@@ -1,0 +1,158 @@
+.newcategory_main_button {
+  border: none !important;
+  background: #ffaa1d !important;
+  border-radius: 15px !important;
+  font-family: "Helvetica" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 21px !important;
+  line-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  padding: 10px 50px !important;
+  color: #363636 !important;
+  margin-top: 16px !important;
+  width: 480px !important;
+  text-transform: none !important;
+}
+
+.editcoursestructure_button {
+  background-color: rgba(42, 36, 42, 0.9) !important;
+  border-radius: 20px !important;
+  margin-left: 10px !important;
+}
+
+.button_container {
+  float: right;
+}
+.button_container_two {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editcoursestructure_button_two {
+  background-color: rgba(11, 85, 112, 0.9) !important;
+  border-radius: 20px !important;
+  margin-left: 10px !important;
+  height: 30px !important;
+}
+
+.editor_input_field {
+  border-radius: 5px;
+  background-color: black;
+  border: none;
+  font-size: 18px;
+  margin-left: 30px;
+  height: 30px;
+}
+
+.editor_submit_button {
+  border: none !important;
+  background-color: black !important;
+  color: white !important;
+  height: 30px !important;
+  margin-left: 10px !important;
+}
+.search_main_container {
+  margin-top: 16px;
+  width: 100%;
+  border: "1px solid white";
+  background-color: rgba(38, 36, 42, 0.7);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.action_container {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.git_introduction_dropdown_two {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  background-color: black;
+  border-radius: 5px;
+  color: #ffffff;
+  width: 340px;
+  height: 38px !important;
+  margin-left: 10px;
+  padding-left: 20px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.go_button {
+  border: 1px solid white !important;
+  margin-right: -10px !important;
+  width: 20px !important;
+  margin-left: 10px !important;
+}
+
+@media screen and (max-width: 958px) {
+  .button_container {
+    float: none;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .editcoursestructure_button {
+    width: 220px;
+    margin-top: 10px !important;
+    font-size: 16px;
+  }
+  .newcategory_main_button {
+    width: 420px !important;
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 438px) {
+  .newcategory_main_button {
+    width: 300px !important;
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .editor_input_field {
+    margin-left: 25px;
+    width: 160px;
+  }
+
+  .newcategory_main_button {
+    width: 330px !important;
+    font-size: 20px !important;
+    height: 50px;
+  }
+
+  .button_container_two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: none;
+  }
+  .editor_submit_button {
+    margin-left: 5px;
+    width: 20px;
+    font-size: 10px;
+  }
+  .search_main_container {
+    margin-left: 8px;
+    padding: 10px 0px;
+  }
+  .action_container {
+    display: flex;
+    align-items: center;
+    padding: 10px 30px;
+    flex-wrap: wrap;
+  }
+}

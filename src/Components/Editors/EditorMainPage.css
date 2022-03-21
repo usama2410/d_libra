@@ -1,0 +1,89 @@
+.editormainpage_root_contianer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  flex-direction: column;
+}
+.editors_menu_heading {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: black;
+}
+
+.editorpage_button_container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.editorpage_button_container_span {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  color: black;
+  padding-bottom: 5px;
+}
+.upload_contents_button {
+  border: none !important;
+  background: #ffaa1d !important;
+  border-radius: 15px !important;
+  font-family: "Helvetica" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 21px !important;
+  line-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  padding: 10px 50px !important;
+  color: #363636 !important;
+  margin-top: 16px !important;
+  width: 340px !important;
+  text-transform: none !important;
+}
+
+.git_introduction_dropdown {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  padding: 15px;
+  background: #4f4f4f;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  color: #ffffff;
+  width: 340px;
+}
+
+@media screen and (max-width: 362px) {
+  .upload_contents_button {
+    width: 300px !important;
+  }
+  .git_introduction_dropdown {
+    width: 300px !important;
+  }
+  .editormainpage_root_contianer {
+    padding-left: 20px;
+  }
+}

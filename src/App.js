@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Sidebar from "./Components/Sidebar";
+import EditorsMainPage from "../src/Components/Editors/EditorsMainPage";
+import EditCourseStructure from "./Components/Editors/EditCourseStructure";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import AddNewCategory from "./Components/Editors/AddNewCategory";
+import UploadContentMain from "./Components/Editors/UploadContent/UploadContentMain";
+import DetailPage from "./Components/Editors/DetailPage";
+import DeleteContent from './Components/Editors/DeleteContent'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Sidebar />
+        <Routes>
+          <Route path="/editormainpage" exact element={<EditorsMainPage />} />
+          <Route
+            path="/editcoursestructure"
+            exact
+            element={<EditCourseStructure />}
+          />
+          <Route path="/addnewcategory" exact element={<AddNewCategory />} />
+          <Route
+            path="/uploadcontentmain"
+            exact
+            element={<UploadContentMain />}
+          />
+          <Route path="/detailpage" exact element={<DetailPage />} />
+          <Route path="/deletecontent" exact element={<DeleteContent />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
