@@ -7,6 +7,8 @@ import AddNewCategory from "./Components/Editors/AddNewCategory";
 import UploadContentMain from "./Components/Editors/UploadContent/UploadContentMain";
 import DetailPage from "./Components/Editors/DetailPage";
 import DeleteContent from './Components/Editors/DeleteContent'
+import EditContentMain from './Components/Editors/UploadContent/EditContentMain'
+import MyContents from './Components/Editors/MyContent/MyContents'
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           />
           <Route path="/detailpage" exact element={<DetailPage />} />
           <Route path="/deletecontent" exact element={<DeleteContent />} />
+          <Route path="/editcontentmain" exact element={<EditContentMain />} />
+          <Route path="/mycontents" exact element={<MyContents />} />
         </Routes>
       </Router>
     </>

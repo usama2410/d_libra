@@ -1,9 +1,9 @@
 .delete_content_main_container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .delete_content_button {
@@ -19,21 +19,21 @@
 }
 
 .delete_content_textone {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
   display: flex;
-  align-items: center;
   text-align: center;
+  margin-top: 40px;
+  width: 100%;
   letter-spacing: -0.015em;
   color: #de4040 !important;
 }
+
 
 .delete_content_textone > span {
   font-family: "Helvetica";
@@ -64,20 +64,12 @@
   color: #ffffff;
 }
 
-@media screen and (max-width: 490px) {
-  .delete_content_textone > span {
-    font-size: 15px;
-  }
-  .delete_content_textone {
-    font-size: 16px;
-    margin-left: 16px;
-  }
-  .delete_content_main_container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 260px;
-    margin-left: 10px;
-  }
+@media screen and (max-width: 340px) {
+ .delete_content_textone >span {
+   font-size: 14px;
+   padding-left: 20px;
+ }
+ .delete_content_main_container{
+   margin-left: 10px;
+ }
 }

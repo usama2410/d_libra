@@ -35,7 +35,7 @@ const DetailPage = () => {
             <div className="buttons_container_detail_page">
               <div style={{ display: "flex" }}>
                 <button className="detail_delete_button" onClick={() => navigate('/deletecontent')}>Delete</button>
-                <button className="detail_edit_button">Edit</button>
+                <button className="detail_edit_button" onClick={() => navigate('/editcontentmain')}>Edit</button>
               </div>
               <div className="tags_wrapper_one">
                 <span className="detail_tag_text"> Tag: </span>
