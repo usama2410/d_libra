@@ -23,21 +23,22 @@
 }
 
 .image_button {
-  background: #119abd;
-  border-radius: 15px;
-  height: 30px;
-  text-transform: none;
-  border: none;
-  font-family: "Helvetica";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: -0.015em;
-  color: #ffffff;
+  background: #119abd !important;
+  border-radius: 15px !important;
+  height: 24px !important;
+  text-transform: none !important;
+  border: none !important;
+  font-family: "Helvetica" !important;
+  font-style: normal !important;
+  width: 200px !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  color: #ffffff !important;
 }
 
 .addcategory_text {
@@ -134,5 +135,10 @@
   }
   .add_new_category_heading {
     font-size: 15px;
+  }
+  .image_button {
+    width: 140px !important;
+    height: 24px !important;
+    padding: 0px 0px !important;
   }
 }

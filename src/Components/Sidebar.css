@@ -76,6 +76,7 @@ input[type="submit"]:hover {
   padding-left: 10px;
   color: white !important;
   outline: none;
+  width: 300px;
 }
 
 ::placeholder {

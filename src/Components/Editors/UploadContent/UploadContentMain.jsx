@@ -148,8 +148,8 @@ const UploadContentMain = () => {
                   className="image_none"
                   style={{
                     width: "240px",
-                    height: "255px",
-                    padding: "0px 20px",
+                    height: "160px",
+             
                   }}
                 >
                   <div>
@@ -171,12 +171,12 @@ const UploadContentMain = () => {
                 </div>
               </Grid>
             </Grid>
-            <div className="main_slide_container">
+            <div className="main_slide_container" style={{marginTop: "80px"}}>
               <span>Edit Main Content</span>
               <div
                 style={{
                   padding: "2px",
-                  minHeight: "462px",
+                  minHeight: "474px",
                   backgroundColor: " #4f4f4f",
                 }}
               >

@@ -146,38 +146,29 @@ var ContentData = [
   {
     chapterName: "Edit & Commit",
     items: [
-        {
+      {
           id: 1,
           image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
+          Tags: "Git & Git Inroduction"         
+  
+      },
         {
           id: 2,
           image: image5,
-          Tags: "Git & Git Inroduction" 
+          Tags: "Git & Git Inroduction"         
+  
+      },
+        {
+          id: 2,
+          // image: image5,
+          Tags: "Git & Git Inroduction"         
         },
         {
           id: 2,
           // image: image5,
-          Tags: "Git & Git Inroduction" 
+          Tags: "Git & Git Inroduction"         
         },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        
-      ],
+  ],
   },
 
   {

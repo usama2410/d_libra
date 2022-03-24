@@ -97,7 +97,7 @@ const MyContents = () => {
                           }}
                         >
                           <span>{e.Tags}</span>
-                          <img src={VectorTag} alt="" />
+                          <img src={VectorTag} style={{height: "18px", height: "20px"}} alt="" />
                         </div>
                       ) : (
                         ""
