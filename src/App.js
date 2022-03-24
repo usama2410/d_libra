@@ -15,6 +15,7 @@ import Feedback from "./Components/User/Feedback";
 import RatingForm from "./Components/User/RatingForm";
 import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
+import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
 
 /* Auth imports */
 import Login from "./Components/Auth/pages/login";
@@ -58,6 +59,7 @@ function App() {
             element={<UserSettingViewPage />}
           />
           <Route path="/ratingform" exact element={<RatingForm />} />
+          <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
         </Routes>
         <FooterCopyright />
       </Router>
