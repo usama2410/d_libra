@@ -1,9 +1,9 @@
 import React from "react";
-import { Typography, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import image6 from "../../assests/image6.png";
-import "./DetailPage.css";
+import "./EditCourseStructure.css";
 import Vectortag from "../../assests/VectorTag.png";
 import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
@@ -15,7 +15,7 @@ const DetailPage = () => {
     <>
       <div className="detailpage_root_container">
         <button
-          onClick={() => navigate("/editcoursestructure")}
+          onClick={() => navigate("/")}
           className="back_button_detail_page"
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
@@ -34,8 +34,18 @@ const DetailPage = () => {
             </div>
             <div className="buttons_container_detail_page">
               <div style={{ display: "flex" }}>
-                <button className="detail_delete_button" onClick={() => navigate('/deletecontent')}>Delete</button>
-                <button className="detail_edit_button" onClick={() => navigate('/editcontentmain')}>Edit</button>
+                <button
+                  className="detail_delete_button"
+                  onClick={() => navigate("/deletecontent")}
+                >
+                  Delete
+                </button>
+                <button
+                  className="detail_edit_button"
+                  onClick={() => navigate("/editcontentmain")}
+                >
+                  Edit
+                </button>
               </div>
               <div className="tags_wrapper_one">
                 <span className="detail_tag_text"> Tag: </span>

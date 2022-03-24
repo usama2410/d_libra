@@ -55,7 +55,7 @@ const EditCourseStructure = () => {
         </Button>
       </div>
       <div className="editormainpage_root_contianer">
-        <div style={{ paddingTop: "30px" }}>
+        <div>
           <Button
             variant="outlined"
             className="newcategory_main_button"
@@ -64,7 +64,7 @@ const EditCourseStructure = () => {
             Add a New Category, Course or Chapter{" "}
           </Button>
         </div>
-        <div style={{ marginTop: "40px" }}>
+        <div style={{ marginTop: "20px" }}>
           <Typography variant="h6" noWrap component="div">
             <span className="editors_menu_heading">Edit Course Structure</span>
           </Typography>
@@ -130,7 +130,7 @@ const EditCourseStructure = () => {
             alt=""
             style={{ paddingLeft: "10px", marginRight: "-20px" }}
           />
-          <input className="editor_input_field" type="text" />
+          <input className="editor_input_field"/>
           <Button className="editor_submit_button" variant="contained">
             Search
           </Button>
@@ -149,7 +149,7 @@ const EditCourseStructure = () => {
         </Button>
         <span style={{ paddingLeft: "20px" }}>0 of 9 selected</span>
       </div>
-      <TableContainer style={{ padding: "0px 20px" }}>
+      <TableContainer style={{ padding: "10px 20px" }}>
         <Table
           sx={{ minWidth: 700 }}
           size="small"
@@ -224,36 +224,10 @@ const EditCourseStructure = () => {
               <StyledTableCell>Nov,10 2020</StyledTableCell>
               <StyledTableCell>Nov,10 2020</StyledTableCell>
             </StyledTableRow>
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                <AddIcon />
-              </StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>457687</StyledTableCell>
-              <StyledTableCell>
-                http://localhost:3000/editcoursestructure
-              </StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
-            </StyledTableRow>
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                <AddIcon />
-              </StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>457687</StyledTableCell>
-              <StyledTableCell>
-                http://localhost:3000/editcoursestructure
-              </StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
-            </StyledTableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <span style={{ padding: "0px 10px" }}>9 categories</span>
+      <span style={{ padding: "0px 20px" }}>9 categories</span>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const DeleteContent = () => {
     <>
       <div style={{ marginTop: "-40px" }}>
         <button
-          onClick={() => navigate("/editcoursestructure")}
+          onClick={() => navigate("/detailpage")}
           className="back_button"
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}

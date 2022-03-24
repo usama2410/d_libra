@@ -1,3 +1,71 @@
+.wrap {
+  margin: 0px 0px;
+  display: inline-block;
+  position: relative;
+  height: 0px;
+  display: none;
+}
+
+.wrap .search_icon {
+  height: 60px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  color: #555;
+  padding: 3px;
+  padding-right: 60px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: width 0.4s cubic-bezier(0, 0.795, 0, 1);
+  cursor: pointer;
+}
+
+input[type="text"]:focus:hover {
+  background: #4f4f4f;
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border: none;
+  font-size: 18px;
+  padding-left: 10px;
+  height: 50px;
+  margin-top: 7px;
+  color: white !important;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  width: 370px;
+  z-index: 1;
+  cursor: text;
+}
+input[type="submit"] {
+  height: 67px;
+  width: 63px;
+  display: inline-block;
+  background: url(../assests/Vector.png) center center no-repeat;
+  text-indent: -10000px;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+}
+
 .sidebar_inputfield {
   background: #4f4f4f;
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
@@ -59,15 +127,39 @@
   color: #4f4f4f;
 }
 
+.sidenav_logo {
+  padding-left: 10px;
+}
+
 @media screen and (max-width: 768px) {
   .logo_main_container {
     padding-left: 0px;
   }
+  .sidebar_inputfield {
+    display: none;
+  }
+  .input_field_icon_container {
+    display: none;
+  }
+
+  .wrap {
+    display: block;
+    margin-top: -14px;
+  }
 }
 
-@media screen and (max-width: 524px) {
-  .sidebar_inputfield {
-    width: 70px;
-    height: 40px;
+@media screen and (max-width: 490px) {
+  input[type="text"]:focus {
+    width: 240px;
+    z-index: 1;
+    cursor: text;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  input[type="text"]:focus {
+    width: 220px;
+    z-index: 1;
+    cursor: text;
   }
 }

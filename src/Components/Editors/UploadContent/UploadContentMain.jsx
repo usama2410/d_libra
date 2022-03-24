@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import image5 from "../../../assests/image5.png";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./UploadContentMain.css";
 const UploadContentMain = () => {
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
+  const [imageName, setImageName] = useState("");
+
+  const handleChange = (e) => {
+    if (e.target.files.length) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+      setImageName(e.target.files[0].name);
+    }
+  };
+
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -58,7 +67,7 @@ const UploadContentMain = () => {
             style={{ width: "100%" }}
             className="addcategory_input"
             placeholder=""
-            type="text"
+         
           />
 
           <span className="addcategory_text">Content ID</span>
@@ -66,14 +75,14 @@ const UploadContentMain = () => {
             style={{ width: "100%" }}
             className="addcategory_input"
             placeholder=""
-            type="text"
+         
           />
           <span className="addcategory_text">Tags(Max 5 Tags)</span>
           <input
             style={{ width: "100%" }}
             className="addcategory_input"
             placeholder=""
-            type="text"
+         
           />
 
           <span className="addcategory_text">Meta Descriptions</span>
@@ -83,7 +92,7 @@ const UploadContentMain = () => {
             id="message"
             rows="6"
             placeholder=""
-            type="text"
+         
           />
 
           <span className="addcategory_text">OGP(Open Graph Protocol)</span>
@@ -93,7 +102,7 @@ const UploadContentMain = () => {
             id="message"
             rows="6"
             placeholder=""
-            type="text"
+         
           />
         </Grid>
         <Grid
@@ -109,26 +118,56 @@ const UploadContentMain = () => {
               <Grid item lg={3} md={4} sm={12} xs={12}>
                 <div className="main_slide_container">
                   <div>
-                    <span>Main Slide</span>
+                    <span>{imageName}</span>
                   </div>
                   <div>
-                    <button
-                      className="image_button"
-                      type="button"
-                      style={{ height: "20px" }}
-                    >
-                      Select an Image File
-                    </button>
+                    <label htmlFor="contained-button-file">
+                      <input
+                        accept="image/*"
+                        id="contained-button-file"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={handleChange}
+                      />
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        component="span"
+                        style={{ height: "20px" }}
+                        className="image_button"
+                      >
+                        Select an Image File
+                      </Button>
+                    </label>
                   </div>
                 </div>
               </Grid>
 
               <Grid item lg={9} md={8} sm={0} xs={0}>
-                <div className="image_none">
+                <div
+                  className="image_none"
+                  style={{
+                    width: "240px",
+                    height: "255px",
+                    padding: "0px 20px",
+                  }}
+                >
                   <div>
                     <span>Preview</span>
                   </div>
-                  <img src={image5} alt="" />
+                  {image ? (
+                    <img
+                      src={image}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                      alt=""
+                    />
+                  ) : (
+                    <span>No Image</span>
+                  )}
                 </div>
               </Grid>
             </Grid>

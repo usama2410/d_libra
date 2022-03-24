@@ -45,12 +45,16 @@ textarea.addcategory_input {
   color: #ffffff;
 }
 
+.main_slide_container {
+  padding: 2px 0px;
+}
+
 @media screen and (max-width: 959px) {
   .image_none {
-    display: none;
+    display: block;
   }
   .main_slide_container {
-    margin-top: 12px;
+    padding-top: 30px;
   }
   .main_root_container_upload_content {
     padding: 0px 20px;

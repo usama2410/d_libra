@@ -1,3 +1,122 @@
+.detailpage_root_container {
+  margin-top: -47px;
+  background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+  padding: 20px 0px;
+  width: 100% !important;
+}
+
+.back_button_detail_page {
+  color: black;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  border: none;
+  margin-top: -20px;
+  cursor: pointer;
+}
+
+.header_text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  color: #ffffff;
+}
+
+.buttons_container_detail_page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_delete_button {
+  background: #de4040;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  color: #ffffff;
+
+  border: none;
+  padding: 2px 20px;
+}
+
+.detail_edit_button {
+  background: #ffaa1d;
+  border-radius: 15px;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+  margin-left: 5px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  color: #363636;
+
+  border: none;
+  padding: 2px 20px;
+}
+
+.detail_tag_text {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+
+  color: #c8c8c8;
+}
+
+.detail_tag_button {
+  background: #119abd;
+  border-radius: 15px;
+  border: none;
+  padding: 2px 20px;
+  margin-left: 5px;
+}
+
+.detail_page_content {
+  padding: 0px 20px;
+}
+.detail_page_image {
+  width: 100%;
+}
+
+.tags_wrapper_two {
+  display: none;
+}
+
+.tags_wrapper_one {
+  display: flex;
+}
+
 .newcategory_main_button {
   border: none !important;
   background: #ffaa1d !important;
@@ -112,6 +231,26 @@
   .newcategory_main_button {
     width: 420px !important;
     font-size: 18px !important;
+  }
+  .detail_page_image {
+    width: 100%;
+  }
+
+  .detail_page_content {
+    font-size: 14px;
+    padding: 0px 0px;
+  }
+
+  .tags_wrapper_two {
+    display: block;
+    padding-top: 20px;
+  }
+  .tags_wrapper_one {
+    display: none;
+  }
+  .buttons_container_detail_page {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 

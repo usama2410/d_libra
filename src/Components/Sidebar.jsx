@@ -77,6 +77,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState(false);
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const navigate = useNavigate();
   const handleDrawerOpen = () => {
@@ -85,6 +86,13 @@ export default function Sidebar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleSearch = () => {
+    if (window.innerWidth < 768) {
+      alert("ahsan here");
+    }
+  };
+
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -105,26 +113,62 @@ export default function Sidebar() {
                 display: "flex",
                 justifyContent: "center",
                 width: "100%",
+               
               }}
             >
               <Typography variant="h6" noWrap component="div">
-                <div className="logo_main_container">
+                <div
+                  className="logo_main_container"
+                  
+                  onClick={() => navigate("/")}
+                >
                   <img src={Fill2} alt="" /> <img src={Fill1} alt="" />
                 </div>
               </Typography>
             </div>
-            <Typography variant="h6" style={{ display: "flex" }}>
-              <div style={{ display: "flex" }}>
+
+
+
+
+
+            <Typography
+              variant="h6"
+              className="sidebar_search_swap"
+              style={{ display: "flex"}}
+            >
+              <div style={{ display: "flex"}}>
                 <input
-                  type="text"
+                  // type="text"
                   placeholder="Search"
                   className="sidebar_inputfield"
                 />
                 <div className="input_field_icon_container">
-                  <img src={Vector} alt="" className="inputfield_icon" />
+                  <img
+                    src={Vector}
+                    alt="vector image"
+                    className="inputfield_icon"
+                    onClick={handleSearch}
+                  />
                 </div>
               </div>
-              <img src={image3} alt="" style={{ paddingLeft: "10px" }} />
+
+
+
+
+
+              <div className="wrap" style={{border: "1px solid red", marginRight: "-10px"}}>
+                <input
+                  className="search_icon"
+                  type="text"
+                  placeholder="Search"
+                />
+                <input id="search_submit" value="Rechercher" type="submit" />
+              </div>
+
+
+
+
+              <img src={image3} alt="" className="sidenav_logo" />
             </Typography>
           </Toolbar>
         </AppBar>
@@ -169,7 +213,7 @@ export default function Sidebar() {
               sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <img src={image3} alt="" style={{ marginLeft: "-9px" }} />
                 </ListItemIcon>
@@ -178,7 +222,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <img src={user} alt="" />
                 </ListItemIcon>
@@ -187,7 +231,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <img src={Login} alt="" />
                 </ListItemIcon>
@@ -196,7 +240,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <ExitToAppIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
@@ -205,7 +249,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <AccessTimeIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
@@ -214,7 +258,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <MenuBookIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
@@ -223,7 +267,7 @@ export default function Sidebar() {
                 </Typography>
               </ListItem>
 
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <img src={Rating} alt="" style={{ paddingLeft: "3px" }} />
                 </ListItemIcon>
@@ -238,7 +282,7 @@ export default function Sidebar() {
               sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
                   <img src={NightMode} alt="" />
                 </ListItemIcon>
@@ -255,7 +299,10 @@ export default function Sidebar() {
               sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
-              <ListItem button onClick={() => navigate("/editormainpage")}>
+              <ListItem
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate("/editormainpage")}
+              >
                 <ListItemIcon>
                   <RiFileEditFill
                     style={{ color: " #FFFFFF", fontSize: "20px" }}
@@ -271,12 +318,12 @@ export default function Sidebar() {
               sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <Typography>
                   <span className="listitem_text">About D-Libra</span>
                 </Typography>
               </ListItem>
-              <ListItem button>
+              <ListItem style={{ cursor: "pointer" }}>
                 <Typography>
                   <span className="listitem_text">Feedback</span>
                 </Typography>
