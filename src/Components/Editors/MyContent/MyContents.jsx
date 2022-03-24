@@ -21,7 +21,7 @@ const MyContents = () => {
     autoplay: false,
     slidesToScroll: 1,
     centerMode: false,
-    arrows: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -53,7 +53,7 @@ const MyContents = () => {
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.02,
           slidesToScroll: 1,
           centerMode: false,
         },
@@ -81,7 +81,11 @@ const MyContents = () => {
                       <img
                         onClick={() => navigate("/detailpage")}
                         src={e.image}
-                        style={{ width: "100%", cursor: "pointer" }}
+                        style={{
+                          borderRadius: "5px",
+                          width: "100%",
+                          cursor: "pointer",
+                        }}
                         alt=""
                       />
                       {e.image ? (
@@ -89,7 +93,7 @@ const MyContents = () => {
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            paddingTop: "10px",
+                            padding: "10px 10px 0px 10px",
                           }}
                         >
                           <span>{e.Tags}</span>
