@@ -62,7 +62,6 @@ function App() {
           />
           <Route path="/ratingform" exact element={<RatingForm />} />
           <Route path="/LandingPage" exact element={<LandingPage />} />
-          {/* <Route path="/Course" exact element={<Course />} /> */}
           <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
         </Routes>
         <FooterCopyright />
