@@ -104,8 +104,7 @@ export default function Sidebar() {
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
+              sx={{ mr: 2, ...(open && { display: "none" }) }}>
               <MenuIcon />
             </IconButton>
             <div
@@ -113,30 +112,21 @@ export default function Sidebar() {
                 display: "flex",
                 justifyContent: "center",
                 width: "100%",
-               
-              }}
-            >
+              }}>
               <Typography variant="h6" noWrap component="div">
                 <div
                   className="logo_main_container"
-                  
-                  onClick={() => navigate("/")}
-                >
+                  onClick={() => navigate("/")}>
                   <img src={Fill2} alt="" /> <img src={Fill1} alt="" />
                 </div>
               </Typography>
             </div>
 
-
-
-
-
             <Typography
               variant="h6"
               className="sidebar_search_swap"
-              style={{ display: "flex"}}
-            >
-              <div style={{ display: "flex"}}>
+              style={{ display: "flex" }}>
+              <div style={{ display: "flex" }}>
                 <input
                   // type="text"
                   placeholder="Search"
@@ -152,11 +142,9 @@ export default function Sidebar() {
                 </div>
               </div>
 
-
-
-
-
-              <div className="wrap" style={{border: "1px solid red", marginRight: "-10px"}}>
+              <div
+                className="wrap"
+                style={{ border: "1px solid red", marginRight: "-10px" }}>
                 <input
                   className="search_icon"
                   type="text"
@@ -164,9 +152,6 @@ export default function Sidebar() {
                 />
                 <input id="search_submit" value="Rechercher" type="submit" />
               </div>
-
-
-
 
               <img src={image3} alt="" className="sidenav_logo" />
             </Typography>
@@ -184,14 +169,12 @@ export default function Sidebar() {
           }}
           variant="persistent"
           anchor="left"
-          open={open}
-        >
+          open={open}>
           <DrawerHeader
             style={{
               background: "#212121",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            }}
-          >
+            }}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <MenuIcon style={{ color: "white" }} />
@@ -206,8 +189,7 @@ export default function Sidebar() {
               background: "#212121",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               color: "white",
-            }}
-          >
+            }}>
             <span style={{ marginLeft: "20px" }}>Account </span>
             <Divider
               sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
@@ -301,8 +283,7 @@ export default function Sidebar() {
             <List style={{ paddingLeft: "30px" }}>
               <ListItem
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate("/editormainpage")}
-              >
+                onClick={() => navigate("/editormainpage")}>
                 <ListItemIcon>
                   <RiFileEditFill
                     style={{ color: " #FFFFFF", fontSize: "20px" }}

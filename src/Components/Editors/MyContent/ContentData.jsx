@@ -6,22 +6,22 @@ var ContentData = [
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         // image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         // image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
     ],
   },
@@ -29,27 +29,27 @@ var ContentData = [
   {
     chapterName: "Chapter 1: Git & GitHub Key Concepts",
     items: [
-        {
-          id: 1,
-          image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-      ],
+      {
+        id: 1,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+    ],
   },
 
   {
@@ -58,34 +58,33 @@ var ContentData = [
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction" 
+        Tags: "Git & Git Inroduction",
       },
-
     ],
   },
 
@@ -95,22 +94,22 @@ var ContentData = [
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction" 
-    },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction"         
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction"         
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction"         
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        image: image5,
+        Tags: "Git & Git Inroduction",
       },
     ],
   },
@@ -121,24 +120,22 @@ var ContentData = [
       {
         id: 1,
         image: image5,
-        Tags: "Git & Git Inroduction"         
-
-    },
+        Tags: "Git & Git Inroduction",
+      },
       {
         id: 2,
         image: image5,
-        Tags: "Git & Git Inroduction"         
-
-    },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction"         
+        Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
         // image: image5,
-        Tags: "Git & Git Inroduction"         
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
       },
     ],
   },
@@ -146,65 +143,52 @@ var ContentData = [
   {
     chapterName: "Edit & Commit",
     items: [
-        {
-          id: 1,
-          image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction" 
-        },
-        
-      ],
+      {
+        id: 1,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+    ],
   },
 
   {
     chapterName: "Work with branches",
     items: [
-        {
-            id: 1,
-            image: image5,
-            Tags: "Git & Git Inroduction"         
-    
-        },
-          {
-            id: 2,
-            image: image5,
-            Tags: "Git & Git Inroduction"         
-    
-        },
-          {
-            id: 2,
-            // image: image5,
-            Tags: "Git & Git Inroduction"         
-          },
-          {
-            id: 2,
-            // image: image5,
-            Tags: "Git & Git Inroduction"         
-          },
+      {
+        id: 1,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
+      {
+        id: 2,
+        // image: image5,
+        Tags: "Git & Git Inroduction",
+      },
     ],
   },
 ];

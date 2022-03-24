@@ -15,6 +15,8 @@ import Feedback from "./Components/User/Feedback";
 import RatingForm from "./Components/User/RatingForm";
 import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
+import LandingPage from "./Components/Guest/LandingPG/LandingPage";
+// import Course from "./Components/Guest/CoursePg/Course";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
             element={<UserSettingViewPage />}
           />
           <Route path="/ratingform" exact element={<RatingForm />} />
+          <Route path="/LandingPage" exact element={<LandingPage />} />
+          {/* <Route path="/Course" exact element={<Course />} /> */}
         </Routes>
         <FooterCopyright />
       </Router>
