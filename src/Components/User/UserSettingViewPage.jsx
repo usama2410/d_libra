@@ -39,7 +39,7 @@ const UserSettingViewPage = () => {
             <input
               className="addcategory_input"
               placeholder="Username"
-              type="text"
+              
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -47,7 +47,7 @@ const UserSettingViewPage = () => {
             <input
               className="addcategory_input"
               placeholder="E-mail Address"
-              type="text"
+              
             />
           </div>
         </div>
@@ -62,7 +62,7 @@ const UserSettingViewPage = () => {
               <input
                 className="addcategory_input"
                 placeholder="High Priority Review List"
-                type="text"
+                
               />
             </div>
           </div>
@@ -74,7 +74,7 @@ const UserSettingViewPage = () => {
             <input
               className="addcategory_input"
               placeholder="High Priority Review List"
-              type="text"
+              
             />
           </div>
           <div className="vector_container">
@@ -84,7 +84,7 @@ const UserSettingViewPage = () => {
             <input
               className="addcategory_input"
               placeholder="Review List"
-              type="text"
+              
             />
           </div>
           <div className="vector_container">
@@ -94,7 +94,7 @@ const UserSettingViewPage = () => {
             <input
               className="addcategory_input"
               placeholder="For future need"
-              type="text"
+              
             />
           </div>
         </div>

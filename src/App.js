@@ -17,6 +17,12 @@ import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
 import LandingPage from "./Components/Guest/LandingPG/LandingPage";
 // import Course from "./Components/Guest/CoursePg/Course";
+import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
+
+/* Auth imports */
+import Login from "./Components/Auth/pages/login";
+import Register from "./Components/Auth/pages/register";
+import Logout from "./Components/Auth/pages/logout";
 
 function App() {
   return (
@@ -25,6 +31,12 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" exact element={<MyContents />} />
+
+          {/* Auth Routes */}
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/logout" element={<Logout />} />
+
           <Route path="/editormainpage" exact element={<EditorsMainPage />} />
           <Route
             path="/editcoursestructure"
@@ -51,6 +63,7 @@ function App() {
           <Route path="/ratingform" exact element={<RatingForm />} />
           <Route path="/LandingPage" exact element={<LandingPage />} />
           {/* <Route path="/Course" exact element={<Course />} /> */}
+          <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
         </Routes>
         <FooterCopyright />
       </Router>

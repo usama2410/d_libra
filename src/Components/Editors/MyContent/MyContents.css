@@ -51,10 +51,17 @@
   
 }
 
+@media screen and (max-width: 510px){
+  .content_root_container{
+    padding: 10px 10px;
+   
+  } 
+  }
+
 @media screen and (max-width: 380px){
 .content_root_container{
-  padding: 10px 10px;
-  margin-left: 15px;
+  padding: 10px 0px;
+  margin-left: 10px;
   width: 100%;
 } 
 }
