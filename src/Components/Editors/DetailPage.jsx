@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import image6 from "../../assests/image6.png";
@@ -7,16 +7,19 @@ import "./EditCourseStructure.css";
 import Vectortag from "../../assests/VectorTag.png";
 import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
-
+import Polygon4 from "../../assests/Polygon4.png";
+import Polygon5 from "../../assests/Polygon5.png";
+import { useSelector } from "react-redux";
 const DetailPage = () => {
   const navigate = useNavigate();
-
+  const theme = useSelector((state) => state.theme.state);
   return (
     <>
       <div className="detailpage_root_container">
         <button
           onClick={() => navigate("/")}
           className="back_button_detail_page"
+          style={{ color: `${theme ? "white" : "black"}` }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
@@ -114,17 +117,44 @@ const DetailPage = () => {
           </Grid>
         </Grid>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <IoMdArrowDropleftCircle fontSize="50px" />
-        <IoMdArrowDroprightCircle fontSize="50px" />
-      </div>
+
+      {theme ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <Button className="polygonclassone">
+            <img
+              src={Polygon4}
+              alt=""
+              style={{ width: "20px", height: "30px" }}
+            />
+          </Button>
+          <Button className="polygonclassone">
+            <img
+              src={Polygon5}
+              alt=""
+              style={{ width: "20px", height: "30px" }}
+            />
+          </Button>
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <IoMdArrowDropleftCircle fontSize="50px" />
+          <IoMdArrowDroprightCircle fontSize="50px" />
+        </div>
+      )}
     </>
   );
 };

@@ -6,9 +6,11 @@ import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
+import { useSelector } from "react-redux";
 import "./RatingForm.css";
 const Feedback = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
   const [value, setValue] = React.useState(2);
   return (
     <>
@@ -22,14 +24,14 @@ const Feedback = () => {
         </Button>
       </div>
       <div className="ratingform_root_two" style={{ marginTop: "20px" }}>
-        <select className="addcategory_input" name="cars" id="cars">
+        <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
           <option value="volvo">Select a course for Rating</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
           <option value="audi">Audi</option>
         </select>
 
-        <select className="addcategory_input" name="cars" id="cars">
+        <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
           <option value="volvo">Select a course for Rating</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
@@ -59,7 +61,7 @@ const Feedback = () => {
 
         <div>
           <textarea
-            className="rating_form_textarea"
+            className={theme ? "rating_form_textarea_sub" : "rating_form_textarea"}
             id="message"
             rows="20"
             placeholder=""

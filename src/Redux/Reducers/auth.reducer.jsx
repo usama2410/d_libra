@@ -7,7 +7,11 @@ const initialState = {
   token: null,
 };
 
- const login = (state = initialState, action) => {
+const themeinitialstate = {
+  status: true
+}
+
+ export const login = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case "LOGIN_SUCCESS":
@@ -37,4 +41,21 @@ const initialState = {
   }
 };
 
-export default login;
+
+export const theme = (themereducerstate = themeinitialstate, action) => {
+   const {type, payload} = action;
+   switch(type){
+     case 'DARKTHEME':
+       return {
+         state : payload.state 
+       }
+       case 'LIGHTTHEME':
+        return {
+          state : payload.state 
+        }
+       default:
+       return themereducerstate
+      }
+}
+
+// export default login;

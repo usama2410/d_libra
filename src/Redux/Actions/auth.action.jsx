@@ -2,6 +2,7 @@ import axios from "axios";
 import { URL, endpoints } from "../../endpoints";
 import * as FormData from "form-data";
 
+
 export const signUp = (username, email, password) => async (dispatch) => {
   // console.log("signUp", username, email, password);
   const bodyFormData = new FormData();
@@ -42,3 +43,17 @@ export const logIn = (email, password) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const themeSwitch = (themestate) => async (dispatch) => {
+  //  console.log(themestate)
+   try{
+       dispatch({
+         type: "LIGHTTHEME", payload: {
+           state: themestate
+          }
+       })
+     
+   }catch(error){
+
+   }
+}

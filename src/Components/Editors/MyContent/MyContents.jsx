@@ -7,10 +7,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./MyContents.css";
 import VectorTag from "../../../assests/VectorTag.png";
+import {useSelector} from 'react-redux'
+
 
 const MyContents = () => {
   const navigate = useNavigate();
   const [data, setdata] = useState(ContentData);
+  const theme = useSelector((state)  => state.theme.state)
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -53,7 +56,7 @@ const MyContents = () => {
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1.02,
+          slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
         },
@@ -64,14 +67,14 @@ const MyContents = () => {
   return (
     <>
       <div className="mainContentContainer">
-        <span className="mycontentheadingone">Git & Git Hub Introduction</span>{" "}
-        <span className="mycontentheadingtwo">Select a Content for Edit</span>
+        <span className={ theme ? "mycontentheadingsubone" : "mycontentheadingone"}>Git & Git Hub Introduction</span>{" "}
+        <span className={theme ? "mycontentheadingsubtwo" : "mycontentheadingtwo"}>Select a Content for Edit</span>
       </div>
       {data.map((item) => {
         return (
           <div className="content_root_container">
             <div>
-              <span>{item.chapterName}</span>
+              <span  style={{color: `${theme ? ' #008EEC' : 'white'}`}}>{item.chapterName}</span>
             </div>
             <div>
               <Slider className="intro-slick" {...settings}>

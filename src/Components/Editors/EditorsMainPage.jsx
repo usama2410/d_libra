@@ -3,15 +3,15 @@ import "./EditorMainPage.css";
 import { Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const EditorsMainPage = () => {
   const navigate = useNavigate();
-
+const theme = useSelector((state) => state.theme.state)
   return (
     <>
       <div style={{ height: "100%" }}>
         <div style={{ marginTop: "-40px" }}>
-          <Button style={{ color: "black" }} startIcon={<ArrowBackIcon />}>
+          <Button style={{ color: `${theme ? 'black' : 'white'}` }} startIcon={<ArrowBackIcon />}>
             Back
           </Button>
         </div>

@@ -1,3 +1,14 @@
+/* 
+
+
+body {
+  background-color: black !important;
+}
+* {
+  color: white !important;
+}   */
+
+
 .wrap {
   margin: 0px 0px;
   display: inline-block;
@@ -5,6 +16,8 @@
   height: 0px;
   display: none;
 }
+
+
 
 .wrap .search_icon {
   height: 60px;
@@ -79,9 +92,27 @@ input[type="submit"]:hover {
   width: 300px;
 }
 
-::placeholder {
-  color: white;
+.sidebar_inputfield::placeholder {
+color: white;
 }
+/* white theme input fiedl */
+.sidebar_inputfield_sub{
+  background: white;
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: none;
+  font-size: 18px;
+  padding-left: 10px;
+  color: black !important;
+  outline: none;
+  width: 300px;
+}
+
+.sidebar_inputfield_sub::placeholder {
+  color: black;
+}
+
 
 .logo_main_container {
   padding-left: 240px;
@@ -104,6 +135,18 @@ input[type="submit"]:hover {
   height: 40px;
   border: none !important;
 }
+
+.input_field_icon_container_sub {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+  background: white;
+  padding-left: 2px;
+  width: 30px;
+  height: 40px;
+  border: none !important;
+}
+
 
 .listitem_text {
   font-family: "Helvetica";
@@ -137,6 +180,9 @@ input[type="submit"]:hover {
     padding-left: 0px;
   }
   .sidebar_inputfield {
+    display: none;
+  }
+  .sidebar_inputfield_sub{
     display: none;
   }
   .input_field_icon_container {

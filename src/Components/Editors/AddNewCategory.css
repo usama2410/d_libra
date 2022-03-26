@@ -73,6 +73,10 @@
   color: #ffffff;
 }
 
+.addcategory_input::placeholder{
+  color: #363636;
+}
+
 .addcategory_dropdown {
   background: #4f4f4f;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);

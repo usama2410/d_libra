@@ -17,6 +17,7 @@ import Fill1 from "../assests/Fill1.png";
 import image3 from "../assests/image3.png";
 import Vector from "../assests/Vector.png";
 import Fill2 from "../assests/Fill2.png";
+import Fill12 from '../assests/Fill12.png'
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -27,7 +28,11 @@ import Login from "../assests/Login.png";
 import user from "../assests/user.png";
 import Switch from "@mui/material/Switch";
 import "./Sidebar.css";
-
+import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { themeSwitch } from "../Redux/Actions/auth.action";
+import Brightness5Icon from '@mui/icons-material/Brightness5';
+import VectorBlue from '../assests/VectorBlue.png'
 const drawerWidth = 341;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -79,15 +84,33 @@ export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState(false);
   const label = { inputProps: { "aria-label": "Switch demo" } };
+  const [themestate, setThemeState] = React.useState(false);
+  const dispatch = useDispatch();
+
+  const handleTheme = async () => {
+    setThemeState(true);
+    if (themestate === true) {
+      setThemeState(false);
+    }
+    await dispatch(themeSwitch(themestate))
+  };
+
+  
+
   const navigate = useNavigate();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleDrawerClose = () => {
+
+  const handleDrawerClose = (e) => {
+    e.preventDefault();
+
     setOpen(false);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+
     if (window.innerWidth < 768) {
       alert("ahsan here");
     }
@@ -98,12 +121,13 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
-          <Toolbar style={{ backgroundColor: " #111111" }}>
+          <Toolbar style={{ backgroundColor: `${themestate ? '#111111' : ' #F3F6FF'}` }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
+              style={{ color: `${themestate ? 'white' : '#111111'}` }}
               sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
               <MenuIcon />
@@ -113,16 +137,15 @@ export default function Sidebar() {
                 display: "flex",
                 justifyContent: "center",
                 width: "100%",
-               
               }}
             >
               <Typography variant="h6" noWrap component="div">
-                <div
-                  className="logo_main_container"
-                  
-                  onClick={() => navigate("/")}
-                >
-                  <img src={Fill2} alt="" /> <img src={Fill1} alt="" />
+                <div className="logo_main_container">
+                  <Button onClick={() => navigate("/")}>
+                    <img src={Fill2} alt="" /> {
+                      themestate ? <img src={Fill1} alt="" /> : <img src={Fill12} alt="" />
+                    } 
+                  </Button>
                 </div>
               </Typography>
             </div>
@@ -131,32 +154,52 @@ export default function Sidebar() {
 
 
 
+
+
+
+
+
+
+
+
+
             <Typography
               variant="h6"
-              className="sidebar_search_swap"
-              style={{ display: "flex"}}
+              
+              style={{ display: "flex" }}
             >
-              <div style={{ display: "flex"}}>
+              <div style={{ display: "flex" }}>
                 <input
-                  // type="text"
+             
                   placeholder="Search"
-                  className="sidebar_inputfield"
+                  className= {`${themestate ? "sidebar_inputfield" : "sidebar_inputfield_sub"}`} 
                 />
-                <div className="input_field_icon_container">
-                  <img
+                <div className= {themestate ? 'input_field_icon_container' : 'input_field_icon_container_sub'}>
+                  
+                  {
+                    themestate ? <img
                     src={Vector}
                     alt="vector image"
                     className="inputfield_icon"
+                  
                     onClick={handleSearch}
-                  />
+                  /> : <img
+                  src={VectorBlue}
+                  alt="vector image"
+                  className="inputfield_icon"
+                
+                  onClick={handleSearch}
+                />
+                  }
+                  
+                
                 </div>
               </div>
 
-
-
-
-
-              <div className="wrap" style={{border: "1px solid red", marginRight: "-10px"}}>
+              <div
+                className="wrap"
+                style={{  marginRight: "-10px" }}
+              >
                 <input
                   className="search_icon"
                   type="text"
@@ -165,11 +208,28 @@ export default function Sidebar() {
                 <input id="search_submit" value="Rechercher" type="submit" />
               </div>
 
-
-
-
               <img src={image3} alt="" className="sidenav_logo" />
             </Typography>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </Toolbar>
         </AppBar>
         <Drawer
@@ -284,13 +344,19 @@ export default function Sidebar() {
             <List style={{ paddingLeft: "30px" }}>
               <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
-                  <img src={NightMode} alt="" />
+                  {
+                    themestate ? 
+                    <img src={NightMode} alt="" /> : <Brightness5Icon style={{color: "white"}}/>
+                  }
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">Dark Theme</span>
+                  {
+                    themestate ?      <span className="listitem_text">Dark Theme</span> :   <span className="listitem_text">Light Theme</span>
+                  }
+            
                 </Typography>
                 <div style={{ marginLeft: "40px" }}>
-                  <Switch {...label} defaultChecked />
+                  <Switch {...label} onClick={handleTheme} defaultUnChecked />
                 </div>
               </ListItem>
             </List>

@@ -7,11 +7,32 @@ import { persistor, store } from "./Redux/Store/strore";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 
+
+
+
+
+
+  // useEffect(() => {
+  //   switch (theme) {
+  //     case themes.light:
+  //       document.body.classList.add('white-content');
+  //       break;
+  //     case themes.dark:
+  //     default:
+  //       document.body.classList.remove('white-content');
+  //       break;
+  //   }
+  // }, [theme]);
+
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <App />
+        <div>
+
+        <App  />
+        </div>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

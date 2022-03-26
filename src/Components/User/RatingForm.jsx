@@ -6,9 +6,11 @@ import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
+import {useSelector} from 'react-redux'
 import "./RatingForm.css";
 const RatingForm = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
   const [value, setValue] = React.useState(2);
   return (
     <>
@@ -23,7 +25,7 @@ const RatingForm = () => {
       </div>
       <div className="rating_form_root_container">
         <div className="ratingform_root">
-          <span className="ratingform_root_span">
+          <span className="ratingform_root_span"  style={{color: `${theme ? ' #008EEC' : 'white'}`}}>
             Please rate the content of
           </span>
           <div>
@@ -32,7 +34,7 @@ const RatingForm = () => {
         </div>
 
         <div className="ratingform_root_two">
-          <span className="ratingform_root_span_one">
+          <span className="ratingform_root_span_one"  style={{color: `${theme ? 'black' : 'white'}`}}>
             Git & GitHub Introduction
           </span>
           <Rating

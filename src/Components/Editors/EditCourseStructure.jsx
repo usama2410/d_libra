@@ -15,6 +15,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,12 +44,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const EditCourseStructure = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
   return (
     <div style={{ height: "100%" }}>
       <div style={{ marginTop: "-40px" }}>
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
+          style={{ color: `${theme ? 'black' : 'white'}` }}
           startIcon={<ArrowBackIcon />}
         >
           Back
@@ -66,10 +68,12 @@ const EditCourseStructure = () => {
         </div>
         <div style={{ marginTop: "20px" }}>
           <Typography variant="h6" noWrap component="div">
-            <span className="editors_menu_heading">Edit Course Structure</span>
+            <span className="editors_menu_heading" style={{color: `${theme ? 'black': 'white'}`}}>Edit Course Structure</span>
           </Typography>
         </div>
       </div>
+      <div style={{background: "black", color: "white"}}> 
+
       <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
         <Grid container>
           <Grid item lg={2} md={3} sm={12} xs={12}>
@@ -211,24 +215,25 @@ const EditCourseStructure = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableRow>
+            <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                <AddIcon />
+                <AddIcon  className= "tableBody_sub" />
               </StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>Git and GitHub Introduction</StyledTableCell>
-              <StyledTableCell>457687</StyledTableCell>
-              <StyledTableCell>
+              <StyledTableCell  className= "tableBody">Git and GitHub Introduction</StyledTableCell>
+              <StyledTableCell  className= "tableBody">Git and GitHub Introduction</StyledTableCell>
+              <StyledTableCell  className= "tableBody">457687</StyledTableCell>
+              <StyledTableCell  className= "tableBody">
                 http://localhost:3000/editcoursestructure
               </StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
-              <StyledTableCell>Nov,10 2020</StyledTableCell>
+              <StyledTableCell  className= "tableBody">Nov,10 2020</StyledTableCell>
+              <StyledTableCell  className= "tableBody">Nov,10 2020</StyledTableCell>
             </StyledTableRow>
           </TableBody>
         </Table>
       </TableContainer>
       <span style={{ padding: "0px 20px" }}>9 categories</span>
     </div>
+      </div>
   );
 };
 

@@ -43,14 +43,8 @@
   margin-left: 10px !important;
 }
 
-/* .footer_buttons_speedial {
-  
-} */
 .footer_copyright {
   display: block;
-  /* position: absolute;
-  bottom: 0;
-  right: 0; */
   width: 100%;
   display: flex;
   align-items: center;
@@ -128,6 +122,15 @@
   background: #4f4f4f;
   padding: 20px 0px;
   width: 600px !important;
+  border: none;
+}
+
+
+.rating_form_textarea_sub {
+  background:  #FFFFFF;
+  padding: 20px 0px;
+  width: 600px !important;
+  border: none;
 }
 
 .user_buttons_sub_three {
@@ -156,6 +159,11 @@
   .rating_form_textarea {
     width: 360px !important;
   }
+
+  .rating_form_textarea_sub {
+    width: 360px !important;
+  }
+  
   .user_buttons_sub_three_hidden {
     width: 350px;
     display: flex;
@@ -194,6 +202,11 @@
   .rating_form_textarea {
     width: 300px !important;
   }
+  
+  .rating_form_textarea_sub {
+    width: 300px !important;
+  }
+  
   .user_buttons_sub_three_hidden {
     width: 280px;
     display: flex;

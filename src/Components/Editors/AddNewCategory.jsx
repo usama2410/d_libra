@@ -3,10 +3,12 @@ import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "./AddNewCategory.css";
+import {useSelector} from 'react-redux'
 import "../Sidebar.css";
 
 const AddNewCategory = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
 
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
@@ -23,15 +25,16 @@ const AddNewCategory = () => {
         <Button
           onClick={() => navigate("/editcoursestructure")}
           className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
+         BACK
         </Button>
       </div>
       <div className="editormainpage_root_contianer">
         <div>
           <Typography variant="h6" noWrap component="div">
-            <span className="add_new_category_heading">
+            <span className="add_new_category_heading" style={{color: `${theme ? '#363636' : 'white'}`}}>
               Add a New Category, Course or Chapter
             </span>
           </Typography>
@@ -43,26 +46,26 @@ const AddNewCategory = () => {
             flexDirection: "column",
           }}
         >
-          <span className="addcategory_text">Category/Course/Chapter Name</span>
+          <span className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>Category/Course/Chapter Name</span>
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Cloud Computing"
            
           />
-          <span className="addcategory_text">Category/Course/Chapter ID</span>
-          <input className="addcategory_input" placeholder="4000" />
-          <span className="addcategory_text">
+          <span className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>Category/Course/Chapter ID</span>
+          <input className={theme ? "addcategory_input_sub" : "addcategory_input"} placeholder="4000" />
+          <span className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>
             Select Parent Category/Course
           </span>
-          <select className="addcategory_dropdown" name="cars" id="cars">
+          <select className={theme ? "addcategory_dropdown_sub" : "addcategory_dropdown"} name="cars" id="cars">
             <option value="volvo">Git & GitHub Introduction</option>
             <option value="saab">Saab</option>
             <option value="opel">Opel</option>
             <option value="audi">Audi</option>
           </select>
-          <span className="addcategory_text">Slug</span>
+          <span className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>Slug</span>
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="cloudcomputing"
            
           />

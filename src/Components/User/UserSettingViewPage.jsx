@@ -7,9 +7,11 @@ import Vector90 from "../../assests/Vector90.png";
 import Vector92 from "../../assests/Vector92.png";
 import Vector91 from "../../assests/Vector91.png";
 import { MdModeEditOutline } from "react-icons/md";
+import {useSelector} from 'react-redux'
 import "./UserSettingViewPage.css";
 const UserSettingViewPage = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
   return (
     <div>
       <div style={{ marginTop: "-40px" }}>
@@ -35,17 +37,17 @@ const UserSettingViewPage = () => {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span className="addcategory_text">Username</span>
+            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}} >Username</span>
             <input
-              className="addcategory_input"
+              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="Username"
               
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span className="addcategory_text">E-mail Address</span>
+            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>E-mail Address</span>
             <input
-              className="addcategory_input"
+              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="E-mail Address"
               
             />
@@ -54,25 +56,25 @@ const UserSettingViewPage = () => {
 
         <div className="user_bookmark_container">
           <div className="hidden_user_input">
-            <span className="addcategory_text">Bookmark Name</span>
+            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>Bookmark Name</span>
             <div className="vector_container">
               <div className="vector_image">
                 <img src={Vector90} alt="" />
               </div>
               <input
-                className="addcategory_input"
+                className= {theme ? "addcategory_input_sub" : "addcategory_input"}
                 placeholder="High Priority Review List"
                 
               />
             </div>
           </div>
-          <span className="addcategory_text">Bookmark Name</span>
+          <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>Bookmark Name</span>
           <div className="vector_container">
             <div className="vector_image">
               <img src={Vector90} alt="" />
             </div>
             <input
-              className="addcategory_input"
+              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="High Priority Review List"
               
             />
@@ -82,7 +84,7 @@ const UserSettingViewPage = () => {
               <img src={Vector91} alt="" />
             </div>
             <input
-              className="addcategory_input"
+              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="Review List"
               
             />
@@ -92,7 +94,7 @@ const UserSettingViewPage = () => {
               <img src={Vector92} alt="" />
             </div>
             <input
-              className="addcategory_input"
+              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="For future need"
               
             />

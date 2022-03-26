@@ -2,10 +2,12 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useSelector} from 'react-redux'
 import "./DeleteContent.css";
 import image5 from "../../assests/image5.png";
 const DeleteContent = () => {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.state)
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
@@ -23,7 +25,7 @@ const DeleteContent = () => {
         <div style={{ display: "flex", flexDirection: "column" }}>
         
           <div className="delete_content_texttwo">
-            <span>What is Git?</span>
+            <span style={{color: `${theme ? 'black' : 'white'}`}}>What is Git?</span>
           </div>
           <img src={image5} alt="" />
           <div

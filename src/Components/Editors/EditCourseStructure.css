@@ -1,9 +1,18 @@
 .detailpage_root_container {
-  margin-top: -47px;
+  margin-top: -48px;
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
-  padding: 20px 0px;
+  padding: 25px 0px;
   width: 100% !important;
 }
+
+.tableBody{
+  color: white !important;
+}
+
+.tableBody_sub{
+  color: black !important;
+}
+
 
 .back_button_detail_page {
   color: black;
@@ -13,6 +22,19 @@
   border: none;
   margin-top: -20px;
   cursor: pointer;
+}
+
+.polygonclassone {
+  background: #f3f6ff !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4) !important;
+  transform: rotate(-180deg) !important;
+  display: flex !important;
+  width: 20px;
+  height: 60px;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 100% !important;
+  margin-left: 10px !important;
 }
 
 .header_text {

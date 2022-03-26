@@ -10,10 +10,12 @@ import "slick-carousel/slick/slick-theme.css";
 import VectorTag from "../../../assests/VectorTag.png";
 import LibraryBookmarkContent from "./LibraryBookmarkContent";
 import "./Library.css";
+import {useSelector} from 'react-redux'
 
 import FooterButtons from "../FooterButtons";
 
 const LibraryBookmark = () => {
+  const theme = useSelector((state) => state.theme.state)
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
@@ -79,10 +81,10 @@ const LibraryBookmark = () => {
         </Button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
-            <MenuBookIcon className="menubookicon_text" />
-            <span className="mylibrary_text">My Library</span>
+            <MenuBookIcon className="menubookicon_text" style={{color: `${theme ? ' #008EEC' : 'white'}`}}/>
+            <span className="mylibrary_text" style={{color: `${theme ? ' #008EEC ' : 'white'}`}}>My Library</span>
           </span>
-          <span style={{paddingTop: "10px"}}>By Bookmark</span>
+          <span style={{color: `${theme ? ' #008EEC ' : 'white'}`,paddingTop: "10px"}}>By Bookmark</span>
         </div>
       </div>
       <div
@@ -94,10 +96,10 @@ const LibraryBookmark = () => {
         }}
       >
         <Button
-          className="bycourse_button"
+          className= {theme ? "bycourse_button_sub" : "bycourse_button"}
           endIcon={<HiOutlineArrowNarrowRight />}
         >
-          By Course{" "}
+          By Course
         </Button>
       </div>
 
