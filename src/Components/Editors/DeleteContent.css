@@ -19,21 +19,21 @@
 }
 
 .delete_content_textone {
-  align-items: center;
-  justify-content: center;
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
   display: flex;
+  align-items: center;
   text-align: center;
-  margin-top: 40px;
-  width: 100%;
   letter-spacing: -0.015em;
+  width: 100%;
+  justify-content: center;
+ margin-top: 20px;
   color: #de4040 !important;
-}
 
+}
 
 .delete_content_textone > span {
   font-family: "Helvetica";
@@ -48,7 +48,7 @@
   color: #de4040 !important;
 }
 
-.delete_content_texttwo {
+.delete_content_texttwo_sub >span {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 400;
@@ -57,19 +57,75 @@
   display: flex;
   align-items: center;
   text-align: center;
-  justify-content: center;
   letter-spacing: -0.015em;
-  margin-top: 10px;
-  padding-bottom: 10px;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0px 20px 0px;
+;
+
   color: #ffffff;
 }
 
-@media screen and (max-width: 340px) {
- .delete_content_textone >span {
-   font-size: 14px;
-   padding-left: 20px;
- }
- .delete_content_main_container{
-   margin-left: 10px;
- }
+.delete_content_texttwo_sub >span {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+  justify-content: center;
+  padding: 20px 0px 20px 0px;
+;
+  color: #363636;
 }
+
+@media screen and (max-width: 600px) {
+  .delete_content_textone>span {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.015em;
+  }
+  .delete_content_texttwo_sub>span {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+  }
+
+  .delete_content_texttwo_sub {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+
+    /* BG_Title_Header */
+
+    background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+}
+

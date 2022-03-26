@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Typography, Button } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import googleIcon from "../../../assests/google.png";
 
 import "../Stylesheet/stylesheet.css";
@@ -15,6 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState("babuibrar@gmail.com");
   const [password, setPassword] = useState("babuibrar@93");
   const [message, setMessage] = useState("");
+  const theme = useSelector((state) => state.theme.state);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -36,48 +37,39 @@ const Login = () => {
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
-        <button onClick={handleBack} className="back_button">
+        <button onClick={handleBack}   className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}>
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
       </div>
       <div
         // style={{ border: "1px solid red" }}
-        className="editormainpage_root_contianer">
+        className="editormainpage_root_contianer"
+      >
         <div
           style={{
             paddingTop: "20px",
             display: "flex",
             flexDirection: "column",
             className: "inputs",
-          }}>
+          }}
+        >
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Email Address or Username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "20px",
-            }}></div>
         </div>
-        {/* <div>
-          {message && (
-            <Typography variant="body1" style={{ color: "red" }}>
-              {message}
-            </Typography>
-          )}
-        </div> */}
+
         <Button className="update_button" onClick={handleLogin}>
           Log in
         </Button>
@@ -98,14 +90,12 @@ const Login = () => {
           <div
             style={{
               marginTop: "41px",
-              color: "white",
+              color: `${theme ? "black" : "white"}`,
               display: "flex",
-              // justifyContent: "right",
-              // paddingLeft: "-30px",
-              // border: "1px solid white",
               marginRight: "-100px",
-            }}>
-            <Link style={{ color: "white" }} to="/">
+            }}
+          >
+            <Link style={{  color: `${theme ? "black" : "white"}` , textDecoration: "none"}} to="/">
               {" "}
               Forget Password ?
             </Link>

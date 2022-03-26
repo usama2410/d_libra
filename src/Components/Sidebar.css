@@ -8,6 +8,9 @@ body {
   color: white !important;
 }   */
 
+.toolbar_rowreverse {
+  display: flex;
+}
 
 .wrap {
   margin: 0px 0px;
@@ -16,8 +19,6 @@ body {
   height: 0px;
   display: none;
 }
-
-
 
 .wrap .search_icon {
   height: 60px;
@@ -62,7 +63,7 @@ input[type="submit"] {
   height: 67px;
   width: 63px;
   display: inline-block;
-  background: url(../assests/Vector.png) center center no-repeat;
+  background: url(../assests/VectorBlue.png) center center no-repeat;
   text-indent: -10000px;
   border: none;
   position: absolute;
@@ -79,6 +80,28 @@ input[type="submit"]:hover {
   opacity: 0.8;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sidebar_inputfield {
   background: #4f4f4f;
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
@@ -93,10 +116,10 @@ input[type="submit"]:hover {
 }
 
 .sidebar_inputfield::placeholder {
-color: white;
+  color: white;
 }
 /* white theme input fiedl */
-.sidebar_inputfield_sub{
+.sidebar_inputfield_sub {
   background: white;
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
   border-top-left-radius: 5px;
@@ -112,7 +135,6 @@ color: white;
 .sidebar_inputfield_sub::placeholder {
   color: black;
 }
-
 
 .logo_main_container {
   padding-left: 240px;
@@ -146,7 +168,6 @@ color: white;
   height: 40px;
   border: none !important;
 }
-
 
 .listitem_text {
   font-family: "Helvetica";
@@ -182,16 +203,34 @@ color: white;
   .sidebar_inputfield {
     display: none;
   }
-  .sidebar_inputfield_sub{
+  .sidebar_inputfield_sub {
     display: none;
   }
   .input_field_icon_container {
     display: none;
   }
-
+  .input_field_icon_container_sub {
+    display: none;
+  }
   .wrap {
     display: block;
-    margin-top: -14px;
+    margin-top: -21px;
+    margin-right: -20px;
+  }
+
+  .toolbar_rowreverse {
+    flex-direction: row-reverse;
+  }
+  .sidenav_logo {
+    margin-right: 28px;
+    width: 34px;
+  }
+
+  .listitem_text {
+    font-size: 14px;
+  }
+  .listitem_text_disabled {
+    font-size: 14px;
   }
 }
 
@@ -205,7 +244,7 @@ color: white;
 
 @media screen and (max-width: 400px) {
   input[type="text"]:focus {
-    width: 220px;
+    width: 240px;
     z-index: 1;
     cursor: text;
   }

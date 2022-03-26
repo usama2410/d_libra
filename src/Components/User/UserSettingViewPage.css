@@ -10,14 +10,23 @@
 }
 
 .vector_image {
-  padding: 10px 5px 0px 5px;
+  padding: 10px 5px 18px 5px;
 }
 
 .vector_container {
   display: flex;
   align-items: center;
-  padding-bottom: 5px;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
 }
+
 
 .user_buttons {
   background: linear-gradient(
@@ -42,7 +51,7 @@
 }
 
 .user_container_root {
-  margin-top: 100px;
+  margin-top: 40px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -89,19 +98,52 @@
   text-align: center !important;
   letter-spacing: -0.015em !important;
   color: #ffffff !important;
+  text-transform: none !important;
 }
 
+
+.user_update_button_sub {
+  font-family: 'Helvetica' !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  /* identical to box height */
+  
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  
+  color: #FFFFFF !important;
+  background: linear-gradient(87.62deg, #004CB6 -44.71%, #009AF9 100%) !important;
+border-radius: 15px !important;
+text-transform: none !important;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .user_bookmark_container {
-  padding-left: 40px;
-  padding-top: 24px;
+  /* padding-left: 40px; */
+  /* padding-top: 24px; */
+  padding: 24px 20px 0px 20px;
 }
 
 
 
 @media screen and (max-width: 969px) {
   .user_bookmark_container {
-    padding-left: 0px;
-    padding-top: 24px;
+      padding: 24px 0px 0px 0px;
   }
 }
 
@@ -120,11 +162,29 @@
   }
   .user_sub_root_container {
     width: 100%;
-    padding-left: 30px;
+    /* padding-left: 30px; */
   }
 }
 
 @media screen and (max-width: 610px) {
+
+
+
+
+.vector_container>span{
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 9px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+  
+}
+
+
 
  .user_buttons{
    font-size: 12px !important;
@@ -139,7 +199,7 @@
 
  .user_buttons_container {
 flex-wrap: wrap;
-margin-left: 20px;
+/* margin-left: 20px; */
 
 margin-top: 20px;
 /* justify-content: space-between; */

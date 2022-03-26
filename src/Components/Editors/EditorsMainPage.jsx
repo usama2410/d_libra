@@ -11,17 +11,18 @@ const theme = useSelector((state) => state.theme.state)
     <>
       <div style={{ height: "100%" }}>
         <div style={{ marginTop: "-40px" }}>
-          <Button style={{ color: `${theme ? 'black' : 'white'}` }} startIcon={<ArrowBackIcon />}>
+          <Button   className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }} startIcon={<ArrowBackIcon />}>
             Back
           </Button>
         </div>
         <div className="editormainpage_root_contianer">
           <div>
             <Typography variant="h6" noWrap component="div">
-              <span className="editors_menu_heading">Editor's Menu</span>
+              <span className={theme ? 'editors_menu_heading_sub' : 'editors_menu_heading'}>Editor's Menu</span>
             </Typography>
           </div>
-          <div style={{ paddingTop: "40px" }}>
+          <div>
             <Button
               variant="outlined"
               className="upload_contents_button"
@@ -41,7 +42,7 @@ const theme = useSelector((state) => state.theme.state)
             </span>
             <div>
               <select
-                className="git_introduction_dropdown"
+                className={theme ? 'git_introduction_dropdown_sub' : 'git_introduction_dropdown'}
                 name="cars"
                 id="cars"
               >

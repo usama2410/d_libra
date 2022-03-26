@@ -3,6 +3,11 @@ textarea.addcategory_input {
   height: 120px;
 }
 
+textarea.addcategory_input_sub {
+  resize: none;
+  height: 120px;
+}
+
 .main_root_container_upload_content {
   padding: 0px 40px;
 }
@@ -22,6 +27,42 @@ textarea.addcategory_input {
   color: #ffffff;
   align-items: center;
   justify-content: center;
+}
+
+
+.upload_new_content_text{
+  font-family: 'Helvetica';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.015em;
+
+/* Font_Title_Header */
+
+color: #FFFFFF;
+
+}
+
+.upload_new_content_text_sub {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  width: 100%;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+  
+  /* Font_Body_Light */
+  
+  color: #363636;
 }
 
 .update_button_new {
@@ -49,21 +90,43 @@ textarea.addcategory_input {
   padding: 2px 0px;
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 1051px) {
   .image_none {
     display: block;
+    /* margin-left: 20px;     */
   }
-  .main_slide_container {
-    padding-top: 30px;
-  }
+
   .main_root_container_upload_content {
-    padding: 0px 20px;
+    /* padding: 0px 20px; */
   }
 }
 
+
+
+@media screen and (max-width: 600px){
+  .upload_new_content_text_sub {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    
+    /* BG_Title_Header */
+    
+    background: linear-gradient(87.62deg, #004CB6 -44.71%, #009AF9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+}
 @media screen and (max-width: 336px) {
   .main_root_container_upload_content {
     padding: 0px 0px;
-    margin-left: 8px;
+    /* margin-left: 8px; */
   }
 }

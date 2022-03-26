@@ -9,7 +9,7 @@ import "./MyContents.css";
 import VectorTag from "../../../assests/VectorTag.png";
 import {useSelector} from 'react-redux'
 
-
+import gitimage from '../../../assests/gitimage.png'
 const MyContents = () => {
   const navigate = useNavigate();
   const [data, setdata] = useState(ContentData);
@@ -56,7 +56,7 @@ const MyContents = () => {
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.1,
           slidesToScroll: 1,
           centerMode: false,
         },
@@ -67,6 +67,7 @@ const MyContents = () => {
   return (
     <>
       <div className="mainContentContainer">
+        <img src={gitimage} alt="" style={{paddingBottom: "10px"}}/>
         <span className={ theme ? "mycontentheadingsubone" : "mycontentheadingone"}>Git & Git Hub Introduction</span>{" "}
         <span className={theme ? "mycontentheadingsubtwo" : "mycontentheadingtwo"}>Select a Content for Edit</span>
       </div>

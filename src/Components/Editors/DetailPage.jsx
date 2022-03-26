@@ -10,6 +10,8 @@ import { IoMdArrowDroprightCircle } from "react-icons/io";
 import Polygon4 from "../../assests/Polygon4.png";
 import Polygon5 from "../../assests/Polygon5.png";
 import { useSelector } from "react-redux";
+import NextButton from '../../assests/NextButton.png'
+import PrevButton from '../../assests/PrevButton.png'
 const DetailPage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
@@ -18,8 +20,8 @@ const DetailPage = () => {
       <div className="detailpage_root_container">
         <button
           onClick={() => navigate("/")}
-          className="back_button_detail_page"
-          style={{ color: `${theme ? "white" : "black"}` }}
+          className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
@@ -125,22 +127,26 @@ const DetailPage = () => {
             alignItems: "center",
             justifyContent: "center",
             width: "100%",
+            backgroundColor: "#F3F6FF"
           }}
         >
-          <Button className="polygonclassone">
+         
             <img
-              src={Polygon4}
+              src={PrevButton}
               alt=""
-              style={{ width: "20px", height: "30px" }}
+              width='50px'
+              height='50px'
+              style={{ cursor: "pointer" }}
             />
-          </Button>
-          <Button className="polygonclassone">
+         
             <img
-              src={Polygon5}
+              src={NextButton}
               alt=""
-              style={{ width: "20px", height: "30px" }}
+              width='50px'
+              height='50px'
+              style={{ cursor: "pointer" }}
             />
-          </Button>
+        
         </div>
       ) : (
         <div

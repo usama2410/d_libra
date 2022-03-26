@@ -6,37 +6,46 @@ import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import "./RatingForm.css";
 const RatingForm = () => {
   const navigate = useNavigate();
-  const theme = useSelector((state) => state.theme.state)
+  const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
+          className="back_button"
+          style={{ color: `${theme ? "black" : "white"}` }}
           startIcon={<ArrowBackIcon />}
         >
           Back
         </Button>
       </div>
-      <div className="rating_form_root_container">
+      <div className="rating_form_root_container" style={{marginTop: "12px"}}>
         <div className="ratingform_root">
-          <span className="ratingform_root_span"  style={{color: `${theme ? ' #008EEC' : 'white'}`}}>
+          <span
+            className={theme ? "ratingform_root_span_sub" : "ratingform_root_span"}
+            style={{paddingBottom: "20px"}}
+          >
             Please rate the content of
           </span>
           <div>
-            <img src={image5} alt="" style={{borderRadius: "10px"}} />
+            <img src={image5} alt="" className="ratingform_image" style={{paddingBottom: "8px"}}/>
           </div>
         </div>
 
         <div className="ratingform_root_two">
-          <span className="ratingform_root_span_one"  style={{color: `${theme ? 'black' : 'white'}`}}>
+          <span
+            className="ratingform_root_span_one"
+            style={{ color: `${theme ? "black" : "white"}` }}
+          >
             Git & GitHub Introduction
           </span>
+          <div className="ratingform_root_sub_two_container">
+
           <Rating
             name="simple-controlled"
             size="large"
@@ -45,7 +54,8 @@ const RatingForm = () => {
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
-          />
+            />
+            </div>
         </div>
       </div>
 
@@ -56,7 +66,8 @@ const RatingForm = () => {
 
         <div>
           <textarea
-            className="rating_form_textarea"
+            className={theme ? "rating_form_textarea_sub" : "rating_form_textarea"}
+            style={{ color: `${theme ? "black" : "white"}` }}
             id="message"
             rows="14"
             placeholder=""
@@ -88,7 +99,7 @@ const RatingForm = () => {
         </div>
       </div>
       <div>
-        <FooterButtons/>
+        <FooterButtons />
       </div>
     </>
   );

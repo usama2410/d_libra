@@ -16,7 +16,23 @@
   align-items: center;
   text-align: center;
   letter-spacing: -0.015em;
-  color: black;
+  color: white;
+}
+
+.editors_menu_heading_sub {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  /* Font_Body_Light */
+
+  color: #363636;
 }
 
 .editorpage_button_container {
@@ -39,51 +55,115 @@
   padding-bottom: 5px;
 }
 .upload_contents_button {
-  border: none !important;
   background: #ffaa1d !important;
   border-radius: 15px !important;
   font-family: "Helvetica" !important;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
+  margin-top: 10px !important;
+  width: 330px !important;
   line-height: 24px !important;
+  border: none !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
   text-align: center !important;
-  letter-spacing: -0.015em !important;
-  padding: 10px 50px !important;
-  color: #363636 !important;
-  margin-top: 16px !important;
-  width: 340px !important;
   text-transform: none !important;
+  letter-spacing: -0.015em !important;
+
+  color: #363636 !important;
 }
 
 .git_introduction_dropdown {
-  font-family: "Helvetica";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.015em;
-  padding: 15px;
   background: #4f4f4f;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 20px;
+  height: 40px;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  padding-left: 20px;
   color: #ffffff;
   width: 340px;
+}
+
+.git_introduction_dropdown_sub {
+  background: white;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin-top: 5px;
+  padding-left: 20px;
+  height: 40px;
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  padding-left: 20px;
+  color: #363636;
+  border: none;
+  width: 340px;
+}
+
+@media screen and (max-width: 600px) {
+  .editors_menu_heading_sub {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+
+    /* BG_Title_Header */
+
+    background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  /* .editors_menu_heading {
+    display: none;
+  } */
+
+  .git_introduction_dropdown {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    width: 330px;
+  }
+
+  .git_introduction_dropdown_sub {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    width: 330px;
+  }
 }
 
 @media screen and (max-width: 362px) {
   .upload_contents_button {
     width: 300px !important;
   }
+
   .git_introduction_dropdown {
     width: 300px !important;
   }
-  .editormainpage_root_contianer {
-    padding-left: 20px;
+
+  .git_introduction_dropdown_sub {
+    width: 300px !important;
   }
 }

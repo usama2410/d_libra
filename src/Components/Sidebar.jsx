@@ -17,7 +17,7 @@ import Fill1 from "../assests/Fill1.png";
 import image3 from "../assests/image3.png";
 import Vector from "../assests/Vector.png";
 import Fill2 from "../assests/Fill2.png";
-import Fill12 from '../assests/Fill12.png'
+import Fill12 from "../assests/Fill12.png";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -31,10 +31,17 @@ import "./Sidebar.css";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
-import Brightness5Icon from '@mui/icons-material/Brightness5';
-import VectorBlue from '../assests/VectorBlue.png'
-const drawerWidth = 341;
+import Brightness5Icon from "@mui/icons-material/Brightness5";
+import VectorBlue from "../assests/VectorBlue.png";
 
+const drawerWidth = () => {
+  if (window.innerWidth <= 600) {
+    return 258;
+  } else {
+    return 341;
+  }
+};
+// const DrawerWidth = 200
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -92,10 +99,8 @@ export default function Sidebar() {
     if (themestate === true) {
       setThemeState(false);
     }
-    await dispatch(themeSwitch(themestate))
+    await dispatch(themeSwitch(themestate));
   };
-
-  
 
   const navigate = useNavigate();
   const handleDrawerOpen = () => {
@@ -121,13 +126,17 @@ export default function Sidebar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
-          <Toolbar style={{ backgroundColor: `${themestate ? '#111111' : ' #F3F6FF'}` }}>
+          <Toolbar
+            style={{
+              backgroundColor: `${themestate ? "#111111" : " #F3F6FF"}`,
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              style={{ color: `${themestate ? 'white' : '#111111'}` }}
+              style={{ color: `${themestate ? "white" : "#111111"}` }}
               sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
               <MenuIcon />
@@ -142,97 +151,72 @@ export default function Sidebar() {
               <Typography variant="h6" noWrap component="div">
                 <div className="logo_main_container">
                   <Button onClick={() => navigate("/")}>
-                    <img src={Fill2} alt="" /> {
-                      themestate ? <img src={Fill1} alt="" /> : <img src={Fill12} alt="" />
-                    } 
+                    <img src={Fill2} alt="" />{" "}
+                    {themestate ? (
+                      <img src={Fill1} alt="" />
+                    ) : (
+                      <img src={Fill12} alt="" />
+                    )}
                   </Button>
                 </div>
               </Typography>
             </div>
 
+            <Typography variant="h6" className="toolbar_rowreverse">
+              <div>
+                <div style={{ display: "flex" }}>
+                  <input
+                    placeholder="Search"
+                    className={`${
+                      themestate
+                        ? "sidebar_inputfield"
+                        : "sidebar_inputfield_sub"
+                    }`}
+                  />
+                  <div
+                    className={
+                      themestate
+                        ? "input_field_icon_container"
+                        : "input_field_icon_container_sub"
+                    }
+                  >
+                    {themestate ? (
+                      <img
+                        src={Vector}
+                        alt="vector image"
+                        className="inputfield_icon"
+                        onClick={handleSearch}
+                      />
+                    ) : (
+                      <img
+                        src={VectorBlue}
+                        alt="vector image"
+                        className="inputfield_icon"
+                        onClick={handleSearch}
+                      />
+                    )}
+                  </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-            <Typography
-              variant="h6"
-              
-              style={{ display: "flex" }}
-            >
-              <div style={{ display: "flex" }}>
-                <input
-             
-                  placeholder="Search"
-                  className= {`${themestate ? "sidebar_inputfield" : "sidebar_inputfield_sub"}`} 
-                />
-                <div className= {themestate ? 'input_field_icon_container' : 'input_field_icon_container_sub'}>
-                  
-                  {
-                    themestate ? <img
-                    src={Vector}
-                    alt="vector image"
-                    className="inputfield_icon"
-                  
-                    onClick={handleSearch}
-                  /> : <img
-                  src={VectorBlue}
-                  alt="vector image"
-                  className="inputfield_icon"
+                <div
+                  className="wrap"
                 
-                  onClick={handleSearch}
-                />
-                  }
+                >
+                  <input
+                    className="search_icon"
+                    type="text"
+                    placeholder="Search"
                   
-                
+                  />
+                  <input id="search_submit"  type="submit"     />
                 </div>
               </div>
-
-              <div
-                className="wrap"
-                style={{  marginRight: "-10px" }}
-              >
-                <input
-                  className="search_icon"
-                  type="text"
-                  placeholder="Search"
-                />
-                <input id="search_submit" value="Rechercher" type="submit" />
-              </div>
-
               <img src={image3} alt="" className="sidenav_logo" />
             </Typography>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </Toolbar>
         </AppBar>
         <Drawer
+        
           sx={{
             width: drawerWidth,
             flexShrink: 0,
@@ -242,11 +226,12 @@ export default function Sidebar() {
               border: "none",
             },
           }}
-          variant="persistent"
+          variant="temporary"
           anchor="left"
           open={open}
         >
           <DrawerHeader
+
             style={{
               background: "#212121",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -270,7 +255,7 @@ export default function Sidebar() {
           >
             <span style={{ marginLeft: "20px" }}>Account </span>
             <Divider
-              sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
+              sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
               <ListItem style={{ cursor: "pointer" }}>
@@ -278,7 +263,12 @@ export default function Sidebar() {
                   <img src={image3} alt="" style={{ marginLeft: "-9px" }} />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">bloovee</span>
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-17px" }}
+                  >
+                    bloovee
+                  </span>
                 </Typography>
               </ListItem>
 
@@ -287,7 +277,12 @@ export default function Sidebar() {
                   <img src={user} alt="" />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text_disabled">Signup</span>
+                  <span
+                    className="listitem_text_disabled"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Signup
+                  </span>
                 </Typography>
               </ListItem>
 
@@ -296,7 +291,12 @@ export default function Sidebar() {
                   <img src={Login} alt="" />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text_disabled">Login</span>
+                  <span
+                    className="listitem_text_disabled"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Login
+                  </span>
                 </Typography>
               </ListItem>
 
@@ -305,7 +305,12 @@ export default function Sidebar() {
                   <ExitToAppIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">Logout</span>
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Logout
+                  </span>
                 </Typography>
               </ListItem>
 
@@ -314,7 +319,12 @@ export default function Sidebar() {
                   <AccessTimeIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">Recently Viewed</span>
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Recently Viewed
+                  </span>
                 </Typography>
               </ListItem>
 
@@ -323,7 +333,7 @@ export default function Sidebar() {
                   <MenuBookIcon style={{ color: " #FFFFFF" }} />
                 </ListItemIcon>
                 <Typography>
-                  <span>My Library</span>
+                  <span style={{ marginLeft: "-24px" }}>My Library</span>
                 </Typography>
               </ListItem>
 
@@ -332,37 +342,41 @@ export default function Sidebar() {
                   <img src={Rating} alt="" style={{ paddingLeft: "3px" }} />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">Rating</span>
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Rating
+                  </span>
                 </Typography>
               </ListItem>
             </List>
 
             <span style={{ marginLeft: "20px" }}>Setting </span>
             <Divider
-              sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
+              sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
               <ListItem style={{ cursor: "pointer" }}>
                 <ListItemIcon>
-                  {
-                    themestate ? 
-                    <img src={NightMode} alt="" /> : <Brightness5Icon style={{color: "white"}}/>
-                  }
+                  <img src={NightMode} alt="" />
                 </ListItemIcon>
                 <Typography>
-                  {
-                    themestate ?      <span className="listitem_text">Dark Theme</span> :   <span className="listitem_text">Light Theme</span>
-                  }
-            
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Dark Theme
+                  </span>
                 </Typography>
-                <div style={{ marginLeft: "40px" }}>
+                <div style={{ marginLeft: "10px" }}>
                   <Switch {...label} onClick={handleTheme} defaultUnChecked />
                 </div>
               </ListItem>
             </List>
             <span style={{ marginLeft: "20px" }}>Editor Menu </span>
             <Divider
-              sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
+              sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
               <ListItem
@@ -375,13 +389,18 @@ export default function Sidebar() {
                   />
                 </ListItemIcon>
                 <Typography>
-                  <span className="listitem_text">Editor's Page</span>
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Editor's Page
+                  </span>
                 </Typography>
               </ListItem>
             </List>
             <span style={{ marginLeft: "20px" }}>Others </span>
             <Divider
-              sx={{ bgcolor: "white", width: "80%", marginLeft: "20px" }}
+              sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }}
             />
             <List style={{ paddingLeft: "30px" }}>
               <ListItem style={{ cursor: "pointer" }}>

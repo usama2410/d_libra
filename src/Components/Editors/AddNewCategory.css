@@ -1,26 +1,3 @@
-.add_new_category_heading {
-  font-family: "Helvetica";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: -0.015em;
-  margin-top: 60px;
-  color: #ffffff;
-}
-
-.back_button {
-  color: black;
-  background: black;
-  border: none;
-  display: flex;
-  align-items: center;
-  padding-top: 9px;
-  cursor: pointer;
-}
 
 .image_button {
   background: #119abd !important;
@@ -42,40 +19,16 @@
 }
 
 .addcategory_text {
-  font-family: "Helvetica";
+  font-family: 'Helvetica';
   font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 21px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.015em;
-  color: #ffffff;
-}
-
-.addcategory_input {
-  background: #4f4f4f;
-  border-radius: 5px;
-  border: none;
-  width: 450px;
-  height: 40px;
-  font-family: "Helvetica";
-  font-style: normal;
-  margin-top: 5px;
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-  padding-left: 20px;
-  color: #ffffff;
 }
 
-.addcategory_input::placeholder{
-  color: #363636;
-}
 
 .addcategory_dropdown {
   background: #4f4f4f;
@@ -119,27 +72,6 @@
 }
 
 @media screen and (max-width: 468px) {
-  .addcategory_input {
-    background: #4f4f4f;
-    border-radius: 5px;
-    border: none;
-    width: 260px;
-    height: 40px;
-    font-family: "Helvetica";
-    font-style: normal;
-    margin-top: 5px;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.015em;
-    padding-left: 20px;
-    color: #ffffff;
-  }
-  .add_new_category_heading {
-    font-size: 15px;
-  }
   .image_button {
     width: 140px !important;
     height: 24px !important;

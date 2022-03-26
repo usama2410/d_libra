@@ -74,7 +74,8 @@ const LibraryBookmark = () => {
       <div className="library_root_container">
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
+          className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
           startIcon={<ArrowBackIcon />}
         >
           Back

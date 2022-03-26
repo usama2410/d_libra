@@ -10,27 +10,37 @@ import { useSelector } from "react-redux";
 import "./RatingForm.css";
 const Feedback = () => {
   const navigate = useNavigate();
-  const theme = useSelector((state) => state.theme.state)
+  const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
-          startIcon={<ArrowBackIcon />}>
+          className="back_button"
+          style={{ color: `${theme ? "black" : "white"}` }}
+          startIcon={<ArrowBackIcon />}
+        >
           Back
         </Button>
       </div>
       <div className="ratingform_root_two" style={{ marginTop: "20px" }}>
-        <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
+        <select
+          className={theme ? "addcategory_input_sub" : "addcategory_input"}
+          name="cars"
+          id="cars"
+        >
           <option value="volvo">Select a course for Rating</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
           <option value="audi">Audi</option>
         </select>
 
-        <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
+        <select
+          className={theme ? "addcategory_input_sub" : "addcategory_input"}
+          name="cars"
+          id="cars"
+        >
           <option value="volvo">Select a course for Rating</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
@@ -57,7 +67,9 @@ const Feedback = () => {
 
         <div>
           <textarea
-            className={theme ? "rating_form_textarea_sub" : "rating_form_textarea"}
+            className={
+              theme ? "rating_form_textarea_sub" : "rating_form_textarea"
+            }
             id="message"
             rows="20"
             placeholder=""

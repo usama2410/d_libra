@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const theme = useSelector((state) => state.theme.state)
+  const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(ContentData);
   const settings = {
     dots: false,
@@ -80,14 +80,21 @@ const LandingPage = () => {
             justifyContent: "center",
             width: "100%",
           }}
-          className="">
-          <img src={Fill9} alt="" /> {
-          theme ?   <img src={Fill12} alt="" /> :   <img src={Fill8} alt="" />
-          }
+          className=""
+        >
+          <img src={Fill9} alt="" />{" "}
+          {theme ? (
+            <img src={Fill12} alt="" style={{ width: "100px" }} />
+          ) : (
+            <img src={Fill8} alt="" />
+          )}
         </div>
 
         {/* <span className="mycontentheadingone">Git & Git Hub Introduction</span>{" "} */}
-        <span className="mycontentheadingtwoo" style={{ color: `${theme ? 'black' : 'white'}` }}>
+        <span
+          className="mycontentheadingtwoo"
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
           A web book based learning content library for digital skill
           development
         </span>
@@ -100,7 +107,8 @@ const LandingPage = () => {
             position: " relative",
             marginTop: "70.91px",
           }}
-          className="">
+          className=""
+        >
           <img style={{ width: "230px" }} src={Vectoroval} alt="" />
         </div>
         <div
@@ -111,7 +119,8 @@ const LandingPage = () => {
             position: "absolute",
             marginTop: "150.91px",
           }}
-          className="">
+          className=""
+        >
           <img style={{ width: "144px" }} src={book} alt="" />
         </div>
       </div>
@@ -119,8 +128,8 @@ const LandingPage = () => {
         {" "}
         <div>
           {" "}
-          <button className="Signup_button Signup">Sign up</button>
-          <button className="Signup_button">Log in</button>
+          <button className="Signup_button Signup" style={{color: `${theme ? 'white' : 'black'}`}}>Sign up</button>
+          <button className="Signup_button"  style={{color: `${theme ? 'white' : 'black'}`}}>Log in</button>
         </div>
       </div>
       {data.map((item) => {
@@ -155,7 +164,8 @@ const LandingPage = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             paddingTop: "10px",
-                          }}>
+                          }}
+                        >
                           <span>{e.Tags}</span>
 
                           {/* <img src={VectorTag} alt="" /> */}

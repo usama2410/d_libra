@@ -3,7 +3,7 @@ import { Typography, Button } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import googleIcon from "../../../assests/google.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../Stylesheet/stylesheet.css";
 import { signUp } from "../../../Redux/Actions/auth.action";
@@ -11,7 +11,7 @@ import { signUp } from "../../../Redux/Actions/auth.action";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const theme = useSelector((state) => state.theme.state);
   const [username, setUserName] = useState("MuhammadIbrar");
   const [email, setEmail] = useState("babuibrar@gmail.com");
   const [password, setPassword] = useState("babuibrar@93");
@@ -20,29 +20,22 @@ const Register = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-
     navigate("/");
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     const response = await dispatch(signUp(username, email, password));
-
-    // setData(response?.data);
-    // setMessage(response?.message);
-
-    // const timer = setTimeout(() => {
-    //   setData("");
-    //   setMessage("");
-    // }, 5000);
-    // return () => clearTimeout(timer);
   };
 
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
-        <button onClick={handleBack} className="back_button">
+        <button
+          onClick={handleBack}
+          className="back_button"
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
@@ -57,45 +50,25 @@ const Register = () => {
           }}
         >
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Username"
             value={username}
             onChange={(e) => setUserName(e.target.value)}
           />
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
-            className="addcategory_input"
+            className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Create a Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "20px",
-            }}
-          ></div>
         </div>
-{/* 
-        <div>
-          {data && (
-            <Typography style={{ color: "red" }} variant="body1">
-              {data}
-            </Typography>
-          )}
-          {message && (
-            <Typography style={{ color: "white" }} variant="body1">
-              {message} !
-            </Typography>
-          )}
-        </div> */}
 
         <Button className="update_button" onClick={handleRegister}>
           Register
@@ -103,7 +76,12 @@ const Register = () => {
       </div>
 
       <div>
-        <Typography className="orText">Or</Typography>
+        <Typography
+          className="orText"
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
+          Or
+        </Typography>
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>

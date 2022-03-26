@@ -17,7 +17,8 @@ const UserSettingViewPage = () => {
       <div style={{ marginTop: "-40px" }}>
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
+          className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
           startIcon={<ArrowBackIcon />}
         >
           Back
@@ -29,25 +30,25 @@ const UserSettingViewPage = () => {
           <div className="user_root_container">
             <img src={icon5} alt=""/>
             <div className="user_header_container">
-              <div className="vector_container">
+              <div className="vector_container" style={{color: `${theme ? '#009AF9' : 'white'}`}}>
                 <MdModeEditOutline />
-                <span style={{ paddingLeft: "5px" }}>Editor</span>
+                <span className="vector_container" style={{fontSize: "14px", paddingLeft: "4px"}} >Editor</span>
               </div>
-              <Button className="user_update_button">Update Icon</Button>
+              <Button className={theme ? "user_update_button_sub" : "user_update_button"}>Update Icon</Button>
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}} >Username</span>
+            <span  className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}} >Username</span>
             <input
-              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="Username"
               
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>E-mail Address</span>
+            <span  className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>E-mail Address</span>
             <input
-              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="E-mail Address"
               
             />
@@ -56,25 +57,25 @@ const UserSettingViewPage = () => {
 
         <div className="user_bookmark_container">
           <div className="hidden_user_input">
-            <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>Bookmark Name</span>
+            <span  className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`}}>Bookmark Name</span>
             <div className="vector_container">
               <div className="vector_image">
                 <img src={Vector90} alt="" />
               </div>
               <input
-                className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+                className={theme ? "addcategory_input_sub" : "addcategory_input"}
                 placeholder="High Priority Review List"
                 
               />
             </div>
           </div>
-          <span className="addcategory_text" style={{color: `${theme ? 'black': 'white'}`}}>Bookmark Name</span>
+          <span  className="addcategory_text" style={{color: `${theme ? '#363636' : 'white'}`, marginTop: "12px"}}>Bookmark Name</span>
           <div className="vector_container">
             <div className="vector_image">
               <img src={Vector90} alt="" />
             </div>
             <input
-              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="High Priority Review List"
               
             />
@@ -84,7 +85,7 @@ const UserSettingViewPage = () => {
               <img src={Vector91} alt="" />
             </div>
             <input
-              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="Review List"
               
             />
@@ -94,7 +95,7 @@ const UserSettingViewPage = () => {
               <img src={Vector92} alt="" />
             </div>
             <input
-              className= {theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
               placeholder="For future need"
               
             />

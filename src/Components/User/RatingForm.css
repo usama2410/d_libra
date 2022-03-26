@@ -9,12 +9,11 @@
 .ratingform_root_two {
   display: flex;
   width: 100%;
-  padding: 20px 0px 10px 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .rating_form_sub_span {
@@ -49,14 +48,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 .footer_buttons_container {
+  position: fixed;
   display: flex;
+  bottom: 15px;
+  left: 0;
+  /* display: flex;
   width: 100%;
   margin-top: 20px;
-  padding-left: 20px;
+  padding-left: 20px; */
 }
 
 .footer_buttons > img {
@@ -71,6 +74,8 @@
 }
 
 .rating_form_span_two {
+  /* Regular Light Text */
+
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 300;
@@ -78,8 +83,8 @@
   line-height: 24px;
   display: flex;
   align-items: center;
+  color: #c8c8c8;
   letter-spacing: -0.015em;
-  color: #c8c8c8 !important;
 }
 
 .ratingform_root_span_one {
@@ -96,7 +101,6 @@
 }
 
 .ratingform_root_span {
-  padding-bottom: 12px;
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 400;
@@ -106,7 +110,28 @@
   align-items: center;
   text-align: center;
   letter-spacing: -0.015em;
-  color: #ffffff;
+  padding-bottom: 15px;
+}
+
+.ratingform_root_span_sub {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  /* Font_Subtitle_Light */
+
+  color: #008eec;
+}
+
+.ratingform_image {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
 }
 
 .ratingform_root_three {
@@ -126,10 +151,9 @@
   border: none;
 }
 
-
 .rating_form_textarea_sub {
-  background:  #FFFFFF;
-  padding: 20px 0px;
+  background: #ffffff;
+  padding: 20px 20px;
   width: 600px !important;
   border: none;
 }
@@ -154,6 +178,42 @@
 }
 
 @media screen and (max-width: 600px) {
+  .ratingform_root_span_sub {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+
+    /* BG_Title_Header */
+
+    background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+
+  .ratingform_root_span {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+
+    /* Font Body Dark */
+
+    color: #ffffff;
+  }
+
   .rating_form_sub_four {
     width: 200px !important;
   }
@@ -164,7 +224,7 @@
   .rating_form_textarea_sub {
     width: 360px !important;
   }
-  
+
   .user_buttons_sub_three_hidden {
     width: 350px;
     display: flex;
@@ -175,7 +235,19 @@
     display: none;
   }
   .ratingform_root_span_one {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
     font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+  }
+  .ratingform_root_sub_two_container {
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
   .rating_form_sub_span {
     width: 360px;
@@ -187,7 +259,7 @@
   .ratingform_root_two {
     display: flex;
     width: 100%;
-    padding: 20px 0px 10px 0px;
+    /* padding: 20px 0px 10px 0px; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -203,11 +275,11 @@
   .rating_form_textarea {
     width: 300px !important;
   }
-  
+
   .rating_form_textarea_sub {
     width: 300px !important;
   }
-  
+
   .user_buttons_sub_three_hidden {
     width: 280px;
     display: flex;
@@ -216,18 +288,5 @@
   }
   .rating_form_sub_span {
     width: 300px;
-  }
-}
-
-@media screen and (max-width: 340px) {
-  .ratingform_root {
-    margin-left: 14px;
-  }
-  .ratingform_root_three {
-    margin-left: 20px;
-  }
-
-  .ratingform_root_two {
-    margin-left: 10px;
   }
 }

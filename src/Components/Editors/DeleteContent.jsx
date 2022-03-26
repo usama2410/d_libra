@@ -14,18 +14,22 @@ const DeleteContent = () => {
         <button
           onClick={() => navigate("/detailpage")}
           className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>  <div className="delete_content_textone">
+      </div>
+      
+      
+        <div className="delete_content_textone">
             <span>Are you really deleting the following content?</span>
           </div>
       <div className="delete_content_main_container">
         <div style={{ display: "flex", flexDirection: "column" }}>
         
-          <div className="delete_content_texttwo">
-            <span style={{color: `${theme ? 'black' : 'white'}`}}>What is Git?</span>
+          <div className={theme ? "delete_content_texttwo_sub" : "delete_content_texttwo"}>
+            <span>What is Git?</span>
           </div>
           <img src={image5} alt="" />
           <div
@@ -35,7 +39,7 @@ const DeleteContent = () => {
               justifyContent: "center",
             }}
           >
-            <button className="delete_content_button">
+            <button className="delete_content_button" style={{color: `${theme ? 'white' : 'black'}`}}> 
               Yes, delete the content
             </button>
           </div>

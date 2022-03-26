@@ -17,7 +17,8 @@ const RatingSidebar = () => {
       <div style={{ marginTop: "-40px" }}>
         <Button
           onClick={() => navigate("/editormainpage")}
-          style={{ color: "black" }}
+          className="back_button"
+          style={{ color: `${theme ? 'black' : 'white'}` }}
           startIcon={<ArrowBackIcon />}
         >
           Back
@@ -55,6 +56,7 @@ const RatingSidebar = () => {
         <div>
           <textarea
             className={theme ? "rating_form_textarea_sub" : "rating_form_textarea"}
+            style={{ color: `${theme ? "black" : "white"}` }}
             id="message"
             rows="14"
             placeholder=""

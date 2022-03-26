@@ -34,7 +34,7 @@ const AddNewCategory = () => {
       <div className="editormainpage_root_contianer">
         <div>
           <Typography variant="h6" noWrap component="div">
-            <span className="add_new_category_heading" style={{color: `${theme ? '#363636' : 'white'}`}}>
+            <span className={theme ? "add_new_category_heading_sub" : "add_new_category_heading"}>
               Add a New Category, Course or Chapter
             </span>
           </Typography>
