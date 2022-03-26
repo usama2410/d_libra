@@ -16,6 +16,7 @@ import RatingForm from "./Components/User/RatingForm";
 import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
 import LandingPage from "./Components/Guest/LandingPG/LandingPage";
+import Accord from "./Components/Guest/Accordian/Accordian";
 // import Course from "./Components/Guest/CoursePg/Course";
 import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
 
@@ -64,23 +65,20 @@ function App() {
               element={<EditContentMain />}
             />
 
-            <Route path="/feedback" exact element={<Feedback />} />
-            <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
-            <Route
-              path="/usersettingviewpage"
-              exact
-              element={<UserSettingViewPage />}
-            />
-            <Route path="/ratingform" exact element={<RatingForm />} />
-            <Route path="/LandingPage" exact element={<LandingPage />} />
-            <Route
-              path="/librarybookmark"
-              exact
-              element={<LibraryBookmark />}
-            />
-          </Routes>
-          <FooterCopyright />
-        </Router>
+          <Route path="/feedback" exact element={<Feedback />} />
+          <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
+          <Route
+            path="/usersettingviewpage"
+            exact
+            element={<UserSettingViewPage />}
+          />
+          <Route path="/ratingform" exact element={<RatingForm />} />
+          <Route path="/LandingPage" exact element={<LandingPage />} />
+          <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
+          <Route path="/Accordian" exact element={<Accord />} />
+        </Routes>
+        <FooterCopyright />
+      </Router>
       </div>
     </>
   );

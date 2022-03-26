@@ -41,19 +41,19 @@ const Login = () => {
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
       </div>
-      <div className="editormainpage_root_contianer">
+      <div
+        // style={{ border: "1px solid red" }}
+        className="editormainpage_root_contianer">
         <div
           style={{
             paddingTop: "20px",
             display: "flex",
             flexDirection: "column",
             className: "inputs",
-          }}
-        >
+          }}>
           <input
             className="addcategory_input"
             placeholder="Email Address or Username"
-            
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -61,7 +61,6 @@ const Login = () => {
           <input
             className="addcategory_input"
             placeholder="Password"
-            
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -70,8 +69,7 @@ const Login = () => {
               display: "flex",
               flexDirection: "column",
               marginTop: "20px",
-            }}
-          ></div>
+            }}></div>
         </div>
         {/* <div>
           {message && (
@@ -83,36 +81,36 @@ const Login = () => {
         <Button className="update_button" onClick={handleLogin}>
           Log in
         </Button>
-      </div>
 
-      <div>
-        <Typography className="orText">Or</Typography>
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "center" }}>
         <div>
-          <Button variant="text" className="signWithGoogle">
-            <img src={googleIcon} className="googleIcon" alt="google" />
-            Log in with Google
-          </Button>
+          <Typography className="orText">Or</Typography>
         </div>
-      </div>
 
-      <div style={{ width: "62%" }}>
-        <div
-          style={{
-            float: "right",
-            marginTop: "41px",
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Link style={{ color: "white" }} to="/">
-            {" "}
-            Forget Password ?
-          </Link>
-          <ArrowForward />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div>
+            <Button variant="text" className="signWithGoogle">
+              <img src={googleIcon} className="googleIcon" alt="google" />
+              Log in with Google
+            </Button>
+          </div>
+        </div>
+        <div style={{ Width: "62%" }}>
+          <div
+            style={{
+              marginTop: "41px",
+              color: "white",
+              display: "flex",
+              // justifyContent: "right",
+              // paddingLeft: "-30px",
+              // border: "1px solid white",
+              marginRight: "-100px",
+            }}>
+            <Link style={{ color: "white" }} to="/">
+              {" "}
+              Forget Password ?
+            </Link>
+            <ArrowForward />
+          </div>
         </div>
       </div>
     </>

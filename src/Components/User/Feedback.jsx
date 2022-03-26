@@ -18,8 +18,7 @@ const Feedback = () => {
         <Button
           onClick={() => navigate("/editormainpage")}
           style={{ color: "black" }}
-          startIcon={<ArrowBackIcon />}
-        >
+          startIcon={<ArrowBackIcon />}>
           Back
         </Button>
       </div>
@@ -38,10 +37,7 @@ const Feedback = () => {
           <option value="audi">Audi</option>
         </select>
 
-        <div
-          className="ratingform_root_two"
-        
-        >
+        <div className="ratingform_root_two">
           <Rating
             name="simple-controlled"
             size="large"
