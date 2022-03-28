@@ -14,7 +14,7 @@ const Feedback = () => {
   const [value, setValue] = React.useState(2);
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
@@ -23,7 +23,7 @@ const Feedback = () => {
         >
           Back
         </Button>
-      </div>
+  
       <div className="ratingform_root_two" style={{ marginTop: "20px" }}>
         <select
           className={theme ? "addcategory_input_sub" : "addcategory_input"}

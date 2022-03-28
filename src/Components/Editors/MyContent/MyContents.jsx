@@ -30,7 +30,7 @@ const MyContents = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
@@ -39,8 +39,7 @@ const MyContents = () => {
         breakpoint: 820,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },
@@ -48,15 +47,14 @@ const MyContents = () => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1.1,
+          slidesToShow: 1.02,
           slidesToScroll: 1,
           centerMode: false,
         },
@@ -67,7 +65,7 @@ const MyContents = () => {
   return (
     <>
       <div className="mainContentContainer">
-        <img src={gitimage} alt="" style={{paddingBottom: "10px"}}/>
+        <img src={gitimage} alt="" style={{padding: "10px 0px"}}/>
         <span className={ theme ? "mycontentheadingsubone" : "mycontentheadingone"}>Git & Git Hub Introduction</span>{" "}
         <span className={theme ? "mycontentheadingsubtwo" : "mycontentheadingtwo"}>Select a Content for Edit</span>
       </div>
@@ -77,18 +75,19 @@ const MyContents = () => {
             <div>
               <span  style={{color: `${theme ? ' #008EEC' : 'white'}`}}>{item.chapterName}</span>
             </div>
-            <div>
+            <div className="intro_slide_sub">
               <Slider className="intro-slick" {...settings}>
                 {item.items.map((e) => {
                   return (
-                    <div className="intro-slides">
+                    <div className="intro-slides"  > 
                       <img
                         onClick={() => navigate("/detailpage")}
                         src={e.image}
                         style={{
-                          borderRadius: "5px",
+                          borderRadius: "2px",
                           width: "100%",
                           cursor: "pointer",
+
                         }}
                         alt=""
                       />

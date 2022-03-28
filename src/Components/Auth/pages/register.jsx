@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+   
         <button
           onClick={handleBack}
           className="back_button"
@@ -39,7 +39,7 @@ const Register = () => {
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>
+    
       <div className="editormainpage_root_contianer">
         <div
           style={{

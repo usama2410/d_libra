@@ -48,7 +48,7 @@ const EditContentMain = () => {
   useEffect(() => {}, [editorState]);
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+
         <button
           onClick={() => navigate("/detailpage")}
           className="back_button"
@@ -56,7 +56,7 @@ const EditContentMain = () => {
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>
+    
       <div  className={theme ? 'upload_new_content_text_sub' : 'upload_new_content_text'}>Edit Contents</div>
       <Grid container className="main_root_container_upload_content">
         <Grid item lg={4} md={4} sm={12} xs={12} style={{ marginTop: "-15px" }}>

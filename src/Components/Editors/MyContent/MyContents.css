@@ -58,10 +58,10 @@
   color: black;
 }
 
-.intro-slides {
-  width: 100% !important;
-  height: 262px !important;
-}
+/* .intro-slick{
+  border: 1px solid white !important;
+  padding-right: -100px !important;
+} */
 
 .slick-next {
   right: -14px !important;

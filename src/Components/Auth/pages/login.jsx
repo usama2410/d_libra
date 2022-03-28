@@ -27,24 +27,19 @@ const Login = () => {
     e.preventDefault();
 
     const response = await dispatch(logIn(email, password));
-    // setMessage(response?.message);
-
-    // const timer = setTimeout(() => {
-    //   setMessage("");
-    // }, 5000);
-    // return () => clearTimeout(timer);
+ 
   };
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+
         <button onClick={handleBack}   className="back_button"
           style={{ color: `${theme ? 'black' : 'white'}` }}>
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>
+      
       <div
-        // style={{ border: "1px solid red" }}
+       
         className="editormainpage_root_contianer"
       >
         <div

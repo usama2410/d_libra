@@ -14,13 +14,11 @@ const theme = useSelector((state) => state.theme.state)
   };
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
         <button onClick={handleBack}  className="back_button"
           style={{ color: `${theme ? 'black' : 'white'}` }}>
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
         <Typography className="logoutText" style={{color: `${theme ? '#008EEC' : 'white'}`}}>
           You've successfully logged out

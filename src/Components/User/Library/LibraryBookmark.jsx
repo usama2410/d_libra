@@ -128,7 +128,7 @@ const LibraryBookmark = () => {
                         style={{
                           width: "100%",
                           cursor: "pointer",
-                          borderRadius: "10px",
+                          borderRadius: "2px",
                           filter: `${
                             e.disabled === true
                               ? "saturate(300%) saturate(12%)  grayscale(100%)  brightness(11%)"
@@ -141,10 +141,8 @@ const LibraryBookmark = () => {
                         <div
                           style={{
                             display: "flex",
-                            // border: "1px solid red",
                             justifyContent: "space-around",
                             padding: "14px 10px 0px 10px",
-                            // height: "auto"
                           }}
                         >
                             <div>

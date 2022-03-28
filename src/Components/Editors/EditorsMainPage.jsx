@@ -9,13 +9,13 @@ const EditorsMainPage = () => {
 const theme = useSelector((state) => state.theme.state)
   return (
     <>
-      <div style={{ height: "100%" }}>
-        <div style={{ marginTop: "-40px" }}>
+    
+        
           <Button   className="back_button"
           style={{ color: `${theme ? 'black' : 'white'}` }} startIcon={<ArrowBackIcon />}>
             Back
           </Button>
-        </div>
+        
         <div className="editormainpage_root_contianer">
           <div>
             <Typography variant="h6" noWrap component="div">
@@ -59,7 +59,7 @@ const theme = useSelector((state) => state.theme.state)
             </div>
           </div>
         </div>
-      </div>
+
     </>
   );
 };

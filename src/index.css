@@ -1,32 +1,19 @@
-
-
-  
-   /* body {
-    background-color: white !important;
-  }
-  *{
-    color: black !important;
-  }  */
-
-
-/* body {
-  background-color: black !important;
-} */
-/* * {
-  color: #000 !important;
-}   */
-
 .darkTheme {
   background-color: #000;
   color: white;
+  padding: 70px 0px;
   min-height: 100vh;
-  min-width: 100vw;
 }
 
 .lightTheme {
-  background-color:  #F3F6FF;
-  /* background-color: red; */
+  background-color: #f3f6ff;
   color: black;
+  padding: 70px 0px;
   min-height: 100vh;
-  /* min-width: 100vw; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
