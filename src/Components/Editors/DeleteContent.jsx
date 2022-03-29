@@ -10,7 +10,7 @@ const DeleteContent = () => {
   const theme = useSelector((state) => state.theme.state)
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+     
         <button
           onClick={() => navigate("/detailpage")}
           className="back_button"
@@ -19,7 +19,7 @@ const DeleteContent = () => {
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-      </div>
+
       
       
         <div className="delete_content_textone">

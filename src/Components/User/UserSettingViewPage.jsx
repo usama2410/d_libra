@@ -20,7 +20,7 @@ const UserSettingViewPage = () => {
   const theme = useSelector((state) => state.theme.state);
   return (
     <div>
-      <div style={{ marginTop: "-40px" }}>
+  
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
@@ -28,7 +28,7 @@ const UserSettingViewPage = () => {
           startIcon={<ArrowBackIcon />}>
           Back
         </Button>
-      </div>
+   
 
       <div className="user_container_root">
         <div className="user_sub_root_container">

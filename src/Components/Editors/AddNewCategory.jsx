@@ -21,7 +21,7 @@ const AddNewCategory = () => {
   };
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+ 
         <Button
           onClick={() => navigate("/editcoursestructure")}
           className="back_button"
@@ -30,7 +30,7 @@ const AddNewCategory = () => {
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
          BACK
         </Button>
-      </div>
+
       <div className="editormainpage_root_contianer">
         <div>
           <Typography variant="h6" noWrap component="div">

@@ -37,7 +37,7 @@ const LandingPage = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
@@ -46,8 +46,7 @@ const LandingPage = () => {
         breakpoint: 820,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },
@@ -55,8 +54,7 @@ const LandingPage = () => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },

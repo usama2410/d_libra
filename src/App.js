@@ -35,6 +35,7 @@ function App() {
   return (
     <>
       <div className={theme ? "lightTheme" : "darkTheme"}>
+        
         <Router>
           <Sidebar />
           <Routes>
@@ -84,6 +85,7 @@ function App() {
           <FooterCopyright />
         </Router>
       </div>
+        
     </>
   );
 }

@@ -47,7 +47,7 @@ const EditCourseStructure = () => {
   const theme = useSelector((state) => state.theme.state);
   return (
     <div style={{ height: "100%" }}>
-      <div style={{ marginTop: "-40px" }}>
+  
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
@@ -56,7 +56,7 @@ const EditCourseStructure = () => {
         >
           Back
         </Button>
-      </div>
+      
       <div className="editormainpage_root_contianer">
         <div>
           <Button

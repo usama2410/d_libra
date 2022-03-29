@@ -38,7 +38,43 @@ body {
   cursor: pointer;
 }
 
-input[type="text"]:focus:hover {
+.search_icon:focus:hover {
+  background: #4f4f4f;
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border: none;
+  font-size: 18px;
+  padding-left: 10px;
+  height: 50px;
+  margin-top: 7px;
+  color: white ;
+  outline: none;
+}
+
+.search_icon:focus {
+  width: 370px;
+  z-index: 1;
+  cursor: text;
+}
+
+.darkThemeBar:focus:hover{
+  background: white ;
+  color: black ;
+
+}
+.whitethemeBar:focus:hover{
+  background: #4f4f4f ;
+  color: white ;
+
+}
+
+
+
+
+/* .search_icon:focus:hover {
   background: #4f4f4f;
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
   border-top-left-radius: 10px;
@@ -54,11 +90,17 @@ input[type="text"]:focus:hover {
   outline: none;
 }
 
-input[type="text"]:focus {
+.search_icon:focus {
   width: 370px;
   z-index: 1;
   cursor: text;
-}
+} */
+
+
+
+
+
+
 input[type="submit"] {
   height: 67px;
   width: 63px;

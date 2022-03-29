@@ -14,7 +14,7 @@ const RatingForm = () => {
   const [value, setValue] = React.useState(2);
   return (
     <>
-      <div style={{ marginTop: "-40px" }}>
+
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
@@ -23,7 +23,7 @@ const RatingForm = () => {
         >
           Back
         </Button>
-      </div>
+    
       <div className="rating_form_root_container" style={{marginTop: "12px"}}>
         <div className="ratingform_root">
           <span
