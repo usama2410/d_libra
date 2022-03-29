@@ -12,6 +12,7 @@ const theme = useSelector((state) => state.theme.state)
     
         
           <Button   className="back_button"
+          onClick={() => navigate('/')}
           style={{ color: `${theme ? 'black' : 'white'}` }} startIcon={<ArrowBackIcon />}>
             Back
           </Button>
@@ -53,7 +54,7 @@ const theme = useSelector((state) => state.theme.state)
               </select>
             </div>
             <div>
-              <Button variant="outlined" className="upload_contents_button">
+              <Button variant="outlined" className="upload_contents_button" onClick={() => navigate('/mycontents')}>
                 Edit Contents{" "}
               </Button>
             </div>

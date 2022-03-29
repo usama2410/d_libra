@@ -16,7 +16,7 @@ const UserSettingViewPage = () => {
     <div>
   
         <Button
-          onClick={() => navigate("/editormainpage")}
+          onClick={() => navigate("/")}
           className="back_button"
           style={{ color: `${theme ? 'black' : 'white'}` }}
           startIcon={<ArrowBackIcon />}

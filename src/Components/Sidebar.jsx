@@ -44,8 +44,6 @@ import { themeSwitch } from "../Redux/Actions/auth.action";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import VectorBlue from "../assests/VectorBlue.png";
 
-
-
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
     return 258;
@@ -83,13 +81,49 @@ export default function Sidebar() {
   const [themestate, setThemeState] = React.useState(false);
   const dispatch = useDispatch();
 
-  const handleTheme = async () => {
-    setThemeState(true);
-    if (themestate === true) {
-      setThemeState(false);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  const handleChange = async (event) => {
+    setThemeState(event.target.checked)
+    console.log(themestate)
     await dispatch(themeSwitch(themestate));
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const navigate = useNavigate();
 
@@ -97,7 +131,7 @@ export default function Sidebar() {
     e.preventDefault();
 
     if (window.innerWidth < 768) {
-      alert("ahsan here");
+      alert("");
     }
   };
 
@@ -116,8 +150,8 @@ export default function Sidebar() {
   const list = (anchor) => (
     <Box
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
       style={{
         height: "100%",
         background: "#212121",
@@ -129,7 +163,10 @@ export default function Sidebar() {
       <span style={{ marginLeft: "20px" }}>Account </span>
       <Divider sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }} />
       <List style={{ paddingLeft: "30px" }}>
-        <ListItem style={{ cursor: "pointer" }}>
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/usersettingviewpage")}
+        >
           <ListItemIcon>
             <img src={image3} alt="" style={{ marginLeft: "-9px" }} />
           </ListItemIcon>
@@ -168,7 +205,10 @@ export default function Sidebar() {
           </Typography>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/logout")}
+        >
           <ListItemIcon>
             <ExitToAppIcon style={{ color: " #FFFFFF" }} />
           </ListItemIcon>
@@ -199,7 +239,10 @@ export default function Sidebar() {
           </Typography>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/ratingsidebar")}
+        >
           <ListItemIcon>
             <img src={Rating} alt="" style={{ paddingLeft: "3px" }} />
           </ListItemIcon>
@@ -223,9 +266,43 @@ export default function Sidebar() {
               Dark Theme
             </span>
           </Typography>
+
+
+
+
+
+
+
+     
           <div style={{ marginLeft: "10px" }}>
-            <Switch {...label} onClick={handleTheme} defaultUnChecked />
+            <Switch 
+            checked={themestate}
+            name="switch"
+            color="primary"
+            inputProps={{'aria-label' : 'test switch'}}
+            onChange={handleChange}
+            />
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </ListItem>
       </List>
       <span style={{ marginLeft: "20px" }}>Editor Menu </span>
@@ -253,7 +330,10 @@ export default function Sidebar() {
             <span className="listitem_text">About D-Libra</span>
           </Typography>
         </ListItem>
-        <ListItem style={{ cursor: "pointer" }}>
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/feedback")}
+        >
           <Typography>
             <span className="listitem_text">Feedback</span>
           </Typography>
@@ -270,37 +350,19 @@ export default function Sidebar() {
             backgroundColor: `${themestate ? "#111111" : " #F3F6FF"}`,
           }}
         >
-          <div >
+          <div>
             {["left"].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer(anchor, true)}>
-
-
-                <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              style={{ color: `${themestate ? "white" : "#111111"}` }}
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    style={{ color: `${themestate ? "white" : "#111111"}` }}
+                    sx={{ mr: 2, ...(open && { display: "none" }) }}
+                  >
+                    <MenuIcon />
+                  </IconButton>
                 </Button>
                 <SwipeableDrawer
                   sx={{
@@ -380,14 +442,22 @@ export default function Sidebar() {
 
               <div className="wrap">
                 <input
-                  className={`search_icon ${themestate ? 'darkThemeBar' : 'whitethemeBar' }` }
+                  className={`search_icon ${
+                    themestate ? "darkThemeBar" : "whitethemeBar"
+                  }`}
                   type="text"
                   placeholder="Search"
                 />
                 <input id="search_submit" type="submit" />
               </div>
             </div>
-            <img src={image3} alt="" className="sidenav_logo" />
+            <img
+              onClick={() => navigate("/usersettingviewpage")}
+              style={{ cursor: "pointer" }}
+              src={image3}
+              alt=""
+              className="sidenav_logo"
+            />
           </Typography>
         </Toolbar>
       </AppBar>

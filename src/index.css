@@ -1,14 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+@font-face {
+  font-family: Helvetica !important;
+  src: url(./assests/Helvetica/Helvetica.ttf) !important;
+}
+
+
+
+body {
+  font-family: Helvetica !important;
+}
+
 .darkTheme {
   background-color: #000;
   color: white;
-  padding: 70px 0px;
+  padding: 64px 0px;
   min-height: 100vh;
 }
 
 .lightTheme {
   background-color: #f3f6ff;
   color: black;
-  padding: 70px 0px;
+  padding: 64px 0px;
   min-height: 100vh;
 }
 
@@ -16,4 +28,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 600px) {
+  .darkTheme {
+    background-color: #000;
+    color: #ffffff;
+    padding: 50px 0px;
+    min-height: 100vh;
+  }
+
+  .lightTheme {
+    background-color: #f3f6ff;
+    color: black;
+    padding: 50px 0px;
+    min-height: 100vh;
+  }
 }

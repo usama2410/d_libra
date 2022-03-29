@@ -29,7 +29,9 @@ const UploadContentMain = () => {
  
         <button
           onClick={() => navigate("/editormainpage")}
+          style={{ color: `${theme ? 'black' : 'white'}`}}
           className="back_button"
+
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>

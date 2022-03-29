@@ -7,7 +7,7 @@
 }
 
 .mycontentheadingone {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -20,7 +20,7 @@
 }
 
 .mycontentheadingtwoo {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 21px;
@@ -68,7 +68,7 @@
   margin-right: 30px;
 }
 .Author {
-  font-family: Helvetica;
+  font-family: Helvetica !important;
   font-size: 12px;
   font-style: normal;
   font-weight: 300;
@@ -78,7 +78,7 @@
   color: #c8c8c8;
 }
 .rating {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 12px;
@@ -88,7 +88,7 @@
 .footer_button {
   background: rgba(196, 196, 196, 1) !important;
 
-  font-family: "Helvetica" !important;
+  font-family: Helvetica !important;
   font-style: normal !important;
   font-weight: 300 !important;
   text-transform: none !important;

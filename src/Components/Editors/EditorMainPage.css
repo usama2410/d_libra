@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 .editors_menu_heading {
-  font-family: "Helvetica";
+ font-family: Helvetica !important;
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -20,7 +20,7 @@
 }
 
 .editors_menu_heading_sub {
-  font-family: "Helvetica";
+ font-family: Helvetica !important;
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -43,7 +43,7 @@
 }
 
 .editorpage_button_container_span {
-  font-family: "Helvetica";
+ font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -57,8 +57,8 @@
 .upload_contents_button {
   background: #ffaa1d !important;
   border-radius: 15px !important;
-  font-family: "Helvetica" !important;
-  font-style: normal !important;
+  font-family: Helvetica !important; 
+   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
   margin-top: 10px !important;
@@ -81,7 +81,7 @@
   margin-top: 5px;
   padding-left: 20px;
   height: 40px;
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
@@ -101,7 +101,7 @@
   margin-top: 5px;
   padding-left: 20px;
   height: 40px;
-  font-family: "Helvetica";
+ font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
@@ -117,7 +117,7 @@
 
 @media screen and (max-width: 600px) {
   .editors_menu_heading_sub {
-    font-family: "Helvetica";
+   font-family: Helvetica !important;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;

@@ -8,6 +8,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
 import "./RatingForm.css";
+import StarIcon from '@mui/icons-material/Star';
 const Feedback = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
@@ -50,8 +51,9 @@ const Feedback = () => {
         <div className="ratingform_root_two">
           <Rating
             name="simple-controlled"
-            size="large"
+            style={{fontSize : '50px'}}
             className="ratingform_root_sub_two"
+            emptyIcon={<StarIcon style={{ color :'#C4C4C4'  }} fontSize="inherit" />}
             value={value}
             onChange={(event, newValue) => {
               setValue(newValue);

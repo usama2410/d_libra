@@ -3,9 +3,10 @@ import { Button, Typography } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import {useSelector} from 'react-redux'
 import "../Stylesheet/stylesheet.css";
+import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
-
+const navigate = useNavigate();
 
 const theme = useSelector((state) => state.theme.state)
 
@@ -26,8 +27,8 @@ const theme = useSelector((state) => state.theme.state)
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Button className="buttons">Log in</Button>
-          <Button className="buttons">Continue with login</Button>
+          <Button className="buttons" onClick={() => navigate('/login')}>Log in</Button>
+          <Button className="buttons" onClick={() => navigate('/')}>Continue without login</Button>
         </div>
       </div>
     </>

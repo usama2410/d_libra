@@ -7,8 +7,7 @@
 }
 
 .mycontentheadingone {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -20,8 +19,7 @@
 }
 
 .mycontentheadingtwo {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 21px;
   line-height: 24px;
@@ -33,8 +31,7 @@
 }
 
 .mycontentheadingsubone {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -46,8 +43,7 @@
 }
 
 .mycontentheadingsubtwo {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 21px;
   line-height: 24px;

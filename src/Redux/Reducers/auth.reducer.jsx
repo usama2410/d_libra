@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const themeinitialstate = {
-  status: true
+  status: false
 }
 
  export const login = (state = initialState, action) => {
@@ -58,4 +58,3 @@ export const theme = (themereducerstate = themeinitialstate, action) => {
       }
 }
 
-// export default login;

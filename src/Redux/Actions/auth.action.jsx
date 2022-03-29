@@ -45,13 +45,20 @@ export const logIn = (email, password) => async (dispatch) => {
 };
 
 export const themeSwitch = (themestate) => async (dispatch) => {
-  //  console.log(themestate)
+  //  console.log('redux theme',themestate)
    try{
        dispatch({
          type: "LIGHTTHEME", payload: {
            state: themestate
           }
-       })
+          
+       },
+       {
+        type: "DARKTHEME", payload: {
+          state: themestate
+         }
+         
+      })
      
    }catch(error){
 

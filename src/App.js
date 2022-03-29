@@ -20,6 +20,9 @@ import Accord from "./Components/Guest/Accordian/Accordian";
 // import Course from "./Components/Guest/CoursePg/Course";
 import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
 
+import UserDetailPage from "./Components/User/DetailPageUser/UserDetailPage";
+
+
 /* Auth imports */
 import Login from "./Components/Auth/pages/login";
 import Register from "./Components/Auth/pages/register";
@@ -39,7 +42,8 @@ function App() {
         <Router>
           <Sidebar />
           <Routes>
-            <Route path="/" exact element={<MyContents />} />
+          <Route path="/" exact element={<LandingPage />} />
+            <Route path="/mycontents" exact element={<MyContents />} />
 
             {/* Auth Routes */}
             <Route exact path="/login" element={<Login />} />
@@ -74,9 +78,9 @@ function App() {
             element={<UserSettingViewPage />}
           />
           <Route path="/ratingform" exact element={<RatingForm />} />
-          <Route path="/LandingPage" exact element={<LandingPage />} />
           <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
           <Route path="/Accordian" exact element={<Accord />} />
+          <Route path="/userdetailpage" exact element={<UserDetailPage />} />
         </Routes>
         <FooterCopyright />
       </Router>

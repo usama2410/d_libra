@@ -31,8 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
   font-size: 21px;
 
@@ -55,8 +54,7 @@
   background: #de4040;
   border-radius: 15px;
   cursor: pointer;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -75,8 +73,7 @@
 .detail_edit_button {
   background: #ffaa1d;
   border-radius: 15px;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -95,8 +92,7 @@
 }
 
 .detail_tag_text {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -131,8 +127,7 @@
 }
 
 .newcategory_main_button {
-  font-family: "Helvetica" !important;
-  font-style: normal !important;
+ font-family: Helvetica !important;  font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
   line-height: 24px !important;
@@ -202,8 +197,7 @@
 }
 
 .git_introduction_dropdown_two {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 16px;
   background-color: black;
@@ -239,8 +233,7 @@
   }
   .newcategory_main_button {
     width: 420px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -276,8 +269,7 @@
 @media screen and (max-width: 438px) {
   .newcategory_main_button {
     width: 300px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -298,8 +290,7 @@
 
   .newcategory_main_button {
     width: 300px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
