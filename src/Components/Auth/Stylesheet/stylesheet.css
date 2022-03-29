@@ -186,22 +186,26 @@
 }
 
 .buttons {
-  background: linear-gradient(87.62deg, #004CB6 -44.71%, #009AF9 100%) !important;
+  background: linear-gradient(
+    87.62deg,
+    #004cb6 -44.71%,
+    #009af9 100%
+  ) !important;
   border-radius: 15px !important;
   text-transform: none !important;
-/* Mid-small Light Text */
-margin-top: 10px !important;
-font-family: 'Helvetica' !important;
-font-style: normal !important;
-font-weight: 300 !important;
-font-size: 16px !important;
-line-height: 18px !important;
-display: flex !important;
-align-items: center !important;
-text-align: center !important;
-letter-spacing: -0.015em !important;
-width: 300px !important;
-color: #FFFFFF !important;
+  /* Mid-small Light Text */
+  margin-top: 10px !important;
+  font-family: "Helvetica" !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  width: 300px !important;
+  color: #ffffff !important;
 }
 
 .orText {
@@ -235,13 +239,17 @@ color: #FFFFFF !important;
   align-items: center !important;
   text-align: center !important;
   letter-spacing: -0.015em !important;
+  position: relative;
 
   color: #363636 !important;
   justify-content: center !important;
 }
 .googleIcon {
   height: 22px;
-  width: 22px;  
+  width: 22px;
+  position: absolute;
+  left: 3%;
+  top: 17%;
 }
 .logoutText {
   font-family: "Helvetica" !important;
@@ -362,4 +370,3 @@ color: #FFFFFF !important;
     line-height: 21px !important;
   }
 }
-

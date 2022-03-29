@@ -65,20 +65,24 @@ function App() {
               element={<EditContentMain />}
             />
 
-          <Route path="/feedback" exact element={<Feedback />} />
-          <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
-          <Route
-            path="/usersettingviewpage"
-            exact
-            element={<UserSettingViewPage />}
-          />
-          <Route path="/ratingform" exact element={<RatingForm />} />
-          <Route path="/LandingPage" exact element={<LandingPage />} />
-          <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
-          <Route path="/Accordian" exact element={<Accord />} />
-        </Routes>
-        <FooterCopyright />
-      </Router>
+            <Route path="/feedback" exact element={<Feedback />} />
+            <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
+            <Route
+              path="/usersettingviewpage"
+              exact
+              element={<UserSettingViewPage />}
+            />
+            <Route path="/ratingform" exact element={<RatingForm />} />
+            <Route path="/LandingPage" exact element={<LandingPage />} />
+            <Route
+              path="/librarybookmark"
+              exact
+              element={<LibraryBookmark />}
+            />
+            <Route path="/Accordian" exact element={<Accord />} />
+          </Routes>
+          <FooterCopyright />
+        </Router>
       </div>
     </>
   );

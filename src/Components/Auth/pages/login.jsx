@@ -37,24 +37,24 @@ const Login = () => {
   return (
     <>
       <div style={{ marginTop: "-40px" }}>
-        <button onClick={handleBack}   className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}>
+        <button
+          onClick={handleBack}
+          className="back_button"
+          style={{ color: `${theme ? "black" : "white"}` }}>
           <ArrowBack style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
       </div>
       <div
         // style={{ border: "1px solid red" }}
-        className="editormainpage_root_contianer"
-      >
+        className="editormainpage_root_contianer">
         <div
           style={{
             paddingTop: "20px",
             display: "flex",
             flexDirection: "column",
             className: "inputs",
-          }}
-        >
+          }}>
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Email Address or Username"
@@ -93,9 +93,13 @@ const Login = () => {
               color: `${theme ? "black" : "white"}`,
               display: "flex",
               marginRight: "-100px",
-            }}
-          >
-            <Link style={{  color: `${theme ? "black" : "white"}` , textDecoration: "none"}} to="/">
+            }}>
+            <Link
+              style={{
+                color: `${theme ? "black" : "white"}`,
+                textDecoration: "none",
+              }}
+              to="/">
               {" "}
               Forget Password ?
             </Link>
