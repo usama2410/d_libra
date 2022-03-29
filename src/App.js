@@ -28,6 +28,10 @@ import Logout from "./Components/Auth/pages/logout";
 import { useSelector } from "react-redux";
 
 import "./index.css";
+import MylibraryCorse from "./Components/Extras/MylibraryCorse";
+import Tagpage from "./Components/Extras/Tagpage";
+import Searchresult from "./Components/Extras/Searchresult";
+import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 
 function App() {
   const theme = useSelector((state) => state.theme.state);
@@ -35,7 +39,6 @@ function App() {
   return (
     <>
       <div className={theme ? "lightTheme" : "darkTheme"}>
-        
         <Router>
           <Sidebar />
           <Routes>
@@ -81,11 +84,14 @@ function App() {
               element={<LibraryBookmark />}
             />
             <Route path="/Accordian" exact element={<Accord />} />
+            <Route path="/MylibraryCorse" exact element={<MylibraryCorse />} />
+            <Route path="/Tagpage" exact element={<Tagpage />} />
+            <Route path="/Searchresult" exact element={<Searchresult />} />
+            <Route path="/Recentlyviewed" exact element={<Recentlyviewed />} />
           </Routes>
           <FooterCopyright />
         </Router>
       </div>
-        
     </>
   );
 }

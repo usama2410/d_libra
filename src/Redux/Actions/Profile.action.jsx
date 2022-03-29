@@ -7,7 +7,7 @@ const headers = {
 export const profileData = () => async (dispatch) => {
   try {
     const response = await axios.get(URL + endpoints.USER_PROFILE, {
-      headers: headers.Authorization,
+      headers,
     });
     console.log("response  profiledata", response.data);
   } catch (error) {

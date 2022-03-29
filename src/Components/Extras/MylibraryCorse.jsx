@@ -7,14 +7,14 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import VectorTag from "../../../assests/VectorTag.png";
-import LibraryBookmarkContent from "./LibraryBookmarkContent";
-import "./Library.css";
+// import VectorTag from "../../assests/VectorTag.png ";
+import LibraryBookmarkContent from "./libcourse";
+import "../User/Library/Library.css";
 import { useSelector } from "react-redux";
 
-import FooterButtons from "../FooterButtons";
+import FooterButtons from "../User/FooterButtons";
 
-const LibraryBookmark = () => {
+const MylibraryCorse = () => {
   const theme = useSelector((state) => state.theme.state);
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
@@ -96,7 +96,7 @@ const LibraryBookmark = () => {
               color: `${theme ? " #008EEC " : "white"}`,
               paddingTop: "10px",
             }}>
-            By Bookmark
+            By Course
           </span>
         </div>
       </div>
@@ -110,7 +110,7 @@ const LibraryBookmark = () => {
         <Button
           className={theme ? "bycourse_button_sub" : "bycourse_button"}
           endIcon={<HiOutlineArrowNarrowRight />}>
-          By Course
+          By Bookmark
         </Button>
       </div>
 
@@ -176,4 +176,4 @@ const LibraryBookmark = () => {
   );
 };
 
-export default LibraryBookmark;
+export default MylibraryCorse;

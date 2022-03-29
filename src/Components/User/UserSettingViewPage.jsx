@@ -20,15 +20,13 @@ const UserSettingViewPage = () => {
   const theme = useSelector((state) => state.theme.state);
   return (
     <div>
-  
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{ color: `${theme ? "black" : "white"}` }}
-          startIcon={<ArrowBackIcon />}>
-          Back
-        </Button>
-   
+      <Button
+        onClick={() => navigate("/editormainpage")}
+        className="back_button"
+        style={{ color: `${theme ? "black" : "white"}` }}
+        startIcon={<ArrowBackIcon />}>
+        Back
+      </Button>
 
       <div className="user_container_root">
         <div className="user_sub_root_container">
@@ -61,7 +59,7 @@ const UserSettingViewPage = () => {
             </span>
             <input
               className={theme ? "addcategory_input_sub" : "addcategory_input"}
-              value="Username"
+              placeholder="Username"
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
