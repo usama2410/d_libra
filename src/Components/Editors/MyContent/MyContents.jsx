@@ -7,13 +7,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./MyContents.css";
 import VectorTag from "../../../assests/VectorTag.png";
-import {useSelector} from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import gitimage from '../../../assests/gitimage.png'
+import gitimage from "../../../assests/gitimage.png";
+import { getDashboardData } from "../../../Redux/Actions/Dashboard.Data.action";
+
 const MyContents = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [data, setdata] = useState(ContentData);
-  const theme = useSelector((state)  => state.theme.state)
+  const [responseArray, setresponseArray] = useState([]);
+
+  const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -62,36 +70,54 @@ const MyContents = () => {
     ],
   };
 
+  useEffect(() => {
+    const dashboardData = async () => {
+    const response =  await dispatch(getDashboardData(token));
+    console.log(response);
+    setresponseArray(response)
+    };
+    dashboardData();
+  }, []);
+
   return (
     <>
       <div className="mainContentContainer">
-        <img src={gitimage} alt="" style={{padding: "10px 0px"}}/>
-        <span className={ theme ? "mycontentheadingsubone" : "mycontentheadingone"}>Git & Git Hub Introduction</span>{" "}
-        <span className={theme ? "mycontentheadingsubtwo" : "mycontentheadingtwo"}>Select a Content for Edit</span>
+        <img src={gitimage} alt="" style={{ padding: "10px 0px" }} />
+        <span
+          className={theme ? "mycontentheadingsubone" : "mycontentheadingone"}
+        >
+          Git & Git Hub Introduction
+        </span>{" "}
+        <span
+          className={theme ? "mycontentheadingsubtwo" : "mycontentheadingtwo"}
+        >
+          Select a Content for Edit
+        </span>
       </div>
-      {data.map((item) => {
+      {responseArray?.map((item) => {
         return (
           <div className="content_root_container">
             <div>
-              <span  style={{color: `${theme ? ' #008EEC' : 'white'}`}}>{item.chapterName}</span>
+              <span key={item.id} style={{ color: `${theme ? " #008EEC" : "white"}` }}>
+                {item.CategoryName}
+              </span>
             </div>
             <div className="intro_slide_sub">
               <Slider className="intro-slick" {...settings}>
-                {item.items.map((e) => {
+                {item.lecture.map((e) => {
                   return (
-                    <div className="intro-slides"  > 
+                    <div key={e.id} className="intro-slides">
                       <img
                         onClick={() => navigate("/detailpage")}
-                        src={e.image}
+                        src={e.images}
                         style={{
                           borderRadius: "2px",
                           width: "100%",
                           cursor: "pointer",
-
                         }}
                         alt=""
                       />
-                      {e.image ? (
+                      {e.images ? (
                         <div
                           style={{
                             display: "flex",
@@ -99,8 +125,12 @@ const MyContents = () => {
                             padding: "10px 10px 0px 10px",
                           }}
                         >
-                          <span>{e.Tags}</span>
-                          <img src={VectorTag} style={{height: "18px", height: "20px"}} alt="" />
+                          <span>{e.title}</span>
+                          <img
+                            src={VectorTag}
+                            style={{ height: "18px", height: "20px" }}
+                            alt=""
+                          />
                         </div>
                       ) : (
                         ""

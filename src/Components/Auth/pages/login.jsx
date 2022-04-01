@@ -15,6 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState("babuibrar@gmail.com");
   const [password, setPassword] = useState("babuibrar@93");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
   const theme = useSelector((state) => state.theme.state);
 
   const handleBack = (e) => {
@@ -27,13 +28,24 @@ const Login = () => {
     e.preventDefault();
 
     const response = await dispatch(logIn(email, password));
+    setMessage(response.message);
+    if (email === "" && password === "") {
+      setErrorMessage(true);
+    }
+
+    const timer = setTimeout(() => {
+      setErrorMessage(false);
+      setMessage("");
+    }, 5000);
+    return () => clearTimeout(timer);
   };
   return (
     <>
       <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? "black" : "white"}` }}>
+        style={{ color: `${theme ? "black" : "white"}` }}
+      >
         <ArrowBack style={{ fontSize: "18px" }} />{" "}
         <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
       </button>
@@ -45,7 +57,20 @@ const Login = () => {
             display: "flex",
             flexDirection: "column",
             className: "inputs",
-          }}>
+          }}
+        >
+          {errorMessage === true ? (
+            <div className="errorMessage">Feilds cannot be empty!</div>
+          ) : message ? (
+            message === "Login SuccessFully" ? (
+              <div className={theme ? "successMessage" : "successMessageTwo"}>
+                {message}
+              </div>
+            ) : message === "Invalid Credential" ? (
+              <div className="errorMessage">{message}</div>
+            ) : null
+          ) : null}
+
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Email Address or Username"
@@ -84,13 +109,15 @@ const Login = () => {
               color: `${theme ? "black" : "white"}`,
               display: "flex",
               marginRight: "-100px",
-            }}>
+            }}
+          >
             <Link
               style={{
                 color: `${theme ? "black" : "white"}`,
                 textDecoration: "none",
               }}
-              to="/">
+              to="/"
+            >
               {" "}
               Forget Password ?
             </Link>

@@ -264,6 +264,34 @@
   color: #ffffff;
   margin-bottom: 37px !important;
 }
+.successMessage {
+  color: green;
+  padding: 10px;
+  width: 100%;
+  border: 2px solid green;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.successMessageTwo {
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: 2px solid white;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.errorMessage {
+  color: red;
+  padding: 10px;
+  border: 2px solid red;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
 
 @media screen and (max-width: 468px) {
   .addcategory_input {
@@ -351,7 +379,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    /* text-fill-color: transparent; */
   }
 }
 /* @media screen and (max-width: 1062px) {

@@ -13,6 +13,9 @@ export const endpoints = {
   USER_PROFILE: "/webapi/userprofile",
   UPDATE_PROFILE: "/webapi/userprofile",
 
+  //Dashboard Data
+  DASHBOARD_DATA: "/webapi/GetDashboardData",
+
   //Category
   PARENT_CATEGORY: "/GetParentCategories",
 

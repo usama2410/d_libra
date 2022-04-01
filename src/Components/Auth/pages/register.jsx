@@ -15,8 +15,10 @@ const Register = () => {
   const [username, setUserName] = useState("MuhammadIbrar");
   const [email, setEmail] = useState("babuibrar@gmail.com");
   const [password, setPassword] = useState("babuibrar@93");
-  const [data, setData] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const [message, setMessage] = useState("");
+  const [data, setData] = useState("");
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -26,20 +28,31 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await dispatch(signUp(username, email, password));
+    setMessage(response.message);
+    setData(response.data);
+    if (email === "" && password === "") {
+      setErrorMessage(true);
+    }
+
+    const timer = setTimeout(() => {
+      setErrorMessage(false);
+      setMessage("");
+      setData("");
+    }, 5000);
+    return () => clearTimeout(timer);
   };
 
   return (
     <>
-   
-        <button
-          onClick={handleBack}
-          className="back_button"
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBack style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
-        </button>
-    
+      <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? "black" : "white"}` }}
+      >
+        <ArrowBack style={{ fontSize: "18px" }} />{" "}
+        <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
+      </button>
+
       <div className="editormainpage_root_contianer">
         <div
           style={{
@@ -49,6 +62,20 @@ const Register = () => {
             className: "inputs",
           }}
         >
+          {errorMessage === true ? (
+            <div className="errorMessage">Feilds cannot be empty!</div>
+          ) : message ? (
+            message === "Account Created Successfully" ? (
+              <div className={theme ? "successMessage" : "successMessageTwo"}>
+                {message}
+              </div>
+            ) : null
+          ) : null}
+
+          {data === "Email already exist" ? (
+            <div className="errorMessage">{data}</div>
+          ) : null}
+
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Username"

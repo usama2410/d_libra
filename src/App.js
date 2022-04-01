@@ -24,6 +24,8 @@ import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
 import Login from "./Components/Auth/pages/login";
 import Register from "./Components/Auth/pages/register";
 import Logout from "./Components/Auth/pages/logout";
+import ChangePassword from "./Components/Auth/pages/change-password";
+
 
 import { useSelector } from "react-redux";
 
@@ -45,6 +47,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/logout" element={<Logout />} />
+            <Route exact path="/changepassword" element={<ChangePassword />} />
 
             <Route path="/editormainpage" exact element={<EditorsMainPage />} />
             <Route

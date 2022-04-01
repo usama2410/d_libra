@@ -11,7 +11,7 @@ const themeinitialstate = {
   status: true
 }
 
- export const login = (state = initialState, action) => {
+ export const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case "LOGIN_SUCCESS":
