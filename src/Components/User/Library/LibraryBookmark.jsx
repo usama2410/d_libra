@@ -10,12 +10,12 @@ import "slick-carousel/slick/slick-theme.css";
 import VectorTag from "../../../assests/VectorTag.png";
 import LibraryBookmarkContent from "./LibraryBookmarkContent";
 import "./Library.css";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 
 import FooterButtons from "../FooterButtons";
 
 const LibraryBookmark = () => {
-  const theme = useSelector((state) => state.theme.state)
+  const theme = useSelector((state) => state.theme.state);
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
@@ -61,7 +61,7 @@ const LibraryBookmark = () => {
       {
         breakpoint: 510,
         settings: {
-            slidesToShow: 1.02,
+          slidesToShow: 1.02,
           slidesToScroll: 1,
           centerMode: false,
         },
@@ -75,17 +75,29 @@ const LibraryBookmark = () => {
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
-          startIcon={<ArrowBackIcon />}
-        >
+          style={{ color: `${theme ? "black" : "white"}` }}
+          startIcon={<ArrowBackIcon />}>
           Back
         </Button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
-            <MenuBookIcon className="menubookicon_text" style={{color: `${theme ? ' #008EEC' : 'white'}`}}/>
-            <span className="mylibrary_text" style={{color: `${theme ? ' #008EEC ' : 'white'}`}}>My Library</span>
+            <MenuBookIcon
+              className="menubookicon_text"
+              style={{ color: `${theme ? " #008EEC" : "white"}` }}
+            />
+            <span
+              className="mylibrary_text"
+              style={{ color: `${theme ? " #008EEC " : "white"}` }}>
+              My Library
+            </span>
           </span>
-          <span style={{color: `${theme ? ' #008EEC ' : 'white'}`,paddingTop: "10px"}}>By Bookmark</span>
+          <span
+            style={{
+              color: `${theme ? " #008EEC " : "white"}`,
+              paddingTop: "10px",
+            }}>
+            By Bookmark
+          </span>
         </div>
       </div>
       <div
@@ -94,12 +106,10 @@ const LibraryBookmark = () => {
           display: "flex",
           justifyContent: "flex-end",
           paddingRight: "20px",
-        }}
-      >
+        }}>
         <Button
-          className= {theme ? "bycourse_button_sub" : "bycourse_button"}
-          endIcon={<HiOutlineArrowNarrowRight />}
-        >
+          className={theme ? "bycourse_button_sub" : "bycourse_button"}
+          endIcon={<HiOutlineArrowNarrowRight />}>
           By Course
         </Button>
       </div>
@@ -112,8 +122,7 @@ const LibraryBookmark = () => {
                 display: "flex",
                 alignItems: "center",
                 paddingBottom: "5px",
-              }}
-            >
+              }}>
               <img src={item.TagsImageOne} alt="" />
               <span style={{ paddingLeft: "10px" }}>{item.chapterName}</span>
             </div>
@@ -143,16 +152,13 @@ const LibraryBookmark = () => {
                             display: "flex",
                             justifyContent: "space-around",
                             padding: "14px 10px 0px 10px",
-                          }}
-                        >
-                            <div>
-
-                          <span>{e.Tags}</span>
-                            </div>
-                            <div>
-
-                          <img src={e.TagsImageTwo} alt="" />
-                            </div>
+                          }}>
+                          <div>
+                            <span>{e.Tags}</span>
+                          </div>
+                          <div>
+                            <img src={e.TagsImageTwo} alt="" />
+                          </div>
                         </div>
                       ) : (
                         ""

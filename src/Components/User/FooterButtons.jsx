@@ -144,7 +144,13 @@ const FooterButtons = (props) => {
 
         <div className="mobile_view_button">
           <div style={{ display: footerbutton ? "block" : "none" }}>
-            <div style={{ display: "flex", marginBottom: "10px" }}>
+            <div
+              style={{
+                display: "flex",
+                marginBottom: "10px",
+                marginLeft: "30px",
+              }}
+            >
               <Button className="footer_buttons" variant="contained">
                 <div className="footer_sub">
                   <img
@@ -186,13 +192,12 @@ const FooterButtons = (props) => {
 
             <SwipeableDrawer
               className="footer-drawer"
-              // container={container}
               anchor="bottom"
               open={open}
               onClose={toggleDrawer(false)}
               onOpen={toggleDrawer(true)}
               swipeAreaWidth={drawerBleeding}
-              disableSwipeToOpen={false}
+              disableSwipeToOpen={true}
               ModalProps={{
                 keepMounted: true,
               }}
@@ -217,7 +222,7 @@ const FooterButtons = (props) => {
                   style={{
                     paddingTop: "10px",
                     background: "#363636",
-                    borderRadius: mobileView ? "" : "100%",
+                    borderRadius: mobileView ? "118px" : "100%",
                   }}
                 >
                   <div
@@ -264,7 +269,7 @@ const FooterButtons = (props) => {
                             style={{
                               position: "relative",
                               bottom: "-90px",
-                              left: "-30px",
+                              left: "-45px",
                             }}
                           />
                           <img
@@ -273,7 +278,7 @@ const FooterButtons = (props) => {
                             style={{
                               position: "relative",
                               bottom: "-40px",
-                              left: "-15px",
+                              left: "-22px",
                             }}
                           />
                           <img
@@ -281,8 +286,8 @@ const FooterButtons = (props) => {
                             alt=""
                             style={{
                               position: "relative",
-                              bottom: "-20px",
-                              left: "5px",
+                              bottom: "-26px",
+                              left: "8px",
                             }}
                           />
                           <img
@@ -291,7 +296,7 @@ const FooterButtons = (props) => {
                             style={{
                               position: "relative",
                               bottom: "-40px",
-                              left: "25px",
+                              left: "40px",
                             }}
                           />
                           <img
@@ -300,7 +305,7 @@ const FooterButtons = (props) => {
                             style={{
                               position: "relative",
                               bottom: "-90px",
-                              left: "30px",
+                              left: "52px",
                             }}
                           />
                         </>

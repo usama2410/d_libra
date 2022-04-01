@@ -50,17 +50,25 @@ export const themeSwitch = (themestate) => async (dispatch) => {
        dispatch({
          type: "LIGHTTHEME", payload: {
            state: themestate
-          }
-          
-       },
-       {
-        type: "DARKTHEME", payload: {
-          state: themestate
-         }
-         
-      })
+          }  
+       })
      
    }catch(error){
 
    }
 }
+
+
+export const accordionstate = (accordionicon) => async (dispatch) => {
+  console.log('redux theme', accordionicon)
+  try {
+    dispatch({
+     type: "ACCORDIONICONSTATE", payload: {
+       state: accordionicon
+     }
+    })
+  }
+  catch(error){
+
+  }
+} 

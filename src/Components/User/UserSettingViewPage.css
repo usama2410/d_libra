@@ -119,13 +119,33 @@
   text-transform: none !important;
 }
 
+
+
+
+.addcategory_text_bookmark{
+
+  font-family: Helvetica !important;  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  /* color: #ffffff; */
+
+}
+
 .user_bookmark_container {
-  padding: 24px 20px 0px 20px;
+  padding: 30px 20px 0px 20px;
 }
 
 @media screen and (max-width: 969px) {
   .user_bookmark_container {
-    padding: 24px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+  .addcategory_text_bookmark{
+    margin-left: -318px;
   }
 }
 
@@ -160,12 +180,21 @@
 
   .user_buttons {
     font-size: 12px !important;
-    margin-top: 5px !important;
+    margin-top: 10px !important;
   }
 
   .user_buttons_container {
     flex-wrap: wrap;
     margin-top: 20px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 468px){
+  .addcategory_text_bookmark{
+    margin-left: -141px;
   }
 }
 

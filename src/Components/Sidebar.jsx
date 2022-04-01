@@ -10,18 +10,13 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { styled, useTheme } from "@mui/material/styles";
-// import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-// import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-// import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Fill1 from "../assests/Fill1.png";
 import image3 from "../assests/image3.png";
@@ -36,19 +31,31 @@ import NightMode from "../assests/NightMode.png";
 import Rating from "../assests/Rating.png";
 import Login from "../assests/Login.png";
 import user from "../assests/user.png";
-import Switch from "@mui/material/Switch";
 import "./Sidebar.css";
-// import { Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
-import Brightness5Icon from "@mui/icons-material/Brightness5";
 import VectorBlue from "../assests/VectorBlue.png";
+import { useLocation } from "react-router-dom";
+import UnionOpen from "../assests/UnionOpen.png";
+import UnionClose from "../assests/UnionClose.png";
+import UnionBlue from "../assests/UnionBlue.png";
+
+import Accordian from "./Guest/Accordian/Accordian";
+import { accordionstate } from "../Redux/Actions/auth.action";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
     return 258;
   } else {
     return 341;
+  }
+};
+
+const drawerWidthTwo = () => {
+  if (window.innerWidth <= 600) {
+    return 300;
+  } else {
+    return 388;
   }
 };
 
@@ -74,56 +81,38 @@ export default function Sidebar() {
     left: false,
   });
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [search, setSearch] = React.useState(false);
-  const label = { inputProps: { "aria-label": "Switch demo" } };
-  const [themestate, setThemeState] = React.useState(false);
-  const dispatch = useDispatch();
+  const [statetwo, setStateTwo] = React.useState({
+    right: false,
+  });
 
+  const toggleDrawerTwo = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  const handleChange = async (event) => {
-    setThemeState(event.target.checked)
-    console.log(themestate)
-    await dispatch(themeSwitch(themestate));
+    setStateTwo({ ...statetwo, [anchor]: open });
   };
 
+  const themeState = useSelector((state) => state.theme.state);
+  const [open, setOpen] = React.useState(false);
+  const [themestate, setThemeState] = React.useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [accordionicon, setaccordionicon] = React.useState(false);
 
+  const handleAccordionIcon = async () => {
+    setaccordionicon(!accordionicon);
+    await dispatch(accordionstate(accordionicon));
+  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const handleChange = async (event) => {
+    setThemeState(event.target.checked);
+    console.log(themestate);
+    await dispatch(themeSwitch(themestate));
+  };
 
   const navigate = useNavigate();
 
@@ -147,6 +136,141 @@ export default function Sidebar() {
     setState({ ...state, [anchor]: open });
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+const handleaccordiondrawer = () => {
+
+
+if("/userdetailpage" === location.pathname && themeState === true){
+return (
+  <button
+    onClick={handleAccordionIcon}
+    className="accordionbutton"
+  >
+    {" "}
+    <div>
+      {["right"].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawerTwo(anchor, true)}>
+            <img src={UnionBlue} alt="" width="24px" height= '24px'/>
+          </Button>
+          <Drawer
+            sx={{
+              width: drawerWidthTwo,
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidthTwo,
+                boxSizing: "border-box",
+                border: "none",
+              },
+            }}
+            anchor={anchor}
+            open={statetwo[anchor]}
+            onClose={toggleDrawerTwo(anchor, false)}
+          >
+            {listtwo(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  </button>
+)
+}else if("/userdetailpage" === location.pathname && themeState === false){
+  return (
+
+    <button
+    onClick={handleAccordionIcon}
+    className="accordionbutton"
+  >
+    {" "}
+    <div>
+      {["right"].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawerTwo(anchor, true)}>
+            <img src={UnionOpen} alt="" />
+          </Button>
+          <Drawer
+            sx={{
+              width: drawerWidthTwo,
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidthTwo,
+                boxSizing: "border-box",
+                border: "none",
+              },
+            }}
+            anchor={anchor}
+            open={statetwo[anchor]}
+            onClose={toggleDrawerTwo(anchor, false)}
+          >
+            {listtwo(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  </button>
+
+  )
+}
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const listtwo = (anchor) => (
+    <Box style={{ background: "#212121", height: "100%", maxWidth: "100%" }}>
+      <div
+        style={{
+          background: "#212121",
+          height: "30px",
+          padding: "20px 20px",
+          marginBottom: "10px",
+        }}
+      >
+        <img
+          onClick={() => setStateTwo(false)}
+          src={UnionClose}
+          alt=""
+          style={{ cursor: "pointer" }}
+        />
+      </div>
+      <Accordian />
+    </Box>
+  );
+
   const list = (anchor) => (
     <Box
       role="presentation"
@@ -161,8 +285,9 @@ export default function Sidebar() {
       }}
     >
       <span style={{ marginLeft: "20px" }}>Account </span>
-      <Divider sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }} />
-      <List style={{ paddingLeft: "30px" }}>
+      <Divider className="divider_class" />
+
+      <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/usersettingviewpage")}
@@ -255,8 +380,8 @@ export default function Sidebar() {
       </List>
 
       <span style={{ marginLeft: "20px" }}>Setting </span>
-      <Divider sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }} />
-      <List style={{ paddingLeft: "30px" }}>
+      <Divider className="divider_class" />
+      <List style={{ paddingLeft: "20px" }}>
         <ListItem style={{ cursor: "pointer" }}>
           <ListItemIcon>
             <img src={NightMode} alt="" />
@@ -267,47 +392,25 @@ export default function Sidebar() {
             </span>
           </Typography>
 
-
-
-
-
-
-
-     
-          <div style={{ marginLeft: "10px" }}>
-            <Switch 
-            checked={themestate}
-            name="switch"
-            color="primary"
-            inputProps={{'aria-label' : 'test switch'}}
-            onChange={handleChange}
-            />
+          <div class="container switch_class">
+            <label
+              class="switch"
+              style={{ background: themestate ? "#009AF9 " : " #BDB9A6" }}
+            >
+              <input
+                type="checkbox"
+                checked={themestate}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "test switch" }}
+              />{" "}
+              <div></div>
+            </label>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </ListItem>
       </List>
       <span style={{ marginLeft: "20px" }}>Editor Menu </span>
-      <Divider sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }} />
-      <List style={{ paddingLeft: "30px" }}>
+      <Divider className="divider_class" />
+      <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/editormainpage")}
@@ -323,8 +426,8 @@ export default function Sidebar() {
         </ListItem>
       </List>
       <span style={{ marginLeft: "20px" }}>Others </span>
-      <Divider sx={{ bgcolor: "white", width: "60%", marginLeft: "20px" }} />
-      <List style={{ paddingLeft: "30px" }}>
+      <Divider className="divider_class" />
+      <List style={{ paddingLeft: "20px" }}>
         <ListItem style={{ cursor: "pointer" }}>
           <Typography>
             <span className="listitem_text">About D-Libra</span>
@@ -345,11 +448,7 @@ export default function Sidebar() {
   return (
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar
-          style={{
-            backgroundColor: `${themestate ? "#111111" : " #F3F6FF"}`,
-          }}
-        >
+        <Toolbar className={themeState ? "toolbarclasstwo" : "toolbarclassone"}>
           <div>
             {["left"].map((anchor) => (
               <React.Fragment key={anchor}>
@@ -407,7 +506,8 @@ export default function Sidebar() {
           </div>
 
           <Typography variant="h6" className="toolbar_rowreverse">
-            <div>
+            {
+              "/userdetailpage" === location.pathname ? '' : <div>
               <div style={{ display: "flex" }}>
                 <input
                   placeholder="Search"
@@ -451,6 +551,8 @@ export default function Sidebar() {
                 <input id="search_submit" type="submit" />
               </div>
             </div>
+            }
+            
             <img
               onClick={() => navigate("/usersettingviewpage")}
               style={{ cursor: "pointer" }}
@@ -459,7 +561,9 @@ export default function Sidebar() {
               className="sidenav_logo"
             />
           </Typography>
+          {handleaccordiondrawer()}
         </Toolbar>
+
       </AppBar>
     </>
   );

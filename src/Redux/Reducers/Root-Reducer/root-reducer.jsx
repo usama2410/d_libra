@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import {login, theme} from "../auth.reducer";
+import {login, theme, accordion} from "../auth.reducer";
 
 const persistConfig = {
   key: "root",
@@ -12,7 +12,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   // Add reducers here
   login,
-  theme
+  theme,
+  accordion
 });
 
 export default persistReducer(persistConfig, rootReducer);

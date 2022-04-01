@@ -96,11 +96,11 @@ const MyContents = () => {
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            padding: "10px 10px 0px 10px",
+                            padding: "2px 10px 0px 10px",
                           }}
                         >
                           <span>{e.Tags}</span>
-                          <img src={VectorTag} style={{height: "18px", height: "20px"}} alt="" />
+                          <img src={VectorTag} style={{width: "14px", height: "16px"}} alt="" />
                         </div>
                       ) : (
                         ""

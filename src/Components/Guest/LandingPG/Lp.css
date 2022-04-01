@@ -54,15 +54,29 @@
 
 
 .Signup_button {
-  background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+  font-family: 'Helvetica';
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 21px !important;
+  line-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  border: none !important;
+  width: 100px;
+  justify-content: center;
+  color: #FFFFFF !important;
+  margin-top: 35px !important;
+  height: 36px;
 
-  border-radius: 15px;
-  border: none;
-  padding: 2px 20px;
-  margin-left: 5px;
-  width: 130px;
-  height: 40px;
-  margin-top: 35px;
+  background: linear-gradient(87.62deg, #004CB6 -44.71%, #009AF9 100%) !important;
+border-radius: 15px !important;
+
+
+
+
+
 }
 .Signup {
   margin-right: 30px;

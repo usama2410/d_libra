@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .footer_buttons_container {
@@ -187,13 +187,13 @@
 display: none;
 }
 
-.footer-drawer .css-9emuhu-MuiPaper-root-MuiDrawer-paper{
+.footer-drawer .MuiDrawer-paper{
   background-color: transparent !important;
   box-shadow: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-
+/* border: 1px solid white !important; */
 }
 
 
@@ -320,8 +320,8 @@ display: none;
 .mobile_view_button{
   display: block;
   position: fixed;
-  bottom: 15px;
-  left: 0;
+  bottom: -15px;
+  left: -25px;
 
   }
   

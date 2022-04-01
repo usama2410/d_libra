@@ -11,6 +11,10 @@ const themeinitialstate = {
   status: false
 }
 
+const accordioniconinitialstate = {
+  status: false
+}
+
  export const login = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -58,3 +62,20 @@ export const theme = (themereducerstate = themeinitialstate, action) => {
       }
 }
 
+
+export const accordion = (accordioniconstate = accordioniconinitialstate, action) => {
+  const {type, payload} = action;
+  switch (type) {
+    case 'ACCORDIONICONSTATE':
+      return {
+        state : payload.state
+      }
+      case 'ACCORDIONICONSTATEFALSE':
+      return {
+        state : payload.state
+      }
+  
+    default:
+      return accordioniconstate;
+  } 
+}

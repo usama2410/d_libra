@@ -16,12 +16,11 @@ import RatingForm from "./Components/User/RatingForm";
 import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
 import LandingPage from "./Components/Guest/LandingPG/LandingPage";
-import Accord from "./Components/Guest/Accordian/Accordian";
+import Accordian from "./Components/Guest/Accordian/Accordian";
 // import Course from "./Components/Guest/CoursePg/Course";
 import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
 
 import UserDetailPage from "./Components/User/DetailPageUser/UserDetailPage";
-
 
 /* Auth imports */
 import Login from "./Components/Auth/pages/login";
@@ -31,6 +30,10 @@ import Logout from "./Components/Auth/pages/logout";
 import { useSelector } from "react-redux";
 
 import "./index.css";
+import MylibraryCorse from "./Components/Extras/MylibraryCorse";
+import Tagpage from "./Components/Extras/Tagpage";
+import Searchresult from "./Components/Extras/Searchresult";
+import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 
 function App() {
   const theme = useSelector((state) => state.theme.state);
@@ -38,11 +41,10 @@ function App() {
   return (
     <>
       <div className={theme ? "lightTheme" : "darkTheme"}>
-        
         <Router>
           <Sidebar />
           <Routes>
-          <Route path="/" exact element={<LandingPage />} />
+            <Route path="/" exact element={<LandingPage />} />
             <Route path="/mycontents" exact element={<MyContents />} />
 
             {/* Auth Routes */}
@@ -70,22 +72,33 @@ function App() {
               element={<EditContentMain />}
             />
 
-          <Route path="/feedback" exact element={<Feedback />} />
-          <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
-          <Route
-            path="/usersettingviewpage"
-            exact
-            element={<UserSettingViewPage />}
-          />
-          <Route path="/ratingform" exact element={<RatingForm />} />
-          <Route path="/librarybookmark" exact element={<LibraryBookmark />} />
-          <Route path="/Accordian" exact element={<Accord />} />
-          <Route path="/userdetailpage" exact element={<UserDetailPage />} />
-        </Routes>
-        <FooterCopyright />
-      </Router>
+            <Route path="/feedback" exact element={<Feedback />} />
+            <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
+            <Route
+              path="/usersettingviewpage"
+              exact
+              element={<UserSettingViewPage />}
+            />
+            <Route path="/ratingform" exact element={<RatingForm />} />
+            {/* <Route path="/LandingPage" exact element={<LandingPage />} /> */}
+            <Route
+              path="/librarybookmark"
+              exact
+              element={<LibraryBookmark />}
+            />
+            <Route path="/Accordian" exact element={<Accordian />} />
+            <Route path="/MylibraryCorse" exact element={<MylibraryCorse />} />
+            <Route path="/Tagpage" exact element={<Tagpage />} />
+            <Route path="/Searchresult" exact element={<Searchresult />} />
+            <Route path="/Recentlyviewed" exact element={<Recentlyviewed />} />
+            <Route path="/userdetailpage" exact element={<UserDetailPage />} />
+          </Routes>
+          {/* <div style={{position: "absolute", bottom: "0"}}>
+
+          <FooterCopyright />
+          </div> */}
+        </Router>
       </div>
-        
     </>
   );
 }
