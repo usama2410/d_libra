@@ -12,9 +12,20 @@ import Polygon5 from "../../assests/Polygon5.png";
 import { useSelector } from "react-redux";
 import NextButton from '../../assests/NextButton.png'
 import PrevButton from '../../assests/PrevButton.png'
+import NextDarkButton from "../../assests/NextDarkButton.png";
+import PrevLightButton from "../../assests/PrevLightButton.png";
+import UserDetailPageData from "../User/DetailPageUser/UserDetailPageData";
+
 const DetailPage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
+  const [userdata, setUserData] = React.useState(UserDetailPageData);
+  const [startdata, setStartData] = React.useState(0);
+  const [enddata, setEndData] = React.useState(1);
+  const [pinstate, setPinState] = React.useState(false);
+  const [transform, setTransform] = React.useState(false);
+  const accordion = useSelector((state) => state.accordion.state)
+
   return (
     <>
       <div className="detailpage_root_container">
@@ -33,7 +44,7 @@ const DetailPage = () => {
 
       <div style={{ padding: "20px 20px" }}>
         <Grid container>
-          <Grid item lg={5} md={6} sm={12} xs={12}>
+          <Grid item lg={4} md={6} sm={12} xs={12}>
             <div>
               <img src={image6} alt="" className="detail_page_image" />
             </div>
@@ -62,7 +73,7 @@ const DetailPage = () => {
             </div>
           </Grid>
 
-          <Grid item lg={7} md={6} sm={12} xs={12}>
+          <Grid item lg={8} md={6} sm={12} xs={12}>
             <div className="detail_page_content">
               <span>
                 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
@@ -121,46 +132,87 @@ const DetailPage = () => {
       </div>
 
       {theme ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            backgroundColor: "#F3F6FF"
-          }}
-        >
-         
-            <img
-              src={PrevButton}
-              alt=""
-              width='50px'
-              height='50px'
-              style={{ cursor: "pointer" }}
-            />
-         
-            <img
-              src={NextButton}
-              alt=""
-              width='50px'
-              height='50px'
-              style={{ cursor: "pointer" }}
-            />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              backgroundColor: "#F3F6FF",
+              position: "fixed",
+              bottom: "0",
+              height: "50px",
+              // border: "1px solid black"
+            }}
+          >
+            <Button disabled={startdata === 0 ? true : false}>
+              <img
+                src={PrevButton}
+                alt=""
+                width="50px"
+                height="50px"
+            
+                onClick={() => {
+                  setStartData(startdata - 1);
+                  setEndData(enddata - 1);
+                }}
+              />
+            </Button>
+            <Button disabled={enddata >= userdata.length ? true : false}>
+              <img
+                src={NextButton}
+                alt=""
+                width="50px"
+                height="50px"
+          
+                onClick={() => {
+                  {
+                    setStartData(startdata + 1);
+                    setEndData(enddata + 1);
+                  }
+                }}
+              />
+            </Button>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              position: "fixed",
+              bottom: "0",
+              height: "45px",
         
-        </div>
-      ) : (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <IoMdArrowDropleftCircle fontSize="50px" />
-          <IoMdArrowDroprightCircle fontSize="50px" />
-        </div>
-      )}
+              background: "#111111",
+            }}
+          >
+            <Button disabled={startdata === 0 ? true : false}>
+              <img
+                src={PrevLightButton}
+                alt=""
+                style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                onClick={() => {
+                  setStartData(startdata - 1);
+                  setEndData(enddata - 1);
+                }}
+              />
+            </Button>
+
+            <Button disabled={enddata >= userdata.length ? true : false}>
+              <img
+                src={NextDarkButton}
+                alt=""
+                style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                onClick={() => {
+                  setStartData(startdata + 1);
+                  setEndData(enddata + 1);
+                }}
+              />
+            </Button>
+          </div>
+        )}
     </>
   );
 };

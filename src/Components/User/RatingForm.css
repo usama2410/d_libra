@@ -26,7 +26,7 @@
     #004cb6 -44.71%,
     #009af9 100%
   ) !important;
-  font-family: "Helvetica" !important;
+  font-family: Helvetica !important;
   font-style: normal !important;
   font-weight: 300 !important;
   text-transform: none !important;
@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .footer_buttons_container {
@@ -56,10 +56,7 @@
   display: flex;
   bottom: 15px;
   left: 0;
-  /* display: flex;
-  width: 100%;
-  margin-top: 20px;
-  padding-left: 20px; */
+
 }
 
 .footer_buttons > img {
@@ -76,7 +73,7 @@
 .rating_form_span_two {
   /* Regular Light Text */
 
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 21px;
@@ -88,7 +85,7 @@
 }
 
 .ratingform_root_span_one {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -101,7 +98,7 @@
 }
 
 .ratingform_root_span {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 400;
   font-size: 21px;
@@ -114,7 +111,7 @@
 }
 
 .ratingform_root_span_sub {
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 400;
   font-size: 21px;
@@ -177,9 +174,57 @@
   align-items: center;
 }
 
+
+
+
+
+
+
+
+
+
+.mobile_view_button{
+display: none;
+}
+
+.footer-drawer .MuiDrawer-paper{
+  background-color: transparent !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+/* border: 1px solid white !important; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 600px) {
   .ratingform_root_span_sub {
-    font-family: "Helvetica";
+    /* font-family: "d"; */
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -199,7 +244,7 @@
   }
 
   .ratingform_root_span {
-    font-family: "Helvetica";
+    /* font-family: "d"; */
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -235,7 +280,7 @@
     display: none;
   }
   .ratingform_root_span_one {
-    font-family: "Helvetica";
+    /* font-family: "d"; */
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -266,6 +311,31 @@
     margin-top: 0px;
     margin-bottom: 0px;
   }
+}
+
+
+
+@media screen and (max-width: 425px){
+  
+.mobile_view_button{
+  display: block;
+  position: fixed;
+  bottom: -15px;
+  left: -25px;
+
+  }
+  
+  
+
+.footer_buttons_container {
+  display: none;
+  
+  }
+
+  
+  
+  
+  
 }
 
 @media screen and (max-width: 360px) {

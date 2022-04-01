@@ -19,8 +19,7 @@
 }
 
 .delete_content_textone {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -36,8 +35,7 @@
 }
 
 .delete_content_textone > span {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -49,8 +47,7 @@
 }
 
 .delete_content_texttwo_sub >span {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 400;
   font-size: 21px;
   line-height: 24px;
@@ -67,8 +64,7 @@
 }
 
 .delete_content_texttwo_sub >span {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 400;
   font-size: 21px;
   line-height: 24px;
@@ -84,8 +80,7 @@
 
 @media screen and (max-width: 600px) {
   .delete_content_textone>span {
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 21px;
@@ -94,8 +89,7 @@
     letter-spacing: -0.015em;
   }
   .delete_content_texttwo_sub>span {
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 21px;
@@ -107,8 +101,7 @@
   }
 
   .delete_content_texttwo_sub {
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 21px;

@@ -16,7 +16,7 @@
 .vector_container {
   display: flex;
   align-items: center;
-  font-family: "Helvetica";
+  font-family: Helvetica !important;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -64,7 +64,7 @@
   ) !important;
   width: 200px;
   border-radius: 15px !important;
-  font-family: "Helvetica" !important;
+  font-family: Helvetica !important;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
@@ -115,7 +115,7 @@
 .user_update_button {
   background: #4f4f4f !important;
   border-radius: 15px !important;
-  font-family: "Helvetica" !important;
+  font-family: Helvetica !important;
   font-style: normal !important;
   font-weight: 300 !important;
   font-size: 12px !important;
@@ -129,18 +129,15 @@
 }
 
 .user_update_button_sub {
-  font-family: "Helvetica" !important;
+  font-family: Helvetica !important;
   font-style: normal !important;
   font-weight: 300 !important;
   font-size: 12px !important;
   line-height: 14px !important;
-  /* identical to box height */
-
   display: flex !important;
   align-items: center !important;
   text-align: center !important;
   letter-spacing: -0.015em !important;
-
   color: #ffffff !important;
   background: linear-gradient(
     87.62deg,
@@ -151,22 +148,36 @@
   text-transform: none !important;
 }
 
+.addcategory_text_bookmark{
+
+  font-family: Helvetica !important;  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  /* color: #ffffff; */
+
+}
+
 .user_bookmark_container {
-  /* padding-left: 40px; */
-  /* padding-top: 24px; */
-  padding: 24px 20px 0px 20px;
+  padding: 30px 20px 0px 20px;
 }
 
 @media screen and (max-width: 969px) {
   .user_bookmark_container {
-    padding: 24px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+  .addcategory_text_bookmark{
+    margin-left: -318px;
   }
 }
 
 @media screen and (max-width: 929px) {
   .user_bookmark_container {
     width: 100%;
-    /* width: 1000px !important; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,13 +189,11 @@
   }
   .user_sub_root_container {
     width: 100%;
-    /* padding-left: 30px; */
   }
 }
 
 @media screen and (max-width: 610px) {
   .vector_container > span {
-    font-family: "Helvetica";
     font-style: normal;
     font-weight: 700;
     font-size: 8px;
@@ -197,21 +206,18 @@
 
   .user_buttons {
     font-size: 12px !important;
-    /* border: 1px solid red !important; */
-    margin-top: 5px !important;
-    /* width: 100% !important; */
-
-    /* width: 160px; */
-    /* line-height: 14px !important; */
-    /* margin-left: 12px !important; */
+    margin-top: 10px !important;
   }
 
   .user_buttons_container {
     flex-wrap: wrap;
-    /* margin-left: 20px; */
-
     margin-top: 20px;
-    /* justify-content: space-between; */
+  }
+}
+
+@media screen and (max-width: 468px){
+  .addcategory_text_bookmark{
+    margin-left: -141px;
   }
 }
 

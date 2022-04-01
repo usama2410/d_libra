@@ -1,8 +1,30 @@
+.pincontainer{
+   display: none;
+}
+
+
+
+
+
+.responsiveaccordian{
+  position: absolute;
+  right: 0;
+  top: 64px;
+}
+
+
+
+
+
+
+
+
+
 .detailpage_root_container {
 
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
   width: 100% !important;
-  height: 50px;
+  height: 60px;
 }
 
 .tableBody {
@@ -31,13 +53,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 700;
-  font-size: 21px;
+  font-size: 20px;
 
   margin-top: -15px;
-  line-height: 24px;
+  line-height: 18px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -55,8 +76,7 @@
   background: #de4040;
   border-radius: 15px;
   cursor: pointer;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -75,8 +95,7 @@
 .detail_edit_button {
   background: #ffaa1d;
   border-radius: 15px;
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -95,8 +114,7 @@
 }
 
 .detail_tag_text {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -111,6 +129,7 @@
   background: #119abd;
   border-radius: 15px;
   border: none;
+  color: white;
   padding: 2px 20px;
   margin-left: 5px;
 }
@@ -131,8 +150,7 @@
 }
 
 .newcategory_main_button {
-  font-family: "Helvetica" !important;
-  font-style: normal !important;
+ font-family: Helvetica !important;  font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
   line-height: 24px !important;
@@ -202,8 +220,7 @@
 }
 
 .git_introduction_dropdown_two {
-  font-family: "Helvetica";
-  font-style: normal;
+ font-family: Helvetica !important;  font-style: normal;
   font-weight: 300;
   font-size: 16px;
   background-color: black;
@@ -224,6 +241,26 @@
 }
 
 @media screen and (max-width: 958px) {
+.pincontainer{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .button_container {
     float: none;
     padding-top: 10px;
@@ -239,8 +276,7 @@
   }
   .newcategory_main_button {
     width: 420px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -257,12 +293,16 @@
 
   .detail_page_content {
     font-size: 14px;
-    padding: 0px 0px;
+    padding: 0px 12px;
+    margin-top: -20px;
+
   }
 
   .tags_wrapper_two {
     display: block;
-    padding-top: 20px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    
   }
   .tags_wrapper_one {
     display: none;
@@ -273,11 +313,34 @@
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 599px){
+  .responsiveaccordian{
+    top: 55px;
+  }
+}
+
+
+
+
+
+
+
 @media screen and (max-width: 438px) {
   .newcategory_main_button {
     width: 300px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -298,8 +361,7 @@
 
   .newcategory_main_button {
     width: 300px !important;
-    font-family: "Helvetica";
-    font-style: normal;
+ font-family: Helvetica !important;    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;

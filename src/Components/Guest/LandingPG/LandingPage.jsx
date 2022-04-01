@@ -71,7 +71,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="mainContentContainer">
+      <div className="mainContentContainer" style={{marginTop: "14px"}}>
         <div
           style={{
             display: "flex",
@@ -124,10 +124,10 @@ const LandingPage = () => {
       </div>
       <div className="mainContentContainer">
         {" "}
-        <div>
+        <div style={{display: "flex"}}>
           {" "}
-          <button className="Signup_button Signup" style={{color: `${theme ? 'white' : 'black'}`}}>Sign up</button>
-          <button className="Signup_button"  style={{color: `${theme ? 'white' : 'black'}`}}>Log in</button>
+          <button className="Signup_button Signup" style={{color: 'white'}} onClick={() => navigate('/register')}>Sign up</button>
+          <button className="Signup_button"  style={{color: 'white'}} onClick={() => navigate('/login')}>Log in</button>
         </div>
       </div>
       {data.map((item) => {
