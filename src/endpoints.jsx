@@ -22,4 +22,9 @@ export const endpoints = {
   //Post
   ADD_POST: "/webapi/AddPost",
   UPDATE_POST: "/webapi/AddPost",
+
+  //Category
+  ADD_CATEGORY: "/webapi/GetParentCategories",
+  GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
+  GET_CHILD_CATEGORY: "/webapi//GetChildCategories?id=1",
 };

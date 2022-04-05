@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EditCourseStructure.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -15,8 +15,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getMainCategory } from "../../Redux/Actions/Editor/Category";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -41,36 +41,47 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
 const EditCourseStructure = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
+
+  const [result, setResult] = useState([]);
+  console.log("result==", result);
+  const mainCategories = async () => {
+    const response = await dispatch(getMainCategory());
+    console.log("response  getMainCategory", response);
+    setResult(response);
+  };
+  useEffect(() => {
+    mainCategories();
+  }, []);
   return (
     <div style={{ height: "100%" }}>
-  
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
-          startIcon={<ArrowBackIcon />}
-        >
-          Back
-        </Button>
-      
+      {console.log("result==", result)}
+      <Button
+        onClick={() => navigate("/editormainpage")}
+        className="back_button"
+        style={{ color: `${theme ? "black" : "white"}` }}
+        startIcon={<ArrowBackIcon />}>
+        Back
+      </Button>
+
       <div className="editormainpage_root_contianer">
         <div>
           <Button
             variant="outlined"
             className="newcategory_main_button"
-            onClick={() => navigate("/addnewcategory")}
-          >
+            onClick={() => navigate("/addnewcategory")}>
             Add a New Category, Course or Chapter{" "}
           </Button>
         </div>
         <div style={{ marginTop: "20px" }}>
           <Typography variant="h6" noWrap component="div">
             <span
-              className={theme ? "editors_menu_heading_sub": "editors_menu_heading"}
+              className={
+                theme ? "editors_menu_heading_sub" : "editors_menu_heading"
+              }
               // style={{ color: `${theme ? "black" : "white"}` }}
             >
               Edit Course Structure
@@ -88,27 +99,23 @@ const EditCourseStructure = () => {
               <div className="button_container">
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button"
-                >
+                  className="editcoursestructure_button">
                   Expand Three
                 </Button>
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button"
-                >
+                  className="editcoursestructure_button">
                   Collapse Three
                 </Button>
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button"
-                >
+                  className="editcoursestructure_button">
                   Import
                 </Button>
                 <Button
                   variant="contained"
                   className="editcoursestructure_button"
-                  endIcon={<AddIcon />}
-                >
+                  endIcon={<AddIcon />}>
                   Add Category
                 </Button>
               </div>
@@ -116,20 +123,17 @@ const EditCourseStructure = () => {
           </Grid>
           <div
             className="button_container_two"
-            style={{ marginTop: "16px", width: "100%" }}
-          >
+            style={{ marginTop: "16px", width: "100%" }}>
             <Button
               variant="contained"
               className="editcoursestructure_button_two"
-              startIcon={<HiArrowSmLeft />}
-            >
+              startIcon={<HiArrowSmLeft />}>
               Export
             </Button>
             <Button
               variant="contained"
               className="editcoursestructure_button_two"
-              startIcon={<HiArrowSmRight />}
-            >
+              startIcon={<HiArrowSmRight />}>
               Import
             </Button>
           </div>
@@ -147,16 +151,16 @@ const EditCourseStructure = () => {
         </div>
         <div className="action_container">
           <span>Action:</span>
+
           <select
             className="git_introduction_dropdown_two"
             name="cars"
-            id="cars"
-          >
-            <option value="volvo">Git & GitHub Introduction</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
+            id="cars">
+            {result?.data?.map((item) => {
+              return <option value="volvo">{item.CategoryName}</option>;
+            })}
           </select>
+
           <Button className="go_button" variant="outlined">
             Go
           </Button>
@@ -166,59 +170,53 @@ const EditCourseStructure = () => {
           <Table
             sx={{ minWidth: 700 }}
             size="small"
-            aria-label="customized table"
-          >
+            aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell
-                  style={{ backgroundColor: "rgba(38, 36, 42, 0.7)" }}
-                ></StyledTableCell>
+                  style={{
+                    backgroundColor: "rgba(38, 36, 42, 0.7)",
+                  }}></StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   TITLE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   NAME
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   UNIQUE IDENTIFIER
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   IMAGE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   CREATED DATE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}
-                >
+                  }}>
                   UPDATED DATE
                 </StyledTableCell>
               </TableRow>
