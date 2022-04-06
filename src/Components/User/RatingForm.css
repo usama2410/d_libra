@@ -6,6 +6,18 @@
   align-items: center;
 }
 
+
+.responsivefooter{
+
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ position: absolute;
+  bottom: 0;
+
+}
+
 .ratingform_root_two {
   display: flex;
   width: 100%;
@@ -26,7 +38,7 @@
     #004cb6 -44.71%,
     #009af9 100%
   ) !important;
-  font-family: Helvetica !important;
+  /* font-family: ddd !important; */
   font-style: normal !important;
   font-weight: 300 !important;
   text-transform: none !important;
@@ -48,7 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 50px; */
+
 }
 
 .footer_buttons_container {
@@ -73,7 +85,7 @@
 .rating_form_span_two {
   /* Regular Light Text */
 
-  font-family: Helvetica !important;
+  /* font-family: ddd !important; */
   font-style: normal;
   font-weight: 300;
   font-size: 21px;
@@ -85,7 +97,7 @@
 }
 
 .ratingform_root_span_one {
-  font-family: Helvetica !important;
+  /* font-family: ddd !important; */
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -98,7 +110,7 @@
 }
 
 .ratingform_root_span {
-  font-family: Helvetica !important;
+  /* font-family: ddd !important; */
   font-style: normal;
   font-weight: 400;
   font-size: 21px;
@@ -111,7 +123,7 @@
 }
 
 .ratingform_root_span_sub {
-  font-family: Helvetica !important;
+  /* font-family: ddd !important; */
   font-style: normal;
   font-weight: 400;
   font-size: 21px;
@@ -242,6 +254,11 @@ display: none;
     background-clip: text;
     text-fill-color: transparent;
   }
+
+.footer_copyright{
+    padding-top: 30px;
+    /* border: 1px solid red; */
+}
 
   .ratingform_root_span {
     /* font-family: "d"; */

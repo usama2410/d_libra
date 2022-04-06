@@ -114,12 +114,13 @@ const AddNewCategory = () => {
                 />
               </div>
             ) : (
-              <span>No Image</span>
+              <span style={{padding: "0px 5px "}}>No Image</span>
             )}
           </div>
         </div>
         <button className="update_button">Update</button>
       </div>
+   
     </>
   );
 };

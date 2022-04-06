@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import Slider from "react-slick";
@@ -35,35 +35,63 @@ const MylibraryCorse = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 820,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-          centerMode: false,
+          slidesToShow: 2.14,
+          slidesToScroll: 1,
+          centerMode: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
           centerMode: false,
         },
       },
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1.02,
+          slidesToShow: 1.15,
           slidesToScroll: 1,
-          centerMode: false,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1.19,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1.21,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 361,
+        settings: {
+          slidesToShow: 1.24,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 338,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+          centerMode: true,
         },
       },
     ],
@@ -71,12 +99,21 @@ const MylibraryCorse = () => {
 
   return (
     <>
-      <div className="library_root_container">
+      <div
+        className={
+          theme ? "library_root_container_simple" : "library_root_container"
+        }
+        style={{ paddingTop: "10px" }}
+      >
         <Button
           onClick={() => navigate("/editormainpage")}
           className="back_button"
-          style={{ color: `${theme ? "black" : "white"}` }}
-          startIcon={<ArrowBackIcon />}>
+          style={{
+            color: `${theme ? "black" : "white"}`,
+            textTransform: "none",
+          }}
+          startIcon={<ArrowBackIcon />}
+        >
           Back
         </Button>
         <div className="header_library_container">
@@ -87,7 +124,8 @@ const MylibraryCorse = () => {
             />
             <span
               className="mylibrary_text"
-              style={{ color: `${theme ? " #008EEC " : "white"}` }}>
+              style={{ color: `${theme ? " #008EEC " : "white"}` }}
+            >
               My Library
             </span>
           </span>
@@ -95,7 +133,8 @@ const MylibraryCorse = () => {
             style={{
               color: `${theme ? " #008EEC " : "white"}`,
               paddingTop: "10px",
-            }}>
+            }}
+          >
             By Course
           </span>
         </div>
@@ -106,71 +145,80 @@ const MylibraryCorse = () => {
           display: "flex",
           justifyContent: "flex-end",
           paddingRight: "20px",
-        }}>
+        }}
+      >
         <Button
           className={theme ? "bycourse_button_sub" : "bycourse_button"}
-          endIcon={<HiOutlineArrowNarrowRight />}>
+          onClick={() => navigate("/LibraryBookmark")}
+          style={{ color: "white" }}
+          endIcon={<HiOutlineArrowNarrowRight />}
+        >
           By Bookmark
         </Button>
       </div>
-
-      {data.map((item) => {
-        return (
-          <div className="content_root_container">
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                paddingBottom: "5px",
-              }}>
-              <img src={item.TagsImageOne} alt="" />
-              <span style={{ paddingLeft: "10px" }}>{item.chapterName}</span>
-            </div>
-            <div>
-              <Slider className="intro-slick" {...settings}>
-                {item.items.map((e) => {
-                  return (
-                    <div className="intro-slides">
-                      <img
-                        onClick={() => navigate("/detailpage")}
-                        src={e.image}
-                        style={{
-                          width: "100%",
-                          cursor: "pointer",
-                          borderRadius: "2px",
-                          filter: `${
-                            e.disabled === true
-                              ? "saturate(300%) saturate(12%)  grayscale(100%)  brightness(11%)"
-                              : ""
-                          }`,
-                        }}
-                        alt=""
-                      />
-                      {e.image ? (
-                        <div
+      <div className="landingpage_slider_container">
+        {data.map((item) => {
+          return (
+            <div className="content_root_container">
+              <div>
+                <span
+                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
+                  style={{ padding: "0px 0px 8px 5px" }}
+                >
+                  {item.chapterName}
+                </span>
+              </div>
+              <div>
+                <Slider className="intro-slick" {...settings}>
+                  {item.items.map((e) => {
+                    return (
+                      <div className="intro-slides">
+                        <img
+                          src={e.image}
+                          className="landingpage_images"
                           style={{
-                            display: "flex",
-                            justifyContent: "space-around",
-                            padding: "6px 10px 0px 10px",
-                          }}>
-                          <div>
-                            <span>{e.Tags}</span>
+                            width: "100%",
+                            cursor: "pointer",
+                            borderRadius: "5px",
+                          }}
+                          alt=""
+                        />
+                        {e.image ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                              alignItems: "center",
+                              padding: "10px 0px 0px 10px",
+                            }}
+                          >
+                            <Typography
+                              noWrap
+                              component="div"
+                              className="subcoursename"
+                              style={{ color: theme ? "#363636" : "#FFFFFF" }}
+                            >
+                              {e.Tags}
+                            </Typography>
+                            <img
+                              src={e.TagsImageTwo}
+                              alt=""
+                              width="17px"
+                              height="20px"
+                            />
                           </div>
-                          <div>
-                            <img src={e.TagsImageTwo} alt="" width='16px'  height='20px'/>
-                          </div>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  );
-                })}
-              </Slider>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <FooterButtons />
     </>
   );

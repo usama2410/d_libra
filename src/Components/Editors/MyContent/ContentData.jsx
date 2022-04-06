@@ -1,53 +1,63 @@
 import image5 from "../../../assests/image5.png";
+
+import WhatYouCanDoOnGitHubBeyondCollaborativeCoding from "../../../assests/SVG_Files/Slides/WhatYouCanDoOnGitHubBeyondCollaborativeCoding.svg";
+import GitGitHubInitialSettings from "../../../assests/SVG_Files/Slides/GitGitHubInitialSettings.svg";
+import WhatIsGit_ from "../../../assests/SVG_Files/Slides/WhatIsGit_.svg";
+import WhatIsVersionControl_ from "../../../assests/SVG_Files/Slides/WhatIsVersionControl_.svg";
+import CollaboratingOnGitGitHubRemoteRepository from "../../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubRemoteRepository.svg";
+import CollaboratingOnGitGitHubBranch from "../../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubBranch.svg";
+import GitGitHubLifeCycle from "../../../assests/SVG_Files/Slides/GitGitHubLifeCycle.svg";
+import GitGitHubIntroduction from "../../../assests/SVG_Files/Slides/GitGitHubIntroduction.svg";
+import TableOfContents from "../../../assests/SVG_Files/Slides/TableOfContents.svg";
+import GitGitHubKeyConcepts from "../../../assests/SVG_Files/Slides/GitGitHubKeyConcepts.svg";
+import GitGitHubBasicLifeCycleOverview from "../../../assests/SVG_Files/Slides/GitGitHubBasicLifeCycleOverview.svg";
+import EditCommit from "../../../assests/SVG_Files/Slides/EditCommit.svg";
+import LaunchGitProject from "../../../assests/SVG_Files/Slides/LaunchGitProject.svg";
+import GitRegularWorkflowEditCommit from "../../../assests/SVG_Files/Slides/GitRegularWorkflowEditCommit.svg";
+import GitGitHubInitialSettingsOverview from "../../../assests/SVG_Files/Slides/GitGitHubInitialSettingsOverview.svg";
+import WorkWithBranches from "../../../assests/SVG_Files/Slides/WorkWithBranches.svg";
+import GitRegularWorkflowWorkWithBranches from "../../../assests/SVG_Files/Slides/GitRegularWorkflowWorkWithBranches.svg";
+import ThreeCasesToLaunchGitProject from "../../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
+
 var ContentData = [
   {
     chapterName: "Introduction",
     items: [
       {
         id: 1,
-        image: image5,
+        image: GitGitHubIntroduction,
         Tags: "Git & Git Inroduction",
       },
       {
         id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
+        image: TableOfContents,
+        Tags: "Table Of Contents",
       },
     ],
   },
 
   {
-    chapterName: "Chapter 1: Git & GitHub Key Concepts",
+    chapterName: "Chapter 1. Git & GitHub Key Concepts",
     items: [
       {
         id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
+        image: GitGitHubKeyConcepts,
+        Tags: "Chapter 1. Git & GitHub Key Concept",
       },
       {
         id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
+        image: WhatIsGit_,
+        Tags: "What is Git?",
       },
       {
         id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
+        image: WhatIsVersionControl_,
+        Tags: "What Is Version Control?",
       },
       {
         id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
+        image: CollaboratingOnGitGitHubRemoteRepository,
+        Tags: "Collaborating On Git & GitHub -- Remote Repository",
       },
     ],
   },
@@ -57,33 +67,13 @@ var ContentData = [
     items: [
       {
         id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
+        image: GitGitHubLifeCycle,
+        Tags: "Chapter 2. Git & GitHub Life Cycle",
       },
       {
         id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
+        image: GitGitHubBasicLifeCycleOverview,
+        Tags: "Git & GitHub Basic Life Cycle",
       },
     ],
   },
@@ -93,103 +83,13 @@ var ContentData = [
     items: [
       {
         id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
+        image: GitGitHubInitialSettings,
+        Tags: "Chapter 3. Git & GitHub Initial Settings",
       },
       {
         id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-    ],
-  },
-
-  {
-    chapterName: "Launch Git Projects",
-    items: [
-      {
-        id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-    ],
-  },
-
-  {
-    chapterName: "Edit & Commit",
-    items: [
-      {
-          id: 1,
-          image: image5,
-          Tags: "Git & Git Inroduction"         
-  
-      },
-        {
-          id: 2,
-          image: image5,
-          Tags: "Git & Git Inroduction"         
-  
-      },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction"         
-        },
-        {
-          id: 2,
-          // image: image5,
-          Tags: "Git & Git Inroduction"         
-        },
-  ],
-  },
-
-  {
-    chapterName: "Work with branches",
-    items: [
-      {
-        id: 1,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
-      },
-      {
-        id: 2,
-        // image: image5,
-        Tags: "Git & Git Inroduction",
+        image: GitGitHubInitialSettingsOverview,
+        Tags: "Git & GitHub Initial Setting Overview",
       },
     ],
   },

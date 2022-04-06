@@ -115,7 +115,7 @@ const UploadContentMain = () => {
           md={8}
           sm={12}
           xs={12}
-          style={{ padding: "20px 20px", marginTop: "-15px" }}
+         className="reactdraftcontainer"
         >
           <div style={{ width: "100%" }}>
             <Grid container>
@@ -194,6 +194,7 @@ const UploadContentMain = () => {
           <button className="update_button_new">Update</button>
         </Grid>
       </Grid>
+
     </>
   );
 };

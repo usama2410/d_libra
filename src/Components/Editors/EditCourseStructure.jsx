@@ -16,6 +16,7 @@ import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
+import EditCourseStructureData from "./EditCourseStructureData";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,18 +46,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const EditCourseStructure = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
+  const [coursedata, setCourseData] = React.useState(EditCourseStructureData);
   return (
-    <div style={{ height: "100%" }}>
-  
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
-          startIcon={<ArrowBackIcon />}
-        >
-          Back
-        </Button>
-      
+    <>
+    
+ 
+      <Button
+        onClick={() => navigate("/editormainpage")}
+        className="back_button"
+        style={{ color: `${theme ? "black" : "white"}` }}
+        startIcon={<ArrowBackIcon />}
+      >
+        Back
+      </Button>
+
       <div className="editormainpage_root_contianer">
         <div>
           <Button
@@ -70,8 +73,9 @@ const EditCourseStructure = () => {
         <div style={{ marginTop: "20px" }}>
           <Typography variant="h6" noWrap component="div">
             <span
-              className={theme ? "editors_menu_heading_sub": "editors_menu_heading"}
-              // style={{ color: `${theme ? "black" : "white"}` }}
+              className={
+                theme ? "editors_menu_heading_sub" : "editors_menu_heading"
+              }
             >
               Edit Course Structure
             </span>
@@ -224,33 +228,42 @@ const EditCourseStructure = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow>
-                <StyledTableCell component="th" scope="row">
-                  <AddIcon className="tableBody_sub" />
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  Git and GitHub Introduction
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  Git and GitHub Introduction
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">457687</StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  http://localhost:3000/editcoursestructure
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  Nov,10 2020
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  Nov,10 2020
-                </StyledTableCell>
-              </StyledTableRow>
+              {coursedata.map((item) => (
+                <StyledTableRow>
+                  <StyledTableCell className="tableBody">
+                    <AddIcon style={{ color: "white" }} />
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.title}
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.name}
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.unique_idetifier}
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.image}
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.createddate}
+                  </StyledTableCell>
+                  <StyledTableCell className="tableBody">
+                    {item.updateddate}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
         <span style={{ padding: "0px 20px" }}>9 categories</span>
       </div>
-    </div>
+    
+    </>
+    
+
+
+
   );
 };
 

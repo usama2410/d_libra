@@ -52,6 +52,7 @@ const EditContentMain = () => {
         <button
           onClick={() => navigate("/detailpage")}
           className="back_button"
+          style={{color: `${theme ? 'black' : 'white'}`}}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
@@ -205,6 +206,7 @@ const EditContentMain = () => {
                 }}
               >
                 <Editor
+                style={{color : "red"}}
                   editorState={editorState}
                   onEditorStateChange={setEditorState}
                 />

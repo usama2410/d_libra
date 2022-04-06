@@ -39,12 +39,13 @@ const DeleteContent = () => {
               justifyContent: "center",
             }}
           >
-            <button className="delete_content_button" style={{color: `${theme ? 'white' : 'black'}`}}> 
+            <button className="delete_content_button" style={{color: "white"}}> 
               Yes, delete the content
             </button>
           </div>
         </div>
       </div>
+   
     </>
   );
 };

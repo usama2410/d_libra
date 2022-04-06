@@ -10,11 +10,17 @@ import { IoMdArrowDroprightCircle } from "react-icons/io";
 import Polygon4 from "../../assests/Polygon4.png";
 import Polygon5 from "../../assests/Polygon5.png";
 import { useSelector } from "react-redux";
-import NextButton from '../../assests/NextButton.png'
-import PrevButton from '../../assests/PrevButton.png'
+import NextButton from "../../assests/NextButton.png";
+import PrevButton from "../../assests/PrevButton.png";
 import NextDarkButton from "../../assests/NextDarkButton.png";
 import PrevLightButton from "../../assests/PrevLightButton.png";
 import UserDetailPageData from "../User/DetailPageUser/UserDetailPageData";
+
+
+import Next from '../../assests/SVG_Files/New folder/icons/Next.svg'
+import Next_dark from '../../assests/SVG_Files/New folder/icons/Next_dark.svg'
+import Previous from '../../assests/SVG_Files/New folder/icons/Previous.svg'
+import Previous_dark from '../../assests/SVG_Files/New folder/icons/Previous_dark.svg'
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -24,7 +30,6 @@ const DetailPage = () => {
   const [enddata, setEndData] = React.useState(1);
   const [pinstate, setPinState] = React.useState(false);
   const [transform, setTransform] = React.useState(false);
-  const accordion = useSelector((state) => state.accordion.state)
 
   return (
     <>
@@ -32,33 +37,54 @@ const DetailPage = () => {
         <button
           onClick={() => navigate("/")}
           className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
+          style={{ color: "white" }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
           <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
         </button>
-        <div className="header_text">
-          <span>What is Git?</span>
-        </div>
+        {userdata.slice(startdata, enddata).map((item) => (
+            <span className="header_text" style={{ marginTop: "-5px" }}>
+              {item.text}
+            </span>
+          ))}
       </div>
 
-      <div style={{ padding: "20px 20px" }}>
+      <div className="detailpagesubcontainer">
         <Grid container>
           <Grid item lg={4} md={6} sm={12} xs={12}>
-            <div>
-              <img src={image6} alt="" className="detail_page_image" />
-            </div>
+          {userdata.slice(startdata, enddata).map((item) => (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: " center",
+                    transition: "transform .2s",
+                    transform: transform && "scale(95%)",
+                    padding: `${pinstate ? "0px 0px" : "5px 5px"}`,
+                  }}
+                >
+                   
+              <img src={item.image} alt="" className="detail_page_image" />
+           
+                </div>
+              ))}
+
+
+         
             <div className="buttons_container_detail_page">
               <div style={{ display: "flex" }}>
                 <button
                   className="detail_delete_button"
                   onClick={() => navigate("/deletecontent")}
+                 
                 >
                   Delete
                 </button>
                 <button
                   className="detail_edit_button"
                   onClick={() => navigate("/editcontentmain")}
+                  
                 >
                   Edit
                 </button>
@@ -68,7 +94,7 @@ const DetailPage = () => {
                 <button className="detail_tag_button">Git</button>
                 <button className="detail_tag_button">GitHub</button>
                 <button className="detail_tag_button">DevOps</button>
-                <img src={Vectortag} alt="" style={{ paddingLeft: "20px" }} />
+                <img src={Vectortag} alt="" style={{ paddingLeft: "3px" }} />
               </div>
             </div>
           </Grid>
@@ -132,39 +158,38 @@ const DetailPage = () => {
       </div>
 
       {theme ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              backgroundColor: "#F3F6FF",
-              position: "fixed",
-              bottom: "0",
-              height: "50px",
-              // border: "1px solid black"
-            }}
-          >
-            <Button disabled={startdata === 0 ? true : false}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            backgroundColor: "#F3F6FF",
+            position: "fixed",
+            bottom: "0",
+            height: "70px",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ marginTop: "-8px" }}>
+            <Button  style={{marginLeft: "16px"}} disabled={startdata === 0 ? true : false}>
               <img
-                src={PrevButton}
+                src={Previous}
                 alt=""
                 width="50px"
                 height="50px"
-            
                 onClick={() => {
                   setStartData(startdata - 1);
                   setEndData(enddata - 1);
                 }}
               />
             </Button>
-            <Button disabled={enddata >= userdata.length ? true : false}>
+            <Button  style={{marginLeft: "-16px"}} disabled={enddata >= userdata.length ? true : false}>
               <img
-                src={NextButton}
+                src={Next}
                 alt=""
                 width="50px"
                 height="50px"
-          
                 onClick={() => {
                   {
                     setStartData(startdata + 1);
@@ -174,23 +199,28 @@ const DetailPage = () => {
               />
             </Button>
           </div>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              position: "fixed",
-              bottom: "0",
-              height: "45px",
-        
-              background: "#111111",
-            }}
-          >
-            <Button disabled={startdata === 0 ? true : false}>
+          <span style={{ fontSize: "12px" }}>
+            © D-Libra All Rights Reserved
+          </span>
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            position: "fixed",
+            bottom: "0",
+            height: "70px",
+            flexDirection: "column",
+            background: "#111111",
+          }}
+        >
+          <div style={{ marginTop: "-8px" }}>
+            <Button style={{marginLeft: "16px"}} disabled={startdata === 0 ? true : false}>
               <img
-                src={PrevLightButton}
+                src={Previous_dark}
                 alt=""
                 style={{ width: "50px", height: "50px", cursro: "pointer" }}
                 onClick={() => {
@@ -200,9 +230,9 @@ const DetailPage = () => {
               />
             </Button>
 
-            <Button disabled={enddata >= userdata.length ? true : false}>
+            <Button style={{marginLeft: "-16px"}}disabled={enddata >= userdata.length ? true : false}>
               <img
-                src={NextDarkButton}
+                src={Next_dark}
                 alt=""
                 style={{ width: "50px", height: "50px", cursro: "pointer" }}
                 onClick={() => {
@@ -212,7 +242,11 @@ const DetailPage = () => {
               />
             </Button>
           </div>
-        )}
+          <span style={{ fontSize: "12px" }}>
+            © D-Libra All Rights Reserved
+          </span>
+        </div>
+      )}
     </>
   );
 };

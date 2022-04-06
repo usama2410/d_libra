@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import sharepic from "../../assests/sharepic.png";
-import Rating from "../../assests/Rating.png";
+// import Rating from "../../assests/Rating.png";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -29,6 +29,12 @@ import gmail from "../../assests/gmail.png";
 import whatsapp from "../../assests/whatsapp.png";
 import facebook from "../../assests/facebook.png";
 import messanger from "../../assests/messanger.png";
+
+
+import Rating from '../../assests/SVG_Files/Rating.svg'
+import MyLibrary from '../../assests/SVG_Files/MyLibrary.svg'
+import History from '../../assests/SVG_Files/History.svg'
+import Share from '../../assests/SVG_Files/Share.svg'
 
 import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
@@ -99,47 +105,52 @@ const FooterButtons = (props) => {
     <>
       <div>
         <div className="footer_buttons_container">
-          <Button className="footer_buttons" variant="contained">
-            <div className="footer_sub">
+          {/* <Button className="footer_buttons" variant="contained"> */}
+            <img src={History} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+            {/* <div className="footer_sub">
               <img
                 src={sharepic}
                 alt=""
                 style={{ width: "22px", height: "22px" }}
               />
               <span>history</span>
-            </div>
-          </Button>
+            </div> */}
+          {/* </Button> */}
 
-          <Button className="footer_buttons" variant="contained">
-            <div className="footer_sub">
+          {/* <Button className="footer_buttons" variant="contained"> */}
+          <img src={MyLibrary} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+            {/* <div className="footer_sub">
               <img
                 src={Rating}
                 alt=""
                 style={{ width: "22px", height: "22px" }}
               />
               <span>Library</span>
-            </div>
-          </Button>
-          <Button
+            </div> */}
+          {/* </Button> */}
+          {/* <Button
             className="footer_buttons"
             variant="contained"
             onClick={() => navigate("/ratingform")}
-          >
-            <div className="footer_sub">
+          > */}
+               <img src={Rating} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+            {/* <div className="footer_sub">
               <MenuBookIcon style={{ width: "20px", height: "20px" }} />
               <span>rating</span>
-            </div>
-          </Button>
-          <Button
+            </div> */}
+          {/* </Button> */}
+          {/* <Button
             className="footer_buttons"
             variant="contained"
             onClick={toggleDrawer(true)}
-          >
-            <div className="footer_sub">
+          > */}
+
+<img src={Share}  onClick={toggleDrawer(true)} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+            {/* <div className="footer_sub">
               <AccessTimeIcon style={{ width: "22px", height: "22px" }} />
               <span>Share</span>
-            </div>
-          </Button>
+            </div> */}
+          {/* </Button> */}
         </div>
 
         <div className="mobile_view_button">
@@ -151,43 +162,47 @@ const FooterButtons = (props) => {
                 marginLeft: "30px",
               }}
             >
-              <Button className="footer_buttons" variant="contained">
-                <div className="footer_sub">
+              {/* <Button className="footer_buttons" variant="contained"> */}
+              <img src={History} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+                {/* <div className="footer_sub">
                   <img
                     src={sharepic}
                     alt=""
                     style={{ width: "22px", height: "22px" }}
                   />
                   <span>history</span>
-                </div>
-              </Button>
+                </div> */}
+              {/* </Button> */}
 
-              <Button className="footer_buttons" variant="contained">
-                <div className="footer_sub">
+              {/* <Button className="footer_buttons" variant="contained"> */}
+              <img src={MyLibrary} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+                {/* <div className="footer_sub">
                   <img
                     src={Rating}
                     alt=""
                     style={{ width: "22px", height: "22px" }}
                   />
                   <span>Library</span>
-                </div>
-              </Button>
-              <Button className="footer_buttons" variant="contained">
-                <div className="footer_sub">
+                </div> */}
+              {/* </Button> */}
+              {/* <Button className="footer_buttons" variant="contained"> */}
+              <img src={Rating} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+                {/* <div className="footer_sub">
                   <MenuBookIcon style={{ width: "20px", height: "20px" }} />
                   <span>rating</span>
-                </div>
-              </Button>
-              <Button
+                </div> */}
+              {/* </Button> */}
+              {/* <Button
                 className="footer_buttons"
                 variant="contained"
                 onClick={toggleDrawer(true)}
-              >
-                <div className="footer_sub">
+              > */}
+                   <img src={Share}   onClick={toggleDrawer(true)}  alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
+                {/* <div className="footer_sub">
                   <AccessTimeIcon style={{ width: "22px", height: "22px" }} />
                   <span>Share</span>
-                </div>
-              </Button>
+                </div> */}
+              {/* </Button> */}
             </div>
 
             <SwipeableDrawer

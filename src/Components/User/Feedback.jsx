@@ -85,7 +85,14 @@ const Feedback = () => {
           </Button>
         </div>
       </div>
+      
       <FooterButtons />
+      {/* <div className="responsivefooter">
+<span style={{fontSize: "12px", }}>
+
+      © D-Libra All Rights Reserved
+    </span>
+  </div> */}
     </>
   );
 };

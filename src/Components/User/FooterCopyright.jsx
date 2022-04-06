@@ -5,7 +5,7 @@ const FooterCopyright = () => {
     <div
     className="footer_copyright"
   >
-    <span>&copy; D-Libra All Rights Reserved</span>
+    <span style={{fontSize: "12px"}}>&copy; D-Libra All Rights Reserved</span>
   </div>
   )
 }

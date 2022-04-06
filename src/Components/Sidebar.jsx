@@ -6,12 +6,8 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -39,9 +35,17 @@ import { useLocation } from "react-router-dom";
 import UnionOpen from "../assests/UnionOpen.png";
 import UnionClose from "../assests/UnionClose.png";
 import UnionBlue from "../assests/UnionBlue.png";
-
+import editor_icon from "../assests/SVG_Files/editor_icon.svg";
+import white_icon from "../assests/SVG_Files/New folder/white_icon.svg";
+import darkmode_logo from "../assests/SVG_Files/New folder/darkmode_logo.svg";
+import lightmode_logo from "../assests/SVG_Files/New folder/lightmode_logo.svg";
+import Sidebar_My_library from '../assests/SVG_Files/New folder/icons/Sidebar_My_library.svg'
+import Sidebar_Signup from "../assests/SVG_Files/New folder/icons/Sidebar_Signup.svg";
+import Sidebar_Login from "../assests/SVG_Files/New folder/icons/Sidebar_Login.svg";
+import Sidebar_Logout from '../assests/SVG_Files/New folder/icons/Sidebar_Logout.svg'
+import Sidebar_EditorPage from "../assests/SVG_Files/New folder/icons/Sidebar_EditorPage.svg";
+import Sidebar_NightMode from '../assests/SVG_Files/New folder/icons/Sidebar_NightMode.svg'
 import Accordian from "./Guest/Accordian/Accordian";
-// import { accordionstate } from "../Redux/Actions/auth.action";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -111,7 +115,7 @@ export default function Sidebar() {
   const handleChange = async (event) => {
     setThemeState(event.target.checked);
     console.log(themestate);
-    await dispatch(themeSwitch(themestate));
+    dispatch(themeSwitch(!themeState));
   };
 
   const navigate = useNavigate();
@@ -136,119 +140,77 @@ export default function Sidebar() {
     setState({ ...state, [anchor]: open });
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-const handleaccordiondrawer = () => {
-
-
-if("/userdetailpage" === location.pathname && themeState === true){
-return (
-  <button
-    onClick={handleAccordionIcon}
-    className="accordionbutton"
-  >
-    {" "}
-    <div>
-      {["right"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawerTwo(anchor, true)}>
-            <img src={UnionBlue} alt="" width="24px" height= '24px'/>
-          </Button>
-          <Drawer
-            sx={{
-              width: drawerWidthTwo,
-              flexShrink: 0,
-              "& .MuiDrawer-paper": {
-                width: drawerWidthTwo,
-                boxSizing: "border-box",
-                border: "none",
-              },
-            }}
-            anchor={anchor}
-            open={statetwo[anchor]}
-            onClose={toggleDrawerTwo(anchor, false)}
-          >
-            {listtwo(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
-    </div>
-  </button>
-)
-}else if("/userdetailpage" === location.pathname && themeState === false){
-  return (
-
-    <button
-    onClick={handleAccordionIcon}
-    className="accordionbutton"
-  >
-    {" "}
-    <div>
-      {["right"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawerTwo(anchor, true)}>
-            <img src={UnionOpen} alt="" />
-          </Button>
-          <Drawer
-            sx={{
-              width: drawerWidthTwo,
-              flexShrink: 0,
-              "& .MuiDrawer-paper": {
-                width: drawerWidthTwo,
-                boxSizing: "border-box",
-                border: "none",
-              },
-            }}
-            anchor={anchor}
-            open={statetwo[anchor]}
-            onClose={toggleDrawerTwo(anchor, false)}
-          >
-            {listtwo(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
-    </div>
-  </button>
-
-  )
-}
-
-  
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const handleaccordiondrawer = () => {
+    if (
+      "/userdetailpage" === location.pathname ||
+      ("/detailpage" === location.pathname && themeState === true)
+    ) {
+      return (
+        <button onClick={handleAccordionIcon} className="accordionbutton">
+          {" "}
+          <div>
+            {["right"].map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawerTwo(anchor, true)}>
+                  <img src={UnionBlue} alt="" width="24px" height="24px" />
+                </Button>
+                <Drawer
+                  sx={{
+                    width: drawerWidthTwo,
+                    flexShrink: 0,
+                    "& .MuiDrawer-paper": {
+                      width: drawerWidthTwo,
+                      boxSizing: "border-box",
+                      border: "none",
+                    },
+                  }}
+                  anchor={anchor}
+                  open={statetwo[anchor]}
+                  onClose={toggleDrawerTwo(anchor, false)}
+                >
+                  {listtwo(anchor)}
+                </Drawer>
+              </React.Fragment>
+            ))}
+          </div>
+        </button>
+      );
+    } else if (
+      "/userdetailpage" === location.pathname ||
+      ("/detailpage" === location.pathname && themeState === false)
+    ) {
+      return (
+        <button onClick={handleAccordionIcon} className="accordionbutton">
+          {" "}
+          <div>
+            {["right"].map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawerTwo(anchor, true)}>
+                  <img src={UnionOpen} alt="" />
+                </Button>
+                <Drawer
+                  sx={{
+                    width: drawerWidthTwo,
+                    flexShrink: 0,
+                    "& .MuiDrawer-paper": {
+                      width: drawerWidthTwo,
+                      boxSizing: "border-box",
+                      border: "none",
+                    },
+                  }}
+                  anchor={anchor}
+                  open={statetwo[anchor]}
+                  onClose={toggleDrawerTwo(anchor, false)}
+                >
+                  {listtwo(anchor)}
+                </Drawer>
+              </React.Fragment>
+            ))}
+          </div>
+        </button>
+      );
+    }
+  };
 
   const listtwo = (anchor) => (
     <Box style={{ background: "#212121", height: "100%", maxWidth: "100%" }}>
@@ -284,29 +246,38 @@ return (
         paddingTop: "45px",
       }}
     >
-      <span style={{ marginLeft: "20px" }}>Account </span>
+      <span className="subheadingsidebar">Account </span>
       <Divider className="divider_class" />
 
       <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/usersettingviewpage")}
+          onClick={() => navigate("/usersettingviewpage") }
+          
         >
-          <ListItemIcon>
-            <img src={image3} alt="" style={{ marginLeft: "-9px" }} />
+          <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+
+          <ListItemIcon      >
+            <img src={image3} alt="" className="profilesidebaricon" />
           </ListItemIcon>
-          <Typography>
+          <Typography      >
             <span className="listitem_text" style={{ marginLeft: "-17px" }}>
               bloovee
             </span>
           </Typography>
+        </div>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
-          <ListItemIcon>
-            <img src={user} alt="" />
+        <ListItem style={{ cursor: "pointer" }} onClick={() => navigate('/register')}>
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "3px" }} />
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span
               className="listitem_text_disabled"
               style={{ marginLeft: "-24px" }}
@@ -314,13 +285,21 @@ return (
               Signup
             </span>
           </Typography>
+          </div>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
-          <ListItemIcon>
-            <img src={Login} alt="" />
+
+
+        <ListItem style={{ cursor: "pointer" }} onClick={() => navigate('/login')}>
+          
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_Login} alt=""  style={{ paddingLeft: "3px" }} />
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span
               className="listitem_text_disabled"
               style={{ marginLeft: "-24px" }}
@@ -328,65 +307,106 @@ return (
               Login
             </span>
           </Typography>
+          </div>
         </ListItem>
 
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/logout")}
         >
-          <ListItemIcon>
-            <ExitToAppIcon style={{ color: " #FFFFFF" }} />
+
+          
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_Logout} alt=""  style={{ paddingLeft: "3px" }}/>
+            {/* <ExitToAppIcon style={{ color: " #FFFFFF" }} /> */}
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Logout
             </span>
           </Typography>
+          </div>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
-          <ListItemIcon>
-            <AccessTimeIcon style={{ color: " #FFFFFF" }} />
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/recentlyviewed")}
+        >
+
+          
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} />
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Recently Viewed
             </span>
           </Typography>
+          </div>
         </ListItem>
 
-        <ListItem style={{ cursor: "pointer" }}>
-          <ListItemIcon>
-            <MenuBookIcon style={{ color: " #FFFFFF" }} />
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/MyLibraryCorse")}
+        >
+
+          
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_My_library} alt=""  style={{ paddingLeft: "1px" }}  />
+            {/* <MenuBookIcon style={{ color: " #FFFFFF" }} /> */}
           </ListItemIcon>
-          <Typography>
-            <span style={{ marginLeft: "-24px" }}>My Library</span>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+              My Library
+            </span>
           </Typography>
+          </div>
         </ListItem>
 
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/ratingsidebar")}
         >
-          <ListItemIcon>
-            <img src={Rating} alt="" style={{ paddingLeft: "3px" }} />
+           <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Rating} alt="" style={{ paddingLeft: "1px" }} />
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Rating
             </span>
           </Typography>
+          </div>
         </ListItem>
       </List>
 
-      <span style={{ marginLeft: "20px" }}>Setting </span>
+      <span className="subheadingsidebar" style={{marginTop: "20px"}}>Setting </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
         <ListItem style={{ cursor: "pointer" }}>
-          <ListItemIcon>
-            <img src={NightMode} alt="" />
+        <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_NightMode} alt=""  style={{ paddingLeft: "3px" }}  />
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Dark Theme
             </span>
@@ -406,29 +426,37 @@ return (
               <div></div>
             </label>
           </div>
+          </div>
         </ListItem>
       </List>
-      <span style={{ marginLeft: "20px" }}>Editor Menu </span>
+      <span className="subheadingsidebar"  style={{marginTop: "20px"}}> Editor Menu </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/editormainpage")}
         >
-          <ListItemIcon>
-            <RiFileEditFill style={{ color: " #FFFFFF", fontSize: "20px" }} />
+           <div  onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
+            <img src={Sidebar_EditorPage} alt=""   style={{ paddingLeft: "3px" }}/>
+            {/* <RiFileEditFill style={{ color: " #FFFFFF", fontSize: "20px" }} /> */}
           </ListItemIcon>
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Editor's Page
             </span>
           </Typography>
+          </div>
         </ListItem>
       </List>
-      <span style={{ marginLeft: "20px" }}>Others </span>
+      <span className="subheadingsidebar"  style={{marginTop: "20px"}}>Others </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
-        <ListItem style={{ cursor: "pointer" }}>
+        <ListItem style={{ cursor: "pointer" }}       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
           <Typography>
             <span className="listitem_text">About D-Libra</span>
           </Typography>
@@ -437,7 +465,8 @@ return (
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/feedback")}
         >
-          <Typography>
+          <Typography       onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text">Feedback</span>
           </Typography>
         </ListItem>
@@ -457,7 +486,7 @@ return (
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
-                    style={{ color: `${themestate ? "white" : "#111111"}` }}
+                    style={{ color: `${themeState ? "#111111 " : " white"}`, marginLeft: "-50px" }}
                     sx={{ mr: 2, ...(open && { display: "none" }) }}
                   >
                     <MenuIcon />
@@ -491,79 +520,131 @@ return (
               width: "100%",
             }}
           >
-            <Typography variant="h6" noWrap component="div">
-              <div className="logo_main_container">
-                <Button onClick={() => navigate("/")}>
-                  <img src={Fill2} alt="" />{" "}
-                  {themestate ? (
-                    <img src={Fill1} alt="" />
+            <Typography>
+              <div
+                className={
+                  "/detailpage" === location.pathname ||
+                  "/userdetailpage" === location.pathname
+                    ? "logo_main_container_two"
+                    : "logo_main_container"
+                }
+              >
+                <Button
+                  onClick={() => navigate("/")}
+                  style={{
+                    marginLeft: `${"/" === location.pathname ? "-50px" : ""}`,
+                  }}
+                >
+                  {themeState ? (
+                    <img src={lightmode_logo} alt="" width='100px' height="20.47"  />
                   ) : (
-                    <img src={Fill12} alt="" />
+                    <img src={ darkmode_logo} alt=""  width='100px' height="20.47" />
                   )}
+
+                  {/* <img src={white_icon} alt="" />{" "}
+                  {themeState ? (
+                    <img src={Fill12} alt="" />
+                  ) : (
+                    <img src={Fill1} alt="" />
+                  )} */}
                 </Button>
               </div>
             </Typography>
           </div>
 
+          {"/detailpage" === location.pathname ||
+          "/editormainpage" === location.pathname ||
+          "/editcoursestructure" === location.pathname ||
+          "/addnewcategory" === location.pathname ||
+          "/uploadcontentmain" === location.pathname ||
+          "/mycontents" === location.pathname ||
+          "/editcontentmain" === location.pathname ||
+          "/deletecontent" === location.pathname ? (
+            <img
+              src={editor_icon}
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/editormainpage")}
+              alt=""
+            />
+          ) : (
+            ""
+          )}
+
           <Typography variant="h6" className="toolbar_rowreverse">
-            {
-              "/userdetailpage" === location.pathname ? '' : <div>
-              <div style={{ display: "flex" }}>
-                <input
-                  placeholder="Search"
-                  className={`${
-                    themestate ? "sidebar_inputfield" : "sidebar_inputfield_sub"
-                  }`}
-                />
+            {"/userdetailpage" === location.pathname ||
+            "/detailpage" === location.pathname ? (
+              ""
+            ) : (
+              <div>
+                <div style={{ display: "flex" }}>
+                  <input
+                    placeholder="Search"
+                    className={`${
+                      themeState
+                        ? "sidebar_inputfield_sub "
+                        : "  sidebar_inputfield"
+                    }`}
+                  />
+                  <div
+                    className={
+                      themeState
+                        ? "input_field_icon_container_sub   "
+                        : "input_field_icon_container"
+                    }
+                  >
+                    {themeState ? (
+                      <img
+                        src={VectorBlue}
+                        alt=""
+                        className="inputfield_icon"
+                        onClick={handleSearch}
+                      />
+                    ) : (
+                      <img
+                        src={Vector}
+                        alt=""
+                        className="inputfield_icon"
+                        onClick={handleSearch}
+                      />
+                    )}
+                  </div>
+                </div>
+
                 <div
-                  className={
-                    themestate
-                      ? "input_field_icon_container"
-                      : "input_field_icon_container_sub"
-                  }
+                  className="wrap"
+                  style={{
+                    marginTop: `${"/" === location.pathname ? "-32px" : ""}`,
+                  }}
                 >
-                  {themestate ? (
-                    <img
-                      src={Vector}
-                      alt="vector image"
-                      className="inputfield_icon"
-                      onClick={handleSearch}
-                    />
-                  ) : (
-                    <img
-                      src={VectorBlue}
-                      alt="vector image"
-                      className="inputfield_icon"
-                      onClick={handleSearch}
-                    />
-                  )}
+                  <input
+                    className={`search_icon ${
+                      themeState ? "darkThemeBar" : "whitethemeBar"
+                    }`}
+                    type="text"
+                    placeholder="Search"
+                  />
+                  <input
+                    id="search_submit"
+                    type="submit"
+                    className={themeState ? "submitone" : "submittwo"}
+                  />
                 </div>
               </div>
-
-              <div className="wrap">
-                <input
-                  className={`search_icon ${
-                    themestate ? "darkThemeBar" : "whitethemeBar"
-                  }`}
-                  type="text"
-                  placeholder="Search"
-                />
-                <input id="search_submit" type="submit" />
-              </div>
-            </div>
-            }
-            
-            <img
-              onClick={() => navigate("/usersettingviewpage")}
-              style={{ cursor: "pointer" }}
-              src={image3}
-              alt=""
-              className="sidenav_logo"
-            />
+            )}
+            {"/" === location.pathname ? (
+              ""
+            ) : (
+              <img
+                onClick={() => navigate("/usersettingviewpage")}
+                style={{ cursor: "pointer" }}
+                src={image3}
+                alt=""
+                className="sidenav_logo"
+              />
+            )}
           </Typography>
           {handleaccordiondrawer()}
         </Toolbar>
-
       </AppBar>
     </>
   );

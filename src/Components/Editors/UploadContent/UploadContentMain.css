@@ -12,10 +12,15 @@ textarea.addcategory_input_sub {
   padding: 0px 40px;
 }
 
+.reactdraftcontainer{
+  padding: 26px 20px!important;
+margin-top: -15px!important;
+}
+
 .upload_new_content_text {
   width: 100%;
   display: flex;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -30,7 +35,7 @@ textarea.addcategory_input_sub {
 
 
 .upload_new_content_text{
- font-family: Helvetica !important;font-style: normal;
+ /* font-family: Helvetica !important;font-style: normal; */
 font-weight: 400;
 font-size: 18px;
 line-height: 21px;
@@ -46,7 +51,7 @@ color: #FFFFFF;
 }
 
 .upload_new_content_text_sub {
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 700;
   width: 100%;
   font-size: 21px;
@@ -65,7 +70,7 @@ color: #FFFFFF;
 .update_button_new {
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
   border-radius: 12px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 400;
   font-size: 21px;
   line-height: 24px;
@@ -101,7 +106,7 @@ color: #FFFFFF;
 
 @media screen and (max-width: 600px){
   .upload_new_content_text_sub {
- font-family: Helvetica !important;    font-style: normal;
+ /* font-family: Helvetica !important;    font-style: normal; */
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
@@ -121,7 +126,13 @@ color: #FFFFFF;
 }
 @media screen and (max-width: 336px) {
   .main_root_container_upload_content {
-    padding: 0px 0px;
+    padding: 0px 10px;
     /* margin-left: 8px; */
+    
   }
+  .reactdraftcontainer{
+    padding: 10px 0px !important;
+  margin-top: -15px !important;
+  }
+  
 }

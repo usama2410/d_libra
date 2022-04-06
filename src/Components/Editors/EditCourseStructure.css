@@ -1,27 +1,18 @@
-.pincontainer{
-   display: none;
+.pincontainer {
+  display: none;
 }
 
-
-
-
-
-.responsiveaccordian{
+.responsiveaccordian {
   position: absolute;
   right: 0;
   top: 64px;
 }
 
-
-
-
-
-
-
-
+.detailpagesubcontainer {
+  padding: 5px 5px;
+}
 
 .detailpage_root_container {
-
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
   width: 100% !important;
   height: 60px;
@@ -53,17 +44,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
- font-family: Helvetica !important;  font-style: normal;
+  /* font-family: Helvetica !important; */
+  font-style: normal;
   font-weight: 700;
   font-size: 20px;
-
-  margin-top: -15px;
+  margin-top: -2px;
   line-height: 18px;
   display: flex;
   align-items: center;
   text-align: center;
   letter-spacing: -0.015em;
-
   color: #ffffff;
 }
 
@@ -76,7 +66,8 @@
   background: #de4040;
   border-radius: 15px;
   cursor: pointer;
- font-family: Helvetica !important;  font-style: normal;
+  /* font-family: Helvetica !important; */
+  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -87,7 +78,7 @@
   letter-spacing: -0.015em;
 
   color: #ffffff;
-
+  width: 80px !important;
   border: none;
   padding: 2px 20px;
 }
@@ -95,13 +86,15 @@
 .detail_edit_button {
   background: #ffaa1d;
   border-radius: 15px;
- font-family: Helvetica !important;  font-style: normal;
+  /* font-family: Helvetica !important; */
+  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
   margin-left: 5px;
-
+  justify-content: center;
+  width: 80px !important;
   display: flex;
   align-items: center;
   text-align: center;
@@ -114,7 +107,8 @@
 }
 
 .detail_tag_text {
- font-family: Helvetica !important;  font-style: normal;
+  /* font-family: Helvetica !important; */
+  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -135,7 +129,7 @@
 }
 
 .detail_page_content {
-  padding: 0px 20px;
+  padding: 5px 10px;
 }
 .detail_page_image {
   width: 100%;
@@ -147,10 +141,13 @@
 
 .tags_wrapper_one {
   display: flex;
+  margin-right: 10px;
+  /* border: 1px solid red; */
 }
 
 .newcategory_main_button {
- font-family: Helvetica !important;  font-style: normal !important;
+  /* font-family: Helvetica !important; */
+  font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
   line-height: 24px !important;
@@ -159,7 +156,7 @@
   text-align: center !important;
   letter-spacing: -0.015em !important;
   background: #ffaa1d !important;
-  border:none !important;
+  border: none !important;
   border-radius: 15px !important;
   color: #363636 !important;
   text-transform: none !important;
@@ -220,7 +217,8 @@
 }
 
 .git_introduction_dropdown_two {
- font-family: Helvetica !important;  font-style: normal;
+  /* font-family: Helvetica !important; */
+  font-style: normal;
   font-weight: 300;
   font-size: 16px;
   background-color: black;
@@ -241,25 +239,15 @@
 }
 
 @media screen and (max-width: 958px) {
-.pincontainer{
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-}
+  .pincontainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  .detailpagesubcontainer {
+    padding: 10px 5px;
+  }
 
   .button_container {
     float: none;
@@ -276,7 +264,8 @@
   }
   .newcategory_main_button {
     width: 420px !important;
- font-family: Helvetica !important;    font-style: normal;
+    /* font-family: Helvetica !important; */
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -293,16 +282,14 @@
 
   .detail_page_content {
     font-size: 14px;
-    padding: 0px 12px;
-    margin-top: -20px;
-
+    padding: 0px 5px;
+    /* margin-top: -20px; */
   }
 
   .tags_wrapper_two {
     display: block;
     margin-top: 100px;
     margin-bottom: 50px;
-    
   }
   .tags_wrapper_one {
     display: none;
@@ -313,34 +300,17 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (max-width: 599px){
-  .responsiveaccordian{
+@media screen and (max-width: 599px) {
+  .responsiveaccordian {
     top: 55px;
   }
 }
 
-
-
-
-
-
-
 @media screen and (max-width: 438px) {
   .newcategory_main_button {
     width: 300px !important;
- font-family: Helvetica !important;    font-style: normal;
+    /* font-family: Helvetica !important; */
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -361,7 +331,8 @@
 
   .newcategory_main_button {
     width: 300px !important;
- font-family: Helvetica !important;    font-style: normal;
+    /* font-family: Helvetica !important; */
+    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;

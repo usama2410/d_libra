@@ -28,7 +28,6 @@ import Register from "./Components/Auth/pages/register";
 import Logout from "./Components/Auth/pages/logout";
 import ChangePassword from "./Components/Auth/pages/change-password";
 
-
 import { useSelector } from "react-redux";
 
 import "./index.css";
@@ -36,6 +35,8 @@ import MylibraryCorse from "./Components/Extras/MylibraryCorse";
 import Tagpage from "./Components/Extras/Tagpage";
 import Searchresult from "./Components/Extras/Searchresult";
 import Recentlyviewed from "./Components/Extras/Recentlyviewed";
+import CourseMainPage from "./Components/Guest/LandingPG/CourseMainPage";
+import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 
 function App() {
   const theme = useSelector((state) => state.theme.state);
@@ -45,62 +46,99 @@ function App() {
       <div className={theme ? "lightTheme" : "darkTheme"}>
         <Router>
           <Sidebar />
-          <Routes>
-            <Route path="/" exact element={<LandingPage />} />
-            <Route path="/mycontents" exact element={<MyContents />} />
 
-            {/* Auth Routes */}
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
-            <Route exact path="/logout" element={<Logout />} />
-            <Route exact path="/changepassword" element={<ChangePassword />} />
+          <div>
+            <Routes>
+              <Route path="/" exact element={<LandingPage />} />
+              <Route path="/mycontents" exact element={<MyContents />} />
 
-            <Route path="/editormainpage" exact element={<EditorsMainPage />} />
-            <Route
-              path="/editcoursestructure"
-              exact
-              element={<EditCourseStructure />}
-            />
-            <Route path="/addnewcategory" exact element={<AddNewCategory />} />
-            <Route
-              path="/uploadcontentmain"
-              exact
-              element={<UploadContentMain />}
-            />
-            <Route path="/detailpage" exact element={<DetailPage />} />
-            <Route path="/deletecontent" exact element={<DeleteContent />} />
-            <Route
-              path="/editcontentmain"
-              exact
-              element={<EditContentMain />}
-            />
+              {/* Auth Routes */}
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
+              <Route exact path="/logout" element={<Logout />} />
+              <Route
+                exact
+                path="/changepassword"
+                element={<ChangePassword />}
+              />
 
-            <Route path="/feedback" exact element={<Feedback />} />
-            <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
-            <Route
-              path="/usersettingviewpage"
-              exact
-              element={<UserSettingViewPage />}
-            />
-            <Route path="/ratingform" exact element={<RatingForm />} />
-            {/* <Route path="/LandingPage" exact element={<LandingPage />} /> */}
-            <Route
-              path="/librarybookmark"
-              exact
-              element={<LibraryBookmark />}
-            />
-            <Route path="/Accordian" exact element={<Accordian />} />
-            <Route path="/MylibraryCorse" exact element={<MylibraryCorse />} />
-            <Route path="/Tagpage" exact element={<Tagpage />} />
-            <Route path="/Searchresult" exact element={<Searchresult />} />
-            <Route path="/Recentlyviewed" exact element={<Recentlyviewed />} />
-            <Route path="/userdetailpage" exact element={<UserDetailPage />} />
-          </Routes>
-          {/* <div style={{position: "absolute", bottom: "0"}}>
+              <Route
+                path="/editormainpage"
+                exact
+                element={<EditorsMainPage />}
+              />
+              <Route
+                path="/editcoursestructure"
+                exact
+                element={<EditCourseStructure />}
+              />
+              <Route
+                path="/addnewcategory"
+                exact
+                element={<AddNewCategory />}
+              />
+              <Route
+                path="/uploadcontentmain"
+                exact
+                element={<UploadContentMain />}
+              />
+              <Route path="/detailpage" exact element={<DetailPage />} />
+              <Route path="/deletecontent" exact element={<DeleteContent />} />
+              <Route
+                path="/editcontentmain"
+                exact
+                element={<EditContentMain />}
+              />
 
-          <FooterCopyright />
-          </div> */}
+              <Route path="/feedback" exact element={<Feedback />} />
+              <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
+              <Route
+                path="/usersettingviewpage"
+                exact
+                element={<UserSettingViewPage />}
+              />
+              <Route path="/ratingform" exact element={<RatingForm />} />
+              {/* <Route path="/LandingPage" exact element={<LandingPage />} /> */}
+              <Route
+                path="/librarybookmark"
+                exact
+                element={<LibraryBookmark />}
+              />
+              <Route path="/Accordian" exact element={<Accordian />} />
+              <Route
+                path="/MylibraryCorse"
+                exact
+                element={<MylibraryCorse />}
+              />
+              <Route path="/Tagpage" exact element={<Tagpage />} />
+              <Route path="/Searchresult" exact element={<Searchresult />} />
+              <Route
+                path="/Recentlyviewed"
+                exact
+                element={<Recentlyviewed />}
+              />
+              <Route
+                path="/userdetailpage"
+                exact
+                element={<UserDetailPage />}
+              />
+              <Route
+                path="/coursemainpage"
+                exact
+                element={<CourseMainPage />}
+              />
+              <Route
+                path="/coursepageguest"
+                exact
+                element={<CoursePageGuest />}
+              />
+            </Routes>
+          </div>
+          {/* <div style={{position: "absolute", bottom: "0"}}> */}
+
+          {/* </div> */}
         </Router>
+        <FooterCopyright />
       </div>
     </>
   );

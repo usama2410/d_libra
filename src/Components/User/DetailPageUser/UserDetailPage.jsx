@@ -16,7 +16,15 @@ import UserDetailPageData from "./UserDetailPageData";
 import Pin from "../../../assests/Pin.png";
 import PinBlue from "../../../assests/PinBlue.png";
 import Accordian from "../../Guest/Accordian/Accordian";
-import UnionClose from '../../../assests/UnionClose.png'
+import UnionClose from "../../../assests/UnionClose.png";
+
+import Next from '../../../assests/SVG_Files/New folder/icons/Next.svg'
+import Next_dark from '../../../assests/SVG_Files/New folder/icons/Next_dark.svg'
+import Previous from '../../../assests/SVG_Files/New folder/icons/Previous.svg'
+import Previous_dark from '../../../assests/SVG_Files/New folder/icons/Previous_dark.svg'
+
+
+import FooterCopyright from "../../../Components/User/FooterCopyright";
 
 const UserDetailPage = () => {
   const navigate = useNavigate();
@@ -26,8 +34,7 @@ const UserDetailPage = () => {
   const theme = useSelector((state) => state.theme.state);
   const [pinstate, setPinState] = useState(false);
   const [transform, setTransform] = React.useState(false);
-  const accordion = useSelector((state) => state.accordion.state)
-  
+  // const accordion = useSelector((state) => state.accordion.state)
 
   const handlePinState = () => {
     setPinState(!pinstate);
@@ -41,29 +48,11 @@ const UserDetailPage = () => {
           className="detailpage_root_container"
           style={{ paddingTop: "35px" }}
         >
-          {/* <button
-          onClick={() => navigate("/")}
-          className="back_button"
-          style={{ color: `${theme ? "white" : "black"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
-        </button> */}
           {userdata.slice(startdata, enddata).map((item) => (
-            <div className="header_text" style={{ color: "white" }}>
-              <span>{item.text}</span>
-            </div>
+            <span className="header_text" style={{ marginTop: "-10px" }}>
+              {item.text}
+            </span>
           ))}
-{/* {
-  accordion ? <div className="responsiveaccordian">
-    <div style={{ background: '#212121', height: "30px", padding: "10px 20px"}}>
-      <img  src={UnionClose} alt="" />
-    </div>
-  <Accordian />
-  </div> : ''
-} */}
-
-
         </div>
 
         <div>
@@ -141,7 +130,6 @@ const UserDetailPage = () => {
                   marginTop: `${pinstate ? "-20px" : ""}`,
                   height: `${pinstate ? "180px" : "100%"}`,
                   overflow: `${pinstate ? "scroll" : "visible"}`,
-                  // marginBottom: `${pinstate ? "-100px" : ""}`,
                 }}
               >
                 <span>
@@ -215,38 +203,41 @@ const UserDetailPage = () => {
               backgroundColor: "#F3F6FF",
               position: "fixed",
               bottom: "0",
-              height: "50px",
-              // border: "1px solid black"
+              height: "70px",
+              flexDirection: "column",
             }}
           >
-            <Button disabled={startdata === 0 ? true : false}>
-              <img
-                src={PrevButton}
-                alt=""
-                width="50px"
-                height="50px"
-                // style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setStartData(startdata - 1);
-                  setEndData(enddata - 1);
-                }}
-              />
-            </Button>
-            <Button disabled={enddata >= userdata.length ? true : false}>
-              <img
-                src={NextButton}
-                alt=""
-                width="50px"
-                height="50px"
-                // style={{ cursor: "pointer" }}
-                onClick={() => {
-                  {
-                    setStartData(startdata + 1);
-                    setEndData(enddata + 1);
-                  }
-                }}
-              />
-            </Button>
+            <div style={{ marginTop: "-8px" }}>
+              <Button dstyle={{marginLeft: "16px"}} disabled={startdata === 0 ? true : false}>
+                <img
+                  src={Previous}
+                  alt=""
+                  width="50px"
+                  height="50px"
+                  onClick={() => {
+                    setStartData(startdata - 1);
+                    setEndData(enddata - 1);
+                  }}
+                />
+              </Button>
+              <Button style={{marginLeft: "-16px"}} disabled={enddata >= userdata.length ? true : false}>
+                <img
+                  src={Next}
+                  alt=""
+                  width="50px"
+                  height="50px"
+                  onClick={() => {
+                    {
+                      setStartData(startdata + 1);
+                      setEndData(enddata + 1);
+                    }
+                  }}
+                />
+              </Button>
+            </div>
+            <span style={{ fontSize: "12px" }}>
+              © D-Libra All Rights Reserved
+            </span>
           </div>
         ) : (
           <div
@@ -257,34 +248,40 @@ const UserDetailPage = () => {
               width: "100%",
               position: "fixed",
               bottom: "0",
-              height: "45px",
-              // borderTop: "1px solid white",
+              height: "70px",
               background: "#111111",
+              flexDirection: "column",
             }}
           >
-            <Button disabled={startdata === 0 ? true : false}>
-              <img
-                src={PrevLightButton}
-                alt=""
-                style={{ width: "50px", height: "50px", cursro: "pointer" }}
-                onClick={() => {
-                  setStartData(startdata - 1);
-                  setEndData(enddata - 1);
-                }}
-              />
-            </Button>
+            <div style={{ marginTop: "-8px" }}>
+              <Button style={{marginLeft: "16px"}}  disabled={startdata === 0 ? true : false}>
+                <img
+                  src={Previous_dark}
+                  alt=""
+                  style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                  onClick={() => {
+                    setStartData(startdata - 1);
+                    setEndData(enddata - 1);
+                  }}
+                />
+              </Button>
 
-            <Button disabled={enddata >= userdata.length ? true : false}>
-              <img
-                src={NextDarkButton}
-                alt=""
-                style={{ width: "50px", height: "50px", cursro: "pointer" }}
-                onClick={() => {
-                  setStartData(startdata + 1);
-                  setEndData(enddata + 1);
-                }}
-              />
-            </Button>
+              <Button style={{marginLeft: "-16px"}} disabled={enddata >= userdata.length ? true : false}>
+                <img
+                  src={Next_dark}
+                  alt=""
+                  style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                  onClick={() => {
+                    setStartData(startdata + 1);
+                    setEndData(enddata + 1);
+                  }}
+                />
+              </Button>
+            </div>
+
+            <span style={{ fontSize: "12px" }}>
+              © D-Libra All Rights Reserved
+            </span>
           </div>
         )}
       </div>

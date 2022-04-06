@@ -91,7 +91,7 @@ const Login = () => {
         </Button>
 
         <div>
-          <Typography className="orText">Or</Typography>
+          <Typography className="orText"        style={{ color: `${theme ? "black" : "white"}` }}>Or</Typography>
         </div>
 
         <div style={{ display: "flex", justifyContent: "center" }}>

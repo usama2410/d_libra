@@ -19,40 +19,85 @@ import Vector92 from "../../assests/Vector92.png";
 import Vector91 from "../../assests/Vector91.png";
 import Vector90 from "../../assests/Vector90.png";
 import VectorTag from "../../assests/VectorTag.png";
+
+
+
+
+
+
+
+
+
+
+
+
+import WhatYouCanDoOnGitHubBeyondCollaborativeCoding from "../../assests/SVG_Files/Slides/WhatYouCanDoOnGitHubBeyondCollaborativeCoding.svg";
+import GitGitHubInitialSettings from "../../assests/SVG_Files/Slides/GitGitHubInitialSettings.svg";
+import WhatIsGit_ from "../../assests/SVG_Files/Slides/WhatIsGit_.svg";
+import WhatIsVersionControl_ from "../../assests/SVG_Files/Slides/WhatIsVersionControl_.svg";
+import CollaboratingOnGitGitHubRemoteRepository from "../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubRemoteRepository.svg";
+import CollaboratingOnGitGitHubBranch from "../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubBranch.svg";
+import GitGitHubLifeCycle from "../../assests/SVG_Files/Slides/GitGitHubLifeCycle.svg";
+import GitGitHubIntroduction from "../../assests/SVG_Files/Slides/GitGitHubIntroduction.svg";
+import TableOfContents from "../../assests/SVG_Files/Slides/TableOfContents.svg";
+import GitGitHubKeyConcepts from "../../assests/SVG_Files/Slides/GitGitHubKeyConcepts.svg";
+import GitGitHubBasicLifeCycleOverview from "../../assests/SVG_Files/Slides/GitGitHubBasicLifeCycleOverview.svg";
+import EditCommit from "../../assests/SVG_Files/Slides/EditCommit.svg";
+import LaunchGitProject from "../../assests/SVG_Files/Slides/LaunchGitProject.svg";
+import GitRegularWorkflowEditCommit from "../../assests/SVG_Files/Slides/GitRegularWorkflowEditCommit.svg";
+import GitGitHubInitialSettingsOverview from "../../assests/SVG_Files/Slides/GitGitHubInitialSettingsOverview.svg";
+import WorkWithBranches from "../../assests/SVG_Files/Slides/WorkWithBranches.svg";
+import GitRegularWorkflowWorkWithBranches from "../../assests/SVG_Files/Slides/GitRegularWorkflowWorkWithBranches.svg";
+import ThreeCasesToLaunchGitProject from "../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var Searchdata = [
   {
     // chapterName: "Popular Courses",
     items: [
       {
         id: 1,
-        image: image9,
+        image: CollaboratingOnGitGitHubBranch,
         Tags: "Collaborating On Git & GitHub - Branch",
         TagsImageTwo: Vector90,
       },
       {
         id: 2,
-        image: imagee19,
+        image: WorkWithBranches,
         Tags: "Chapter 6. Work with Branches",
         TagsImageTwo: VectorTag,
       },
       {
         id: 2,
-        image: imagee18,
+        image: GitRegularWorkflowWorkWithBranches,
         Tags: "Git Regular Workflow - Work with Branches",
         TagsImageTwo: VectorTag,
       },
       {
         id: 2,
-        image: imagee18,
+        image: ThreeCasesToLaunchGitProject,
         Tags: "xxxxx",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: image7,
-        Tags: "What is Git?",
-        TagsImageTwo: Vector92,
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
+        TagsImageTwo: VectorTag,
         disabled: true,
       },
     ],
@@ -61,37 +106,38 @@ var Searchdata = [
     // chapterName: "Popular Courses",
     items: [
       {
-        id: 1,
-        image: imagee18,
-        Tags: "What Is Version Control?",
+        id: 2,
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Collaborating On Git & GitHub -- Remote Repository",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Collaborating On Git & GitHub - Branch",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "What You Can Do On Git & GitHub Beyond Collaborative Coding",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "What You Can Do On Git & GitHub Beyond Collaborative Coding",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
+        TagsImageTwo: VectorTag,
         disabled: true,
       },
     ],
@@ -100,37 +146,37 @@ var Searchdata = [
     // chapterName: "Popular Courses",
     items: [
       {
-        id: 1,
-        image: imagee18,
-        Tags: "Chapter 2. Git & GitHub Life Cycle",
+        id: 2,
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Git & GitHub Basic Life Cycle",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Chapter 3. Git & GitHub Initial Settings",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Git & GitHub Initial Setting Overview",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },
       {
         id: 2,
-        image: imagee18,
-        Tags: "Git & Git Inroduction",
+        image: ThreeCasesToLaunchGitProject,
+        Tags: "XXXXX",
         TagsImageTwo: VectorTag,
         disabled: true,
       },

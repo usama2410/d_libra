@@ -1,33 +1,46 @@
-import React, { useState, useEffect } from "react";
-// import "./MyContents.css";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentData from "./LandingPagedata";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
-import VectorTag from "../../../assests/VectorTag.png";
-import Fill8 from "../../../assests/Fill8.png";
-import Fill9 from "../../../assests/Fill9.png";
-import Fill12 from "../../../assests/Fill12.png";
-import book from "../../../assests/book.png";
-import Vectoroval from "../../../assests/Vectoroval.png";
+import LandingPageImage1 from "../../../assests/SVG_Files/LandingPageImage1.svg";
+import darkmode_logo from "../../../assests/SVG_Files/New folder/darkmode_logo.svg";
+import lightmode_logo from "../../../assests/SVG_Files/New folder/lightmode_logo.svg";
 import Typography from "@mui/material/Typography";
-import HoverRating from "./Rating";
 import FooterButton from "./FooterButton";
 import { useSelector } from "react-redux";
+import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
+import StarIcon from "@mui/icons-material/Star";
 
+const labels = {
+  0: "0",
+  0.5: "0.5",
+  1: "1+",
+  1.5: "1.5",
+  2: "2",
+  2.5: "2.5",
+  3: "3",
+  3.5: "3.5",
+  4: "4",
+  4.5: "4.5",
+  5: "5+",
+};
 const LandingPage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(ContentData);
+  const [value, setValue] = React.useState(2);
+  const [hover, setHover] = React.useState(-1);
   const settings = {
     dots: false,
     adaptiveHeight: true,
     infinite: true,
     speed: 500,
     initialSlide: 0,
-    slidesToShow: 4.5,
+    slidesToShow: 4,
     autoplay: false,
     slidesToScroll: 1,
     centerMode: false,
@@ -38,16 +51,14 @@ const LandingPage = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-          dots: true,
         },
       },
       {
         breakpoint: 820,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2.14,
           slidesToScroll: 1,
-          centerMode: false,
+          centerMode: true,
         },
       },
       {
@@ -61,9 +72,41 @@ const LandingPage = () => {
       {
         breakpoint: 510,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.15,
           slidesToScroll: 1,
-          centerMode: false,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1.19,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1.21,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 361,
+        settings: {
+          slidesToShow: 1.24,
+          slidesToScroll: 1,
+          centerMode: true,
+        },
+      },
+      {
+        breakpoint: 338,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+          centerMode: true,
         },
       },
     ],
@@ -71,7 +114,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="mainContentContainer" style={{marginTop: "14px"}}>
+      <div className="mainContentContainer" style={{ marginTop: "20px" }}>
         <div
           style={{
             display: "flex",
@@ -80,18 +123,14 @@ const LandingPage = () => {
           }}
           className=""
         >
-          <img src={Fill9} alt="" />{" "}
           {theme ? (
-            <img src={Fill12} alt="" style={{ width: "100px" }} />
+            <img src={lightmode_logo} alt="" width="150px" height="30.7" />
           ) : (
-            <img src={Fill8} alt="" />
+            <img src={darkmode_logo} alt="" width="150px" height="30.7" />
           )}
         </div>
-
-        {/* <span className="mycontentheadingone">Git & Git Hub Introduction</span>{" "} */}
         <span
-          className="mycontentheadingtwoo"
-          style={{ color: `${theme ? "black" : "white"}` }}
+          className={theme ? "mycontentheadingtwoo" : "mycontentheadingthree"}
         >
           A web book based learning content library for digital skill
           development
@@ -107,81 +146,150 @@ const LandingPage = () => {
           }}
           className=""
         >
-          <img style={{ width: "230px" }} src={Vectoroval} alt="" />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-
-            position: "absolute",
-            marginTop: "150.91px",
-          }}
-          className=""
-        >
-          <img style={{ width: "144px" }} src={book} alt="" />
+          <img style={{ width: "230px" }} src={LandingPageImage1} alt="" />
         </div>
       </div>
       <div className="mainContentContainer">
         {" "}
-        <div style={{display: "flex"}}>
+        <div style={{ display: "flex" }}>
           {" "}
-          <button className="Signup_button Signup" style={{color: 'white'}} onClick={() => navigate('/register')}>Sign up</button>
-          <button className="Signup_button"  style={{color: 'white'}} onClick={() => navigate('/login')}>Log in</button>
+          <button
+            className="Signup_button Signup"
+            style={{ color: "white", cursor: "pointer" }}
+            onClick={() => navigate("/register")}
+          >
+            Sign up
+          </button>
+          <button
+            className="Signup_button"
+            style={{ color: "white", cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
+            Log in
+          </button>
         </div>
       </div>
-      {data.map((item) => {
-        return (
-          <div className="content_root_container">
-            <div>
-              <span>{item.chapterName}</span>
-            </div>
-            <div>
-              <Slider className="intro-slick" {...settings}>
-                {item.items.map((e) => {
-                  return (
-                    <div className="intro-slides">
-                      <img
-                        // onClick={() => navigate("/detailpage")}
-                        src={e.image}
-                        style={{
-                          width: "100%",
-                          cursor: "pointer",
-                          filter: `${
-                            e.disable
-                              ? "saturate(300%) saturate(12%)  grayscale(100%)  brightness(11%)"
-                              : ""
-                            // e.disable ? "blur(2px)" || "greyscale(100%)" : ""
-                          }`,
-                        }}
-                        alt=""
-                      />
-                      {e.image ? (
+      <div className="landingpage_slider_container">
+        {data.map((item) => {
+          return (
+            <div className="content_root_container">
+              <div>
+                <span
+                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
+                  style={{ padding: "0px 0px 8px 5px" }}
+                >
+                  {item.chapterName}
+                </span>
+              </div>
+              <div>
+                <Slider className="intro-slick" {...settings}>
+                  {item.items.map((e) => {
+                    return (
+                      <div className="intro-slides">
+                        <img
+                          src={e.image}
+                          className="landingpage_images"
+                          style={{
+                            width: "100%",
+                            cursor: "pointer",
+                            borderRadius: "5px",
+                            filter: `${e.disable ? "brightness(15%)" : ""}`,
+                          }}
+                          alt=""
+                        />
+                        {e.image ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              padding: "10px 0px 0px 10px",
+                            }}
+                          >
+                            <Typography
+                              noWrap
+                              component="div"
+                              className="subcoursename"
+                              style={{
+                                width: "250px",
+                                color: theme ? "#363636" : "#FFFFFF",
+                              }}
+                            >
+                              {e.Tags}
+                            </Typography>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
                         <div
                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            paddingTop: "10px",
+                            padding: "10px 0px 0px 10px",
                           }}
                         >
-                          <span>{e.Tags}</span>
-
-                          {/* <img src={VectorTag} alt="" /> */}
+                          <span
+                            className="Author"
+                            style={{
+                              padding: "10px 0px 0px 10px",
+                              marginLeft: "-10px",
+                              color: theme ? "#363636" : "#C8C8C8",
+                            }}
+                          >
+                            Author:
+                          </span>
+                          <Box
+                            sx={{
+                              width: 200,
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {" "}
+                            <div className="rating">
+                              {value !== null && (
+                                <Box sx={{ ml: 0 }}>
+                                  {labels[hover !== -1 ? hover : value]}
+                                </Box>
+                              )}
+                            </div>
+                            <Rating
+                              sx={{ ml: 1 }}
+                              name="hover-feedback"
+                              value={value}
+                              className="secondratingcomponent"
+                              precision={0.5}
+                              onChange={(event, newValue) => {
+                                setValue(newValue);
+                              }}
+                              onChangeActive={(event, newHover) => {
+                                setHover(newHover);
+                              }}
+                              emptyIcon={
+                                <StarIcon
+                                  style={{ color: "#C4C4C4" }}
+                                  fontSize="inherit"
+                                />
+                              }
+                            />
+                            <div
+                              className="rating"
+                              style={{
+                                paddingLeft: "10px",
+                                color: theme ? "#363636" : "#C8C8C8",
+                              }}
+                            >
+                              (110,000)
+                            </div>
+                          </Box>
                         </div>
-                      ) : (
-                        ""
-                      )}
-                      <span className="Author">Author: bloovee</span>
-
-                      <HoverRating />
-                    </div>
-                  );
-                })}
-              </Slider>
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <FooterButton />
     </>
   );

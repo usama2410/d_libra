@@ -26,7 +26,8 @@ export default function HoverRating() {
         width: 200,
         display: "flex",
         alignItems: "center",
-      }}>
+      }}
+    >
       {" "}
       <div className="rating">
         {value !== null && (

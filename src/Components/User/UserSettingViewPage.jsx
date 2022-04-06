@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Button, Grid } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import icon5 from "../../assests/icon5.png";
 import Vector90 from "../../assests/Vector90.png";
@@ -164,7 +164,7 @@ const UserSettingViewPage = () => {
           </div> */}
         </div>
 
-        <div className="user_bookmark_container">
+        <div className="user_bookmark_container" style={{marginTop: "20px"}}>
           <div className="hidden_user_input">
             <span
               className="addcategory_text"
@@ -188,8 +188,7 @@ const UserSettingViewPage = () => {
             className="addcategory_text_bookmark"
             style={{
               color: `${theme ? "#363636" : "white"}`,
-    
-              marginTop: "12px",
+              marginTop: "20px",
             }}
           >
             Bookmark Name
@@ -256,7 +255,7 @@ const UserSettingViewPage = () => {
 
       </div>
 
-      <div className="user_buttons_container">
+      <div className="user_buttons_container" style={{paddingBottom: "20px"}}>
         <Button
           variant="contained"
           className="user_buttons"

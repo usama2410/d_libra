@@ -1,5 +1,5 @@
 .add_new_category_heading {
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -13,7 +13,7 @@
 }
 
 .add_new_category_heading_sub {
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
@@ -40,7 +40,7 @@
   height: 30px;
   text-transform: none;
   border: none;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 300;
   font-size: 16px;
   line-height: 18px;
@@ -52,7 +52,7 @@
 }
 
 .addcategory_text {
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
@@ -69,7 +69,7 @@
   border: none;
   width: 450px;
   height: 40px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   margin-top: 5px;
   font-weight: 300;
   font-size: 18px;
@@ -92,7 +92,7 @@
   border: none;
   width: 450px;
   height: 40px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   margin-top: 5px;
   font-weight: 300;
   font-size: 18px;
@@ -121,7 +121,7 @@
   margin-top: 5px;
   padding-left: 20px;
   height: 40px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
@@ -139,7 +139,7 @@
   margin-top: 5px;
   padding-left: 20px;
   height: 40px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
@@ -165,7 +165,7 @@
   width: 200px !important;
   border: none;
   height: 30px;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 400;
   font-size: 21px;
   line-height: 24px;
@@ -186,7 +186,7 @@
   text-transform: none !important;
 /* Mid-small Light Text */
 margin-top: 10px !important;
- font-family: Helvetica !important;font-style: normal !important;
+ /* font-family: Helvetica !important;font-style: normal !important; */
 font-weight: 300 !important;
 font-size: 16px !important;
 line-height: 18px !important;
@@ -201,7 +201,7 @@ color: #FFFFFF !important;
 .orText {
   color: white;
   margin-bottom: 22px !important;
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 400 !important;
   font-size: 18px !important;
   line-height: 21px !important;
@@ -217,7 +217,7 @@ color: #FFFFFF !important;
   border-radius: 15px !important;
   /* Mid-small Light Text */
 
- font-family: Helvetica !important;  font-style: normal !important;
+ /* font-family: Helvetica !important;  font-style: normal !important; */
   font-weight: 300 !important;
   font-size: 16px !important;
   line-height: 18px !important;
@@ -240,7 +240,7 @@ color: #FFFFFF !important;
   top: 17%;
 }
 .logoutText {
- font-family: Helvetica !important;  font-style: normal;
+ /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 400 !important;
   font-size: 28px !important;
   line-height: 21px !important;
@@ -287,7 +287,7 @@ color: #FFFFFF !important;
     border: none;
     width: 260px;
     height: 40px;
- font-family: Helvetica !important;    font-style: normal;
+ /* font-family: Helvetica !important;    font-style: normal; */
     margin-top: 5px;
     font-weight: 300;
     font-size: 14px;
@@ -315,7 +315,7 @@ color: #FFFFFF !important;
     line-height: 16px;
   }
   .add_new_category_heading {
- font-family: Helvetica !important;    font-style: normal;
+ /* font-family: Helvetica !important;    font-style: normal; */
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
@@ -332,7 +332,7 @@ color: #FFFFFF !important;
     border: none;
     width: 260px;
     height: 40px;
- font-family: Helvetica !important;    font-style: normal;
+ /* font-family: Helvetica !important;    font-style: normal; */
     margin-top: 5px;
     font-weight: 300;
     font-size: 14px;
@@ -347,7 +347,7 @@ color: #FFFFFF !important;
   .add_new_category_heading_sub {
     /* Medium Normal Text */
 
- font-family: Helvetica !important;    font-style: normal;
+ /* font-family: Helvetica !important;    font-style: normal; */
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
