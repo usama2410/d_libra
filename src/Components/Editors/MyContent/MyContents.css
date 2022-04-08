@@ -1,3 +1,12 @@
+
+.mycontentcontainer{
+
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 30px 0px 60px;
+    align-items: center;
+ 
+}
 .mainmycontentcontainer {
   display: flex;
   flex-direction: column;
@@ -98,6 +107,17 @@
 
 
   }
+
+
+  
+.mycontentcontainer{
+
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 10px 0px 10px;
+  align-items: center;
+
+}
   .mycontentheadtwooo {
     font-weight: 300;
     font-size: 18px;

@@ -9,14 +9,13 @@ const EditorsMainPage = () => {
   const theme = useSelector((state) => state.theme.state);
   return (
     <>
-      <Button
-        className="back_button"
-        onClick={() => navigate("/")}
-        style={{ color: `${theme ? "black" : "white"}` }}
-        startIcon={<ArrowBackIcon />}
-      >
-        Back
-      </Button>
+     <button
+          className="back_button "
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
 
       <div className="editormainpage_root_contianer">
         <div>
@@ -49,7 +48,8 @@ const EditorsMainPage = () => {
           </Button>
         </div>
         <div style={{ marginTop: "68px" }}>
-          <span className="editorpage_button_container_span">
+          <span  className="addcategory_text"
+              style={{ color: `${theme ? "#363636" : "white"}` }}>
             Select Course for Edit
           </span>
           <div>
@@ -68,7 +68,7 @@ const EditorsMainPage = () => {
               <option value="audi">Audi</option>
             </select>
           </div>
-          <div>
+          <div style={{ justifyContent: "center", display: "flex" }}>
             <Button
               variant="outlined"
               className="upload_contents_button"
@@ -79,8 +79,6 @@ const EditorsMainPage = () => {
           </div>
         </div>
       </div>
-
-     
     </>
   );
 };

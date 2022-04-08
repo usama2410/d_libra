@@ -10,12 +10,21 @@
   background: #de4040;
   border-radius: 15px;
   margin-top: 20px;
-  width: 220px;
+  width: 300px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   padding: 10px 20px;
+  font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 24px;
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.015em;
 }
 
 .delete_content_textone {

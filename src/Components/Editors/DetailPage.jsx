@@ -40,10 +40,10 @@ const DetailPage = () => {
           style={{ color: "white" }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
+          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
         </button>
         {userdata.slice(startdata, enddata).map((item) => (
-            <span className="header_text" style={{ marginTop: "-5px" }}>
+            <span className="header_text detailpagetext">
               {item.text}
             </span>
           ))}

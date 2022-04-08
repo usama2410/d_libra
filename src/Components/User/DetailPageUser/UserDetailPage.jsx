@@ -49,7 +49,7 @@ const UserDetailPage = () => {
           style={{ paddingTop: "35px" }}
         >
           {userdata.slice(startdata, enddata).map((item) => (
-            <span className="header_text" style={{ marginTop: "-10px" }}>
+            <span className="header_text" style={{ marginTop: "-14px" }}>
               {item.text}
             </span>
           ))}

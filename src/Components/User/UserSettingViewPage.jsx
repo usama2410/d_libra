@@ -6,6 +6,7 @@ import icon5 from "../../assests/icon5.png";
 import Vector90 from "../../assests/Vector90.png";
 import Vector92 from "../../assests/Vector92.png";
 import Vector91 from "../../assests/Vector91.png";
+import Member_Icon from '../../assests/SVG_Files/Member_Icon.svg'
 import addwhite from "../../assests/addwhite.png";
 import addblack from "../../assests/addblack.png";
 import { MdModeEditOutline } from "react-icons/md";
@@ -27,12 +28,12 @@ const UserSettingViewPage = () => {
   const [validation, setValidation] = useState(false);
   const [message, setMessage] = useState("");
 
-  useEffect( () => {
+  useEffect(() => {
     const userData = async () => {
       const response = await dispatch(profileData(token));
-    setUsername(response?.data?.username);
-    setEmail(response?.data?.email);
-    }
+      setUsername(response?.data?.username);
+      setEmail(response?.data?.email);
+    };
     userData();
   }, []);
 
@@ -59,15 +60,13 @@ const UserSettingViewPage = () => {
 
   return (
     <div>
-     <Button
-          onClick={() => navigate("/")}
-          className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
-          startIcon={<ArrowBackIcon />}
+     <button
+          className="back_button usersettingbackbutton"
+          style={{ color: `${theme ? "black" : "white"}` }}
         >
-          Back
-        </Button>
-
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
       {validation ? (
         firstName && lastName !== "" ? (
           message ? (
@@ -87,16 +86,16 @@ const UserSettingViewPage = () => {
       <div className="user_container_root">
         <div className="user_sub_root_container">
           <div className="user_root_container">
-            <img src={icon5} alt="" />
+            <img src={Member_Icon} alt=""  className="usersettingmembericon"/>
             <div className="user_header_container">
               <div
-                className="vector_container"
-                style={{ color: `${theme ? "#009AF9" : "white"}` }}
+                className="vector_container vectorcontainermobile"
+                style={{ color: `${theme ? "#009AF9" : "#C8C8C8"}` }}
               >
-                <MdModeEditOutline />
+                <MdModeEditOutline     className="editorimage_icon"/>
                 <span
-                  className="vector_container"
-                  style={{ fontSize: "14px", paddingLeft: "4px" }}
+                  className="editoricon_image"
+                 
                 >
                   Editor
                 </span>
@@ -119,18 +118,20 @@ const UserSettingViewPage = () => {
             </span>
             <input
               className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              placeholder="Username"
               value={username}
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
               className="addcategory_text"
-              style={{ color: `${theme ? "#363636" : "white"}` }}>
-
+              style={{ color: `${theme ? "#363636" : "white"}` }}
+            >
               E-mail Address
             </span>
             <input
               className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              placeholder="E-mail Address"
               value={email}
             />
           </div>
@@ -164,7 +165,7 @@ const UserSettingViewPage = () => {
           </div> */}
         </div>
 
-        <div className="user_bookmark_container" style={{marginTop: "20px"}}>
+        <div className="user_bookmark_container" style={{ marginTop: "20px" }}>
           <div className="hidden_user_input">
             <span
               className="addcategory_text"
@@ -178,7 +179,7 @@ const UserSettingViewPage = () => {
               </div>
               <input
                 className={
-                  theme ? "addcategory_input_sub" : "addcategory_input"
+                  theme ? "profile_sub_input" : "profile_sub_input_two"
                 }
                 placeholder="High Priority Review List"
               />
@@ -198,7 +199,7 @@ const UserSettingViewPage = () => {
               <img src={Vector90} alt="" />
             </div>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
               placeholder="High Priority Review List"
             />
           </div>
@@ -207,55 +208,39 @@ const UserSettingViewPage = () => {
               <img src={Vector91} alt="" />
             </div>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
               placeholder="Review List"
             />
           </div>
           <div className="vector_container">
             <div className="vector_image">
               <img src={Vector92} alt="" />
-            
             </div>
-            
+
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
               placeholder="For future need"
-              />
+            />
+          </div>
+          <div className="vector_container">
+            <img
+              src={theme ? addblack : addwhite}
+              alt=""
+              style={{ marginLeft: "2px" }}
+            />
+
+            <input
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
+              placeholder="For future need"
+              style={{ visibility: "hidden" }}
+            />
           </div>
 
-
-
-
-
-          <div className="vector_container" style={{marginTop: "-30px"}} >
-            <div className="vector_image">
-              <img src={theme ? addblack : addwhite} alt="" />
-            
-            </div>
-            
-            <input
-
-              style={{visibility: 'hidden'}}
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
-              placeholder="For future need"
-              />
-          </div>
+          <div className="vector_image"></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
 
-      <div className="user_buttons_container" style={{paddingBottom: "20px"}}>
+      <div className="user_buttons_container" style={{ paddingBottom: "20px" }}>
         <Button
           variant="contained"
           className="user_buttons"

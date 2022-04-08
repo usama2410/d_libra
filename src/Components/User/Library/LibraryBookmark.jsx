@@ -11,7 +11,8 @@ import VectorTag from "../../../assests/VectorTag.png";
 import LibraryBookmarkContent from "./LibraryBookmarkContent";
 import "./Library.css";
 import { useSelector } from "react-redux";
-
+import MyLibrary_light from '../../../assests/SVG_Files/MyLibrary_light.svg'
+import Mylibrary_dark from '../../../assests/SVG_Files/Mylibrary_dark.svg'
 import FooterButtons from "../FooterButtons";
 
 const LibraryBookmark = () => {
@@ -111,10 +112,11 @@ const LibraryBookmark = () => {
         </Button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
-            <MenuBookIcon
-              className="menubookicon_text"
-              style={{ color: `${theme ? " #008EEC" : "white"}` }}
-            />
+          {theme ? (
+       <img src={MyLibrary_light} alt="" className="recentlyviewedimage librarymainicon" />
+        ) : (
+          <img src={Mylibrary_dark} alt="" className="recentlyviewedimage librarymainicon"/>
+        )}
             <span
               className="mylibrary_text"
               style={{ color: `${theme ? " #008EEC " : "white"}` }}>

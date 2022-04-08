@@ -134,7 +134,7 @@ const MyContents = () => {
             </button>
           </div>
           <div className={theme ? "contentforedittext" : ""}>
-            <div className="mainContentContainersub ">
+            <div className="mainContentContainersub " style={{boxShadow: theme ?  '' : '0px 4px 4px rgba(0, 0, 0, 0.25)'}}>
               <span
                 className={
                   theme ? "mycontentheadthreee" : " mycontentheadtwooo"
@@ -149,7 +149,7 @@ const MyContents = () => {
       <div className="landingpage_slider_container">
         {data.map((item) => {
           return (
-            <div className="content_root_container">
+            <div className="content_root_container" style={{marginTop: "20px"}}>
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
@@ -166,8 +166,10 @@ const MyContents = () => {
                         <img
                           src={e.image}
                           className="landingpage_images"
+                          // style={{}}
                           style={{
                             width: "100%",
+                           
                             cursor: "pointer",
                             borderRadius: "5px",
                           }}
@@ -175,12 +177,7 @@ const MyContents = () => {
                         />
                         {e.image ? (
                           <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                              padding: "20px 3px 0px 4px",
-                              alignItems: "center",
-                            }}
+                          className="mycontentcontainer"
                           >
                             <Typography
                               noWrap

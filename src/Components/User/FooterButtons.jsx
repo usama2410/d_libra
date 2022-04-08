@@ -218,26 +218,21 @@ const FooterButtons = (props) => {
               }}
             >
               <div
-                style={{
-                  borderRadius: "100%",
-                  width: "473px",
-                  height: "304px",
-                  background: "none",
-                  position: "fixed",
-                  bottom: "-140px",
-                }}
+             className="bottomnavigator"
               >
                 <StyledBox
                   sx={{
-                    px: 1,
+                    px: 10,
                     pb: 24,
                     height: "100%",
                     overflow: "auto",
                   }}
                   style={{
                     paddingTop: "10px",
+                    // border: "1px solid red",
+                    // height :"50px ",
                     background: "#363636",
-                    borderRadius: mobileView ? "118px" : "100%",
+                    borderRadius: mobileView ? "10px" : "100%",
                   }}
                 >
                   <div
@@ -258,22 +253,22 @@ const FooterButtons = (props) => {
                           <img
                             src={whatsapp}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={facebook}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={gmail}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={telegram}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                         </>
                       ) : (
@@ -327,6 +322,7 @@ const FooterButtons = (props) => {
                       )}
                     </div>
                     <Typography
+className="sharingthispagetext"
                       variant="h6"
                       style={{
                         color: "white",
@@ -335,7 +331,7 @@ const FooterButtons = (props) => {
                       }}
                     >
                       {" "}
-                      Share this Page
+                      sharing this Page
                     </Typography>
                   </div>
                 </StyledBox>

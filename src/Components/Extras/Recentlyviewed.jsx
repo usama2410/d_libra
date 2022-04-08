@@ -115,6 +115,7 @@ const Recentlyviewed = () => {
               justifyContent: "center",
               width: "100%",
               marginTop: "0px",
+              paddingBottom: "20px",
             }}
             // className="mycontentheadingtwoo"
           >
@@ -202,6 +203,55 @@ const Recentlyviewed = () => {
           );
         })}
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div className="second_tagpage_container">
+{data.map((item) => {
+        return (
+          
+          <>
+            
+              {
+                item.items.map((content) => {
+                  return (
+                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
+                    <div className="left">
+                      <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
+                    </div>
+                    <div className="right">
+                      <img className="right_image" src={content.image} alt="" />
+                    </div>
+                  </div>
+                  )
+                })
+              }
+
+          </>
+        );
+      })}
+</div>
+
+
+
+
+
+
 
       <FooterButtons />
     </>

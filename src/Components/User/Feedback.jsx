@@ -16,14 +16,13 @@ const Feedback = () => {
   return (
     <>
 
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
+<button
+          className="back_button "
           style={{ color: `${theme ? "black" : "white"}` }}
-          startIcon={<ArrowBackIcon />}
         >
-          Back
-        </Button>
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
   
       <div className="ratingform_root_two" style={{ marginTop: "20px" }}>
         <select
@@ -48,7 +47,7 @@ const Feedback = () => {
           <option value="audi">Audi</option>
         </select>
 
-        <div className="ratingform_root_two">
+        {/* <div className="ratingform_root_two">
           <Rating
             name="simple-controlled"
             style={{fontSize : '50px'}}
@@ -59,19 +58,21 @@ const Feedback = () => {
               setValue(newValue);
             }}
           />
-        </div>
+        </div> */}
       </div>
 
-      <div className="ratingform_root_three">
+      <div className="ratingform_root_three" style={{marginTop: "35px"}}>
         <div className="rating_form_sub_span">
           <span className="rating_form_span_two">Feedback Comments:</span>
         </div>
 
         <div>
           <textarea
+         style={{ color: `${theme ? "black" : "white"}`, height: "403px"}}
             className={
               theme ? "rating_form_textarea_sub" : "rating_form_textarea"
             }
+            
             id="message"
             rows="20"
             placeholder=""

@@ -31,12 +31,13 @@ const AddNewCategory = () => {
   };
   return (
     <>
-      <Button
-        onClick={() => navigate("/editcoursestructure")}
-        className="back_button"
-        style={{ color: `${theme ? "black" : "white"}` }}>
-        <ArrowBackIcon style={{ fontSize: "18px" }} /> BACK
-      </Button>
+      <button
+          className="back_button "
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
 
       <div className="editormainpage_root_contianer">
         <div>
@@ -46,7 +47,8 @@ const AddNewCategory = () => {
                 theme
                   ? "add_new_category_heading_sub"
                   : "add_new_category_heading"
-              }>
+              }
+            >
               Add a New Category, Course or Chapter
             </span>
           </Typography>
@@ -56,32 +58,36 @@ const AddNewCategory = () => {
             paddingTop: "10px",
             display: "flex",
             flexDirection: "column",
-          }}>
+          }}
+        >
           <span
             className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "white"}` }}>
+            style={{ color: `${theme ? "#363636" : "white"}` }}
+          >
             Category/Course/Chapter Name
           </span>
           <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="Cloud Computing"
             value={chapName}
             onChange={(e) => setChapName(e.target.value)}
           />
           <span
             className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "white"}` }}>
+            style={{ color: `${theme ? "#363636" : "white"}` }}
+          >
             Category/Course/Chapter ID
           </span>
           <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="4000"
             value={chapId}
             onChange={(e) => setchapId(e.target.value)}
           />
           <span
             className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "white"}` }}>
+            style={{ color: `${theme ? "#363636" : "white"}` }}
+          >
             Select Parent Category/Course
           </span>
           <select
@@ -89,7 +95,8 @@ const AddNewCategory = () => {
               theme ? "addcategory_dropdown_sub" : "addcategory_dropdown"
             }
             name="cars"
-            id="cars">
+            id="cars"
+          >
             <option value="volvo">Git & GitHub Introduction</option>
             <option value="saab">Saab</option>
             <option value="opel">Opel</option>
@@ -97,11 +104,12 @@ const AddNewCategory = () => {
           </select>
           <span
             className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "white"}` }}>
+            style={{ color: `${theme ? "#363636" : "white"}` }}
+          >
             Slug
           </span>
           <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="cloudcomputing"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
@@ -111,7 +119,8 @@ const AddNewCategory = () => {
               display: "flex",
               flexDirection: "column",
               marginTop: "20px",
-            }}>
+            }}
+          >
             <label htmlFor="contained-button-file">
               <input
                 accept="image/*"
@@ -125,7 +134,8 @@ const AddNewCategory = () => {
                 color="primary"
                 component="span"
                 style={{ height: "20px" }}
-                className="image_button">
+                className="image_button"
+              >
                 Select an Image File
               </Button>
             </label>
@@ -136,7 +146,9 @@ const AddNewCategory = () => {
                 style={{
                   width: "240px",
                   height: "200px",
-                }}>
+                  marginTop: "14px",
+                }}
+              >
                 <img
                   src={image}
                   style={{
@@ -148,15 +160,18 @@ const AddNewCategory = () => {
                 />
               </div>
             ) : (
-              <span style={{padding: "0px 5px "}}>No Image</span>
+              <span style={{ padding: "0px 5px " }}>No Image</span>
             )}
           </div>
         </div>
-        <button className="update_button" onClick={handleSubmit}>
+        <button
+          className="update_button"
+          onClick={handleSubmit}
+          style={{ marginBottom: "40px" }}
+        >
           Update
         </button>
       </div>
-   
     </>
   );
 };

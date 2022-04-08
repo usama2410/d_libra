@@ -13,6 +13,8 @@ import "../User/Library/Library.css";
 import { useSelector } from "react-redux";
 
 import FooterButtons from "../User/FooterButtons";
+import Mylibrary_dark from './../../assests/SVG_Files/Mylibrary_dark.svg'
+import MyLibrary_light from './../../assests/SVG_Files/MyLibrary_light.svg'
 
 const MylibraryCorse = () => {
   const theme = useSelector((state) => state.theme.state);
@@ -118,10 +120,12 @@ const MylibraryCorse = () => {
         </Button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
-            <MenuBookIcon
-              className="menubookicon_text"
-              style={{ color: `${theme ? " #008EEC" : "white"}` }}
-            />
+          {theme ? (
+       <img src={MyLibrary_light} alt="" className="recentlyviewedimage librarymainicon" />
+        ) : (
+          <img src={Mylibrary_dark} alt="" className="recentlyviewedimage librarymainicon"/>
+        )}
+
             <span
               className="mylibrary_text"
               style={{ color: `${theme ? " #008EEC " : "white"}` }}
@@ -138,6 +142,26 @@ const MylibraryCorse = () => {
             By Course
           </span>
         </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
       <div
         style={{
@@ -180,6 +204,7 @@ const MylibraryCorse = () => {
                             width: "100%",
                             cursor: "pointer",
                             borderRadius: "5px",
+                            filter: `${e.disabled ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />

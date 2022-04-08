@@ -223,7 +223,7 @@ const FooterButtons = (props) => {
                   style={{
                     paddingTop: "10px",
                     background: "#363636",
-                    borderRadius: mobileView ? "118px" : "100%",
+                    borderRadius: mobileView ? "90px" : "100%",
                   }}
                 >
                   <div
@@ -244,22 +244,22 @@ const FooterButtons = (props) => {
                           <img
                             src={whatsapp}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={facebook}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={gmail}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                           <img
                             src={telegram}
                             alt=""
-                            style={{ paddingLeft: "10px" }}
+                            style={{ paddingLeft: "15px" }}
                           />
                         </>
                       ) : (
@@ -319,6 +319,7 @@ const FooterButtons = (props) => {
                         position: "absolute",
                         bottom: "150px",
                       }}
+                      className="sharingthispagetext"
                     >
                       {" "}
                       Share this Page

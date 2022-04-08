@@ -161,7 +161,7 @@ const Searchresult = () => {
                             width: "100%",
                             cursor: "pointer",
                             borderRadius: "5px",
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
+                            filter: `${e.disabled ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />

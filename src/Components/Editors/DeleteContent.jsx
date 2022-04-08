@@ -17,11 +17,12 @@ const DeleteContent = () => {
           style={{ color: `${theme ? 'black' : 'white'}` }}
         >
           <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
+          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
         </button>
 
       
-      
+      <div style={{position: "absolute", top: "50%", left:"50%", transform: "translate(-50%, -50%)"}}>
+
         <div className="delete_content_textone">
             <span>Are you really deleting the following content?</span>
           </div>
@@ -46,6 +47,7 @@ const DeleteContent = () => {
         </div>
       </div>
    
+      </div>
     </>
   );
 };

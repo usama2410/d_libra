@@ -11,6 +11,9 @@ import Vector3 from "../../assests/Vector3.png";
 import Tag from "../../assests/Tag.png";
 import Vector3Blue from "../../assests/Vector3Blue.png";
 import TagBlue from "../../assests/TagBlue.png";
+import Tag_dark from '../../assests/SVG_Files/Tag_dark.svg'
+import Tag_light from '../../assests/SVG_Files/Tag_light.svg'
+import TgpageData from './TgpageData'
 
 // import HoverRating from "./Rating";
 import FooterButtons from "../User/FooterButtons";
@@ -20,7 +23,8 @@ import { Typography } from "@material-ui/core";
 const Tagpage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
-  const [data, setdata] = useState(ContentData);
+  const [data, setdata] = useState(TgpageData);
+  console.log(data)
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -116,23 +120,16 @@ const Tagpage = () => {
         justifyContent: "center",
         width: "100%",
         marginTop: "0px",
+        paddingBottom: "20px"
       }}
       // className="mycontentheadingtwoo"
     >
       <div style={{ display: "flex", alignItems: "center" }}>
         {theme ? (
-       <img src={Vector3Blue} alt="" className="recentlyviewedimage" />
+       <img src={Tag_light} alt="" className="recentlyviewedimage" />
         ) : (
-          <img src={Vector3} alt="" className="recentlyviewedimage"/>
+          <img src={Tag_dark} alt="" className="recentlyviewedimage"/>
         )}
-
-        
-
-
-
-
-
-
         <span
           className={
             theme ? " recentlyviewedheading" : "recentlyviewedheadingtwo"
@@ -211,6 +208,41 @@ const Tagpage = () => {
     );
   })}
 </div>
+
+
+
+<div className="second_tagpage_container">
+{data.map((item) => {
+        return (
+          
+          <>
+            
+              {
+                item.items.map((content) => {
+                  return (
+                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
+                    <div className="left">
+                      <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
+                    </div>
+                    <div className="right">
+                      <img className="right_image" src={content.image} alt="" />
+                    </div>
+                  </div>
+                  )
+                })
+              }
+
+          </>
+        );
+      })}
+</div>
+
+
+
+
+
+
+
 
 <FooterButtons />
 </>

@@ -30,11 +30,13 @@ import user from "../assests/user.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
+import Member_Icon from '../assests/SVG_Files/Member_Icon.svg'
 import VectorBlue from "../assests/VectorBlue.png";
 import { useLocation } from "react-router-dom";
 import UnionOpen from "../assests/UnionOpen.png";
 import UnionClose from "../assests/UnionClose.png";
 import UnionBlue from "../assests/UnionBlue.png";
+import Arrow_white from '../assests/Arrow_white.png'
 import editor_icon from "../assests/SVG_Files/editor_icon.svg";
 import white_icon from "../assests/SVG_Files/New folder/white_icon.svg";
 import darkmode_logo from "../assests/SVG_Files/New folder/darkmode_logo.svg";
@@ -46,6 +48,7 @@ import Sidebar_Logout from '../assests/SVG_Files/New folder/icons/Sidebar_Logout
 import Sidebar_EditorPage from "../assests/SVG_Files/New folder/icons/Sidebar_EditorPage.svg";
 import Sidebar_NightMode from '../assests/SVG_Files/New folder/icons/Sidebar_NightMode.svg'
 import Accordian from "./Guest/Accordian/Accordian";
+import Recent_view_dark from '../assests/SVG_Files/Recent_view_dark.svg'
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -107,6 +110,23 @@ export default function Sidebar() {
   const location = useLocation();
   const [accordionicon, setaccordionicon] = React.useState(false);
 
+
+
+
+
+
+
+const [searchstate, setSearchState] = React.useState(false)
+
+const handleSearchState = () => {
+  setSearchState(true)
+}
+
+
+
+
+
+
   const handleAccordionIcon = async () => {
     setaccordionicon(!accordionicon);
     // await dispatch(accordionstate(accordionicon));
@@ -152,7 +172,10 @@ export default function Sidebar() {
             {["right"].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
-                  <img src={UnionBlue} alt="" width="24px" height="24px" />
+                  {
+                    themeState ? <img src={UnionBlue} alt="" className="arrows_icon_sidebar"/> : <img src={Arrow_white} alt="" className="arrows_icon_sidebar"/>
+                  }
+                  
                 </Button>
                 <Drawer
                   sx={{
@@ -186,7 +209,9 @@ export default function Sidebar() {
             {["right"].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
-                  <img src={UnionOpen} alt="" />
+                {
+                    themeState ? <img src={UnionBlue} alt="" className="arrows_icon_sidebar"/> : <img src={Arrow_white} alt="" className="arrows_icon_sidebar"/>
+                  }
                 </Button>
                 <Drawer
                   sx={{
@@ -342,7 +367,8 @@ export default function Sidebar() {
       onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
           <ListItemIcon       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
-            <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} />
+        <img src={Recent_view_dark} alt="" width="20px"/>
+            {/* <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} /> */}
           </ListItemIcon>
           <Typography       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
@@ -352,13 +378,10 @@ export default function Sidebar() {
           </Typography>
           </div>
         </ListItem>
-
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/MyLibraryCorse")}
         >
-
-          
         <div  onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
           <ListItemIcon       onClick={toggleDrawer(anchor, false)}
@@ -380,13 +403,13 @@ export default function Sidebar() {
           onClick={() => navigate("/ratingsidebar")}
         >
            <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
+            onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
           <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+            onKeyDown={toggleDrawer(anchor, false)}>
             <img src={Rating} alt="" style={{ paddingLeft: "1px" }} />
           </ListItemIcon>
           <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+                onKeyDown={toggleDrawer(anchor, false)}>
             <span className="listitem_text" style={{ marginLeft: "-24px" }}>
               Rating
             </span>
@@ -394,7 +417,6 @@ export default function Sidebar() {
           </div>
         </ListItem>
       </List>
-
       <span className="subheadingsidebar" style={{marginTop: "20px"}}>Setting </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
@@ -411,7 +433,6 @@ export default function Sidebar() {
               Dark Theme
             </span>
           </Typography>
-
           <div class="container switch_class">
             <label
               class="switch"
@@ -470,6 +491,10 @@ export default function Sidebar() {
             <span className="listitem_text">Feedback</span>
           </Typography>
         </ListItem>
+
+
+
+      
       </List>
     </Box>
   );
@@ -575,8 +600,45 @@ export default function Sidebar() {
             "/detailpage" === location.pathname ? (
               ""
             ) : (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", padding: "0px 2px 0px 0px" }}>
                   <input
                     placeholder="Search"
                     className={`${
@@ -612,11 +674,43 @@ export default function Sidebar() {
 
                 <div
                   className="wrap"
-                  style={{
-                    marginTop: `${"/" === location.pathname ? "-32px" : ""}`,
-                  }}
+                  style={{ position: "relative", right: "20px", top:" 21px",   marginTop: `${"/" === location.pathname ? "-32px" : ""}`}}
                 >
-                  <input
+                  <div>
+                  {
+                    themeState ?      <img  onClick={handleSearchState} src={VectorBlue} alt=""/> :     <img   onClick={handleSearchState} src={Vector} alt=""/>
+                  }
+              
+
+
+
+
+
+              
+                  </div>
+
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  {/* <input
                     className={`search_icon ${
                       themeState ? "darkThemeBar" : "whitethemeBar"
                     }`}
@@ -627,9 +721,62 @@ export default function Sidebar() {
                     id="search_submit"
                     type="submit"
                     className={themeState ? "submitone" : "submittwo"}
-                  />
+                  /> */}
                 </div>
               </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             )}
             {"/" === location.pathname ? (
               ""
@@ -637,7 +784,7 @@ export default function Sidebar() {
               <img
                 onClick={() => navigate("/usersettingviewpage")}
                 style={{ cursor: "pointer" }}
-                src={image3}
+                src={Member_Icon}
                 alt=""
                 className="sidenav_logo"
               />
@@ -645,6 +792,27 @@ export default function Sidebar() {
           </Typography>
           {handleaccordiondrawer()}
         </Toolbar>
+        <div className="Searchb_main" style={{marginTop: "-58px", zIndex: "1", display: searchstate ? "block" : 'none'}} >
+        <div className="main" style={{backgroundColor: `${themeState ? "#F3F6FF" : " black"}`}}>
+          <div className="left_search"  onClick={() => setSearchState(false)}>
+            {
+              themeState ?  <img src={UnionBlue} alt=""  /> :  <img src={Arrow_white} alt=""  />
+            }
+           
+          </div>
+          <div className="right_search" style={{backgroundColor: `${themeState ? "#FFFFFF" : " black"}`}}>
+            <div className="left">
+              <input type="text" placeholder="Search" className={themeState ? "searchbar_input_two" : "searchbar_input"} style={{backgroundColor: `${themeState ? " #FFFFFF" : " #4F4F4F"}`,  color: `${themeState ? "black" : "white"}`}}/>
+            </div>
+            <div className="right" style={{backgroundColor :`${themeState ? " #FFFFFF" : "#4F4F4F"}`}}>
+              {
+                themeState ?    <img src={VectorBlue} alt="" style={{position: "absolute", right: "28px"}}/> :    <img src={Vector} alt=""  style={{position: "absolute", right: "28px"}}/>
+              }
+           
+            </div>
+          </div>
+        </div>
+      </div>
       </AppBar>
     </>
   );

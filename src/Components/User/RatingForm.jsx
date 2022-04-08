@@ -16,14 +16,13 @@ const RatingForm = () => {
   return (
     <>
 
-        <Button
-          onClick={() => navigate("/librarybookmark")}
-          className="back_button"
+<button
+          className="back_button "
           style={{ color: `${theme ? "black" : "white"}` }}
-          startIcon={<ArrowBackIcon />}
         >
-          Back
-        </Button>
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
     
       <div className="rating_form_root_container" style={{marginTop: "12px"}}>
         <div className="ratingform_root">
@@ -49,7 +48,7 @@ const RatingForm = () => {
 
           <Rating
             name="simple-controlled"
-            style={{fontSize : '50px'}}
+            style={{fontSize : '36px'}}
             className="ratingform_root_sub_two"
             value={value}
             

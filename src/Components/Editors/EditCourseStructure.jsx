@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { getMainCategory } from "../../Redux/Actions/Editor/Category";
+import EditCourseStructureData from './EditCourseStructureData'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -50,8 +51,8 @@ const EditCourseStructure = () => {
   console.log("result==", result);
   const mainCategories = async () => {
     const response = await dispatch(getMainCategory());
-    console.log("response  getMainCategory", response);
-    setResult(response);
+    // console.log("response  getMainCategory", response);
+    setResult(EditCourseStructureData);
   };
   useEffect(() => {
     mainCategories();
@@ -59,13 +60,13 @@ const EditCourseStructure = () => {
   return (
     <div style={{ height: "100%" }}>
       {console.log("result==", result)}
-      <Button
-        onClick={() => navigate("/editormainpage")}
-        className="back_button"
-        style={{ color: `${theme ? "black" : "white"}` }}
-        startIcon={<ArrowBackIcon />}>
-        Back
-      </Button>
+      <button
+          className="back_button "
+          style={{ color: `${theme ? "black" : "white"}` }}
+        >
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
 
       <div className="editormainpage_root_contianer">
         <div>
@@ -222,27 +223,41 @@ const EditCourseStructure = () => {
               </TableRow>
             </TableHead>
             <TableBody>
+            {
+                  result.map((item) => {
+                    return (
+                      <>
               <StyledTableRow>
-                <StyledTableCell component="th" scope="row">
+              
+                       <StyledTableCell component="th" scope="row">
                   <AddIcon className="tableBody_sub" />
                 </StyledTableCell>
                 <StyledTableCell className="tableBody">
-                  Git and GitHub Introduction
+                  {item.title}
                 </StyledTableCell>
                 <StyledTableCell className="tableBody">
-                  Git and GitHub Introduction
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">457687</StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  http://localhost:3000/editcoursestructure
+              {item.name}
                 </StyledTableCell>
                 <StyledTableCell className="tableBody">
-                  Nov,10 2020
+              {item.unique_idetifier}
                 </StyledTableCell>
                 <StyledTableCell className="tableBody">
-                  Nov,10 2020
+                 {item.image}
                 </StyledTableCell>
+               <StyledTableCell className="tableBody">
+                {item.createddate}
+                </StyledTableCell> 
+                <StyledTableCell className="tableBody">
+                {item.updateddate}
+                </StyledTableCell>
+                      
+                   
+               
               </StyledTableRow>
+              </>
+                    )
+                  })
+                }
             </TableBody>
           </Table>
         </TableContainer>

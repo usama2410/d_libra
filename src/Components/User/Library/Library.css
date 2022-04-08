@@ -7,13 +7,10 @@
   margin-left: -70px;
 }
 
-
-.library_root_container_simple{
+.library_root_container_simple {
   display: flex;
- 
+
   margin-top: -5px;
-
-
 }
 
 .library_root_container {
@@ -21,11 +18,10 @@
   background: #111111;
   margin-top: -5px;
 
-padding-bottom: 10px;
-border: 1px solid #111111;
-box-sizing: border-box;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+  padding-bottom: 10px;
+  border: 1px solid #111111;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .bycourse_button {
@@ -33,24 +29,39 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: 1px solid #999999 !important;
   box-sizing: border-box !important;
   border-radius: 15px !important;
-  width: 200px;
+  width: 200px !important;
   text-transform: none !important;
-  height: 30px;
+  height: 30px !important;
+  margin-top: 10px !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
+  /* border: 1px solid red !important; */
 }
-
 
 .bycourse_button_sub {
-  background: #006AE1 !important;
-/* border-radius: 15px; */
+  background: #006ae1 !important;
+  /* border-radius: 15px !important; */
   box-sizing: border-box !important;
   border-radius: 15px !important;
-  width: 200px;
+  width: 200px !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  letter-spacing: -0.015em !important;
   text-transform: none !important;
-  height: 30px;
+  height: 30px !important;
   color: white !important;
+  margin-top: 10px !important;
+  /* border: 1px solid red !important; */
 }
-
-
 
 .mylibrary_text {
   padding-left: 10px;
@@ -65,45 +76,67 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: #ffffff;
 }
 
-
-
-@media screen and (max-width: 677px){
+@media screen and (max-width: 677px) {
   .library_root_container {
     display: flex;
     background: #111111;
     margin-top: -15px;
-  
-  padding-bottom: 10px;
-  border: 1px solid #111111;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  }
 
+    padding-bottom: 10px;
+    border: 1px solid #111111;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
 
+@media screen and (max-width: 600px) {
+  .header_library_container {
+    margin-top: 10px;
+  }
+}
 
 @media screen and (max-width: 490px) {
   .bycourse_button {
-    width: auto !important;
-    height: 24px !important;
-    margin-top: 14px !important;
-    margin-right: -20px !important;
+    width: 115px !important;
+    height: 18px !important;
+    /* margin-top: 14px !important; */
+    margin-right: -10px !important;
     text-transform: none !important;
+
+    font-weight: 300 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    /* identical to box height */
+
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    letter-spacing: -0.015em !important;
   }
-  .bycourse_button_sub{
-    width: auto !important;
-    height: 24px !important;
-    margin-top: 14px !important;
-    margin-right: -20px !important;
+  .bycourse_button_sub {
+    width: 115px !important;
+    height: 16px !important;
+    /* margin-top: 14px !important; */
+    margin-right: -10px !important;
     text-transform: none !important;
+
+    font-weight: 300 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    /* identical to box height */
+
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    letter-spacing: -0.015em !important;
   }
   .header_library_container > span {
-    font-size: 14px
+    font-size: 14px;
   }
-.header_library_container{
+  .header_library_container {
     margin-left: -70px;
     margin-top: 16px;
-}
+  }
   .menubookicon_text {
     font-size: 18px;
     margin-bottom: -10px;
@@ -113,5 +146,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 18px;
     margin-bottom: -10px;
   }
-  
+  .librarymainicon {
+    margin-top: 10px;
+  }
 }

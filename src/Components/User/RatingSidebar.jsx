@@ -16,14 +16,13 @@ const RatingSidebar = () => {
   return (
     <>
  
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{ color: `${theme ? 'black' : 'white'}` }}
-          startIcon={<ArrowBackIcon />}
+ <button
+          className="back_button "
+          style={{ color: `${theme ? "black" : "white"}` }}
         >
-          Back
-        </Button>
+          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        </button>
    
       <div className="ratingform_root_two" style={{ marginTop: "20px"}}>
         <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
@@ -39,7 +38,7 @@ const RatingSidebar = () => {
         >
           <Rating
             name="simple-controlled"
-            style={{fontSize : '50px'}}
+            style={{fontSize : '36px'}}
             emptyIcon={<StarIcon style={{ color :'#C4C4C4'  }} fontSize="inherit" />}
             className="ratingform_root_sub_two"
             value={value}

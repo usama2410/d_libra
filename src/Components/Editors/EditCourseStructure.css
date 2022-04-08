@@ -1,3 +1,8 @@
+.detailpagetext{
+  margin-top: -6px !important;
+}
+
+
 .pincontainer {
   display: none;
 }
@@ -158,6 +163,8 @@
   background: #ffaa1d !important;
   border: none !important;
   border-radius: 15px !important;
+  width: 500px !important;
+  height: 40px !important;
   color: #363636 !important;
   text-transform: none !important;
 }
@@ -258,24 +265,13 @@
     justify-content: center;
   }
   .editcoursestructure_button {
-    width: 220px;
-    margin-top: 10px !important;
-    font-size: 16px;
-  }
-  .newcategory_main_button {
-    width: 420px !important;
-    /* font-family: Helvetica !important; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 18px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.015em;
+    width: 200px;
+    height: 25px;
 
-    color: #363636;
+    margin-top: 10px !important;
+    font-size: 15px !important;
   }
+
   .detail_page_image {
     width: 100%;
   }
@@ -304,6 +300,20 @@
   .responsiveaccordian {
     top: 55px;
   }
+
+  .newcategory_main_button {
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    letter-spacing: -0.015em !important;
+
+    color: #363636 !important;
+    width: 344px !important ;
+    height: 30px !important;
+  }
 }
 
 @media screen and (max-width: 438px) {
@@ -324,6 +334,19 @@
 }
 
 @media screen and (max-width: 400px) {
+
+
+
+
+
+
+  .detailpagetext{
+    margin-top: -1px !important;
+  }
+  
+
+
+
   .editor_input_field {
     margin-left: 25px;
     width: 160px;

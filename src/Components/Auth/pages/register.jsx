@@ -50,7 +50,7 @@ const Register = () => {
         style={{ color: `${theme ? "black" : "white"}` }}
       >
         <ArrowBack style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "10px", fontSize: "13px" }}>BACK</span>
+        <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
       </button>
 
       <div className="editormainpage_root_contianer">
@@ -103,12 +103,7 @@ const Register = () => {
       </div>
 
       <div>
-        <Typography
-          className="orText"
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          Or
-        </Typography>
+      <span className={theme ? "texttwo" : "orText"}>Or</span>
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>

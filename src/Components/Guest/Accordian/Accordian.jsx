@@ -9,6 +9,7 @@ import "./Accordian.css";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import arrow from "../../../assests/Arrow.png";
+import {useSelector} from 'react-redux'
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -21,6 +22,8 @@ const Accordion = styled((props) => (
     display: "none",
   },
 }));
+
+
 
 // const AccordionSummary = styled((props) => (
 //   <MuiAccordionSummary
@@ -53,6 +56,9 @@ const Accordian = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
+
+  const theme = useSelector((state) => state.theme.state)
+  console.log("Ye themestate he ", theme)
   return (
     <>
       <div className="mainAccordionContainer">
