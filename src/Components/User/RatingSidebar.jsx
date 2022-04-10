@@ -51,7 +51,7 @@ const RatingSidebar = () => {
 
       <div className="ratingform_root_three">
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two">Rating Comments:</span>
+          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Rating Comments:</span>
         </div>
 
         <div>

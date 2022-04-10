@@ -83,3 +83,20 @@ export const themeSwitch = (themestate) => async (dispatch) => {
     });
   } catch (error) {}
 };
+
+
+
+export const pinState = (pin) => async (dispatch) => {
+   console.log(pin)
+  try {
+    dispatch({
+      type: "PINTHEME",
+      payload: {
+        state: pin,
+      },
+    });
+  } catch (error) {}
+};
+
+
+

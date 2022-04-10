@@ -5,6 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import "./UploadContentMain.css";
 const UploadContentMain = () => {
@@ -23,16 +24,20 @@ const UploadContentMain = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+
+  const handleBack = () => {
+
+  }
   useEffect(() => {}, [editorState]);
   return (
     <>
-      <button
-        onClick={() => navigate("/editormainpage")}
-        className="back_button "
-        style={{ color: `${theme ? "black" : "white"}` }}
+       <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-        <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
       </button>
 
       <div
@@ -44,7 +49,7 @@ const UploadContentMain = () => {
         Upload a New Content
       </div>
       <Grid container className="main_root_container_upload_content">
-        <Grid item lg={3} md={3} sm={12} xs={12} style={{ marginTop: "-15px" }}>
+        <Grid item lg={4} md={4} sm={12} xs={12} style={{ marginTop: "-15px" }}>
           <div>
             <span
               className="addcategory_text"
@@ -169,18 +174,18 @@ const UploadContentMain = () => {
         </Grid>
         <Grid
           item
-          lg={9}
-          md={9}
+          lg={8}
+          md={8}
           sm={12}
           xs={12}
           className="reactdraftcontainer"
           style={{ float: "right" }}
         >
           <div style={{ width: "100%" }}>
-            <Grid container>
-              <Grid item lg={3} md={4} sm={12} xs={12}>
+            <Grid container spacing={1}>
+              <Grid item lg={4} md={4} sm={12} xs={12} >
                 <div className="main_slide_container">
-                  <div>
+                  <div    style={{paddingBottom: "10px"}}>
                     <span>{imageName}</span>
                   </div>
                   <div>
@@ -196,8 +201,9 @@ const UploadContentMain = () => {
                         variant="contained"
                         color="primary"
                         component="span"
-                        style={{ height: "20px" }}
+                        // style={{ height: "20px" }}
                         className="image_button"
+                     
                       >
                         Select an Image File
                       </Button>
@@ -206,17 +212,18 @@ const UploadContentMain = () => {
                 </div>
               </Grid>
 
-              <Grid item lg={9} md={8} sm={0} xs={0}>
+              <Grid item lg={8} md={8} sm={0} xs={0}  >
                 <div
                   className="image_none"
                   style={{
-                    width: "240px",
-                    height: "160px",
-                    // marginLeft: "30px",
+                    width: "300px",
+                    height: "225px",
+                    
                   }}
                 >
                   <div>
-                    <span>Preview</span>
+                    <span 
+            style={{ color: `${theme ? "#363636" : "white"}` }}>Preview</span>
                   </div>
                   {image ? (
                     <img
@@ -224,8 +231,9 @@ const UploadContentMain = () => {
                       style={{
                         width: "100%",
                         height: "100%",
-                        marginLeft: "-41px",
+                        marginLeft: "-10px",
                         objectFit: "contain",
+                        paddingTop: "10px"
                       }}
                       alt=""
                     />

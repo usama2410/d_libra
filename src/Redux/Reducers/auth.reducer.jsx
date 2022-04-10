@@ -15,6 +15,10 @@ const accordioniconinitialstate = {
   status: false
 }
 
+const pininitialstate= {
+  state: false
+}
+
  export const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -77,5 +81,20 @@ export const accordion = (accordioniconstate = accordioniconinitialstate, action
   
     default:
       return accordioniconstate;
+  } 
+}
+
+
+export const pin = (piniInitialState = pininitialstate, action) => {
+  const {type, payload} = action;
+  switch (type) {
+    case 'PINTHEME':
+      return {
+        state : payload.state
+      }
+   
+  
+    default:
+      return piniInitialState;
   } 
 }

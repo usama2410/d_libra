@@ -29,7 +29,9 @@ const EditorsMainPage = () => {
             </span>
           </Typography>
         </div>
-        <div>
+
+
+        <div className="editormainpagebuttoncontainer">
           <Button
             variant="outlined"
             className="upload_contents_button"
@@ -38,7 +40,7 @@ const EditorsMainPage = () => {
             Edit Course Structure{" "}
           </Button>
         </div>
-        <div>
+        <div className="editormainpagebuttoncontainertwo">
           <Button
             variant="outlined"
             className="upload_contents_button"
@@ -47,7 +49,7 @@ const EditorsMainPage = () => {
             Upload Contents{" "}
           </Button>
         </div>
-        <div style={{ marginTop: "68px" }}>
+        <div className="editormainpagebuttoncontainerthree">
           <span  className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}>
             Select Course for Edit
@@ -68,7 +70,7 @@ const EditorsMainPage = () => {
               <option value="audi">Audi</option>
             </select>
           </div>
-          <div style={{ justifyContent: "center", display: "flex" }}>
+          <div style={{ justifyContent: "center", display: "flex" }}  className="editormainpagebuttoncontainertwo">
             <Button
               variant="outlined"
               className="upload_contents_button"

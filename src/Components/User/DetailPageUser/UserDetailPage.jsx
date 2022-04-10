@@ -8,7 +8,7 @@ import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import NextDarkButton from "../../../assests/NextDarkButton.png";
 import PrevLightButton from "../../../assests/PrevLightButton.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NextButton from "../../../assests/NextButton.png";
 import PrevButton from "../../../assests/PrevButton.png";
 import FooterButtons from "../FooterButtons";
@@ -18,16 +18,17 @@ import PinBlue from "../../../assests/PinBlue.png";
 import Accordian from "../../Guest/Accordian/Accordian";
 import UnionClose from "../../../assests/UnionClose.png";
 
-import Next from '../../../assests/SVG_Files/New folder/icons/Next.svg'
-import Next_dark from '../../../assests/SVG_Files/New folder/icons/Next_dark.svg'
-import Previous from '../../../assests/SVG_Files/New folder/icons/Previous.svg'
-import Previous_dark from '../../../assests/SVG_Files/New folder/icons/Previous_dark.svg'
-
+import Next from "../../../assests/SVG_Files/New folder/icons/Next.svg";
+import Next_dark from "../../../assests/SVG_Files/New folder/icons/Next_dark.svg";
+import Previous from "../../../assests/SVG_Files/New folder/icons/Previous.svg";
+import Previous_dark from "../../../assests/SVG_Files/New folder/icons/Previous_dark.svg";
 
 import FooterCopyright from "../../../Components/User/FooterCopyright";
+import { pinState } from "../../../Redux/Actions/auth.action";
 
 const UserDetailPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userdata, setUserData] = React.useState(UserDetailPageData);
   const [startdata, setStartData] = useState(0);
   const [enddata, setEndData] = useState(1);
@@ -36,14 +37,30 @@ const UserDetailPage = () => {
   const [transform, setTransform] = React.useState(false);
   // const accordion = useSelector((state) => state.accordion.state)
 
-  const handlePinState = () => {
+  
+
+  const handlePinState = async () => {
     setPinState(!pinstate);
     setTransform(!transform);
+     await dispatch(pinState(!pinstate))
+    //  dispatch(themeSwitch(!themeState));
+  };
+
+  const handle = () => {
+    if (pinstate === true && theme === true) {
+      return "linear-gradient(180deg, #F3F6FF 82.81%, rgba(243, 246, 255, 0) 100%)";
+    }else if (pinstate === false && theme === true) {
+      return "#EEEEEE";
+    }else if (pinstate === true && theme === false) {
+      return "linear-gradient(180deg, #363636 82.81%, rgba(54, 54, 54, 0) 100%)";
+    } else if (pinstate === false && theme === false) {
+      return " #111111";
+    }
   };
 
   return (
     <>
-      <div style={{ position: pinstate ? "fixed" : "" }}>
+      <div style={{ position: pinstate ? "fixed" : "", top: pinstate ? "0" : ""}}>
         <div
           className="detailpage_root_container"
           style={{ paddingTop: "35px" }}
@@ -61,14 +78,10 @@ const UserDetailPage = () => {
               item
               lg={4}
               md={6}
-              sm={12}
+              sm={6}
               xs={12}
               style={{
-                background: `${
-                  pinstate
-                    ? "linear-gradient(180deg, #363636 82.81%, rgba(54, 54, 54, 0) 100%)"
-                    : "none"
-                }`,
+                background: handle(),
               }}
             >
               {userdata.slice(startdata, enddata).map((item) => (
@@ -86,18 +99,24 @@ const UserDetailPage = () => {
                   <img
                     src={item.image}
                     alt=""
-                    className="detail_page_image"
-                    style={{
-                      width: `${pinstate ? "90%" : "100%"}`,
-                      height: `${pinstate ? "90%" : "100%"}`,
-                    }}
+                    className={
+                      pinstate ? "detail_page_image_two" : "detail_page_image"
+                    }
+                    // style={{
+                    //   width: `${pinstate ? "50%" : "100%"}`,
+                    //   height: `${pinstate ? "50%" : "100%"}`,
+                    // }}
                   />
                 </div>
               ))}
-              <div className="pincontainer" style={{ paddingRight: "10px" }}>
+              <div
+                className={pinstate ? "pincontainertwo" : "pincontainer"}
+                style={{ paddingRight: "10px" }}
+              >
+                {/* pincontainer */}
                 <button
                   style={{
-                    marginRight: "15px",
+                    marginRight: `${pinstate ? "" : "15px"}`,
                     background: "none",
                     border: "none",
                   }}
@@ -123,12 +142,12 @@ const UserDetailPage = () => {
               </div>
             </Grid>
 
-            <Grid item lg={8} md={6} sm={12} xs={12}>
+            <Grid item lg={8} md={6} sm={6} xs={12}>
               <div
                 className="detail_page_content"
                 style={{
                   marginTop: `${pinstate ? "-20px" : ""}`,
-                  height: `${pinstate ? "180px" : "100%"}`,
+                  height: `${pinstate ? "220px" : "100%"}`,
                   overflow: `${pinstate ? "scroll" : "visible"}`,
                 }}
               >
@@ -136,52 +155,52 @@ const UserDetailPage = () => {
                   Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
                   odit aut fugit, sed quia consequuntur magni dolores eos qui
                   ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet.Nemo enim ipsam
-                  voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                  sed quia consequuntur magni dolores eos qui ratione voluptatem{" "}
+                  qui dolorem ipsum quia dolor sit amet <br />
                   <br />
-                  sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-                  quia dolor sit amet. Nemo enim ipsam voluptatem quia voluptas
-                  sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                  dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                  quisquam est, qui dolorem ipsum quia dolor sit amet.Nemo enim
-                  ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                  fugit, sed quia consequuntur magni dolores eos qui ratione
-                  voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                  dolorem ipsum quia dolor sit amet. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet.Nemo enim ipsam voluptatem quia voluptas sit
-                  aspernatur aut odit aut fugit, sed quia
-                  <br /> consequuntur magni dolores eos qui ratione voluptatem
-                  sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-                  quia dolor sit amet. Nemo enim ipsam voluptatem quia voluptas
-                  sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                  dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                  quisquam est, qui dolorem ipsum quia dolor sit amet.Nemo enim
-                  ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                  fugit, sed quia consequuntur magni dolores eos qui ratione
-                  voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                  dolorem ipsum quia dolor sit amet. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam
-                  <br /> est, qui dolorem ipsum quia dolor sit amet.Nemo enim
-                  ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                  fugit, sed quia consequuntur magni dolores eos qui ratione
-                  voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                  dolorem ipsum quia dolor sit amet. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut
-                  <br /> odit aut fugit, sed quia consequuntur magni dolores eos
-                  qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-                  est, qui dolorem ipsum quia dolor sit amet.Nemo enim ipsam
-                  voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                  sed quia
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
                 </span>
 
                 <div className="tags_wrapper_two">
-                  <div style={{ display: "flex" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      paddingBottom: pinstate ? "100px" : "",
+                    }}
+                  >
                     <span className="detail_tag_text"> Tag: </span>
                     <button className="detail_tag_button">Git</button>
                     <button className="detail_tag_button">GitHub</button>
@@ -203,29 +222,35 @@ const UserDetailPage = () => {
               backgroundColor: "#F3F6FF",
               position: "fixed",
               bottom: "0",
-              height: "70px",
+              height: "64px",
               flexDirection: "column",
             }}
           >
             <div style={{ marginTop: "-8px" }}>
-              <Button dstyle={{marginLeft: "16px"}} disabled={startdata === 0 ? true : false}>
+              <Button
+                dstyle={{ marginLeft: "16px" }}
+                disabled={startdata === 0 ? true : false}
+              >
                 <img
                   src={Previous}
                   alt=""
-                  width="50px"
-                  height="50px"
+                  style={{ marginRight: "-15px" }}
+                  className="userdetailfootericons userdetailfootericonsleft"
                   onClick={() => {
                     setStartData(startdata - 1);
                     setEndData(enddata - 1);
                   }}
                 />
               </Button>
-              <Button style={{marginLeft: "-16px"}} disabled={enddata >= userdata.length ? true : false}>
+              <Button
+                style={{ marginLeft: "-16px" }}
+                disabled={enddata >= userdata.length ? true : false}
+              >
                 <img
                   src={Next}
                   alt=""
-                  width="50px"
-                  height="50px"
+                  style={{ marginLeft: "-15px" }}
+                  className="userdetailfootericons userdetailfootericonsright"
                   onClick={() => {
                     {
                       setStartData(startdata + 1);
@@ -234,10 +259,10 @@ const UserDetailPage = () => {
                   }}
                 />
               </Button>
+              <span className="userdetailpagefootertext">
+                © D-Libra All Rights Reserved
+              </span>
             </div>
-            <span style={{ fontSize: "12px" }}>
-              © D-Libra All Rights Reserved
-            </span>
           </div>
         ) : (
           <div
@@ -248,17 +273,21 @@ const UserDetailPage = () => {
               width: "100%",
               position: "fixed",
               bottom: "0",
-              height: "70px",
+              height: "64px",
               background: "#111111",
               flexDirection: "column",
             }}
           >
             <div style={{ marginTop: "-8px" }}>
-              <Button style={{marginLeft: "16px"}}  disabled={startdata === 0 ? true : false}>
+              <Button
+                style={{ marginLeft: "16px" }}
+                disabled={startdata === 0 ? true : false}
+              >
                 <img
                   src={Previous_dark}
                   alt=""
-                  style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                  style={{ marginRight: "-15px" }}
+                  className="userdetailfootericons userdetailfootericonsleft"
                   onClick={() => {
                     setStartData(startdata - 1);
                     setEndData(enddata - 1);
@@ -266,22 +295,24 @@ const UserDetailPage = () => {
                 />
               </Button>
 
-              <Button style={{marginLeft: "-16px"}} disabled={enddata >= userdata.length ? true : false}>
+              <Button
+                style={{ marginLeft: "-16px" }}
+                disabled={enddata >= userdata.length ? true : false}
+              >
                 <img
                   src={Next_dark}
                   alt=""
-                  style={{ width: "50px", height: "50px", cursro: "pointer" }}
+                  className="userdetailfootericons userdetailfootericonsright"
                   onClick={() => {
                     setStartData(startdata + 1);
                     setEndData(enddata + 1);
                   }}
                 />
               </Button>
+              <span className="userdetailpagefootertext">
+                © D-Libra All Rights Reserved
+              </span>
             </div>
-
-            <span style={{ fontSize: "12px" }}>
-              © D-Libra All Rights Reserved
-            </span>
           </div>
         )}
       </div>

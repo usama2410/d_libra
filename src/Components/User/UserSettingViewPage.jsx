@@ -165,7 +165,7 @@ const UserSettingViewPage = () => {
           </div> */}
         </div>
 
-        <div className="user_bookmark_container" style={{ marginTop: "20px" }}>
+        <div className="user_bookmark_container">
           <div className="hidden_user_input">
             <span
               className="addcategory_text"
@@ -175,7 +175,7 @@ const UserSettingViewPage = () => {
             </span>
             <div className="vector_container">
               <div className="vector_image">
-                <img src={Vector90} alt="" />
+                <img src={Vector90} alt=""  className="tagimageusersettingpage" />
               </div>
               <input
                 className={
@@ -190,13 +190,14 @@ const UserSettingViewPage = () => {
             style={{
               color: `${theme ? "#363636" : "white"}`,
               marginTop: "20px",
+              marginBottom: "-8px"
             }}
           >
             Bookmark Name
           </span>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector90} alt="" />
+              <img src={Vector90} alt="" className="tagimageusersettingpage" />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -205,7 +206,7 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector91} alt="" />
+              <img src={Vector91} alt="" className="tagimageusersettingpage" />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -214,7 +215,7 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector92} alt="" />
+              <img src={Vector92} alt="" className="tagimageusersettingpage" />
             </div>
 
             <input
@@ -226,7 +227,7 @@ const UserSettingViewPage = () => {
             <img
               src={theme ? addblack : addwhite}
               alt=""
-              style={{ marginLeft: "2px" }}
+              className="addiconcontainer"
             />
 
             <input

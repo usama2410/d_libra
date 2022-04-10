@@ -1,7 +1,78 @@
-.detailpagetext{
-  margin-top: -6px !important;
+
+
+
+
+
+.detailpagesubcontainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
 }
 
+.detailpagesubcontainertwo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.editcoursestructurecontainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 98px;
+  flex-direction: column;
+}
+
+.editcoursestructuretext {
+  margin-top: 34px;
+}
+
+.detail_page_image {
+  width: 100%;
+}
+
+.detail_page_image_two {
+  width: 90%;
+}
+
+.pincontainertwo {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0%;
+  align-items: center;
+  /* ; */
+  top: 50%;
+}
+
+.userdetailfootericonsleft {
+  margin-right: 15px;
+}
+
+.userdetailfootericonsright {
+  margin-left: -15px;
+}
+
+.userdetailpagefootertext {
+  font-size: 12px;
+  position: absolute;
+  /* right: 0; */
+  bottom: 0;
+}
+
+.userdetailfootericons {
+  width: 35px;
+  height: 35px;
+}
+
+.detailpagetext {
+  margin-top: -6px !important;
+}
 
 .pincontainer {
   display: none;
@@ -52,7 +123,7 @@
   /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 21px;
   margin-top: -2px;
   line-height: 18px;
   display: flex;
@@ -130,14 +201,18 @@
   border: none;
   color: white;
   padding: 2px 20px;
-  margin-left: 5px;
+  margin-left: 10px;
+  width: 80px;
+  height: 20px;
 }
 
 .detail_page_content {
-  padding: 5px 10px;
-}
-.detail_page_image {
-  width: 100%;
+  padding: 12px 0px 30px 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: -0.015em;
 }
 
 .tags_wrapper_two {
@@ -146,8 +221,9 @@
 
 .tags_wrapper_one {
   display: flex;
-  margin-right: 10px;
-  /* border: 1px solid red; */
+  margin-right: 16px;
+
+  /* ; */
 }
 
 .newcategory_main_button {
@@ -210,7 +286,7 @@
 .search_main_container {
   margin-top: 16px;
   width: 100%;
-  border: "1px solid white";
+  /* border: "1px solid white"; */
   background-color: rgba(38, 36, 42, 0.7);
   display: flex;
   align-items: center;
@@ -242,20 +318,39 @@
   border: 1px solid white !important;
   margin-right: -10px !important;
   width: 20px !important;
+  color: white !important;
+  text-transform: none !important;
   margin-left: 10px !important;
 }
 
 @media screen and (max-width: 958px) {
-  .pincontainer {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-  }
-
   .detailpagesubcontainer {
     padding: 10px 5px;
   }
 
+
+  .detailpagetext {
+   
+  padding-top: 26px !important;
+  }
+
+  .backbutton_disable{
+    /* border: 1px solid red; */
+    display: none;
+  }
+  .tags_wrapper_two {
+    padding: 0px 16px 0px 16px;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+  .footerbuttoncontainer{
+    position: absolute;
+    bottom: 0;
+  }
+  .tags_wrapper_one {
+    display: none;
+  }
   .button_container {
     float: none;
     padding-top: 10px;
@@ -276,29 +371,50 @@
     width: 100%;
   }
 
-  .detail_page_content {
-    font-size: 14px;
-    padding: 0px 5px;
-    /* margin-top: -20px; */
+  .detail_page_image_two {
+    width: 90%;
   }
 
-  .tags_wrapper_two {
-    display: block;
-    margin-top: 100px;
-    margin-bottom: 50px;
+  .detail_page_content {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.015em;
+
+    padding: 0px 16px 0px 16px;
   }
-  .tags_wrapper_one {
-    display: none;
+
+  .detail_page_image {
+    width: 80% !important;
   }
+
+  .detail_page_image_two {
+    width: 70% !important;
+  }
+
   .buttons_container_detail_page {
     padding-top: 20px;
     padding-bottom: 20px;
   }
+  
+  .userdetailpagefootertext {
+    font-size: 8px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 600px) {
   .responsiveaccordian {
     top: 55px;
+  }
+
+  .pincontainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .newcategory_main_button {
@@ -316,7 +432,7 @@
   }
 }
 
-@media screen and (max-width: 438px) {
+@media screen and (max-width: 468px) {
   .newcategory_main_button {
     width: 300px !important;
     /* font-family: Helvetica !important; */
@@ -331,21 +447,79 @@
 
     color: #363636;
   }
+
+  .header_text{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    
+    
+  }
+
+  
+  .editcoursestructuretext {
+    margin-top: 22px;
+  }
+
+  .detailpagesubcontainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+
+  .detail_page_image {
+    width: 100% !important;
+  }
+
+  .detail_page_image_two {
+    width: 80% !important;
+  }
+
+  .editcoursestructurecontainer {
+    margin-top: 40px;
+  }
+
+  .pincontainertwo {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 2%;
+    align-items: center;
+    /* border: 1px solid red; */
+    top: 45%;
+  }
+
+  .userdetailfootericons {
+    width: 25px;
+
+    height: 25px;
+  }
+
+  .userdetailpagefootertext {
+    font-size: 8px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .userdetailfootericonsleft {
+    margin-right: 30px;
+  }
+
+  .userdetailfootericonsright {
+    margin-left: -30px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-
-
-
-
-
-
-  .detailpagetext{
-    margin-top: -1px !important;
-  }
-  
-
-
+ 
 
   .editor_input_field {
     margin-left: 25px;
@@ -387,5 +561,17 @@
     align-items: center;
     padding: 10px 30px;
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .pincontainertwo {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 1%;
+    align-items: center;
+    /* border: 1px solid red; */
+    top: 42%;
   }
 }

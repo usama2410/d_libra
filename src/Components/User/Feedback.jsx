@@ -63,7 +63,7 @@ const Feedback = () => {
 
       <div className="ratingform_root_three" style={{marginTop: "35px"}}>
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two">Feedback Comments:</span>
+          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Feedback Comments:</span>
         </div>
 
         <div>

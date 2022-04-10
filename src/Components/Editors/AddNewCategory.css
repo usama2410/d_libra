@@ -1,3 +1,26 @@
+.addnewcategorycontainer{
+  margin-top: 179px;
+
+
+
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 98px; */
+  flex-direction: column;
+}
+
+
+.addcategorysubcontainer{
+  
+    padding-top: 62px;
+    display: flex;
+    flex-direction: column;
+  
+}
+
 .image_button {
   background: #119abd !important;
   border-radius: 15px !important;
@@ -137,6 +160,21 @@ fvf
     letter-spacing: -0.015em !important;
   }
 
+
+  .addnewcategorycontainer{
+    margin-top: 43px;
+  }
+  
+
+
+
+  .addcategorysubcontainer{
+  
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+  
+}
   .addcategory_inputt_sub {
     width: 300px !important;
     height: 40px !important;

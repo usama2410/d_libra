@@ -1,9 +1,23 @@
+.editormainpagebuttoncontainer{
+  margin-top: 80px;
+  /* border: 1px solid red; */
+}
+
+.editormainpagebuttoncontainertwo{
+  margin-top: 18px;
+}
+
+
+.editormainpagebuttoncontainerthree{
+  margin-top: 70px;
+}
+
 .editormainpage_root_contianer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 80px;
   flex-direction: column;
 }
 .editors_menu_heading {
@@ -158,4 +172,30 @@
     line-height: 16px;
     width: 299px;
   }
+}
+
+
+
+
+@media screen and (max-width: 468px) {
+  editormainpage_root_contianer {
+    margin-top: 34px;
+   
+  }
+
+
+  .editormainpagebuttoncontainer{
+    margin-top: 28px;
+    /* border: 1px solid red; */
+  }
+  
+  .editormainpagebuttoncontainertwo{
+    margin-top: 0px;
+  }
+
+  
+.editormainpagebuttoncontainerthree{
+  margin-top: 36px;
+}
+  
 }

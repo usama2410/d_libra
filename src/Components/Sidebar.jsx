@@ -14,41 +14,31 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import Fill1 from "../assests/Fill1.png";
 import image3 from "../assests/image3.png";
 import Vector from "../assests/Vector.png";
-import Fill2 from "../assests/Fill2.png";
-import Fill12 from "../assests/Fill12.png";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import { RiFileEditFill } from "react-icons/ri";
-import NightMode from "../assests/NightMode.png";
 import Rating from "../assests/Rating.png";
-import Login from "../assests/Login.png";
-import user from "../assests/user.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
-import Member_Icon from '../assests/SVG_Files/Member_Icon.svg'
+import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
 import VectorBlue from "../assests/VectorBlue.png";
 import { useLocation } from "react-router-dom";
-import UnionOpen from "../assests/UnionOpen.png";
 import UnionClose from "../assests/UnionClose.png";
 import UnionBlue from "../assests/UnionBlue.png";
-import Arrow_white from '../assests/Arrow_white.png'
+import Arrow_white from "../assests/Arrow_white.png";
 import editor_icon from "../assests/SVG_Files/editor_icon.svg";
-import white_icon from "../assests/SVG_Files/New folder/white_icon.svg";
 import darkmode_logo from "../assests/SVG_Files/New folder/darkmode_logo.svg";
 import lightmode_logo from "../assests/SVG_Files/New folder/lightmode_logo.svg";
-import Sidebar_My_library from '../assests/SVG_Files/New folder/icons/Sidebar_My_library.svg'
+import Sidebar_My_library from "../assests/SVG_Files/New folder/icons/Sidebar_My_library.svg";
 import Sidebar_Signup from "../assests/SVG_Files/New folder/icons/Sidebar_Signup.svg";
 import Sidebar_Login from "../assests/SVG_Files/New folder/icons/Sidebar_Login.svg";
-import Sidebar_Logout from '../assests/SVG_Files/New folder/icons/Sidebar_Logout.svg'
+import Sidebar_Logout from "../assests/SVG_Files/New folder/icons/Sidebar_Logout.svg";
 import Sidebar_EditorPage from "../assests/SVG_Files/New folder/icons/Sidebar_EditorPage.svg";
-import Sidebar_NightMode from '../assests/SVG_Files/New folder/icons/Sidebar_NightMode.svg'
+import Sidebar_NightMode from "../assests/SVG_Files/New folder/icons/Sidebar_NightMode.svg";
 import Accordian from "./Guest/Accordian/Accordian";
-import Recent_view_dark from '../assests/SVG_Files/Recent_view_dark.svg'
+import Recent_view_dark from "../assests/SVG_Files/Recent_view_dark.svg";
+import Search_dark from '../assests/SVG_Files/New folder/icons/Search_dark.svg'
+import Search from '../assests/SVG_Files/New folder/icons/Search.svg'
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -104,28 +94,18 @@ export default function Sidebar() {
   };
 
   const themeState = useSelector((state) => state.theme.state);
+  const Pinstate = useSelector((state) => state.pin.state);
   const [open, setOpen] = React.useState(false);
   const [themestate, setThemeState] = React.useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   const [accordionicon, setaccordionicon] = React.useState(false);
+  const navigate = useNavigate();
+  const [searchstate, setSearchState] = React.useState(false);
 
-
-
-
-
-
-
-const [searchstate, setSearchState] = React.useState(false)
-
-const handleSearchState = () => {
-  setSearchState(true)
-}
-
-
-
-
-
+  const handleSearchState = () => {
+    setSearchState(true);
+  };
 
   const handleAccordionIcon = async () => {
     setaccordionicon(!accordionicon);
@@ -137,17 +117,6 @@ const handleSearchState = () => {
     console.log(themestate);
     dispatch(themeSwitch(!themeState));
   };
-
-  const navigate = useNavigate();
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    if (window.innerWidth < 768) {
-      alert("");
-    }
-  };
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -159,6 +128,20 @@ const handleSearchState = () => {
 
     setState({ ...state, [anchor]: open });
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (window.innerWidth < 768) {
+      alert("");
+    }
+  };
+
+
+
+
+
+
 
   const handleaccordiondrawer = () => {
     if (
@@ -172,10 +155,19 @@ const handleSearchState = () => {
             {["right"].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
-                  {
-                    themeState ? <img src={UnionBlue} alt="" className="arrows_icon_sidebar"/> : <img src={Arrow_white} alt="" className="arrows_icon_sidebar"/>
-                  }
-                  
+                  {themeState ? (
+                    <img
+                      src={UnionBlue}
+                      alt=""
+                      className="arrows_icon_sidebar"
+                    />
+                  ) : (
+                    <img
+                      src={Arrow_white}
+                      alt=""
+                      className="arrows_icon_sidebar"
+                    />
+                  )}
                 </Button>
                 <Drawer
                   sx={{
@@ -209,9 +201,19 @@ const handleSearchState = () => {
             {["right"].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
-                {
-                    themeState ? <img src={UnionBlue} alt="" className="arrows_icon_sidebar"/> : <img src={Arrow_white} alt="" className="arrows_icon_sidebar"/>
-                  }
+                  {themeState ? (
+                    <img
+                      src={UnionBlue}
+                      alt=""
+                      className="arrows_icon_sidebar"
+                    />
+                  ) : (
+                    <img
+                      src={Arrow_white}
+                      alt=""
+                      className="arrows_icon_sidebar"
+                    />
+                  )}
                 </Button>
                 <Drawer
                   sx={{
@@ -277,61 +279,79 @@ const handleSearchState = () => {
       <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/usersettingviewpage") }
-          
+          onClick={() => navigate("/usersettingviewpage")}
         >
-          <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-
-          <ListItemIcon      >
-            <img src={image3} alt="" className="profilesidebaricon" />
-          </ListItemIcon>
-          <Typography      >
-            <span className="listitem_text" style={{ marginLeft: "-17px" }}>
-              bloovee
-            </span>
-          </Typography>
-        </div>
-        </ListItem>
-
-        <ListItem style={{ cursor: "pointer" }} onClick={() => navigate('/register')}>
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "3px" }} />
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span
-              className="listitem_text_disabled"
-              style={{ marginLeft: "-24px" }}
-            >
-              Signup
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon>
+              <img src={image3} alt="" className="profilesidebaricon" />
+            </ListItemIcon>
+            <Typography>
+              <span className="listitem_text" style={{ marginLeft: "-17px" }}>
+                bloovee
+              </span>
+            </Typography>
           </div>
         </ListItem>
 
-
-
-        <ListItem style={{ cursor: "pointer" }} onClick={() => navigate('/login')}>
-          
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_Login} alt=""  style={{ paddingLeft: "3px" }} />
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span
-              className="listitem_text_disabled"
-              style={{ marginLeft: "-24px" }}
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/register")}
+        >
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
             >
-              Login
-            </span>
-          </Typography>
+              <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "3px" }} />
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span
+                className="listitem_text_disabled"
+                style={{ marginLeft: "-24px" }}
+              >
+                Signup
+              </span>
+            </Typography>
+          </div>
+        </ListItem>
+
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/login")}
+        >
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img src={Sidebar_Login} alt="" style={{ paddingLeft: "3px" }} />
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span
+                className="listitem_text_disabled"
+                style={{ marginLeft: "-24px" }}
+              >
+                Login
+              </span>
+            </Typography>
           </div>
         </ListItem>
 
@@ -339,21 +359,26 @@ const handleSearchState = () => {
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/logout")}
         >
-
-          
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_Logout} alt=""  style={{ paddingLeft: "3px" }}/>
-            {/* <ExitToAppIcon style={{ color: " #FFFFFF" }} /> */}
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              Logout
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img src={Sidebar_Logout} alt="" style={{ paddingLeft: "3px" }} />
+              {/* <ExitToAppIcon style={{ color: " #FFFFFF" }} /> */}
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                Logout
+              </span>
+            </Typography>
           </div>
         </ListItem>
 
@@ -361,40 +386,56 @@ const handleSearchState = () => {
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/recentlyviewed")}
         >
-
-          
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-        <img src={Recent_view_dark} alt="" width="20px"/>
-            {/* <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} /> */}
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              Recently Viewed
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img src={Recent_view_dark} alt="" width="20px" />
+              {/* <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} /> */}
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                Recently Viewed
+              </span>
+            </Typography>
           </div>
         </ListItem>
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/MyLibraryCorse")}
         >
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_My_library} alt=""  style={{ paddingLeft: "1px" }}  />
-            {/* <MenuBookIcon style={{ color: " #FFFFFF" }} /> */}
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              My Library
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img
+                src={Sidebar_My_library}
+                alt=""
+                style={{ paddingLeft: "1px" }}
+              />
+              {/* <MenuBookIcon style={{ color: " #FFFFFF" }} /> */}
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                My Library
+              </span>
+            </Typography>
           </div>
         </ListItem>
 
@@ -402,82 +443,121 @@ const handleSearchState = () => {
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/ratingsidebar")}
         >
-           <div  onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Rating} alt="" style={{ paddingLeft: "1px" }} />
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-                onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              Rating
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img src={Rating} alt="" style={{ paddingLeft: "1px" }} />
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                Rating
+              </span>
+            </Typography>
           </div>
         </ListItem>
       </List>
-      <span className="subheadingsidebar" style={{marginTop: "20px"}}>Setting </span>
+      <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
+        Setting{" "}
+      </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
         <ListItem style={{ cursor: "pointer" }}>
-        <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_NightMode} alt=""  style={{ paddingLeft: "3px" }}  />
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              Dark Theme
-            </span>
-          </Typography>
-          <div class="container switch_class">
-            <label
-              class="switch"
-              style={{ background: themestate ? "#009AF9 " : " #BDB9A6" }}
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
             >
-              <input
-                type="checkbox"
-                checked={themestate}
-                onChange={handleChange}
-                inputProps={{ "aria-label": "test switch" }}
-              />{" "}
-              <div></div>
-            </label>
-          </div>
+              <img
+                src={Sidebar_NightMode}
+                alt=""
+                style={{ paddingLeft: "3px" }}
+              />
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                Dark Theme
+              </span>
+            </Typography>
+            <div class="container switch_class">
+              <label
+                class="switch"
+                style={{ background: themestate ? "#009AF9 " : " #BDB9A6" }}
+              >
+                <input
+                  type="checkbox"
+                  checked={themestate}
+                  onChange={handleChange}
+                  inputProps={{ "aria-label": "test switch" }}
+                />{" "}
+                <div></div>
+              </label>
+            </div>
           </div>
         </ListItem>
       </List>
-      <span className="subheadingsidebar"  style={{marginTop: "20px"}}> Editor Menu </span>
+      <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
+        {" "}
+        Editor Menu{" "}
+      </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/editormainpage")}
         >
-           <div  onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)} style={{display: "flex", alignItems: "center", width: "100%"}}>
-          <ListItemIcon       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <img src={Sidebar_EditorPage} alt=""   style={{ paddingLeft: "3px" }}/>
-            {/* <RiFileEditFill style={{ color: " #FFFFFF", fontSize: "20px" }} /> */}
-          </ListItemIcon>
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
-            <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-              Editor's Page
-            </span>
-          </Typography>
+          <div
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+            style={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
+            <ListItemIcon
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <img
+                src={Sidebar_EditorPage}
+                alt=""
+                style={{ paddingLeft: "3px" }}
+              />
+              {/* <RiFileEditFill style={{ color: " #FFFFFF", fontSize: "20px" }} /> */}
+            </ListItemIcon>
+            <Typography
+              onClick={toggleDrawer(anchor, false)}
+              onKeyDown={toggleDrawer(anchor, false)}
+            >
+              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                Editor's Page
+              </span>
+            </Typography>
           </div>
         </ListItem>
       </List>
-      <span className="subheadingsidebar"  style={{marginTop: "20px"}}>Others </span>
+      <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
+        Others{" "}
+      </span>
       <Divider className="divider_class" />
       <List style={{ paddingLeft: "20px" }}>
-        <ListItem style={{ cursor: "pointer" }}       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+        <ListItem
+          style={{ cursor: "pointer" }}
+          onClick={toggleDrawer(anchor, false)}
+          onKeyDown={toggleDrawer(anchor, false)}
+        >
           <Typography>
             <span className="listitem_text">About D-Libra</span>
           </Typography>
@@ -486,22 +566,69 @@ const handleSearchState = () => {
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/feedback")}
         >
-          <Typography       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+          <Typography
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+          >
             <span className="listitem_text">Feedback</span>
           </Typography>
         </ListItem>
-
-
-
-      
       </List>
     </Box>
   );
 
+
+
+  const Conditional_Searchbar = () => {
+    if("/" === location.pathname){
+      return   "-50px"
+
+    }else if ("/register" === location.pathname){
+      return    "-70px"
+    }else if ("/login" === location.pathname){
+
+      return    "-70px"
+    } else if ( "/logout" === location.pathname){
+      return    "-70px"
+    }else {
+      return    "14px"
+    }
+  }
+
+
+  const Conditional_SearchIcon = () => {
+    if("/" === location.pathname || "/register" === location.pathname || "/login" === location.pathname || "/logout" === location.pathname || "/coursepageguest" === location.pathname || "/searchresult" === location.pathname || "/Tagpage" === location.pathname){
+      return   "wrap"
+    }
+      if("/detailpage" === location.pathname || "/userdetailpage" === location.pathname){   
+           return   "wrapthree"
+    }
+    
+    else {
+      return   "wraptwo"
+    }
+  }
+
+
+
+
+  const Conditional_Sidenavlogo = () => {
+    if("/detailpage" === location.pathname || "/userdetailpage" === location.pathname){
+      return   "sidenav_logotwo"
+
+    }else {
+      return   "sidenav_logo"
+    }
+  }
+
+
   return (
     <>
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        open={open}
+        style={{ display: Pinstate ? "none" : "" }}
+      >
         <Toolbar className={themeState ? "toolbarclasstwo" : "toolbarclassone"}>
           <div>
             {["left"].map((anchor) => (
@@ -511,7 +638,11 @@ const handleSearchState = () => {
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
-                    style={{ color: `${themeState ? "#111111 " : " white"}`, marginLeft: "-50px" }}
+                    style={{
+                      color: `${themeState ? "#111111 " : " white"}`,
+                      position: "absolute",
+                      left: "-10px",
+                    }}
                     sx={{ mr: 2, ...(open && { display: "none" }) }}
                   >
                     <MenuIcon />
@@ -538,44 +669,72 @@ const handleSearchState = () => {
             ))}
           </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               width: "100%",
+              
             }}
           >
-            <Typography>
               <div
                 className={
-                  "/detailpage" === location.pathname ||
-                  "/userdetailpage" === location.pathname
+                  "/detailpage" === location.pathname 
                     ? "logo_main_container_two"
                     : "logo_main_container"
                 }
               >
                 <Button
                   onClick={() => navigate("/")}
-                  style={{
-                    marginLeft: `${"/" === location.pathname ? "-50px" : ""}`,
-                  }}
+                  style={{ marginLeft: Conditional_Searchbar()}}
                 >
                   {themeState ? (
-                    <img src={lightmode_logo} alt="" width='100px' height="20.47"  />
+                    <img
+                      src={lightmode_logo}
+                      alt=""
+                      width="100px"
+                      height="20.47"
+                    />
                   ) : (
-                    <img src={ darkmode_logo} alt=""  width='100px' height="20.47" />
+                    <img
+                      src={darkmode_logo}
+                      alt=""
+                      width="100px"
+                      height="20.47"
+                    />
                   )}
-
-                  {/* <img src={white_icon} alt="" />{" "}
-                  {themeState ? (
-                    <img src={Fill12} alt="" />
-                  ) : (
-                    <img src={Fill1} alt="" />
-                  )} */}
                 </Button>
-              </div>
-            </Typography>
+            </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           {"/detailpage" === location.pathname ||
           "/editormainpage" === location.pathname ||
@@ -586,8 +745,9 @@ const handleSearchState = () => {
           "/editcontentmain" === location.pathname ||
           "/deletecontent" === location.pathname ? (
             <img
+            
               src={editor_icon}
-              style={{ cursor: "pointer" }}
+              className="editoriconsidebar"
               onClick={() => navigate("/editormainpage")}
               alt=""
             />
@@ -595,11 +755,6 @@ const handleSearchState = () => {
             ""
           )}
 
-          <Typography variant="h6" className="toolbar_rowreverse">
-            {"/userdetailpage" === location.pathname ||
-            "/detailpage" === location.pathname ? (
-              ""
-            ) : (
 
 
 
@@ -615,38 +770,19 @@ const handleSearchState = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <div className="toolbar_rowreverse">
+          
               <div>
-                <div style={{ display: "flex", padding: "0px 2px 0px 0px" }}>
+                <div className="mainsearchcontianer" >
                   <input
                     placeholder="Search"
                     className={`${
                       themeState
-                        ? "sidebar_inputfield_sub "
-                        : "  sidebar_inputfield"
+                        ? "sidebar_inputfield_sub"
+                        : "sidebar_inputfield"
                     }`}
                   />
+              
                   <div
                     className={
                       themeState
@@ -656,74 +792,49 @@ const handleSearchState = () => {
                   >
                     {themeState ? (
                       <img
-                        src={VectorBlue}
+                        src={Search}
                         alt=""
-                        className="inputfield_icon"
-                        onClick={handleSearch}
                       />
                     ) : (
                       <img
-                        src={Vector}
+                        src={Search_dark}
                         alt=""
-                        className="inputfield_icon"
-                        onClick={handleSearch}
                       />
                     )}
                   </div>
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div
-                  className="wrap"
-                  style={{ position: "relative", right: "20px", top:" 21px",   marginTop: `${"/" === location.pathname ? "-32px" : ""}`}}
+                  className={Conditional_SearchIcon()}
+                 
                 >
                   <div>
-                  {
-                    themeState ?      <img  onClick={handleSearchState} src={VectorBlue} alt=""/> :     <img   onClick={handleSearchState} src={Vector} alt=""/>
-                  }
-              
-
-
-
-
-
-              
+                    {themeState ? (
+                      <img
+                        onClick={handleSearchState}
+                        src={Search}
+                        alt=""
+                        className="searchiconsize"
+                      />
+                    ) : (
+                      <img    className="searchiconsize" onClick={handleSearchState} src={Search_dark} alt="" />
+                    )}
                   </div>
-
-
-
-
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  {/* <input
-                    className={`search_icon ${
-                      themeState ? "darkThemeBar" : "whitethemeBar"
-                    }`}
-                    type="text"
-                    placeholder="Search"
-                  />
-                  <input
-                    id="search_submit"
-                    type="submit"
-                    className={themeState ? "submitone" : "submittwo"}
-                  /> */}
                 </div>
               </div>
+          
 
 
 
@@ -734,85 +845,104 @@ const handleSearchState = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            )}
-            {"/" === location.pathname ? (
+            {"/" === location.pathname || "/register" === location.pathname || "/logout" === location.pathname || "/login" === location.pathname ? (
               ""
             ) : (
               <img
                 onClick={() => navigate("/usersettingviewpage")}
-                style={{ cursor: "pointer" }}
+               
                 src={Member_Icon}
                 alt=""
-                className="sidenav_logo"
+                className={Conditional_Sidenavlogo()}
+       
               />
             )}
-          </Typography>
+          </div>
           {handleaccordiondrawer()}
         </Toolbar>
-        <div className="Searchb_main" style={{marginTop: "-58px", zIndex: "1", display: searchstate ? "block" : 'none'}} >
-        <div className="main" style={{backgroundColor: `${themeState ? "#F3F6FF" : " black"}`}}>
-          <div className="left_search"  onClick={() => setSearchState(false)}>
-            {
-              themeState ?  <img src={UnionBlue} alt=""  /> :  <img src={Arrow_white} alt=""  />
-            }
-           
-          </div>
-          <div className="right_search" style={{backgroundColor: `${themeState ? "#FFFFFF" : " black"}`}}>
-            <div className="left">
-              <input type="text" placeholder="Search" className={themeState ? "searchbar_input_two" : "searchbar_input"} style={{backgroundColor: `${themeState ? " #FFFFFF" : " #4F4F4F"}`,  color: `${themeState ? "black" : "white"}`}}/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div
+          className="Searchb_main"
+          style={{
+            marginTop: "-58px",
+            zIndex: "1",
+            display: searchstate ? "block" : "none",
+          }}
+        >
+          <div
+            className="main"
+            style={{ backgroundColor: `${themeState ? "#F3F6FF" : "  #111111"}` }}
+          >
+            <div className="left_search" onClick={() => setSearchState(false)}>
+              {themeState ? (
+                <img src={UnionBlue} alt="" />
+              ) : (
+                <img src={Arrow_white} alt="" />
+              )}
             </div>
-            <div className="right" style={{backgroundColor :`${themeState ? " #FFFFFF" : "#4F4F4F"}`}}>
-              {
-                themeState ?    <img src={VectorBlue} alt="" style={{position: "absolute", right: "28px"}}/> :    <img src={Vector} alt=""  style={{position: "absolute", right: "28px"}}/>
-              }
-           
+            <div
+              className="right_search"
+              style={{
+                backgroundColor: `${themeState ? "#FFFFFF" : "  #111111"}`,
+              
+              }}
+            >
+              <div className="left" >
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className={
+                    themeState ? "searchbar_input_two" : "searchbar_input"
+                  }
+                  style={{
+                    backgroundColor: `${themeState ? " #FFFFFF" : " #4F4F4F"}`,
+                    color: `${themeState ? "black" : "white"}`,
+                  }}
+                />
+              </div>
+              <div
+                className="right"
+                style={{
+                  backgroundColor: `${themeState ? " #FFFFFF" : "#4F4F4F"}`,
+                }}
+              >
+                {themeState ? (
+                  <img
+                    src={Search}
+                    alt=""
+                    style={{ position: "absolute", right: "20px", width: "22px", height: "22px"}}
+                  />
+                ) : (
+                  <img
+                    src={Search_dark}
+                    alt=""
+                    style={{ position: "absolute", right: "20px", width: "22px", height: "22px"}}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </AppBar>
     </>
   );

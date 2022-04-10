@@ -44,16 +44,16 @@ const Register = () => {
 
   return (
     <>
-      <button
+       <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? "black" : "white"}` }}
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-        <ArrowBack style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
       </button>
 
-      <div className="editormainpage_root_contianer">
+      <div className="registermaincontainer">
         <div
           style={{
             paddingTop: "20px",

@@ -40,19 +40,16 @@ import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 
 function App() {
   const theme = useSelector((state) => state.theme.state);
-
   return (
     <>
       <div className={theme ? "lightTheme" : "darkTheme"}>
         <Router>
           <Sidebar />
-
           <div>
             <Routes>
               <Route path="/" exact element={<LandingPage />} />
               <Route path="/mycontents" exact element={<MyContents />} />
 
-              {/* Auth Routes */}
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/logout" element={<Logout />} />
@@ -89,7 +86,6 @@ function App() {
                 exact
                 element={<EditContentMain />}
               />
-
               <Route path="/feedback" exact element={<Feedback />} />
               <Route path="/ratingsidebar" exact element={<RatingSidebar />} />
               <Route
@@ -98,7 +94,7 @@ function App() {
                 element={<UserSettingViewPage />}
               />
               <Route path="/ratingform" exact element={<RatingForm />} />
-              {/* <Route path="/LandingPage" exact element={<LandingPage />} /> */}
+            
               <Route
                 path="/librarybookmark"
                 exact
@@ -134,9 +130,6 @@ function App() {
               />
             </Routes>
           </div>
-          {/* <div style={{position: "absolute", bottom: "0"}}> */}
-
-          {/* </div> */}
         </Router>
         <FooterCopyright />
       </div>
