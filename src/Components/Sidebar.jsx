@@ -103,8 +103,10 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [searchstate, setSearchState] = React.useState(false);
 
-  const handleSearchState = () => {
+  const handleSearchState = (e) => {
+    e.preventDefault()
     setSearchState(true);
+    console.log(searchstate)
   };
 
   const handleAccordionIcon = async () => {
@@ -129,13 +131,13 @@ export default function Sidebar() {
     setState({ ...state, [anchor]: open });
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
 
-    if (window.innerWidth < 768) {
-      alert("");
-    }
-  };
+  //   if (window.innerWidth < 768) {
+  //     alert("");
+  //   }
+  // };
 
 
 
@@ -590,8 +592,11 @@ export default function Sidebar() {
       return    "-70px"
     } else if ( "/logout" === location.pathname){
       return    "-70px"
-    }else {
-      return    "14px"
+    }else if("/mycontents" === location.pathname){
+      return    "10px"
+    }
+    else if("/feedback" === location.pathname || "/ratingsidebar" === location.pathname || "/ratingform" === location.pathname || "/usersettingviewpage" === location.pathname){
+      return    "-40px"
     }
   }
 
@@ -885,6 +890,7 @@ export default function Sidebar() {
           className="Searchb_main"
           style={{
             marginTop: "-58px",
+            
             zIndex: "1",
             display: searchstate ? "block" : "none",
           }}

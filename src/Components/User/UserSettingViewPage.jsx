@@ -9,6 +9,7 @@ import Vector91 from "../../assests/Vector91.png";
 import Member_Icon from '../../assests/SVG_Files/Member_Icon.svg'
 import addwhite from "../../assests/addwhite.png";
 import addblack from "../../assests/addblack.png";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { MdModeEditOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
 import "./UserSettingViewPage.css";
@@ -58,15 +59,21 @@ const UserSettingViewPage = () => {
     navigate("/changepassword");
   };
 
+
+  const handleBack = () => {
+
+  }
   return (
     <div>
-     <button
-          className="back_button usersettingbackbutton"
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+  
+ <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
       {validation ? (
         firstName && lastName !== "" ? (
           message ? (
@@ -109,9 +116,11 @@ const UserSettingViewPage = () => {
               </Button>
             </div>
           </div>
+
+
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark_two"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               Username
@@ -122,9 +131,9 @@ const UserSettingViewPage = () => {
               value={username}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column"}}>
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark_two"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               E-mail Address
@@ -168,7 +177,7 @@ const UserSettingViewPage = () => {
         <div className="user_bookmark_container">
           <div className="hidden_user_input">
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               Bookmark Name
@@ -190,7 +199,7 @@ const UserSettingViewPage = () => {
             style={{
               color: `${theme ? "#363636" : "white"}`,
               marginTop: "20px",
-              marginBottom: "-8px"
+              marginBottom: "-5px"
             }}
           >
             Bookmark Name

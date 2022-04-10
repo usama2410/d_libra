@@ -243,11 +243,11 @@ const UploadContentMain = () => {
                 </div>
               </Grid>
             </Grid>
-            <div style={{ marginTop: "50px" }}>
+            <div className="editormaincontainer">
               <span className="addcategory_text">Edit Main Content</span>
               <div
                 style={{
-                  padding: "10px 10px 10px 10px",
+                  padding: "5px 5px 0px 5px",
                   backgroundColor: `${theme ? "white" : "#4f4f4f"}`,
                 }}
                 className="editorstatecontainer"
@@ -259,8 +259,11 @@ const UploadContentMain = () => {
               </div>
             </div>
           </div>
-          <button className="update_button_new">Update</button>
+       
         </Grid>
+        <div style={{width: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+       <button className="update_button_new">Update</button>
+       </div>
       </Grid>
     </>
   );

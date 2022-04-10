@@ -4,18 +4,23 @@ import { Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const EditorsMainPage = () => {
   const navigate = useNavigate();
+  const handleBack = () => {
+
+  }
   const theme = useSelector((state) => state.theme.state);
   return (
     <>
-     <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+      <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
 
       <div className="editormainpage_root_contianer">
         <div>

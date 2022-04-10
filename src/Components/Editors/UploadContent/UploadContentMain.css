@@ -1,19 +1,11 @@
-
-.editorstatecontainer{
+.editorstatecontainer {
   width: 100%;
   min-height: 457px;
 }
 
-
-
-
-
-
-
-
-
-
-
+.editormaincontainer {
+  margin-top: 50px;
+}
 
 .addcategory_textarea_sub {
   width: 100% !important;
@@ -65,7 +57,7 @@
   align-items: center !important;
   letter-spacing: -0.015em !important;
   border: none;
-     padding: 10px 10px;
+  padding: 10px 10px;
   color: #ffffff !important;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
@@ -159,7 +151,7 @@ textarea.addcategory_input_sub {
 
 .update_button_new {
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
-  border-radius: 12px;
+  border-radius: 15px;
   /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 400;
   font-size: 21px;
@@ -168,13 +160,15 @@ textarea.addcategory_input_sub {
   align-items: center;
   text-align: center;
   border: none;
-  width: 170px;
+  height: 40px;
+  width: 200px;
   justify-content: center;
-  margin-top: 14px;
-  margin-left: 38px;
+  margin-top: 51px;
+
   padding: 6px 10px;
   letter-spacing: -0.015em;
   color: #ffffff;
+  margin-bottom: 40px;
 }
 
 .main_slide_container {
@@ -192,17 +186,22 @@ textarea.addcategory_input_sub {
   }
 }
 
+@media screen and (max-width: 960px) {
+  .editormaincontainer {
+    margin-top: 0px;
+  }
 
+  .reactdraftcontainer {
+    padding: 10px 0px !important;
+    margin-top: -15px !important;
+  }
+}
 
 @media screen and (max-width: 600px) {
-
-
   .main_root_container_upload_content {
     padding: 0px 20px;
     /* margin-left: 8px; */
   }
-
-
 
   .addcategory_textarea_sub {
     width: 100% !important;
@@ -219,7 +218,7 @@ textarea.addcategory_input_sub {
 
     color: #ffffff !important;
   }
-  
+
   .addcategory_textarea {
     width: 100% !important;
     height: 175px !important;
@@ -235,29 +234,23 @@ textarea.addcategory_input_sub {
 
     color: #363636 !important;
   }
-  
 
+  .update_button_new {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    margin-top: 37px;
+    padding: 6px 10px;
+    margin-bottom: 40px;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    height: 30px;
+    width: 200px;
+  }
 
   .uploadcontentinputfield {
     background: #4f4f4f !important;
@@ -363,12 +356,5 @@ textarea.addcategory_input_sub {
     align-items: center !important;
     text-align: center !important;
     letter-spacing: -0.015em !important;
-  }
-}
-@media screen and (max-width: 336px) {
- 
-  .reactdraftcontainer {
-    padding: 10px 0px !important;
-    margin-top: -15px !important;
   }
 }
