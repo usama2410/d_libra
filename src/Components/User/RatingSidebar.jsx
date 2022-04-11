@@ -44,7 +44,7 @@ const RatingSidebar = () => {
         >
           <Rating
             name="simple-controlled"
-            style={{fontSize : '40px'}}
+            style={{fontSize : '48px'}}
             emptyIcon={<StarIcon style={{ color :'#C4C4C4'  }} fontSize="inherit" />}
             // className="ratingform_root_sub_two"
             value={value}

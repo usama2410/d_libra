@@ -1,3 +1,7 @@
+.rating_form_root_container_two {
+  margin-top: 10vh;
+}
+
 .ratingform_root_four {
   display: flex;
   width: 100%;
@@ -8,7 +12,7 @@
   margin-bottom: 40px;
 }
 
-.ratingform_root_four_five{
+.ratingform_root_four_five {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -129,6 +133,24 @@
   margin-bottom: 40px;
 }
 
+.ratingform_root_two_two {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vh;
+}
+
+.ratingform_root_three_three {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+}
+
 .rating_form_sub_span {
   width: 600px;
 }
@@ -167,7 +189,7 @@
   position: fixed;
   display: flex;
   bottom: 15px;
-  left: 0;
+  left: 9px;
 }
 
 .footer_buttons > img {
@@ -232,7 +254,7 @@
   align-items: center;
   text-align: center;
   letter-spacing: -0.015em;
-
+  padding-bottom: 15px;
   /* Font_Subtitle_Light */
 
   color: #008eec;
@@ -241,8 +263,9 @@
 .ratingform_image {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 5px;
-  height: 225.24px;
-  width: 300.32px;
+
+  width: 300px !important;
+  height: 225.24px !important;
 }
 
 .ratingform_root_three {
@@ -322,6 +345,13 @@
   /* border: 1px solid white !important; */
 }
 
+@media screen and (max-width: 640px) {
+  .rating_form_sub_four {
+    /* display: flex; */
+    width: 600px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .ratingform_root_span_sub {
     /* font-family: "d"; */
@@ -333,7 +363,7 @@
     align-items: center;
     text-align: center;
     letter-spacing: -0.015em;
-
+    padding-bottom: 10px;
     /* BG_Title_Header */
 
     background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
@@ -343,10 +373,43 @@
     text-fill-color: transparent;
   }
 
-  .ratingsidebarcomponent {
-    margin-top: 130px;
+  .ratingform_root_span {
+    /* font-family: "d"; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+    padding-bottom: 10px;
+    /* Font Body Dark */
+
+    color: #ffffff;
   }
-  
+
+  .ratingform_image {
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+    /* border-radius: 5px; */
+
+    width: 223.76px !important;
+    object-fit: contain !important;
+    height: 163.59px !important;
+  }
+
+  .ratingsidebarcomponent {
+    margin-top: 10vh;
+  }
+
+  .ratingform_root_three_three {
+    margin-top: 0vh;
+  }
+
+  .rating_form_root_container_two {
+    margin-top: 2vh;
+  }
+
   .ratingform_root_five {
     display: flex;
     flex-direction: column;
@@ -355,8 +418,8 @@
     margin-top: 20px;
     width: 100%;
   }
-  
-  .ratingform_root_four_five{
+
+  .ratingform_root_four_five {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -405,22 +468,6 @@
     margin-bottom: 13px !important;
   }
 
-  .ratingform_root_span {
-    /* font-family: "d"; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.015em;
-
-    /* Font Body Dark */
-
-    color: #ffffff;
-  }
-
   .rating_form_sub_four {
     width: 200px !important;
   }
@@ -433,7 +480,7 @@
   }
 
   .user_buttons_sub_three_hidden {
-    width: 300px;
+    width: 380px;
     display: flex;
     justify-content: flex-end;
     margin-top: -20px;
@@ -452,6 +499,7 @@
   .ratingform_root_span_one {
     /* font-family: "d"; */
     font-style: normal;
+    margin-top: -14px;
     font-weight: 700;
     font-size: 14px;
     line-height: 16px;
@@ -469,6 +517,7 @@
   }
   .rating_form_span_two {
     font-size: 13px;
+    padding-bottom: 0px;
   }
 
   .ratingform_root_two {
@@ -517,7 +566,7 @@
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 380px) {
   .rating_form_sub_four {
     width: 180px !important;
   }
@@ -529,6 +578,9 @@
     width: 300px !important;
   }
 
+  .user_buttons_sub_three_hidden {
+    width: 300px;
+  }
 
   .rating_form_sub_span {
     width: 300px;

@@ -1,3 +1,8 @@
+.deletecontentimage{
+  width: 300px;
+  height: 225px;
+}
+
 .delete_content_main_container {
   display: flex;
   align-items: center;
@@ -7,7 +12,7 @@
 }
 
 .deletecontentcontainer{
-  margin-top: 120px;
+  margin-top: 16vh;
   width: 100%;
   padding-bottom: 40px;
 }
@@ -114,6 +119,9 @@ letter-spacing: -0.015em;
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    width: 100%;
     letter-spacing: -0.015em;
     color: #ffffff;
   }
@@ -137,6 +145,29 @@ letter-spacing: -0.015em;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+  }
+  .delete_content_button{
+    font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 18px;
+display: flex;
+align-items: center;
+text-align: center;
+width: 200px;
+height: 30px;
+letter-spacing: -0.015em;
+  }
+
+  .deletecontentimage{
+    width: 200px;
+    height: 150px;
+  }
+
+  .deletecontentcontainer{
+    margin-top: 3vh;
+    width: 100%;
+    padding-bottom: 40px;
   }
 }
 

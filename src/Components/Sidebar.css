@@ -1,3 +1,27 @@
+.logocontainertwo{
+  position: relative;
+  left: -40px;
+  top: 0;
+}
+
+.logocontainerthree{
+  position: relative;
+  left: -15px;
+  top: 0;
+  /* border: 1px solid red !important; */
+}
+
+.logocontainerone{
+   position: relative;
+   left: -30px;
+}
+
+.hamburgericonsidebar{
+  width: 30px !important;
+  /* border: 1px solid red; */
+  height: 22.5px !important;
+}
+
 .searchiconsize {
 }
 
@@ -467,14 +491,30 @@ input[type="submit"]:hover {
   height: 40px;
 }
 
-@media screen and (max-width: 978px) {
+@media screen and (max-width: 1012px) {
   .logo_main_container {
     padding-left: 0px;
     position: relative;
     right: -100px;
   }
 
+  .logocontainerone{
+    position: relative;
+    left: -20px;
+ }
 
+ .logocontainerthree{
+  position: relative;
+  left: -5px;
+  top: 0;
+  /* border: 1px solid red !important; */
+}
+
+ .logocontainertwo{
+  position: relative;
+  left: -30px;
+  top: 0;
+}
   .logo_main_container_two {
     padding-left: 0px;
     position: relative;
@@ -483,7 +523,6 @@ input[type="submit"]:hover {
   .sidebar_inputfield {
     width: 180px;
   }
-
   .sidebar_inputfield_sub {
     width: 180px;
   }
@@ -503,30 +542,30 @@ input[type="submit"]:hover {
   .sidebar_inputfield {
     width: 180px;
   }
-
   .sidebar_inputfield_sub {
     width: 180px;
   }
 }
 
-@media screen and (max-width: 732px) {
+@media screen and (max-width: 755px) {
   .divider_class {
     width: 197px !important;
   }
-
   .switch_class {
     margin: 8px 0px 0px 100px;
   }
-
   .editoriconsidebar {
     width: 30px;
     height: 30px;
     position: relative;
     left: 0px;
     margin-right: -10px;
-    /* border: 1px solid red; */
   }
-
+  .hamburgericonsidebar{
+    width: 20px !important;
+    height: 14.6px !important;
+    margin-left: 10px;
+  }
   .searchiconsize {
     width: 22px;
     height: 22px;
@@ -622,6 +661,16 @@ input[type="submit"]:hover {
     width: 30px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .profilesidebaricon {
+    margin-left: -4px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
 
 @media screen and (max-width: 490px) {
   input[type="text"]:focus {

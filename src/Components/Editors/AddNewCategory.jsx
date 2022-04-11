@@ -163,14 +163,17 @@ const AddNewCategory = () => {
             )}
           </div>
         </div>
+        <div  className="update_button_newcategory">
+
         <button
-          className="update_button"
+          className="update_button   "
           onClick={handleSubmit}
           style={{ marginBottom: "40px" }}
         >
           Update
         </button>
       </div>
+          </div>
     </>
   );
 };

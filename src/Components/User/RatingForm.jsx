@@ -7,37 +7,42 @@ import Rating from "@mui/material/Rating";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import "./RatingForm.css";
+import GitGitHubIntroduction from '../../assests/SVG_Files/Slides/GitGitHubIntroduction.svg'
 import StarIcon from '@mui/icons-material/Star';
 const RatingForm = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
+  const handleBack = () => {
+
+  }
   return (
     <>
-
-<button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+ <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
     
-      <div className="rating_form_root_container" style={{marginTop: "12px"}}>
+      <div className="rating_form_root_container_two">
         <div className="ratingform_root">
           <span
             className={theme ? "ratingform_root_span_sub" : "ratingform_root_span"}
-            style={{paddingBottom: "20px"}}
+            // style={{paddingBottom: "20px"}}
           >
             Please rate the content of
           </span>
-          <div>
-            <img src={image5} alt="" className="ratingform_image" style={{paddingBottom: "8px"}}/>
-          </div>
+         
+            <img src={GitGitHubIntroduction} alt="" className="ratingform_image"/>
+      
         </div>
 
-        <div className="ratingform_root_two">
+        <div className="ratingform_root_two_two">
           <span
             className="ratingform_root_span_one"
             style={{ color: `${theme ? "black" : "white"}` }}
@@ -48,7 +53,7 @@ const RatingForm = () => {
 
           <Rating
             name="simple-controlled"
-            style={{fontSize : '36px'}}
+            style={{fontSize : '48px'}}
             className="ratingform_root_sub_two"
             value={value}
             
@@ -61,7 +66,7 @@ const RatingForm = () => {
         </div>
       </div>
 
-      <div className="ratingform_root_three" style={{paddingBottom: "20px"}}>
+      <div className="ratingform_root_three_three">
         <div className="rating_form_sub_span">
           <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Rating Comments:</span>
         </div>

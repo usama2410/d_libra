@@ -25,6 +25,8 @@ const EditorsMainPage = () => {
       <div className="editormainpage_root_contianer">
         <div>
           <Typography variant="h6" noWrap component="div">
+         
+
             <span
               className={
                 theme ? "editors_menu_heading_sub" : "editors_menu_heading"
@@ -32,6 +34,7 @@ const EditorsMainPage = () => {
             >
               Editor's Menu
             </span>
+             
           </Typography>
         </div>
 

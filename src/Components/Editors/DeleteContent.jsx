@@ -5,6 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import {useSelector} from 'react-redux'
 import "./DeleteContent.css";
+import WhatIsGit_ from '../../assests/SVG_Files/Slides/WhatIsGit_.svg'
 import image5 from "../../assests/image5.png";
 const DeleteContent = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const DeleteContent = () => {
           <div className={theme ? "delete_content_texttwo_sub" : "delete_content_texttwo"}>
             <span>What is Git?</span>
           </div>
-          <img src={image5} alt="" />
+          <img src={WhatIsGit_} alt="" className="deletecontentimage"/>
           <div
             style={{
               widthy: "100%",

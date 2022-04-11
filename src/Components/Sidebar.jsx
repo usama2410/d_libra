@@ -39,6 +39,8 @@ import Accordian from "./Guest/Accordian/Accordian";
 import Recent_view_dark from "../assests/SVG_Files/Recent_view_dark.svg";
 import Search_dark from '../assests/SVG_Files/New folder/icons/Search_dark.svg'
 import Search from '../assests/SVG_Files/New folder/icons/Search.svg'
+import Hamburger_Menu_light from '../assests/SVG_Files/New folder/Hamburger_Menu_light.svg'
+import Hamburger_Menu_dark from '../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg'
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -312,7 +314,7 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "3px" }} />
+              <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "2px" }} />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -583,20 +585,15 @@ export default function Sidebar() {
 
   const Conditional_Searchbar = () => {
     if("/" === location.pathname){
-      return   "-50px"
+      return    "logocontainerone"
 
-    }else if ("/register" === location.pathname){
-      return    "-70px"
-    }else if ("/login" === location.pathname){
-
-      return    "-70px"
-    } else if ( "/logout" === location.pathname){
-      return    "-70px"
+    }else if ("/register" === location.pathname || "/login" === location.pathname || "/logout" === location.pathname ){
+      return     "logocontainertwo"
     }else if("/mycontents" === location.pathname){
       return    "10px"
     }
     else if("/feedback" === location.pathname || "/ratingsidebar" === location.pathname || "/ratingform" === location.pathname || "/usersettingviewpage" === location.pathname){
-      return    "-40px"
+      return   "logocontainerthree"
     }
   }
 
@@ -644,13 +641,16 @@ export default function Sidebar() {
                     aria-label="open drawer"
                     edge="start"
                     style={{
-                      color: `${themeState ? "#111111 " : " white"}`,
+                      // color: `${themeState ? "#111111 " : " white"}`,
                       position: "absolute",
                       left: "-10px",
                     }}
                     sx={{ mr: 2, ...(open && { display: "none" }) }}
                   >
-                    <MenuIcon />
+                    {
+                      themeState ?      <img src={Hamburger_Menu_light} alt="" className="hamburgericonsidebar" /> :      <img src={Hamburger_Menu_dark} alt=""  className="hamburgericonsidebar"  />
+                    }
+               
                   </IconButton>
                 </Button>
                 <SwipeableDrawer
@@ -706,7 +706,8 @@ export default function Sidebar() {
               >
                 <Button
                   onClick={() => navigate("/")}
-                  style={{ marginLeft: Conditional_Searchbar()}}
+                  className={Conditional_Searchbar()}
+                  // style={{ marginLeft: Conditional_Searchbar()}}
                 >
                   {themeState ? (
                     <img

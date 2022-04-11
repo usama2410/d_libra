@@ -37,30 +37,33 @@ const UserDetailPage = () => {
   const [transform, setTransform] = React.useState(false);
   // const accordion = useSelector((state) => state.accordion.state)
 
-  
-
   const handlePinState = async () => {
     setPinState(!pinstate);
     setTransform(!transform);
-     await dispatch(pinState(!pinstate))
-    //  dispatch(themeSwitch(!themeState));
+    await dispatch(pinState(!pinstate));
   };
 
   const handle = () => {
     if (pinstate === true && theme === true) {
       return "linear-gradient(180deg, #F3F6FF 82.81%, rgba(243, 246, 255, 0) 100%)";
-    }else if (pinstate === false && theme === true) {
+    } else if (pinstate === false && theme === true) {
       return "#EEEEEE";
-    }else if (pinstate === true && theme === false) {
+    } else if (pinstate === true && theme === false) {
       return "linear-gradient(180deg, #363636 82.81%, rgba(54, 54, 54, 0) 100%)";
     } else if (pinstate === false && theme === false) {
       return " #111111";
     }
   };
 
+  React.useEffect(async () => {
+    await dispatch(pinState(pinstate));
+  }, []);
+
   return (
     <>
-      <div style={{ position: pinstate ? "fixed" : "", top: pinstate ? "0" : ""}}>
+      <div
+        style={{ position: pinstate ? "fixed" : "", top: pinstate ? "0" : "" }}
+      >
         <div
           className="detailpage_root_container"
           style={{ paddingTop: "35px" }}
@@ -76,9 +79,9 @@ const UserDetailPage = () => {
           <Grid container>
             <Grid
               item
-              lg={4}
+              lg={6}
               md={6}
-              sm={6}
+              sm={12}
               xs={12}
               style={{
                 background: handle(),
@@ -92,7 +95,7 @@ const UserDetailPage = () => {
                     alignItems: "center",
                     justifyContent: " center",
                     transition: "transform .2s",
-                    transform: transform && "scale(95%)",
+                    transform: transform && "scale(97%)",
                     padding: `${pinstate ? "0px 0px" : "5px 5px"}`,
                   }}
                 >
@@ -111,7 +114,7 @@ const UserDetailPage = () => {
               ))}
               <div
                 className={pinstate ? "pincontainertwo" : "pincontainer"}
-                style={{ paddingRight: "10px" }}
+                // style={{ paddingRight: "10px" }}
               >
                 {/* pincontainer */}
                 <button
@@ -142,12 +145,11 @@ const UserDetailPage = () => {
               </div>
             </Grid>
 
-            <Grid item lg={8} md={6} sm={6} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <div
                 className="detail_page_content"
                 style={{
-                  marginTop: `${pinstate ? "-20px" : ""}`,
-                  height: `${pinstate ? "220px" : "100%"}`,
+                  height: `${pinstate ? "50vh" : "100%"}`,
                   overflow: `${pinstate ? "scroll" : "visible"}`,
                 }}
               >
@@ -198,7 +200,7 @@ const UserDetailPage = () => {
                   <div
                     style={{
                       display: "flex",
-                      paddingBottom: pinstate ? "100px" : "",
+                      paddingBottom: pinstate ? "15vh" : "",
                     }}
                   >
                     <span className="detail_tag_text"> Tag: </span>
@@ -221,7 +223,7 @@ const UserDetailPage = () => {
               width: "100%",
               backgroundColor: "#F3F6FF",
               position: "fixed",
-              bottom: "0",
+              bottom: "-1px",
               height: "64px",
               flexDirection: "column",
             }}
@@ -272,7 +274,7 @@ const UserDetailPage = () => {
               justifyContent: "center",
               width: "100%",
               position: "fixed",
-              bottom: "0",
+              bottom: "-1px",
               height: "64px",
               background: "#111111",
               flexDirection: "column",

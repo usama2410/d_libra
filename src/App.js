@@ -37,8 +37,10 @@ import Searchresult from "./Components/Extras/Searchresult";
 import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 import CourseMainPage from "./Components/Guest/LandingPG/CourseMainPage";
 import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
+// import {useLocation} from 'react-router-dom'
 
 function App() {
+  // const location = useLocation()
   const theme = useSelector((state) => state.theme.state);
   return (
     <>

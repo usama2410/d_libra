@@ -87,7 +87,7 @@ const EditCourseStructure = () => {
           <Typography variant="h6" noWrap component="div">
             <span
               className={
-                theme ? "editors_menu_heading_sub" : "editors_menu_heading"
+                theme ? "editors_menu_heading_sub_two" : "editors_menu_heading"
               }
        
             >

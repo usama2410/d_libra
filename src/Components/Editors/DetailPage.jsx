@@ -8,6 +8,7 @@ import Vectortag from "../../assests/VectorTag.png";
 import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import Polygon4 from "../../assests/Polygon4.png";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import Polygon5 from "../../assests/Polygon5.png";
 import { useSelector } from "react-redux";
 import NextButton from "../../assests/NextButton.png";
@@ -29,20 +30,22 @@ const DetailPage = () => {
   const [enddata, setEndData] = React.useState(1);
   const [pinstate, setPinState] = React.useState(false);
   const [transform, setTransform] = React.useState(false);
+  const handleBack = () =>{
 
+  }
   return (
     <>
       <div className="detailpage_root_container ">
         <div className="backbutton_disable">
 
         <button
-          onClick={() => navigate("/")}
-          className="back_button "
-          style={{ color: "white" }}
-          >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
-        </button>
+        onClick={handleBack}
+        className="back_button"
+        style={{ color:  "#FFFFFF " }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
           </div>
         {userdata.slice(startdata, enddata).map((item) => (
           <span className="header_text detailpagetext">{item.text}</span>
@@ -55,6 +58,7 @@ const DetailPage = () => {
             {userdata.slice(startdata, enddata).map((item) => (
               <div
               className="detailpagesubcontainertwo"
+              
     
               >
                 <img src={item.image} alt="" className="detail_page_image" />
@@ -62,7 +66,7 @@ const DetailPage = () => {
             ))}
 
             <div className="buttons_container_detail_page">
-              <div style={{ display: "flex", paddingLeft: "14px" }}>
+              <div className="deleteeditcontainer">
                 <button
                   className="detail_delete_button"
                   onClick={() => navigate("/deletecontent")}
@@ -77,11 +81,11 @@ const DetailPage = () => {
                 </button>
               </div>
               <div className="tags_wrapper_one">
-                <span className="detail_tag_text"> Tag: </span>
+                <span className="detail_tag_text "> Tag: </span>
                 <button className="detail_tag_button">Git</button>
                 <button className="detail_tag_button">GitHub</button>
                 <button className="detail_tag_button">DevOps</button>
-                <img src={Vectortag} alt="" style={{paddingLeft: "24px"}}/>
+                <img src={Vectortag} alt="" className="detail_tag_text_two" style={{paddingLeft: "24px"}}/>
               </div>
             </div>
           </Grid>
@@ -141,13 +145,13 @@ const DetailPage = () => {
             <div style={{position:"fixed", bottom: "30px",left: "0", zIndex: "1"}}>
 
             <button
-          onClick={() => navigate("/")}
-          className="back_button"
-          style={{ color: "white" }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "10px", fontSize: "13px" }}>Back</span>
-        </button>
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
           </div>
           </Grid>
         </Grid>
@@ -162,7 +166,7 @@ const DetailPage = () => {
             width: "100%",
             backgroundColor: "#F3F6FF",
             position: "fixed",
-            bottom: "0",
+            bottom: "-1px",
             height: "64px",
             flexDirection: "column",
           }}
@@ -204,7 +208,7 @@ const DetailPage = () => {
                 />
             </Button>
                 </div>
-            <span className="userdetailpagefootertext">
+            <span className="userdetailpagefootertexttwo">
               © D-Libra All Rights Reserved
             </span>
           </div>
@@ -217,14 +221,14 @@ const DetailPage = () => {
             justifyContent: "center",
             width: "100%",
             position: "fixed",
-            bottom: "0",
+            bottom: "-1px",
             height: "64px",
             flexDirection: "column",
             background: "#111111",
           }}
         >
           <div style={{ marginTop: "-8px", display: "flex", flexDirection: "column" , alignItems: "center"}}>
-            <div  className="footerbuttoncontainer">
+            <div  className="footerbuttoncontainer" >
 
             <Button
               style={{ marginLeft: "16px" }}
@@ -258,7 +262,7 @@ const DetailPage = () => {
                 />
             </Button>
                 </div>
-            <span className="userdetailpagefootertext">
+            <span className="userdetailpagefootertexttwo">
               © D-Libra All Rights Reserved
             </span>
           </div>
