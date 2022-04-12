@@ -112,6 +112,8 @@ const UserDetailPage = () => {
                   />
                 </div>
               ))}
+              <div style={{position: "relative"}}>
+
               <div
                 className={pinstate ? "pincontainertwo" : "pincontainer"}
                 // style={{ paddingRight: "10px" }}
@@ -133,6 +135,7 @@ const UserDetailPage = () => {
                   <img src={pinstate ? PinBlue : Pin} alt="" />
                 </button>
               </div>
+                </div>
 
               <div className="buttons_container_detail_page">
                 <div className="tags_wrapper_one">

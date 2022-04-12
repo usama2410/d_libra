@@ -12,7 +12,7 @@
   background-color: #111111;
   color: white;
 
-  padding-top: 64px;
+  padding-top: 58px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
 .lightTheme {
   background: #F3F6FF;
   color: black;
-  padding-top: 64px;
+  padding-top: 58px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,11 +39,10 @@
 
 @media screen and (max-width: 600px) {
   .darkTheme {
-    padding: 50px 0px;
+    padding: 40px 0px;
   }
-
-  /* .lightTheme {
-    padding: 50px 0px;
+   .lightTheme {
+    padding: 40px 0px;
   }
- */
+ 
 }

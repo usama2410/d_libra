@@ -193,7 +193,7 @@
   align-items: center;
   justify-content: center;
   /* background: #eeeeee; */
-  bottom: 0;
+  /* bottom: 0; */
 }
 
 .footer_copyright_three {
@@ -202,8 +202,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f3f6ff;
-  bottom: 0;
+  /* background: #f3f6ff; */
+  /* bottom: 0; */
 }
 
 .footer_buttons_container {

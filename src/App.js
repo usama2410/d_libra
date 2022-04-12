@@ -42,6 +42,9 @@ import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 function App() {
   // const location = useLocation()
   const theme = useSelector((state) => state.theme.state);
+
+
+  
   return (
     <>
       <div className={theme ? "lightTheme" : "darkTheme"}>

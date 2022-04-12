@@ -4,6 +4,7 @@ import { Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import FooterCopyright from '../User/FooterCopyright'
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const EditorsMainPage = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const EditorsMainPage = () => {
 
   return (
     <>
-      <div style={{ background: handleBackgroung() }}>
+      <div style={{ background: handleBackgroung()}}>
         <button
           onClick={handleBack}
           className="back_button"
@@ -99,6 +100,10 @@ const EditorsMainPage = () => {
             </div>
           </div>
         </div>
+     {/* <div style={{position: "absolute", bottom: "0", width: "100%", display: "flex", justifyContent: }}>
+
+     <FooterCopyright/>
+     </div> */}
       </div>
     </>
   );
