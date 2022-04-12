@@ -13,9 +13,21 @@ const DeleteContent = () => {
   const handleBack = () => {
 
   }
+
+  const handleBackgroung = () => {
+    if (
+      theme === true &&
+      window.location.href.split("/")[3] === "deletecontent"
+    ) {
+      return "#eeeeee";
+    }
+  };
+
   return (
     <>
-     
+
+    <div style={{background: handleBackgroung()}}>
+      
      <button
         onClick={handleBack}
         className="back_button"
@@ -53,6 +65,8 @@ const DeleteContent = () => {
       </div>
    
       </div>
+    </div>
+     
     </>
   );
 };

@@ -17,8 +17,11 @@ import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { getMainCategory } from "../../Redux/Actions/Editor/Category";
-import EditCourseStructureData from './EditCourseStructureData'
+import {
+  getMainCategory,
+  getParentChildCategories,
+} from "../../Redux/Actions/Editor/Category";
+import EditCourseStructureData from "./EditCourseStructureData";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -59,25 +62,30 @@ const EditCourseStructure = () => {
     // console.log("response  getMainCategory", response);
     setResult(EditCourseStructureData);
   };
-  const handleBack = () => {
-
-  }
+  const handleBack = () => {};
   useEffect(() => {
     mainCategories();
-    parentChildCategories();
+    getParentChildCategories();
   }, []);
+
+  const handleBackgroung = () => {
+    if (
+      theme === true &&
+      window.location.href.split("/")[3] === "editcoursestructure"
+    ) {
+      return "#eeeeee";
+    }
+  };
   return (
-    <div style={{ height: "100%" }}>
-    
-    <button
+    <div style={{ height: "100%", background: handleBackgroung() }}>
+      <button
         onClick={handleBack}
         className="back_button"
         style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-         <ArrowBack className="backbutton_icon" />{" "}
+        <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
-
 
       <div className="editcoursestructurecontainer">
         <div>
@@ -95,14 +103,15 @@ const EditCourseStructure = () => {
               className={
                 theme ? "editors_menu_heading_sub_two" : "editors_menu_heading"
               }
-       
             >
               Edit Course Structure
             </span>
           </Typography>
         </div>
       </div>
-      <div style={{ background: "#111111", color: "white", paddingBottom: "40px"}}>
+      <div
+        style={{ background: "#111111", color: "white", paddingBottom: "40px" }}
+      >
         <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
           <Grid container>
             <Grid item lg={2} md={3} sm={12} xs={12}>

@@ -30,69 +30,77 @@ const DetailPage = () => {
   const [enddata, setEndData] = React.useState(1);
   const [pinstate, setPinState] = React.useState(false);
   const [transform, setTransform] = React.useState(false);
-  const handleBack = () =>{
+  const handleBack = () => {};
 
-  }
+  const handleBackgroung = () => {
+    if (
+      theme === true &&
+      window.location.href.split("/")[3] === "detailpage"
+    ) {
+      return "#eeeeee";
+    }
+  };
   return (
     <>
-      <div className="detailpage_root_container ">
-        <div className="backbutton_disable">
-
-        <button
-        onClick={handleBack}
-        className="back_button"
-        style={{ color:  "#FFFFFF " }}
-      >
-         <ArrowBack className="backbutton_icon" />{" "}
-        <span className="backbutton_text">Back</span>
-      </button>
+      <div style={{ background: handleBackgroung() }}>
+        <div className="detailpage_root_container ">
+          <div className="backbutton_disable">
+            <button
+              onClick={handleBack}
+              className="back_button"
+              style={{ color: "#FFFFFF " }}
+            >
+              <ArrowBack className="backbutton_icon" />{" "}
+              <span className="backbutton_text">Back</span>
+            </button>
           </div>
-        {userdata.slice(startdata, enddata).map((item) => (
-          <span className="header_text detailpagetext">{item.text}</span>
-        ))}
-      </div>
+          {userdata.slice(startdata, enddata).map((item) => (
+            <span className="header_text detailpagetext">{item.text}</span>
+          ))}
+        </div>
 
-      <div>
-        <Grid container>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            {userdata.slice(startdata, enddata).map((item) => (
-              <div
-              className="detailpagesubcontainertwo"
-              
-    
-              >
-                <img src={item.image} alt="" className="detail_page_image" />
-              </div>
-            ))}
+        <div>
+          <Grid container>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              {userdata.slice(startdata, enddata).map((item) => (
+                <div className="detailpagesubcontainertwo">
+                  <img src={item.image} alt="" className="detail_page_image" />
+                </div>
+              ))}
 
-            <div className="buttons_container_detail_page">
-              <div className="deleteeditcontainer">
-                <button
-                  className="detail_delete_button"
-                  onClick={() => navigate("/deletecontent")}
-                >
-                  Delete
-                </button>
-                <button
-                  className="detail_edit_button"
-                  onClick={() => navigate("/editcontentmain")}
-                >
-                  Edit
-                </button>
+              <div className="buttons_container_detail_page">
+                <div className="deleteeditcontainer">
+                  <button
+                    className="detail_delete_button"
+                    onClick={() => navigate("/deletecontent")}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="detail_edit_button"
+                    onClick={() => navigate("/editcontentmain")}
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div className="tags_wrapper_one">
+                  <span className="detail_tag_text "> Tag: </span>
+                  <button className="detail_tag_button">Git</button>
+                  <button className="detail_tag_button">GitHub</button>
+                  <button className="detail_tag_button">DevOps</button>
+                  <img
+                    src={Vectortag}
+                    alt=""
+                    className="detail_tag_text_two"
+                    style={{ paddingLeft: "24px" }}
+                  />
+                </div>
               </div>
-              <div className="tags_wrapper_one">
-                <span className="detail_tag_text "> Tag: </span>
-                <button className="detail_tag_button">Git</button>
-                <button className="detail_tag_button">GitHub</button>
-                <button className="detail_tag_button">DevOps</button>
-                <img src={Vectortag} alt="" className="detail_tag_text_two" style={{paddingLeft: "24px"}}/>
-              </div>
-            </div>
-          </Grid>
+            </Grid>
 
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <div className="detail_page_content">
-            <span>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              <div className="detail_page_content">
+                <span>
                   Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
                   odit aut fugit, sed quia consequuntur magni dolores eos qui
                   ratione voluptatem sequi nesciunt. Neque porro quisquam est,
@@ -134,140 +142,157 @@ const DetailPage = () => {
                   qui dolorem ipsum quia dolor sit amet <br />
                   <br />
                 </span>
-
-            </div>
-            <div className="tags_wrapper_two">
-              <span className="detail_tag_text"> Tag: </span>
-              <button className="detail_tag_button">Git</button>
-              <button className="detail_tag_button">GitHub</button>
-              <button className="detail_tag_button">DevOps</button>
-            </div>
-            <div style={{position:"fixed", bottom: "30px",left: "0", zIndex: "1"}}>
-
-            <button
-        onClick={handleBack}
-        className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
-      >
-         <ArrowBack className="backbutton_icon" />{" "}
-        <span className="backbutton_text">Back</span>
-      </button>
-          </div>
+              </div>
+              <div className="tags_wrapper_two">
+                <span className="detail_tag_text"> Tag: </span>
+                <button className="detail_tag_button">Git</button>
+                <button className="detail_tag_button">GitHub</button>
+                <button className="detail_tag_button">DevOps</button>
+              </div>
+              <div
+                style={{
+                  position: "fixed",
+                  bottom: "30px",
+                  left: "0",
+                  zIndex: "1",
+                }}
+              >
+                <button
+                  onClick={handleBack}
+                  className="back_button"
+                  style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+                >
+                  <ArrowBack className="backbutton_icon" />{" "}
+                  <span className="backbutton_text">Back</span>
+                </button>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
+
+        {theme ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              backgroundColor: "#F3F6FF",
+              position: "fixed",
+              bottom: "-1px",
+              height: "64px",
+              flexDirection: "column",
+            }}
+          >
+            <div
+              style={{
+                marginTop: "-8px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <div className="footerbuttoncontainer">
+                <Button
+                  style={{ marginLeft: "16px" }}
+                  disabled={startdata === 0 ? true : false}
+                >
+                  <img
+                    src={Previous}
+                    alt=""
+                    style={{ marginRight: "-15px" }}
+                    className="userdetailfootericons userdetailfootericonsleft"
+                    onClick={() => {
+                      setStartData(startdata - 1);
+                      setEndData(enddata - 1);
+                    }}
+                  />
+                </Button>
+                <Button
+                  style={{ marginLeft: "-16px" }}
+                  disabled={enddata >= userdata.length ? true : false}
+                >
+                  <img
+                    src={Next}
+                    alt=""
+                    style={{ marginleft: "15px" }}
+                    className="userdetailfootericons userdetailfootericonsright"
+                    onClick={() => {
+                      {
+                        setStartData(startdata + 1);
+                        setEndData(enddata + 1);
+                      }
+                    }}
+                  />
+                </Button>
+              </div>
+              <span className="userdetailpagefootertexttwo">
+                © D-Libra All Rights Reserved
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              position: "fixed",
+              bottom: "-1px",
+              height: "64px",
+              flexDirection: "column",
+              background: "#111111",
+            }}
+          >
+            <div
+              style={{
+                marginTop: "-8px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <div className="footerbuttoncontainer">
+                <Button
+                  style={{ marginLeft: "16px" }}
+                  disabled={startdata === 0 ? true : false}
+                >
+                  <img
+                    src={Previous_dark}
+                    alt=""
+                    style={{ marginRight: "-15px" }}
+                    className="userdetailfootericons userdetailfootericonsleft"
+                    onClick={() => {
+                      setStartData(startdata - 1);
+                      setEndData(enddata - 1);
+                    }}
+                  />
+                </Button>
+
+                <Button
+                  style={{ marginLeft: "-16px" }}
+                  disabled={enddata >= userdata.length ? true : false}
+                >
+                  <img
+                    src={Next_dark}
+                    alt=""
+                    style={{ marginleft: "15px" }}
+                    className="userdetailfootericons userdetailfootericonsright"
+                    onClick={() => {
+                      setStartData(startdata + 1);
+                      setEndData(enddata + 1);
+                    }}
+                  />
+                </Button>
+              </div>
+              <span className="userdetailpagefootertexttwo">
+                © D-Libra All Rights Reserved
+              </span>
+            </div>
+          </div>
+        )}
       </div>
-
-      {theme ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            backgroundColor: "#F3F6FF",
-            position: "fixed",
-            bottom: "-1px",
-            height: "64px",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ marginTop: "-8px", display: "flex", flexDirection: "column" , alignItems: "center"}}>
-            <div className="footerbuttoncontainer">
-
-
-            <Button
-              style={{ marginLeft: "16px" }}
-              disabled={startdata === 0 ? true : false}
-            >
-              <img
-                src={Previous}
-                alt=""
-                style={{ marginRight: "-15px" }}
-                className="userdetailfootericons userdetailfootericonsleft"
-                onClick={() => {
-                  setStartData(startdata - 1);
-                  setEndData(enddata - 1);
-                }}
-              />
-            </Button>
-            <Button
-              style={{ marginLeft: "-16px" }}
-              disabled={enddata >= userdata.length ? true : false}
-            >
-              <img
-                src={Next}
-                alt=""
-                style={{ marginleft: "15px" }}
-                className="userdetailfootericons userdetailfootericonsright"
-                onClick={() => {
-                  {
-                    setStartData(startdata + 1);
-                    setEndData(enddata + 1);
-                  }
-                }}
-                />
-            </Button>
-                </div>
-            <span className="userdetailpagefootertexttwo">
-              © D-Libra All Rights Reserved
-            </span>
-          </div>
-        </div>
-      ) : (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            position: "fixed",
-            bottom: "-1px",
-            height: "64px",
-            flexDirection: "column",
-            background: "#111111",
-          }}
-        >
-          <div style={{ marginTop: "-8px", display: "flex", flexDirection: "column" , alignItems: "center"}}>
-            <div  className="footerbuttoncontainer" >
-
-            <Button
-              style={{ marginLeft: "16px" }}
-              disabled={startdata === 0 ? true : false}
-            >
-              <img
-                src={Previous_dark}
-                alt=""
-                style={{ marginRight: "-15px" }}
-                className="userdetailfootericons userdetailfootericonsleft"
-                onClick={() => {
-                  setStartData(startdata - 1);
-                  setEndData(enddata - 1);
-                }}
-              />
-            </Button>
-
-            <Button
-              style={{ marginLeft: "-16px" }}
-              disabled={enddata >= userdata.length ? true : false}
-            >
-              <img
-                src={Next_dark}
-                alt=""
-                style={{ marginleft: "15px" }}
-                className="userdetailfootericons userdetailfootericonsright"
-                onClick={() => {
-                  setStartData(startdata + 1);
-                  setEndData(enddata + 1);
-                }}
-                />
-            </Button>
-                </div>
-            <span className="userdetailpagefootertexttwo">
-              © D-Libra All Rights Reserved
-            </span>
-          </div>
-        </div>
-      )}
     </>
   );
 };
