@@ -16,8 +16,11 @@ import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
-import { getMainCategory } from "../../Redux/Actions/Editor/Category";
-import EditCourseStructureData from './EditCourseStructureData'
+import {
+  getMainCategory,
+  getParentChildCategories,
+} from "../../Redux/Actions/Editor/Category";
+import EditCourseStructureData from "./EditCourseStructureData";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -46,34 +49,46 @@ const EditCourseStructure = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
 
   const [result, setResult] = useState([]);
-  console.log("result==", result);
+  const [parentChidCategory, setParentChidCategory] = useState([]);
+
+  console.log("parentChidCategory", parentChidCategory.SubCategory);
+
   const mainCategories = async () => {
-    const response = await dispatch(getMainCategory());
+    const response = await dispatch(getMainCategory(token));
     // console.log("response  getMainCategory", response);
     setResult(EditCourseStructureData);
   };
+
+  const parentChildCategories = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    // console.log("response", response);
+    setParentChidCategory(response);
+  };
+
   useEffect(() => {
     mainCategories();
+    parentChildCategories();
   }, []);
   return (
     <div style={{ height: "100%" }}>
-      {console.log("result==", result)}
       <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+        className="back_button "
+        style={{ color: `${theme ? "black" : "white"}` }}
+      >
+        <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
+        <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+      </button>
 
       <div className="editormainpage_root_contianer">
         <div>
           <Button
             variant="outlined"
             className="newcategory_main_button"
-            onClick={() => navigate("/addnewcategory")}>
+            onClick={() => navigate("/addnewcategory")}
+          >
             Add a New Category, Course or Chapter{" "}
           </Button>
         </div>
@@ -100,23 +115,27 @@ const EditCourseStructure = () => {
               <div className="button_container">
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button">
+                  className="editcoursestructure_button"
+                >
                   Expand Three
                 </Button>
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button">
+                  className="editcoursestructure_button"
+                >
                   Collapse Three
                 </Button>
                 <Button
                   variant="contained"
-                  className="editcoursestructure_button">
+                  className="editcoursestructure_button"
+                >
                   Import
                 </Button>
                 <Button
                   variant="contained"
                   className="editcoursestructure_button"
-                  endIcon={<AddIcon />}>
+                  endIcon={<AddIcon />}
+                >
                   Add Category
                 </Button>
               </div>
@@ -124,17 +143,20 @@ const EditCourseStructure = () => {
           </Grid>
           <div
             className="button_container_two"
-            style={{ marginTop: "16px", width: "100%" }}>
+            style={{ marginTop: "16px", width: "100%" }}
+          >
             <Button
               variant="contained"
               className="editcoursestructure_button_two"
-              startIcon={<HiArrowSmLeft />}>
+              startIcon={<HiArrowSmLeft />}
+            >
               Export
             </Button>
             <Button
               variant="contained"
               className="editcoursestructure_button_two"
-              startIcon={<HiArrowSmRight />}>
+              startIcon={<HiArrowSmRight />}
+            >
               Import
             </Button>
           </div>
@@ -156,7 +178,8 @@ const EditCourseStructure = () => {
           <select
             className="git_introduction_dropdown_two"
             name="cars"
-            id="cars">
+            id="cars"
+          >
             {result?.data?.map((item) => {
               return <option value="volvo">{item.CategoryName}</option>;
             })}
@@ -171,97 +194,103 @@ const EditCourseStructure = () => {
           <Table
             sx={{ minWidth: 700 }}
             size="small"
-            aria-label="customized table">
+            aria-label="customized table"
+          >
             <TableHead>
               <TableRow>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
-                  }}></StyledTableCell>
+                  }}
+                ></StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   TITLE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   NAME
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   UNIQUE IDENTIFIER
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   IMAGE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   CREATED DATE
                 </StyledTableCell>
                 <StyledTableCell
                   style={{
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                     fontSize: "12px",
-                  }}>
+                  }}
+                >
                   UPDATED DATE
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-            {
-                  result.map((item) => {
-                    return (
-                      <>
-              <StyledTableRow>
-              
-                       <StyledTableCell component="th" scope="row">
-                  <AddIcon className="tableBody_sub" />
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                  {item.title}
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-              {item.name}
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-              {item.unique_idetifier}
-                </StyledTableCell>
-                <StyledTableCell className="tableBody">
-                 {item.image}
-                </StyledTableCell>
-               <StyledTableCell className="tableBody">
-                {item.createddate}
-                </StyledTableCell> 
-                <StyledTableCell className="tableBody">
-                {item.updateddate}
-                </StyledTableCell>
-                      
-                   
-               
-              </StyledTableRow>
-              </>
-                    )
-                  })
-                }
+              {parentChidCategory?.map((item) => {
+                return item.SubCategory.map((subItem) => {
+                  return (
+                    <>
+                      <StyledTableRow>
+                        <StyledTableCell component="th" scope="row">
+                          <AddIcon className="tableBody_sub" />
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.CategoryName}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.CategoryName}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.unique_idetifier}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.image}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.created_at.split("T")[0]}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.updated_at.split("T")[0]}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    </>
+                  );
+                });
+              })}
             </TableBody>
           </Table>
         </TableContainer>
-        <span style={{ padding: "0px 20px" }}>9 categories</span>
+        <span style={{ padding: "0px 20px" }}>
+          {parentChidCategory?.length} categories
+        </span>
       </div>
     </div>
   );

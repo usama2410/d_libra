@@ -20,13 +20,14 @@
 }
 
 .lightTheme {
-  background: #EEEEEE;
+  background: #eeeeee;
   color: black;
   padding-top: 64px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #f3f6ff !important;
 }
 
 * {

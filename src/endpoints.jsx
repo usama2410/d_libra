@@ -27,4 +27,7 @@ export const endpoints = {
   ADD_CATEGORY: "/webapi/GetParentCategories",
   GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
   GET_CHILD_CATEGORY: "/webapi//GetChildCategories?id=1",
-};
+
+  GET_PARENT_CHILD_CATEGORY: "/webapi/GetParentChildCategories"
+
+}
