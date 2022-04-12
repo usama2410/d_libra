@@ -81,7 +81,7 @@ const EditCourseStructure = () => {
       <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
         <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -110,7 +110,8 @@ const EditCourseStructure = () => {
         </div>
       </div>
       <div
-        style={{ background: "#111111", color: "white", paddingBottom: "40px" }}
+     
+        style={{ background: "#111111", color: "#FFFFFF", paddingBottom: "40px" }}
       >
         <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
           <Grid container>

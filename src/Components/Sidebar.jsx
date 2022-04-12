@@ -37,10 +37,10 @@ import Sidebar_EditorPage from "../assests/SVG_Files/New folder/icons/Sidebar_Ed
 import Sidebar_NightMode from "../assests/SVG_Files/New folder/icons/Sidebar_NightMode.svg";
 import Accordian from "./Guest/Accordian/Accordian";
 import Recent_view_dark from "../assests/SVG_Files/Recent_view_dark.svg";
-import Search_dark from '../assests/SVG_Files/New folder/icons/Search_dark.svg'
-import Search from '../assests/SVG_Files/New folder/icons/Search.svg'
-import Hamburger_Menu_light from '../assests/SVG_Files/New folder/Hamburger_Menu_light.svg'
-import Hamburger_Menu_dark from '../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg'
+import Search_dark from "../assests/SVG_Files/New folder/icons/Search_dark.svg";
+import Search from "../assests/SVG_Files/New folder/icons/Search.svg";
+import Hamburger_Menu_light from "../assests/SVG_Files/New folder/Hamburger_Menu_light.svg";
+import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -106,9 +106,9 @@ export default function Sidebar() {
   const [searchstate, setSearchState] = React.useState(false);
 
   const handleSearchState = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setSearchState(true);
-    console.log(searchstate)
+    console.log(searchstate);
   };
 
   const handleAccordionIcon = async () => {
@@ -140,12 +140,6 @@ export default function Sidebar() {
   //     alert("");
   //   }
   // };
-
-
-
-
-
-
 
   const handleaccordiondrawer = () => {
     if (
@@ -291,7 +285,7 @@ export default function Sidebar() {
             style={{ display: "flex", alignItems: "center", width: "100%" }}
           >
             <ListItemIcon>
-              <img src={image3} alt="" className="profilesidebaricon" />
+              <img src={Member_Icon} alt="" className="profilesidebaricon" />
             </ListItemIcon>
             <Typography>
               <span className="listitem_text" style={{ marginLeft: "-17px" }}>
@@ -581,48 +575,73 @@ export default function Sidebar() {
     </Box>
   );
 
-
-
   const Conditional_Searchbar = () => {
-    if("/" === location.pathname){
-      return    "logocontainerone"
-
-    }else if ("/register" === location.pathname || "/login" === location.pathname || "/logout" === location.pathname ){
-      return     "logocontainertwo"
-    }else if("/mycontents" === location.pathname){
-      return    "10px"
+    if ("/" === location.pathname) {
+      return "logocontainerone";
+    } else if (
+      "/register" === location.pathname ||
+      "/login" === location.pathname ||
+      "/logout" === location.pathname
+    ) {
+      return "logocontainertwo";
+    } else if (
+      "/feedback" === location.pathname ||
+      "/ratingsidebar" === location.pathname ||
+      "/ratingform" === location.pathname ||
+      "/usersettingviewpage" === location.pathname
+    ) {
+      return "logocontainerthree";
+    } else if (
+      "/MyLibraryCorse" === location.pathname ||
+      "/LibraryBookmark" === location.pathname
+    ) {
+      return "logocontainerseven";
+    } else if (
+      "/Tagpage" === location.pathname ||
+      "/Searchresult" === location.pathname ||
+      "/recentlyviewed" === location.pathname 
+   
+    ) {
+      return "logocontainereight";
+    } else if ("/coursepageguest" === location.pathname) {
+      return "logocontainernine";
+    }else if (   "/coursemainpage" === location.pathname){
+      return "logocontainerten"
+    } else {
+      return "logocontainereleven"
     }
-    else if("/feedback" === location.pathname || "/ratingsidebar" === location.pathname || "/ratingform" === location.pathname || "/usersettingviewpage" === location.pathname){
-      return   "logocontainerthree"
-    }
-  }
-
+  };
 
   const Conditional_SearchIcon = () => {
-    if("/" === location.pathname || "/register" === location.pathname || "/login" === location.pathname || "/logout" === location.pathname || "/coursepageguest" === location.pathname || "/searchresult" === location.pathname || "/Tagpage" === location.pathname){
-      return   "wrap"
+    if (
+      "/" === location.pathname ||
+      "/register" === location.pathname ||
+      "/login" === location.pathname ||
+      "/logout" === location.pathname ||
+      "/searchresult" === location.pathname
+    ) {
+      return "wrap";
     }
-      if("/detailpage" === location.pathname || "/userdetailpage" === location.pathname){   
-           return   "wrapthree"
+    if (
+      "/detailpage" === location.pathname ||
+      "/userdetailpage" === location.pathname
+    ) {
+      return "wrapthree";
+    } else {
+      return "wraptwo";
     }
-    
-    else {
-      return   "wraptwo"
-    }
-  }
-
-
-
+  };
 
   const Conditional_Sidenavlogo = () => {
-    if("/detailpage" === location.pathname || "/userdetailpage" === location.pathname){
-      return   "sidenav_logotwo"
-
-    }else {
-      return   "sidenav_logo"
+    if (
+      "/detailpage" === location.pathname ||
+      "/userdetailpage" === location.pathname
+    ) {
+      return "sidenav_logotwo";
+    } else {
+      return "sidenav_logo";
     }
-  }
-
+  };
 
   return (
     <>
@@ -647,10 +666,19 @@ export default function Sidebar() {
                     }}
                     sx={{ mr: 2, ...(open && { display: "none" }) }}
                   >
-                    {
-                      themeState ?      <img src={Hamburger_Menu_light} alt="" className="hamburgericonsidebar" /> :      <img src={Hamburger_Menu_dark} alt=""  className="hamburgericonsidebar"  />
-                    }
-               
+                    {themeState ? (
+                      <img
+                        src={Hamburger_Menu_light}
+                        alt=""
+                        className="hamburgericonsidebar"
+                      />
+                    ) : (
+                      <img
+                        src={Hamburger_Menu_dark}
+                        alt=""
+                        className="hamburgericonsidebar"
+                      />
+                    )}
                   </IconButton>
                 </Button>
                 <SwipeableDrawer
@@ -674,73 +702,43 @@ export default function Sidebar() {
             ))}
           </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              
             }}
           >
-              <div
-                className={
-                  "/detailpage" === location.pathname 
-                    ? "logo_main_container_two"
-                    : "logo_main_container"
-                }
+            <div
+              className={
+                "/detailpage" === location.pathname
+                  ? "logo_main_container_two"
+                  : "logo_main_container"
+              }
+            >
+              <Button
+                onClick={() => navigate("/")}
+                className={Conditional_Searchbar()}
+                // style={{ marginLeft: Conditional_Searchbar()}}
               >
-                <Button
-                  onClick={() => navigate("/")}
-                  className={Conditional_Searchbar()}
-                  // style={{ marginLeft: Conditional_Searchbar()}}
-                >
-                  {themeState ? (
-                    <img
-                      src={lightmode_logo}
-                      alt=""
-                      width="100px"
-                      height="20.47"
-                    />
-                  ) : (
-                    <img
-                      src={darkmode_logo}
-                      alt=""
-                      width="100px"
-                      height="20.47"
-                    />
-                  )}
-                </Button>
+                {themeState ? (
+                  <img
+                    src={lightmode_logo}
+                    alt=""
+                    width="100px"
+                    height="20.47"
+                  />
+                ) : (
+                  <img
+                    src={darkmode_logo}
+                    alt=""
+                    width="100px"
+                    height="20.47"
+                  />
+                )}
+              </Button>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           {"/detailpage" === location.pathname ||
           "/editormainpage" === location.pathname ||
@@ -751,7 +749,6 @@ export default function Sidebar() {
           "/editcontentmain" === location.pathname ||
           "/deletecontent" === location.pathname ? (
             <img
-            
               src={editor_icon}
               className="editoriconsidebar"
               onClick={() => navigate("/editormainpage")}
@@ -761,144 +758,84 @@ export default function Sidebar() {
             ""
           )}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div className="toolbar_rowreverse">
-          
-              <div>
-                <div className="mainsearchcontianer" >
-                  <input
-                    placeholder="Search"
-                    className={`${
-                      themeState
-                        ? "sidebar_inputfield_sub"
-                        : "sidebar_inputfield"
-                    }`}
-                  />
-              
-                  <div
-                    className={
-                      themeState
-                        ? "input_field_icon_container_sub   "
-                        : "input_field_icon_container"
-                    }
-                  >
-                    {themeState ? (
-                      <img
-                        src={Search}
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        src={Search_dark}
-                        alt=""
-                      />
-                    )}
-                  </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
+            <div>
+              <div className="mainsearchcontianer">
+                <input
+                  placeholder="Search"
+                  className={`${
+                    themeState ? "sidebar_inputfield_sub" : "sidebar_inputfield"
+                  }`}
+                />
 
                 <div
-                  className={Conditional_SearchIcon()}
-                 
+                  className={
+                    themeState
+                      ? "input_field_icon_container_sub   "
+                      : "input_field_icon_container"
+                  }
                 >
-                  <div>
-                    {themeState ? (
-                      <img
-                        onClick={handleSearchState}
-                        src={Search}
-                        alt=""
-                        className="searchiconsize"
-                      />
-                    ) : (
-                      <img    className="searchiconsize" onClick={handleSearchState} src={Search_dark} alt="" />
-                    )}
-                  </div>
+                  {themeState ? (
+                    <img src={Search} alt="" />
+                  ) : (
+                    <img src={Search_dark} alt="" />
+                  )}
                 </div>
               </div>
-          
 
+              <div className={Conditional_SearchIcon()}>
+                <div>
+                  {themeState ? (
+                    <img
+                      onClick={handleSearchState}
+                      src={Search}
+                      alt=""
+                      className="searchiconsize"
+                    />
+                  ) : (
+                    <img
+                      className="searchiconsize"
+                      onClick={handleSearchState}
+                      src={Search_dark}
+                      alt=""
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-
-
-
-
-
-
-
-
-            {"/" === location.pathname || "/register" === location.pathname || "/logout" === location.pathname || "/login" === location.pathname ? (
+            {"/" === location.pathname ||
+            "/register" === location.pathname ||
+            "/logout" === location.pathname ||
+            "/login" === location.pathname  || 
+            "/coursepageguest" === location.pathname ? (
               ""
             ) : (
               <img
                 onClick={() => navigate("/usersettingviewpage")}
-               
                 src={Member_Icon}
                 alt=""
                 className={Conditional_Sidenavlogo()}
-       
               />
             )}
           </div>
           {handleaccordiondrawer()}
         </Toolbar>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div
           className="Searchb_main"
           style={{
             marginTop: "-58px",
-            
+
             zIndex: "1",
             display: searchstate ? "block" : "none",
           }}
         >
           <div
             className="main"
-            style={{ backgroundColor: `${themeState ? "#F3F6FF" : "  #111111"}` }}
+            style={{
+              backgroundColor: `${themeState ? "#F3F6FF" : "  #111111"}`,
+            }}
           >
             <div className="left_search" onClick={() => setSearchState(false)}>
               {themeState ? (
@@ -911,10 +848,9 @@ export default function Sidebar() {
               className="right_search"
               style={{
                 backgroundColor: `${themeState ? "#FFFFFF" : "  #111111"}`,
-              
               }}
             >
-              <div className="left" >
+              <div className="left">
                 <input
                   type="text"
                   placeholder="Search"
@@ -937,13 +873,23 @@ export default function Sidebar() {
                   <img
                     src={Search}
                     alt=""
-                    style={{ position: "absolute", right: "20px", width: "22px", height: "22px"}}
+                    style={{
+                      position: "absolute",
+                      right: "20px",
+                      width: "22px",
+                      height: "22px",
+                    }}
                   />
                 ) : (
                   <img
                     src={Search_dark}
                     alt=""
-                    style={{ position: "absolute", right: "20px", width: "22px", height: "22px"}}
+                    style={{
+                      position: "absolute",
+                      right: "20px",
+                      width: "22px",
+                      height: "22px",
+                    }}
                   />
                 )}
               </div>

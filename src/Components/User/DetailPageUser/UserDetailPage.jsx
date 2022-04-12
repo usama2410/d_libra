@@ -12,9 +12,12 @@ import { useSelector, useDispatch } from "react-redux";
 import NextButton from "../../../assests/NextButton.png";
 import PrevButton from "../../../assests/PrevButton.png";
 import FooterButtons from "../FooterButtons";
+import Bookmark_gray from '../../../assests/SVG_Files/New folder/Bookmark_gray.svg'
 import UserDetailPageData from "./UserDetailPageData";
 import Pin from "../../../assests/Pin.png";
 import PinBlue from "../../../assests/PinBlue.png";
+import Pin_off from '../../../assests/SVG_Files/New folder/icons/Pin_off.svg'
+import Pin_on from '../../../assests/SVG_Files/New folder/icons/Pin_on.svg'
 import Accordian from "../../Guest/Accordian/Accordian";
 import UnionClose from "../../../assests/UnionClose.png";
 
@@ -126,13 +129,13 @@ const UserDetailPage = () => {
                     border: "none",
                   }}
                 >
-                  <img src={Vectortag} alt="" />
+                  <img src={Bookmark_gray} alt=""  style={{width: "18px",height: "18px"}}  />
                 </button>
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={handlePinState}
                 >
-                  <img src={pinstate ? PinBlue : Pin} alt="" />
+                  <img style={{width: "18px",height: "18px"}} src={pinstate ? Pin_on : Pin_off} alt=""  />
                 </button>
               </div>
                 </div>
@@ -143,7 +146,7 @@ const UserDetailPage = () => {
                   <button className="detail_tag_button">Git</button>
                   <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button>
-                  <img src={Vectortag} alt="" style={{ paddingLeft: "20px" }} />
+                  <img src={Bookmark_gray} alt=""  style={{width: "15px",height: "18px", marginLeft: "24px"}}  />
                 </div>
               </div>
             </Grid>

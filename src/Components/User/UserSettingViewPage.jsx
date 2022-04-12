@@ -96,7 +96,7 @@ const UserSettingViewPage = () => {
 
       <div className="user_container_root">
         <div className="user_sub_root_container">
-          <div className="user_root_container">
+          <div className={theme ? "user_root_container" : "user_root_container_two"}>
             <img src={Member_Icon} alt="" className="usersettingmembericon" />
             <div className="user_header_container">
               <div

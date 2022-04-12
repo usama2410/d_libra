@@ -46,7 +46,7 @@ const AddNewCategory = () => {
         <button
           onClick={handleBack}
           className="back_button"
-          style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+          style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
         >
           <ArrowBack className="backbutton_icon" />{" "}
           <span className="backbutton_text">Back</span>
@@ -69,7 +69,7 @@ const AddNewCategory = () => {
           <div className="addcategorysubcontainer">
             <span
               className="addcategory_text"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
+              style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
             >
               Category/Course/Chapter Name
             </span>
@@ -83,7 +83,7 @@ const AddNewCategory = () => {
             />
             <span
               className="addcategory_text"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
+              style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
             >
               Category/Course/Chapter ID
             </span>
@@ -97,7 +97,7 @@ const AddNewCategory = () => {
             />
             <span
               className="addcategory_text"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
+              style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
             >
               Select Parent Category/Course
             </span>
@@ -115,7 +115,7 @@ const AddNewCategory = () => {
             </select>
             <span
               className="addcategory_text"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
+              style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
             >
               Slug
             </span>

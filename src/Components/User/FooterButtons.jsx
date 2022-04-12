@@ -30,11 +30,12 @@ import whatsapp from "../../assests/whatsapp.png";
 import facebook from "../../assests/facebook.png";
 import messanger from "../../assests/messanger.png";
 
-
-import Rating from '../../assests/SVG_Files/Rating.svg'
-import MyLibrary from '../../assests/SVG_Files/MyLibrary.svg'
-import History from '../../assests/SVG_Files/History.svg'
-import Share from '../../assests/SVG_Files/Share.svg'
+import Popup_CloseArrow from "../../assests/SVG_Files/New folder/Popup_CloseArrow.svg";
+import Popup_OpenArrow from "../../assests/SVG_Files/New folder/Popup_OpenArrow.svg";
+import Rating from "../../assests/SVG_Files/Rating.svg";
+import MyLibrary from "../../assests/SVG_Files/MyLibrary.svg";
+import History from "../../assests/SVG_Files/History.svg";
+import Share from "../../assests/SVG_Files/Share.svg";
 
 import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
@@ -106,8 +107,14 @@ const FooterButtons = (props) => {
       <div>
         <div className="footer_buttons_container">
           {/* <Button className="footer_buttons" variant="contained"> */}
-            <img src={History} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-            {/* <div className="footer_sub">
+          <img
+            src={History}
+            alt=""
+            style={{ cursor: "pointer" }}
+            width="50px"
+            height="50px"
+          />
+          {/* <div className="footer_sub">
               <img
                 src={sharepic}
                 alt=""
@@ -118,8 +125,14 @@ const FooterButtons = (props) => {
           {/* </Button> */}
 
           {/* <Button className="footer_buttons" variant="contained"> */}
-          <img src={MyLibrary} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-            {/* <div className="footer_sub">
+          <img
+            src={MyLibrary}
+            alt=""
+            style={{ cursor: "pointer" }}
+            width="50px"
+            height="50px"
+          />
+          {/* <div className="footer_sub">
               <img
                 src={Rating}
                 alt=""
@@ -133,8 +146,14 @@ const FooterButtons = (props) => {
             variant="contained"
             onClick={() => navigate("/ratingform")}
           > */}
-               <img src={Rating} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-            {/* <div className="footer_sub">
+          <img
+            src={Rating}
+            alt=""
+            style={{ cursor: "pointer" }}
+            width="50px"
+            height="50px"
+          />
+          {/* <div className="footer_sub">
               <MenuBookIcon style={{ width: "20px", height: "20px" }} />
               <span>rating</span>
             </div> */}
@@ -145,8 +164,15 @@ const FooterButtons = (props) => {
             onClick={toggleDrawer(true)}
           > */}
 
-<img src={Share}  onClick={toggleDrawer(true)} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-            {/* <div className="footer_sub">
+          <img
+            src={Share}
+            onClick={toggleDrawer(true)}
+            alt=""
+            style={{ cursor: "pointer" }}
+            width="50px"
+            height="50px"
+          />
+          {/* <div className="footer_sub">
               <AccessTimeIcon style={{ width: "22px", height: "22px" }} />
               <span>Share</span>
             </div> */}
@@ -163,8 +189,14 @@ const FooterButtons = (props) => {
               }}
             >
               {/* <Button className="footer_buttons" variant="contained"> */}
-              <img src={History} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-                {/* <div className="footer_sub">
+              <img
+                src={History}
+                alt=""
+                style={{ cursor: "pointer" }}
+                width="50px"
+                height="50px"
+              />
+              {/* <div className="footer_sub">
                   <img
                     src={sharepic}
                     alt=""
@@ -175,8 +207,14 @@ const FooterButtons = (props) => {
               {/* </Button> */}
 
               {/* <Button className="footer_buttons" variant="contained"> */}
-              <img src={MyLibrary} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-                {/* <div className="footer_sub">
+              <img
+                src={MyLibrary}
+                alt=""
+                style={{ cursor: "pointer" }}
+                width="50px"
+                height="50px"
+              />
+              {/* <div className="footer_sub">
                   <img
                     src={Rating}
                     alt=""
@@ -186,8 +224,14 @@ const FooterButtons = (props) => {
                 </div> */}
               {/* </Button> */}
               {/* <Button className="footer_buttons" variant="contained"> */}
-              <img src={Rating} alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-                {/* <div className="footer_sub">
+              <img
+                src={Rating}
+                alt=""
+                style={{ cursor: "pointer" }}
+                width="50px"
+                height="50px"
+              />
+              {/* <div className="footer_sub">
                   <MenuBookIcon style={{ width: "20px", height: "20px" }} />
                   <span>rating</span>
                 </div> */}
@@ -197,8 +241,15 @@ const FooterButtons = (props) => {
                 variant="contained"
                 onClick={toggleDrawer(true)}
               > */}
-                   <img src={Share}   onClick={toggleDrawer(true)}  alt="" style={{cursor: "pointer"}} width="50px"  height="50px"/>
-                {/* <div className="footer_sub">
+              <img
+                src={Share}
+                onClick={toggleDrawer(true)}
+                alt=""
+                style={{ cursor: "pointer" }}
+                width="50px"
+                height="50px"
+              />
+              {/* <div className="footer_sub">
                   <AccessTimeIcon style={{ width: "22px", height: "22px" }} />
                   <span>Share</span>
                 </div> */}
@@ -217,9 +268,7 @@ const FooterButtons = (props) => {
                 keepMounted: true,
               }}
             >
-              <div
-             className="bottomnavigator"
-              >
+              <div className="bottomnavigator">
                 <StyledBox
                   sx={{
                     px: 10,
@@ -322,7 +371,7 @@ const FooterButtons = (props) => {
                       )}
                     </div>
                     <Typography
-className="sharingthispagetext"
+                      className="sharingthispagetext"
                       variant="h6"
                       style={{
                         color: "white",
@@ -340,33 +389,33 @@ className="sharingthispagetext"
           </div>
           <Button
             className="footer_buttons"
-            variant="contained"
+            // variant="contained"
             onClick={handleFotterButton}
           >
             <div className="footer_sub">
               {footerbutton ? (
                 <img
-                  src={Arrow3}
+                  src={Popup_CloseArrow}
                   alt="logo"
-                  style={{
-                    position: "relative",
-                    top: "-10px",
-                    right: "-10px",
-                    width: "16px",
-                    height: "16px",
-                  }}
+                  // style={{
+                  //   position: "relative",
+                  //   top: "-10px",
+                  //   right: "-10px",
+                  //   width: "16px",
+                  //   height: "16px",
+                  // }}
                 />
               ) : (
                 <img
-                  src={Arrow2}
+                  src={Popup_OpenArrow}
                   alt="logo"
-                  style={{
-                    position: "relative",
-                    top: "-10px",
-                    right: "-10px",
-                    width: "16px",
-                    height: "16px",
-                  }}
+                  // style={{
+                  //   position: "relative",
+                  //   top: "-10px",
+                  //   right: "-10px",
+                  //   width: "16px",
+                  //   height: "16px",
+                  // }}
                 />
               )}
             </div>

@@ -33,7 +33,7 @@ const handleBack = () =>
     <button
      onClick={handleBack}
      className="back_button"
-     style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+     style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
    >
       <ArrowBack className="backbutton_icon" />{" "}
      <span className="backbutton_text">Back</span>
@@ -52,7 +52,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Select Course
          </span>
@@ -73,7 +73,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Select Chapter
          </span>
@@ -94,7 +94,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Content Title
          </span>
@@ -109,7 +109,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Content ID
          </span>
@@ -124,7 +124,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Tags(Max 5 Tags)
          </span>
@@ -139,7 +139,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            Meta Descriptions
          </span>
@@ -156,7 +156,7 @@ const handleBack = () =>
        <div>
          <span
            className="addcategory_text"
-           style={{ color: `${theme ? "#363636" : "white"}` }}
+           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
          >
            OGP(Open Graph Protocol)
          </span>
@@ -222,7 +222,7 @@ const handleBack = () =>
              >
                <div>
                  <span 
-         style={{ color: `${theme ? "#363636" : "white"}` }}>Preview</span>
+         style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}>Preview</span>
                </div>
                {image ? (
                  <img

@@ -10,13 +10,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { getDashboardData } from "../../../Redux/Actions/Dashboard.Data.action";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Typography } from "@material-ui/core";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const MyContents = () => {
   const dispatch = useDispatch();
   const [data, setdata] = useState(ContentData);
   const [responseArray, setresponseArray] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const handleBack = () => {
+
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -30,14 +33,14 @@ const MyContents = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -45,7 +48,7 @@ const MyContents = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -114,21 +117,22 @@ const MyContents = () => {
 
   return (
     <>
-      <div style={{ background: handleBackgroung() }}>
-        <div className="mainmycontentcontainer">
+      {/* <div style={{ background: handleBackgroung() }}> */}
+        <div className={theme ? "mainmycontentcontainer" : "mainmycontentcontainertwo"}>
           <div className="mycontentcontainerbackbutton">
-            <button
-              className="back_button "
-              style={{ color: `${theme ? "black" : "white"}` }}
-            >
-              <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-              <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-            </button>
+          <button
+          onClick={handleBack}
+          className="back_button"
+          style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+        >
+          <ArrowBack className="backbutton_icon" />{" "}
+          <span className="backbutton_text">Back</span>
+        </button>
           </div>
           <div>
             <div className="mainContentContainertwotwo">
               <span
-                style={{ marginTop: "10px", marginBottom: "10px" }}
+                style={{ paddingTop: "8px", paddingBottom: "14px" }}
                 className={
                   theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"
                 }
@@ -137,15 +141,14 @@ const MyContents = () => {
               </span>
             </div>
             <div className="mycontentcontainerbackbuttontwo">
-              <button
-                className="back_button "
-                style={{ color: `${theme ? "black" : "white"}` }}
-              >
-                <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-                <span style={{ paddingLeft: "5px", fontSize: "13px" }}>
-                  Back
-                </span>
-              </button>
+             <button
+          onClick={handleBack}
+          className="back_button"
+          style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        >
+          <ArrowBack className="backbutton_icon" />{" "}
+          <span className="backbutton_text">Back</span>
+        </button>
             </div>
             <div className={theme ? "contentforedittext" : ""}>
               <div
@@ -170,14 +173,14 @@ const MyContents = () => {
             return (
               <div
                 className="content_root_container"
-                style={{ marginTop: "20px" }}
+                // style={{ marginTop: "20px" }}
               >
                 <div>
                   <span
                     className={
                       theme ? "chapternameclass" : "chapternameclasstwo"
                     }
-                    style={{ padding: "0px 0px 8px 5px" }}
+                    style={{ padding: "0px 0px 8px 0px" }}
                   >
                     {item.chapterName}
                   </span>
@@ -200,25 +203,37 @@ const MyContents = () => {
                             alt=""
                           />
                           {e.image ? (
-                            <div className="mycontentcontainer">
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursename"
-                                style={{
-                                  width: "250px",
-                                  color: theme ? "#363636" : "#FFFFFF",
-                                }}
-                              >
-                                {e.Tags}
-                              </Typography>
-                              <img
-                                src={VectorTag}
-                                alt=""
-                                width="17px"
-                                height="20px"
-                              />
-                            </div>
+                           <div
+                           className="underimagetextcontainer"
+                         >
+                           <Typography
+                             noWrap
+                             component="div"
+                            //  className="subcoursename"
+                             // style={{}}
+                             style={{
+                               color: theme ? "#363636" : "#FFFFFF",
+                               display: "flex",
+                               justifyContent: "center",
+                               width: "100%",
+                             }}
+                           >
+                             <Typography
+                               noWrap
+                               component="div"
+                               className="subcoursenametwo subcoursename"
+                             >
+                               {e.Tags}
+                             </Typography>
+                           </Typography>
+                           <div style={{ position: "relative" }}>
+                             <img
+                               src={e.TagsImageTwo}
+                               alt=""
+                               className="tagstwocontainer"
+                             />
+                           </div>
+                         </div>
                           ) : (
                             ""
                           )}
@@ -231,7 +246,7 @@ const MyContents = () => {
             );
           })}
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

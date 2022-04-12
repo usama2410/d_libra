@@ -5,16 +5,47 @@
 }
 
 .logocontainerthree{
-  position: relative;
-  left: -15px;
-  top: 0;
-  /* border: 1px solid red !important; */
+
+  
 }
 
 .logocontainerone{
    position: relative;
    left: -30px;
 }
+
+
+.logocontainerseven{
+  position: relative;
+  left: -14px;
+}
+
+.logocontainereight{
+  position: relative;
+  left: -10px;
+}
+
+
+.logocontainernine{
+  position: relative;
+  left: -35px;
+}
+
+.logocontainerten{
+  position: relative;
+  left: -15px;
+}
+
+.logocontainereleven{
+  position: relative;
+  left: 5px;
+}
+
+/* 
+.logocontainereight{
+  margin-right: 100px;
+}
+ */
 
 .hamburgericonsidebar{
   width: 30px !important;
@@ -515,6 +546,31 @@ input[type="submit"]:hover {
   /* border: 1px solid red !important; */
 }
 
+  
+.logocontainerseven{
+  position: relative;
+  left: -3px;
+}
+
+
+.logocontainereight{
+  position: relative;
+  left: 0px;
+}
+
+.logocontainernine{
+  position: relative;
+  left: -25px;
+}
+
+
+
+.logocontainerten{
+  position: relative;
+  left: -5px;
+}
+
+
  .logocontainertwo{
   position: relative;
   left: -30px;
@@ -557,7 +613,7 @@ input[type="submit"]:hover {
     width: 197px !important;
   }
   .switch_class {
-    margin: 8px 0px 0px 100px;
+    margin: 8px 0px 0px 30px;
   }
   .editoriconsidebar {
     width: 30px;
@@ -673,7 +729,11 @@ input[type="submit"]:hover {
     width: 30px;
     height: 30px;
   }
-  
+
+  .switch_class {
+    margin: 8px 0px 0px 100px;
+  }
+
 .toolbarclassone {
   background: #111111 !important;
   /* border: none; */
@@ -693,6 +753,26 @@ input[type="submit"]:hover {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

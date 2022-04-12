@@ -18,7 +18,7 @@ import GitRegularWorkflowWorkWithBranches from "../../../assests/SVG_Files/Slide
 import ThreeCasesToLaunchGitProject from "../../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
 import Vector90 from '../../../assests/Vector90.png'
 import VectorTag from '../../../assests/VectorTag.png'
-
+import Bookmark_gray from '../../../assests/SVG_Files/New folder/Bookmark_gray.svg'
 import Vector92 from '../../../assests/Vector92.png'
 
 // import <Ve></Ve> from '../../../assests/<Ve></Ve>.png'
@@ -28,6 +28,7 @@ import Vector92 from '../../../assests/Vector92.png'
 var CourseMainPageData = [
   {
     chapterName: "Recently Viewed Contents",
+    // TagsImageOne: ,
     items: [
       {
         id: 1,
@@ -57,6 +58,7 @@ var CourseMainPageData = [
   },
   {
     chapterName: "Bookmark Contents",
+    TagsImageOne: Bookmark_gray,
     items: [
       {
         id: 1,

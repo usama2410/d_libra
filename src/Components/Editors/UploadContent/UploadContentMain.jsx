@@ -42,7 +42,7 @@ const UploadContentMain = () => {
         <button
           onClick={handleBack}
           className="back_button"
-          style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+          style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
         >
           <ArrowBack className="backbutton_icon" />{" "}
           <span className="backbutton_text">Back</span>
@@ -68,7 +68,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Select Course
               </span>
@@ -91,7 +91,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Select Chapter
               </span>
@@ -116,7 +116,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Content Title
               </span>
@@ -133,7 +133,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Content ID
               </span>
@@ -150,7 +150,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Tags(Max 5 Tags)
               </span>
@@ -167,7 +167,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 Meta Descriptions
               </span>
@@ -184,7 +184,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
               >
                 OGP(Open Graph Protocol)
               </span>
@@ -247,7 +247,7 @@ const UploadContentMain = () => {
                     }}
                   >
                     <div>
-                      <span style={{ color: `${theme ? "#363636" : "white"}` }}>
+                      <span style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}>
                         Preview
                       </span>
                     </div>

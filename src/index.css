@@ -30,6 +30,17 @@
   background-color: #f3f6ff !important;
 }
 
+.CreamyTheme {
+  background: #F3F6FF;
+  color: black;
+  padding-top: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #eeeeee !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -39,10 +50,11 @@
 
 @media screen and (max-width: 600px) {
   .darkTheme {
-    padding: 40px 0px;
+    padding: 40px 0px 0px 0px;
+    /* padding: 40px 0px; */
   }
    .lightTheme {
-    padding: 40px 0px;
+      padding: 40px 0px 0px 0px;
   }
  
 }

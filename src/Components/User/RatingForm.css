@@ -156,12 +156,16 @@
 }
 
 .footer_buttons {
-  background: linear-gradient(
+  height: 40px !important;
+  width: 40px !important;
+   position: relative;
+   bottom: 5px;
+   left: 4px;
+  /* background: linear-gradient(
     87.62deg,
     #004cb6 -44.71%,
     #009af9 100%
   ) !important;
-  /* font-family: ddd !important; */
   font-style: normal !important;
   font-weight: 300 !important;
   text-transform: none !important;
@@ -174,7 +178,7 @@
   letter-spacing: -0.015em !important;
   color: #ffffff !important;
   border-radius: 50% !important;
-  margin-left: 10px !important;
+  margin-left: 10px !important; */
 }
 
 .footer_copyright {
@@ -183,7 +187,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eeeeee;
+  /* background: #eeeeee; */
 }
 
 .footer_copyright_two {
@@ -218,10 +222,10 @@
 }
 
 .footer_sub {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .rating_form_span_two {
