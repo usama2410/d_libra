@@ -42,9 +42,52 @@ import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 function App() {
   // const location = useLocation()
   const theme = useSelector((state) => state.theme.state);
+  console.log("url", window.location.href.split("/")[3], theme);
+
+  const backgroundHanlde = () => {
+    if (
+      (window.location.href.split("/")[3] === "mycontents" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "uploadcontentmain" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "editormainpage" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "addnewcategory" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "deletecontent" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "detailpage" &&
+        theme === false) ||
+      (window.location.href.split("/")[3] === "editcoursestructure" &&
+        theme === false)
+    ) {
+      console.log("home");
+      return "darkTheme";
+    } else if (
+      (window.location.href.split("/")[3] === "mycontents" && theme === true) ||
+      (window.location.href.split("/")[3] === "uploadcontentmain" &&
+        theme === true) ||
+      (window.location.href.split("/")[3] === "editormainpage" &&
+        theme === true) ||
+      (window.location.href.split("/")[3] === "addnewcategory" &&
+        theme === true) ||
+      (window.location.href.split("/")[3] === "deletecontent" &&
+        theme === true) ||
+      (window.location.href.split("/")[3] === "detailpage" && theme === true) ||
+      (window.location.href.split("/")[3] === "editcoursestructure" &&
+        theme === true)
+    ) {
+      return "CreamyTheme";
+    } else if (theme === true) {
+      return "lightTheme";
+    } else {
+      return "darkTheme";
+    }
+  };
+
   return (
     <>
-      <div className={theme ? "lightTheme" : "darkTheme"}>
+      <div className={backgroundHanlde()}>
         <Router>
           <Sidebar />
           <div>
@@ -96,7 +139,7 @@ function App() {
                 element={<UserSettingViewPage />}
               />
               <Route path="/ratingform" exact element={<RatingForm />} />
-            
+
               <Route
                 path="/librarybookmark"
                 exact
@@ -133,7 +176,7 @@ function App() {
             </Routes>
           </div>
         </Router>
-        <FooterCopyright />
+        <FooterCopyright backgroundHanld={backgroundHanlde()} />
       </div>
     </>
   );

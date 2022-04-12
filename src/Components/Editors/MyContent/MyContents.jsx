@@ -114,7 +114,7 @@ const MyContents = () => {
 
   return (
     <>
-      <div style={{ background: handleBackgroung() }}>
+      {/* <div style={{ background: handleBackgroung() }}> */}
         <div className="mainmycontentcontainer">
           <div className="mycontentcontainerbackbutton">
             <button
@@ -231,7 +231,7 @@ const MyContents = () => {
             );
           })}
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };
