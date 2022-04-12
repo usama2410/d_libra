@@ -4,22 +4,29 @@ import { Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const EditorsMainPage = () => {
   const navigate = useNavigate();
+  const handleBack = () => {
+
+  }
   const theme = useSelector((state) => state.theme.state);
   return (
     <>
-     <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+      <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
 
       <div className="editormainpage_root_contianer">
         <div>
           <Typography variant="h6" noWrap component="div">
+         
+
             <span
               className={
                 theme ? "editors_menu_heading_sub" : "editors_menu_heading"
@@ -27,9 +34,12 @@ const EditorsMainPage = () => {
             >
               Editor's Menu
             </span>
+             
           </Typography>
         </div>
-        <div>
+
+
+        <div className="editormainpagebuttoncontainer">
           <Button
             variant="outlined"
             className="upload_contents_button"
@@ -38,7 +48,7 @@ const EditorsMainPage = () => {
             Edit Course Structure{" "}
           </Button>
         </div>
-        <div>
+        <div className="editormainpagebuttoncontainertwo">
           <Button
             variant="outlined"
             className="upload_contents_button"
@@ -47,7 +57,7 @@ const EditorsMainPage = () => {
             Upload Contents{" "}
           </Button>
         </div>
-        <div style={{ marginTop: "68px" }}>
+        <div className="editormainpagebuttoncontainerthree">
           <span  className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}>
             Select Course for Edit
@@ -68,7 +78,7 @@ const EditorsMainPage = () => {
               <option value="audi">Audi</option>
             </select>
           </div>
-          <div style={{ justifyContent: "center", display: "flex" }}>
+          <div style={{ justifyContent: "center", display: "flex" }}  className="editormainpagebuttoncontainertwo">
             <Button
               variant="outlined"
               className="upload_contents_button"

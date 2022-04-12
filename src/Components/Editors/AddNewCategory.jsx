@@ -6,7 +6,7 @@ import "./AddNewCategory.css";
 import { useSelector, useDispatch } from "react-redux";
 import "../Sidebar.css";
 import { addnewCategory } from "../../Redux/Actions/Editor/Category";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const AddNewCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,7 +23,9 @@ const AddNewCategory = () => {
       setImage(URL.createObjectURL(e.target.files[0]));
       setImageName(e.target.files[0].name);
     }
-  };
+  };const handleBack = () => {
+
+  }
   const handleSubmit = async (e) => {
     // console.log("chapName",)
     e.preventDefault();
@@ -31,15 +33,16 @@ const AddNewCategory = () => {
   };
   return (
     <>
-      <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+  <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
 
-      <div className="editormainpage_root_contianer">
+      <div className="addnewcategorycontainer">
         <div>
           <Typography variant="h6" noWrap component="div">
             <span
@@ -54,11 +57,7 @@ const AddNewCategory = () => {
           </Typography>
         </div>
         <div
-          style={{
-            paddingTop: "10px",
-            display: "flex",
-            flexDirection: "column",
-          }}
+       className="addcategorysubcontainer"
         >
           <span
             className="addcategory_text"
@@ -164,14 +163,17 @@ const AddNewCategory = () => {
             )}
           </div>
         </div>
+        <div  className="update_button_newcategory">
+
         <button
-          className="update_button"
+          className="update_button   "
           onClick={handleSubmit}
           style={{ marginBottom: "40px" }}
         >
           Update
         </button>
       </div>
+          </div>
     </>
   );
 };

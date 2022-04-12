@@ -16,11 +16,9 @@ import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getMainCategory,
-  getParentChildCategories,
-} from "../../Redux/Actions/Editor/Category";
-import EditCourseStructureData from "./EditCourseStructureData";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { getMainCategory } from "../../Redux/Actions/Editor/Category";
+import EditCourseStructureData from './EditCourseStructureData'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -61,28 +59,27 @@ const EditCourseStructure = () => {
     // console.log("response  getMainCategory", response);
     setResult(EditCourseStructureData);
   };
+  const handleBack = () => {
 
-  const parentChildCategories = async () => {
-    const response = await dispatch(getParentChildCategories(token));
-    // console.log("response", response);
-    setParentChidCategory(response);
-  };
-
+  }
   useEffect(() => {
     mainCategories();
     parentChildCategories();
   }, []);
   return (
     <div style={{ height: "100%" }}>
-      <button
-        className="back_button "
-        style={{ color: `${theme ? "black" : "white"}` }}
+    
+    <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-        <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
       </button>
 
-      <div className="editormainpage_root_contianer">
+
+      <div className="editcoursestructurecontainer">
         <div>
           <Button
             variant="outlined"
@@ -92,20 +89,20 @@ const EditCourseStructure = () => {
             Add a New Category, Course or Chapter{" "}
           </Button>
         </div>
-        <div style={{ marginTop: "20px" }}>
+        <div className="editcoursestructuretext">
           <Typography variant="h6" noWrap component="div">
             <span
               className={
-                theme ? "editors_menu_heading_sub" : "editors_menu_heading"
+                theme ? "editors_menu_heading_sub_two" : "editors_menu_heading"
               }
-              // style={{ color: `${theme ? "black" : "white"}` }}
+       
             >
               Edit Course Structure
             </span>
           </Typography>
         </div>
       </div>
-      <div style={{ background: "black", color: "white" }}>
+      <div style={{ background: "#111111", color: "white", paddingBottom: "40px"}}>
         <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
           <Grid container>
             <Grid item lg={2} md={3} sm={12} xs={12}>

@@ -4,6 +4,7 @@ import { Button, Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
@@ -11,22 +12,26 @@ import "./RatingForm.css";
 import StarIcon from '@mui/icons-material/Star';
 const Feedback = () => {
   const navigate = useNavigate();
+  const handleBack = () => {
+
+  }
   const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
   return (
     <>
 
 <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
   
-      <div className="ratingform_root_two" style={{ marginTop: "20px" }}>
+      <div className="ratingform_root_two">
         <select
-          className={theme ? "addcategory_input_sub" : "addcategory_input"}
+          className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"}
           name="cars"
           id="cars"
         >
@@ -37,7 +42,7 @@ const Feedback = () => {
         </select>
 
         <select
-          className={theme ? "addcategory_input_sub" : "addcategory_input"}
+          className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"}
           name="cars"
           id="cars"
         >
@@ -61,9 +66,9 @@ const Feedback = () => {
         </div> */}
       </div>
 
-      <div className="ratingform_root_three" style={{marginTop: "35px"}}>
+      <div className="ratingform_root_three">
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two">Feedback Comments:</span>
+          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Feedback Comments:</span>
         </div>
 
         <div>
@@ -80,7 +85,7 @@ const Feedback = () => {
           />
         </div>
 
-        <div style={{ marginTop: "20px" }}>
+        <div className="submitfeedbackbutton">
           <Button variant="contained" className="user_buttons">
             Submit
           </Button>

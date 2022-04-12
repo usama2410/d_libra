@@ -9,11 +9,18 @@ import Vector91 from "../../assests/Vector91.png";
 import Member_Icon from '../../assests/SVG_Files/Member_Icon.svg'
 import addwhite from "../../assests/addwhite.png";
 import addblack from "../../assests/addblack.png";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { MdModeEditOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
 import "./UserSettingViewPage.css";
 import { profileData, updateProfile } from "../../Redux/Actions/Profile.action";
 import { useDispatch } from "react-redux";
+import Add_dark from '../../assests/SVG_Files/New folder/Add_dark.svg'
+import Add_light from '../../assests/SVG_Files/New folder/Add_light.svg'
+import Bookmark_green from '../../assests/SVG_Files/New folder/Bookmark_green.svg'
+import Bookmark_blue from '../../assests/SVG_Files/New folder/Bookmark_blue.svg'
+import Bookmark_red from '../../assests/SVG_Files/New folder/Bookmark_red.svg'
+import FooterButtons from './FooterButtons'
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -58,15 +65,21 @@ const UserSettingViewPage = () => {
     navigate("/changepassword");
   };
 
+
+  const handleBack = () => {
+
+  }
   return (
     <div>
-     <button
-          className="back_button usersettingbackbutton"
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+  
+ <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
       {validation ? (
         firstName && lastName !== "" ? (
           message ? (
@@ -94,7 +107,7 @@ const UserSettingViewPage = () => {
               >
                 <MdModeEditOutline     className="editorimage_icon"/>
                 <span
-                  className="editoricon_image"
+                  className={theme ? " editorimage_icon" : "  editorimage_icon_two"}
                  
                 >
                   Editor
@@ -109,32 +122,36 @@ const UserSettingViewPage = () => {
               </Button>
             </div>
           </div>
+
+<div className="userinputfieldmaincontainer">
+
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark_two"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               Username
             </span>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "usersetting_inputfield_light" : "usersetting_inputfield_dark"}
               placeholder="Username"
               value={username}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="emailaddresscontainer">
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark_two"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               E-mail Address
             </span>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={theme ? "usersetting_inputfield_light" : "usersetting_inputfield_dark"}
               placeholder="E-mail Address"
               value={email}
-            />
+              />
           </div>
+              </div>
           {/* <div style={{ display: "flex", flexDirection: "column" }}>
             <span
               className="addcategory_text"
@@ -165,17 +182,17 @@ const UserSettingViewPage = () => {
           </div> */}
         </div>
 
-        <div className="user_bookmark_container" style={{ marginTop: "20px" }}>
+        <div className="user_bookmark_container">
           <div className="hidden_user_input">
             <span
-              className="addcategory_text"
+              className="addcategory_text_bookmark"
               style={{ color: `${theme ? "#363636" : "white"}` }}
             >
               Bookmark Name
             </span>
             <div className="vector_container">
               <div className="vector_image">
-                <img src={Vector90} alt="" />
+                <img src={Bookmark_blue} alt=""  className="tagimageusersettingpage" />
               </div>
               <input
                 className={
@@ -190,13 +207,14 @@ const UserSettingViewPage = () => {
             style={{
               color: `${theme ? "#363636" : "white"}`,
               marginTop: "20px",
+              marginBottom: "-5px"
             }}
           >
             Bookmark Name
           </span>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector90} alt="" />
+              <img src={Bookmark_blue} alt="" className="tagimageusersettingpage" />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -205,7 +223,7 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector91} alt="" />
+              <img src={Bookmark_green} alt="" className="tagimageusersettingpage" />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -214,7 +232,7 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Vector92} alt="" />
+              <img src={Bookmark_red} alt="" className="tagimageusersettingpage" />
             </div>
 
             <input
@@ -224,9 +242,9 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <img
-              src={theme ? addblack : addwhite}
+              src={theme ?  Add_light : Add_dark}
               alt=""
-              style={{ marginLeft: "2px" }}
+              className="addiconcontainer"
             />
 
             <input
@@ -259,6 +277,7 @@ const UserSettingViewPage = () => {
           Log out
         </Button>
       </div>
+      <FooterButtons />
     </div>
   );
 };

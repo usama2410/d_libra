@@ -40,10 +40,10 @@ const LandingPage = () => {
     infinite: true,
     speed: 500,
     initialSlide: 0,
-    slidesToShow: 4,
+    slidesToShow: 4.1,
     autoplay: false,
     slidesToScroll: 1,
-    centerMode: false,
+    centerMode: true,
     arrows: false,
     responsive: [
       {
@@ -188,6 +188,8 @@ const LandingPage = () => {
                       <div className="intro-slides">
                         <img
                           src={e.image}
+                          // width="100%"
+                          // height="225px"
                           className="landingpage_images"
                           style={{
                             width: "100%",

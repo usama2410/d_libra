@@ -4,6 +4,7 @@ import { Button, Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
@@ -11,21 +12,27 @@ import "./RatingForm.css";
 import StarIcon from '@mui/icons-material/Star';
 const RatingSidebar = () => {
   const navigate = useNavigate();
+  const handleBack = () => {
+
+  }
   const theme = useSelector((state)=> state.theme.state)
   const [value, setValue] = React.useState(2);
   return (
     <>
  
+
  <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+      >
+         <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
    
-      <div className="ratingform_root_two" style={{ marginTop: "20px"}}>
-        <select className={theme ? "addcategory_input_sub" : "addcategory_input"} name="cars" id="cars">
+      <div className="ratingform_root_four_five">
+        <select           className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"} 
+        name="cars" id="cars">
           <option value="volvo">Select a course for Rating</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
@@ -33,14 +40,13 @@ const RatingSidebar = () => {
         </select>
 
         <div
-          className="ratingform_root_two"
-          style={{ marginTop: "20px", marginBottom: "20px" }}
+       className="ratingsidebarcomponent"
         >
           <Rating
             name="simple-controlled"
-            style={{fontSize : '36px'}}
+            style={{fontSize : '48px'}}
             emptyIcon={<StarIcon style={{ color :'#C4C4C4'  }} fontSize="inherit" />}
-            className="ratingform_root_sub_two"
+            // className="ratingform_root_sub_two"
             value={value}
             onChange={(event, newValue) => {
               setValue(newValue);
@@ -49,9 +55,9 @@ const RatingSidebar = () => {
         </div>
       </div>
 
-      <div className="ratingform_root_three">
+      <div className="ratingform_root_five">
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two">Rating Comments:</span>
+          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Rating Comments:</span>
         </div>
 
         <div>
