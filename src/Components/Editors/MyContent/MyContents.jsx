@@ -117,7 +117,6 @@ const MyContents = () => {
 
   return (
     <>
-      {/* <div style={{ background: handleBackgroung() }}> */}
         <div className={theme ? "mainmycontentcontainer" : "mainmycontentcontainertwo"}>
           <div className="mycontentcontainerbackbutton">
           <button
@@ -132,7 +131,7 @@ const MyContents = () => {
           <div>
             <div className="mainContentContainertwotwo">
               <span
-                style={{ paddingTop: "8px", paddingBottom: "14px" }}
+                style={{ paddingTop: "8px", paddingBottom: "14px"}}
                 className={
                   theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"
                 }

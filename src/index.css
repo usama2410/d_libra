@@ -8,11 +8,26 @@
   
 } */
 
+:root {
+  --app-height: 100%;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: -webkit-fill-available;
+  height: var(--app-height);
+  min-height: 100vh;
+}
+
 .darkTheme {
   background-color: #111111;
   color: white;
 
   padding-top: 58px;
+  /* max-height: 100vh; */
+  /* height: var( — app-height); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,21 +35,27 @@
 }
 
 .lightTheme {
-  background: #F3F6FF;
+  /* background: #F3F6FF; */
   color: black;
+  /* height: var( — app-height); */
+  /* max-height: 100vh; */
   padding-top: 58px;
   min-height: 100vh;
   display: flex;
+
   flex-direction: column;
   justify-content: space-between;
   background-color: #f3f6ff !important;
 }
 
 .CreamyTheme {
-  background: #F3F6FF;
+  /* background: #F3F6FF; */
   color: black;
-  padding-top: 40px;
+  padding-top: 58px;
   min-height: 100vh;
+  /* height: var( — app-height); */
+  /* max-height: 100vh; */
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,8 +74,11 @@
     padding: 40px 0px 0px 0px;
     /* padding: 40px 0px; */
   }
-   .lightTheme {
-      padding: 40px 0px 0px 0px;
+  .lightTheme {
+    padding: 40px 0px 0px 0px;
   }
- 
+
+  .CreamyTheme {
+    padding: 40px 0px 0px 0px;
+  }
 }

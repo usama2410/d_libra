@@ -96,10 +96,12 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+<div style={{marginTop: "-16px"}}>  
 
         <Button className="update_button" onClick={handleRegister}>
           Register
         </Button>
+</div>
       </div>
 
       <div>

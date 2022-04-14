@@ -47,7 +47,7 @@ const libcourse = [
       {
         id: 2,
         image: CollaboratingOnGitGitHubRemoteRepository,
-        Tags: "Collaborating On Git & GitHub -- Remote Repository",
+        Tags: "Collaborating On Git & GitHub",
         TagsImageTwo: Vector91,
       },
       {

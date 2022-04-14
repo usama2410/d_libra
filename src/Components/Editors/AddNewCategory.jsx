@@ -173,7 +173,7 @@ const AddNewCategory = () => {
                   />
                 </div>
               ) : (
-                <span style={{ padding: "0px 5px " }}>No Image</span>
+                <span style={{ padding: "20px 5px 0px 5px ", position: "relative", top: "5px" }}>No Image</span>
               )}
             </div>
           </div>

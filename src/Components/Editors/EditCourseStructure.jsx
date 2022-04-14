@@ -110,8 +110,11 @@ const EditCourseStructure = () => {
         </div>
       </div>
       <div
-     
-        style={{ background: "#111111", color: "#FFFFFF", paddingBottom: "40px" }}
+        style={{
+          background: "#111111",
+          color: "#FFFFFF",
+          paddingBottom: "40px",
+        }}
       >
         <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
           <Grid container>

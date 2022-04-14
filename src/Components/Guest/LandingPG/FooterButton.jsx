@@ -113,9 +113,10 @@ const FooterButtons = (props) => {
         >
           <img
             src={Popup_History_off}
+            // style={{}}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -124,7 +125,7 @@ const FooterButtons = (props) => {
             src={Popup_My_library_off}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -133,7 +134,7 @@ const FooterButtons = (props) => {
             src={Popup_Rating_off}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -141,7 +142,7 @@ const FooterButtons = (props) => {
             src={Popup_Share}
             onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -160,7 +161,7 @@ const FooterButtons = (props) => {
                 src={Popup_History_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -169,7 +170,7 @@ const FooterButtons = (props) => {
                 src={Popup_My_library_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -178,7 +179,7 @@ const FooterButtons = (props) => {
                 src={Popup_Rating_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -186,7 +187,7 @@ const FooterButtons = (props) => {
                 src={Popup_Share}
                 onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />

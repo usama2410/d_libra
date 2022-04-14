@@ -1,90 +1,77 @@
-.logocontainertwo{
+.Searchb_main {
+  margin-top: -56px;
+}
+.logocontainertwo {
   position: relative;
   left: -40px;
   top: 0;
 }
-
-.logocontainerthree{
-
-  
+.logocontainerone {
+  position: relative;
+  left: -30px;
 }
-
-.logocontainerone{
-   position: relative;
-   left: -30px;
-}
-
-
-.logocontainerseven{
+.logocontainerseven {
   position: relative;
   left: -14px;
+  /* border: 1px solid red !important; */
+}
+.logocontaineredit{
+  position: relative;
+  left: 7px;
 }
 
-.logocontainereight{
+/* .logocontainertwenty{
+  position: relative !important;
+  left: -100px !important;
+  margin-left: 200px !important;
+  border: 1px solid red !important;
+} */
+
+.logocontainereight {
   position: relative;
   left: -10px;
 }
-
-
-.logocontainernine{
+.logocontainernine {
   position: relative;
   left: -35px;
 }
-
-.logocontainerten{
+.logocontainerten {
   position: relative;
   left: -15px;
 }
-
-.logocontainereleven{
+.logocontainereleven {
   position: relative;
-  left: 5px;
+  left: -14px;
 }
-
-/* 
-.logocontainereight{
-  margin-right: 100px;
-}
- */
-
-.hamburgericonsidebar{
+.hamburgericonsidebar {
   width: 30px !important;
-  /* border: 1px solid red; */
   height: 22.5px !important;
 }
-
-.searchiconsize {
-}
-
-.wrapthree{
+.wrapthree {
   display: none;
 }
-
 .editoriconsidebar {
   width: 40px;
   height: 40px;
   position: relative;
   left: 0px;
 }
-
 .mainsearchcontianer {
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
-
   display: flex;
 }
-
 .arrows_icon_sidebar {
-  width: 22.4px;
-  height: 22.9px;
+  width: 24.4px;
+  height: 22.91px;
 }
-
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  height: 55px;
+  height: 48px;
+  padding-top: 5px;
+  /* border: 1px solid red; */
 }
 .left_search {
   display: flex;
@@ -94,17 +81,16 @@
 }
 .right_search {
   height: 42px;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 75%;
-  /* background-color: #4f4f4f; */
   border-radius: 10px;
 }
 .left {
   display: flex;
   justify-content: flex-start;
-
   width: 80%;
 }
 .searchbar_input {
@@ -120,7 +106,6 @@
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
-
   color: #ffffff !important;
 }
 .searchbar_input::placeholder {
@@ -130,10 +115,8 @@
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
-
   color: #ffffff !important;
 }
-
 .searchbar_input_two {
   border-radius: 5px 0px 0px 5px !important;
   padding-left: 10% !important;
@@ -148,7 +131,6 @@
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
-
   color: #363636 !important;
 }
 .searchbar_input_two::placeholder {
@@ -159,57 +141,41 @@
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
-
   color: #363636 !important;
 }
-
 .right {
-  /* width: 20%; */
-  /* border: 1px solid green; */
   height: 32.5px;
-  /* padding: 0px 30px 0px 0px; */
   border-radius: 0px 5px 5px 0px;
 }
-
 .MuiAppBar-root {
   box-shadow: none !important;
-  /* background: #F3F6FF !important; */
 }
-
 .subheadingsidebar {
   margin-left: 20px;
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
-  /* identical to box height */
-
   display: flex;
   align-items: flex-end;
   letter-spacing: -0.015em;
-
   color: #ffffff;
   padding-top: 2px;
 }
-
 .profilesidebaricon {
   margin-left: -9px;
   width: 40px;
   height: 40px;
 }
-
 .toolbar_rowreverse {
   display: flex;
 }
-
 .wrap {
   display: none;
 }
-
 .wraptwo {
   display: none;
 }
-
 .wrap .search_icon {
   height: 60px;
   font-size: 14px;
@@ -227,7 +193,6 @@
   transition: width 0.4s cubic-bezier(0, 0.795, 0, 1);
   cursor: pointer;
 }
-
 .search_icon:focus:hover {
   background: #4f4f4f;
   box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
@@ -243,13 +208,11 @@
   color: white;
   outline: none;
 }
-
 .search_icon:focus {
   width: 370px;
   z-index: 1;
   cursor: text;
 }
-
 .darkThemeBar:focus:hover {
   background: white;
   color: black;
@@ -258,57 +221,16 @@
   background: #4f4f4f;
   color: white;
 }
-
 .toolbarclassone {
   background: #111111 !important;
-  /* border: none; */
-  /* BG Body Dark */
   min-height: 61px !important;
-  /* border: 1px solid #111111 !important; */
-  /* box-sizing: border-box !important; */
-  /* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25) !important; */
 }
-
 .toolbarclasstwo {
   background: #f3f6ff !important;
-  /* height: 42px !important; */
   min-height: 61px !important;
-  /* height: 10px !important;
-  border: 1px solid red; */
-  /* border: 1px solid red; */
 }
-
-input[type="submit"] {
-  height: 67px;
-  width: 63px;
-  display: inline-block;
-  /* background: url(../assests/VectorBlue.png) center center no-repeat; */
-  text-indent: -10000px;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  cursor: pointer;
-  opacity: 0.4;
-  cursor: pointer;
-  transition: opacity 0.4s ease;
-}
-input[type="submit"].submitone {
-  background: url(../assests/VectorBlue.png) center center no-repeat;
-}
-
-input[type="submit"].submittwo {
-  background: url(../assests/Vector.png) center center no-repeat;
-}
-
-input[type="submit"]:hover {
-  opacity: 0.8;
-}
-
 .sidebar_inputfield {
   background: #4f4f4f;
-  /* box-shadow: inset -3px 2px 4px 0px rgba(0, 0, 0, 0.25); */
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border: none !important;
@@ -320,13 +242,11 @@ input[type="submit"]:hover {
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-
   color: #ffffff;
   outline: none !important;
   width: 280px;
   height: 40.53px !important;
 }
-
 .sidebar_inputfield::placeholder {
   font-style: normal;
   font-weight: 300;
@@ -335,17 +255,13 @@ input[type="submit"]:hover {
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-
   color: #ffffff;
 }
-
 .sidebar_inputfield_sub {
   background: white;
-  /* box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25); */
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border: none !important;
-
   padding-left: 20px;
   font-style: normal;
   font-weight: 300;
@@ -354,13 +270,11 @@ input[type="submit"]:hover {
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-
   color: #363636;
   outline: none !important;
   width: 280px;
   height: 40.53px !important;
 }
-
 .sidebar_inputfield_sub::placeholder {
   font-style: normal;
   font-weight: 300;
@@ -369,32 +283,24 @@ input[type="submit"]:hover {
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-
   color: #363636;
 }
-
 .logo_main_container {
   padding-left: 320px;
 }
-
 .logo_main_container_two {
   padding-left: 360px;
-
 }
-
 .inputfield_icon {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 10px;
 }
-
 .input_field_icon_container {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-
   background: #4f4f4f;
-
   width: 40px;
   height: 40.53px !important;
   display: flex;
@@ -402,7 +308,6 @@ input[type="submit"]:hover {
   justify-content: center;
   border: none !important;
 }
-
 .input_field_icon_container_sub {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -410,15 +315,11 @@ input[type="submit"]:hover {
   align-items: center;
   justify-content: center;
   background: white;
-
   width: 40px;
   height: 40.53px !important;
-
   border: none !important;
 }
-
 .listitem_text {
-  /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -429,7 +330,6 @@ input[type="submit"]:hover {
   color: #ffffff;
 }
 .listitem_text_disabled {
-  /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -443,25 +343,20 @@ input[type="submit"]:hover {
 .sidenav_logo {
   width: 40px;
   height: 40px;
-
   cursor: pointer;
   position: relative;
   right: -10px;
   top: 0px;
 }
-
-
 .sidenav_logotwo {
   width: 40px;
   height: 40px;
-
   cursor: pointer;
   position: relative;
   right: -6px;
   margin-right: 20px;
   top: 0px;
 }
-
 .container {
   position: absolute;
   top: 0;
@@ -472,12 +367,10 @@ input[type="submit"]:hover {
   margin: auto;
   text-align: center;
 }
-
 .switch input {
   position: absolute;
   opacity: 0;
 }
-
 .switch {
   display: inline-block;
   font-size: 20px;
@@ -533,49 +426,46 @@ input[type="submit"]:hover {
     position: relative;
     right: -100px;
   }
-
-  .logocontainerone{
+  .logocontainereleven {
+    position: relative;
+    left: -3px;
+  }
+  .logocontainerone {
     position: relative;
     left: -20px;
- }
+  }
 
- .logocontainerthree{
-  position: relative;
-  left: -5px;
-  top: 0;
-  /* border: 1px solid red !important; */
-}
+  .logocontainerthree {
+    position: relative;
+    left: -5px;
+    top: 0;
+  }
 
-  
-.logocontainerseven{
-  position: relative;
-  left: -3px;
-}
+  .logocontainerseven {
+    position: relative;
+    left: -3px;
+  }
 
+  .logocontainereight {
+    position: relative;
+    left: 0px;
+  }
 
-.logocontainereight{
-  position: relative;
-  left: 0px;
-}
+  .logocontainernine {
+    position: relative;
+    left: -25px;
+  }
 
-.logocontainernine{
-  position: relative;
-  left: -25px;
-}
+  .logocontainerten {
+    position: relative;
+    left: -5px;
+  }
 
-
-
-.logocontainerten{
-  position: relative;
-  left: -5px;
-}
-
-
- .logocontainertwo{
-  position: relative;
-  left: -30px;
-  top: 0;
-}
+  .logocontainertwo {
+    position: relative;
+    left: -30px;
+    top: 0;
+  }
   .logo_main_container_two {
     padding-left: 0px;
     position: relative;
@@ -622,7 +512,7 @@ input[type="submit"]:hover {
     left: 0px;
     margin-right: -10px;
   }
-  .hamburgericonsidebar{
+  .hamburgericonsidebar {
     width: 20px !important;
     height: 14.6px !important;
     margin-left: 10px;
@@ -636,12 +526,9 @@ input[type="submit"]:hover {
     font-weight: 300;
     font-size: 12px;
     line-height: 14px;
-    /* identical to box height */
-
     display: flex;
     align-items: flex-end;
     letter-spacing: -0.015em;
-
     color: #ffffff;
     padding-bottom: 2px;
   }
@@ -664,7 +551,7 @@ input[type="submit"]:hover {
   }
   .arrows_icon_sidebar {
     width: 17.22px;
-    height: 18px;
+    height: 16.47px;
   }
   .sidebar_inputfield {
     display: none;
@@ -702,7 +589,6 @@ input[type="submit"]:hover {
     height: 25px;
   }
 
-
   .sidenav_logotwo {
     margin-right: 40px;
     width: 25px;
@@ -730,66 +616,24 @@ input[type="submit"]:hover {
     height: 30px;
   }
 
+  .Searchb_main {
+    margin-top: -46px;
+  }
+
   .switch_class {
     margin: 8px 0px 0px 100px;
   }
 
-.toolbarclassone {
-  background: #111111 !important;
-  /* border: none; */
-  /* BG Body Dark */
-  min-height: 42px !important;
-  /* border: 1px solid #111111 !important; */
-  /* box-sizing: border-box !important; */
-  /* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25) !important; */
-}
-
-.toolbarclasstwo {
-  background: #f3f6ff !important;
-  /* height: 42px !important; */
-  min-height: 42px !important;
-  border: 1px solid #F3F6FF;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (max-width: 490px) {
-  input[type="text"]:focus {
-    width: 240px;
-    z-index: 1;
-    cursor: text;
+  .toolbarclassone {
+    background: #111111 !important;
+    min-height: 42px !important;
   }
 
-
-}
-
-@media screen and (max-width: 400px) {
-  input[type="text"]:focus {
-    width: 240px;
-    z-index: 1;
-    cursor: text;
+  .toolbarclasstwo {
+    background: #f3f6ff !important;
+    min-height: 42px !important;
+    border: 1px solid #f3f6ff;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   }
 }

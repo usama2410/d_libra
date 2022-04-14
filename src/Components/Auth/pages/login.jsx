@@ -85,10 +85,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+           <div className="logininbuttoncontainer">
 
-        <Button className="update_button" onClick={handleLogin}>
+        <Button className="loginbuttontext" onClick={handleLogin}>
           Log in
         </Button>
+           </div>
 
         <div>
           <span className={theme ? "texttwo" : "orText"}>Or</span>
@@ -120,7 +122,7 @@ const Login = () => {
               {" "}
               Forget Password ?
             </span>
-            <ArrowForward />
+            <ArrowForward  className="arrowforwardicon"/>
           </div>
         </div>
       </div>

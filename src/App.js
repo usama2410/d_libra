@@ -1,3 +1,5 @@
+
+import React, {useEffect} from 'react'
 import Sidebar from "./Components/Sidebar";
 import EditorsMainPage from "../src/Components/Editors/EditorsMainPage";
 import EditCourseStructure from "./Components/Editors/EditCourseStructure";
@@ -62,6 +64,7 @@ function App() {
         theme === false)
     ) {
       console.log("home");
+      document.body.style.backgroundColor = "#111111"
       return "darkTheme";
     } else if (
       (window.location.href.split("/")[3] === "mycontents" && theme === true) ||
@@ -77,13 +80,33 @@ function App() {
       (window.location.href.split("/")[3] === "editcoursestructure" &&
         theme === true)
     ) {
+      document.body.style.backgroundColor = "#eeeeee"
       return "CreamyTheme";
     } else if (theme === true) {
+      document.body.style.backgroundColor = "#F3F6FF"
       return "lightTheme";
     } else {
+      document.body.style.backgroundColor = "#111111"
       return "darkTheme";
     }
   };
+
+
+
+
+useEffect(() => {
+  const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+}
+window.addEventListener('resize', appHeight)
+appHeight()
+})
+
+
+
+
+
 
   return (
     <>

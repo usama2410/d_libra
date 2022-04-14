@@ -4,8 +4,9 @@ import { Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import FooterCopyright from '../User/FooterCopyright'
+import FooterCopyright from "../User/FooterCopyright";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import Select from "react-select";
 const EditorsMainPage = () => {
   const navigate = useNavigate();
   const handleBack = () => {};
@@ -20,9 +21,105 @@ const EditorsMainPage = () => {
     }
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const options = [
+    { value: "chocolate", label: "Git & GitHub Introduction" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: " #FFFFFF",
+      borderRadius: "5px",
+      border: "none",
+      color: " #363636",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: " #363636",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: " #363636",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: " #363636",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: " #363636",
+    }),
+  };
+
+  const customStyless = {
+    control: (base, state) => ({
+      ...base,
+      background: " #4F4F4F",
+      borderRadius: "5px",
+      border: "none",
+      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
+      color: "white",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: "black",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: "black",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: "#FFFFFF",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "white",
+    }),
+  };
+
   return (
     <>
-      <div style={{ background: handleBackgroung()}}>
+      <div style={{ background: handleBackgroung() }}>
         <button
           onClick={handleBack}
           className="back_button"
@@ -65,13 +162,30 @@ const EditorsMainPage = () => {
           </div>
           <div className="editormainpagebuttoncontainerthree">
             <span
-              className="addcategory_text"
-              style={{  color: `${theme ? "#363636" : "#FFFFFF"}` }}
+              className="selectcourseforedit"
+              style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
             >
               Select Course for Edit
             </span>
-            <div>
-              <select
+            <div
+            //  className={
+            //       theme
+            //         ? "git_introduction_dropdown_sub"
+            //         : "git_introduction_dropdown"
+            //     }
+            >
+              <Select
+              
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub"
+                    : "git_introduction_dropdown"
+                }
+                options={options}
+              />
+
+              {/* <select
                 className={
                   theme
                     ? "git_introduction_dropdown_sub"
@@ -84,7 +198,7 @@ const EditorsMainPage = () => {
                 <option value="saab">Saab</option>
                 <option value="opel">Opel</option>
                 <option value="audi">Audi</option>
-              </select>
+              </select> */}
             </div>
             <div
               style={{ justifyContent: "center", display: "flex" }}
@@ -100,7 +214,7 @@ const EditorsMainPage = () => {
             </div>
           </div>
         </div>
-     {/* <div style={{position: "absolute", bottom: "0", width: "100%", display: "flex", justifyContent: }}>
+        {/* <div style={{position: "absolute", bottom: "0", width: "100%", display: "flex", justifyContent: }}>
 
      <FooterCopyright/>
      </div> */}

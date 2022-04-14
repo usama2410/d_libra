@@ -229,7 +229,7 @@ const UploadContentMain = () => {
                           color="primary"
                           component="span"
                           // style={{ height: "20px" }}
-                          className="image_button"
+                          className="image_button selectanimagebutton"
                         >
                           Select an Image File
                         </Button>

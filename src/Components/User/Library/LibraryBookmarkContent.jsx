@@ -72,7 +72,7 @@ const LibraryBookmarkContent = [
       {
         id: 1,
         image: CollaboratingOnGitGitHubRemoteRepository,
-        Tags: "Collaborating On Git & GitHub -- Remote Repository",
+        Tags: "Collaborating On Git & GitHub -- Remote",
         TagsImageTwo: Vector91,
       },
     ],

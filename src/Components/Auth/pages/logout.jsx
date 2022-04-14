@@ -26,7 +26,7 @@ const theme = useSelector((state) => state.theme.state)
         <div className="logoutmaincontainer">
 
       <div style={{ display: "flex", justifyContent: "center"}}>
-        <Typography className="logoutText" style={{color: `${theme ? '#008EEC' : ' #FFFFFF'}`}}>
+        <Typography className={theme ? "logoutTextdark" : " logoutText"}>
           You've successfully logged out.
         </Typography>
       </div>

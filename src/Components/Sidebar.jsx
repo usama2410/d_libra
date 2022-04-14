@@ -13,15 +13,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import image3 from "../assests/image3.png";
-import Vector from "../assests/Vector.png";
 import Rating from "../assests/Rating.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
 import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
-import VectorBlue from "../assests/VectorBlue.png";
 import { useLocation } from "react-router-dom";
 import UnionClose from "../assests/UnionClose.png";
 import UnionBlue from "../assests/UnionBlue.png";
@@ -41,6 +37,8 @@ import Search_dark from "../assests/SVG_Files/New folder/icons/Search_dark.svg";
 import Search from "../assests/SVG_Files/New folder/icons/Search.svg";
 import Hamburger_Menu_light from "../assests/SVG_Files/New folder/Hamburger_Menu_light.svg";
 import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg";
+import Arrow_Left_light from '../assests/SVG_Files/New folder/Arrow_Left_light.svg'
+import Arrow_Left_dark from '../assests/SVG_Files/New folder/Arrow_Left_dark.svg'
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -91,7 +89,6 @@ export default function Sidebar() {
     ) {
       return;
     }
-
     setStateTwo({ ...statetwo, [anchor]: open });
   };
 
@@ -113,7 +110,6 @@ export default function Sidebar() {
 
   const handleAccordionIcon = async () => {
     setaccordionicon(!accordionicon);
-    // await dispatch(accordionstate(accordionicon));
   };
 
   const handleChange = async (event) => {
@@ -129,17 +125,8 @@ export default function Sidebar() {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
-
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-
-  //   if (window.innerWidth < 768) {
-  //     alert("");
-  //   }
-  // };
 
   const handleaccordiondrawer = () => {
     if (
@@ -155,14 +142,16 @@ export default function Sidebar() {
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
                   {themeState ? (
                     <img
-                      src={UnionBlue}
+                      src={Arrow_Left_light}
+                      // style={{border : "1px solid red"}}
                       alt=""
                       className="arrows_icon_sidebar"
                     />
                   ) : (
                     <img
-                      src={Arrow_white}
+                      src={Arrow_Left_dark}
                       alt=""
+                      // style={{border : "1px solid red"}}
                       className="arrows_icon_sidebar"
                     />
                   )}
@@ -201,13 +190,13 @@ export default function Sidebar() {
                 <Button onClick={toggleDrawerTwo(anchor, true)}>
                   {themeState ? (
                     <img
-                      src={UnionBlue}
+                      src={Arrow_Left_light}
                       alt=""
                       className="arrows_icon_sidebar"
                     />
                   ) : (
                     <img
-                      src={Arrow_white}
+                      src={Arrow_Left_dark}
                       alt=""
                       className="arrows_icon_sidebar"
                     />
@@ -261,12 +250,7 @@ export default function Sidebar() {
   const list = (anchor) => (
     <Box
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
       style={{
-        height: "100%",
-        background: "#212121",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         color: "white",
         paddingTop: "45px",
       }}
@@ -294,7 +278,6 @@ export default function Sidebar() {
             </Typography>
           </div>
         </ListItem>
-
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/register")}
@@ -592,23 +575,33 @@ export default function Sidebar() {
     ) {
       return "logocontainerthree";
     } else if (
-      "/MyLibraryCorse" === location.pathname ||
+      // "/MylibraryCorse" === location.pathname ||
       "/LibraryBookmark" === location.pathname
     ) {
       return "logocontainerseven";
     } else if (
       "/Tagpage" === location.pathname ||
       "/Searchresult" === location.pathname ||
-      "/recentlyviewed" === location.pathname 
-   
+      "/recentlyviewed" === location.pathname
     ) {
       return "logocontainereight";
     } else if ("/coursepageguest" === location.pathname) {
       return "logocontainernine";
-    }else if (   "/coursemainpage" === location.pathname){
-      return "logocontainerten"
-    } else {
-      return "logocontainereleven"
+    } else if ("/coursemainpage" === location.pathname) {
+      return "logocontainerten";
+    } else if (
+      "/editormainpage" === location.pathname ||
+      "/editcoursestructure" === location.pathname ||
+      "/addnewcategory" === location.pathname ||
+      "/uploadcontentmain" === location.pathname ||
+      "/mycontents" === location.pathname ||
+      "/detailpage" === location.pathname ||
+      "/editcontentmain" === location.pathname ||
+      "/deletecontent" === location.pathname
+    ) {
+      return "logocontaineredit"
+    }else {
+      return "logocontainereleven";
     }
   };
 
@@ -617,8 +610,8 @@ export default function Sidebar() {
       "/" === location.pathname ||
       "/register" === location.pathname ||
       "/login" === location.pathname ||
-      "/logout" === location.pathname ||
-      "/searchresult" === location.pathname
+      "/logout" === location.pathname
+      // "/searchresult" === location.pathname
     ) {
       return "wrap";
     }
@@ -660,7 +653,6 @@ export default function Sidebar() {
                     aria-label="open drawer"
                     edge="start"
                     style={{
-                      // color: `${themeState ? "#111111 " : " white"}`,
                       position: "absolute",
                       left: "-10px",
                     }}
@@ -689,6 +681,7 @@ export default function Sidebar() {
                       width: drawerWidth,
                       boxSizing: "border-box",
                       border: "none",
+                      backgroundColor: "rgb(33, 33, 33)",
                     },
                   }}
                   anchor={anchor}
@@ -701,7 +694,6 @@ export default function Sidebar() {
               </React.Fragment>
             ))}
           </div>
-
           <div
             style={{
               display: "flex",
@@ -719,7 +711,6 @@ export default function Sidebar() {
               <Button
                 onClick={() => navigate("/")}
                 className={Conditional_Searchbar()}
-                // style={{ marginLeft: Conditional_Searchbar()}}
               >
                 {themeState ? (
                   <img
@@ -807,7 +798,7 @@ export default function Sidebar() {
             {"/" === location.pathname ||
             "/register" === location.pathname ||
             "/logout" === location.pathname ||
-            "/login" === location.pathname  || 
+            "/login" === location.pathname ||
             "/coursepageguest" === location.pathname ? (
               ""
             ) : (
@@ -825,8 +816,6 @@ export default function Sidebar() {
         <div
           className="Searchb_main"
           style={{
-            marginTop: "-58px",
-
             zIndex: "1",
             display: searchstate ? "block" : "none",
           }}
