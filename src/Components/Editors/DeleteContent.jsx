@@ -26,7 +26,7 @@ const DeleteContent = () => {
   return (
     <>
 
-    <div style={{background: handleBackgroung()}}>
+    {/* <div style={{background: handleBackgroung()}}> */}
       
      <button
         onClick={handleBack}
@@ -65,7 +65,7 @@ const DeleteContent = () => {
       </div>
    
       </div>
-    </div>
+    {/* </div> */}
      
     </>
   );

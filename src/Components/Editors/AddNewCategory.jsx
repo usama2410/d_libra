@@ -42,7 +42,7 @@ const AddNewCategory = () => {
 
   return (
     <>
-      <div style={{ background: handleBackgroung() }}>
+      {/* <div style={{ background: handleBackgroung() }}> */}
         <button
           onClick={handleBack}
           className="back_button"
@@ -187,7 +187,7 @@ const AddNewCategory = () => {
             </button>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

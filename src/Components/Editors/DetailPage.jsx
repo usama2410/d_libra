@@ -42,7 +42,7 @@ const DetailPage = () => {
   };
   return (
     <>
-      <div style={{ background: handleBackgroung() }}>
+      {/* <div style={{ background: handleBackgroung() }}> */}
         <div className="detailpage_root_container ">
           <div className="backbutton_disable">
             <button
@@ -292,7 +292,7 @@ const DetailPage = () => {
             </div>
           </div>
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 };

@@ -77,7 +77,7 @@ const EditCourseStructure = () => {
     }
   };
   return (
-    <div style={{ height: "100%", background: handleBackgroung() }}>
+    <div style={{ height: "100%" }}>
       <button
         onClick={handleBack}
         className="back_button"
