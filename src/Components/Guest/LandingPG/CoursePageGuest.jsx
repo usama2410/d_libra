@@ -18,7 +18,9 @@ const CoursePageGuest = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(CourseGuestData);
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate('/')
+  };
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -136,6 +138,7 @@ const CoursePageGuest = () => {
                     return (
                       <div className="intro-slides">
                         <img
+                        onClick={() => navigate('/userdetailpage')}
                           src={e.image}
                           className="landingpage_images"
                           style={{

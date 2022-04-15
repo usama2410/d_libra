@@ -39,7 +39,7 @@ const LandingPage = () => {
     adaptiveHeight: true,
     infinite: true,
     speed: 500,
-    initialSlide: 0,
+    initialSlide: 2,
     slidesToShow: 4.1,
     autoplay: false,
     slidesToScroll: 1,
@@ -51,6 +51,8 @@ const LandingPage = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
+          // initialSlide: 6,
+          centerMode: false,
         },
       },
       {
@@ -188,6 +190,7 @@ const LandingPage = () => {
                       <div className="intro-slides">
                         <img
                           src={e.image}
+                          onClick={() => navigate('/coursepageguest')}
                           // width="100%"
                           // height="225px"
                           className="landingpage_images"

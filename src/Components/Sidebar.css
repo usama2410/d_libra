@@ -1,3 +1,39 @@
+.sidebarsignupicon{
+width: 20px;
+height: 20px;
+}
+
+.sidebarloginicon{
+  width: 18px;
+height: 22.5px;
+}
+.sidebarlogouticon{
+  width: 18px;
+height: 20.12px;
+}
+.sidebardarkicon{
+  width: 20px;
+height: 19.95px;
+}
+.sidebarlibraryicon{
+  width: 22px;
+height: 18px;
+}
+.sidebarratingicon{
+  width: 17.7px;
+height: 16.96px;
+}
+.sidebarnighticon{
+  width: 18px;
+height: 18px;
+}
+.sidebareditoricon{
+  width: 18px;
+height: 19.2px;
+}
+
+
+
 .Searchb_main {
   margin-top: -56px;
 }

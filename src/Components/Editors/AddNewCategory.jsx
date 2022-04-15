@@ -26,9 +26,12 @@ const AddNewCategory = () => {
       setImageName(e.target.files[0].name);
     }
   };
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/editcoursestructure")
+  };
   const handleSubmit = async (e) => {
     // console.log("chapName",)
+    navigate("/editormainpage")
     e.preventDefault();
     await dispatch(addnewCategory(chapName, chapId, slug));
   };

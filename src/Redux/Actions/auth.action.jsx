@@ -107,3 +107,17 @@ export const pinState = (pin) => async (dispatch) => {
     });
   } catch (error) {}
 };
+
+
+
+export const searchState = (search) => async (dispatch) => {
+  console.log("tyfuygihjlk",search);
+  try {
+    dispatch({
+      type: "SEARCHSTATE",
+      payload: {
+        state: search,
+      },
+    });
+  } catch (error) {}
+};

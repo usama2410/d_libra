@@ -21,7 +21,7 @@ const Recentlyviewed = () => {
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(RviewData);
   const handleBack = () => {
-    
+      navigate('/coursemainpage')
   }
   const settings = {
     dots: false,
@@ -159,6 +159,7 @@ const Recentlyviewed = () => {
                     return (
                       <div className="intro-slides">
                         <img
+                        onClick={() => navigate('/Tagpage')}
                           src={e.image}
                           className="landingpage_images"
                           style={{

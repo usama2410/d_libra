@@ -175,7 +175,7 @@ appHeight()
                 element={<MylibraryCorse />}
               />
               <Route path="/Tagpage" exact element={<Tagpage />} />
-              <Route path="/Searchresult" exact element={<Searchresult />} />
+              {/* <Route path="/Searchresult" exact element={<Searchresult />} /> */}
               <Route
                 path="/Recentlyviewed"
                 exact

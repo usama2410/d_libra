@@ -1,26 +1,25 @@
-.librarybookmarkicon{
+.librarybookmarkicon {
   padding: 0px 0px 5px 5px;
 }
 
-.libraryrootcontainer{
+.libraryrootcontainer {
   margin-top: 10px;
 }
 
-.librarybackbutton{
+.librarybackbutton {
   position: relative;
-  top: -30px;
+  top: 0px;
 }
 
-.bookmarktext{
+.bookmarktext {
   font-style: normal;
-font-weight: 400;
-font-size: 21px;
-line-height: 24px;
-display: flex;
-align-items: center;
-text-align: center;
-letter-spacing: -0.015em;
-
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.015em;
 }
 
 .header_library_container {
@@ -113,11 +112,9 @@ letter-spacing: -0.015em;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
-
-  .librarybookmarkicon{
+  .librarybookmarkicon {
     padding: 0px 6px 5px 5px;
   }
-  
 }
 
 @media screen and (max-width: 600px) {
@@ -145,35 +142,17 @@ letter-spacing: -0.015em;
     letter-spacing: -0.015em !important;
   }
 
-
-
-
-
-
-
-
-  .bookmarktext{
+  .bookmarktext {
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
     /* identical to box height */
-    
+
     display: flex;
     align-items: center;
     letter-spacing: -0.015em;
   }
-  
-
-
-
-
-
-
-
-
-
-
 
   .bycourse_button_sub {
     width: 115px !important;
@@ -212,28 +191,20 @@ letter-spacing: -0.015em;
     margin-top: 10px;
   }
   .library_root_container_simple {
-    background: #F3F6FF;
+    background: #f3f6ff;
     box-shadow: 0px 4px 4px rgba(214, 230, 255, 0.25);
     /* margin-top: -20px; */
     /* border: 1px solid red; */
     padding-bottom: 12px !important;
-  /* border: 1px solid green; */
+    /* border: 1px solid green; */
     margin-top: -5px;
   }
-  
+
   .library_root_container {
-    
     margin-top: -5px;
- 
-  }
-  .librarybackbutton{
-    position: relative;
-    top: -10px;
   }
 
-
-  .libraryrootcontainer{
+  .libraryrootcontainer {
     margin-top: -10px;
   }
-  
 }

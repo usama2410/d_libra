@@ -14,7 +14,7 @@ import Select from "react-select";
 const RatingSidebar = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-
+  navigate('/usersettingviewpage')
   }
   const theme = useSelector((state)=> state.theme.state)
   const [value, setValue] = React.useState(2);
@@ -238,7 +238,7 @@ const RatingSidebar = () => {
             </span>
           </div>
         </div>
-        <div className="user_buttons_sub_three_hidden">
+        <div className="user_buttons_sub_three_hidden" onClick={() => navigate('/feedback')}>
         <span style={{color: theme ? "  #111111" : " #C8C8C8"}}>
             Make a more specific <br /> feedback on contents
           </span>

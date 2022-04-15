@@ -11,7 +11,7 @@ const DeleteContent = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state)
   const handleBack = () => {
-
+  navigate('/editcontentmain')
   }
 
   const handleBackgroung = () => {
@@ -57,7 +57,7 @@ const DeleteContent = () => {
               justifyContent: "center",
             }}
           >
-            <button className="delete_content_button" style={{color: "#FFFFFF"}}> 
+            <button onClick={() => navigate('/mycontents')} className="delete_content_button" style={{color: "#FFFFFF"}}> 
 
             
               Yes, delete the content

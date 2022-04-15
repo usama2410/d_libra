@@ -17,6 +17,7 @@ import Rating from "../assests/Rating.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
+import { searchState } from "../Redux/Actions/auth.action";
 import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
 import { useLocation } from "react-router-dom";
 import UnionClose from "../assests/UnionClose.png";
@@ -308,7 +309,8 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Sidebar_Signup} alt="" style={{ paddingLeft: "2px" }} />
+              <img 
+              src={Sidebar_Signup} alt="" style={{ paddingLeft: "2px" }}  className="sidebarsignupicon"/>
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -337,7 +339,8 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Sidebar_Login} alt="" style={{ paddingLeft: "3px" }} />
+              <img 
+              src={Sidebar_Login} alt="" style={{ paddingLeft: "3px" }}  className="sidebarloginicon" />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -366,7 +369,8 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Sidebar_Logout} alt="" style={{ paddingLeft: "3px" }} />
+              <img 
+              src={Sidebar_Logout} alt="" style={{ paddingLeft: "3px" }} className="sidebarlogouticon" />
               {/* <ExitToAppIcon style={{ color: " #FFFFFF" }} /> */}
             </ListItemIcon>
             <Typography
@@ -393,7 +397,8 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Recent_view_dark} alt="" width="20px" />
+              <img 
+              src={Recent_view_dark} alt="" className="sidebardarkicon"    style={{ paddingRight: "2px" }}/>
               {/* <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} /> */}
             </ListItemIcon>
             <Typography
@@ -420,9 +425,11 @@ export default function Sidebar() {
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <img
+                
                 src={Sidebar_My_library}
                 alt=""
-                style={{ paddingLeft: "1px" }}
+                className="sidebarlibraryicon"
+                style={{ paddingRight: "3px" }}
               />
               {/* <MenuBookIcon style={{ color: " #FFFFFF" }} /> */}
             </ListItemIcon>
@@ -450,7 +457,8 @@ export default function Sidebar() {
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img src={Rating} alt="" style={{ paddingLeft: "1px" }} />
+              <img 
+              src={Rating} alt="" className="sidebarratingicon" style={{ paddingLeft: "1px" }} />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -479,6 +487,7 @@ export default function Sidebar() {
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <img
+                className="sidebarnighticon"
                 src={Sidebar_NightMode}
                 alt=""
                 style={{ paddingLeft: "3px" }}
@@ -529,6 +538,7 @@ export default function Sidebar() {
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <img
+                className="sidebareditoricon"
                 src={Sidebar_EditorPage}
                 alt=""
                 style={{ paddingLeft: "3px" }}

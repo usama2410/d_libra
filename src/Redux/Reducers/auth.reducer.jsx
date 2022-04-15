@@ -19,7 +19,11 @@ const pininitialstate= {
   state: false
 }
 
- export const auth = (state = initialState, action) => {
+const searchinitialstate = {
+  state: false
+}
+
+export const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case "LOGIN_SUCCESS":
@@ -96,5 +100,19 @@ export const pin = (piniInitialState = pininitialstate, action) => {
   
     default:
       return piniInitialState;
+  } 
+}
+
+
+
+export const searchSTate = (searchInitialstate = searchinitialstate, action) => {
+  const {type, payload} = action;
+  switch (type) {
+    case 'SEARCHSTATE':
+      return {
+        state : payload.state
+      }
+    default:
+      return searchInitialstate;
   } 
 }

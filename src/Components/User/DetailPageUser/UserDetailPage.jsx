@@ -70,7 +70,7 @@ const UserDetailPage = () => {
               sm={12}
               xs={12}
               style={{
-                background: handle(),
+                // background: handle(),
               }}
             >
               {userdata.slice(startdata, enddata).map((item) => (
@@ -123,9 +123,9 @@ const UserDetailPage = () => {
               </div>
 
               <div className="buttons_container_detail_page">
-                <div className="tags_wrapper_one">
+                <div className="tags_wrapper_new">
                   <span className="detail_tag_text"> Tag: </span>
-                  <button className="detail_tag_button">Git</button>
+                  <button className="detail_tag_button" onClick={() => navigate('/Tagpage')}>Git</button>
                   <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button>
                   <img
@@ -200,7 +200,7 @@ const UserDetailPage = () => {
                     }}
                   >
                     <span className="detail_tag_text"> Tag: </span>
-                    <button className="detail_tag_button">Git</button>
+                    <button className="detail_tag_button" onClick={() => navigate('/Tagpage')}>Git</button>
                     <button className="detail_tag_button">GitHub</button>
                     <button className="detail_tag_button">DevOps</button>
                   </div>

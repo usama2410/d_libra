@@ -120,7 +120,9 @@ const UploadContentMain = () => {
     EditorState.createEmpty()
   );
 
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate('/addnewcategory')
+  };
   useEffect(() => {}, [editorState]);
   return (
     <>
@@ -372,7 +374,7 @@ const UploadContentMain = () => {
               justifyContent: "center",
             }}
           >
-            <button className="update_button_new">Update</button>
+            <button className="update_button_new" onClick={() => navigate("/editormainpage")}>Update</button>
           </div>
         </Grid>
       </div>

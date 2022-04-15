@@ -23,39 +23,12 @@ const EditContentMain = () => {
   };
 const handleBack = () => 
 {
-
+navigate('/detailpage')
 }
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
  
   const options = [
     { value: "chocolate", label: "Git & Git Hub Introduction" },

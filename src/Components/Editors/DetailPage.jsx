@@ -30,7 +30,9 @@ const DetailPage = () => {
   const [enddata, setEndData] = React.useState(1);
   const [pinstate, setPinState] = React.useState(false);
   const [transform, setTransform] = React.useState(false);
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/mycontents")
+  };
 
   const handleBackgroung = () => {
     if (
@@ -68,7 +70,7 @@ const DetailPage = () => {
                 </div>
               ))}
 
-              <div className="buttons_container_detail_page">
+              <div className="buttons_container_detail_page_two">
                 <div className="deleteeditcontainer">
                   <button
                     className="detail_delete_button"

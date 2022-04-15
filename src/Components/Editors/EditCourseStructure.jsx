@@ -64,7 +64,9 @@ const EditCourseStructure = () => {
     // console.log("response  getMainCategory", response);
     setResult(EditCourseStructureData);
   };
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/editormainpage")
+  };
   useEffect(() => {
     mainCategories();
     getParentChildCategories();

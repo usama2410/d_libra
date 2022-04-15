@@ -67,7 +67,9 @@ const UserSettingViewPage = () => {
     navigate("/changepassword");
   };
 
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate('/userdetailpage')
+  };
   return (
     <div>
       <button

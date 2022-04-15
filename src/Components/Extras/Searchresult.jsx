@@ -22,9 +22,10 @@ const Searchresult = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(Searchdata);
-    const handleBack = () => {
-    
-  }
+  const [handlebackstate, sethandlebackstate] = useState(false)
+  //   const handleBack = () => {
+  //    sethandlebackstate(handlebackstate === true)
+  // }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -81,22 +82,25 @@ const Searchresult = () => {
   };
   return (
     <>
+    {/* <div  style={{display: handlebackstate ? "none" : ''} }> */}
+
+   
       <div className={theme ? "" : "recentlyviewedmaincontainer"}>
-      <button
-        onClick={handleBack}
+      {/* <button
+        onClick={() => sethandlebackstate(true)}
         className="back_button"
         style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
         <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
-      </button>
+      </button> */}
         <div className="mainContentContainer recentlyreviewed">
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               width: "100%",
-              marginTop: "0px",
+              marginTop: "20px",
               paddingBottom: "20px"
             }}
             // className="mycontentheadingtwoo"
@@ -227,7 +231,7 @@ const Searchresult = () => {
 
 
 
-
+{/* </div> */}
 
 
       <FooterButtons />

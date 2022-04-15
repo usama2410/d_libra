@@ -25,7 +25,7 @@ const Tagpage = () => {
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(TgpageData);
   const handleBack = () => {
-    
+    navigate("/userdetailpage")
   }
   const settings = {
     dots: false,
@@ -162,6 +162,7 @@ const Tagpage = () => {
               return (
                 <div className="intro-slides">
                   <img
+                  onClick={() => navigate('/userdetailpage')}
                     src={e.image}
                     className="landingpage_images"
                     style={{
@@ -228,7 +229,7 @@ const Tagpage = () => {
               {
                 item.items.map((content) => {
                   return (
-                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
+                    <div   onClick={() => navigate('/userdetailpage')}  className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
                     <div className="left">
                       <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
                     </div>

@@ -14,7 +14,7 @@ import StarIcon from '@mui/icons-material/Star';
 const Feedback = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-
+   navigate('/ratingform')
   }
   const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);

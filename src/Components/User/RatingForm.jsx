@@ -16,7 +16,7 @@ const RatingForm = () => {
   const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
   const handleBack = () => {
-
+   navigate('/ratingsidebar')
   }
   return (
     <>

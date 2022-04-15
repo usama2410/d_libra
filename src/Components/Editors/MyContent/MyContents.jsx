@@ -4,6 +4,7 @@ import ContentData from "./ContentData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {useNavigate} from 'react-router-dom'
 import "./MyContents.css";
 import VectorTag from "../../../assests/VectorTag.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,13 +14,16 @@ import { Typography } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const MyContents = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [data, setdata] = useState(ContentData);
   const [responseArray, setresponseArray] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const handleBack = () => {
-
+  navigate('/uploadcontentmain')
   }
+
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -190,6 +194,7 @@ const MyContents = () => {
                       return (
                         <div className="intro-slides">
                           <img
+                          onClick={() => navigate('/detailpage')}
                             src={e.image}
                             className="landingpage_images"
                             // style={{}}
