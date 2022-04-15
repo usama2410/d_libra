@@ -47,7 +47,7 @@ const Register = () => {
        <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
          <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -96,10 +96,12 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+<div style={{marginTop: "-16px"}}>  
 
         <Button className="update_button" onClick={handleRegister}>
           Register
         </Button>
+</div>
       </div>
 
       <div>

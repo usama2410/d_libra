@@ -5,32 +5,31 @@ import CollaboratingOnGitGitHubRemoteRepository from "../../../assests/SVG_Files
 import GitGitHubLifeCycle from "../../../assests/SVG_Files/Slides/GitGitHubLifeCycle.svg";
 import GitGitHubKeyConcepts from "../../../assests/SVG_Files/Slides/GitGitHubKeyConcepts.svg";
 
- const UserDetailPageData = [
+const UserDetailPageData = [
   {
     image: GitGitHubInitialSettings,
-    text: 'Git & GitHub Initial Settings'
+    text: "Git & GitHub Initial Settings",
   },
   {
     image: WhatIsGit_,
-    text: 'What is Git?'
+    text: "What is Git?",
   },
   {
     image: WhatIsVersionControl_,
-    text: 'What is Version Control?'
+    text: "What is Version Control?",
   },
   {
     image: CollaboratingOnGitGitHubRemoteRepository,
-    text: 'Collaborating on Git & Git Hub Remote Repository'
+    text: "Collaborating on Git & Git Hub Remote Repository",
   },
   {
     image: GitGitHubLifeCycle,
-    text: 'Git & GitHub Life Cycle?'
+    text: "Git & GitHub Life Cycle?",
   },
   {
     image: GitGitHubKeyConcepts,
-    text: 'Git & GitHub Key Concepts'
+    text: "Git & GitHub Key Concepts",
   },
 ];
-
 
 export default UserDetailPageData;

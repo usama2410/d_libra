@@ -18,7 +18,9 @@ import GitGitHubInitialSettingsOverview from "../../../assests/SVG_Files/Slides/
 import WorkWithBranches from "../../../assests/SVG_Files/Slides/WorkWithBranches.svg";
 import GitRegularWorkflowWorkWithBranches from "../../../assests/SVG_Files/Slides/GitRegularWorkflowWorkWithBranches.svg";
 import ThreeCasesToLaunchGitProject from "../../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
-
+import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_red from "../../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
 var ContentData = [
   {
     chapterName: "Introduction",
@@ -27,11 +29,13 @@ var ContentData = [
         id: 1,
         image: GitGitHubIntroduction,
         Tags: "Git & Git Inroduction",
+        TagsImageTwo: Bookmark_green
       },
       {
         id: 2,
         image: TableOfContents,
         Tags: "Table Of Contents",
+        TagsImageTwo: Bookmark_blue
       },
     ],
   },
@@ -43,21 +47,25 @@ var ContentData = [
         id: 1,
         image: GitGitHubKeyConcepts,
         Tags: "Chapter 1. Git & GitHub Key Concept",
+        TagsImageTwo: Bookmark_green
       },
       {
         id: 2,
         image: WhatIsGit_,
         Tags: "What is Git?",
+        TagsImageTwo: Bookmark_blue
       },
       {
         id: 2,
         image: WhatIsVersionControl_,
         Tags: "What Is Version Control?",
+        TagsImageTwo: Bookmark_green
       },
       {
         id: 2,
         image: CollaboratingOnGitGitHubRemoteRepository,
-        Tags: "Collaborating On Git & GitHub -- Remote Repository",
+        Tags: "Collaborating On Git & GitHub ",
+        TagsImageTwo: Bookmark_red
       },
     ],
   },
@@ -69,11 +77,13 @@ var ContentData = [
         id: 1,
         image: GitGitHubLifeCycle,
         Tags: "Chapter 2. Git & GitHub Life Cycle",
+        TagsImageTwo: Bookmark_blue
       },
       {
         id: 2,
         image: GitGitHubBasicLifeCycleOverview,
         Tags: "Git & GitHub Basic Life Cycle",
+        TagsImageTwo: Bookmark_red
       },
     ],
   },
@@ -85,11 +95,67 @@ var ContentData = [
         id: 1,
         image: GitGitHubInitialSettings,
         Tags: "Chapter 3. Git & GitHub Initial Settings",
+        TagsImageTwo: Bookmark_red
       },
       {
         id: 2,
         image: GitGitHubInitialSettingsOverview,
         Tags: "Git & GitHub Initial Setting Overview",
+        TagsImageTwo: Bookmark_blue
+      },
+    ],
+  },
+
+  {
+    chapterName: "Chapter 1: Git & GitHub Initial Settings",
+    items: [
+      {
+        id: 1,
+        image: GitGitHubInitialSettings,
+        Tags: "Chapter 3. Git & GitHub Initial Settings",
+        TagsImageTwo: Bookmark_red
+      },
+      {
+        id: 2,
+        image: GitGitHubInitialSettingsOverview,
+        Tags: "Git & GitHub Initial Setting Overview",
+        TagsImageTwo: Bookmark_blue
+      },
+    ],
+  },
+
+  {
+    chapterName: "Chapter 1: Git & GitHub Initial Settings",
+    items: [
+      {
+        id: 1,
+        image: GitGitHubInitialSettings,
+        Tags: "Chapter 3. Git & GitHub Initial Settings",
+        TagsImageTwo: Bookmark_red
+      },
+      {
+        id: 2,
+        image: GitGitHubInitialSettingsOverview,
+        Tags: "Git & GitHub Initial Setting Overview",
+        TagsImageTwo: Bookmark_blue
+      },
+    ],
+  },
+
+  {
+    chapterName: "Chapter 1: Git & GitHub Initial Settings",
+    items: [
+      {
+        id: 1,
+        image: GitGitHubInitialSettings,
+        Tags: "Chapter 3. Git & GitHub Initial Settings",
+        TagsImageTwo: Bookmark_red
+      },
+      {
+        id: 2,
+        image: GitGitHubInitialSettingsOverview,
+        Tags: "Git & GitHub Initial Setting Overview",
+        TagsImageTwo: Bookmark_blue
       },
     ],
   },

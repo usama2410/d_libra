@@ -14,7 +14,7 @@ import TagBlue from "../../assests/TagBlue.png";
 import Tag_dark from '../../assests/SVG_Files/Tag_dark.svg'
 import Tag_light from '../../assests/SVG_Files/Tag_light.svg'
 import TgpageData from './TgpageData'
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 // import HoverRating from "./Rating";
 import FooterButtons from "../User/FooterButtons";
 import { useSelector } from "react-redux";
@@ -24,7 +24,9 @@ const Tagpage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(TgpageData);
-  console.log(data)
+  const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -38,14 +40,14 @@ const Tagpage = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -53,7 +55,7 @@ const Tagpage = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -106,13 +108,14 @@ const Tagpage = () => {
    
 <>
 <div className={theme ? "" : "recentlyviewedmaincontainer"}>
-  <button
-    className="back_button "
-    style={{ color: `${theme ? "black" : "white"}` }}
-  >
-    <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-    <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-  </button>
+<button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+      >
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
   <div className="mainContentContainer recentlyreviewed">
     <div
       style={{
@@ -170,32 +173,37 @@ const Tagpage = () => {
                     alt=""
                   />
                   {e.image ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        padding: "20px 3px 0px 4px",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography
-                        noWrap
-                        component="div"
-                        className="subcoursename"
-                        style={{
-                          width: "250px",
-                          color: theme ? "#363636" : "#FFFFFF",
-                        }}
-                      >
-                        {e.Tags}
-                      </Typography>
-                      <img
-                        src={e.TagsImageTwo}
-                        alt=""
-                        width="17px"
-                        height="20px"
-                      />
-                    </div>
+                   <div
+                   className="underimagetextcontainer"
+                 >
+                   <Typography
+                     noWrap
+                     component="div"
+                    //  className="subcoursename"
+                     // style={{}}
+                     style={{
+                       color: theme ? "#363636" : "#FFFFFF",
+                       display: "flex",
+                       justifyContent: "center",
+                       width: "100%",
+                     }}
+                   >
+                     <Typography
+                       noWrap
+                       component="div"
+                       className="subcoursenametwo subcoursename"
+                     >
+                       {e.Tags}
+                     </Typography>
+                   </Typography>
+                   <div style={{ position: "relative" }}>
+                     <img
+                       src={e.TagsImageTwo}
+                       alt=""
+                       className="tagstwocontainer"
+                     />
+                   </div>
+                 </div>
                   ) : (
                     ""
                   )}

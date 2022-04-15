@@ -31,7 +31,7 @@ const DeleteContent = () => {
      <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
          <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -57,7 +57,9 @@ const DeleteContent = () => {
               justifyContent: "center",
             }}
           >
-            <button className="delete_content_button" style={{color: "white"}}> 
+            <button className="delete_content_button" style={{color: "#FFFFFF"}}> 
+
+            
               Yes, delete the content
             </button>
           </div>

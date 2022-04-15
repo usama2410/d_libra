@@ -44,7 +44,7 @@ const Login = () => {
      <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
          <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -85,10 +85,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+           <div className="logininbuttoncontainer">
 
-        <Button className="update_button" onClick={handleLogin}>
+        <Button className="loginbuttontext" onClick={handleLogin}>
           Log in
         </Button>
+           </div>
 
         <div>
           <span className={theme ? "texttwo" : "orText"}>Or</span>
@@ -106,21 +108,21 @@ const Login = () => {
           <div
           className="forgotpasswordcontainer"
             style={{
-              color: `${theme ? "black" : "white"}`,
+              color: `${theme ? "#363636" : "#FFFFFF"}`,
             
             }}
           >
             <span
             className="forgotpasswordtext"
               style={{
-                color: `${theme ? "black" : "white"}`,
+                color: `${theme ? "#363636" : "#FFFFFF"}`,
                 
               }}
             >
               {" "}
               Forget Password ?
             </span>
-            <ArrowForward />
+            <ArrowForward  className="arrowforwardicon"/>
           </div>
         </div>
       </div>

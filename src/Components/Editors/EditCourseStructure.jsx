@@ -22,6 +22,8 @@ import {
   getParentChildCategories,
 } from "../../Redux/Actions/Editor/Category";
 import EditCourseStructureData from "./EditCourseStructureData";
+import Select from "react-select";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -68,6 +70,57 @@ const EditCourseStructure = () => {
     getParentChildCategories();
   }, []);
 
+  const options = [
+    { value: "chocolate", label: "Git & Git Hub Introduction" },
+    { value: "Saab", label: "Saab" },
+    { value: "Opel", label: "Opel" },
+    { value: "Audi", label: "Audi" },
+  ];
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: "black",
+      borderRadius: "5px",
+      border: "none",
+      color: " #363636",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      width: "100%",
+      height: "28px !important",
+      marginLeft: "5px !important",
+      marginTop: "-1px !important",
+      border: "2px solid rgba(70, 66, 77, 0.7) !important",
+    }),
+    focused: {
+      border: "2px solid rgba(70, 66, 77, 0.7) !important",
+    },
+    placeholder: (base) => ({
+      ...base,
+      color: "#111111",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: " #363636",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: " #363636",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: " #363636",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: " #363636",
+    }),
+  };
+
   const handleBackgroung = () => {
     if (
       theme === true &&
@@ -81,7 +134,7 @@ const EditCourseStructure = () => {
       <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
         <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -110,7 +163,11 @@ const EditCourseStructure = () => {
         </div>
       </div>
       <div
-        style={{ background: "#111111", color: "white", paddingBottom: "40px" }}
+        style={{
+          background: "#111111",
+          color: "#FFFFFF",
+          paddingBottom: "40px",
+        }}
       >
         <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
           <Grid container>
@@ -181,15 +238,16 @@ const EditCourseStructure = () => {
         <div className="action_container">
           <span>Action:</span>
 
-          <select
-            className="git_introduction_dropdown_two"
-            name="cars"
-            id="cars"
-          >
-            {result?.data?.map((item) => {
-              return <option value="volvo">{item.CategoryName}</option>;
-            })}
-          </select>
+          <Select
+            styles={customStyles}
+            className={
+              theme
+                ? "git_introduction_dropdown_sub"
+                : "git_introduction_dropdown"
+            }
+            placeholder=""
+            options={options}
+          />
 
           <Button className="go_button" variant="outlined">
             Go

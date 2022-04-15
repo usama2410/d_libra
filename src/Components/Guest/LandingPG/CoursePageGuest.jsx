@@ -13,11 +13,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
 import FooterButtons from "../../User/FooterButtons";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const CoursePageGuest = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(CourseGuestData);
+  const handleBack = () => {};
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -72,7 +73,7 @@ const CoursePageGuest = () => {
       {
         breakpoint: 380,
         settings: {
-          slidesToShow: 1.21,
+          slidesToShow: 1.195,
           slidesToScroll: 1,
           centerMode: true,
         },
@@ -99,11 +100,12 @@ const CoursePageGuest = () => {
   return (
     <>
       <button
-        className="back_button "
-        style={{ color: `${theme ? "black" : "white"}`, paddingLeft: "10px" }}
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
-        <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
       </button>
       <div className="mainContentContainer">
         <div className="mainContentContainer" style={{ marginTop: "20px" }}>
@@ -150,7 +152,7 @@ const CoursePageGuest = () => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
-                              padding: "10px 0px 0px 10px",
+                              padding: "20px 0px 0px 0px",
                             }}
                           >
                             <Typography

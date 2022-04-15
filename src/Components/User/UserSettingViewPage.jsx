@@ -6,7 +6,7 @@ import icon5 from "../../assests/icon5.png";
 import Vector90 from "../../assests/Vector90.png";
 import Vector92 from "../../assests/Vector92.png";
 import Vector91 from "../../assests/Vector91.png";
-import Member_Icon from '../../assests/SVG_Files/Member_Icon.svg'
+import Member_Icon from "../../assests/SVG_Files/Member_Icon.svg";
 import addwhite from "../../assests/addwhite.png";
 import addblack from "../../assests/addblack.png";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
@@ -15,12 +15,14 @@ import { useSelector } from "react-redux";
 import "./UserSettingViewPage.css";
 import { profileData, updateProfile } from "../../Redux/Actions/Profile.action";
 import { useDispatch } from "react-redux";
-import Add_dark from '../../assests/SVG_Files/New folder/Add_dark.svg'
-import Add_light from '../../assests/SVG_Files/New folder/Add_light.svg'
-import Bookmark_green from '../../assests/SVG_Files/New folder/Bookmark_green.svg'
-import Bookmark_blue from '../../assests/SVG_Files/New folder/Bookmark_blue.svg'
-import Bookmark_red from '../../assests/SVG_Files/New folder/Bookmark_red.svg'
-import FooterButtons from './FooterButtons'
+import Add_dark from "../../assests/SVG_Files/New folder/Add_dark.svg";
+import Add_light from "../../assests/SVG_Files/New folder/Add_light.svg";
+import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import FooterButtons from "./FooterButtons";
+import Editor_icon_dark from "../../assests/SVG_Files/New/Editor_icon_dark.svg";
+import Editor_icon_light from "../../assests/SVG_Files/New/Editor_icon_light.svg";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -65,19 +67,15 @@ const UserSettingViewPage = () => {
     navigate("/changepassword");
   };
 
-
-  const handleBack = () => {
-
-  }
+  const handleBack = () => {};
   return (
     <div>
-  
- <button
+      <button
         onClick={handleBack}
         className="back_button"
         style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-         <ArrowBack className="backbutton_icon" />{" "}
+        <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
       {validation ? (
@@ -98,17 +96,31 @@ const UserSettingViewPage = () => {
 
       <div className="user_container_root">
         <div className="user_sub_root_container">
-          <div className="user_root_container">
-            <img src={Member_Icon} alt=""  className="usersettingmembericon"/>
+          <div className={theme ? "user_root_container" : "user_root_container_two"}>
+            <img src={Member_Icon} alt="" className="usersettingmembericon" />
             <div className="user_header_container">
               <div
                 className="vector_container vectorcontainermobile"
                 style={{ color: `${theme ? "#009AF9" : "#C8C8C8"}` }}
               >
-                <MdModeEditOutline     className="editorimage_icon"/>
+                {/* <MdModeEditOutline className="editorimage_icon" /> */}
+                {theme ? (
+                  <img
+                    src={Editor_icon_light}
+                    alt=""
+                    className="editoricon_image"
+                  />
+                ) : (
+                  <img
+                    src={Editor_icon_dark}
+                    alt=""
+                    className="editoricon_image"
+                  />
+                )}
                 <span
-                  className={theme ? " editorimage_icon" : "  editorimage_icon_two"}
-                 
+                  className={
+                    theme ? " editorimage_icon" : "  editorimage_icon_two"
+                  }
                 >
                   Editor
                 </span>
@@ -123,35 +135,42 @@ const UserSettingViewPage = () => {
             </div>
           </div>
 
-<div className="userinputfieldmaincontainer">
-
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              className="addcategory_text_bookmark_two"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
-            >
-              Username
-            </span>
-            <input
-              className={theme ? "usersetting_inputfield_light" : "usersetting_inputfield_dark"}
-              placeholder="Username"
-              value={username}
-            />
-          </div>
-          <div className="emailaddresscontainer">
-            <span
-              className="addcategory_text_bookmark_two"
-              style={{ color: `${theme ? "#363636" : "white"}` }}
-            >
-              E-mail Address
-            </span>
-            <input
-              className={theme ? "usersetting_inputfield_light" : "usersetting_inputfield_dark"}
-              placeholder="E-mail Address"
-              value={email}
+          <div className="userinputfieldmaincontainer">
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span
+                className="addcategory_text_bookmark_two"
+                style={{ color: `${theme ? "#363636" : "white"}` }}
+              >
+                Username
+              </span>
+              <input
+                className={
+                  theme
+                    ? "usersetting_inputfield_light"
+                    : "usersetting_inputfield_dark"
+                }
+                placeholder="Username"
+                value={username}
               />
+            </div>
+            <div className="emailaddresscontainer">
+              <span
+                className="addcategory_text_bookmark_two"
+                style={{ color: `${theme ? "#363636" : "white"}` }}
+              >
+                E-mail Address
+              </span>
+              <input
+                className={
+                  theme
+                    ? "usersetting_inputfield_light"
+                    : "usersetting_inputfield_dark"
+                }
+                placeholder="E-mail Address"
+                value={email}
+              />
+            </div>
           </div>
-              </div>
           {/* <div style={{ display: "flex", flexDirection: "column" }}>
             <span
               className="addcategory_text"
@@ -192,7 +211,11 @@ const UserSettingViewPage = () => {
             </span>
             <div className="vector_container">
               <div className="vector_image">
-                <img src={Bookmark_blue} alt=""  className="tagimageusersettingpage" />
+                <img
+                  src={Bookmark_blue}
+                  alt=""
+                  className="tagimageusersettingpage"
+                />
               </div>
               <input
                 className={
@@ -207,14 +230,18 @@ const UserSettingViewPage = () => {
             style={{
               color: `${theme ? "#363636" : "white"}`,
               marginTop: "20px",
-              marginBottom: "-5px"
+              marginBottom: "-5px",
             }}
           >
             Bookmark Name
           </span>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Bookmark_blue} alt="" className="tagimageusersettingpage" />
+              <img
+                src={Bookmark_blue}
+                alt=""
+                className="tagimageusersettingpage"
+              />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -223,7 +250,11 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Bookmark_green} alt="" className="tagimageusersettingpage" />
+              <img
+                src={Bookmark_green}
+                alt=""
+                className="tagimageusersettingpage"
+              />
             </div>
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
@@ -232,7 +263,11 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <div className="vector_image">
-              <img src={Bookmark_red} alt="" className="tagimageusersettingpage" />
+              <img
+                src={Bookmark_red}
+                alt=""
+                className="tagimageusersettingpage"
+              />
             </div>
 
             <input
@@ -242,7 +277,7 @@ const UserSettingViewPage = () => {
           </div>
           <div className="vector_container">
             <img
-              src={theme ?  Add_light : Add_dark}
+              src={theme ? Add_light : Add_dark}
               alt=""
               className="addiconcontainer"
             />

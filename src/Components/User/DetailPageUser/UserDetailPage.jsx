@@ -1,29 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Button, Accordion } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import image6 from "../../../assests/image6.png";
-import Vectortag from "../../../assests/VectorTag.png";
-import { IoMdArrowDropleftCircle } from "react-icons/io";
-import { IoMdArrowDroprightCircle } from "react-icons/io";
-import NextDarkButton from "../../../assests/NextDarkButton.png";
-import PrevLightButton from "../../../assests/PrevLightButton.png";
 import { useSelector, useDispatch } from "react-redux";
-import NextButton from "../../../assests/NextButton.png";
-import PrevButton from "../../../assests/PrevButton.png";
 import FooterButtons from "../FooterButtons";
+import Bookmark_gray from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import UserDetailPageData from "./UserDetailPageData";
-import Pin from "../../../assests/Pin.png";
-import PinBlue from "../../../assests/PinBlue.png";
-import Accordian from "../../Guest/Accordian/Accordian";
-import UnionClose from "../../../assests/UnionClose.png";
-
+import Pin_off from "../../../assests/SVG_Files/New folder/icons/Pin_off.svg";
+import Pin_on from "../../../assests/SVG_Files/New folder/icons/Pin_on.svg";
 import Next from "../../../assests/SVG_Files/New folder/icons/Next.svg";
 import Next_dark from "../../../assests/SVG_Files/New folder/icons/Next_dark.svg";
 import Previous from "../../../assests/SVG_Files/New folder/icons/Previous.svg";
 import Previous_dark from "../../../assests/SVG_Files/New folder/icons/Previous_dark.svg";
-
-import FooterCopyright from "../../../Components/User/FooterCopyright";
 import { pinState } from "../../../Redux/Actions/auth.action";
 
 const UserDetailPage = () => {
@@ -35,7 +22,6 @@ const UserDetailPage = () => {
   const theme = useSelector((state) => state.theme.state);
   const [pinstate, setPinState] = useState(false);
   const [transform, setTransform] = React.useState(false);
-  // const accordion = useSelector((state) => state.accordion.state)
 
   const handlePinState = async () => {
     setPinState(!pinstate);
@@ -66,10 +52,10 @@ const UserDetailPage = () => {
       >
         <div
           className="detailpage_root_container"
-          style={{ paddingTop: "35px" }}
+          // style={{ paddingTop: "24px" }}
         >
           {userdata.slice(startdata, enddata).map((item) => (
-            <span className="header_text" style={{ marginTop: "-14px" }}>
+            <span className="header_texttwo" >
               {item.text}
             </span>
           ))}
@@ -105,33 +91,35 @@ const UserDetailPage = () => {
                     className={
                       pinstate ? "detail_page_image_two" : "detail_page_image"
                     }
-                    // style={{
-                    //   width: `${pinstate ? "50%" : "100%"}`,
-                    //   height: `${pinstate ? "50%" : "100%"}`,
-                    // }}
                   />
                 </div>
               ))}
-              <div
-                className={pinstate ? "pincontainertwo" : "pincontainer"}
-                // style={{ paddingRight: "10px" }}
-              >
-                {/* pincontainer */}
-                <button
-                  style={{
-                    marginRight: `${pinstate ? "" : "15px"}`,
-                    background: "none",
-                    border: "none",
-                  }}
-                >
-                  <img src={Vectortag} alt="" />
-                </button>
-                <button
-                  style={{ background: "none", border: "none" }}
-                  onClick={handlePinState}
-                >
-                  <img src={pinstate ? PinBlue : Pin} alt="" />
-                </button>
+              <div style={{ position: "relative" }}>
+                <div className={pinstate ? "pincontainertwo" : "pincontainer"}>
+                  <button
+                    style={{
+                      marginRight: `${pinstate ? "" : "15px"}`,
+                      background: "none",
+                      border: "none",
+                    }}
+                  >
+                    <img
+                      src={Bookmark_gray}
+                      alt=""
+                      style={{ width: "18px", height: "18px" }}
+                    />
+                  </button>
+                  <button
+                    style={{ background: "none", border: "none" }}
+                    onClick={handlePinState}
+                  >
+                    <img
+                      style={{ width: "18px", height: "18px" }}
+                      src={pinstate ? Pin_on : Pin_off}
+                      alt=""
+                    />
+                  </button>
+                </div>
               </div>
 
               <div className="buttons_container_detail_page">
@@ -140,7 +128,15 @@ const UserDetailPage = () => {
                   <button className="detail_tag_button">Git</button>
                   <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button>
-                  <img src={Vectortag} alt="" style={{ paddingLeft: "20px" }} />
+                  <img
+                    src={Bookmark_gray}
+                    alt=""
+                    style={{
+                      width: "15px",
+                      height: "18px",
+                      marginLeft: "24px",
+                    }}
+                  />
                 </div>
               </div>
             </Grid>
@@ -213,7 +209,6 @@ const UserDetailPage = () => {
             </Grid>
           </Grid>
         </div>
-
         {theme ? (
           <div
             style={{
@@ -296,7 +291,6 @@ const UserDetailPage = () => {
                   }}
                 />
               </Button>
-
               <Button
                 style={{ marginLeft: "-16px" }}
                 disabled={enddata >= userdata.length ? true : false}

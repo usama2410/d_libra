@@ -15,7 +15,7 @@ const ChangePassword = () => {
   const [password, setPassword] = useState();
   const [message, setMessage] = useState("");
   const [validation, setValidation] = useState(false);
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
   const handleBack = (e) => {
@@ -41,14 +41,50 @@ const ChangePassword = () => {
   };
   return (
     <>
-          <button
+         <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
          <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div className="editormainpage_root_contianer">
         <div
           style={{
@@ -76,7 +112,7 @@ const ChangePassword = () => {
             )
           ) : null}
           <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
+   className={theme ? "addcategory_input_sub" : "addcategory_input"}
             placeholder="Old Password"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
@@ -91,7 +127,7 @@ const ChangePassword = () => {
         </div>
 
         <Button className="update_button" onClick={handleChangePassword}>
-          Chnage Password
+          Change Password
         </Button>
       </div>
     </>

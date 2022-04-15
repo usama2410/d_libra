@@ -12,7 +12,7 @@ import Vector from "../../assests/Vector.png";
 import Rfb from "../../assests/Rfb.png";
 import ResultsBlue from "../../assests/ResultsBlue.png";
 import SearchBlue from "../../assests/SearchBlue.png";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 // import HoverRating from "./Rating";
 import FooterButtons from "../User/FooterButtons";
 import { useSelector } from "react-redux";
@@ -22,6 +22,9 @@ const Searchresult = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(Searchdata);
+    const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -35,22 +38,22 @@ const Searchresult = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
-          centerMode: true,
+          centerMode: false,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 760,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -73,43 +76,20 @@ const Searchresult = () => {
           centerMode: true,
         },
       },
-      {
-        breakpoint: 380,
-        settings: {
-          slidesToShow: 1.21,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 361,
-        settings: {
-          slidesToShow: 1.24,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 338,
-        settings: {
-          slidesToShow: 1.3,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
+     
     ],
   };
-
   return (
     <>
       <div className={theme ? "" : "recentlyviewedmaincontainer"}>
-        <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+      <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+      >
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
         <div className="mainContentContainer recentlyreviewed">
           <div
             style={{
@@ -117,14 +97,15 @@ const Searchresult = () => {
               justifyContent: "center",
               width: "100%",
               marginTop: "0px",
+              paddingBottom: "20px"
             }}
             // className="mycontentheadingtwoo"
           >
             <div style={{ display: "flex", alignItems: "center" }}>
               {theme ? (
-                <img src={Search} alt="error" />
+                <img src={Search} alt="error" className="recentlyviewedimage" />
               ) : (
-                <img src={Search_dark} alt="error" />
+                <img src={Search_dark} alt="error" className="recentlyviewedimage"  />
               )}
               <span
                 className={
@@ -166,32 +147,37 @@ const Searchresult = () => {
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                              padding: "20px 3px 0px 4px",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{
-                                width: "250px",
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                            <img
-                              src={e.TagsImageTwo}
-                              alt=""
-                              width="17px"
-                              height="20px"
-                            />
-                          </div>
+                         <div
+                         className="underimagetextcontainer"
+                       >
+                         <Typography
+                           noWrap
+                           component="div"
+                          //  className="subcoursename"
+                           // style={{}}
+                           style={{
+                             color: theme ? "#363636" : "#FFFFFF",
+                             display: "flex",
+                             justifyContent: "center",
+                             width: "100%",
+                           }}
+                         >
+                           <Typography
+                             noWrap
+                             component="div"
+                             className="subcoursenametwo subcoursename"
+                           >
+                             {e.Tags}
+                           </Typography>
+                         </Typography>
+                         <div style={{ position: "relative" }}>
+                           <img
+                             src={e.TagsImageTwo}
+                             alt=""
+                             className="tagstwocontainer"
+                           />
+                         </div>
+                       </div>
                         ) : (
                           ""
                         )}
@@ -204,6 +190,45 @@ const Searchresult = () => {
           );
         })}
       </div>
+
+
+
+
+
+
+
+      <div className="second_tagpage_container">
+{data.map((item) => {
+        return (
+          
+          <>
+            
+              {
+                item.items.map((content) => {
+                  return (
+                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
+                    <div className="left">
+                      <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
+                    </div>
+                    <div className="right">
+                      <img className="right_image" src={content.image} alt="" />
+                    </div>
+                  </div>
+                  )
+                })
+              }
+
+          </>
+        );
+      })}
+</div>
+
+
+
+
+
+
+
 
       <FooterButtons />
     </>

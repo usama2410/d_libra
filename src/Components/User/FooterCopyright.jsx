@@ -62,7 +62,7 @@ const FooterCopyright = (props) => {
   // };
   // }, []);
   return (
-    <div className="footer_copyright" style={{background: handleFooterBackground()}}>
+    <div className="footer_copyright"  style={{background: handleFooterBackground(), color: theme ? " #000000" : " #C8C8C8 "}}>
     <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
     </div> 
   );

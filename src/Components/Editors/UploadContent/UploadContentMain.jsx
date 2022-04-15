@@ -7,6 +7,7 @@ import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useSelector } from "react-redux";
+import Select from "react-select";
 import "./UploadContentMain.css";
 const UploadContentMain = () => {
   const navigate = useNavigate();
@@ -19,6 +20,91 @@ const UploadContentMain = () => {
       setImage(URL.createObjectURL(e.target.files[0]));
       setImageName(e.target.files[0].name);
     }
+  };
+
+  const options = [
+    { value: "chocolate", label: "Git & Git Hub Introduction" },
+    { value: "Saab", label: "Saab" },
+    { value: "Opel", label: "Opel" },
+    { value: "Audi", label: "Audi" },
+  ];
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: " #FFFFFF",
+      borderRadius: "5px",
+      border: "none",
+      color: " #363636",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      width: "450px",
+      height: "40px",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "#111111",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: " #363636",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: " #363636",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: " #363636",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: " #363636",
+    }),
+  };
+
+  const customStyless = {
+    control: (base, state) => ({
+      ...base,
+      background: " #4F4F4F",
+      borderRadius: "5px",
+      border: "none",
+      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
+      color: "white",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      width: "450px",
+      height: "40px",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "#FFFFFF",
+      opacity: 1,
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: "black",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: "black",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: "#FFFFFF",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "white",
+    }),
   };
 
   const handleBackgroung = () => {
@@ -42,7 +128,7 @@ const UploadContentMain = () => {
         <button
           onClick={handleBack}
           className="back_button"
-          style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+          style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
         >
           <ArrowBack className="backbutton_icon" />{" "}
           <span className="backbutton_text">Back</span>
@@ -68,34 +154,29 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Select Course
               </span>
-              <select
+              <Select
+                styles={theme ? customStyles : customStyless}
                 className={
                   theme
-                    ? "uploadcontentinputfieldtwo"
-                    : "uploadcontentinputfield"
+                    ? "git_introduction_dropdown_sub"
+                    : "git_introduction_dropdown"
                 }
-                style={{ width: "100%" }}
-                name="cars"
-                id="cars"
-              >
-                <option value="volvo">Git & GitHub Introduction</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select>
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
             </div>
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Select Chapter
               </span>
-              <select
+              {/* <select
                 className={
                   theme
                     ? "uploadcontentinputfieldtwo"
@@ -111,12 +192,23 @@ const UploadContentMain = () => {
                 <option value="saab">Saab</option>
                 <option value="opel">Opel</option>
                 <option value="audi">Audi</option>
-              </select>
+              </select> */}
+
+              <Select
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub"
+                    : "git_introduction_dropdown"
+                }
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
             </div>
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Content Title
               </span>
@@ -133,7 +225,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Content ID
               </span>
@@ -150,7 +242,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Tags(Max 5 Tags)
               </span>
@@ -167,7 +259,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 Meta Descriptions
               </span>
@@ -184,7 +276,7 @@ const UploadContentMain = () => {
             <div>
               <span
                 className="addcategory_text"
-                style={{ color: `${theme ? "#363636" : "white"}` }}
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
               >
                 OGP(Open Graph Protocol)
               </span>
@@ -229,7 +321,7 @@ const UploadContentMain = () => {
                           color="primary"
                           component="span"
                           // style={{ height: "20px" }}
-                          className="image_button"
+                          className="image_button selectanimagebutton"
                         >
                           Select an Image File
                         </Button>
@@ -247,7 +339,9 @@ const UploadContentMain = () => {
                     }}
                   >
                     <div>
-                      <span style={{ color: `${theme ? "#363636" : "white"}` }}>
+                      <span
+                        style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+                      >
                         Preview
                       </span>
                     </div>

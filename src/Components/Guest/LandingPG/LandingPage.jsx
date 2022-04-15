@@ -47,14 +47,14 @@ const LandingPage = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -204,7 +204,7 @@ const LandingPage = () => {
                             style={{
                               display: "flex",
                               justifyContent: "space-between",
-                              padding: "10px 0px 0px 10px",
+                              padding: "16px 0px 0px 10px",
                             }}
                           >
                             <Typography
@@ -246,7 +246,7 @@ const LandingPage = () => {
                             }}
                           >
                             {" "}
-                            <div className="rating">
+                            <div     className="rating_text" style={{paddingTop: "1px"}}>
                               {value !== null && (
                                 <Box sx={{ ml: 0 }}>
                                   {labels[hover !== -1 ? hover : value]}
@@ -273,7 +273,7 @@ const LandingPage = () => {
                               }
                             />
                             <div
-                              className="rating"
+                              className="rating_text"
                               style={{
                                 paddingLeft: "10px",
                                 color: theme ? "#363636" : "#C8C8C8",

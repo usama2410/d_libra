@@ -84,10 +84,20 @@ export const themeSwitch = (themestate) => async (dispatch) => {
   } catch (error) {}
 };
 
-
+export const creamyTheme = (themestate) => async (dispatch) => {
+  //  console.log(themestate)
+  try {
+    dispatch({
+      type: "LIGHTTHEME",
+      payload: {
+        state: themestate,
+      },
+    });
+  } catch (error) {}
+};
 
 export const pinState = (pin) => async (dispatch) => {
-   console.log(pin)
+  console.log(pin);
   try {
     dispatch({
       type: "PINTHEME",
@@ -97,6 +107,3 @@ export const pinState = (pin) => async (dispatch) => {
     });
   } catch (error) {}
 };
-
-
-

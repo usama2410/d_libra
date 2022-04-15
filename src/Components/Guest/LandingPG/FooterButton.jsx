@@ -37,7 +37,8 @@ import Popup_My_library_off from "../../../assests/SVG_Files/New folder/icons/Po
 import Popup_History_off from "../../../assests/SVG_Files/New folder/icons/Popup_History_off.svg";
 import Popup_Rating from "../../../assests/SVG_Files/New folder/icons/Popup_Rating.svg";
 import Popup_Share from "../../../assests/SVG_Files/New folder/icons/Popup_Share.svg";
-
+import Popup_CloseArrow from "../../../assests/SVG_Files/New folder/Popup_CloseArrow.svg";
+import Popup_OpenArrow from "../../../assests/SVG_Files/New folder/Popup_OpenArrow.svg";
 import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
 
@@ -112,9 +113,10 @@ const FooterButtons = (props) => {
         >
           <img
             src={Popup_History_off}
+            // style={{}}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -123,7 +125,7 @@ const FooterButtons = (props) => {
             src={Popup_My_library_off}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -132,7 +134,7 @@ const FooterButtons = (props) => {
             src={Popup_Rating_off}
             // onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -140,7 +142,7 @@ const FooterButtons = (props) => {
             src={Popup_Share}
             onClick={toggleDrawer(true)}
             alt=""
-            style={{ cursor: "pointer" }}
+              className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -159,7 +161,7 @@ const FooterButtons = (props) => {
                 src={Popup_History_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -168,7 +170,7 @@ const FooterButtons = (props) => {
                 src={Popup_My_library_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -177,7 +179,7 @@ const FooterButtons = (props) => {
                 src={Popup_Rating_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -185,7 +187,7 @@ const FooterButtons = (props) => {
                 src={Popup_Share}
                 onClick={toggleDrawer(true)}
                 alt=""
-                style={{ cursor: "pointer" }}
+                    className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -203,27 +205,20 @@ const FooterButtons = (props) => {
                 keepMounted: true,
               }}
             >
-              <div
-                style={{
-                  borderRadius: "100%",
-                  width: "473px",
-                  height: "304px",
-                  background: "none",
-                  position: "fixed",
-                  bottom: "-140px",
-                }}
-              >
-                <StyledBox
+             <div className="bottomnavigator">
+                   <StyledBox
                   sx={{
-                    px: 1,
+                    px: 10,
                     pb: 24,
                     height: "100%",
                     overflow: "auto",
                   }}
                   style={{
                     paddingTop: "10px",
+                    // border: "1px solid red",
+                    // height :"50px ",
                     background: "#363636",
-                    borderRadius: mobileView ? "90px" : "100%",
+                    borderRadius: mobileView ? "10px" : "100%",
                   }}
                 >
                   <div
@@ -331,34 +326,34 @@ const FooterButtons = (props) => {
           </div>
           <Button
             className="footer_buttons"
-            variant="contained"
+            // variant="contained"
             onClick={handleFotterButton}
           >
             <div className="footer_sub">
               {footerbutton ? (
-                <img
-                  src={Arrow3}
-                  alt="logo"
-                  style={{
-                    position: "relative",
-                    top: "-10px",
-                    right: "-10px",
-                    width: "16px",
-                    height: "16px",
-                  }}
-                />
+               <img
+               src={Popup_CloseArrow}
+               alt="logo"
+               // style={{
+               //   position: "relative",
+               //   top: "-10px",
+               //   right: "-10px",
+               //   width: "16px",
+               //   height: "16px",
+               // }}
+             />
               ) : (
                 <img
-                  src={Arrow2}
-                  alt="logo"
-                  style={{
-                    position: "relative",
-                    top: "-10px",
-                    right: "-10px",
-                    width: "16px",
-                    height: "16px",
-                  }}
-                />
+                src={Popup_OpenArrow}
+                alt="logo"
+                // style={{
+                //   position: "relative",
+                //   top: "-10px",
+                //   right: "-10px",
+                //   width: "16px",
+                //   height: "16px",
+                // }}
+              />
               )}
             </div>
           </Button>

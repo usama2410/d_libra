@@ -57,7 +57,7 @@ const RatingSidebar = () => {
 
       <div className="ratingform_root_five">
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "white"}` }}>Rating Comments:</span>
+          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "#C8C8C8"}` }}>Rating Comments:</span>
         </div>
 
         <div>
@@ -77,20 +77,20 @@ const RatingSidebar = () => {
           </Button>
 
           <div className="user_buttons_sub_three">
-            <span>
+          <span style={{color: theme ? "  #111111" : " #C8C8C8"}}>
               Make a more specific <br /> feedback on contents
             </span>
-            <span style={{ paddingLeft: "10px", fontSize: "26px" }}>
-              <HiOutlineArrowNarrowRight />
+            <span style={{ paddingLeft: "10px", fontSize: "26px", color: theme ? "  #111111" : " #C8C8C8"}}>
+              <HiOutlineArrowNarrowRight  style={{color: theme ? "  #111111" : " #C8C8C8"}} />
             </span>
           </div>
         </div>
         <div className="user_buttons_sub_three_hidden">
-          <span>
+        <span style={{color: theme ? "  #111111" : " #C8C8C8"}}>
             Make a more specific <br /> feedback on contents
           </span>
-          <span style={{ paddingLeft: "10px", fontSize: "26px" }}>
-            <HiOutlineArrowNarrowRight />
+          <span style={{ paddingLeft: "10px", fontSize: "26px", color: theme ? "  #111111" : " #C8C8C8"}}>
+            <HiOutlineArrowNarrowRight  style={{color: theme ? "  #111111" : " #C8C8C8"}}/>
           </span>
         </div>
       </div>

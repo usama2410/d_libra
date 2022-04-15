@@ -10,15 +10,20 @@
 .mainmycontentcontainer {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid #111111;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  padding-top: 30px;
 }
+.mainmycontentcontainertwo{
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+
 .mycontentheadtwooo {
   font-style: normal;
   font-weight: 300;
   font-size: 21px;
-  line-height: 24px;
+  line-height: 24.15px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -29,7 +34,7 @@
   font-style: normal;
   font-weight: 300;
   font-size: 21px;
-  line-height: 24px;
+  line-height: 24.15px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -96,18 +101,16 @@
   .mainmycontentcontainer {
     display: flex;
     flex-direction: column-reverse;
+ padding-top: 0px;
+    }
 
 
-      /* border: none;
-      box-sizing: none;
-      box-shadow: none;
-     */
-
-
-
-
-  }
-
+    .mainmycontentcontainertwo{
+      display: flex;
+      flex-direction: column;
+      padding-top: 00px;
+    }
+    
 
   
 .mycontentcontainer{
@@ -132,9 +135,38 @@
     line-height: 21px;
     letter-spacing: -0.015em;
     padding-bottom: -20px;
-    background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    text-shadow: 0px 0px #00000000;
+    background-color: #004cb6 !important;
+    display: inline-block;
+    background-image: -webkit-linear-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    ) !important;
+    background-image: -webkit-conic-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    ) !important;
+    -webkit-box-decoration-break: clone;
+    -webkit-background-clip: text !important;
+    -moz-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    -moz-text-fill-color: transparent !important;
+    -webkit-mask-image: linear-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    );
+  }
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .mainmycontentcontainer {
+ padding-top: 0px;
   }
 }

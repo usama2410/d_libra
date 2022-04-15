@@ -9,10 +9,13 @@ import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
 import { useSelector } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const CourseMainPage = () => {
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(CourseMainPageData);
+  const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -26,14 +29,14 @@ const CourseMainPage = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -41,7 +44,7 @@ const CourseMainPage = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -93,12 +96,13 @@ const CourseMainPage = () => {
 
   return (
     <>
-      <button
-        className="back_button "
-        style={{ color: `${theme ? "black" : "white"}`, paddingLeft: "10px" }}
+         <button
+        onClick={handleBack}
+        className="back_button librarybackbutton"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
-        <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-        <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
       </button>
       <div className="mainContentContainer">
         <div className="mainContentContainer" style={{ marginTop: "20px" }}>
@@ -115,7 +119,8 @@ const CourseMainPage = () => {
         {data.map((item) => {
           return (
             <div className="content_root_container">
-              <div>
+               <div style={{ display: "flex", alignItems: " center" }}>
+           
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
                   style={{ padding: "0px 0px 8px 5px" }}
@@ -140,34 +145,37 @@ const CourseMainPage = () => {
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                              padding: "20px 3px 0px 4px",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{
-                                width: "250px",
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                            <div>
-                              <img
-                                src={e.TagImage}
-                                alt=""
-                                width="17px"
-                                height="20px"
-                              />
-                            </div>
-                          </div>
+                           <div
+                             className="underimagetextcontainer"
+                           >
+                             <Typography
+                               noWrap
+                               component="div"
+                              //  className="subcoursename"
+                               // style={{}}
+                               style={{
+                                 color: theme ? "#363636" : "#FFFFFF",
+                                 display: "flex",
+                                 justifyContent: "center",
+                                 width: "100%",
+                               }}
+                             >
+                               <Typography
+                                 noWrap
+                                 component="div"
+                                 className="subcoursenametwo subcoursename"
+                               >
+                                 {e.Tags}
+                               </Typography>
+                             </Typography>
+                             <div style={{ position: "relative" }}>
+                               <img
+                                 src={e.TagImage}
+                                 alt=""
+                                 className="tagstwocontainer"
+                               />
+                             </div>
+                           </div>
                         ) : (
                           ""
                         )}

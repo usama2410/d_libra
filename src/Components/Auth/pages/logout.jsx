@@ -18,7 +18,7 @@ const theme = useSelector((state) => state.theme.state)
           <button
         onClick={handleBack}
         className="back_button"
-        style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
          <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
@@ -26,7 +26,7 @@ const theme = useSelector((state) => state.theme.state)
         <div className="logoutmaincontainer">
 
       <div style={{ display: "flex", justifyContent: "center"}}>
-        <Typography className="logoutText" style={{color: `${theme ? '#008EEC' : ' #FFFFFF'}`}}>
+        <Typography className={theme ? "logoutTextdark" : " logoutText"}>
           You've successfully logged out.
         </Typography>
       </div>

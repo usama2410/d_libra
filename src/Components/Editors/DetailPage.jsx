@@ -55,7 +55,7 @@ const DetailPage = () => {
             </button>
           </div>
           {userdata.slice(startdata, enddata).map((item) => (
-            <span className="header_text detailpagetext">{item.text}</span>
+            <span className="header_text" >{item.text}</span>
           ))}
         </div>
 

@@ -15,11 +15,14 @@ import Group89Blue from "../../assests/Group89Blue.png";
 // import HoverRating from "./Rating";
 import FooterButtons from "../User/FooterButtons";
 import { useSelector } from "react-redux";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const Recentlyviewed = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(RviewData);
+  const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -33,14 +36,14 @@ const Recentlyviewed = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -48,7 +51,7 @@ const Recentlyviewed = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -98,16 +101,18 @@ const Recentlyviewed = () => {
     ],
   };
 
+
   return (
     <>
       <div className={theme ? "" : "recentlyviewedmaincontainer"}>
-        <button
-          className="back_button "
-          style={{ color: `${theme ? "black" : "white"}` }}
-        >
-          <ArrowBackIcon style={{ fontSize: "18px" }} />{" "}
-          <span style={{ paddingLeft: "5px", fontSize: "13px" }}>Back</span>
-        </button>
+      <button
+        onClick={handleBack}
+        className="back_button"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+      >
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
         <div className="mainContentContainer recentlyreviewed">
           <div
             style={{
@@ -165,32 +170,37 @@ const Recentlyviewed = () => {
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                              padding: "20px 3px 0px 4px",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{
-                                width: "250px",
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                            <img
-                              src={e.TagsImageTwo}
-                              alt=""
-                              width="17px"
-                              height="20px"
-                            />
-                          </div>
+                           <div
+                           className="underimagetextcontainer"
+                         >
+                           <Typography
+                             noWrap
+                             component="div"
+                            //  className="subcoursename"
+                             // style={{}}
+                             style={{
+                               color: theme ? "#363636" : "#FFFFFF",
+                               display: "flex",
+                               justifyContent: "center",
+                               width: "100%",
+                             }}
+                           >
+                             <Typography
+                               noWrap
+                               component="div"
+                               className="subcoursenametwo subcoursename"
+                             >
+                               {e.Tags}
+                             </Typography>
+                           </Typography>
+                           <div style={{ position: "relative" }}>
+                             <img
+                               src={e.TagsImageTwo}
+                               alt=""
+                               className="tagstwocontainer"
+                             />
+                           </div>
+                         </div>
                         ) : (
                           ""
                         )}
@@ -203,56 +213,6 @@ const Recentlyviewed = () => {
           );
         })}
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div className="second_tagpage_container">
-{data.map((item) => {
-        return (
-          
-          <>
-            
-              {
-                item.items.map((content) => {
-                  return (
-                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
-                    <div className="left">
-                      <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
-                    </div>
-                    <div className="right">
-                      <img className="right_image" src={content.image} alt="" />
-                    </div>
-                  </div>
-                  )
-                })
-              }
-
-          </>
-        );
-      })}
-</div>
-
-
-
-
-
-
-
       <FooterButtons />
     </>
   );

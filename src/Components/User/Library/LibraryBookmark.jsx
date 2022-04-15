@@ -11,15 +11,18 @@ import VectorTag from "../../../assests/VectorTag.png";
 import LibraryBookmarkContent from "./LibraryBookmarkContent";
 import "./Library.css";
 import { useSelector } from "react-redux";
-import MyLibrary_light from '../../../assests/SVG_Files/MyLibrary_light.svg'
-import Mylibrary_dark from '../../../assests/SVG_Files/Mylibrary_dark.svg'
+import MyLibrary_light from "../../../assests/SVG_Files/MyLibrary_light.svg";
+import Mylibrary_dark from "../../../assests/SVG_Files/Mylibrary_dark.svg";
 import FooterButtons from "../FooterButtons";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const LibraryBookmark = () => {
   const theme = useSelector((state) => state.theme.state);
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
+  const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -33,14 +36,14 @@ const LibraryBookmark = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -48,7 +51,7 @@ const LibraryBookmark = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -100,38 +103,52 @@ const LibraryBookmark = () => {
 
   return (
     <>
-      <div className={theme ? "library_root_container_simple" : "library_root_container"} style={{paddingTop: "10px"}}>
-
-
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{ color: `${theme ? "black" : "white"}`,  textTransform: "none" }}
-          startIcon={<ArrowBackIcon />}>
-          Back
-        </Button>
+      <div
+        className={
+          theme ? "library_root_container_simple" : "library_root_container"
+        }
+        // style={{ paddingTop: "10px" }}
+      >
+        <button
+        onClick={handleBack}
+        className="back_button librarybackbutton"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+      >
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
-          {theme ? (
-       <img src={MyLibrary_light} alt="" className="recentlyviewedimage librarymainicon" />
-        ) : (
-          <img src={Mylibrary_dark} alt="" className="recentlyviewedimage librarymainicon"/>
-        )}
+            {theme ? (
+              <img
+                src={MyLibrary_light}
+                alt=""
+                className="recentlyviewedimage librarymainicon"
+              />
+            ) : (
+              <img
+                src={Mylibrary_dark}
+                alt=""
+                className="recentlyviewedimage librarymainicon"
+              />
+            )}
             <span
               className="mylibrary_text"
-              style={{ color: `${theme ? " #008EEC " : "white"}` }}>
+              style={{ color: `${theme ? " #008EEC " : "white"}` }}
+            >
               My Library
             </span>
           </span>
           <span
+            className="bookmarktext"
             style={{
               color: `${theme ? " #008EEC " : "white"}`,
               paddingTop: "10px",
-            }}>
+            }}
+          >
             By Bookmark
           </span>
-          </div>
-      
+        </div>
       </div>
       <div
         style={{
@@ -139,23 +156,32 @@ const LibraryBookmark = () => {
           display: "flex",
           justifyContent: "flex-end",
           paddingRight: "20px",
-        }}>
+        }}
+      >
         <Button
           className={theme ? "bycourse_button_sub" : "bycourse_button"}
-          onClick={() => navigate('/MyLibraryCorse')}
-          style={{color: 'white'}}
-          endIcon={<HiOutlineArrowNarrowRight />}>
+          onClick={() => navigate("/MyLibraryCorse")}
+          style={{ color: "white" }}
+          endIcon={<HiOutlineArrowNarrowRight />}
+        >
           By Course
         </Button>
       </div>
-      <div className="landingpage_slider_container">
+     <div className="landingpage_slider_container libraryrootcontainer">
         {data.map((item) => {
           return (
             <div className="content_root_container">
-              <div>
+              <div style={{ display: "flex", alignItems: " center" }}>
+                <span className="librarybookmarkicon">
+                  <img
+                    src={item.TagsImageOne}
+                    alt=""
+                    className="tagsiconcontainer"
+                  />
+                </span>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
+                  style={{ padding: "0px 0px 8px 10px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -176,29 +202,37 @@ const LibraryBookmark = () => {
                           alt=""
                         />
                         {e.image ? (
-                          <div
+                        <div
+                        className="underimagetextcontainer"
+                      >
+                        <Typography
+                          noWrap
+                          component="div"
+                         //  className="subcoursename"
+                          // style={{}}
                           style={{
+                            color: theme ? "#363636" : "#FFFFFF",
                             display: "flex",
-                            justifyContent: "space-around",
-                            alignItems: "center",
-                            padding: "10px 0px 0px 10px",
+                            justifyContent: "center",
+                            width: "100%",
                           }}
                         >
                           <Typography
                             noWrap
                             component="div"
-                            className="subcoursename"
-                            style={{ color: theme ? "#363636" : "#FFFFFF" }}
+                            className="subcoursenametwo subcoursename"
                           >
                             {e.Tags}
                           </Typography>
+                        </Typography>
+                        <div style={{ position: "relative" }}>
                           <img
-                              src={e.TagsImageTwo}
-                              alt=""
-                              width="17px"
-                              height="20px"
-                            />
+                            src={e.TagsImageTwo}
+                            alt=""
+                            className="tagstwocontainer"
+                          />
                         </div>
+                      </div>
                         ) : (
                           ""
                         )}

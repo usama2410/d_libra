@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import LibraryBookmarkContent from "./libcourse";
 import "../User/Library/Library.css";
 import { useSelector } from "react-redux";
-
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import FooterButtons from "../User/FooterButtons";
 import Mylibrary_dark from './../../assests/SVG_Files/Mylibrary_dark.svg'
 import MyLibrary_light from './../../assests/SVG_Files/MyLibrary_light.svg'
@@ -21,6 +21,9 @@ const MylibraryCorse = () => {
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
+  const handleBack = () => {
+    
+  }
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -34,14 +37,14 @@ const MylibraryCorse = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1120,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 820,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2.14,
           slidesToScroll: 1,
@@ -49,7 +52,7 @@ const MylibraryCorse = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -105,19 +108,16 @@ const MylibraryCorse = () => {
         className={
           theme ? "library_root_container_simple" : "library_root_container"
         }
-        style={{ paddingTop: "10px" }}
+        // style={{ paddingTop: "10px" }}
       >
-        <Button
-          onClick={() => navigate("/editormainpage")}
-          className="back_button"
-          style={{
-            color: `${theme ? "black" : "white"}`,
-            textTransform: "none",
-          }}
-          startIcon={<ArrowBackIcon />}
-        >
-          Back
-        </Button>
+        <button
+        onClick={handleBack}
+        className="back_button librarybackbutton"
+        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+      >
+        <ArrowBack className="backbutton_icon" />{" "}
+        <span className="backbutton_text">Back</span>
+      </button>
         <div className="header_library_container">
           <span style={{ display: "flex", alignItems: "center" }}>
           {theme ? (
@@ -180,14 +180,14 @@ const MylibraryCorse = () => {
           By Bookmark
         </Button>
       </div>
-      <div className="landingpage_slider_container">
+      <div className="landingpage_slider_container libraryrootcontainer">
         {data.map((item) => {
           return (
             <div className="content_root_container">
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
+                  style={{ padding: "0px 0px 8px 3px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -209,29 +209,37 @@ const MylibraryCorse = () => {
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-around",
-                              alignItems: "center",
-                              padding: "10px 0px 0px 10px",
-                            }}
-                          >
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{ color: theme ? "#363636" : "#FFFFFF" }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                            <img
-                              src={e.TagsImageTwo}
-                              alt=""
-                              width="17px"
-                              height="20px"
-                            />
-                          </div>
+                             <div
+                             className="underimagetextcontainer"
+                           >
+                             <Typography
+                               noWrap
+                               component="div"
+                              //  className="subcoursename"
+                               // style={{}}
+                               style={{
+                                 color: theme ? "#363636" : "#FFFFFF",
+                                 display: "flex",
+                                 justifyContent: "center",
+                                 width: "100%",
+                               }}
+                             >
+                               <Typography
+                                 noWrap
+                                 component="div"
+                                 className="subcoursenametwo subcoursename"
+                               >
+                                 {e.Tags}
+                               </Typography>
+                             </Typography>
+                             <div style={{ position: "relative" }}>
+                               <img
+                                 src={e.TagsImageTwo}
+                                 alt=""
+                                 className="tagstwocontainer"
+                               />
+                             </div>
+                           </div>
                         ) : (
                           ""
                         )}
