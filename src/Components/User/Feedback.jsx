@@ -9,6 +9,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
 import "./RatingForm.css";
+import Select from "react-select";
 import StarIcon from '@mui/icons-material/Star';
 const Feedback = () => {
   const navigate = useNavigate();
@@ -17,6 +18,126 @@ const Feedback = () => {
   }
   const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  const options = [
+    { value: "chocolate", label: "Git & Git Hub Introduction" },
+    { value: "Saab", label: "Saab" },
+    { value: "Opel", label: "Opel" },
+    { value: "Audi", label: "Audi" },
+  ];
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: " #FFFFFF",
+      borderRadius: "5px",
+      border: "none",
+      color: " #363636",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      height: "50px",
+      "@media only screen and (max-width: 425px)": {
+        // ...base["@media only screen and (max-width: 400px)"],
+        // marginRight: "20rem",
+        height: "40px"
+    },
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "#111111",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: " #363636",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: " #363636",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: " #363636",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: " #363636",
+    }),
+  };
+
+  const customStyless = {
+    control: (base, state) => ({
+      ...base,
+      background: " #4F4F4F",
+      borderRadius: "5px",
+      border: "none",
+      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
+      color: "white",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      // width: "450px",
+      height: "50px",
+      "@media only screen and (max-width: 425px)": {
+        // ...base["@media only screen and (max-width: 400px)"],
+        // marginRight: "20rem",
+        height: "40px"
+    },
+    }),
+   
+    placeholder: (base) => ({
+      ...base,
+      color: "#FFFFFF",
+      opacity: 1,
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: "black",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: "black",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: "#FFFFFF",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "white",
+    }),
+
+  };
+
+ 
+
+
+
   return (
     <>
 
@@ -30,27 +151,21 @@ const Feedback = () => {
       </button>
   
       <div className="ratingform_root_two">
-        <select
-          className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"}
-          name="cars"
-          id="cars"
-        >
-          <option value="volvo">Select a course for Rating</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
+     
+      <Select
+                styles={theme ? customStyles : customStyless}
+                className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"} 
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
 
-        <select
-          className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"}
-          name="cars"
-          id="cars"
-        >
-          <option value="volvo">Select a course for Rating</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
+      
+<Select
+                styles={theme ? customStyles : customStyless}
+                className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"} 
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
 
         {/* <div className="ratingform_root_two">
           <Rating

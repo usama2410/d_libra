@@ -39,7 +39,7 @@
 }
 
 .addcategory_input_two {
-  background: #4f4f4f !important;
+  /* background: #4f4f4f !important; */
   border-radius: 5px !important;
   border: none !important;
   width: 500px !important;
@@ -50,10 +50,10 @@
   font-weight: 300 !important;
   font-size: 21px !important;
   line-height: 24px !important;
-  display: flex !important;
-  align-items: center !important;
+  /* display: flex !important;
+  align-items: center !important; */
   letter-spacing: -0.015em !important;
-  padding-left: 10px !important;
+  /* padding-left: 10px !important; */
   /* Font Body Dark */
 
   color: #ffffff !important;
@@ -69,6 +69,7 @@
   background: #ffffff !important;
   border-radius: 5px !important;
   border: none !important;
+  
   width: 500px !important;
   height: 50px !important;
   /* font-family: Helvetica !important;  font-style: normal; */
@@ -76,14 +77,14 @@
   font-weight: 300 !important;
   font-size: 21px !important;
   line-height: 24px !important;
-  display: flex !important;
-  align-items: center !important;
+  /* display: flex !important;
+  align-items: center !important; */
   letter-spacing: -0.015em !important;
-  padding-left: 10px !important;
+  /* padding-left: 10px !important; */
   margin-bottom: 16px !important;
   color: #363636 !important;
 
-  background: #ffffff !important;
+  /* background: #ffffff !important; */
   border: 1px solid rgba(230, 230, 230, 0.5) !important;
   box-sizing: border-box !important;
   border-radius: 5px !important;
@@ -498,8 +499,8 @@
     font-weight: 300 !important;
     font-size: 14px !important;
     line-height: 16px !important;
-    display: flex !important;
-    align-items: center !important;
+    /* display: flex !important; */
+    /* align-items: center !important; */
     letter-spacing: -0.015em !important;
     margin-bottom: 13px !important;
   }
@@ -511,8 +512,8 @@
     font-weight: 300 !important;
     font-size: 14px !important;
     line-height: 16px !important;
-    display: flex !important;
-    align-items: center !important;
+    /* display: flex !important;
+    align-items: center !important; */
     letter-spacing: -0.015em !important;
     margin-bottom: 13px !important;
   }

@@ -104,7 +104,7 @@ const Recentlyviewed = () => {
 
   return (
     <>
-      <div className={theme ? "" : "recentlyviewedmaincontainer"}>
+      <div className={theme ? "recentlyviewedmaincontainerlight" : "recentlyviewedmaincontainer"}>
       <button
         onClick={handleBack}
         className="back_button"

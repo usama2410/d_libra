@@ -1,3 +1,7 @@
+.recentlyviewedmaincontainerlight {
+  /* border: 1px solid red; */
+}
+
 .underimagetextcontainer {
   display: flex;
   justify-content: center;
@@ -172,7 +176,7 @@
   font-size: 21px;
   line-height: 24px;
   display: flex;
- /* padding-bottom: 15px; */
+  /* padding-bottom: 15px; */
   align-items: center;
   letter-spacing: -0.015em;
   color: #ffffff;
@@ -459,7 +463,7 @@
     font-size: 16px;
     line-height: 18px;
     /* identical to box height */
-padding-bottom: 0px;
+    padding-bottom: 0px;
     display: flex;
     align-items: center;
     letter-spacing: -0.015em;
@@ -525,28 +529,28 @@ padding-bottom: 0px;
     color: #ffffff !important;
     margin-top: 20px !important;
     text-shadow: 0px 0px #00000000;
-  background-color: #004cb6 !important;
-  display: inline-block;
-  background-image: -webkit-linear-gradient(
-    87.62deg,
-    #004cb6 -44.71%,
-    #009af9 100%
-  ) !important;
-  background-image: -webkit-conic-gradient(
-    87.62deg,
-    #004cb6 -44.71%,
-    #009af9 100%
-  ) !important;
-  -webkit-box-decoration-break: clone;
-  -webkit-background-clip: text !important;
-  -moz-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  -moz-text-fill-color: transparent !important;
-  -webkit-mask-image: linear-gradient(
-    87.62deg,
-    #004cb6 -44.71%,
-    #009af9 100%
-  );
+    background-color: #004cb6 !important;
+    display: inline-block;
+    background-image: -webkit-linear-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    ) !important;
+    background-image: -webkit-conic-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    ) !important;
+    -webkit-box-decoration-break: clone;
+    -webkit-background-clip: text !important;
+    -moz-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    -moz-text-fill-color: transparent !important;
+    -webkit-mask-image: linear-gradient(
+      87.62deg,
+      #004cb6 -44.71%,
+      #009af9 100%
+    );
   }
   .mycontentheadthree {
     font-weight: 700 !important;
@@ -655,6 +659,11 @@ padding-bottom: 0px;
     position: absolute;
     right: 5px;
   }
+
+  .recentlyviewedmaincontainerlight {
+    background: #f3f6ff;
+    box-shadow: 0px 4px 4px rgba(214, 230, 255, 0.25);
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -663,7 +672,7 @@ padding-bottom: 0px;
   }
   .second_tagpage_container {
     display: block;
-    margin-top: 0px ;
+    margin-top: 0px;
   }
   /* .recentlyreviewd_slider_container {
     display: none;
@@ -674,7 +683,6 @@ padding-bottom: 0px;
   }
 
   .underimagetextcontainer {
-
     padding: 18px 0px 0px 0px;
   }
   .content_root_container {

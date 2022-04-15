@@ -176,23 +176,7 @@ const UploadContentMain = () => {
               >
                 Select Chapter
               </span>
-              {/* <select
-                className={
-                  theme
-                    ? "uploadcontentinputfieldtwo"
-                    : "uploadcontentinputfield"
-                }
-                style={{ width: "100%" }}
-                name="cars"
-                id="cars"
-              >
-                <option value="volvo">
-                  Chapter 1.Git & GitHub Key Concepts
-                </option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select> */}
+           
 
               <Select
                 styles={theme ? customStyles : customStyless}

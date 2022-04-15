@@ -120,7 +120,7 @@
   letter-spacing: -0.015em !important;
   /* padding-left: 20px !important; */
   color: #ffffff !important;
-  width: 300px !important;
+  /* width: 300px !important; */
 }
 
 .git_introduction_dropdown_sub {
@@ -140,7 +140,7 @@
   /* padding-left: 20px; */
   color: #363636;
   /* border: 1px solid red; */
-  width: 300px;
+  /* width: 300px; */
 }
 
 @media screen and (max-width: 468px) {
@@ -184,14 +184,14 @@
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    width: 299px;
+    /* width: 299px; */
   }
 
   .git_introduction_dropdown_sub {
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    width: 299px;
+    /* width: 299px; */
   }
 
   .editormainpagebuttoncontainer {

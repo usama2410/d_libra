@@ -8,6 +8,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useSelector } from "react-redux";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import "./UploadContentMain.css";
+import Select from "react-select";
 const EditContentMain = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState("");
@@ -27,6 +28,133 @@ const handleBack = () =>
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  const options = [
+    { value: "chocolate", label: "Git & Git Hub Introduction" },
+    { value: "Saab", label: "Saab" },
+    { value: "Opel", label: "Opel" },
+    { value: "Audi", label: "Audi" },
+  ];
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: " #FFFFFF",
+      borderRadius: "5px",
+      border: "none",
+      color: " #363636",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      // width: "450px",
+      height: "40px",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "#111111",
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: " #363636",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: " #363636",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: " #363636",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: " #363636",
+    }),
+  };
+
+  const customStyless = {
+    control: (base, state) => ({
+      ...base,
+      background: " #4F4F4F",
+      borderRadius: "5px",
+      border: "none",
+      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
+      color: "white",
+      boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
+      // width: "450px",
+      height: "40px",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "#FFFFFF",
+      opacity: 1,
+    }),
+    menu: (base, state) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+      backgroundColor: "yellow",
+      color: "black",
+    }),
+    menuList: (base, state) => ({
+      ...base,
+      padding: 0,
+      background: "white",
+      color: "black",
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      color: "#FFFFFF",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "white",
+    }),
+  };
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   useEffect(() => {}, [editorState]);
   return (
     <>
@@ -49,48 +177,44 @@ const handleBack = () =>
    </div>
    <Grid container className="main_root_container_upload_content">
      <Grid item lg={4} md={4} sm={12} xs={12} style={{ marginTop: "-15px" }}>
-       <div>
-         <span
-           className="addcategory_text"
-           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
-         >
-           Select Course
-         </span>
-         <select
-           className={
-             theme ? "uploadcontentinputfieldtwo" : "uploadcontentinputfield"
-           }
-           style={{ width: "100%" }}
-           name="cars"
-           id="cars"
-         >
-           <option value="volvo">Git & GitHub Introduction</option>
-           <option value="saab">Saab</option>
-           <option value="opel">Opel</option>
-           <option value="audi">Audi</option>
-         </select>
-       </div>
-       <div>
-         <span
-           className="addcategory_text"
-           style={{   color: `${theme ? "#363636" : "#FFFFFF"}`, }}
-         >
-           Select Chapter
-         </span>
-         <select
-           className={
-             theme ? "uploadcontentinputfieldtwo" : "uploadcontentinputfield"
-           }
-           style={{ width: "100%" }}
-           name="cars"
-           id="cars"
-         >
-           <option value="volvo">Chapter 1.Git & GitHub Key Concepts</option>
-           <option value="saab">Saab</option>
-           <option value="opel">Opel</option>
-           <option value="audi">Audi</option>
-         </select>
-       </div>
+     <div>
+              <span
+                className="addcategory_text"
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+              >
+                Select Course
+              </span>
+              <Select
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub_three"
+                    : "git_introduction_dropdown_sub_two"
+                }
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
+            </div>
+            <div>
+              <span
+                className="addcategory_text"
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+              >
+                Select Chapter
+              </span>
+           
+
+              <Select
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub_three"
+                    : "git_introduction_dropdown_sub_two"
+                }
+                placeholder="Git & GitHub Introduction"
+                options={options}
+              />
+            </div>
        <div>
          <span
            className="addcategory_text"

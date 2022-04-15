@@ -57,7 +57,7 @@ const AddNewCategory = () => {
       border: "none",
       color: " #363636",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      width: "450px",
+      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -96,7 +96,7 @@ const AddNewCategory = () => {
       // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      width: "450px",
+      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
