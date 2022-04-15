@@ -36,6 +36,11 @@ import Rating from "../../assests/SVG_Files/Rating.svg";
 import MyLibrary from "../../assests/SVG_Files/MyLibrary.svg";
 import History from "../../assests/SVG_Files/History.svg";
 import Share from "../../assests/SVG_Files/Share.svg";
+import Icon_messages from '../../assests/SVG_Files/New folder/icons/Icon_messages.svg'
+import Icon_facebook from '../../assests/SVG_Files/New folder/icons/Icon_facebook.svg'
+import Icon_gmail from '../../assests/SVG_Files/New folder/icons/Icon_gmail.svg'
+import Icon_telegram from '../../assests/SVG_Files/New folder/icons/Icon_telegram.svg'
+import Icon_whatsapp from '../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg'
 
 import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
@@ -295,27 +300,27 @@ const FooterButtons = (props) => {
                       {mobileView ? (
                         <>
                           <img
-                            src={messanger}
+                            src={Icon_messages}
                             alt=""
                             style={{ paddingLeft: "0px" }}
                           />
                           <img
-                            src={whatsapp}
+                            src={Icon_whatsapp}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={facebook}
+                            src={Icon_facebook}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={gmail}
+                            src={Icon_gmail}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={telegram}
+                            src={Icon_telegram}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
@@ -323,7 +328,7 @@ const FooterButtons = (props) => {
                       ) : (
                         <>
                           <img
-                            src={messanger}
+                            src={Icon_messages}
                             alt=""
                             style={{
                               position: "relative",
@@ -332,7 +337,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={whatsapp}
+                            src={Icon_whatsapp}
                             alt=""
                             style={{
                               position: "relative",
@@ -341,7 +346,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={facebook}
+                            src={Icon_facebook}
                             alt=""
                             style={{
                               position: "relative",
@@ -350,7 +355,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={gmail}
+                            src={Icon_gmail}
                             alt=""
                             style={{
                               position: "relative",
@@ -359,7 +364,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={telegram}
+                            src={Icon_telegram}
                             alt=""
                             style={{
                               position: "relative",

@@ -39,6 +39,13 @@ import Popup_Rating from "../../../assests/SVG_Files/New folder/icons/Popup_Rati
 import Popup_Share from "../../../assests/SVG_Files/New folder/icons/Popup_Share.svg";
 import Popup_CloseArrow from "../../../assests/SVG_Files/New folder/Popup_CloseArrow.svg";
 import Popup_OpenArrow from "../../../assests/SVG_Files/New folder/Popup_OpenArrow.svg";
+
+import Icon_messages from "../../../assests/SVG_Files/New folder/icons/Icon_messages.svg";
+import Icon_facebook from "../../../assests/SVG_Files/New folder/icons/Icon_facebook.svg";
+import Icon_gmail from "../../../assests/SVG_Files/New folder/icons/Icon_gmail.svg";
+import Icon_telegram from "../../../assests/SVG_Files/New folder/icons/Icon_telegram.svg";
+import Icon_whatsapp from "../../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg";
+
 import { useNavigate } from "react-router-dom";
 import { border } from "@mui/system";
 
@@ -116,7 +123,7 @@ const FooterButtons = (props) => {
             // style={{}}
             // onClick={toggleDrawer(true)}
             alt=""
-              className="footerbuttonimages"
+            className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -125,7 +132,7 @@ const FooterButtons = (props) => {
             src={Popup_My_library_off}
             // onClick={toggleDrawer(true)}
             alt=""
-              className="footerbuttonimages"
+            className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -134,7 +141,7 @@ const FooterButtons = (props) => {
             src={Popup_Rating_off}
             // onClick={toggleDrawer(true)}
             alt=""
-              className="footerbuttonimages"
+            className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -142,7 +149,7 @@ const FooterButtons = (props) => {
             src={Popup_Share}
             onClick={toggleDrawer(true)}
             alt=""
-              className="footerbuttonimages"
+            className="footerbuttonimages"
             width="50px"
             height="50px"
           />
@@ -161,7 +168,7 @@ const FooterButtons = (props) => {
                 src={Popup_History_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                    className="footerbuttonimages"
+                className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -170,7 +177,7 @@ const FooterButtons = (props) => {
                 src={Popup_My_library_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                    className="footerbuttonimages"
+                className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -179,7 +186,7 @@ const FooterButtons = (props) => {
                 src={Popup_Rating_off}
                 // onClick={toggleDrawer(true)}
                 alt=""
-                    className="footerbuttonimages"
+                className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -187,7 +194,7 @@ const FooterButtons = (props) => {
                 src={Popup_Share}
                 onClick={toggleDrawer(true)}
                 alt=""
-                    className="footerbuttonimages"
+                className="footerbuttonimages"
                 width="50px"
                 height="50px"
               />
@@ -205,8 +212,8 @@ const FooterButtons = (props) => {
                 keepMounted: true,
               }}
             >
-             <div className="bottomnavigator">
-                   <StyledBox
+              <div className="bottomnavigator">
+                <StyledBox
                   sx={{
                     px: 10,
                     pb: 24,
@@ -232,27 +239,27 @@ const FooterButtons = (props) => {
                       {mobileView ? (
                         <>
                           <img
-                            src={messanger}
+                            src={Icon_messages}
                             alt=""
                             style={{ paddingLeft: "0px" }}
                           />
                           <img
-                            src={whatsapp}
+                            src={Icon_whatsapp}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={facebook}
+                            src={Icon_facebook}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={gmail}
+                            src={Icon_gmail}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
                           <img
-                            src={telegram}
+                            src={Icon_telegram}
                             alt=""
                             style={{ paddingLeft: "15px" }}
                           />
@@ -260,7 +267,7 @@ const FooterButtons = (props) => {
                       ) : (
                         <>
                           <img
-                            src={messanger}
+                            src={Icon_messages}
                             alt=""
                             style={{
                               position: "relative",
@@ -269,7 +276,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={whatsapp}
+                            src={Icon_whatsapp}
                             alt=""
                             style={{
                               position: "relative",
@@ -278,7 +285,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={facebook}
+                            src={Icon_facebook}
                             alt=""
                             style={{
                               position: "relative",
@@ -287,7 +294,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={gmail}
+                            src={Icon_gmail}
                             alt=""
                             style={{
                               position: "relative",
@@ -296,7 +303,7 @@ const FooterButtons = (props) => {
                             }}
                           />
                           <img
-                            src={telegram}
+                            src={Icon_telegram}
                             alt=""
                             style={{
                               position: "relative",
@@ -331,29 +338,29 @@ const FooterButtons = (props) => {
           >
             <div className="footer_sub">
               {footerbutton ? (
-               <img
-               src={Popup_CloseArrow}
-               alt="logo"
-               // style={{
-               //   position: "relative",
-               //   top: "-10px",
-               //   right: "-10px",
-               //   width: "16px",
-               //   height: "16px",
-               // }}
-             />
+                <img
+                  src={Popup_CloseArrow}
+                  alt="logo"
+                  // style={{
+                  //   position: "relative",
+                  //   top: "-10px",
+                  //   right: "-10px",
+                  //   width: "16px",
+                  //   height: "16px",
+                  // }}
+                />
               ) : (
                 <img
-                src={Popup_OpenArrow}
-                alt="logo"
-                // style={{
-                //   position: "relative",
-                //   top: "-10px",
-                //   right: "-10px",
-                //   width: "16px",
-                //   height: "16px",
-                // }}
-              />
+                  src={Popup_OpenArrow}
+                  alt="logo"
+                  // style={{
+                  //   position: "relative",
+                  //   top: "-10px",
+                  //   right: "-10px",
+                  //   width: "16px",
+                  //   height: "16px",
+                  // }}
+                />
               )}
             </div>
           </Button>

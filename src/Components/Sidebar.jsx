@@ -117,6 +117,20 @@ export default function Sidebar() {
     console.log(themestate);
     dispatch(themeSwitch(!themeState));
   };
+  
+  
+//   React.useEffect( async () => {
+    
+//     if(themeState === true){
+// await dispatch(themeSwitch(themeState === true))
+//     }
+//   })
+  
+  
+  
+  
+  
+  
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -127,6 +141,9 @@ export default function Sidebar() {
     }
     setState({ ...state, [anchor]: open });
   };
+
+
+
 
   const handleaccordiondrawer = () => {
     if (

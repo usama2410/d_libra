@@ -37,7 +37,7 @@ const UploadContentMain = () => {
       border: "none",
       color: " #363636",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      width: "450px",
+      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -76,7 +76,7 @@ const UploadContentMain = () => {
       // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      width: "450px",
+      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -162,8 +162,8 @@ const UploadContentMain = () => {
                 styles={theme ? customStyles : customStyless}
                 className={
                   theme
-                    ? "git_introduction_dropdown_sub"
-                    : "git_introduction_dropdown"
+                    ? "git_introduction_dropdown_sub_three"
+                    : "git_introduction_dropdown_sub_two"
                 }
                 placeholder="Git & GitHub Introduction"
                 options={options}
@@ -198,8 +198,8 @@ const UploadContentMain = () => {
                 styles={theme ? customStyles : customStyless}
                 className={
                   theme
-                    ? "git_introduction_dropdown_sub"
-                    : "git_introduction_dropdown"
+                    ? "git_introduction_dropdown_sub_three"
+                    : "git_introduction_dropdown_sub_two"
                 }
                 placeholder="Git & GitHub Introduction"
                 options={options}
