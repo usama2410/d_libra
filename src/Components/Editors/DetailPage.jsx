@@ -102,48 +102,98 @@ const DetailPage = () => {
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div className="detail_page_content">
-                <span>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                </span>
+              <div className="scrollable"> 
+
+               
+<span>
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+</span>
+
+</div>
+<div className="noscrollable">
+<span>
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+  odit aut fugit, sed quia consequuntur magni dolores eos qui
+  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+  qui dolorem ipsum quia dolor sit amet <br />
+  <br />
+</span>
+
+</div>
               </div>
               <div className="tags_wrapper_two">
                 <span className="detail_tag_text"> Tag: </span>

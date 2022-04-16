@@ -449,7 +449,7 @@
   }
 
   .ratingsidebarcomponent {
-    margin-top: 10vh;
+    margin-top: 10px;
   }
 
   .ratingform_root_three_three {
@@ -465,7 +465,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
   }
 
@@ -475,7 +475,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 50px;
     /* margin-bottom: 40px; */
   }
 
@@ -519,6 +519,7 @@
   }
 
   .rating_form_sub_four {
+    margin-top: 20px !important;
     width: 200px !important;
   }
   .rating_form_textarea {

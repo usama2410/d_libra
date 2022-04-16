@@ -149,6 +149,9 @@ const UserDetailPage = () => {
                   overflow: `${pinstate ? "scroll" : "visible"}`,
                 }}
               >
+                <div className="scrollable"> 
+
+               
                 <span>
                   Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
                   odit aut fugit, sed quia consequuntur magni dolores eos qui
@@ -192,6 +195,52 @@ const UserDetailPage = () => {
                   <br />
                 </span>
 
+                </div>
+                <div className="noscrollable">
+                <span>
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                  odit aut fugit, sed quia consequuntur magni dolores eos qui
+                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                  qui dolorem ipsum quia dolor sit amet <br />
+                  <br />
+                </span>
+
+                </div>
                 <div className="tags_wrapper_two">
                   <div
                     style={{

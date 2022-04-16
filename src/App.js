@@ -18,6 +18,7 @@ import RatingForm from "./Components/User/RatingForm";
 import RatingSidebar from "./Components/User/RatingSidebar";
 import UserSettingViewPage from "./Components/User/UserSettingViewPage";
 import LandingPage from "./Components/Guest/LandingPG/LandingPage";
+import LandingPageMain from "./Components/Guest/LandingPG/LandingPageMain";
 import Accordian from "./Components/Guest/Accordian/Accordian";
 // import Course from "./Components/Guest/CoursePg/Course";
 import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
@@ -39,6 +40,8 @@ import Searchresult from "./Components/Extras/Searchresult";
 import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 import CourseMainPage from "./Components/Guest/LandingPG/CourseMainPage";
 import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
+
+
 // import {useLocation} from 'react-router-dom'
 
 function App() {
@@ -116,6 +119,7 @@ appHeight()
           <div>
             <Routes>
               <Route path="/" exact element={<LandingPage />} />
+              <Route path="/landingpagemain" exact element={<LandingPageMain />} />
               <Route path="/mycontents" exact element={<MyContents />} />
 
               <Route exact path="/login" element={<Login />} />

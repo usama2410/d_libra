@@ -116,7 +116,7 @@ const UserSettingViewPage = () => {
                   <img
                     src={Editor_icon_dark}
                     alt=""
-                    className="editoricon_image"
+                    className="editoricon_image_two"
                   />
                 )}
                 <span
