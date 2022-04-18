@@ -1,67 +1,31 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"); */
-/* @font-face {
-  font-family: Helvetica !important;
-  src: url(./assests/Helvetica/Helvetica.ttf) !important;
-} */
-
-/* body {
-  
-} */
-
-:root {
-  --app-height: 100%;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  height: -webkit-fill-available;
-  height: var(--app-height);
-  min-height: 100vh;
-}
-
 .darkTheme {
   background-color: #111111;
   color: white;
-
   padding-top: 58px;
-  /* max-height: 100vh; */
-  /* height: var( — app-height); */
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .lightTheme {
-  /* background: #F3F6FF; */
   color: black;
-  /* height: var( — app-height); */
-  /* max-height: 100vh; */
   padding-top: 58px;
-  min-height: 100vh;
-  display: flex;
 
+  height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
-
 .CreamyTheme {
-  /* background: #F3F6FF; */
   color: black;
   padding-top: 58px;
-  min-height: 100vh;
-  /* height: var( — app-height); */
-  /* max-height: 100vh; */
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #eeeeee !important;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -69,16 +33,33 @@ body {
   font-family: Helvetica !important;
 }
 
+@media screen and (max-width: 430px) {
+  .darkTheme {
+    /* padding: 40px 0px 0px 0px; */
+    height: 0vh;
+  }
+  .lightTheme {
+    /* padding: 40px 0px 0px 0px; */
+    height: 0vh;
+  }
+  .CreamyTheme {
+    /* padding: 40px 0px 0px 0px; */
+    height: 0vh;
+  }
+}
+
+
 @media screen and (max-width: 600px) {
   .darkTheme {
     padding: 40px 0px 0px 0px;
-    /* padding: 40px 0px; */
+    /* height: 0vh; */
   }
   .lightTheme {
     padding: 40px 0px 0px 0px;
+    /* height: 0vh; */
   }
-
   .CreamyTheme {
     padding: 40px 0px 0px 0px;
+    /* height: 0vh; */
   }
 }

@@ -18,46 +18,6 @@ const RatingSidebar = () => {
   }
   const theme = useSelector((state)=> state.theme.state)
   const [value, setValue] = React.useState(2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   const options = [
     { value: "chocolate", label: "Git & Git Hub Introduction" },
     { value: "Saab", label: "Saab" },
@@ -151,16 +111,6 @@ const RatingSidebar = () => {
     }),
   };
 
- 
-
-
-
-
-
-
-
-
-
   return (
     <>
  
@@ -246,10 +196,14 @@ const RatingSidebar = () => {
             <HiOutlineArrowNarrowRight  style={{color: theme ? "  #111111" : " #C8C8C8"}}/>
           </span>
         </div>
+        <div className="footer_copyright ratingsidebar_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
+    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
+    </div>
       </div>
       <div >
         <FooterButtons />
       </div>
+      
     </>
   );
 };

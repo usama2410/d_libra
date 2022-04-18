@@ -195,9 +195,9 @@ const EditorsMainPage = () => {
             </div>
           </div>
         </div>
-        {/* <div style={{position: "absolute", bottom: "0", width: "100%", display: "flex", justifyContent: }}>
-     <FooterCopyright/>
-     </div> */}
+        <div className="footer_copyright editor_mainPage_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
+    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
+    </div> 
       </div>
     </>
   );

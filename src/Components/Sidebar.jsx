@@ -596,17 +596,12 @@ export default function Sidebar() {
       return "logocontainertwo";
     } else if (
       "/feedback" === location.pathname ||
-      "/ratingsidebar" === location.pathname ||
+      "/rlogocontainertwoatingsidebar" === location.pathname ||
       "/ratingform" === location.pathname ||
       "/usersettingviewpage" === location.pathname
     ) {
       return "logocontainerthree";
-    } else if (
-      // "/MylibraryCorse" === location.pathname ||
-      "/LibraryBookmark" === location.pathname
-    ) {
-      return "logocontainerseven";
-    } else if (
+    }  else if (
       "/Tagpage" === location.pathname ||
       "/Searchresult" === location.pathname ||
       "/recentlyviewed" === location.pathname
@@ -614,8 +609,6 @@ export default function Sidebar() {
       return "logocontainereight";
     } else if ("/coursepageguest" === location.pathname) {
       return "logocontainernine";
-    } else if ("/coursemainpage" === location.pathname) {
-      return "logocontainerten";
     } else if (
       "/editormainpage" === location.pathname ||
       "/editcoursestructure" === location.pathname ||

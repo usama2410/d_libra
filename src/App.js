@@ -202,8 +202,8 @@ appHeight()
               />
             </Routes>
           </div>
-        </Router>
         <FooterCopyright backgroundHanld={backgroundHanlde()} />
+        </Router>
       </div>
     </>
   );

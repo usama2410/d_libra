@@ -115,6 +115,9 @@ const Register = () => {
             Sign up with Google
           </Button>
         </div>
+        <div className="footer_copyright editor_mainPage_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
+    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
+    </div>
       </div>
     </>
   );

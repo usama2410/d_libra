@@ -1,3 +1,7 @@
+.editor_mainPage_footer {
+  position: fixed;
+  bottom: 0;
+}
 
 .editormainpage_light {
   margin-top: 0px !important;
@@ -31,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10vh;
+  margin-top: 6vh;
   flex-direction: column;
 }
 .editors_menu_heading {
@@ -141,6 +145,13 @@
   color: #363636;
   /* border: 1px solid red; */
   /* width: 300px; */
+}
+
+@media screen and (max-width: 600px) {
+  .ratingsidebar_footer {
+    position: fixed;
+    bottom: 0;
+  }
 }
 
 @media screen and (max-width: 468px) {
