@@ -4,18 +4,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
 import { useSelector } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
+
 const CourseMainPage = () => {
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(CourseMainPageData);
-  const handleBack = () => {
-    
-  }
+  const handleBack = () => {};
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -96,7 +94,7 @@ const CourseMainPage = () => {
 
   return (
     <>
-         <button
+      <button
         onClick={handleBack}
         className="back_button librarybackbutton"
         style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
@@ -119,11 +117,9 @@ const CourseMainPage = () => {
         {data.map((item) => {
           return (
             <div className="content_root_container">
-               <div style={{ display: "flex", alignItems: " center" }}>
-           
+              <div style={{ display: "flex", alignItems: " center" }}>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -137,45 +133,36 @@ const CourseMainPage = () => {
                           src={e.image}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                           <div
-                             className="underimagetextcontainer"
-                           >
-                             <Typography
-                               noWrap
-                               component="div"
-                              //  className="subcoursename"
-                               // style={{}}
-                               style={{
-                                 color: theme ? "#363636" : "#FFFFFF",
-                                 display: "flex",
-                                 justifyContent: "center",
-                                 width: "100%",
-                               }}
-                             >
-                               <Typography
-                                 noWrap
-                                 component="div"
-                                 className="subcoursenametwo subcoursename"
-                               >
-                                 {e.Tags}
-                               </Typography>
-                             </Typography>
-                             <div style={{ position: "relative" }}>
-                               <img
-                                 src={e.TagImage}
-                                 alt=""
-                                 className="tagstwocontainer"
-                               />
-                             </div>
-                           </div>
+                          <div className="underimagetextcontainer">
+                            <Typography
+                              noWrap
+                              component="div"
+                              className="underimagecontent"
+                              style={{
+                                color: theme ? "#363636" : "#FFFFFF",
+                              }}
+                            >
+                              <Typography
+                                noWrap
+                                component="div"
+                                className="subcoursenametwo subcoursename"
+                              >
+                                {e.Tags}
+                              </Typography>
+                            </Typography>
+                            <div className="mycontenttagscontainer">
+                              <img
+                                src={e.TagImage}
+                                alt=""
+                                className="tagstwocontainer"
+                              />
+                            </div>
+                          </div>
                         ) : (
                           ""
                         )}

@@ -16,44 +16,33 @@ import GitGitHubInitialSettingsOverview from "../../../assests/SVG_Files/Slides/
 import WorkWithBranches from "../../../assests/SVG_Files/Slides/WorkWithBranches.svg";
 import GitRegularWorkflowWorkWithBranches from "../../../assests/SVG_Files/Slides/GitRegularWorkflowWorkWithBranches.svg";
 import ThreeCasesToLaunchGitProject from "../../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
-import Vector90 from '../../../assests/Vector90.png'
-import VectorTag from '../../../assests/VectorTag.png'
-import Bookmark_gray from '../../../assests/SVG_Files/New folder/Bookmark_gray.svg'
-import Vector92 from '../../../assests/Vector92.png'
-
-// import <Ve></Ve> from '../../../assests/<Ve></Ve>.png'
-
-
+import Vector90 from "../../../assests/Vector90.png";
+import VectorTag from "../../../assests/VectorTag.png";
+import Bookmark_gray from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Vector92 from "../../../assests/Vector92.png";
 
 var CourseMainPageData = [
   {
     chapterName: "Recently Viewed Contents",
-    // TagsImageOne: ,
     items: [
       {
         id: 1,
         image: WhatYouCanDoOnGitHubBeyondCollaborativeCoding,
         Tags: "What You Can Do On Git & GitHub Beyond Collaborative Coding",
-        TagImage: Vector92
+        TagImage: Vector92,
       },
       {
         id: 2,
         image: GitGitHubInitialSettings,
         Tags: "Git & GitHub Initial Setting Overview",
-        TagImage: Vector92
-        
+        TagImage: Vector92,
       },
       {
         id: 1,
         image: WhatYouCanDoOnGitHubBeyondCollaborativeCoding,
         Tags: "What You Can Do On Git & GitHub Beyond Collaborative Coding",
-        TagImage: Vector92
+        TagImage: Vector92,
       },
-      // {
-      //   id: 2,
-      //   image: GitGitHubInitialSettings,
-      //   Tags: "Git & GitHub Initial Setting Overview",
-      // },
     ],
   },
   {
@@ -64,32 +53,32 @@ var CourseMainPageData = [
         id: 1,
         image: WhatIsGit_,
         Tags: "What is Git?",
-        TagImage: Vector92
+        TagImage: Vector92,
       },
       {
         id: 2,
         image: WhatIsVersionControl_,
         Tags: "What Is Version Control?",
-        TagImage: Vector90
+        TagImage: Vector90,
       },
       {
         id: 2,
         image: CollaboratingOnGitGitHubRemoteRepository,
         Tags: "Collaborating On Git & GitHub -- Remote Repository",
-        TagImage: Vector90
+        TagImage: Vector90,
       },
       {
         id: 2,
         image: CollaboratingOnGitGitHubBranch,
         Tags: "Collaborating On Git & GitHub - Branch",
-        TagImage: Vector90
+        TagImage: Vector90,
       },
       {
         id: 2,
         image: GitGitHubLifeCycle,
         Tags: "Git & GitHub Basic Life Cycle",
-        TagImage: Vector90      
-       },
+        TagImage: Vector90,
+      },
     ],
   },
   {
@@ -99,13 +88,13 @@ var CourseMainPageData = [
         id: 1,
         image: GitGitHubIntroduction,
         Tags: "Git & GitHub Introduction",
-        TagImage: VectorTag   
+        TagImage: VectorTag,
       },
       {
         id: 2,
         image: TableOfContents,
         Tags: "Table Of Contents",
-        TagImage: VectorTag 
+        TagImage: VectorTag,
       },
     ],
   },
@@ -116,32 +105,32 @@ var CourseMainPageData = [
         id: 1,
         image: GitGitHubKeyConcepts,
         Tags: "Chapter 1. Git & GitHub Key Concept",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: WhatIsGit_,
         Tags: "What is Git?",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: WhatIsVersionControl_,
         Tags: "What Is Version Control?",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: CollaboratingOnGitGitHubRemoteRepository,
         Tags: "Collaborating On Git & GitHub -- Remote Repository",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: CollaboratingOnGitGitHubBranch,
         Tags: "Collaborating On Git & GitHub - Branch",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
   {
@@ -151,14 +140,14 @@ var CourseMainPageData = [
         id: 1,
         image: GitGitHubLifeCycle,
         Tags: "Chapter 2. Git & GitHub Life Cycle",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: GitGitHubBasicLifeCycleOverview,
         Tags: "Git & GitHub Basic Life Cycle",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
 
@@ -169,14 +158,14 @@ var CourseMainPageData = [
         id: 1,
         image: GitGitHubInitialSettings,
         Tags: "Chapter 3. Git & GitHub Initial Settings",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: GitGitHubInitialSettingsOverview,
         Tags: "Git & GitHub Initial Setting Overview",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
 
@@ -187,14 +176,14 @@ var CourseMainPageData = [
         id: 1,
         image: LaunchGitProject,
         Tags: "Chapter 4. Launch Git Project",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: ThreeCasesToLaunchGitProject,
         Tags: "Three Cases To Launch Git Project",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
 
@@ -205,14 +194,14 @@ var CourseMainPageData = [
         id: 1,
         image: EditCommit,
         Tags: "Chapter 5. Edit & Commit",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: GitRegularWorkflowEditCommit,
         Tags: "Git Regular Workflow - Edit & Commit",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
 
@@ -223,14 +212,14 @@ var CourseMainPageData = [
         id: 1,
         image: WorkWithBranches,
         Tags: "Chapter 6. Work with Branches",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
       {
         id: 2,
         image: GitRegularWorkflowWorkWithBranches,
         Tags: "Git Regular Workflow - Work with Branches",
-           TagImage: VectorTag      
-       },
+        TagImage: VectorTag,
+      },
     ],
   },
 ];

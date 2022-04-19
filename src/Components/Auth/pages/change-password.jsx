@@ -3,14 +3,12 @@ import { Button } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import "../Stylesheet/stylesheet.css";
 import { changePassword } from "../../../Redux/Actions/auth.action";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [oldPassword, setOldPassword] = useState();
   const [password, setPassword] = useState();
   const [message, setMessage] = useState("");
@@ -20,27 +18,23 @@ const ChangePassword = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-
     navigate("/");
   };
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-
     const response = await dispatch(
       changePassword(oldPassword, password, token)
     );
-    // console.log("change password response", response);
     setMessage(response?.message);
-
     setValidation(true);
     const timer = setTimeout(() => {
       setValidation(false);
       setMessage("");
     }, 5000);
-
     return () => clearTimeout(timer);
   };
+
   return (
     <>
       <button
@@ -48,19 +42,12 @@ const ChangePassword = () => {
         className="back_button"
         style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
-        <ArrowBack className="backbutton_icon" />{" "}
+        <ArrowBack className="backbutton_icon" />
         <span className="backbutton_text">Back</span>
       </button>
 
       <div className="editormainpage_root_contianer">
-        <div
-          style={{
-            paddingTop: "20px",
-            display: "flex",
-            flexDirection: "column",
-            className: "inputs",
-          }}
-        >
+        <div className="editormainpage_container">
           {validation ? (
             oldPassword && password !== undefined ? (
               message ? (
@@ -97,9 +84,14 @@ const ChangePassword = () => {
           Change Password
         </Button>
       </div>
-      <div className="footer_copyright editor_mainPage_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
-    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
-    </div>
+      <div
+        className="footer_copyright editor_mainPage_footer"
+        style={{ color: theme ? " #000000" : " #C8C8C8 " }}
+      >
+        <span style={{ fontSize: "12px" }}>
+          &copy; D-Libra All Rights Reserved
+        </span>
+      </div>
     </>
   );
 };

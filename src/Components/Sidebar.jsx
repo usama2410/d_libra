@@ -17,7 +17,6 @@ import Rating from "../assests/Rating.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { themeSwitch } from "../Redux/Actions/auth.action";
-import { searchState } from "../Redux/Actions/auth.action";
 import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
 import { useLocation } from "react-router-dom";
 import UnionClose from "../assests/UnionClose.png";
@@ -38,8 +37,8 @@ import Search_dark from "../assests/SVG_Files/New folder/icons/Search_dark.svg";
 import Search from "../assests/SVG_Files/New folder/icons/Search.svg";
 import Hamburger_Menu_light from "../assests/SVG_Files/New folder/Hamburger_Menu_light.svg";
 import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg";
-import Arrow_Left_light from '../assests/SVG_Files/New folder/Arrow_Left_light.svg'
-import Arrow_Left_dark from '../assests/SVG_Files/New folder/Arrow_Left_dark.svg'
+import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.svg";
+import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -118,20 +117,7 @@ export default function Sidebar() {
     console.log(themestate);
     dispatch(themeSwitch(!themeState));
   };
-  
-  
-//   React.useEffect( async () => {
-    
-//     if(themeState === true){
-// await dispatch(themeSwitch(themeState === true))
-//     }
-//   })
-  
-  
-  
-  
-  
-  
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -142,9 +128,6 @@ export default function Sidebar() {
     }
     setState({ ...state, [anchor]: open });
   };
-
-
-
 
   const handleaccordiondrawer = () => {
     if (
@@ -161,7 +144,6 @@ export default function Sidebar() {
                   {themeState ? (
                     <img
                       src={Arrow_Left_light}
-                      // style={{border : "1px solid red"}}
                       alt=""
                       className="arrows_icon_sidebar"
                     />
@@ -169,7 +151,6 @@ export default function Sidebar() {
                     <img
                       src={Arrow_Left_dark}
                       alt=""
-                      // style={{border : "1px solid red"}}
                       className="arrows_icon_sidebar"
                     />
                   )}
@@ -284,7 +265,7 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon>
               <img src={Member_Icon} alt="" className="profilesidebaricon" />
@@ -303,14 +284,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img 
-              src={Sidebar_Signup} alt="" style={{ paddingLeft: "2px" }}  className="sidebarsignupicon"/>
+              <img
+                src={Sidebar_Signup}
+                alt=""
+                style={{ paddingLeft: "2px" }}
+                className="sidebarsignupicon"
+              />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -333,14 +318,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img 
-              src={Sidebar_Login} alt="" style={{ paddingLeft: "3px" }}  className="sidebarloginicon" />
+              <img
+                src={Sidebar_Login}
+                alt=""
+                style={{ paddingLeft: "3px" }}
+                className="sidebarloginicon"
+              />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -363,15 +352,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img 
-              src={Sidebar_Logout} alt="" style={{ paddingLeft: "3px" }} className="sidebarlogouticon" />
-              {/* <ExitToAppIcon style={{ color: " #FFFFFF" }} /> */}
+              <img
+                src={Sidebar_Logout}
+                alt=""
+                style={{ paddingLeft: "3px" }}
+                className="sidebarlogouticon"
+              />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -391,15 +383,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img 
-              src={Recent_view_dark} alt="" className="sidebardarkicon"    style={{ paddingRight: "2px" }}/>
-              {/* <AccessTimeIcon style={{ color: " #FFFFFF", fontSize: "21px" }} /> */}
+              <img
+                src={Recent_view_dark}
+                alt=""
+                className="sidebardarkicon"
+                style={{ paddingRight: "2px" }}
+              />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -418,20 +413,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <img
-                
                 src={Sidebar_My_library}
                 alt=""
                 className="sidebarlibraryicon"
                 style={{ paddingRight: "3px" }}
               />
-              {/* <MenuBookIcon style={{ color: " #FFFFFF" }} /> */}
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -443,7 +436,6 @@ export default function Sidebar() {
             </Typography>
           </div>
         </ListItem>
-
         <ListItem
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/ratingsidebar")}
@@ -451,14 +443,18 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
             >
-              <img 
-              src={Rating} alt="" className="sidebarratingicon" style={{ paddingLeft: "1px" }} />
+              <img
+                src={Rating}
+                alt=""
+                className="sidebarratingicon"
+                style={{ paddingLeft: "1px" }}
+              />
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -480,7 +476,7 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
@@ -531,7 +527,7 @@ export default function Sidebar() {
           <div
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
-            style={{ display: "flex", alignItems: "center", width: "100%" }}
+            className="sidebarlistcontainer"
           >
             <ListItemIcon
               onClick={toggleDrawer(anchor, false)}
@@ -543,7 +539,6 @@ export default function Sidebar() {
                 alt=""
                 style={{ paddingLeft: "3px" }}
               />
-              {/* <RiFileEditFill style={{ color: " #FFFFFF", fontSize: "20px" }} /> */}
             </ListItemIcon>
             <Typography
               onClick={toggleDrawer(anchor, false)}
@@ -601,7 +596,7 @@ export default function Sidebar() {
       "/usersettingviewpage" === location.pathname
     ) {
       return "logocontainerthree";
-    }  else if (
+    } else if (
       "/Tagpage" === location.pathname ||
       "/Searchresult" === location.pathname ||
       "/recentlyviewed" === location.pathname
@@ -619,8 +614,8 @@ export default function Sidebar() {
       "/editcontentmain" === location.pathname ||
       "/deletecontent" === location.pathname
     ) {
-      return "logocontaineredit"
-    }else {
+      return "logocontaineredit";
+    } else {
       return "logocontainereleven";
     }
   };
@@ -631,7 +626,6 @@ export default function Sidebar() {
       "/register" === location.pathname ||
       "/login" === location.pathname ||
       "/logout" === location.pathname
-      // "/searchresult" === location.pathname
     ) {
       return "wrap";
     }
@@ -667,8 +661,9 @@ export default function Sidebar() {
           <div>
             {["left"].map((anchor) => (
               <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer(anchor, true)}>
+                <Button>
                   <IconButton
+                    onClick={toggleDrawer(anchor, true)}
                     color="inherit"
                     aria-label="open drawer"
                     edge="start"
@@ -714,13 +709,7 @@ export default function Sidebar() {
               </React.Fragment>
             ))}
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
+          <div className="logocontainer">
             <div
               className={
                 "/detailpage" === location.pathname
@@ -736,15 +725,13 @@ export default function Sidebar() {
                   <img
                     src={lightmode_logo}
                     alt=""
-                    width="100px"
-                    height="20.47"
+                    className="sidebarlightmodelogo"
                   />
                 ) : (
                   <img
                     src={darkmode_logo}
                     alt=""
-                    width="100px"
-                    height="20.47"
+                    className="sidebarlightmodelogo"
                   />
                 )}
               </Button>
@@ -879,27 +866,9 @@ export default function Sidebar() {
                 }}
               >
                 {themeState ? (
-                  <img
-                    src={Search}
-                    alt=""
-                    style={{
-                      position: "absolute",
-                      right: "20px",
-                      width: "22px",
-                      height: "22px",
-                    }}
-                  />
+                  <img src={Search} alt="" className="sidebarsearchlogo" />
                 ) : (
-                  <img
-                    src={Search_dark}
-                    alt=""
-                    style={{
-                      position: "absolute",
-                      right: "20px",
-                      width: "22px",
-                      height: "22px",
-                    }}
-                  />
+                  <img src={Search_dark} alt="" className="sidebarsearchlogo" />
                 )}
               </div>
             </div>

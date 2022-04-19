@@ -11,7 +11,6 @@ export const profileData = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("response  profiledata", response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -19,20 +18,16 @@ export const profileData = (token) => async (dispatch) => {
 };
 
 export const updateProfile = (fname, lname, token) => async (dispatch) => {
-  // console.log("fname", fname);
-  // console.log("lname", lname);
   const formData = new FormData();
   formData.append("fname", fname);
   formData.append("lname", lname);
   formData.append("img", "/media/SuperAdmin/dummy.jpg");
-
   try {
     const response = await axios.put(URL + endpoints.UPDATE_PROFILE, formData, {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("response", response);
     return response.data;
   } catch (error) {
     console.log(error);

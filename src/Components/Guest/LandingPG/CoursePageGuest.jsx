@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
-// import "./MyContents.css";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CourseGuestData from "./CourseGuestData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
-
 import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
-import FooterButtons from "../../User/FooterButtons";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
+
 const CoursePageGuest = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(CourseGuestData);
   const handleBack = () => {
-    navigate('/')
+    navigate("/");
   };
   const settings = {
     dots: false,
@@ -127,7 +124,6 @@ const CoursePageGuest = () => {
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -138,26 +134,16 @@ const CoursePageGuest = () => {
                     return (
                       <div className="intro-slides">
                         <img
-                        onClick={() => navigate('/userdetailpage')}
+                          onClick={() => navigate("/userdetailpage")}
                           src={e.image}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              padding: "20px 0px 0px 0px",
-                            }}
-                          >
+                          <div className="coursepageguestsection">
                             <Typography
                               noWrap
                               component="div"

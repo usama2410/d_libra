@@ -1,23 +1,23 @@
 import React from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Button, Grid } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import image5 from "../../assests/image5.png";
 import Rating from "@mui/material/Rating";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
 import { useSelector } from "react-redux";
 import "./RatingForm.css";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 import Select from "react-select";
+
 const RatingSidebar = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-  navigate('/usersettingviewpage')
-  }
-  const theme = useSelector((state)=> state.theme.state)
+    navigate("/usersettingviewpage");
+  };
+  const theme = useSelector((state) => state.theme.state);
   const [value, setValue] = React.useState(2);
+
   const options = [
     { value: "chocolate", label: "Git & Git Hub Introduction" },
     { value: "Saab", label: "Saab" },
@@ -26,7 +26,7 @@ const RatingSidebar = () => {
   ];
 
   const customStyles = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #FFFFFF",
       borderRadius: "5px",
@@ -35,29 +35,27 @@ const RatingSidebar = () => {
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
       height: "50px",
       "@media only screen and (max-width: 425px)": {
-        // ...base["@media only screen and (max-width: 400px)"],
-        // marginRight: "20rem",
-        height: "40px"
-    },
+        height: "40px",
+      },
     }),
     placeholder: (base) => ({
       ...base,
       color: "#111111",
     }),
-    menu: (base, state) => ({
+    menu: (base) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: " #363636",
     }),
-    menuList: (base, state) => ({
+    menuList: (base) => ({
       ...base,
       padding: 0,
       background: "white",
       color: " #363636",
     }),
-    singleValue: (base, state) => ({
+    singleValue: (base) => ({
       ...base,
       color: " #363636",
     }),
@@ -68,40 +66,37 @@ const RatingSidebar = () => {
   };
 
   const customStyless = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #4F4F4F",
       borderRadius: "5px",
       border: "none",
-      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
       height: "50px",
       "@media only screen and (max-width: 425px)": {
-        // ...base["@media only screen and (max-width: 400px)"],
-        // marginRight: "20rem",
-        height: "40px"
-    },
+        height: "40px",
+      },
     }),
     placeholder: (base) => ({
       ...base,
       color: "#FFFFFF",
       opacity: 1,
     }),
-    menu: (base, state) => ({
+    menu: (base) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: "black",
     }),
-    menuList: (base, state) => ({
+    menuList: (base) => ({
       ...base,
       padding: 0,
       background: "white",
       color: "black",
     }),
-    singleValue: (base, state) => ({
+    singleValue: (base) => ({
       ...base,
       color: "#FFFFFF",
     }),
@@ -113,43 +108,31 @@ const RatingSidebar = () => {
 
   return (
     <>
- 
-
- <button
+      <button
         onClick={handleBack}
         className="back_button"
         style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
       >
-         <ArrowBack className="backbutton_icon" />{" "}
+        <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
-   
       <div className="ratingform_root_four_five">
-        {/* <select           className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"} 
-        name="cars" id="cars">
-          <option value="volvo">Select a course for Rating</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select> */}
-
-
         <Select
-                styles={theme ? customStyles : customStyless}
-                className={theme ? "addcategory_input_sub_two" : "addcategory_input_two"} 
-                placeholder="Git & GitHub Introduction"
-                options={options}
-              />
+          styles={theme ? customStyles : customStyless}
+          className={
+            theme ? "addcategory_input_sub_two" : "addcategory_input_two"
+          }
+          placeholder="Git & GitHub Introduction"
+          options={options}
+        />
 
-
-        <div
-       className="ratingsidebarcomponent"
-        >
+        <div className="ratingsidebarcomponent">
           <Rating
             name="simple-controlled"
-            style={{fontSize : '48px'}}
-            emptyIcon={<StarIcon style={{ color :'#C4C4C4'  }} fontSize="inherit" />}
-            // className="ratingform_root_sub_two"
+            style={{ fontSize: "48px" }}
+            emptyIcon={
+              <StarIcon style={{ color: "#C4C4C4" }} fontSize="inherit" />
+            }
             value={value}
             onChange={(event, newValue) => {
               setValue(newValue);
@@ -160,12 +143,19 @@ const RatingSidebar = () => {
 
       <div className="ratingform_root_five">
         <div className="rating_form_sub_span">
-          <span className="rating_form_span_two"  style={{ color: `${theme ? "#363636" : "#C8C8C8"}` }}>Rating Comments:</span>
+          <span
+            className="rating_form_span_two"
+            style={{ color: `${theme ? "#363636" : "#C8C8C8"}` }}
+          >
+            Rating Comments:
+          </span>
         </div>
 
         <div>
           <textarea
-            className={theme ? "rating_form_textarea_sub" : "rating_form_textarea"}
+            className={
+              theme ? "rating_form_textarea_sub" : "rating_form_textarea"
+            }
             style={{ color: `${theme ? "black" : "white"}` }}
             id="message"
             rows="14"
@@ -180,30 +170,53 @@ const RatingSidebar = () => {
           </Button>
 
           <div className="user_buttons_sub_three">
-          <span style={{color: theme ? "  #111111" : " #C8C8C8"}}>
+            <span style={{ color: theme ? "  #111111" : " #C8C8C8" }}>
               Make a more specific <br /> feedback on contents
             </span>
-            <span style={{ paddingLeft: "10px", fontSize: "26px", color: theme ? "  #111111" : " #C8C8C8"}}>
-              <HiOutlineArrowNarrowRight  style={{color: theme ? "  #111111" : " #C8C8C8"}} />
+            <span
+              style={{
+                paddingLeft: "10px",
+                fontSize: "26px",
+                color: theme ? "  #111111" : " #C8C8C8",
+              }}
+            >
+              <HiOutlineArrowNarrowRight
+                style={{ color: theme ? "  #111111" : " #C8C8C8" }}
+              />
             </span>
           </div>
         </div>
-        <div className="user_buttons_sub_three_hidden" onClick={() => navigate('/feedback')}>
-        <span style={{color: theme ? "  #111111" : " #C8C8C8"}}>
+        <div
+          className="user_buttons_sub_three_hidden"
+          onClick={() => navigate("/feedback")}
+        >
+          <span style={{ color: theme ? "  #111111" : " #C8C8C8" }}>
             Make a more specific <br /> feedback on contents
           </span>
-          <span style={{ paddingLeft: "10px", fontSize: "26px", color: theme ? "  #111111" : " #C8C8C8"}}>
-            <HiOutlineArrowNarrowRight  style={{color: theme ? "  #111111" : " #C8C8C8"}}/>
+          <span
+            style={{
+              paddingLeft: "10px",
+              fontSize: "26px",
+              color: theme ? "  #111111" : " #C8C8C8",
+            }}
+          >
+            <HiOutlineArrowNarrowRight
+              style={{ color: theme ? "  #111111" : " #C8C8C8" }}
+            />
           </span>
         </div>
-        <div className="footer_copyright ratingsidebar_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
-    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
-    </div>
+        <div
+          className="footer_copyright ratingsidebar_footer"
+          style={{ color: theme ? " #000000" : " #C8C8C8 " }}
+        >
+          <span style={{ fontSize: "12px" }}>
+            &copy; D-Libra All Rights Reserved
+          </span>
+        </div>
       </div>
-      <div >
+      <div>
         <FooterButtons />
       </div>
-      
     </>
   );
 };

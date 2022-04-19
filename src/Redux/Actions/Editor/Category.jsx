@@ -30,7 +30,6 @@ export const getMainCategory = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    // console.log("response  getMainCategory", response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -43,7 +42,6 @@ export const getSubCategory = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    // console.log("response  getsSubCategory", response.data);
     return response.data;
   } catch (error) {
     console.log(error);

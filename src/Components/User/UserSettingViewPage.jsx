@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import icon5 from "../../assests/icon5.png";
-import Vector90 from "../../assests/Vector90.png";
-import Vector92 from "../../assests/Vector92.png";
-import Vector91 from "../../assests/Vector91.png";
 import Member_Icon from "../../assests/SVG_Files/Member_Icon.svg";
-import addwhite from "../../assests/addwhite.png";
-import addblack from "../../assests/addblack.png";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { MdModeEditOutline } from "react-icons/md";
+import { ArrowBack } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import "./UserSettingViewPage.css";
 import { profileData, updateProfile } from "../../Redux/Actions/Profile.action";
@@ -48,28 +40,25 @@ const UserSettingViewPage = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-
     const response = await dispatch(updateProfile(firstName, lastName, token));
     setMessage(response?.message);
-
     setValidation(true);
     const timer = setTimeout(() => {
       setValidation(false);
       setMessage("");
     }, 5000);
-
     return () => clearTimeout(timer);
   };
 
   const handleChangePassword = (e) => {
     e.preventDefault();
-
     navigate("/changepassword");
   };
 
   const handleBack = () => {
-    navigate('/userdetailpage')
+    navigate("/userdetailpage");
   };
+
   return (
     <div>
       <button
@@ -98,14 +87,17 @@ const UserSettingViewPage = () => {
 
       <div className="user_container_root">
         <div className="user_sub_root_container">
-          <div className={theme ? "user_root_container" : "user_root_container_two"}>
+          <div
+            className={
+              theme ? "user_root_container" : "user_root_container_two"
+            }
+          >
             <img src={Member_Icon} alt="" className="usersettingmembericon" />
             <div className="user_header_container">
               <div
                 className="vector_container vectorcontainermobile"
                 style={{ color: `${theme ? "#009AF9" : "#C8C8C8"}` }}
               >
-                {/* <MdModeEditOutline className="editorimage_icon" /> */}
                 {theme ? (
                   <img
                     src={Editor_icon_light}

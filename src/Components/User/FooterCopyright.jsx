@@ -1,25 +1,10 @@
-import React, { useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const FooterCopyright = (props) => {
   const location = useLocation();
-  console.log("props", props?.backgroundHanld);
-  const params = useParams();
   const theme = useSelector((state) => state.theme.state);
-
-  const handleFooterBackground = () => {
-    if (props?.backgroundHanld === "lightTheme") {
-      return "#f3f6ff";
-    }
-    if (props?.backgroundHanld === "CreamyTheme") {
-      return "#eeeeee";
-    }
-    if (props?.backgroundHanld === "darkTheme") {
-      return "#111111";
-    }
-  };
-
   const handleFooter = () => {
     if (
       "/editormainpage" === location.pathname ||

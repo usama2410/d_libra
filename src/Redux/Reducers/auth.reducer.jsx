@@ -8,20 +8,20 @@ const initialState = {
 };
 
 const themeinitialstate = {
-  status: false
-}
+  status: false,
+};
 
 const accordioniconinitialstate = {
-  status: false
-}
+  status: false,
+};
 
-const pininitialstate= {
-  state: false
-}
+const pininitialstate = {
+  state: false,
+};
 
 const searchinitialstate = {
-  state: false
-}
+  state: false,
+};
 
 export const auth = (state = initialState, action) => {
   const { type, payload } = action;
@@ -53,66 +53,66 @@ export const auth = (state = initialState, action) => {
   }
 };
 
-
 export const theme = (themereducerstate = themeinitialstate, action) => {
-   const {type, payload} = action;
-   switch(type){
-     case 'DARKTHEME':
-       return {
-         state : payload.state 
-       }
-       case 'LIGHTTHEME':
-        return {
-          state : payload.state 
-        }
-       default:
-       return themereducerstate
-      }
-}
-
-
-export const accordion = (accordioniconstate = accordioniconinitialstate, action) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
   switch (type) {
-    case 'ACCORDIONICONSTATE':
+    case "DARKTHEME":
       return {
-        state : payload.state
-      }
-      case 'ACCORDIONICONSTATEFALSE':
+        state: payload.state,
+      };
+    case "LIGHTTHEME":
       return {
-        state : payload.state
-      }
-  
+        state: payload.state,
+      };
+    default:
+      return themereducerstate;
+  }
+};
+
+export const accordion = (
+  accordioniconstate = accordioniconinitialstate,
+  action
+) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "ACCORDIONICONSTATE":
+      return {
+        state: payload.state,
+      };
+    case "ACCORDIONICONSTATEFALSE":
+      return {
+        state: payload.state,
+      };
+
     default:
       return accordioniconstate;
-  } 
-}
-
+  }
+};
 
 export const pin = (piniInitialState = pininitialstate, action) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
   switch (type) {
-    case 'PINTHEME':
+    case "PINTHEME":
       return {
-        state : payload.state
-      }
-   
-  
+        state: payload.state,
+      };
+
     default:
       return piniInitialState;
-  } 
-}
+  }
+};
 
-
-
-export const searchSTate = (searchInitialstate = searchinitialstate, action) => {
-  const {type, payload} = action;
+export const searchSTate = (
+  searchInitialstate = searchinitialstate,
+  action
+) => {
+  const { type, payload } = action;
   switch (type) {
-    case 'SEARCHSTATE':
+    case "SEARCHSTATE":
       return {
-        state : payload.state
-      }
+        state: payload.state,
+      };
     default:
       return searchInitialstate;
-  } 
-}
+  }
+};

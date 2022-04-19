@@ -1,4 +1,3 @@
-import WhatYouCanDoOnGitHubBeyondCollaborativeCoding from "../../../assests/SVG_Files/Slides/WhatYouCanDoOnGitHubBeyondCollaborativeCoding.svg";
 import GitGitHubInitialSettings from "../../../assests/SVG_Files/Slides/GitGitHubInitialSettings.svg";
 import WhatIsGit_ from "../../../assests/SVG_Files/Slides/WhatIsGit_.svg";
 import WhatIsVersionControl_ from "../../../assests/SVG_Files/Slides/WhatIsVersionControl_.svg";

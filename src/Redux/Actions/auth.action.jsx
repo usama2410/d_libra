@@ -7,17 +7,14 @@ import * as FormData from "form-data";
 // };
 
 export const signUp = (username, email, password) => async (dispatch) => {
-  // console.log("signUp", username, email, password);
   const bodyFormData = new FormData();
   bodyFormData.append("email", email);
   bodyFormData.append("password", password);
 
   try {
     const response = await axios.post(URL + endpoints.SIGNUP, bodyFormData);
-    // console.log("signUp response", response);
     return response?.data;
   } catch (error) {
-    // console.log(error);
     return error;
   }
 };
@@ -28,7 +25,6 @@ export const logIn = (email, password) => async (dispatch) => {
   bodyFormData.append("password", password);
   try {
     const response = await axios.post(URL + endpoints.LOGIN, bodyFormData);
-    // console.log("logIn response", response);
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: {
@@ -40,7 +36,6 @@ export const logIn = (email, password) => async (dispatch) => {
         token: response?.data?.token,
       },
     });
-
     return response?.data;
   } catch (error) {
     console.log(error);
@@ -54,7 +49,6 @@ export const changePassword =
     const formData = new FormData();
     formData.append("oldpassword", oldpassword);
     formData.append("password", password);
-
     try {
       const response = await axios.put(
         URL + endpoints.CHANGE_PASSWORD,
@@ -65,15 +59,11 @@ export const changePassword =
           },
         }
       );
-      // console.log("changePassword response", response);
       return response.data;
-    } catch (error) {
-      // console.log(error);
-    }
+    } catch (error) {}
   };
 
 export const themeSwitch = (themestate) => async (dispatch) => {
-  //  console.log(themestate)
   try {
     dispatch({
       type: "LIGHTTHEME",
@@ -85,7 +75,6 @@ export const themeSwitch = (themestate) => async (dispatch) => {
 };
 
 export const creamyTheme = (themestate) => async (dispatch) => {
-  //  console.log(themestate)
   try {
     dispatch({
       type: "LIGHTTHEME",
@@ -97,7 +86,6 @@ export const creamyTheme = (themestate) => async (dispatch) => {
 };
 
 export const pinState = (pin) => async (dispatch) => {
-  console.log(pin);
   try {
     dispatch({
       type: "PINTHEME",
@@ -108,10 +96,7 @@ export const pinState = (pin) => async (dispatch) => {
   } catch (error) {}
 };
 
-
-
 export const searchState = (search) => async (dispatch) => {
-  console.log("tyfuygihjlk",search);
   try {
     dispatch({
       type: "SEARCHSTATE",

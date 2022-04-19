@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   theme,
   dashboardData,
   pin,
-  searchSTate
+  searchSTate,
 });
 
 export default persistReducer(persistConfig, rootReducer);

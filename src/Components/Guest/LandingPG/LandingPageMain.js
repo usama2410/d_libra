@@ -5,19 +5,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
-import LandingPageImage1 from "../../../assests/SVG_Files/LandingPageImage1.svg";
-import darkmode_logo from "../../../assests/SVG_Files/New folder/darkmode_logo.svg";
-import lightmode_logo from "../../../assests/SVG_Files/New folder/lightmode_logo.svg";
 import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
 import { useSelector } from "react-redux";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import LandingPageMainDataOne from './LandinPageData'
-import {Divider} from '@material-ui/core'
-
-// import LandingPageMainDataTwo from './LandinPageData'
+import LandingPageMainDataOne from "./LandinPageData";
+import { Divider } from "@material-ui/core";
 
 const labels = {
   0: "0",
@@ -32,16 +27,19 @@ const labels = {
   4.5: "4.5",
   5: "5+",
 };
+
 const LandingPageMain = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(ContentData);
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
-  const [dataone, setDataOne] = React.useState(LandingPageMainDataOne.LandingPageMainDataOne)
-  const [datatwo, setDataTwo] = React.useState(LandingPageMainDataOne.LandingPageMainDataTwo)
-//   console.log("LandingPageMainDataOne", LandingPageMainDataOne.LandingPageMainDataOne);
-//   console.log("LandingPageMainDataTwo", LandingPageMainDataOne.LandingPageMainDataTwo);
+  const [dataone, setDataOne] = React.useState(
+    LandingPageMainDataOne.LandingPageMainDataOne
+  );
+  const [datatwo, setDataTwo] = React.useState(
+    LandingPageMainDataOne.LandingPageMainDataTwo
+  );
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -59,7 +57,6 @@ const LandingPageMain = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          // initialSlide: 6,
           centerMode: false,
         },
       },
@@ -124,8 +121,6 @@ const LandingPageMain = () => {
 
   return (
     <>
-      {/* <div className="mainContentContainer" style={{ marginTop: "20px" }}> */}
-     
       <div className="landingpage_slider_container">
         {dataone.map((item) => {
           return (
@@ -133,7 +128,6 @@ const LandingPageMain = () => {
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -145,26 +139,16 @@ const LandingPageMain = () => {
                       <div className="intro-slides">
                         <img
                           src={e.image}
-                          onClick={() => navigate('/coursepageguest')}
-                          // width="100%"
-                          // height="225px"
+                          onClick={() => navigate("/coursepageguest")}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              padding: "16px 0px 0px 10px",
-                            }}
-                          >
+                                           <div      className="landingpagemainunderimage"
+                                           >
                             <Typography
                               noWrap
                               component="div"
@@ -180,7 +164,6 @@ const LandingPageMain = () => {
                         ) : (
                           ""
                         )}
-
                         <div
                           style={{
                             padding: "10px 0px 0px 10px",
@@ -189,8 +172,6 @@ const LandingPageMain = () => {
                           <span
                             className="Author"
                             style={{
-                              padding: "10px 0px 0px 10px",
-                              marginLeft: "-10px",
                               color: theme ? "#363636" : "#C8C8C8",
                             }}
                           >
@@ -204,7 +185,7 @@ const LandingPageMain = () => {
                             }}
                           >
                             {" "}
-                            <div     className="rating_text" style={{paddingTop: "1px"}}>
+                            <div className="rating_text">
                               {value !== null && (
                                 <Box sx={{ ml: 0 }}>
                                   {labels[hover !== -1 ? hover : value]}
@@ -232,6 +213,7 @@ const LandingPageMain = () => {
                             />
                             <div
                               className="rating_text"
+                               
                               style={{
                                 paddingLeft: "10px",
                                 color: theme ? "#363636" : "#C8C8C8",
@@ -251,63 +233,9 @@ const LandingPageMain = () => {
         })}
       </div>
 
-
-
-
-
-
-
-
-
-
-
-<div style={{ padding: "0px 10px 0px 10px"}}>
-
-<Divider  style={{backgroundColor: "#004CB6", width: "100%"}}/>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <div style={{ padding: "0px 10px 0px 10px" }}>
+        <Divider style={{ backgroundColor: "#004CB6", width: "100%" }} />
+      </div>
 
       <div className="landingpage_slider_container">
         {datatwo.map((item) => {
@@ -328,26 +256,15 @@ const LandingPageMain = () => {
                       <div className="intro-slides">
                         <img
                           src={e.image}
-                          onClick={() => navigate('/coursepageguest')}
-                          // width="100%"
-                          // height="225px"
+                          onClick={() => navigate("/coursepageguest")}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              padding: "16px 0px 0px 10px",
-                            }}
-                          >
+                                            <div className="landingpagemainunderimage">
                             <Typography
                               noWrap
                               component="div"
@@ -372,8 +289,7 @@ const LandingPageMain = () => {
                           <span
                             className="Author"
                             style={{
-                              padding: "10px 0px 0px 10px",
-                              marginLeft: "-10px",
+                            
                               color: theme ? "#363636" : "#C8C8C8",
                             }}
                           >
@@ -387,7 +303,10 @@ const LandingPageMain = () => {
                             }}
                           >
                             {" "}
-                            <div     className="rating_text" style={{paddingTop: "1px"}}>
+                            <div
+                              className="rating_text"
+                             
+                            >
                               {value !== null && (
                                 <Box sx={{ ml: 0 }}>
                                   {labels[hover !== -1 ? hover : value]}
@@ -433,14 +352,6 @@ const LandingPageMain = () => {
           );
         })}
       </div>
-
-
-
-
-
-
-
-
 
       <FooterButton />
     </>

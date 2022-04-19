@@ -64,12 +64,10 @@
   align-items: center !important;
   text-align: center !important;
   letter-spacing: -0.015em !important;
-  /* border: 1px solid red !important; */
 }
 
 .bycourse_button_sub {
   background: #006ae1 !important;
-  /* border-radius: 15px !important; */
   box-sizing: border-box !important;
   border-radius: 15px !important;
   width: 200px !important;
@@ -84,19 +82,16 @@
   height: 30px !important;
   color: white !important;
   margin-top: 10px !important;
-  /* border: 1px solid red !important; */
 }
 
 .mylibrary_text {
   padding-left: 10px;
-  /* font-family: Helvetica !important;  font-style: normal; */
   font-weight: 700;
   font-size: 21px;
   line-height: 24px;
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
-
   color: #ffffff;
 }
 
@@ -104,8 +99,6 @@
   .library_root_container {
     display: flex;
     background: #111111;
-    /* margin-top: -15px; */
-
     padding-bottom: 10px;
     border: 1px solid #111111;
     box-sizing: border-box;
@@ -127,15 +120,11 @@
   .bycourse_button {
     width: 115px !important;
     height: 20px !important;
-    /* margin-top: 14px !important; */
     margin-right: -10px !important;
     text-transform: none !important;
-
     font-weight: 300 !important;
     font-size: 12px !important;
     line-height: 16px !important;
-    /* identical to box height */
-
     display: flex !important;
     align-items: center !important;
     text-align: center !important;
@@ -147,8 +136,6 @@
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    /* identical to box height */
-
     display: flex;
     align-items: center;
     letter-spacing: -0.015em;
@@ -157,15 +144,11 @@
   .bycourse_button_sub {
     width: 115px !important;
     height: 20px !important;
-    /* margin-top: 14px !important; */
     margin-right: -10px !important;
     text-transform: none !important;
-
     font-weight: 300 !important;
     font-size: 12px !important;
     line-height: 14px !important;
-    /* identical to box height */
-
     display: flex !important;
     align-items: center !important;
     text-align: center !important;
@@ -176,7 +159,6 @@
   }
   .header_library_container {
     margin-left: -60px;
-    /* margin-top: 16px; */
   }
   .menubookicon_text {
     font-size: 18px;
@@ -193,10 +175,7 @@
   .library_root_container_simple {
     background: #f3f6ff;
     box-shadow: 0px 4px 4px rgba(214, 230, 255, 0.25);
-    /* margin-top: -20px; */
-    /* border: 1px solid red; */
     padding-bottom: 12px !important;
-    /* border: 1px solid green; */
     margin-top: -5px;
   }
 

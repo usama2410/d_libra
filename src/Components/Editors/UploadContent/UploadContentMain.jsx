@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import "./UploadContentMain.css";
+
 const UploadContentMain = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState("");
@@ -37,27 +37,26 @@ const UploadContentMain = () => {
       border: "none",
       color: " #363636",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
       ...base,
       color: "#111111",
     }),
-    menu: (base, state) => ({
+    menu: (base) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: " #363636",
     }),
-    menuList: (base, state) => ({
+    menuList: (base) => ({
       ...base,
       padding: 0,
       background: "white",
       color: " #363636",
     }),
-    singleValue: (base, state) => ({
+    singleValue: (base) => ({
       ...base,
       color: " #363636",
     }),
@@ -68,15 +67,13 @@ const UploadContentMain = () => {
   };
 
   const customStyless = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #4F4F4F",
       borderRadius: "5px",
       border: "none",
-      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -84,20 +81,20 @@ const UploadContentMain = () => {
       color: "#FFFFFF",
       opacity: 1,
     }),
-    menu: (base, state) => ({
+    menu: (base) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: "black",
     }),
-    menuList: (base, state) => ({
+    menuList: (base) => ({
       ...base,
       padding: 0,
       background: "white",
       color: "black",
     }),
-    singleValue: (base, state) => ({
+    singleValue: (base) => ({
       ...base,
       color: "#FFFFFF",
     }),
@@ -121,9 +118,11 @@ const UploadContentMain = () => {
   );
 
   const handleBack = () => {
-    navigate('/addnewcategory')
+    navigate("/addnewcategory");
   };
+
   useEffect(() => {}, [editorState]);
+
   return (
     <>
       <div style={{ background: handleBackgroung() }}>
@@ -137,7 +136,6 @@ const UploadContentMain = () => {
         </button>
 
         <div
-          style={{ marginBottom: "10px" }}
           className={
             theme ? "upload_new_content_text_sub" : "upload_new_content_text"
           }
@@ -178,8 +176,6 @@ const UploadContentMain = () => {
               >
                 Select Chapter
               </span>
-           
-
               <Select
                 styles={theme ? customStyles : customStyless}
                 className={
@@ -199,11 +195,10 @@ const UploadContentMain = () => {
                 Content Title
               </span>
               <input
-                style={{ width: "100%" }}
                 className={
                   theme
-                    ? "uploadcontentinputfieldtwo"
-                    : "uploadcontentinputfield"
+                    ? "uploadcontentinputfieldtwo widthautoclass "
+                    : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
               />
@@ -216,11 +211,10 @@ const UploadContentMain = () => {
                 Content ID
               </span>
               <input
-                style={{ width: "100%" }}
                 className={
                   theme
-                    ? "uploadcontentinputfieldtwo"
-                    : "uploadcontentinputfield"
+                    ? "uploadcontentinputfieldtwo widthautoclass"
+                    : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
               />
@@ -233,11 +227,10 @@ const UploadContentMain = () => {
                 Tags(Max 5 Tags)
               </span>
               <input
-                style={{ width: "100%" }}
                 className={
                   theme
-                    ? "uploadcontentinputfieldtwo"
-                    : "uploadcontentinputfield"
+                    ? "uploadcontentinputfieldtwo widthautoclass"
+                    : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
               />
@@ -250,9 +243,10 @@ const UploadContentMain = () => {
                 Meta Descriptions
               </span>
               <textarea
-                style={{ width: "100%" }}
                 className={
-                  theme ? "addcategory_textarea" : "addcategory_textarea_sub"
+                  theme
+                    ? "addcategory_textarea widthautoclass"
+                    : "addcategory_textarea_sub widthautoclass"
                 }
                 id="message"
                 rows="6"
@@ -267,9 +261,10 @@ const UploadContentMain = () => {
                 OGP(Open Graph Protocol)
               </span>
               <textarea
-                style={{ width: "100%" }}
                 className={
-                  theme ? "addcategory_textarea" : "addcategory_textarea_sub"
+                  theme
+                    ? "addcategory_textarea widthautoclass"
+                    : "addcategory_textarea_sub widthautoclass"
                 }
                 id="message"
                 rows="6"
@@ -286,7 +281,7 @@ const UploadContentMain = () => {
             className="reactdraftcontainer"
             style={{ float: "right" }}
           >
-            <div style={{ width: "100%" }}>
+            <div className="widthautoclass">
               <Grid container spacing={1}>
                 <Grid item lg={4} md={4} sm={12} xs={12}>
                   <div className="main_slide_container">
@@ -306,7 +301,6 @@ const UploadContentMain = () => {
                           variant="contained"
                           color="primary"
                           component="span"
-                          // style={{ height: "20px" }}
                           className="image_button selectanimagebutton"
                         >
                           Select an Image File
@@ -317,13 +311,7 @@ const UploadContentMain = () => {
                 </Grid>
 
                 <Grid item lg={8} md={8} sm={0} xs={0}>
-                  <div
-                    className="image_none"
-                    style={{
-                      width: "300px",
-                      height: "225px",
-                    }}
-                  >
+                  <div className="image_none">
                     <div>
                       <span
                         style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
@@ -332,17 +320,7 @@ const UploadContentMain = () => {
                       </span>
                     </div>
                     {image ? (
-                      <img
-                        src={image}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          marginLeft: "-10px",
-                          objectFit: "contain",
-                          paddingTop: "10px",
-                        }}
-                        alt=""
-                      />
+                      <img src={image} className="noimagecontainer" alt="" />
                     ) : (
                       <span>No Image</span>
                     )}
@@ -353,7 +331,6 @@ const UploadContentMain = () => {
                 <span className="addcategory_text">Edit Main Content</span>
                 <div
                   style={{
-                    padding: "5px 5px 0px 5px",
                     backgroundColor: `${theme ? "white" : "#4f4f4f"}`,
                   }}
                   className="editorstatecontainer"
@@ -366,15 +343,13 @@ const UploadContentMain = () => {
               </div>
             </div>
           </Grid>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <button className="update_button_new" onClick={() => navigate("/editormainpage")}>Update</button>
+          <div className="updatecontainerbutton">
+            <button
+              className="update_button_new"
+              onClick={() => navigate("/editormainpage")}
+            >
+              Update
+            </button>
           </div>
         </Grid>
       </div>

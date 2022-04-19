@@ -1,12 +1,11 @@
 import React from "react";
 import "./EditorMainPage.css";
 import { Typography, Button } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import FooterCopyright from "../User/FooterCopyright";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import Select from "react-select";
+
 const EditorsMainPage = () => {
   const navigate = useNavigate();
   const handleBack = () => {};
@@ -27,47 +26,12 @@ const EditorsMainPage = () => {
     { value: "vanilla", label: "Vanilla" },
   ];
 
-  // const customStyles = {
-  //   control: (base, state) => ({
-  //     ...base,
-  //     background: " #FFFFFF",
-  //     borderRadius: "5px",
-  //     border: "none",
-  //     color: " #363636",
-  //     boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-  //     width: "300px",
-  //     height: "40px",
-  //   }),
-  //   menu: (base, state) => ({
-  //     ...base,
-  //     borderRadius: 0,
-  //     marginTop: 0,
-  //     backgroundColor: "yellow",
-  //     color: " #363636",
-  //   }),
-  //   menuList: (base, state) => ({
-  //     ...base,
-  //     padding: 0,
-  //     background: "white",
-  //     color: " #363636",
-  //   }),
-  //   singleValue: (base, state) => ({
-  //     ...base,
-  //     color: " #363636",
-  //   }),
-  //   dropdownIndicator: (base) => ({
-  //     ...base,
-  //     color: " #363636",
-  //   }),
-  // };
-
   const customStyless = {
     control: (base, state) => ({
       ...base,
       background: " #4F4F4F",
       borderRadius: "5px",
       border: "none",
-      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
       width: "300px",
@@ -148,13 +112,7 @@ const EditorsMainPage = () => {
             <span className="selectcourseforedit" style={{ color: "#FFFFFF" }}>
               Select Course for Edit
             </span>
-            <div
-            //  className={
-            //       theme
-            //         ? "git_introduction_dropdown_sub"
-            //         : "git_introduction_dropdown"
-            //     }
-            >
+            <div>
               <Select
                 styles={customStyless}
                 className={
@@ -165,26 +123,8 @@ const EditorsMainPage = () => {
                 placeholder="Git & GitHub Introduction"
                 options={options}
               />
-
-              {/* <select
-                className={
-                  theme
-                    ? "git_introduction_dropdown_sub"
-                    : "git_introduction_dropdown"
-                }
-                name="cars"
-                id="cars"
-              >
-                <option value="volvo">Git & GitHub Introduction</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select> */}
             </div>
-            <div
-              style={{ justifyContent: "center", display: "flex" }}
-              className="editormainpagebuttoncontainertwo"
-            >
+            <div className="editormainpagebuttoncontainertwo centercontainer">
               <Button
                 variant="outlined"
                 className="upload_contents_button"
@@ -195,9 +135,14 @@ const EditorsMainPage = () => {
             </div>
           </div>
         </div>
-        <div className="footer_copyright editor_mainPage_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
-    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
-    </div> 
+        <div
+          className="footer_copyright editor_mainPage_footer"
+          style={{ color: theme ? " #000000" : " #C8C8C8 " }}
+        >
+          <span style={{ fontSize: "12px" }}>
+            &copy; D-Libra All Rights Reserved
+          </span>
+        </div>
       </div>
     </>
   );

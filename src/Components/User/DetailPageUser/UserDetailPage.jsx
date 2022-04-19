@@ -29,18 +29,6 @@ const UserDetailPage = () => {
     await dispatch(pinState(!pinstate));
   };
 
-  const handle = () => {
-    if (pinstate === true && theme === true) {
-      return "linear-gradient(180deg, #F3F6FF 82.81%, rgba(243, 246, 255, 0) 100%)";
-    } else if (pinstate === false && theme === true) {
-      return "#EEEEEE";
-    } else if (pinstate === true && theme === false) {
-      return "linear-gradient(180deg, #363636 82.81%, rgba(54, 54, 54, 0) 100%)";
-    } else if (pinstate === false && theme === false) {
-      return " #111111";
-    }
-  };
-
   React.useEffect(async () => {
     await dispatch(pinState(pinstate));
   }, []);
@@ -50,36 +38,19 @@ const UserDetailPage = () => {
       <div
         style={{ position: pinstate ? "fixed" : "", top: pinstate ? "0" : "" }}
       >
-        <div
-          className="detailpage_root_container"
-          // style={{ paddingTop: "24px" }}
-        >
+        <div className="detailpage_root_container">
           {userdata.slice(startdata, enddata).map((item) => (
-            <span className="header_texttwo" >
-              {item.text}
-            </span>
+            <span className="header_texttwo">{item.text}</span>
           ))}
         </div>
 
         <div>
           <Grid container>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              sm={12}
-              xs={12}
-              style={{
-                // background: handle(),
-              }}
-            >
+            <Grid item lg={6} md={6} sm={12} xs={12} style={{}}>
               {userdata.slice(startdata, enddata).map((item) => (
                 <div
+                  className="userdetailmainsection"
                   style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: " center",
                     transition: "transform .2s",
                     transform: transform && "scale(97%)",
                     padding: `${pinstate ? "0px 0px" : "5px 5px"}`,
@@ -106,7 +77,7 @@ const UserDetailPage = () => {
                     <img
                       src={Bookmark_gray}
                       alt=""
-                      style={{ width: "18px", height: "18px" }}
+                      className="userdetailpinimage"
                     />
                   </button>
                   <button
@@ -114,7 +85,7 @@ const UserDetailPage = () => {
                     onClick={handlePinState}
                   >
                     <img
-                      style={{ width: "18px", height: "18px" }}
+                      className="userdetailpinimage"
                       src={pinstate ? Pin_on : Pin_off}
                       alt=""
                     />
@@ -124,18 +95,24 @@ const UserDetailPage = () => {
 
               <div className="buttons_container_detail_page">
                 <div className="tags_wrapper_new">
-                  <span className="detail_tag_text"> Tag: </span>
-                  <button className="detail_tag_button" onClick={() => navigate('/Tagpage')}>Git</button>
+                  <span
+                    className="detail_tag_text"
+                    style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                  >
+                    Tag:
+                  </span>
+                  <button
+                    className="detail_tag_button"
+                    onClick={() => navigate("/Tagpage")}
+                  >
+                    Git
+                  </button>
                   <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button>
                   <img
                     src={Bookmark_gray}
                     alt=""
-                    style={{
-                      width: "15px",
-                      height: "18px",
-                      marginLeft: "24px",
-                    }}
+                    className="bookmarkgrayimage"
                   />
                 </div>
               </div>
@@ -149,97 +126,93 @@ const UserDetailPage = () => {
                   overflow: `${pinstate ? "scroll" : "visible"}`,
                 }}
               >
-                <div className="scrollable"> 
-
-               
-                <span>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                </span>
-
+                <div className="scrollable">
+                  <span>
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                  </span>
                 </div>
                 <div className="noscrollable">
-                <span>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                </span>
-
+                  <span>
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                    odit aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet <br />
+                    <br />
+                  </span>
                 </div>
                 <div className="tags_wrapper_two">
                   <div
@@ -248,8 +221,19 @@ const UserDetailPage = () => {
                       paddingBottom: pinstate ? "15vh" : "",
                     }}
                   >
-                    <span className="detail_tag_text"> Tag: </span>
-                    <button className="detail_tag_button" onClick={() => navigate('/Tagpage')}>Git</button>
+                    <span
+                      className="detail_tag_text"
+                      style={{ color: theme ? "#000000" : " #C8C8C8" }}
+                    >
+                      {" "}
+                      Tag:{" "}
+                    </span>
+                    <button
+                      className="detail_tag_button"
+                      onClick={() => navigate("/Tagpage")}
+                    >
+                      Git
+                    </button>
                     <button className="detail_tag_button">GitHub</button>
                     <button className="detail_tag_button">DevOps</button>
                   </div>
@@ -259,19 +243,7 @@ const UserDetailPage = () => {
           </Grid>
         </div>
         {theme ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              backgroundColor: "#F3F6FF",
-              position: "fixed",
-              bottom: "-1px",
-              height: "64px",
-              flexDirection: "column",
-            }}
-          >
+          <div className="userdetailsecondsection">
             <div style={{ marginTop: "-8px" }}>
               <Button
                 dstyle={{ marginLeft: "16px" }}
@@ -298,10 +270,8 @@ const UserDetailPage = () => {
                   style={{ marginLeft: "-15px" }}
                   className="userdetailfootericons userdetailfootericonsright"
                   onClick={() => {
-                    {
-                      setStartData(startdata + 1);
-                      setEndData(enddata + 1);
-                    }
+                    setStartData(startdata + 1);
+                    setEndData(enddata + 1);
                   }}
                 />
               </Button>
@@ -311,19 +281,7 @@ const UserDetailPage = () => {
             </div>
           </div>
         ) : (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              position: "fixed",
-              bottom: "-1px",
-              height: "64px",
-              background: "#111111",
-              flexDirection: "column",
-            }}
-          >
+          <div className="userdetailsecondsectiondark">
             <div style={{ marginTop: "-8px" }}>
               <Button
                 style={{ marginLeft: "16px" }}

@@ -1,5 +1,4 @@
-
-import React, {useEffect} from 'react'
+import React, { useEffect } from "react";
 import Sidebar from "./Components/Sidebar";
 import EditorsMainPage from "../src/Components/Editors/EditorsMainPage";
 import EditCourseStructure from "./Components/Editors/EditCourseStructure";
@@ -11,7 +10,6 @@ import DetailPage from "./Components/Editors/DetailPage";
 import DeleteContent from "./Components/Editors/DeleteContent";
 import EditContentMain from "./Components/Editors/UploadContent/EditContentMain";
 import MyContents from "./Components/Editors/MyContent/MyContents";
-
 import FooterCopyright from "./Components/User/FooterCopyright";
 import Feedback from "./Components/User/Feedback";
 import RatingForm from "./Components/User/RatingForm";
@@ -20,19 +18,14 @@ import UserSettingViewPage from "./Components/User/UserSettingViewPage";
 import LandingPage from "./Components/Guest/LandingPG/LandingPage";
 import LandingPageMain from "./Components/Guest/LandingPG/LandingPageMain";
 import Accordian from "./Components/Guest/Accordian/Accordian";
-// import Course from "./Components/Guest/CoursePg/Course";
 import LibraryBookmark from "./Components/User/Library/LibraryBookmark";
-
 import UserDetailPage from "./Components/User/DetailPageUser/UserDetailPage";
 
-/* Auth imports */
 import Login from "./Components/Auth/pages/login";
 import Register from "./Components/Auth/pages/register";
 import Logout from "./Components/Auth/pages/logout";
 import ChangePassword from "./Components/Auth/pages/change-password";
-
 import { useSelector } from "react-redux";
-
 import "./index.css";
 import MylibraryCorse from "./Components/Extras/MylibraryCorse";
 import Tagpage from "./Components/Extras/Tagpage";
@@ -41,14 +34,8 @@ import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 import CourseMainPage from "./Components/Guest/LandingPG/CourseMainPage";
 import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 
-
-// import {useLocation} from 'react-router-dom'
-
 function App() {
-  // const location = useLocation()
   const theme = useSelector((state) => state.theme.state);
-  console.log("url", window.location.href.split("/")[3], theme);
-
   const backgroundHanlde = () => {
     if (
       (window.location.href.split("/")[3] === "mycontents" &&
@@ -66,8 +53,7 @@ function App() {
       (window.location.href.split("/")[3] === "editcoursestructure" &&
         theme === false)
     ) {
-      console.log("home");
-      document.body.style.backgroundColor = "#111111"
+      document.body.style.backgroundColor = "#111111";
       return "darkTheme";
     } else if (
       (window.location.href.split("/")[3] === "mycontents" && theme === true) ||
@@ -83,33 +69,16 @@ function App() {
       (window.location.href.split("/")[3] === "editcoursestructure" &&
         theme === true)
     ) {
-      document.body.style.backgroundColor = "#eeeeee"
+      document.body.style.backgroundColor = "#eeeeee";
       return "CreamyTheme";
     } else if (theme === true) {
-      document.body.style.backgroundColor = "#F3F6FF"
+      document.body.style.backgroundColor = "#F3F6FF";
       return "lightTheme";
     } else {
-      document.body.style.backgroundColor = "#111111"
+      document.body.style.backgroundColor = "#111111";
       return "darkTheme";
     }
   };
-
-
-
-
-useEffect(() => {
-  const appHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
-}
-window.addEventListener('resize', appHeight)
-appHeight()
-})
-
-
-
-
-
 
   return (
     <>
@@ -119,9 +88,12 @@ appHeight()
           <div>
             <Routes>
               <Route path="/" exact element={<LandingPage />} />
-              <Route path="/landingpagemain" exact element={<LandingPageMain />} />
+              <Route
+                path="/landingpagemain"
+                exact
+                element={<LandingPageMain />}
+              />
               <Route path="/mycontents" exact element={<MyContents />} />
-
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/logout" element={<Logout />} />
@@ -130,7 +102,6 @@ appHeight()
                 path="/changepassword"
                 element={<ChangePassword />}
               />
-
               <Route
                 path="/editormainpage"
                 exact
@@ -166,7 +137,6 @@ appHeight()
                 element={<UserSettingViewPage />}
               />
               <Route path="/ratingform" exact element={<RatingForm />} />
-
               <Route
                 path="/librarybookmark"
                 exact
@@ -179,7 +149,7 @@ appHeight()
                 element={<MylibraryCorse />}
               />
               <Route path="/Tagpage" exact element={<Tagpage />} />
-              {/* <Route path="/Searchresult" exact element={<Searchresult />} /> */}
+              <Route path="/Searchresult" exact element={<Searchresult />} />
               <Route
                 path="/Recentlyviewed"
                 exact
@@ -202,7 +172,7 @@ appHeight()
               />
             </Routes>
           </div>
-        <FooterCopyright backgroundHanld={backgroundHanlde()} />
+          <FooterCopyright backgroundHanld={backgroundHanlde()} />
         </Router>
       </div>
     </>

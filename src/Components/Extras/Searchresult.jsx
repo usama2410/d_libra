@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import "./MyContents.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Searchdata from "./Searchdata";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,24 +6,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "../Guest/LandingPG/Lp.css";
 import Search_dark from "../../assests/SVG_Files/New folder/icons/Search_dark.svg";
 import Search from "../../assests/SVG_Files/New folder/icons/Search.svg";
-import Vector from "../../assests/Vector.png";
-import Rfb from "../../assests/Rfb.png";
-import ResultsBlue from "../../assests/ResultsBlue.png";
-import SearchBlue from "../../assests/SearchBlue.png";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
-// import HoverRating from "./Rating";
 import FooterButtons from "../User/FooterButtons";
 import { useSelector } from "react-redux";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Typography } from "@material-ui/core";
+
 const Searchresult = () => {
-  const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(Searchdata);
-  const [handlebackstate, sethandlebackstate] = useState(false)
-  //   const handleBack = () => {
-  //    sethandlebackstate(handlebackstate === true)
-  // }
+  
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -77,39 +65,22 @@ const Searchresult = () => {
           centerMode: true,
         },
       },
-     
     ],
   };
   return (
     <>
-    {/* <div  style={{display: handlebackstate ? "none" : ''} }> */}
-
-   
       <div className={theme ? "" : "recentlyviewedmaincontainer"}>
-      {/* <button
-        onClick={() => sethandlebackstate(true)}
-        className="back_button"
-        style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
-      >
-        <ArrowBack className="backbutton_icon" />{" "}
-        <span className="backbutton_text">Back</span>
-      </button> */}
         <div className="mainContentContainer recentlyreviewed">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              marginTop: "20px",
-              paddingBottom: "20px"
-            }}
-            // className="mycontentheadingtwoo"
-          >
+          <div className="searchresultsection">
             <div style={{ display: "flex", alignItems: "center" }}>
               {theme ? (
                 <img src={Search} alt="error" className="recentlyviewedimage" />
               ) : (
-                <img src={Search_dark} alt="error" className="recentlyviewedimage"  />
+                <img
+                  src={Search_dark}
+                  alt="error"
+                  className="recentlyviewedimage"
+                />
               )}
               <span
                 className={
@@ -129,7 +100,6 @@ const Searchresult = () => {
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -143,45 +113,36 @@ const Searchresult = () => {
                           src={e.image}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disabled ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                         <div
-                         className="underimagetextcontainer"
-                       >
-                         <Typography
-                           noWrap
-                           component="div"
-                          //  className="subcoursename"
-                           // style={{}}
-                           style={{
-                             color: theme ? "#363636" : "#FFFFFF",
-                             display: "flex",
-                             justifyContent: "center",
-                             width: "100%",
-                           }}
-                         >
-                           <Typography
-                             noWrap
-                             component="div"
-                             className="subcoursenametwo subcoursename"
-                           >
-                             {e.Tags}
-                           </Typography>
-                         </Typography>
-                         <div style={{ position: "relative" }}>
-                           <img
-                             src={e.TagsImageTwo}
-                             alt=""
-                             className="tagstwocontainer"
-                           />
-                         </div>
-                       </div>
+                          <div className="underimagetextcontainer">
+                            <Typography
+                              noWrap
+                              component="div"
+                              className="underimagecontent"
+                              style={{
+                                color: theme ? "#363636" : "#FFFFFF",
+                              }}
+                            >
+                              <Typography
+                                noWrap
+                                component="div"
+                                className="subcoursenametwo subcoursename"
+                              >
+                                {e.Tags}
+                              </Typography>
+                            </Typography>
+                            <div className="mycontenttagscontainer">
+                              <img
+                                src={e.TagsImageTwo}
+                                alt=""
+                                className="tagstwocontainer"
+                              />
+                            </div>
+                          </div>
                         ) : (
                           ""
                         )}
@@ -195,45 +156,37 @@ const Searchresult = () => {
         })}
       </div>
 
-
-
-
-
-
-
       <div className="second_tagpage_container">
-{data.map((item) => {
-        return (
-          
-          <>
-            
-              {
-                item.items.map((content) => {
-                  return (
-                    <div className="W-main-map" style={{marginTop: "2px", backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`}}>
+        {data.map((item) => {
+          return (
+            <>
+              {item.items.map((content) => {
+                return (
+                  <div
+                    className="W-main-map"
+                    style={{
+                      marginTop: "2px",
+                      backgroundColor: `${theme ? "#f3f6ff" : "   #4f4f4f "}`,
+                    }}
+                  >
                     <div className="left">
-                      <p className="left_p" style={{color : theme ? ' #363636' : "  #ffffff"}}>{content.Tags}</p>
+                      <p
+                        className="left_p"
+                        style={{ color: theme ? " #363636" : "  #ffffff" }}
+                      >
+                        {content.Tags}
+                      </p>
                     </div>
                     <div className="right">
                       <img className="right_image" src={content.image} alt="" />
                     </div>
                   </div>
-                  )
-                })
-              }
-
-          </>
-        );
-      })}
-</div>
-
-
-
-
-
-{/* </div> */}
-
-
+                );
+              })}
+            </>
+          );
+        })}
+      </div>
       <FooterButtons />
     </>
   );

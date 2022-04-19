@@ -1,35 +1,15 @@
-import image5 from "../../assests/image5.png";
-import image6 from "../../assests/image 6.png";
-import image7 from "../../assests/image 7.png";
-import image20 from "../../assests/image 20.png";
 import Vector92 from "../../assests/Vector92.png";
 import Vector91 from "../../assests/Vector91.png";
-
-
-import WhatYouCanDoOnGitHubBeyondCollaborativeCoding from "../../assests/SVG_Files/Slides/WhatYouCanDoOnGitHubBeyondCollaborativeCoding.svg";
-import GitGitHubInitialSettings from "../../assests/SVG_Files/Slides/GitGitHubInitialSettings.svg";
 import WhatIsGit_ from "../../assests/SVG_Files/Slides/WhatIsGit_.svg";
 import WhatIsVersionControl_ from "../../assests/SVG_Files/Slides/WhatIsVersionControl_.svg";
 import CollaboratingOnGitGitHubRemoteRepository from "../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubRemoteRepository.svg";
 import CollaboratingOnGitGitHubBranch from "../../assests/SVG_Files/Slides/CollaboratingOnGitGitHubBranch.svg";
-import GitGitHubLifeCycle from "../../assests/SVG_Files/Slides/GitGitHubLifeCycle.svg";
-import GitGitHubIntroduction from "../../assests/SVG_Files/Slides/GitGitHubIntroduction.svg";
-import TableOfContents from "../../assests/SVG_Files/Slides/TableOfContents.svg";
-import GitGitHubKeyConcepts from "../../assests/SVG_Files/Slides/GitGitHubKeyConcepts.svg";
 import GitGitHubBasicLifeCycleOverview from "../../assests/SVG_Files/Slides/GitGitHubBasicLifeCycleOverview.svg";
-import EditCommit from "../../assests/SVG_Files/Slides/EditCommit.svg";
-import LaunchGitProject from "../../assests/SVG_Files/Slides/LaunchGitProject.svg";
-import GitRegularWorkflowEditCommit from "../../assests/SVG_Files/Slides/GitRegularWorkflowEditCommit.svg";
-import GitGitHubInitialSettingsOverview from "../../assests/SVG_Files/Slides/GitGitHubInitialSettingsOverview.svg";
-import WorkWithBranches from "../../assests/SVG_Files/Slides/WorkWithBranches.svg";
-import GitRegularWorkflowWorkWithBranches from "../../assests/SVG_Files/Slides/GitRegularWorkflowWorkWithBranches.svg";
 import ThreeCasesToLaunchGitProject from "../../assests/SVG_Files/Slides/ThreeCasesToLaunchGitProject.svg";
-
 
 const libcourse = [
   {
     chapterName: "Git & GitHub Introduction",
-
     items: [
       {
         id: 1,
@@ -67,7 +47,7 @@ const libcourse = [
 
   {
     chapterName: "Course A",
-  
+
     items: [
       {
         id: 1,
@@ -83,7 +63,6 @@ const libcourse = [
         disabled: true,
         TagsImageTwo: Vector92,
       },
-    
     ],
   },
   {
@@ -103,7 +82,6 @@ const libcourse = [
         disabled: true,
         TagsImageTwo: Vector92,
       },
-     
     ],
   },
 ];

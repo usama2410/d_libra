@@ -1,23 +1,28 @@
+.underimagecontent{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
-.mycontentcontainer{
-
-    display: flex;
-    justify-content: space-around;
-    padding: 20px 30px 0px 60px;
-    align-items: center;
- 
+.mycontenttagscontainer{
+  position: relative;
+}
+.mycontentcontainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 30px 0px 60px;
+  align-items: center;
 }
 .mainmycontentcontainer {
   display: flex;
   flex-direction: column;
   padding-top: 30px;
 }
-.mainmycontentcontainertwo{
+.mainmycontentcontainertwo {
   display: flex;
   flex-direction: column;
   padding-top: 20px;
 }
-
 
 .mycontentheadtwooo {
   font-style: normal;
@@ -101,26 +106,21 @@
   .mainmycontentcontainer {
     display: flex;
     flex-direction: column-reverse;
- padding-top: 0px;
-    }
+    padding-top: 0px;
+  }
 
+  .mainmycontentcontainertwo {
+    display: flex;
+    flex-direction: column;
+    padding-top: 00px;
+  }
 
-    .mainmycontentcontainertwo{
-      display: flex;
-      flex-direction: column;
-      padding-top: 00px;
-    }
-    
-
-  
-.mycontentcontainer{
-
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 10px 0px 10px;
-  align-items: center;
-
-}
+  .mycontentcontainer {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 10px 0px 10px;
+    align-items: center;
+  }
   .mycontentheadtwooo {
     font-weight: 300;
     font-size: 18px;
@@ -161,12 +161,8 @@
   }
 }
 
-
-
-
-
 @media screen and (max-width: 600px) {
   .mainmycontentcontainer {
- padding-top: 0px;
+    padding-top: 0px;
   }
 }

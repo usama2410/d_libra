@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "./AddNewCategory.css";
 import { useSelector, useDispatch } from "react-redux";
 import "../Sidebar.css";
 import { addnewCategory } from "../../Redux/Actions/Editor/Category";
 import Select from "react-select";
+import { ArrowBack } from "@mui/icons-material";
 
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const AddNewCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
-
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const [chapId, setchapId] = useState("");
@@ -26,23 +24,14 @@ const AddNewCategory = () => {
       setImageName(e.target.files[0].name);
     }
   };
+
   const handleBack = () => {
-    navigate("/editcoursestructure")
+    navigate("/editcoursestructure");
   };
   const handleSubmit = async (e) => {
-    // console.log("chapName",)
-    navigate("/editormainpage")
+    navigate("/editormainpage");
     e.preventDefault();
     await dispatch(addnewCategory(chapName, chapId, slug));
-  };
-
-  const handleBackgroung = () => {
-    if (
-      theme === true &&
-      window.location.href.split("/")[3] === "addnewcategory"
-    ) {
-      return "#eeeeee";
-    }
   };
 
   const options = [
@@ -53,14 +42,13 @@ const AddNewCategory = () => {
   ];
 
   const customStyles = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #FFFFFF",
       borderRadius: "5px",
       border: "none",
       color: " #363636",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -91,15 +79,13 @@ const AddNewCategory = () => {
   };
 
   const customStyless = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #4F4F4F",
       borderRadius: "5px",
       border: "none",
-      // backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
       color: "white",
       boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.25)",
-      // width: "450px",
       height: "40px",
     }),
     placeholder: (base) => ({
@@ -132,7 +118,6 @@ const AddNewCategory = () => {
 
   return (
     <>
-      {/* <div style={{ background: handleBackgroung() }}> */}
       <button
         onClick={handleBack}
         className="back_button"
@@ -187,19 +172,6 @@ const AddNewCategory = () => {
           >
             Select Parent Category/Course
           </span>
-          {/* <select
-              className={
-                theme ? "addcategory_dropdown_sub" : "addcategory_dropdown"
-              }
-              name="cars"
-              id="cars"
-            >
-              <option value="volvo">Git & GitHub Introduction</option>
-              <option value="saab">Saab</option>
-              <option value="opel">Opel</option>
-              <option value="audi">Audi</option>
-            </select> */}
-
           <Select
             styles={theme ? customStyles : customStyless}
             className={
@@ -222,13 +194,7 @@ const AddNewCategory = () => {
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
           />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "20px",
-            }}
-          >
+          <div className="selectimagecontainer">
             <label htmlFor="contained-button-file">
               <input
                 accept="image/*"
@@ -250,33 +216,11 @@ const AddNewCategory = () => {
           </div>
           <div className="image_none">
             {image ? (
-              <div
-                style={{
-                  width: "240px",
-                  height: "200px",
-                  marginTop: "14px",
-                }}
-              >
-                <img
-                  src={image}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
-                  alt=""
-                />
+              <div className="noimagefirstcontainer">
+                <img src={image} className="noimagesecondcontainer" alt="" />
               </div>
             ) : (
-              <span
-                style={{
-                  padding: "20px 5px 0px 5px ",
-                  position: "relative",
-                  top: "5px",
-                }}
-              >
-                No Image
-              </span>
+              <span className="noimagetext">No Image</span>
             )}
           </div>
         </div>
@@ -290,7 +234,6 @@ const AddNewCategory = () => {
           </button>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };

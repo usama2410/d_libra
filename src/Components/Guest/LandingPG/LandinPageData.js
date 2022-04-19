@@ -1,6 +1,3 @@
-import image7 from "../../../assests/image7.png";
-import image5 from "../../../assests/image5.png";
-
 import GitGitHubIntroduction from "../../../assests/SVG_Files/Slides/GitGitHubIntroduction.svg";
 
 const LandingPageMainDataOne = [
@@ -147,5 +144,4 @@ const LandingPageMainDataTwo = [
   },
 ];
 
-export default {LandingPageMainDataOne, LandingPageMainDataTwo};
-// export default ;
+export default { LandingPageMainDataOne, LandingPageMainDataTwo };

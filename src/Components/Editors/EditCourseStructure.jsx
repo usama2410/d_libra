@@ -2,7 +2,6 @@ import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EditCourseStructure.css";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 import { HiArrowSmRight } from "react-icons/hi";
@@ -16,7 +15,7 @@ import TableHead from "@mui/material/TableHead";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import {
   getMainCategory,
   getParentChildCategories,
@@ -48,25 +47,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
 const EditCourseStructure = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
-
   const [result, setResult] = useState([]);
   const [parentChidCategory, setParentChidCategory] = useState([]);
 
-  console.log("parentChidCategory", parentChidCategory.SubCategory);
-
   const mainCategories = async () => {
     const response = await dispatch(getMainCategory(token));
-    // console.log("response  getMainCategory", response);
     setResult(EditCourseStructureData);
   };
+
   const handleBack = () => {
-    navigate("/editormainpage")
+    navigate("/editormainpage");
   };
+
   useEffect(() => {
     mainCategories();
     getParentChildCategories();
@@ -91,11 +89,7 @@ const EditCourseStructure = () => {
       height: "28px !important",
       marginLeft: "5px !important",
       marginTop: "-1px !important",
-      border: "2px solid rgba(70, 66, 77, 0.7) !important",
     }),
-    focused: {
-      border: "2px solid rgba(70, 66, 77, 0.7) !important",
-    },
     placeholder: (base) => ({
       ...base,
       color: "#111111",
@@ -123,14 +117,6 @@ const EditCourseStructure = () => {
     }),
   };
 
-  const handleBackgroung = () => {
-    if (
-      theme === true &&
-      window.location.href.split("/")[3] === "editcoursestructure"
-    ) {
-      return "#eeeeee";
-    }
-  };
   return (
     <div style={{ height: "100%" }}>
       <button
@@ -164,14 +150,8 @@ const EditCourseStructure = () => {
           </Typography>
         </div>
       </div>
-      <div
-        style={{
-          background: "#111111",
-          color: "#FFFFFF",
-          paddingBottom: "40px",
-        }}
-      >
-        <div style={{ marginTop: "30px", width: "100%", padding: "10px 20px" }}>
+      <div className="editcoursesection">
+        <div className="editcoursesectiontwo">
           <Grid container>
             <Grid item lg={2} md={3} sm={12} xs={12}>
               <span>Select Category to change</span>
@@ -226,11 +206,7 @@ const EditCourseStructure = () => {
             </Button>
           </div>
           <div className="search_main_container">
-            <img
-              src={Vector}
-              alt=""
-              style={{ paddingLeft: "10px", marginRight: "-20px" }}
-            />
+            <img src={Vector} alt="" className="editcourseimagesection" />
             <input className="editor_input_field" />
             <Button className="editor_submit_button" variant="contained">
               Search
@@ -269,52 +245,22 @@ const EditCourseStructure = () => {
                     backgroundColor: "rgba(38, 36, 42, 0.7)",
                   }}
                 ></StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   TITLE
                 </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   NAME
                 </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   UNIQUE IDENTIFIER
                 </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   IMAGE
                 </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   CREATED DATE
                 </StyledTableCell>
-                <StyledTableCell
-                  style={{
-                    backgroundColor: "rgba(38, 36, 42, 0.7)",
-                    fontSize: "12px",
-                  }}
-                >
+                <StyledTableCell className="tablefirstheader">
                   UPDATED DATE
                 </StyledTableCell>
               </TableRow>

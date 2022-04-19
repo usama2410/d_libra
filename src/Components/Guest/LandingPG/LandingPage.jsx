@@ -28,12 +28,14 @@ const labels = {
   4.5: "4.5",
   5: "5+",
 };
+
 const LandingPage = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const [data, setdata] = useState(ContentData);
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -51,7 +53,6 @@ const LandingPage = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          // initialSlide: 6,
           centerMode: false,
         },
       },
@@ -117,14 +118,7 @@ const LandingPage = () => {
   return (
     <>
       <div className="mainContentContainer" style={{ marginTop: "20px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-          className=""
-        >
+        <div className="underimagecontent">
           {theme ? (
             <img src={lightmode_logo} alt="" width="150px" height="30.7" />
           ) : (
@@ -138,16 +132,7 @@ const LandingPage = () => {
           development
         </span>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-
-            position: " relative",
-            marginTop: "70.91px",
-          }}
-          className=""
-        >
+        <div className="landingpagesection">
           <img style={{ width: "230px" }} src={LandingPageImage1} alt="" />
         </div>
       </div>
@@ -157,16 +142,11 @@ const LandingPage = () => {
           {" "}
           <button
             className="Signup_button Signup"
-            style={{ color: "white", cursor: "pointer" }}
             onClick={() => navigate("/register")}
           >
             Sign up
           </button>
-          <button
-            className="Signup_button"
-            style={{ color: "white", cursor: "pointer" }}
-            onClick={() => navigate("/login")}
-          >
+          <button className="Signup_button" onClick={() => navigate("/login")}>
             Log in
           </button>
         </div>
@@ -178,7 +158,6 @@ const LandingPage = () => {
               <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                  style={{ padding: "0px 0px 8px 5px" }}
                 >
                   {item.chapterName}
                 </span>
@@ -190,32 +169,20 @@ const LandingPage = () => {
                       <div className="intro-slides">
                         <img
                           src={e.image}
-                          onClick={() => navigate('/coursepageguest')}
-                          // width="100%"
-                          // height="225px"
+                          onClick={() => navigate("/coursepageguest")}
                           className="landingpage_images"
                           style={{
-                            width: "100%",
-                            cursor: "pointer",
-                            borderRadius: "5px",
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
                         {e.image ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              padding: "16px 0px 0px 10px",
-                            }}
-                          >
+                          <div className="landingpagesubsection">
                             <Typography
                               noWrap
                               component="div"
                               className="subcoursename"
                               style={{
-                                width: "250px",
                                 color: theme ? "#363636" : "#FFFFFF",
                               }}
                             >
@@ -234,8 +201,6 @@ const LandingPage = () => {
                           <span
                             className="Author"
                             style={{
-                              padding: "10px 0px 0px 10px",
-                              marginLeft: "-10px",
                               color: theme ? "#363636" : "#C8C8C8",
                             }}
                           >
@@ -249,7 +214,7 @@ const LandingPage = () => {
                             }}
                           >
                             {" "}
-                            <div     className="rating_text" style={{paddingTop: "1px"}}>
+                            <div className="rating_text">
                               {value !== null && (
                                 <Box sx={{ ml: 0 }}>
                                   {labels[hover !== -1 ? hover : value]}

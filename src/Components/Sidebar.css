@@ -1,38 +1,60 @@
-.sidebarsignupicon{
-width: 20px;
-height: 20px;
+.sidebarlightmodelogo {
+  width: 100px;
+  height: 20.47px;
 }
 
-.sidebarloginicon{
-  width: 18px;
-height: 22.5px;
-}
-.sidebarlogouticon{
-  width: 18px;
-height: 20.12px;
-}
-.sidebardarkicon{
-  width: 20px;
-height: 19.95px;
-}
-.sidebarlibraryicon{
+.sidebarsearchlogo {
+  position: absolute;
+  right: 20px;
   width: 22px;
-height: 18px;
+  height: 22px;
 }
-.sidebarratingicon{
+
+.sidebarlistcontainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logocontainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sidebarsignupicon {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebarloginicon {
+  width: 18px;
+  height: 22.5px;
+}
+.sidebarlogouticon {
+  width: 18px;
+  height: 20.12px;
+}
+.sidebardarkicon {
+  width: 20px;
+  height: 19.95px;
+}
+.sidebarlibraryicon {
+  width: 22px;
+  height: 18px;
+}
+.sidebarratingicon {
   width: 17.7px;
-height: 16.96px;
+  height: 16.96px;
 }
-.sidebarnighticon{
+.sidebarnighticon {
   width: 18px;
-height: 18px;
+  height: 18px;
 }
-.sidebareditoricon{
+.sidebareditoricon {
   width: 18px;
-height: 19.2px;
+  height: 19.2px;
 }
-
-
 
 .Searchb_main {
   margin-top: -56px;
@@ -49,9 +71,8 @@ height: 19.2px;
 .logocontainerseven {
   position: relative;
   left: -14px;
-  /* border: 1px solid red !important; */
 }
-.logocontaineredit{
+.logocontaineredit {
   position: relative;
   left: 7px;
 }
@@ -60,13 +81,6 @@ height: 19.2px;
   left: -20px;
   top: 0;
 }
-
-/* .logocontainertwenty{
-  position: relative !important;
-  left: -100px !important;
-  margin-left: 200px !important;
-  border: 1px solid red !important;
-} */
 
 .logocontainereight {
   position: relative;
@@ -109,7 +123,6 @@ height: 19.2px;
   width: 100%;
   height: 48px;
   padding-top: 5px;
-  /* border: 1px solid red; */
 }
 .left_search {
   display: flex;
@@ -119,7 +132,6 @@ height: 19.2px;
 }
 .right_search {
   height: 42px;
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,6 +156,7 @@ height: 19.2px;
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
+
   color: #ffffff !important;
 }
 .searchbar_input::placeholder {
@@ -176,6 +189,7 @@ height: 19.2px;
   font-weight: 300 !important;
   font-size: 14px !important;
   line-height: 16px !important;
+
   display: flex !important;
   align-items: center !important;
   letter-spacing: -0.015em !important;
@@ -270,8 +284,6 @@ height: 19.2px;
 .sidebar_inputfield {
   background: #4f4f4f;
   border-radius: 5px;
-  /* border-top-left-radius: 5px; */
-  /* border-bottom-left-radius: 5px; */
   border: none !important;
   padding-left: 20px;
   padding-right: 40px;
@@ -300,9 +312,6 @@ height: 19.2px;
 .sidebar_inputfield_sub {
   background: white;
   border-radius: 5px;
-
-  /* border-top-left-radius: 5px; */
-  /* border-bottom-left-radius: 5px; */
   border: none !important;
   padding-right: 40px;
   padding-left: 20px;
@@ -335,39 +344,21 @@ height: 19.2px;
   position: relative;
 }
 
-
 .input_field_icon_container {
-  /* border-top-right-radius: 5px; */
-  /* border-bottom-right-radius: 5px; */
-  /* background: #4f4f4f; */
   width: 40px;
   position: absolute;
   right: -5px;
   top: 9px;
-  z-index: 1
-  ;
+  z-index: 1;
   height: 40.53px !important;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  /* border: none !important; */
 }
 .input_field_icon_container_sub {
-  /* border-top-right-radius: 5px; */
-  /* border-bottom-right-radius: 5px; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white; */
   width: 40px;
   position: absolute;
   right: -5px;
   top: 9px;
-  z-index: 1
-  ;
+  z-index: 1;
   height: 40.53px !important;
-
-  /* border: none !important; */
 }
 .logo_main_container {
   padding-left: 320px;
@@ -489,7 +480,7 @@ height: 19.2px;
     position: relative;
     right: -100px;
   }
-  .logocontaineredit{
+  .logocontaineredit {
     position: relative;
     left: -3px;
   }
@@ -546,9 +537,8 @@ height: 19.2px;
   }
 }
 
-
 @media screen and (max-width: 755px) {
-  .logocontaineredit{
+  .logocontaineredit {
     position: relative;
     left: 8px;
   }
@@ -573,7 +563,7 @@ height: 19.2px;
   }
   .logocontainereight {
     position: relative;
-    left:0px;
+    left: 0px;
   }
 
   .logocontainernine {
@@ -581,12 +571,6 @@ height: 19.2px;
     left: -22px;
   }
 
-
-
-
-
-
-  
   .divider_class {
     width: 197px !important;
   }

@@ -1,3 +1,8 @@
+.centercontainer{
+  display: flex;
+  justify-content: center;
+}
+
 .editor_mainPage_footer {
   position: fixed;
   bottom: 0;
@@ -19,7 +24,6 @@
 
 .editormainpagebuttoncontainer {
   margin-top: 80px;
-  /* border: 1px solid red; */
 }
 
 .editormainpagebuttoncontainertwo {
@@ -39,7 +43,6 @@
   flex-direction: column;
 }
 .editors_menu_heading {
-  /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -52,7 +55,6 @@
 }
 
 .editors_menu_heading_sub {
-  /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -61,9 +63,6 @@
   align-items: center;
   text-align: center;
   letter-spacing: -0.015em;
-
-  /* Font_Body_Light */
-
   color: #363636;
 }
 
@@ -75,7 +74,6 @@
 }
 
 .editorpage_button_container_span {
-  /* font-family: Helvetica !important; */
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
@@ -89,7 +87,6 @@
 .upload_contents_button {
   background: #ffaa1d !important;
   border-radius: 15px !important;
-  /* font-family: Helvetica !important;  */
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 21px !important;
@@ -108,43 +105,29 @@
 }
 
 .git_introduction_dropdown {
-  /* background: #4f4f4f !important; */
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25) !important;
   border-radius: 5px !important;
   margin-top: 5px !important;
-  /* padding-left: 20px !important; */
   height: 40px !important;
   font-style: normal !important;
   font-weight: 300 !important;
   font-size: 18px !important;
   line-height: 21px !important;
-  /* display: flex !important; */
-  /* border: 1px solid red !important; */
-  /* align-items: center !important; */
   letter-spacing: -0.015em !important;
-  /* padding-left: 20px !important; */
   color: #ffffff !important;
-  /* width: 300px !important; */
 }
 
 .git_introduction_dropdown_sub {
-  /* background: white; */
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin-top: 5px;
-  /* padding-left: 20px; */
   height: 40px;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
-  /* display: flex;
-  align-items: center; */
   letter-spacing: -0.015em;
-  /* padding-left: 20px; */
   color: #363636;
-  /* border: 1px solid red; */
-  /* width: 300px; */
 }
 
 @media screen and (max-width: 600px) {
@@ -162,10 +145,8 @@
   .upload_contents_button {
     width: 299px !important;
     height: 30px !important;
-
     width: 299px !important;
     height: 30px !important;
-
     font-style: normal !important;
     font-weight: 400 !important;
     font-size: 16px !important;
@@ -195,19 +176,16 @@
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    /* width: 299px; */
   }
 
   .git_introduction_dropdown_sub {
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
-    /* width: 299px; */
   }
 
   .editormainpagebuttoncontainer {
     margin-top: 28px;
-    /* border: 1px solid red; */
   }
 
   .editormainpagebuttoncontainertwo {

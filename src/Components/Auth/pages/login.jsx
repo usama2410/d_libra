@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Typography, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import googleIcon from "../../../assests/google.png";
-
 import "../Stylesheet/stylesheet.css";
 import { logIn } from "../../../Redux/Actions/auth.action";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState("babuibrar@gmail.com");
   const [password, setPassword] = useState("babuibrar@93");
   const [message, setMessage] = useState("");
@@ -20,7 +18,6 @@ const Login = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-
     navigate("/");
   };
 
@@ -41,24 +38,17 @@ const Login = () => {
   };
   return (
     <>
-     <button
+      <button
         onClick={handleBack}
         className="back_button"
         style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
       >
-         <ArrowBack className="backbutton_icon" />{" "}
+        <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
 
       <div className="loginmaincontainer">
-        <div
-          style={{
-            paddingTop: "20px",
-            display: "flex",
-            flexDirection: "column",
-            className: "inputs",
-          }}
-        >
+        <div className="editomainpage_container">
           {errorMessage === true ? (
             <div className="errorMessage">Feilds cannot be empty!</div>
           ) : message ? (
@@ -85,18 +75,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-           <div className="logininbuttoncontainer">
-
-        <Button className="loginbuttontext" onClick={handleLogin}>
-          Log in
-        </Button>
-           </div>
+        <div className="logininbuttoncontainer">
+          <Button className="loginbuttontext" onClick={handleLogin}>
+            Log in
+          </Button>
+        </div>
 
         <div>
           <span className={theme ? "texttwo" : "orText"}>Or</span>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="loginwithgooglecontainer">
           <div>
             <Button variant="text" className="signWithGoogle">
               <img src={googleIcon} className="googleIcon" alt="google" />
@@ -106,28 +95,31 @@ const Login = () => {
         </div>
         <div style={{ Width: "62%" }}>
           <div
-          className="forgotpasswordcontainer"
+            className="forgotpasswordcontainer"
             style={{
               color: `${theme ? "#363636" : "#FFFFFF"}`,
-            
             }}
           >
             <span
-            className="forgotpasswordtext"
+              className="forgotpasswordtext"
               style={{
                 color: `${theme ? "#363636" : "#FFFFFF"}`,
-                
               }}
             >
               {" "}
               Forget Password ?
             </span>
-            <ArrowForward  className="arrowforwardicon"/>
+            <ArrowForward className="arrowforwardicon" />
           </div>
         </div>
-        <div className="footer_copyright editor_mainPage_footer"  style={{color: theme ? " #000000" : " #C8C8C8 "}}>
-    <span style={{ fontSize: "12px" }}>&copy; D-Libra All Rights Reserved</span>
-    </div>
+        <div
+          className="footer_copyright editor_mainPage_footer"
+          style={{ color: theme ? " #000000" : " #C8C8C8 " }}
+        >
+          <span className="d_libratext">
+            &copy; D-Libra All Rights Reserved
+          </span>
+        </div>
       </div>
     </>
   );
