@@ -39,6 +39,8 @@ import Hamburger_Menu_light from "../assests/SVG_Files/New folder/Hamburger_Menu
 import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg";
 import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.svg";
 import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
+import Searchresult from "./Extras/Searchresult";
+import {searchState} from '../../src/Redux/Actions/auth.action'
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -101,11 +103,24 @@ export default function Sidebar() {
   const [accordionicon, setaccordionicon] = React.useState(false);
   const navigate = useNavigate();
   const [searchstate, setSearchState] = React.useState(false);
+  const [searchstate2, setSearchState2] = React.useState(false);
 
-  const handleSearchState = (e) => {
+  const handleSearchBar = async () => {
+    setSearchState2(!searchstate2);
+    await dispatch(searchState(searchstate2))
+  };
+
+  React.useEffect( async () => {
+    console.log("searchstate2",searchstate2)
+    await dispatch(searchState( searchstate2 ))
+  }, [])
+  
+
+  const handleSearchState = async (e) => {
     e.preventDefault();
+    await dispatch(searchState(searchstate2))
+    setSearchState2(!searchstate2);
     setSearchState(true);
-    console.log(searchstate);
   };
 
   const handleAccordionIcon = async () => {
@@ -114,7 +129,6 @@ export default function Sidebar() {
 
   const handleChange = async (event) => {
     setThemeState(event.target.checked);
-    console.log(themestate);
     dispatch(themeSwitch(!themeState));
   };
 
@@ -760,6 +774,7 @@ export default function Sidebar() {
             <div>
               <div className="mainsearchcontianer">
                 <input
+                  onClick={handleSearchBar}
                   placeholder="Search"
                   className={`${
                     themeState ? "sidebar_inputfield_sub" : "sidebar_inputfield"
@@ -793,8 +808,7 @@ export default function Sidebar() {
                   ) : (
                     <img
                       className="searchiconsize"
-                      onClick={handleSearchState}
-                      src={Search_dark}
+                      onClick={handleSearchState}                      src={Search_dark}
                       alt=""
                     />
                   )}
@@ -833,7 +847,7 @@ export default function Sidebar() {
               backgroundColor: `${themeState ? "#F3F6FF" : "  #111111"}`,
             }}
           >
-            <div className="left_search" onClick={() => setSearchState(false)}>
+            <div className="left_search" onClick={() => {setSearchState(false)}}>
               {themeState ? (
                 <img src={UnionBlue} alt="" />
               ) : (
@@ -875,6 +889,13 @@ export default function Sidebar() {
           </div>
         </div>
       </AppBar>
+      {/* {searchstate2 ? (
+        <div>
+          <Searchresult />
+        </div>
+      ) : (
+       ''
+      )} */}
     </>
   );
 }

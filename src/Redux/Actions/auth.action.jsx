@@ -97,6 +97,7 @@ export const pinState = (pin) => async (dispatch) => {
 };
 
 export const searchState = (search) => async (dispatch) => {
+  console.log("SERAHC STATET ", search)
   try {
     dispatch({
       type: "SEARCHSTATE",
