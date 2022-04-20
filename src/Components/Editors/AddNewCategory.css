@@ -10,6 +10,12 @@
   object-fit: contain;
 }
 
+.newimage{
+  width: 100%;
+
+
+}
+
 .noimagefirstcontainer {
   width: 240px;
   height: 200px;
@@ -30,7 +36,7 @@
 }
 
 .update_button_newcategory {
-  margin-top: 70px !important;
+  margin-top: 30px !important;
 }
 
 .addnewcategorycontainer {

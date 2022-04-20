@@ -6,8 +6,8 @@
 }
 
 .noimagecontainer {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 200px;
   margin-left: -10px;
   object-fit: contain;
   padding-top: 10px;
@@ -190,6 +190,11 @@ textarea.addcategory_input_sub {
 
 .main_slide_container {
   padding: 2px 0px;
+}
+
+.image_none{
+  width: 100px;
+  height: 222px;
 }
 
 @media screen and (max-width: 1051px) {

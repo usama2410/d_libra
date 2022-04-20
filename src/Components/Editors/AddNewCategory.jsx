@@ -214,7 +214,7 @@ const AddNewCategory = () => {
               </Button>
             </label>
           </div>
-          <div className="image_none">
+          <div className="newimage">
             {image ? (
               <div className="noimagefirstcontainer">
                 <img src={image} className="noimagesecondcontainer" alt="" />
