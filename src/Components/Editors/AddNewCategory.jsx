@@ -17,6 +17,10 @@ const AddNewCategory = () => {
   const [chapId, setchapId] = useState("");
   const [chapName, setChapName] = useState("");
   const [slug, setSlug] = useState("");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
 
   const handleChange = (e) => {
     if (e.target.files.length) {
@@ -29,9 +33,18 @@ const AddNewCategory = () => {
     navigate("/editcoursestructure");
   };
   const handleSubmit = async (e) => {
-    navigate("/editormainpage");
+    // navigate("/editormainpage");
     e.preventDefault();
-    await dispatch(addnewCategory(chapName, chapId, slug));
+    const response = await dispatch(
+      addnewCategory(chapName, chapId, slug, token)
+    );
+    setMessage(response.message);
+
+    const timer = setTimeout(() => {
+      setErrorMessage(false);
+      setMessage("");
+    }, 5000);
+    return () => clearTimeout(timer);
   };
 
   const options = [
@@ -141,7 +154,25 @@ const AddNewCategory = () => {
             </span>
           </Typography>
         </div>
+
         <div className="addcategorysubcontainer">
+          {errorMessage === true ? (
+            <div className="errorMessage">Feilds cannot be empty!</div>
+          ) : message ? (
+            message === "Add Sub Category Successfully" ? (
+              <div className={theme ? "successMessage" : "successMessageTwo"}>
+                Sub category added successfully
+              </div>
+            ) : message === "All Fields are Required" ? (
+              <div className="errorMessage"> All Fields are Required </div>
+            ) : null
+          ) : null}
+
+          {message === "Category Name Already Exist" ? (
+            <div className="errorMessage">{message}</div>
+          ) : message === "Slug Name Already Exist" ? (
+            <div className="errorMessage">{message}</div>
+          ) : null}
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
@@ -228,7 +259,7 @@ const AddNewCategory = () => {
           <button
             className="update_button   "
             onClick={handleSubmit}
-            style={{ marginBottom: "40px" }}
+            style={{ marginBottom: "40px", cursor: 'pointer' }}
           >
             Update
           </button>

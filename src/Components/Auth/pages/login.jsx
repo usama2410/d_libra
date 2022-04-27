@@ -23,7 +23,6 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const response = await dispatch(logIn(email, password));
     setMessage(response.message);
     if (email === "" && password === "") {

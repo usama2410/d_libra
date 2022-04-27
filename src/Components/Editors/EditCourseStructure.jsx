@@ -16,6 +16,8 @@ import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import {
   getMainCategory,
   getParentChildCategories,
@@ -56,9 +58,16 @@ const EditCourseStructure = () => {
   const [result, setResult] = useState([]);
   const [parentChidCategory, setParentChidCategory] = useState([]);
 
+  console.log("parentChidCategory", parentChidCategory);
+
   const mainCategories = async () => {
     const response = await dispatch(getMainCategory(token));
-    setResult(EditCourseStructureData);
+    setResult(response);
+  };
+
+  const ParentChildCategories = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    setParentChidCategory(response);
   };
 
   const handleBack = () => {
@@ -67,7 +76,7 @@ const EditCourseStructure = () => {
 
   useEffect(() => {
     mainCategories();
-    getParentChildCategories();
+    ParentChildCategories();
   }, []);
 
   const options = [
@@ -266,37 +275,56 @@ const EditCourseStructure = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {parentChidCategory?.map((item) => {
-                return item.SubCategory.map((subItem) => {
-                  return (
-                    <>
-                      <StyledTableRow>
-                        <StyledTableCell component="th" scope="row">
-                          <AddIcon className="tableBody_sub" />
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.CategoryName}
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.CategoryName}
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.unique_idetifier}
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.image}
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.created_at.split("T")[0]}
-                        </StyledTableCell>
-                        <StyledTableCell className="tableBody">
-                          {subItem.updated_at.split("T")[0]}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    </>
-                  );
-                });
-              })}
+              {parentChidCategory?.length === 0 ? (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  Loading...
+                </div>
+              ) : (
+                <>
+                  {parentChidCategory?.map((item) => {
+                    return item.SubCategory.map((subItem) => {
+                      return (
+                        <>
+                          <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">
+                              <AddIcon className="tableBody_sub" />
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {item.CategoryName}
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {subItem.CategoryName}
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {subItem.unique_identifier}
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {subItem.image !== ""
+                                ? subItem.image
+                                : "No Image"}
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {subItem.created_at.split("T")[0]}
+                            </StyledTableCell>
+                            <StyledTableCell className="tableBody">
+                              {subItem.updated_at.split("T")[0]}
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        </>
+                      );
+                    });
+                  })}
+                </>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

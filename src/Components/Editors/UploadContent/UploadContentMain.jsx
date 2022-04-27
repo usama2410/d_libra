@@ -2,18 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Button, Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { ArrowBack } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import "./UploadContentMain.css";
+import { addPost } from "../../../Redux/Actions/Editor/post.action";
+import { getParentChildCategories } from "../../../Redux/Actions/Editor/Category";
 
 const UploadContentMain = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [contentTitle, setContentTitle] = useState("nodejs table of content");
+  const [contentId, setContentId] = useState(16);
+  const [tags, setTags] = useState("niodejs,git,tech");
   const [image, setImage] = useState("");
+  const [metaDescription, setMetaDiscription] = useState("meta_description");
+  const [OGP, setOGP] = useState("OGP");
+
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+
+  // console.log("image", image, imageName)
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const onEditorStateChange = (editorState) => {
+    return setEditorState(editorState);
+  };
+  const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  // console.log("hrmlText", htmlText)
+
+  const [parentCategory, setParentCategory] = useState([]);
 
   const handleChange = (e) => {
     if (e.target.files.length) {
@@ -22,12 +44,21 @@ const UploadContentMain = () => {
     }
   };
 
-  const options = [
-    { value: "chocolate", label: "Git & Git Hub Introduction" },
-    { value: "Saab", label: "Saab" },
-    { value: "Opel", label: "Opel" },
-    { value: "Audi", label: "Audi" },
-  ];
+  const handleButton = async (e) => {
+    e.preventDefault();
+    // navigate("/editormainpage")
+    const response = await dispatch(
+      addPost(
+        contentTitle,
+        contentId,
+        tags,
+        htmlText,
+        metaDescription,
+        OGP,
+        token
+      )
+    );
+  };
 
   const customStyles = {
     control: (base, state) => ({
@@ -113,15 +144,31 @@ const UploadContentMain = () => {
     }
   };
 
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
   const handleBack = () => {
     navigate("/addnewcategory");
   };
 
-  useEffect(() => {}, [editorState]);
+  const handleParentChildeCategory = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    // console.log("getParentChildCategories response", response)
+    setParentCategory(response);
+  };
+
+  useEffect(() => {
+    handleParentChildeCategory();
+  }, []);
+
+  const parentOptions = parentCategory.map((category) => {
+    console.log("category.id", category.id)
+    return { id: category.id, label: category.CategoryName };
+  });
+  console.log("parentCategory", parentOptions);
+
+  const handleSelector = () => {
+    parentOptions.map((item) => {
+      console.log(item.id);
+    });
+  };
 
   return (
     <>
@@ -166,7 +213,8 @@ const UploadContentMain = () => {
                     : "git_introduction_dropdown_sub_two"
                 }
                 placeholder="Git & GitHub Introduction"
-                options={options}
+                options={parentOptions}
+                onChange={handleSelector}
               />
             </div>
             <div>
@@ -184,7 +232,7 @@ const UploadContentMain = () => {
                     : "git_introduction_dropdown_sub_two"
                 }
                 placeholder="Git & GitHub Introduction"
-                options={options}
+                // options={options}
               />
             </div>
             <div>
@@ -201,6 +249,8 @@ const UploadContentMain = () => {
                     : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
+                value={contentTitle}
+                onChange={(e) => setContentTitle(e.target.value)}
               />
             </div>
             <div>
@@ -217,6 +267,8 @@ const UploadContentMain = () => {
                     : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
+                value={contentId}
+                onChange={(e) => setContentId(e.target.value)}
               />
             </div>
             <div>
@@ -233,6 +285,8 @@ const UploadContentMain = () => {
                     : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder=""
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
               />
             </div>
             <div>
@@ -251,6 +305,8 @@ const UploadContentMain = () => {
                 id="message"
                 rows="6"
                 placeholder=""
+                value={metaDescription}
+                onChange={(e) => setMetaDiscription(e.target.value)}
               />
             </div>
             <div>
@@ -269,6 +325,8 @@ const UploadContentMain = () => {
                 id="message"
                 rows="6"
                 placeholder=""
+                value={OGP}
+                onChange={(e) => setOGP(e.target.value)}
               />
             </div>
           </Grid>
@@ -337,17 +395,17 @@ const UploadContentMain = () => {
                 >
                   <Editor
                     editorState={editorState}
-                    onEditorStateChange={setEditorState}
+                    wrapperClassName="demo-wrapper"
+                    editorClassName="demo-editor"
+                    onEditorStateChange={onEditorStateChange}
+                    placeholder="Write description here"
                   />
                 </div>
               </div>
             </div>
           </Grid>
           <div className="updatecontainerbutton">
-            <button
-              className="update_button_new"
-              onClick={() => navigate("/editormainpage")}
-            >
+            <button className="update_button_new" onClick={handleButton}>
               Update
             </button>
           </div>

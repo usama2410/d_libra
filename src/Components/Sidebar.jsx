@@ -111,7 +111,7 @@ export default function Sidebar() {
   };
 
   React.useEffect( async () => {
-    console.log("searchstate2",searchstate2)
+    // console.log("searchstate2",searchstate2)
     await dispatch(searchState( searchstate2 ))
   }, [])
   

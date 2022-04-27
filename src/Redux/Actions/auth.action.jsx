@@ -7,12 +7,15 @@ import * as FormData from "form-data";
 // };
 
 export const signUp = (username, email, password) => async (dispatch) => {
+  console.log(username, email, password)
   const bodyFormData = new FormData();
   bodyFormData.append("email", email);
   bodyFormData.append("password", password);
+  bodyFormData.append("username", username);
 
   try {
     const response = await axios.post(URL + endpoints.SIGNUP, bodyFormData);
+    console.log(response)
     return response?.data;
   } catch (error) {
     return error;
@@ -20,11 +23,13 @@ export const signUp = (username, email, password) => async (dispatch) => {
 };
 
 export const logIn = (email, password) => async (dispatch) => {
+  // console.log("email, password", email, password)
   const bodyFormData = new FormData();
   bodyFormData.append("email", email);
   bodyFormData.append("password", password);
   try {
     const response = await axios.post(URL + endpoints.LOGIN, bodyFormData);
+    console.log(response)
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: {
@@ -97,7 +102,7 @@ export const pinState = (pin) => async (dispatch) => {
 };
 
 export const searchState = (search) => async (dispatch) => {
-  console.log("SERAHC STATET ", search)
+  // console.log("SERAHC STATET ", search)
   try {
     dispatch({
       type: "SEARCHSTATE",

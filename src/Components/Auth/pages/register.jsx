@@ -26,6 +26,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await dispatch(signUp(username, email, password));
+    // console.log("response", response)
     setMessage(response.message);
     setData(response.data);
     if (email === "" && password === "") {
@@ -60,10 +61,10 @@ const Register = () => {
               <div className={theme ? "successMessage" : "successMessageTwo"}>
                 {message}
               </div>
-            ) : null
+            ) : message === "All Fields are Required" ? (<div className="errorMessage"> All Fields are Required </div>) : null
           ) : null}
 
-          {data === "Email already exist" ? (
+          {data === "Email or Username already exist" ? (
             <div className="errorMessage">{data}</div>
           ) : null}
 

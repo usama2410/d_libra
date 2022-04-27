@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentData from "./LandingPagedata";
 import Slider from "react-slick";
@@ -10,10 +10,11 @@ import darkmode_logo from "../../../assests/SVG_Files/New folder/darkmode_logo.s
 import lightmode_logo from "../../../assests/SVG_Files/New folder/lightmode_logo.svg";
 import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+import { home } from "../../../Redux/Actions/Client Side/home.action";
 
 const labels = {
   0: "0",
@@ -31,10 +32,14 @@ const labels = {
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const theme = useSelector((state) => state.theme.state);
-  const [data, setdata] = useState(ContentData);
+  const dispatch = useDispatch();
+  const [data, setdata] = useState([]);
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
+
+  const theme = useSelector((state) => state.theme.state);
+  const isAuthenticated = useSelector((state) => state.auth.token);
+  console.log("isAuthenticated", isAuthenticated);
 
   const settings = {
     dots: false,
@@ -115,6 +120,15 @@ const LandingPage = () => {
     ],
   };
 
+  useEffect(() => {
+    const homeData = async () => {
+      const response = await dispatch(home());
+      setdata(response?.data);
+      console.log(response);
+    };
+    homeData();
+  }, []);
+
   return (
     <>
       <div className="mainContentContainer" style={{ marginTop: "20px" }}>
@@ -136,129 +150,131 @@ const LandingPage = () => {
           <img style={{ width: "230px" }} src={LandingPageImage1} alt="" />
         </div>
       </div>
-      <div className="mainContentContainer">
-        {" "}
-        <div style={{ display: "flex" }}>
-          {" "}
-          <button
-            className="Signup_button Signup"
-            onClick={() => navigate("/register")}
-          >
-            Sign up
-          </button>
-          <button className="Signup_button" onClick={() => navigate("/login")}>
-            Log in
-          </button>
-        </div>
-      </div>
-      <div className="landingpage_slider_container">
-        {data.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.chapterName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          src={e.image}
-                          onClick={() => navigate("/coursepageguest")}
-                          className="landingpage_images"
-                          style={{
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          }}
-                          alt=""
-                        />
-                        {e.image ? (
-                          <div className="landingpagesubsection">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                          </div>
-                        ) : (
-                          ""
-                        )}
 
-                        <div
+      {isAuthenticated === null ? (
+        <div className="mainContentContainer">
+          {" "}
+          <div style={{ display: "flex" }}>
+            {" "}
+            <button
+              className="Signup_button Signup"
+              onClick={() => navigate("/register")}
+            >
+              Sign up
+            </button>
+            <button
+              className="Signup_button"
+              onClick={() => navigate("/login")}
+            >
+              Log in
+            </button>
+          </div>
+        </div>
+      ) : null}
+      <div className="landingpage_slider_container">
+        <div className="content_root_container">
+          <div>
+            <span
+              className={theme ? "chapternameclass" : "chapternameclasstwo"}
+            >
+              {/* {item.chapterName} */}
+            </span>
+          </div>
+          <div>
+            <Slider className="intro-slick" {...settings}>
+              {data.map((item) => {
+                return (
+                  <div className="intro-slides">
+                    <img
+                      src={`https://libra.pythonanywhere.com/media/${item.image}`}
+                      // onClick={() => navigate("/coursepageguest")}
+                      className="landingpage_images"
+                      style={{
+                        filter: `${item.disable ? "brightness(15%)" : ""}`,
+                      }}
+                      alt=""
+                    />
+                    {item.image ? (
+                      <div className="landingpagesubsection">
+                        <Typography
+                          noWrap
+                          component="div"
+                          className="subcoursename"
                           style={{
-                            padding: "10px 0px 0px 10px",
+                            color: theme ? "#363636" : "#FFFFFF",
                           }}
                         >
-                          <span
-                            className="Author"
-                            style={{
-                              color: theme ? "#363636" : "#C8C8C8",
-                            }}
-                          >
-                            Author:
-                          </span>
-                          <Box
-                            sx={{
-                              width: 200,
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            {" "}
-                            <div className="rating_text">
-                              {value !== null && (
-                                <Box sx={{ ml: 0 }}>
-                                  {labels[hover !== -1 ? hover : value]}
-                                </Box>
-                              )}
-                            </div>
-                            <Rating
-                              sx={{ ml: 1 }}
-                              name="hover-feedback"
-                              value={value}
-                              className="secondratingcomponent"
-                              precision={0.5}
-                              onChange={(event, newValue) => {
-                                setValue(newValue);
-                              }}
-                              onChangeActive={(event, newHover) => {
-                                setHover(newHover);
-                              }}
-                              emptyIcon={
-                                <StarIcon
-                                  style={{ color: "#C4C4C4" }}
-                                  fontSize="inherit"
-                                />
-                              }
-                            />
-                            <div
-                              className="rating_text"
-                              style={{
-                                paddingLeft: "10px",
-                                color: theme ? "#363636" : "#C8C8C8",
-                              }}
-                            >
-                              (110,000)
-                            </div>
-                          </Box>
-                        </div>
+                          {item.CategoryName}
+                        </Typography>
                       </div>
-                    );
-                  })}
-                </Slider>
-              </div>
-            </div>
-          );
-        })}
+                    ) : (
+                      ""
+                    )}
+
+                    <div
+                      style={{
+                        padding: "10px 0px 0px 10px",
+                      }}
+                    >
+                      <span
+                        className="Author"
+                        style={{
+                          color: theme ? "#363636" : "#C8C8C8",
+                        }}
+                      >
+                        Author:
+                      </span>
+                      <Box
+                        sx={{
+                          width: 200,
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {" "}
+                        <div className="rating_text">
+                          {value !== null && (
+                            <Box sx={{ ml: 0 }}>
+                              {labels[hover !== -1 ? hover : value]}
+                            </Box>
+                          )}
+                        </div>
+                        <Rating
+                          sx={{ ml: 1 }}
+                          name="hover-feedback"
+                          value={value}
+                          className="secondratingcomponent"
+                          precision={0.5}
+                          onChange={(event, newValue) => {
+                            setValue(newValue);
+                          }}
+                          onChangeActive={(event, newHover) => {
+                            setHover(newHover);
+                          }}
+                          emptyIcon={
+                            <StarIcon
+                              style={{ color: "#C4C4C4" }}
+                              fontSize="inherit"
+                            />
+                          }
+                        />
+                        <div
+                          className="rating_text"
+                          style={{
+                            paddingLeft: "10px",
+                            color: theme ? "#363636" : "#C8C8C8",
+                          }}
+                        >
+                          (110,000)
+                        </div>
+                      </Box>
+                    </div>
+                  </div>
+                );
+              })}
+            </Slider>
+          </div>
+        </div>
       </div>
       <FooterButton />
     </>
