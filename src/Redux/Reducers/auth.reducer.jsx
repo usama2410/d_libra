@@ -5,6 +5,7 @@ const initialState = {
   status: false,
   profile: null,
   token: null,
+  role: null,
 };
 
 const themeinitialstate = {
@@ -35,6 +36,7 @@ export const auth = (state = initialState, action) => {
         status: true,
         profile: payload.profile,
         token: payload.token,
+        role: payload.role,
       };
 
     case "LOGIN_FAIL":
@@ -46,6 +48,7 @@ export const auth = (state = initialState, action) => {
         status: false,
         profile: null,
         token: null,
+        role: null,
       };
 
     default:

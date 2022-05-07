@@ -10,7 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import "./UploadContentMain.css";
 import { addPost } from "../../../Redux/Actions/Editor/post.action";
-import { getParentChildCategories } from "../../../Redux/Actions/Editor/Category";
+import {
+  getChildCategories,
+  getParentChildCategories,
+} from "../../../Redux/Actions/Editor/Category";
 
 const UploadContentMain = () => {
   const navigate = useNavigate();
@@ -26,6 +29,8 @@ const UploadContentMain = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
+  const [selectedOption, setSelectedOption] = useState("");
+
   // console.log("image", image, imageName)
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -36,6 +41,9 @@ const UploadContentMain = () => {
   // console.log("hrmlText", htmlText)
 
   const [parentCategory, setParentCategory] = useState([]);
+  const [childCategory, setChildCategory] = useState([]);
+
+  // console.log("childCategory", childCategory);
 
   const handleChange = (e) => {
     if (e.target.files.length) {
@@ -158,16 +166,26 @@ const UploadContentMain = () => {
     handleParentChildeCategory();
   }, []);
 
-  const parentOptions = parentCategory.map((category) => {
-    console.log("category.id", category.id)
+  const parentOptions = parentCategory?.map((category) => {
+    // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
   });
-  console.log("parentCategory", parentOptions);
+  // console.log("parentCategory", parentOptions, selectedOption);
 
-  const handleSelector = () => {
-    parentOptions.map((item) => {
-      console.log(item.id);
-    });
+  const childOptions = childCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.CategoryName };
+  });
+
+  const handleSelector = async (selectedOption) => {
+    setSelectedOption(selectedOption);
+    // console.log("selectedOption ID", selectedOption.id);
+
+    const response = await dispatch(
+      getChildCategories(selectedOption.id, token)
+    );
+    setChildCategory(response);
+    // console.log("response", response);
   };
 
   return (
@@ -215,6 +233,7 @@ const UploadContentMain = () => {
                 placeholder="Git & GitHub Introduction"
                 options={parentOptions}
                 onChange={handleSelector}
+                value={selectedOption}
               />
             </div>
             <div>
@@ -231,8 +250,8 @@ const UploadContentMain = () => {
                     ? "git_introduction_dropdown_sub_three"
                     : "git_introduction_dropdown_sub_two"
                 }
-                placeholder="Git & GitHub Introduction"
-                // options={options}
+                // placeholder="Git & GitHub Introduction"
+                options={childOptions}
               />
             </div>
             <div>

@@ -69,21 +69,6 @@ const UserSettingViewPage = () => {
         <ArrowBack className="backbutton_icon" />{" "}
         <span className="backbutton_text">Back</span>
       </button>
-      {validation ? (
-        firstName && lastName !== "" ? (
-          message ? (
-            message === "Update Successfully" ? (
-              <div className={theme ? "successMessage" : "successMessageTwo"}>
-                {message}
-              </div>
-            ) : (
-              <div className="errorMessage">{message}</div>
-            )
-          ) : null
-        ) : (
-          <div className="errorMessage">Feilds cannot be empty!</div>
-        )
-      ) : null}
 
       <div className="user_container_root">
         <div className="user_sub_root_container">
@@ -130,6 +115,23 @@ const UserSettingViewPage = () => {
           </div>
 
           <div className="userinputfieldmaincontainer">
+            {validation ? (
+              firstName && lastName !== "" ? (
+                message ? (
+                  message === "Update Successfully" ? (
+                    <div
+                      className={theme ? "successMessage" : "successMessageTwo"}
+                    >
+                      {message}
+                    </div>
+                  ) : (
+                    <div className="errorMessage">{message}</div>
+                  )
+                ) : null
+              ) : (
+                <div className="errorMessage">Feilds cannot be empty!</div>
+              )
+            ) : null}
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span
                 className="addcategory_text_bookmark_two"
@@ -165,7 +167,7 @@ const UserSettingViewPage = () => {
               />
             </div>
           </div>
-          {/* <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <span
               className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}
@@ -192,7 +194,7 @@ const UserSettingViewPage = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-          </div> */}
+          </div>
         </div>
 
         <div className="user_bookmark_container">

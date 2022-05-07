@@ -22,11 +22,17 @@ export const endpoints = {
   //Post
   ADD_POST: "/webapi/AddPost",
   UPDATE_POST: "/webapi/AddPost",
+  GET_POST_BY_ID: "/webapi/AddPost?",
+  DELETE_POST_BY_ID: "/webapi/AddPost?",
+
 
   //Category
   ADD_CATEGORY: "/webapi/GetParentCategories",
   GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
-  GET_CHILD_CATEGORY: "/webapi//GetChildCategories?id=1",
+  GET_CHILD_CATEGORY: "/webapi//GetChildCategories?id=",
 
   GET_PARENT_CHILD_CATEGORY: "/webapi/GetParentChildCategories",
+
+  // Course Data - Screen 10
+  VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus",
 };

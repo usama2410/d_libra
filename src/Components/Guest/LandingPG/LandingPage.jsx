@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContentData from "./LandingPagedata";
 import Slider from "react-slick";
@@ -14,7 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import { home } from "../../../Redux/Actions/Client Side/home.action";
+
+import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.action";
 
 const labels = {
   0: "0",
@@ -33,13 +34,12 @@ const labels = {
 const LandingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setdata] = useState([]);
+  const [data, setdata] = useState(ContentData);
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
 
   const theme = useSelector((state) => state.theme.state);
-  const isAuthenticated = useSelector((state) => state.auth.token);
-  console.log("isAuthenticated", isAuthenticated);
+  const token = useSelector((state) => state.auth.token);
 
   const settings = {
     dots: false,
@@ -121,12 +121,10 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    const homeData = async () => {
-      const response = await dispatch(home());
-      setdata(response?.data);
-      console.log(response);
+    const viewRecentCourseStatus = async () => {
+      const response = await dispatch(viewCourseStatus(token));
     };
-    homeData();
+    viewRecentCourseStatus();
   }, []);
 
   return (
@@ -150,131 +148,129 @@ const LandingPage = () => {
           <img style={{ width: "230px" }} src={LandingPageImage1} alt="" />
         </div>
       </div>
-
-      {isAuthenticated === null ? (
-        <div className="mainContentContainer">
+      <div className="mainContentContainer">
+        {" "}
+        <div style={{ display: "flex" }}>
           {" "}
-          <div style={{ display: "flex" }}>
-            {" "}
-            <button
-              className="Signup_button Signup"
-              onClick={() => navigate("/register")}
-            >
-              Sign up
-            </button>
-            <button
-              className="Signup_button"
-              onClick={() => navigate("/login")}
-            >
-              Log in
-            </button>
-          </div>
+          <button
+            className="Signup_button Signup"
+            onClick={() => navigate("/register")}
+          >
+            Sign up
+          </button>
+          <button className="Signup_button" onClick={() => navigate("/login")}>
+            Log in
+          </button>
         </div>
-      ) : null}
+      </div>
       <div className="landingpage_slider_container">
-        <div className="content_root_container">
-          <div>
-            <span
-              className={theme ? "chapternameclass" : "chapternameclasstwo"}
-            >
-              {/* {item.chapterName} */}
-            </span>
-          </div>
-          <div>
-            <Slider className="intro-slick" {...settings}>
-              {data.map((item) => {
-                return (
-                  <div className="intro-slides">
-                    <img
-                      src={`https://libra.pythonanywhere.com/media/${item.image}`}
-                      // onClick={() => navigate("/coursepageguest")}
-                      className="landingpage_images"
-                      style={{
-                        filter: `${item.disable ? "brightness(15%)" : ""}`,
-                      }}
-                      alt=""
-                    />
-                    {item.image ? (
-                      <div className="landingpagesubsection">
-                        <Typography
-                          noWrap
-                          component="div"
-                          className="subcoursename"
+        {data.map((item) => {
+          return (
+            <div className="content_root_container">
+              <div>
+                <span
+                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
+                >
+                  {item.chapterName}
+                </span>
+              </div>
+              <div>
+                <Slider className="intro-slick" {...settings}>
+                  {item.items.map((e) => {
+                    return (
+                      <div className="intro-slides">
+                        <img
+                          src={e.image}
+                          onClick={() => navigate("/coursepageguest")}
+                          className="landingpage_images"
                           style={{
-                            color: theme ? "#363636" : "#FFFFFF",
+                            filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
-                        >
-                          {item.CategoryName}
-                        </Typography>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-
-                    <div
-                      style={{
-                        padding: "10px 0px 0px 10px",
-                      }}
-                    >
-                      <span
-                        className="Author"
-                        style={{
-                          color: theme ? "#363636" : "#C8C8C8",
-                        }}
-                      >
-                        Author:
-                      </span>
-                      <Box
-                        sx={{
-                          width: 200,
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        {" "}
-                        <div className="rating_text">
-                          {value !== null && (
-                            <Box sx={{ ml: 0 }}>
-                              {labels[hover !== -1 ? hover : value]}
-                            </Box>
-                          )}
-                        </div>
-                        <Rating
-                          sx={{ ml: 1 }}
-                          name="hover-feedback"
-                          value={value}
-                          className="secondratingcomponent"
-                          precision={0.5}
-                          onChange={(event, newValue) => {
-                            setValue(newValue);
-                          }}
-                          onChangeActive={(event, newHover) => {
-                            setHover(newHover);
-                          }}
-                          emptyIcon={
-                            <StarIcon
-                              style={{ color: "#C4C4C4" }}
-                              fontSize="inherit"
-                            />
-                          }
+                          alt=""
                         />
+                        {e.image ? (
+                          <div className="landingpagesubsection">
+                            <Typography
+                              noWrap
+                              component="div"
+                              className="subcoursename"
+                              style={{
+                                color: theme ? "#363636" : "#FFFFFF",
+                              }}
+                            >
+                              {e.Tags}
+                            </Typography>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
                         <div
-                          className="rating_text"
                           style={{
-                            paddingLeft: "10px",
-                            color: theme ? "#363636" : "#C8C8C8",
+                            padding: "10px 0px 0px 10px",
                           }}
                         >
-                          (110,000)
+                          <span
+                            className="Author"
+                            style={{
+                              color: theme ? "#363636" : "#C8C8C8",
+                            }}
+                          >
+                            Author:
+                          </span>
+                          <Box
+                            sx={{
+                              width: 200,
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {" "}
+                            <div className="rating_text">
+                              {value !== null && (
+                                <Box sx={{ ml: 0 }}>
+                                  {labels[hover !== -1 ? hover : value]}
+                                </Box>
+                              )}
+                            </div>
+                            <Rating
+                              sx={{ ml: 1 }}
+                              name="hover-feedback"
+                              value={value}
+                              className="secondratingcomponent"
+                              precision={0.5}
+                              onChange={(event, newValue) => {
+                                setValue(newValue);
+                              }}
+                              onChangeActive={(event, newHover) => {
+                                setHover(newHover);
+                              }}
+                              emptyIcon={
+                                <StarIcon
+                                  style={{ color: "#C4C4C4" }}
+                                  fontSize="inherit"
+                                />
+                              }
+                            />
+                            <div
+                              className="rating_text"
+                              style={{
+                                paddingLeft: "10px",
+                                color: theme ? "#363636" : "#C8C8C8",
+                              }}
+                            >
+                              (110,000)
+                            </div>
+                          </Box>
                         </div>
-                      </Box>
-                    </div>
-                  </div>
-                );
-              })}
-            </Slider>
-          </div>
-        </div>
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </div>
+            </div>
+          );
+        })}
       </div>
       <FooterButton />
     </>

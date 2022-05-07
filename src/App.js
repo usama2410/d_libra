@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import Sidebar from "./Components/Sidebar";
 import EditorsMainPage from "../src/Components/Editors/EditorsMainPage";
 import EditCourseStructure from "./Components/Editors/EditCourseStructure";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import AddNewCategory from "./Components/Editors/AddNewCategory";
 import UploadContentMain from "./Components/Editors/UploadContent/UploadContentMain";
@@ -141,17 +146,17 @@ function App() {
                         element={<UploadContentMain />}
                       />
                       <Route
-                        path="/detailpage"
+                        path="/detailpage/:id/:role/:categoryid"
                         exact
                         element={<DetailPage />}
                       />
                       <Route
-                        path="/deletecontent"
+                        path="/deletecontent/:id/:role/:categoryid"
                         exact
                         element={<DeleteContent />}
                       />
                       <Route
-                        path="/editcontentmain"
+                        path="/editcontentmain/:id/:role/:categoryid"
                         exact
                         element={<EditContentMain />}
                       />
@@ -207,7 +212,7 @@ function App() {
                     </>
                   </>
                 ) : (
-                  <Navigate to={("/")} />
+                  <Navigate to={"/"} />
                 )}
               </Routes>
             </div>

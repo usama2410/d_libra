@@ -18,6 +18,7 @@ const MyContents = () => {
   const [responseArray, setresponseArray] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
   const handleBack = () => {
     navigate("/uploadcontentmain");
   };
@@ -103,10 +104,18 @@ const MyContents = () => {
   useEffect(() => {
     const dashboardData = async () => {
       const response = await dispatch(getDashboardData(token));
-      setresponseArray(ContentData);
+      // console.log("My content response", response);
+      setdata(response);
     };
     dashboardData();
   }, []);
+
+  const handleDetailPageNavigate = (categoryid, postId) => {
+    console.log(categoryid, postId);
+    navigate(
+      `/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`
+    );
+  };
 
   return (
     <>
@@ -169,21 +178,23 @@ const MyContents = () => {
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
                 >
-                  {item.chapterName}
+                  {item.CategoryName}
                 </span>
               </div>
               <div>
                 <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
+                  {item.lecture?.map((e) => {
                     return (
                       <div className="intro-slides">
                         <img
-                          onClick={() => navigate("/detailpage")}
-                          src={e.image}
+                          onClick={() =>
+                            handleDetailPageNavigate(item.id, e.id)
+                          }
+                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
                           className="landingpage_images"
                           alt=""
                         />
-                        {e.image ? (
+                        {e.images ? (
                           <div className="underimagetextcontainer">
                             <Typography
                               noWrap

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import "./AddNewCategory.css";
 import { useSelector, useDispatch } from "react-redux";
 import "../Sidebar.css";
-import { addnewCategory } from "../../Redux/Actions/Editor/Category";
+import {
+  addnewCategory,
+  getParentChildCategories,
+} from "../../Redux/Actions/Editor/Category";
 import Select from "react-select";
 import { ArrowBack } from "@mui/icons-material";
 
@@ -19,6 +22,9 @@ const AddNewCategory = () => {
   const [slug, setSlug] = useState("");
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
+
+  const [parentCategory, setParentCategory] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const token = useSelector((state) => state.auth.token);
 
@@ -47,12 +53,32 @@ const AddNewCategory = () => {
     return () => clearTimeout(timer);
   };
 
-  const options = [
-    { value: "chocolate", label: "Git & Git Hub Introduction" },
-    { value: "Saab", label: "Saab" },
-    { value: "Opel", label: "Opel" },
-    { value: "Audi", label: "Audi" },
-  ];
+  // const options = [
+  //   { value: "chocolate", label: "Git & Git Hub Introduction" },
+  //   { value: "Saab", label: "Saab" },
+  //   { value: "Opel", label: "Opel" },
+  //   { value: "Audi", label: "Audi" },
+  // ];
+
+  const handleParentChildeCategory = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    // console.log("getParentChildCategories response", response)
+    setParentCategory(response);
+  };
+
+  useEffect(() => {
+    handleParentChildeCategory();
+  }, []);
+
+  const parentOptions = parentCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.CategoryName };
+  });
+
+  const handleSelector = async (selectedOption) => {
+    setSelectedOption(selectedOption);
+    console.log("selectedOption ID", selectedOption.id);
+  };
 
   const customStyles = {
     control: (base) => ({
@@ -193,9 +219,9 @@ const AddNewCategory = () => {
           </span>
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
-            placeholder="4000"
-            value={chapId}
-            onChange={(e) => setchapId(e.target.value)}
+            placeholder="Parent Category Id"
+            value={selectedOption.id}
+            // onChange={(e) => setchapId(e.target.value)}
           />
           <span
             className="addcategory_text"
@@ -211,7 +237,9 @@ const AddNewCategory = () => {
                 : "git_introduction_dropdown"
             }
             placeholder="Git & GitHub Introduction"
-            options={options}
+            options={parentOptions}
+            onChange={handleSelector}
+            value={selectedOption}
           />
           <span
             className="addcategory_text"
@@ -259,7 +287,7 @@ const AddNewCategory = () => {
           <button
             className="update_button   "
             onClick={handleSubmit}
-            style={{ marginBottom: "40px", cursor: 'pointer' }}
+            style={{ marginBottom: "40px", cursor: "pointer" }}
           >
             Update
           </button>

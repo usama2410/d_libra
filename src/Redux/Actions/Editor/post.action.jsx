@@ -5,15 +5,15 @@ import * as FormData from "form-data";
 export const addPost =
   (contentTitle, contentId, tags, htmlText, metaDescription, OGP, token) =>
   async (dispatch) => {
-    console.log(
-      contentTitle,
-      contentId,
-      tags,
-      htmlText,
-      metaDescription,
-      OGP
-      //   token
-    );
+    // console.log(
+    //   contentTitle,
+    //   contentId,
+    //   tags,
+    //   htmlText,
+    //   metaDescription,
+    //   OGP
+    //   //   token
+    // );
     const formData = new FormData();
     formData.append("title", contentTitle);
     formData.append("Categroyid", contentId);
@@ -29,6 +29,76 @@ export const addPost =
         },
       });
       console.log("AddPost response", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const getPostByID =
+  (id, role, categoryid, token) => async (dispatch) => {
+    console.log(id, role, categoryid);
+    try {
+      const response = await axios.get(
+        URL + endpoints.GET_POST_BY_ID + id + "&" + role + "&" + categoryid,
+        {
+          headers: {
+            Authorization: "Bearar " + token,
+          },
+        }
+      );
+      // console.log(" getPostByID response", response);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const deletePost = (id, token) => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      URL + endpoints.DELETE_POST_BY_ID + id,
+      {
+        headers: {
+          Authorization: "Bearar " + token,
+        },
+      }
+    );
+    console.log("Delete Post response", response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updatePost =
+  (
+    contentTitle,
+    categoryId,
+    tags,
+    htmlText,
+    contentId,
+    metaDescription,
+    OGP,
+    token
+  ) =>
+  async (dispatch) => {
+    const formData = new FormData();
+    formData.append("title", contentTitle);
+    formData.append("Categroyid", categoryId);
+    formData.append("tags", tags);
+    formData.append("content", htmlText);
+    formData.append("image", "/media/SuperAdmin/dummy.jpg");
+    formData.append("Postid", contentId);
+    formData.append("meta_description", metaDescription);
+    formData.append("OGP", OGP);
+    try {
+      const response = await axios.put(URL + endpoints.UPDATE_POST, formData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      // console.log("UpdatePost response", response);
+      return response?.data
     } catch (error) {
       console.log(error);
     }

@@ -39,6 +39,7 @@ export const logIn = (email, password) => async (dispatch) => {
         status: response?.data?.status,
         profile: response?.data?.data?.profile,
         token: response?.data?.token,
+        role: response?.data?.data?.role,
       },
     });
     return response?.data;

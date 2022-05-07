@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./EditorMainPage.css";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
 import Select from "react-select";
+import { getParentChildCategories } from "../../Redux/Actions/Editor/Category";
 
 const EditorsMainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
   const handleBack = () => {};
   const theme = useSelector((state) => state.theme.state);
+
+  const [parentCategory, setParentCategory] = useState([]);
 
   const handleBackgroung = () => {
     if (
@@ -25,6 +31,21 @@ const EditorsMainPage = () => {
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
+
+  const handleParentChildeCategory = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    // console.log("getParentChildCategories response", response)
+    setParentCategory(response);
+  };
+
+  const parentOptions = parentCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.CategoryName };
+  });
+
+  useEffect(() => {
+    handleParentChildeCategory();
+  }, []);
 
   const customStyless = {
     control: (base, state) => ({
@@ -121,7 +142,7 @@ const EditorsMainPage = () => {
                     : "git_introduction_dropdown"
                 }
                 placeholder="Git & GitHub Introduction"
-                options={options}
+                options={parentOptions}
               />
             </div>
             <div className="editormainpagebuttoncontainertwo centercontainer">

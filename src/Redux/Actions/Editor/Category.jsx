@@ -68,3 +68,17 @@ export const getParentChildCategories = (token) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getChildCategories = (id, token) => async (dispatch) => {
+  try {
+    const response = await axios.get(URL + endpoints.GET_CHILD_CATEGORY + id, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    // console.log("GetChildCategories response", response);
+    return response?.data?.data
+  } catch (error) {
+    console.log(error);
+  }
+};
