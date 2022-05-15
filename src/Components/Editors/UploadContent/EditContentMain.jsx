@@ -14,27 +14,30 @@ import {
   getParentChildCategories,
 } from "../../../Redux/Actions/Editor/Category";
 
-import { updatePost } from "../../../Redux/Actions/Editor/post.action";
+import {
+  getPostByID,
+  updatePost,
+} from "../../../Redux/Actions/Editor/post.action";
 
 const EditContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
+  // console.log(params);
 
+  const [contentTitle, setContentTitle] = useState();
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
-  const [contentTitle, setContentTitle] = useState("nodejs table of content");
   const [contentId, setContentId] = useState(params?.id?.split("=")[1]);
   const [categoryId, setCategoryId] = useState(
     params?.categoryid?.split("=")[1]
   );
-  const [tags, setTags] = useState("niodejs,git,tech");
+  const [tags, setTags] = useState();
   const [image, setImage] = useState("");
-  const [metaDescription, setMetaDiscription] = useState("meta_description");
-  const [OGP, setOGP] = useState("OGP");
+  const [metaDescription, setMetaDiscription] = useState("");
+  const [OGP, setOGP] = useState();
 
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionChild, setSelectedOptionChild] = useState("");
@@ -151,7 +154,7 @@ const EditContentMain = () => {
 
   useEffect(() => {
     handleParentChildeCategory();
-  }, []);
+  }, [contentTitle]);
 
   const parentOptions = parentCategory?.map((category) => {
     // console.log("category.id", category.id);
@@ -199,7 +202,7 @@ const EditContentMain = () => {
         token
       )
     );
-    console.log("handleUpdatePost response", response);
+    // console.log("handleUpdatePost response", response);
     setMessage(response.message);
     setErrorMessage(true);
 
@@ -209,6 +212,19 @@ const EditContentMain = () => {
 
     return () => clearTimeout(timer);
   };
+
+  useEffect(() => {
+    const postById = async () => {
+      const response = await dispatch(
+        getPostByID(params.id, params.role, params.categoryid, token)
+      );
+      setTags(response?.post?.tags)
+      setContentTitle(response?.post?.title);
+      setMetaDiscription(response?.post?.meta_description);
+      setOGP(response?.post?.OGP);
+    };
+    postById();
+  }, [contentTitle]);
 
   return (
     <>
@@ -269,7 +285,7 @@ const EditContentMain = () => {
                   ? "git_introduction_dropdown_sub_three"
                   : "git_introduction_dropdown_sub_two"
               }
-              placeholder="Git & GitHub Introduction"
+              placeholder="Select"
               options={childOptions}
               onChange={handleSelectorChild}
               value={selectedOptionChild}

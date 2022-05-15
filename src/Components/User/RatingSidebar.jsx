@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import { ArrowBack } from "@mui/icons-material";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import FooterButtons from "./FooterButtons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./RatingForm.css";
 import StarIcon from "@mui/icons-material/Star";
 import Select from "react-select";
+import { getParentChildCategories } from "../../Redux/Actions/Editor/Category";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleBack = () => {
     navigate("/usersettingviewpage");
   };
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+
   const [value, setValue] = React.useState(2);
+  const [parentCategory, setParentCategory] = useState([]);
 
   const options = [
     { value: "chocolate", label: "Git & Git Hub Introduction" },
@@ -24,6 +30,21 @@ const RatingSidebar = () => {
     { value: "Opel", label: "Opel" },
     { value: "Audi", label: "Audi" },
   ];
+
+  const handleParentChildeCategory = async () => {
+    const response = await dispatch(getParentChildCategories(token));
+    // console.log("getParentChildCategories response", response)
+    setParentCategory(response);
+  };
+
+  useEffect(() => {
+    handleParentChildeCategory();
+  }, []);
+
+  const parentOptions = parentCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.CategoryName };
+  });
 
   const customStyles = {
     control: (base) => ({
@@ -123,7 +144,7 @@ const RatingSidebar = () => {
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
           placeholder="Git & GitHub Introduction"
-          options={options}
+          options={parentOptions}
         />
 
         <div className="ratingsidebarcomponent">

@@ -34,5 +34,6 @@ export const endpoints = {
   GET_PARENT_CHILD_CATEGORY: "/webapi/GetParentChildCategories",
 
   // Course Data - Screen 10
-  VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus",
+  VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus?role",
+
 };

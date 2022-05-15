@@ -52,7 +52,7 @@ export const getSubCategory = (token) => async (dispatch) => {
 };
 
 export const getParentChildCategories = (token) => async (dispatch) => {
-  // console.log("token", token);
+  console.log("token", token);
   try {
     const response = await axios.get(
       URL + endpoints.GET_PARENT_CHILD_CATEGORY,
@@ -62,7 +62,7 @@ export const getParentChildCategories = (token) => async (dispatch) => {
         },
       }
     );
-    // console.log("Parent Child response", response);
+    console.log("Parent Child response", response);
     return response?.data?.data;
   } catch (error) {
     console.log(error);

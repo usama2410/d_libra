@@ -23,6 +23,8 @@ const AddNewCategory = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
 
+  console.log("message", message)
+
   const [parentCategory, setParentCategory] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -185,7 +187,7 @@ const AddNewCategory = () => {
           {errorMessage === true ? (
             <div className="errorMessage">Feilds cannot be empty!</div>
           ) : message ? (
-            message === "Add Sub Category Successfully" ? (
+            message === "Add Categroy Successfully" ? (
               <div className={theme ? "successMessage" : "successMessageTwo"}>
                 Sub category added successfully
               </div>

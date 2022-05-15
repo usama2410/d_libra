@@ -2,7 +2,7 @@ import GitGitHubIntroduction from "../../../assests/SVG_Files/Slides/GitGitHubIn
 
 const LandingPageMainDataOne = [
   {
-    chapterName: "Recently Viewed Courses",
+    chapterName: "Recently Viewed Courses", 
     items: [
       {
         id: 1,

@@ -171,7 +171,7 @@ const MyContents = () => {
         </div>
       </div>
       <div className="landingpage_slider_container">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
               <div>
