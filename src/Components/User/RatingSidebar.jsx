@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./RatingForm.css";
 import StarIcon from "@mui/icons-material/Star";
 import Select from "react-select";
-import { getParentChildCategories } from "../../Redux/Actions/Editor/Category";
+import { getMainCategory, getParentChildCategories } from "../../Redux/Actions/Editor/Category";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const RatingSidebar = () => {
   ];
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
-    // console.log("getParentChildCategories response", response)
-    setParentCategory(response);
+    const response = await dispatch(getMainCategory(token));
+    console.log("getParentChildCategories response", response)
+    setParentCategory(response?.data);
   };
 
   useEffect(() => {

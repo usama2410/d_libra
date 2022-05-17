@@ -77,7 +77,24 @@ export const getChildCategories = (id, token) => async (dispatch) => {
       },
     });
     // console.log("GetChildCategories response", response);
-    return response?.data?.data
+    return response?.data?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getTopicContent = (role, id, token) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      URL + endpoints.GET_TOPIC_CONTENT + role + "&" + "course_id=" + id,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    // console.log("getTopicContent response", response);
+    return response?.data?.data;
   } catch (error) {
     console.log(error);
   }

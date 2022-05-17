@@ -1,26 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import FooterButtons from "./FooterButtons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./RatingForm.css";
 import Select from "react-select";
 
+import {
+  getMainCategory,
+  getTopicContent,
+} from "../../Redux/Actions/Editor/Category";
+
 const Feedback = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
+  const role = useSelector((state) => state.auth.role);
+  const token = useSelector((state) => state.auth.token);
+  const [parentCategory, setParentCategory] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [childCategory, setChildCategory] = useState([]);
 
+  console.log("selectedOption", selectedOption);
   const handleBack = () => {
     navigate("/ratingform");
   };
 
-  const options = [
-    { value: "chocolate", label: "Git & Git Hub Introduction" },
-    { value: "Saab", label: "Saab" },
-    { value: "Opel", label: "Opel" },
-    { value: "Audi", label: "Audi" },
-  ];
+  // const options = [
+  //   { value: "chocolate", label: "Git & Git Hub Introduction" },
+  //   { value: "Saab", label: "Saab" },
+  //   { value: "Opel", label: "Opel" },
+  //   { value: "Audi", label: "Audi" },
+  // ];
+
+  useEffect(() => {
+    const mainCategory = async () => {
+      const response = await dispatch(getMainCategory());
+      // console.log("response", response);
+      setParentCategory(response?.data);
+    };
+    mainCategory();
+  }, []);
+
+  const parentOptions = parentCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.CategoryName };
+  });
+
+  const childOptions = childCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return { id: category.id, label: category.title };
+  });
+
+  const handleSelector = async (selectedOption) => {
+    setSelectedOption(selectedOption);
+
+    const response = await dispatch(
+      getTopicContent(role, selectedOption?.id, token)
+    );
+    console.log("response", response);
+    setChildCategory(response);
+  };
 
   const customStyles = {
     control: (base) => ({
@@ -120,16 +161,18 @@ const Feedback = () => {
           className={
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
-          placeholder="Git & GitHub Introduction"
-          options={options}
+          placeholder="Select a Course for Feedback"
+          options={parentOptions}
+          onChange={handleSelector}
+          value={selectedOption}
         />
         <Select
           styles={theme ? customStyles : customStyless}
           className={
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
-          placeholder="Git & GitHub Introduction"
-          options={options}
+          placeholder="Select a Topic for Feedback"
+          options={childOptions}
         />
       </div>
       <div className="ratingform_root_three">

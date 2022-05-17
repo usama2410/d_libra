@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 
 import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.action";
+import { getMainCategory } from "../../../Redux/Actions/Editor/Category";
 
 const labels = {
   0: "0",
@@ -121,10 +122,11 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    const viewRecentCourseStatus = async () => {
-      const response = await dispatch(viewCourseStatus(token));
+    const MainCategory = async () => {
+      const response = await dispatch(getMainCategory(token));
+      console.log("response", response)
     };
-    viewRecentCourseStatus();
+    MainCategory();
   }, []);
 
   return (
