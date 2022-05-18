@@ -141,7 +141,7 @@ const LandingPageMain = () => {
   return (
     <>
       <div className="landingpage_slider_container">
-        {dataone.map((item) => {
+        {dataone?.map((item) => {
           return (
             <div className="content_root_container">
               <div>

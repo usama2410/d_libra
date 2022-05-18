@@ -9,7 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./RatingForm.css";
 import StarIcon from "@mui/icons-material/Star";
 import Select from "react-select";
-import { getMainCategory, getParentChildCategories } from "../../Redux/Actions/Editor/Category";
+import {
+  getMainCategory,
+  getParentChildCategories,
+} from "../../Redux/Actions/Editor/Category";
+import { ratingCourse } from "../../Redux/Actions/Client Side/Rating.action";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
@@ -20,21 +24,22 @@ const RatingSidebar = () => {
   };
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const [value, setValue] = React.useState(2);
+  const [comment, setComment] = useState("");
   const [parentCategory, setParentCategory] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [content_id, setContent_id] = useState("");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
 
-  const options = [
-    { value: "chocolate", label: "Git & Git Hub Introduction" },
-    { value: "Saab", label: "Saab" },
-    { value: "Opel", label: "Opel" },
-    { value: "Audi", label: "Audi" },
-  ];
+  console.log("message", message);
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getMainCategory(token));
-    console.log("getParentChildCategories response", response)
-    setParentCategory(response?.data);
+    // console.log("getParentChildCategories response", response)
+    setParentCategory(response?.data[0]?.items);
   };
 
   useEffect(() => {
@@ -45,6 +50,26 @@ const RatingSidebar = () => {
     // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
   });
+
+  const handleSelector = async (selectedOption) => {
+    setSelectedOption(selectedOption);
+    // console.log("selectedOption ID", selectedOption.id);
+    setContent_id(selectedOption.id);
+  };
+
+  const handleSubmit = async () => {
+    const response = await dispatch(
+      ratingCourse(role, content_id, value, comment, token)
+    );
+    setErrorMessage(true);
+    setMessage(response?.message);
+
+    const timer = setTimeout(() => {
+      setErrorMessage(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  };
 
   const customStyles = {
     control: (base) => ({
@@ -138,6 +163,20 @@ const RatingSidebar = () => {
         <span className="backbutton_text">Back</span>
       </button>
       <div className="ratingform_root_four_five">
+        {errorMessage === true && message === "Rating Content Sucessfully" ? (
+          <div>
+            <h4 style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}>
+              Content rated sucessfully
+            </h4>
+          </div>
+        ) : errorMessage === true && message === "Already rated" ? (
+          <div>
+            <h4 style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}>
+              Already rated
+            </h4>
+          </div>
+        ) : null}
+
         <Select
           styles={theme ? customStyles : customStyless}
           className={
@@ -145,6 +184,8 @@ const RatingSidebar = () => {
           }
           placeholder="Git & GitHub Introduction"
           options={parentOptions}
+          onChange={handleSelector}
+          value={selectedOption}
         />
 
         <div className="ratingsidebarcomponent">
@@ -182,11 +223,17 @@ const RatingSidebar = () => {
             rows="14"
             placeholder=""
             type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
         </div>
 
         <div className="rating_form_sub_four">
-          <Button variant="contained" className="user_buttons">
+          <Button
+            variant="contained"
+            className="user_buttons"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
 

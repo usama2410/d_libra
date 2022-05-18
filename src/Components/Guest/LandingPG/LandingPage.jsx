@@ -15,8 +15,12 @@ import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 
-import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.action";
+import {
+  addToRecentViewCourses,
+  viewCourseStatus,
+} from "../../../Redux/Actions/Client Side/course.action";
 import { getMainCategory } from "../../../Redux/Actions/Editor/Category";
+import { home } from "../../../Redux/Actions/Client Side/home.action";
 
 const labels = {
   0: "0",
@@ -41,6 +45,7 @@ const LandingPage = () => {
 
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const settings = {
     dots: false,
@@ -123,11 +128,17 @@ const LandingPage = () => {
 
   useEffect(() => {
     const MainCategory = async () => {
-      const response = await dispatch(getMainCategory(token));
-      console.log("response", response)
+      const response = await dispatch(home(token));
+      // console.log("response", response);
+      setdata(response?.data);
     };
     MainCategory();
   }, []);
+
+  const handleViewRecentCourses = async (id) => {
+    console.log("view recent courses", id);
+    await dispatch(addToRecentViewCourses(id, role, token));
+  };
 
   return (
     <>
@@ -182,13 +193,16 @@ const LandingPage = () => {
                     return (
                       <div className="intro-slides">
                         <img
-                          src={e.image}
-                          onClick={() => navigate("/coursepageguest")}
+                          src={`https://libra.pythonanywhere.com/media/${e.image}`}
+                          // onClick={() => navigate("/coursepageguest")}
+                          onClick={() => handleViewRecentCourses(e.id)}
                           className="landingpage_images"
-                          style={{
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          }}
-                          alt=""
+                          width="300px"
+                          height="225px"
+                          // style={{
+                          //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                          // }}
+                          alt="No Image"
                         />
                         {e.image ? (
                           <div className="landingpagesubsection">
@@ -200,7 +214,7 @@ const LandingPage = () => {
                                 color: theme ? "#363636" : "#FFFFFF",
                               }}
                             >
-                              {e.Tags}
+                              {e.CategoryName}
                             </Typography>
                           </div>
                         ) : (

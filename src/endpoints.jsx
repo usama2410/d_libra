@@ -36,5 +36,10 @@ export const endpoints = {
 
   // Course Data - Screen 10
   VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus?role",
+  ADD_TO_RECENT_COURSES: "/webapi/recentlyViewCourseStatus",
+
+
+  // Rating
+  RATING_COURSE: "/webapi/RatingContent"
 
 };
