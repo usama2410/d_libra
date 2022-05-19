@@ -23,7 +23,7 @@ const EditContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  // console.log(params);
+  console.log(params);
 
   const [contentTitle, setContentTitle] = useState();
   const [imageName, setImageName] = useState("");
@@ -60,7 +60,7 @@ const EditContentMain = () => {
   // console.log("selectedOptionChild", selectedOptionChild);
 
   const handleBack = () => {
-    navigate("/detailpage");
+    navigate(`/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`);
   };
 
   const customStyles = {
@@ -218,7 +218,7 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      setTags(response?.post?.tags)
+      setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);
       setOGP(response?.post?.OGP);

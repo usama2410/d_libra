@@ -209,7 +209,7 @@ const MyContents = () => {
                                 component="div"
                                 className="subcoursenametwo subcoursename"
                               >
-                                {e.Tags}
+                                {e.title}
                               </Typography>
                             </Typography>
                             <div className="mycontenttagscontainer">

@@ -36,7 +36,7 @@ export const addPost =
 
 export const getPostByID =
   (id, role, categoryid, token) => async (dispatch) => {
-    console.log(id, role, categoryid);
+    // console.log(id, role, categoryid);
     try {
       const response = await axios.get(
         URL + endpoints.GET_POST_BY_ID + id + "&" + role + "&" + categoryid,
@@ -63,7 +63,7 @@ export const deletePost = (id, token) => async (dispatch) => {
         },
       }
     );
-    console.log("Delete Post response", response);
+    // console.log("Delete Post response", response);
     return response.data;
   } catch (error) {
     console.log(error);
