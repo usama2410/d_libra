@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CourseMainPageData from "./CourseMainPageData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,13 +6,19 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
 import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
 import { ArrowBack } from "@mui/icons-material";
 
+import { getRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
+
 const CourseMainPage = () => {
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
-  const [data, setdata] = useState(CourseMainPageData);
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+  const [data, setdata] = useState([]);
+
   const handleBack = () => {};
   const settings = {
     dots: false,
@@ -92,6 +98,15 @@ const CourseMainPage = () => {
     ],
   };
 
+  useEffect(() => {
+    const getRecentContent = async () => {
+      const response = await dispatch(getRecenetViewContent(role, token));
+      console.log("response", response);
+      setdata(response);
+    };
+    getRecentContent();
+  }, []);
+
   return (
     <>
       <button
@@ -128,16 +143,16 @@ const CourseMainPage = () => {
                 <Slider className="intro-slick" {...settings}>
                   {item.items.map((e) => {
                     return (
-                      <div className="intro-slides">
+                      <div className="intro-slides" key={e.Content_id}>
                         <img
-                          src={e.image}
+                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
                           className="landingpage_images"
                           style={{
                             filter: `${e.disable ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
-                        {e.image ? (
+                        {e.images ? (
                           <div className="underimagetextcontainer">
                             <Typography
                               noWrap
@@ -152,7 +167,7 @@ const CourseMainPage = () => {
                                 component="div"
                                 className="subcoursenametwo subcoursename"
                               >
-                                {e.Tags}
+                                {e.title}
                               </Typography>
                             </Typography>
                             <div className="mycontenttagscontainer">

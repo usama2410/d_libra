@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getDashboardData } from "../../../Redux/Actions/Dashboard.Data.action";
 import { Typography } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
+import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
 
 const MyContents = () => {
   const dispatch = useDispatch();
@@ -110,11 +111,11 @@ const MyContents = () => {
     dashboardData();
   }, []);
 
-  const handleDetailPageNavigate = (categoryid, postId) => {
-    console.log(categoryid, postId);
-    navigate(
-      `/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`
-    );
+  const handleDetailPageNavigate = async (categoryid, postId) => {
+    // console.log(categoryid, postId);
+    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`);
+
+    await dispatch(addRecenetViewContent(categoryid, role, token));
   };
 
   return (

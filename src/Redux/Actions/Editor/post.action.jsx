@@ -3,7 +3,16 @@ import { URL, endpoints } from "../../../endpoints";
 import * as FormData from "form-data";
 
 export const addPost =
-  (contentTitle, contentId, tags, htmlText, metaDescription, OGP, token) =>
+  (
+    contentTitle,
+    contentId,
+    tags,
+    htmlText,
+    image,
+    metaDescription,
+    OGP,
+    token
+  ) =>
   async (dispatch) => {
     // console.log(
     //   contentTitle,
@@ -19,7 +28,7 @@ export const addPost =
     formData.append("Categroyid", contentId);
     formData.append("tags", tags);
     formData.append("content", htmlText);
-    formData.append("image", "/media/SuperAdmin/dummy.jpg");
+    formData.append("image", image);
     formData.append("meta_description", metaDescription);
     formData.append("OGP", OGP);
     try {
@@ -98,7 +107,7 @@ export const updatePost =
         },
       });
       // console.log("UpdatePost response", response);
-      return response?.data
+      return response?.data;
     } catch (error) {
       console.log(error);
     }

@@ -13,7 +13,6 @@
   padding-top: 10px;
 }
 
-
 .widthautoclass {
   width: 100% !important;
 }
@@ -186,13 +185,14 @@ textarea.addcategory_input_sub {
   letter-spacing: -0.015em;
   color: #ffffff;
   margin-bottom: 40px;
+  cursor: pointer;
 }
 
 .main_slide_container {
   padding: 2px 0px;
 }
 
-.image_none{
+.image_none {
   width: 100px;
   height: 222px;
 }
@@ -260,6 +260,7 @@ textarea.addcategory_input_sub {
     margin-bottom: 40px;
     height: 30px;
     width: 200px;
+    cursor: pointer;
   }
 
   .uploadcontentinputfield {

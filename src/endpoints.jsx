@@ -25,7 +25,6 @@ export const endpoints = {
   GET_POST_BY_ID: "/webapi/AddPost?",
   DELETE_POST_BY_ID: "/webapi/AddPost?",
 
-
   //Category
   ADD_CATEGORY: "/webapi/GetParentCategories",
   GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
@@ -38,8 +37,10 @@ export const endpoints = {
   VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus?role",
   ADD_TO_RECENT_COURSES: "/webapi/recentlyViewCourseStatus",
 
+  // Content Data
+  VIEW_RECENT_CONTENT: "/webapi/recentlyViewContentStatus",
+  GET_RECENT_CONTENT: "/webapi/recentlyViewContentStatus?role",
 
   // Rating
-  RATING_COURSE: "/webapi/RatingContent"
-
+  RATING_COURSE: "/webapi/RatingContent",
 };

@@ -31,7 +31,7 @@ const UploadContentMain = () => {
 
   const [selectedOption, setSelectedOption] = useState("");
 
-  // console.log("image", image, imageName)
+  console.log("image", image, imageName)
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = (editorState) => {
@@ -61,6 +61,7 @@ const UploadContentMain = () => {
         contentId,
         tags,
         htmlText,
+        imageName,
         metaDescription,
         OGP,
         token
@@ -425,7 +426,7 @@ const UploadContentMain = () => {
           </Grid>
           <div className="updatecontainerbutton">
             <button className="update_button_new" onClick={handleButton}>
-              Update
+              Upload
             </button>
           </div>
         </Grid>
