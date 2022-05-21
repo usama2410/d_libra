@@ -14,6 +14,10 @@ from .permission import authorization
 # Create your views here.
 
 
+
+
+
+
 def index(request):
     return HttpResponse('<h1>Project libra</h1>')
 
