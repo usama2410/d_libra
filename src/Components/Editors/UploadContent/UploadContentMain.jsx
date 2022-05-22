@@ -31,7 +31,7 @@ const UploadContentMain = () => {
 
   const [selectedOption, setSelectedOption] = useState("");
 
-  console.log("image", image, imageName)
+  console.log("image", image, imageName);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = (editorState) => {
@@ -55,7 +55,7 @@ const UploadContentMain = () => {
   const handleButton = async (e) => {
     e.preventDefault();
     // navigate("/editormainpage")
-    const response = await dispatch(
+    await dispatch(
       addPost(
         contentTitle,
         contentId,

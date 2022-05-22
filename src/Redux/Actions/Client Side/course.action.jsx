@@ -9,8 +9,7 @@ export const viewCourseStatus = (token, role) => async (dispatch) => {
       URL + endpoints.VIEW_COURSE_STATUS + "=" + role,
       {
         headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTYsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJzaGFrZWViMTFAZ21haWwuY29tIiwiZXhwIjoxNjUyMjU3MDU3LCJpYXQiOjE2NTIxNzA2NTd9.4Y2MHH9S6ZJBeCTz1AVGcAYCtGrvNf5XecLh2-62hmA",
+          Authorization: "Bearer " + token,
         },
       }
     );

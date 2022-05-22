@@ -23,10 +23,11 @@ const AddNewCategory = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
 
-  console.log("message", message)
+  console.log("message", message);
 
   const [parentCategory, setParentCategory] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
 
@@ -43,6 +44,7 @@ const AddNewCategory = () => {
   const handleSubmit = async (e) => {
     // navigate("/editormainpage");
     e.preventDefault();
+    setIsLoading(true);
     const response = await dispatch(
       addnewCategory(chapName, chapId, slug, token)
     );
@@ -52,6 +54,7 @@ const AddNewCategory = () => {
       setErrorMessage(false);
       setMessage("");
     }, 5000);
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -286,13 +289,22 @@ const AddNewCategory = () => {
           </div>
         </div>
         <div className="update_button_newcategory">
-          <button
-            className="update_button   "
-            onClick={handleSubmit}
-            style={{ marginBottom: "40px", cursor: "pointer" }}
-          >
-            Update
-          </button>
+          {isLoading ? (
+            <button
+              className="update_button"
+              style={{ marginBottom: "40px", cursor: "pointer" }}
+            >
+              loading...
+            </button>
+          ) : (
+            <button
+              className="update_button   "
+              onClick={handleSubmit}
+              style={{ marginBottom: "40px", cursor: "pointer" }}
+            >
+              Update
+            </button>
+          )}
         </div>
       </div>
     </>

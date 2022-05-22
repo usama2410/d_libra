@@ -10,11 +10,17 @@ import { logIn } from "../../../Redux/Actions/auth.action";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("babuibrar@gmail.com");
-  const [password, setPassword] = useState("babuibrar@93");
-  const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const theme = useSelector((state) => state.theme.state);
+  const role = useSelector((state) => state.auth.role);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // console.log("email", email, password);
+  // console.log("role", role);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -23,16 +29,25 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const response = await dispatch(logIn(email, password));
-    setMessage(response.message);
+    console.log("response", response);
+    setMessage(response?.message);
     if (email === "" && password === "") {
       setErrorMessage(true);
+    } else if (response?.data?.role === "normaluser") {
+      setIsLoading(false);
+      navigate("/");
+    } else if (response?.data?.role === "editor") {
+      setIsLoading(false);
+      navigate("/editormainpage");
     }
 
     const timer = setTimeout(() => {
       setErrorMessage(false);
       setMessage("");
     }, 5000);
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
   return (
@@ -51,17 +66,14 @@ const Login = () => {
           {errorMessage === true ? (
             <div className="errorMessage">Feilds cannot be empty!</div>
           ) : message ? (
-            message === "Login SuccessFully" ? (
-              <div className={theme ? "successMessage" : "successMessageTwo"}>
-                {message}
-              </div>
-            ) : message === "Invalid Credential" ? (
+            message === "Invalid Credential" ? (
               <div className="errorMessage">{message}</div>
             ) : null
           ) : null}
 
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="email"
             placeholder="Email Address or Username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -69,15 +81,20 @@ const Login = () => {
 
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="logininbuttoncontainer">
-          <Button className="loginbuttontext" onClick={handleLogin}>
-            Log in
-          </Button>
+          {isLoading ? (
+            <Button className="loginbuttontext">loading...</Button>
+          ) : (
+            <Button className="loginbuttontext" onClick={handleLogin}>
+              Log in
+            </Button>
+          )}
         </div>
 
         <div>

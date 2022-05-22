@@ -291,7 +291,7 @@ const EditCourseStructure = () => {
               ) : (
                 <>
                   {parentChidCategory?.map((item) => {
-                    return item.SubCategory.map((subItem) => {
+                    return item.SubCategory?.map((subItem) => {
                       return (
                         <>
                           <StyledTableRow>

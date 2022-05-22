@@ -177,7 +177,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="landingpage_slider_container">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
               <div>
@@ -189,7 +189,7 @@ const LandingPage = () => {
               </div>
               <div>
                 <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
+                  {item?.items?.map((e) => {
                     return (
                       <div className="intro-slides">
                         <img
@@ -197,8 +197,6 @@ const LandingPage = () => {
                           // onClick={() => navigate("/coursepageguest")}
                           onClick={() => handleViewRecentCourses(e.id)}
                           className="landingpage_images"
-                          width="300px"
-                          height="225px"
                           // style={{
                           //   filter: `${e.disable ? "brightness(15%)" : ""}`,
                           // }}

@@ -7,7 +7,7 @@ import * as FormData from "form-data";
 // };
 
 export const signUp = (username, email, password) => async (dispatch) => {
-  console.log(username, email, password)
+  // console.log(username, email, password)
   const bodyFormData = new FormData();
   bodyFormData.append("email", email);
   bodyFormData.append("password", password);
@@ -15,7 +15,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
   try {
     const response = await axios.post(URL + endpoints.SIGNUP, bodyFormData);
-    console.log(response)
+    // console.log(response)
     return response?.data;
   } catch (error) {
     return error;
@@ -29,7 +29,7 @@ export const logIn = (email, password) => async (dispatch) => {
   bodyFormData.append("password", password);
   try {
     const response = await axios.post(URL + endpoints.LOGIN, bodyFormData);
-    console.log(response)
+    // console.log(response)
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: {
@@ -51,7 +51,7 @@ export const logIn = (email, password) => async (dispatch) => {
 
 export const changePassword =
   (oldpassword, password, token) => async (dispatch) => {
-    console.log("changePassword", oldpassword, password, token);
+    // console.log("changePassword", oldpassword, password, token);
     const formData = new FormData();
     formData.append("oldpassword", oldpassword);
     formData.append("password", password);

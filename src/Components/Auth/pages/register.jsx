@@ -11,26 +11,30 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
-  const [username, setUserName] = useState("MuhammadIbrar");
-  const [email, setEmail] = useState("babuibrar@gmail.com");
-  const [password, setPassword] = useState("babuibrar@93");
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/login");
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const response = await dispatch(signUp(username, email, password));
     // console.log("response", response)
     setMessage(response.message);
     setData(response.data);
     if (email === "" && password === "") {
       setErrorMessage(true);
+    } else if (response.message === "Account Created Successfully") {
+      navigate("/");
     }
 
     const timer = setTimeout(() => {
@@ -38,6 +42,7 @@ const Register = () => {
       setMessage("");
       setData("");
     }, 5000);
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -61,7 +66,9 @@ const Register = () => {
               <div className={theme ? "successMessage" : "successMessageTwo"}>
                 {message}
               </div>
-            ) : message === "All Fields are Required" ? (<div className="errorMessage"> All Fields are Required </div>) : null
+            ) : message === "All Fields are Required" ? (
+              <div className="errorMessage"> All Fields are Required </div>
+            ) : null
           ) : null}
 
           {data === "Email or Username already exist" ? (
@@ -76,6 +83,7 @@ const Register = () => {
           />
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -83,15 +91,22 @@ const Register = () => {
 
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="password"
             placeholder="Create a Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="registercontainer">
-          <Button className="update_button" onClick={handleRegister}>
-            Register
-          </Button>
+          {isLoading ? (
+            <Button className="update_button" onClick={handleRegister}>
+              loading...
+            </Button>
+          ) : (
+            <Button className="update_button" onClick={handleRegister}>
+              Register
+            </Button>
+          )}
         </div>
       </div>
 

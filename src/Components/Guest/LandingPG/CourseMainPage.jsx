@@ -129,7 +129,7 @@ const CourseMainPage = () => {
         </div>
       </div>
       <div className="landingpage_slider_container coursemainpage_container">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
               <div style={{ display: "flex", alignItems: " center" }}>

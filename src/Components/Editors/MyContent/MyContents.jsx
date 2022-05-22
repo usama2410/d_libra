@@ -20,8 +20,10 @@ const MyContents = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-  const handleBack = () => {
-    navigate("/uploadcontentmain");
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate("/editormainpage");
+    console.log("vvv");
   };
 
   const settings = {
@@ -129,7 +131,10 @@ const MyContents = () => {
           <button
             onClick={handleBack}
             className="back_button"
-            style={{ color: `${theme ? " #363636" : "  #C8C8C8"}` }}
+            style={{
+              color: `${theme ? " #363636" : "  #C8C8C8"}`,
+              cursor: "pointer",
+            }}
           >
             <ArrowBack className="backbutton_icon" />{" "}
             <span className="backbutton_text">Back</span>
@@ -143,16 +148,7 @@ const MyContents = () => {
               Git & GitHub Introduction
             </span>
           </div>
-          <div className="mycontentcontainerbackbuttontwo">
-            <button
-              onClick={handleBack}
-              className="back_button"
-              style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
-            >
-              <ArrowBack className="backbutton_icon" />{" "}
-              <span className="backbutton_text">Back</span>
-            </button>
-          </div>
+
           <div className={theme ? "contentforedittext" : ""}>
             <div
               className="mainContentContainersub "
@@ -184,7 +180,7 @@ const MyContents = () => {
               </div>
               <div>
                 <Slider className="intro-slick" {...settings}>
-                  {item.lecture?.map((e) => {
+                  {item?.lecture?.map((e) => {
                     return (
                       <div className="intro-slides">
                         <img

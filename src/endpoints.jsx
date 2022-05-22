@@ -1,4 +1,4 @@
-const production = "https://examplePage.com";
+const production = "https://libra.pythonanywhere.com";
 const development = "https://libra.pythonanywhere.com";
 export const URL =
   process.env.NODE_ENV === "development" ? development : production;

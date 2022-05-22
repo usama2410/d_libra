@@ -9,12 +9,14 @@ import { changePassword } from "../../../Redux/Actions/auth.action";
 const ChangePassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+
   const [oldPassword, setOldPassword] = useState();
   const [password, setPassword] = useState();
   const [message, setMessage] = useState("");
   const [validation, setValidation] = useState(false);
-  const theme = useSelector((state) => state.theme.state);
-  const token = useSelector((state) => state.auth.token);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const ChangePassword = () => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const response = await dispatch(
       changePassword(oldPassword, password, token)
     );
@@ -32,6 +35,7 @@ const ChangePassword = () => {
       setValidation(false);
       setMessage("");
     }, 5000);
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -67,6 +71,7 @@ const ChangePassword = () => {
           ) : null}
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="password"
             placeholder="Old Password"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
@@ -74,15 +79,19 @@ const ChangePassword = () => {
 
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
+            type="password"
             placeholder="New Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        <Button className="update_button" onClick={handleChangePassword}>
-          Change Password
-        </Button>
+        {isLoading ? (
+          <Button className="update_button">loading...</Button>
+        ) : (
+          <Button className="update_button" onClick={handleChangePassword}>
+            Change Password
+          </Button>
+        )}
       </div>
       <div
         className="footer_copyright editor_mainPage_footer"
