@@ -4,10 +4,9 @@ import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
-
-import {
-    resetPassword
-  } from "../../../Redux/Actions/auth.action";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { resetPassword } from "../../../Redux/Actions/auth.action";
 
 const UpdatePassword = ({ email }) => {
   const navigate = useNavigate();
@@ -15,22 +14,46 @@ const UpdatePassword = ({ email }) => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [validation, setValidation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const response = await dispatch(resetPassword(email, password, token));
     console.log("response", response);
+    setMessage(response?.message);
+    if (response?.status === true) {
+      navigate("/login");
+    }
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 5000);
+    setIsLoading(false);
+    return () => clearTimeout(timer);
   };
 
   return (
     <>
       <div className="editormainpage_root_contianer">
+        <div
+          style={{
+            textAlign: "center",
+            textDecoration: "center",
+            padding: "20px",
+          }}
+        >
+          <h4>You are successfully verified. Please enter new password</h4>
+        </div>
         <div className="editormainpage_container">
+          {message === "All Fields are Required" ? (
+            <div className="errorMessage">Kindly provide new password.</div>
+          ) : message === "Password must be 8 or less than 20 characters" ? (
+            <div className="errorMessage">
+              Password must be 8 or less than 20 characters.
+            </div>
+          ) : null}
           <input
             className={theme ? "addcategory_input_sub" : "addcategory_input"}
             type="email"
@@ -46,9 +69,18 @@ const UpdatePassword = ({ email }) => {
           />
         </div>
 
-        <Button className="update_button" onClick={handleResetPassword}>
-          Reset Password
-        </Button>
+        {isLoading ? (
+          <Box
+            className="loginbuttontext"
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            <CircularProgress color="inherit" size={30} />
+          </Box>
+        ) : (
+          <Button className="update_button" onClick={handleResetPassword}>
+            Reset Password
+          </Button>
+        )}
       </div>
     </>
   );

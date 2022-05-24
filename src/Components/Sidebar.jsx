@@ -111,8 +111,12 @@ export default function Sidebar() {
   // console.log("search", search);
 
   const handleSearchResult = (e) => {
-    e.preventDefault(); 
-    navigate(`/searchresult?role=${role}&coursename=${search}`);
+    e.preventDefault();
+    if (search) {
+      navigate(`/searchresult?role=${role}&coursename=${search}`);
+    } else {
+      console.log("null")
+    }
   };
 
   const handleSearchBar = async () => {

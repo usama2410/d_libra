@@ -38,7 +38,7 @@ const Login = () => {
     const response = await dispatch(logIn(email, password));
     console.log("response", response);
     setMessage(response?.message);
-    if (email === "" && password === "") {
+    if (!email || !password) {
       setErrorMessage(true);
     } else if (response?.data?.role === "normaluser") {
       setIsLoading(false);

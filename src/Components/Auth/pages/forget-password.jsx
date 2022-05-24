@@ -10,6 +10,9 @@ import {
 } from "../../../Redux/Actions/auth.action";
 import UpdatePassword from "./update-password";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +27,7 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState();
   const [showCodeInput, setShowCodeInput] = useState(false);
   const [status, setStatus] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const [changePasswordForm, setChangePasswordForm] = useState(false);
 
@@ -34,6 +38,7 @@ const ForgetPassword = () => {
 
   const handleVerifyCode = async (e) => {
     e.preventDefault();
+    setIsVerifying(true);
     const response = await dispatch(forgetPassword(email, code, token));
     setValidation(true);
     setMessage(response?.message);
@@ -42,7 +47,13 @@ const ForgetPassword = () => {
 
     if (response?.status === true) {
       setMessage("Code verified successfully");
-      setChangePasswordForm(true);
+
+      const timer = setTimeout(() => {
+        setMessage("");
+        setChangePasswordForm(true);
+        setIsVerifying(false);
+      }, 5000);
+      return () => clearTimeout(timer);
     }
 
     const timer = setTimeout(() => {
@@ -58,12 +69,14 @@ const ForgetPassword = () => {
 
   const handleSendCode = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (!email) {
       setMessage("Email is required");
       setValidation(true);
       const timer = setTimeout(() => {
         setValidation(false);
         setMessage("");
+        setIsLoading(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -77,6 +90,7 @@ const ForgetPassword = () => {
       const timer = setTimeout(() => {
         setValidation(false);
         setMessage("");
+        setIsLoading(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -97,7 +111,7 @@ const ForgetPassword = () => {
       setValidation(false);
       setMessage("");
     }, 5000);
-
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -126,8 +140,8 @@ const ForgetPassword = () => {
               <h1>Forget Your Passowrd?</h1>
               {showCodeInput ? (
                 <h5>
-                  Do not worry. We are here to help you. Please enter the{" "}
-                  <br /> code to get verified.
+                  Do not worry. We are here to help you. Please enter the <br />{" "}
+                  code to get verified.
                 </h5>
               ) : (
                 <h5>
@@ -199,9 +213,20 @@ const ForgetPassword = () => {
 
           <>
             {showCodeInput ? (
-              <Button className="update_button" onClick={handleVerifyCode}>
-                Verify
-              </Button>
+              isVerifying ? (
+                <Button className="update_button">Verifying...</Button>
+              ) : (
+                <Button className="update_button" onClick={handleVerifyCode}>
+                  Verify
+                </Button>
+              )
+            ) : isLoading ? (
+              <Box
+                className="loginbuttontext"
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <CircularProgress color="inherit" size={30} />
+              </Box>
             ) : (
               <Button className="update_button" onClick={handleSendCode}>
                 Send Code

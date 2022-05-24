@@ -9,24 +9,27 @@ import Search from "../../assests/SVG_Files/New folder/icons/Search.svg";
 import FooterButtons from "../User/FooterButtons";
 import { useSelector, useDispatch } from "react-redux";
 import { Typography } from "@material-ui/core";
-import { useParams } from "react-router-dom";
 import { searchAction } from "../../Redux/Actions/Client Side/search.action";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
-  const { search } = useParams();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
-  const [data, setdata] = useState(Searchdata);
-
-  console.log(window.location.search);
+  const [data, setdata] = useState([]);
+  const [message, setmessage] = useState("");
 
   useEffect(() => {
     const searchResult = async () => {
-      const response = await dispatch(searchAction(window.location.search, token));
+      const response = await dispatch(
+        searchAction(window.location.search, token)
+      );
+      setdata(response?.data);
+      if (response?.data[0]?.items?.length === 0) {
+        setmessage("No Content Found");
+      }
     };
     searchResult();
-  }, []);
+  }, [window.location.search]);
 
   const settings = {
     dots: false,
@@ -101,14 +104,17 @@ const Searchresult = () => {
                   theme ? " recentlyviewedheading" : "recentlyviewedheadingtwo"
                 }
               >
-                Results for 'branch'
+                Results for '{window.location.search?.split("=")[2]}'
               </span>
             </div>
           </div>
         </div>
       </div>
       <div className="searchresult_slider_container">
-        {data.map((item) => {
+        {message === "No Content Found" ? (
+          <h1 style={{ textAlign: "center" }}>No Content Found</h1>
+        ) : null}
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
               <div>
@@ -124,14 +130,14 @@ const Searchresult = () => {
                     return (
                       <div className="intro-slides">
                         <img
-                          src={e.image}
+                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
                           className="landingpage_images"
                           style={{
                             filter: `${e.disabled ? "brightness(15%)" : ""}`,
                           }}
                           alt=""
                         />
-                        {e.image ? (
+                        {e.images ? (
                           <div className="underimagetextcontainer">
                             <Typography
                               noWrap
@@ -146,7 +152,7 @@ const Searchresult = () => {
                                 component="div"
                                 className="subcoursenametwo subcoursename"
                               >
-                                {e.Tags}
+                                {e.title}
                               </Typography>
                             </Typography>
                             <div className="mycontenttagscontainer">
