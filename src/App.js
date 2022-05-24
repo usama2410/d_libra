@@ -29,7 +29,9 @@ import UserDetailPage from "./Components/User/DetailPageUser/UserDetailPage";
 import Login from "./Components/Auth/pages/login";
 import Register from "./Components/Auth/pages/register";
 import Logout from "./Components/Auth/pages/logout";
+import ForgetPassword from "./Components/Auth/pages/forget-password";
 import ChangePassword from "./Components/Auth/pages/change-password";
+
 import { useSelector } from "react-redux";
 import "./index.css";
 import MylibraryCorse from "./Components/Extras/MylibraryCorse";
@@ -106,7 +108,16 @@ function App() {
                     <Route path="/" exact element={<LandingPage />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/register" element={<Register />} />
-
+                    <Route
+                      exact
+                      path="/searchresult"
+                      element={<Searchresult />}
+                    />
+                    <Route
+                      exact
+                      path="/forgetPassword"
+                      element={<ForgetPassword />}
+                    />
                     <>
                       <Route
                         path="/landingpagemain"

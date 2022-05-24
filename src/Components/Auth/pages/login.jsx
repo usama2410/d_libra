@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import googleIcon from "../../../assests/google.png";
 import "../Stylesheet/stylesheet.css";
 import { logIn } from "../../../Redux/Actions/auth.action";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
+import GoogleLogin from "react-google-login";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -89,7 +94,12 @@ const Login = () => {
         </div>
         <div className="logininbuttoncontainer">
           {isLoading ? (
-            <Button className="loginbuttontext">loading...</Button>
+            <Box
+              className="loginbuttontext"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="inherit" size={30} />
+            </Box>
           ) : (
             <Button className="loginbuttontext" onClick={handleLogin}>
               Log in
@@ -103,10 +113,30 @@ const Login = () => {
 
         <div className="loginwithgooglecontainer">
           <div>
-            <Button variant="text" className="signWithGoogle">
-              <img src={googleIcon} className="googleIcon" alt="google" />
-              Log in with Google
-            </Button>
+            {/* <GoogleOAuthProvider
+              clientId="589338479437-kg18vpo3jkntfmefr8rl3cqug31c5rk9.apps.googleusercontent.com"
+              redirectUri="http://localhost:3000/"
+              scope="https://www.googleapis.com/auth/userinfo.email"
+              onSuccess={(response) => {
+                console.log("response", response);
+                navigate("/");
+              }}
+              onFailure={(error) => {
+                console.log("error", error);
+              }}
+            > */}
+            <GoogleLogin
+              clientId="557890712742-u2b9oop79pjvdq9e5s1n9pqmuuugodhd.apps.googleusercontent.com"
+              buttonText="Login with Google"
+              onSuccess={(response) => {
+                console.log("response", response);
+              }}
+              onFailure={(response) => {
+                console.log("response", response);
+              }}
+              cookiePolicy={"single_host_origin"}
+            />
+            {/* </GoogleOAuthProvider> */}
           </div>
         </div>
         <div style={{ Width: "62%" }}>
@@ -116,7 +146,8 @@ const Login = () => {
               color: `${theme ? "#363636" : "#FFFFFF"}`,
             }}
           >
-            <span
+            <Link
+              to="/forgetPassword"
               className="forgotpasswordtext"
               style={{
                 color: `${theme ? "#363636" : "#FFFFFF"}`,
@@ -124,8 +155,8 @@ const Login = () => {
             >
               {" "}
               Forget Password ?
-            </span>
-            <ArrowForward className="arrowforwardicon" />
+              <ArrowForward className="arrowforwardicon" />
+            </Link>
           </div>
         </div>
         <div

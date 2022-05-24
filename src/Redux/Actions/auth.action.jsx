@@ -69,6 +69,69 @@ export const changePassword =
     } catch (error) {}
   };
 
+export const sendVerificationCode = (email, token) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("Email", email);
+  try {
+    const response = await axios.post(
+      URL + endpoints.SEND_VERIFICATION_CODE,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // console.log("sendVerificationCode", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const forgetPassword = (email, Code, token) => async (dispatch) => {
+  console.log(email, Code);
+  const formData = new FormData();
+  formData.append("Email", email);
+  formData.append("Code", Code);
+  try {
+    const response = await axios.post(
+      URL + endpoints.FORGOT_PASSWORD,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // console.log("Forget Password Response", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resetPassword = (email, passowrd, token) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("Email", email);
+  formData.append("Password", passowrd);
+  try {
+    const response = await axios.post(
+      URL + endpoints.RESET_PASSWORD,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // console.log("Forget Password Response", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const themeSwitch = (themestate) => async (dispatch) => {
   try {
     dispatch({

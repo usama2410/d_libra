@@ -8,6 +8,9 @@ export const endpoints = {
   SIGNUP: "/webapi/signup",
   LOGIN: "/webapi/userlogin",
   CHANGE_PASSWORD: "/webapi/changepassword",
+  SEND_VERIFICATION_CODE: "/webapi/SendVerificationCode",
+  FORGOT_PASSWORD: "/webapi/VerifyCode",
+  RESET_PASSWORD: "/webapi/ChangePassword",
 
   //Profile
   USER_PROFILE: "/webapi/userprofile",
@@ -43,4 +46,7 @@ export const endpoints = {
 
   // Rating
   RATING_COURSE: "/webapi/RatingContent",
+
+  // Search
+  SEARCH_COURSE: "/webapi/SearchCourse",
 };

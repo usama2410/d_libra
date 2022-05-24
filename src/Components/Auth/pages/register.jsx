@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
 import { signUp } from "../../../Redux/Actions/auth.action";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,9 +102,12 @@ const Register = () => {
         </div>
         <div className="registercontainer">
           {isLoading ? (
-            <Button className="update_button" onClick={handleRegister}>
-              loading...
-            </Button>
+            <Box
+              className="loginbuttontext"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="inherit" size={30} />
+            </Box>
           ) : (
             <Button className="update_button" onClick={handleRegister}>
               Register

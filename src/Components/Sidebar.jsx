@@ -40,7 +40,7 @@ import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_
 import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.svg";
 import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
 import Searchresult from "./Extras/Searchresult";
-import {searchState} from '../../src/Redux/Actions/auth.action'
+import { searchState } from "../../src/Redux/Actions/auth.action";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -104,21 +104,30 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [searchstate, setSearchState] = React.useState(false);
   const [searchstate2, setSearchState2] = React.useState(false);
+  const [search, setSearch] = React.useState("");
 
-  const handleSearchBar = async () => {
-    setSearchState2(!searchstate2);
-    await dispatch(searchState(searchstate2))
+  const role = useSelector((state) => state.auth.role);
+
+  // console.log("search", search);
+
+  const handleSearchResult = (e) => {
+    e.preventDefault(); 
+    navigate(`/searchresult?role=${role}&coursename=${search}`);
   };
 
-  React.useEffect( async () => {
+  const handleSearchBar = async () => {
+    // setSearchState2(!searchstate2);
+    // await dispatch(searchState(searchstate2))
+  };
+
+  React.useEffect(async () => {
     // console.log("searchstate2",searchstate2)
-    await dispatch(searchState( searchstate2 ))
-  }, [])
-  
+    await dispatch(searchState(searchstate2));
+  }, []);
 
   const handleSearchState = async (e) => {
     e.preventDefault();
-    await dispatch(searchState(searchstate2))
+    await dispatch(searchState(searchstate2));
     setSearchState2(!searchstate2);
     setSearchState(true);
   };
@@ -779,6 +788,9 @@ export default function Sidebar() {
                   className={`${
                     themeState ? "sidebar_inputfield_sub" : "sidebar_inputfield"
                   }`}
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
 
                 <div
@@ -789,9 +801,19 @@ export default function Sidebar() {
                   }
                 >
                   {themeState ? (
-                    <img src={Search} alt="" />
+                    <img
+                      src={Search}
+                      alt=""
+                      onClick={handleSearchResult}
+                      style={{ cursor: "pointer" }}
+                    />
                   ) : (
-                    <img src={Search_dark} alt="" />
+                    <img
+                      src={Search_dark}
+                      alt=""
+                      onClick={handleSearchResult}
+                      style={{ cursor: "pointer" }}
+                    />
                   )}
                 </div>
               </div>
@@ -808,7 +830,8 @@ export default function Sidebar() {
                   ) : (
                     <img
                       className="searchiconsize"
-                      onClick={handleSearchState}                      src={Search_dark}
+                      onClick={handleSearchState}
+                      src={Search_dark}
                       alt=""
                     />
                   )}
@@ -847,7 +870,12 @@ export default function Sidebar() {
               backgroundColor: `${themeState ? "#F3F6FF" : "  #111111"}`,
             }}
           >
-            <div className="left_search" onClick={() => {setSearchState(false)}}>
+            <div
+              className="left_search"
+              onClick={() => {
+                setSearchState(false);
+              }}
+            >
               {themeState ? (
                 <img src={UnionBlue} alt="" />
               ) : (

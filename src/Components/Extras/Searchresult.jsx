@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Searchdata from "./Searchdata";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,13 +7,27 @@ import "../Guest/LandingPG/Lp.css";
 import Search_dark from "../../assests/SVG_Files/New folder/icons/Search_dark.svg";
 import Search from "../../assests/SVG_Files/New folder/icons/Search.svg";
 import FooterButtons from "../User/FooterButtons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Typography } from "@material-ui/core";
+import { useParams } from "react-router-dom";
+import { searchAction } from "../../Redux/Actions/Client Side/search.action";
 
 const Searchresult = () => {
+  const dispatch = useDispatch();
+  const { search } = useParams();
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
   const [data, setdata] = useState(Searchdata);
-  
+
+  console.log(window.location.search);
+
+  useEffect(() => {
+    const searchResult = async () => {
+      const response = await dispatch(searchAction(window.location.search, token));
+    };
+    searchResult();
+  }, []);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
