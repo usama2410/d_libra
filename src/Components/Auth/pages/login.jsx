@@ -10,7 +10,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import GoogleLogin from "react-google-login";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -113,6 +112,10 @@ const Login = () => {
 
         <div className="loginwithgooglecontainer">
           <div>
+            <Button variant="text" className="signWithGoogle">
+              <img src={googleIcon} className="googleIcon" alt="google" />
+              Sign in with Google
+            </Button>
             {/* <GoogleOAuthProvider
               clientId="589338479437-kg18vpo3jkntfmefr8rl3cqug31c5rk9.apps.googleusercontent.com"
               redirectUri="http://localhost:3000/"
@@ -125,7 +128,7 @@ const Login = () => {
                 console.log("error", error);
               }}
             > */}
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId="557890712742-u2b9oop79pjvdq9e5s1n9pqmuuugodhd.apps.googleusercontent.com"
               buttonText="Login with Google"
               onSuccess={(response) => {
@@ -135,8 +138,7 @@ const Login = () => {
                 console.log("response", response);
               }}
               cookiePolicy={"single_host_origin"}
-            />
-            {/* </GoogleOAuthProvider> */}
+            /> */}
           </div>
         </div>
         <div style={{ Width: "62%" }}>

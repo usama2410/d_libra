@@ -18,6 +18,8 @@ import Icon_gmail from "../../../assests/SVG_Files/New folder/icons/Icon_gmail.s
 import Icon_telegram from "../../../assests/SVG_Files/New folder/icons/Icon_telegram.svg";
 import Icon_whatsapp from "../../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg";
 
+import ReactWhatsapp from "react-whatsapp";
+
 const drawerBleeding = 56;
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -34,6 +36,7 @@ const FooterButtons = (props) => {
 
   const [open, setOpen] = React.useState(false);
   const [mobileView, setMobileView] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -45,6 +48,13 @@ const FooterButtons = (props) => {
       setMobileView(true);
     }
   }, []);
+
+  const handleWhatsApp = () => {
+    // setOpenDrawer(true);
+    console.log("whatsapp");
+    const url = `https://api.whatsapp.com/send?text=${window.location.href}`;
+    window.open(url, "_blank");
+  };
 
   return (
     <>
@@ -145,7 +155,8 @@ const FooterButtons = (props) => {
                           <img
                             src={Icon_whatsapp}
                             alt=""
-                            style={{ paddingLeft: "15px" }}
+                            style={{ paddingLeft: "15px", cursor: "pointer" }}
+                            onClick={handleWhatsApp}
                           />
                           <img
                             src={Icon_facebook}
@@ -177,10 +188,12 @@ const FooterButtons = (props) => {
                           <img
                             src={Icon_whatsapp}
                             alt=""
+                            onClick={handleWhatsApp}
                             style={{
                               position: "relative",
                               bottom: "-40px",
                               left: "-22px",
+                              cursor: "pointer",
                             }}
                           />
                           <img
@@ -240,6 +253,9 @@ const FooterButtons = (props) => {
             </div>
           </Button>
         </div>
+        {/* {openDrawer && (
+          <ReactWhatsapp number="" message={window.location.href} />
+        )} */}
       </div>
     </>
   );

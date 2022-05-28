@@ -10,11 +10,17 @@ import FooterButtons from "../User/FooterButtons";
 import { useSelector, useDispatch } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { searchAction } from "../../Redux/Actions/Client Side/search.action";
+import { useParams } from "react-router-dom";
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
+  const params = useParams();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
 
@@ -23,13 +29,16 @@ const Searchresult = () => {
       const response = await dispatch(
         searchAction(window.location.search, token)
       );
-      setdata(response?.data);
       if (response?.data[0]?.items?.length === 0) {
         setmessage("No Content Found");
+        setdata([]);
+      } else {
+        setmessage("");
+        setdata(response?.data);
       }
     };
     searchResult();
-  }, [window.location.search]);
+  }, [window.location.search, token, params]);
 
   const settings = {
     dots: false,
@@ -113,67 +122,88 @@ const Searchresult = () => {
       <div className="searchresult_slider_container">
         {message === "No Content Found" ? (
           <h1 style={{ textAlign: "center" }}>No Content Found</h1>
-        ) : null}
-        {data?.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.chapterName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
-                          className="landingpage_images"
-                          style={{
-                            filter: `${e.disabled ? "brightness(15%)" : ""}`,
-                          }}
-                          alt=""
-                        />
-                        {e.images ? (
-                          <div className="underimagetextcontainer">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="underimagecontent"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursenametwo subcoursename"
-                              >
-                                {e.title}
-                              </Typography>
-                            </Typography>
-                            <div className="mycontenttagscontainer">
-                              <img
-                                src={e.TagsImageTwo}
-                                alt=""
-                                className="tagstwocontainer"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
+        ) : (
+          <>
+            {data?.length > 0 ? (
+              <>
+                {data?.map((item) => {
+                  return (
+                    <div className="content_root_container">
+                      <div>
+                        <span
+                          className={
+                            theme ? "chapternameclass" : "chapternameclasstwo"
+                          }
+                        >
+                          {item.chapterName}
+                        </span>
                       </div>
-                    );
-                  })}
-                </Slider>
-              </div>
-            </div>
-          );
-        })}
+                      <div>
+                        <Slider className="intro-slick" {...settings}>
+                          {item.items.map((e) => {
+                            return (
+                              <div className="intro-slides">
+                                <img
+                                  src={`https://api.libraa.ml/media/${e.images}`}
+                                  className="landingpage_images"
+                                  style={{
+                                    filter: `${
+                                      e.disabled ? "brightness(15%)" : ""
+                                    }`,
+                                  }}
+                                  alt=""
+                                />
+                                {e.images ? (
+                                  <div className="underimagetextcontainer">
+                                    <Typography
+                                      noWrap
+                                      component="div"
+                                      className="underimagecontent"
+                                      style={{
+                                        color: theme ? "#363636" : "#FFFFFF",
+                                      }}
+                                    >
+                                      <Typography
+                                        noWrap
+                                        component="div"
+                                        className="subcoursenametwo subcoursename"
+                                      >
+                                        {e.title}
+                                      </Typography>
+                                    </Typography>
+                                    <div className="mycontenttagscontainer">
+                                      <img
+                                        src={Bookmark_blue}
+                                        alt=""
+                                        className="tagstwocontainer"
+                                      />
+                                    </div>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            );
+                          })}
+                        </Slider>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "50px",
+                }}
+              >
+                <CircularProgress color="inherit" size={60} />
+              </Box>
+            )}
+          </>
+        )}
       </div>
 
       <div className="second_tagpage_container">

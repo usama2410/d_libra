@@ -12,8 +12,9 @@ import Typography from "@mui/material/Typography";
 import FooterButton from "./FooterButton";
 import { useSelector, useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import {
   addToRecentViewCourses,
@@ -39,13 +40,19 @@ const labels = {
 const LandingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setdata] = useState(ContentData);
-  const [value, setValue] = React.useState(2);
+  const [data, setdata] = useState([]);
+  const [value, setValue] = React.useState("");
   const [hover, setHover] = React.useState(-1);
-
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
+
+  const mainCategoryState = useSelector(
+    (state) => state?.mainCategoryData?.data
+  );
+
+  // console.log("mainCategoryState", mainCategoryState)
+  // console.log("data", data)
 
   const settings = {
     dots: false,
@@ -128,9 +135,13 @@ const LandingPage = () => {
 
   useEffect(() => {
     const MainCategory = async () => {
-      const response = await dispatch(home(token));
-      // console.log("response", response);
-      setdata(response?.data);
+      if (mainCategoryState?.length === 0) {
+        const response = await dispatch(home(token));
+        // console.log("response", response);
+        setdata(response);
+      } else {
+        setdata(mainCategoryState);
+      }
     };
     MainCategory();
   }, []);
@@ -138,6 +149,7 @@ const LandingPage = () => {
   const handleViewRecentCourses = async (id) => {
     console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
+    navigate("/coursepageguest");
   };
 
   return (
@@ -176,116 +188,127 @@ const LandingPage = () => {
           </button>
         </div>
       </div>
-      <div className="landingpage_slider_container">
-        {data?.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.chapterName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item?.items?.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          src={`https://libra.pythonanywhere.com/media/${e.image}`}
-                          // onClick={() => navigate("/coursepageguest")}
-                          onClick={() => handleViewRecentCourses(e.id)}
-                          className="landingpage_images"
-                          // style={{
-                          //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          // }}
-                          alt="No Image"
-                        />
-                        {e.image ? (
-                          <div className="landingpagesubsection">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
+      {data?.length > 0 ? (
+        <div className="landingpage_slider_container">
+          {data?.map((item) => {
+            return (
+              <div className="content_root_container">
+                <div>
+                  <span
+                    className={
+                      theme ? "chapternameclass" : "chapternameclasstwo"
+                    }
+                  >
+                    {item.chapterName}
+                  </span>
+                </div>
+                <div>
+                  <Slider className="intro-slick" {...settings}>
+                    {item?.items?.map((e) => {
+                      return (
+                        <div className="intro-slides">
+                          <img
+                            src={`https://api.libraa.ml/media/${e.image}`}
+                            // onClick={() => navigate("/coursepageguest")}
+                            onClick={() => handleViewRecentCourses(e.id)}
+                            className="landingpage_images"
+                            // style={{
+                            //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                            // }}
+                            alt="No Image"
+                          />
+                          {e.image ? (
+                            <div className="landingpagesubsection">
+                              <Typography
+                                noWrap
+                                component="div"
+                                className="subcoursename"
+                                style={{
+                                  color: theme ? "#363636" : "#FFFFFF",
+                                }}
+                              >
+                                {e.CategoryName}
+                              </Typography>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+
+                          <div
+                            style={{
+                              padding: "10px 0px 0px 10px",
+                            }}
+                          >
+                            <span
+                              className="Author"
                               style={{
-                                color: theme ? "#363636" : "#FFFFFF",
+                                color: theme ? "#363636" : "#C8C8C8",
                               }}
                             >
-                              {e.CategoryName}
-                            </Typography>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        <div
-                          style={{
-                            padding: "10px 0px 0px 10px",
-                          }}
-                        >
-                          <span
-                            className="Author"
-                            style={{
-                              color: theme ? "#363636" : "#C8C8C8",
-                            }}
-                          >
-                            Author:
-                          </span>
-                          <Box
-                            sx={{
-                              width: 200,
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            {" "}
-                            <div className="rating_text">
+                              Author:
+                            </span>
+                            <Box
+                              sx={{
+                                width: 200,
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              {" "}
+                              {/* <div className="rating_text">
                               {value !== null && (
                                 <Box sx={{ ml: 0 }}>
                                   {labels[hover !== -1 ? hover : value]}
                                 </Box>
                               )}
-                            </div>
-                            <Rating
-                              sx={{ ml: 1 }}
-                              name="hover-feedback"
-                              value={value}
-                              className="secondratingcomponent"
-                              precision={0.5}
-                              onChange={(event, newValue) => {
-                                setValue(newValue);
-                              }}
-                              onChangeActive={(event, newHover) => {
-                                setHover(newHover);
-                              }}
-                              emptyIcon={
-                                <StarIcon
-                                  style={{ color: "#C4C4C4" }}
-                                  fontSize="inherit"
-                                />
-                              }
-                            />
-                            <div
-                              className="rating_text"
-                              style={{
-                                paddingLeft: "10px",
-                                color: theme ? "#363636" : "#C8C8C8",
-                              }}
-                            >
-                              (110,000)
-                            </div>
-                          </Box>
+                            </div> */}
+                              <Rating
+                                sx={{ ml: 1 }}
+                                name="hover-feedback"
+                                value={e?.totalratinng}
+                                className="secondratingcomponent"
+                                // precision={0.5}
+                                // onChange={(event, newValue) => {
+                                //   setValue(newValue);
+                                // }}
+                                // onChangeActive={(event, newHover) => {
+                                //   setHover(newHover);
+                                // }}
+                                emptyIcon={
+                                  <StarIcon
+                                    style={{ color: "#C4C4C4" }}
+                                    fontSize="inherit"
+                                  />
+                                }
+                              />
+                              <div
+                                className="rating_text"
+                                style={{
+                                  paddingLeft: "10px",
+                                  color: theme ? "#363636" : "#C8C8C8",
+                                }}
+                              >
+                                ({e?.totalperson})
+                              </div>
+                            </Box>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </Slider>
+                      );
+                    })}
+                  </Slider>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+        >
+          <CircularProgress color="inherit" size={60} />
+        </Box>
+      )}
+
       <FooterButton />
     </>
   );

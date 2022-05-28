@@ -24,7 +24,7 @@ const Register = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/login");
+    navigate("/");
   };
 
   const handleRegister = async (e) => {

@@ -145,7 +145,7 @@ const CourseMainPage = () => {
                     return (
                       <div className="intro-slides" key={e.Content_id}>
                         <img
-                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
+                          src={`https://api.libraa.ml/media/${e.images}`}
                           className="landingpage_images"
                           style={{
                             filter: `${e.disable ? "brightness(15%)" : ""}`,

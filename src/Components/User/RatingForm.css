@@ -33,6 +33,16 @@
   border-radius: 5px;
 }
 
+.errorMessage {
+  color: red;
+  padding: 10px;
+  border: 2px solid red;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+
 .userdetailsecondsection {
   display: flex;
   align-items: center;

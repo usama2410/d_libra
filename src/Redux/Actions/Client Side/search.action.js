@@ -8,6 +8,12 @@ export const searchAction = (location, token) => async (dispatch) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     // console.log("searchAction", response.data);
+    dispatch({
+      type: "GET_SEARCH_RESULT_DATA",
+      payload: {
+        data: response.data,
+      },
+    });
     return response?.data;
   } catch (error) {
     console.log(error);

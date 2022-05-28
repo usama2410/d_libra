@@ -23,7 +23,7 @@ const DetailPage = () => {
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
-  // console.log(details);
+  console.log(params.id);
 
   // console.log(params);
 
@@ -36,6 +36,11 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
+      console.log("response", response);
+      const post = response?.all?.filter((item) => {
+        return item.id === params.id;
+      });
+      console.log("post", post);
       setDetails(response);
     };
     postById();
@@ -68,7 +73,7 @@ const DetailPage = () => {
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <div className="detailpagesubcontainertwo">
               <img
-                src={`https://libra.pythonanywhere.com/media/${details?.post?.images}`}
+                src={`https://api.libraa.ml/media/${details?.post?.images}`}
                 alt=""
                 className="detail_page_image"
               />

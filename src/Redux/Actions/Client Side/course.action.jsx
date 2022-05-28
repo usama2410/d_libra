@@ -14,6 +14,11 @@ export const viewCourseStatus = (token, role) => async (dispatch) => {
       }
     );
     console.log("viewCourseStatus response", response);
+    dispatch({
+      type: "VIEW_RECENT_COURSE_STATUS_SUCCESS",
+      payload: response.data,
+    });
+
     return response?.data;
   } catch (error) {
     console.log(error);

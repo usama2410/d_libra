@@ -48,7 +48,11 @@ const LandingPageMain = () => {
     LandingPageMainDataOne.LandingPageMainDataTwo
   );
 
+  const viewRecentCourseState = useSelector(
+    (state) => state.viewRecentCourseStatus?.data
+  );
   console.log("viewCourseStatus dataone", dataone);
+  console.log("viewRecentCourseState", viewRecentCourseState.length);
 
   const settings = {
     dots: false,
@@ -131,9 +135,13 @@ const LandingPageMain = () => {
 
   useEffect(() => {
     const viewRecentCourseStatus = async () => {
-      const response = await dispatch(viewCourseStatus(token, role));
-      console.log("response", response);
-      setDataOne(response);
+      if (viewRecentCourseState?.length === 0) {
+        const response = await dispatch(viewCourseStatus(token, role));
+        // console.log("response", response);
+        setDataOne(response);
+      } else {
+        setDataOne(viewRecentCourseState);
+      }
     };
     viewRecentCourseStatus();
   }, []);
@@ -157,7 +165,7 @@ const LandingPageMain = () => {
                     return (
                       <div className="intro-slides">
                         <img
-                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
+                          src={`https://api.libraa.ml/media/${e.images}`}
                           onClick={() => navigate("/coursepageguest")}
                           className="landingpage_images"
                           // style={{

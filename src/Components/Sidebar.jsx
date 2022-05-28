@@ -129,6 +129,11 @@ export default function Sidebar() {
     await dispatch(searchState(searchstate2));
   }, []);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/logout")
+  }
+
   const handleSearchState = async (e) => {
     e.preventDefault();
     await dispatch(searchState(searchstate2));
@@ -374,7 +379,7 @@ export default function Sidebar() {
 
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/logout")}
+          onClick={handleLogout}
         >
           <div
             onClick={toggleDrawer(anchor, false)}

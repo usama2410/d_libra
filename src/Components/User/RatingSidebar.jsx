@@ -14,6 +14,8 @@ import {
   getParentChildCategories,
 } from "../../Redux/Actions/Editor/Category";
 import { ratingCourse } from "../../Redux/Actions/Client Side/Rating.action";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
@@ -33,13 +35,12 @@ const RatingSidebar = () => {
   const [content_id, setContent_id] = useState("");
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-
-  console.log("message", message);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getMainCategory(token));
     // console.log("getParentChildCategories response", response)
-    setParentCategory(response?.data[0]?.items);
+    setParentCategory(response[0]?.items);
   };
 
   useEffect(() => {
@@ -50,7 +51,6 @@ const RatingSidebar = () => {
     // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
   });
-
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
     // console.log("selectedOption ID", selectedOption.id);
@@ -58,6 +58,7 @@ const RatingSidebar = () => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     const response = await dispatch(
       ratingCourse(role, content_id, value, comment, token)
     );
@@ -67,7 +68,7 @@ const RatingSidebar = () => {
     const timer = setTimeout(() => {
       setErrorMessage(false);
     }, 5000);
-
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -165,15 +166,19 @@ const RatingSidebar = () => {
       <div className="ratingform_root_four_five">
         {errorMessage === true && message === "Rating Content Sucessfully" ? (
           <div>
-            <h4 style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}>
+            <h4 className={theme ? "successMessage" : "successMessageTwo"}>
               Content rated sucessfully
             </h4>
           </div>
         ) : errorMessage === true && message === "Already rated" ? (
           <div>
-            <h4 style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}>
+            <h4 className={theme ? "successMessage" : "successMessageTwo"}>
               Already rated
             </h4>
+          </div>
+        ) : errorMessage === true && message === "All Fields are Required" ? (
+          <div>
+            <h4 className="errorMessage">{message}</h4>
           </div>
         ) : null}
 
@@ -229,13 +234,22 @@ const RatingSidebar = () => {
         </div>
 
         <div className="rating_form_sub_four">
-          <Button
-            variant="contained"
-            className="user_buttons"
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
+          {isLoading ? (
+            <Box
+              className="user_buttons"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="inherit" size={30} />
+            </Box>
+          ) : (
+            <Button
+              variant="contained"
+              className="user_buttons"
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          )}
 
           <div className="user_buttons_sub_three">
             <span style={{ color: theme ? "  #111111" : " #C8C8C8" }}>

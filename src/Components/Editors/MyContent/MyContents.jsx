@@ -11,11 +11,15 @@ import { getDashboardData } from "../../../Redux/Actions/Dashboard.Data.action";
 import { Typography } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
+import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const MyContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [data, setdata] = useState(ContentData);
+  const [data, setdata] = useState([]);
   const [responseArray, setresponseArray] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -26,6 +30,10 @@ const MyContents = () => {
     console.log("vvv");
   };
 
+  const dashboardState = useSelector((state) => state?.dashboardData?.data[0]);
+  // console.log("dashboard", dashboardState[0]);
+
+  // console.log("data", data);
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -106,9 +114,13 @@ const MyContents = () => {
 
   useEffect(() => {
     const dashboardData = async () => {
-      const response = await dispatch(getDashboardData(token));
-      // console.log("My content response", response);
-      setdata(response);
+      if (dashboardState?.length === 0) {
+        const response = await dispatch(getDashboardData(token));
+        // console.log("My content response", response);
+        setdata(response);
+      } else {
+        setdata(dashboardState);
+      }
     };
     dashboardData();
   }, []);
@@ -119,6 +131,8 @@ const MyContents = () => {
 
     await dispatch(addRecenetViewContent(categoryid, role, token));
   };
+
+  //
 
   return (
     <>
@@ -167,68 +181,77 @@ const MyContents = () => {
           </div>
         </div>
       </div>
-      <div className="landingpage_slider_container">
-        {data?.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.CategoryName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item?.lecture?.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          onClick={() =>
-                            handleDetailPageNavigate(item.id, e.id)
-                          }
-                          src={`https://libra.pythonanywhere.com/media/${e.images}`}
-                          className="landingpage_images"
-                          alt=""
-                        />
-                        {e.images ? (
-                          <div className="underimagetextcontainer">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="underimagecontent"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
+
+      {data?.length > 0 ? (
+        <div className="landingpage_slider_container">
+          {data?.map((item) => {
+            return (
+              <div className="content_root_container" key={item?.id}>
+                <div>
+                  <span
+                    className={
+                      theme ? "chapternameclass" : "chapternameclasstwo"
+                    }
+                  >
+                    {item.CategoryName}
+                  </span>
+                </div>
+                <div>
+                  <Slider className="intro-slick" {...settings}>
+                    {item?.lecture?.map((e) => {
+                      return (
+                        <div className="intro-slides" key={e?.id}>
+                          <img
+                            onClick={() =>
+                              handleDetailPageNavigate(item.id, e.id)
+                            }
+                            src={`https://api.libraa.ml/media/${e.images}`}
+                            className="landingpage_images"
+                            alt=""
+                          />
+                          {e.images ? (
+                            <div className="underimagetextcontainer">
                               <Typography
                                 noWrap
                                 component="div"
-                                className="subcoursenametwo subcoursename"
+                                className="underimagecontent"
+                                style={{
+                                  color: theme ? "#363636" : "#FFFFFF",
+                                }}
                               >
-                                {e.title}
+                                <Typography
+                                  noWrap
+                                  component="div"
+                                  className="subcoursenametwo subcoursename"
+                                >
+                                  {e.title}
+                                </Typography>
                               </Typography>
-                            </Typography>
-                            <div className="mycontenttagscontainer">
-                              <img
-                                src={e.TagsImageTwo}
-                                alt=""
-                                className="tagstwocontainer"
-                              />
+                              <div className="mycontenttagscontainer">
+                                <img
+                                  src={Bookmark_blue}
+                                  alt=""
+                                  className="tagstwocontainer"
+                                />
+                              </div>
                             </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    );
-                  })}
-                </Slider>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      );
+                    })}
+                  </Slider>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress color="inherit" size={30} />
+        </Box>
+      )}
     </>
   );
 };

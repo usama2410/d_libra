@@ -71,12 +71,12 @@ const DeleteContent = () => {
               className={
                 theme ? "delete_content_texttwo_sub" : "delete_content_texttwo"
               }
-            >
+            > 
               <span>What is Git?</span>
             </div>
             <img
               style={{ cursor: "pointer" }}
-              src={`https://libra.pythonanywhere.com/media/${details?.post?.images}`}
+              src={`https://api.libraa.ml/media/${details?.post?.images}`}
               alt=""
               className="deletecontentimage"
             />

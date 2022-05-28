@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@material-ui/core";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
@@ -7,18 +7,32 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LibraryBookmarkContent from "./LibraryBookmarkContent";
 import "./Library.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MyLibrary_light from "../../../assests/SVG_Files/MyLibrary_light.svg";
 import Mylibrary_dark from "../../../assests/SVG_Files/Mylibrary_dark.svg";
 import FooterButtons from "../FooterButtons";
 import { ArrowBack } from "@mui/icons-material";
+import { librarybookmark } from "../../../Redux/Actions/Client Side/librar.y.action";
+import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 
 const LibraryBookmark = () => {
-  const theme = useSelector((state) => state.theme.state);
   const navigate = useNavigate();
-  console.log(LibraryBookmarkContent);
-  const [data, setdata] = useState(LibraryBookmarkContent);
-  const handleBack = () => {};
+  const dispatch = useDispatch();
+  
+  const role = useSelector((state) => state.auth.role);
+  const token = useSelector((state) => state.auth.token);
+
+  const theme = useSelector((state) => state.theme.state);
+  const [data, setdata] = useState([]);
+  const handleBack = () => {}; 
+
+  useEffect(() => {
+    const library = async () => {
+      const response = await dispatch(librarybookmark(role, token))
+      setdata(response?.data)
+    }
+    library();
+  }, [])
 
   const settings = {
     dots: false,
@@ -156,8 +170,9 @@ const LibraryBookmark = () => {
           By Course
         </Button>
       </div>
+
       <div className="landingpage_slider_container libraryrootcontainer">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
               <div style={{ display: "flex", alignItems: " center" }}>
@@ -171,7 +186,7 @@ const LibraryBookmark = () => {
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
                 >
-                  {item.chapterName}
+                  {item.PriorityType}
                 </span>
               </div>
               <div>
@@ -204,7 +219,7 @@ const LibraryBookmark = () => {
                             </Typography>
                             <div className="mycontenttagscontainer">
                               <img
-                                src={e.TagsImageTwo}
+                                src={Bookmark_blue}
                                 alt=""
                                 className="tagstwocontainer"
                               />

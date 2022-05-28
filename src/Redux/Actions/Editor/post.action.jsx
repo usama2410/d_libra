@@ -45,7 +45,7 @@ export const addPost =
 
 export const getPostByID =
   (id, role, categoryid, token) => async (dispatch) => {
-    // console.log(id, role, categoryid);
+    // console.log("get post by id", id, role, categoryid);
     try {
       const response = await axios.get(
         URL + endpoints.GET_POST_BY_ID + id + "&" + role + "&" + categoryid,

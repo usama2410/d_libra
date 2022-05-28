@@ -1,5 +1,5 @@
-const production = "https://libra.pythonanywhere.com";
-const development = "https://libra.pythonanywhere.com";
+const production = "https://api.libraa.ml";
+const development = "https://api.libraa.ml";
 export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 
@@ -49,4 +49,7 @@ export const endpoints = {
 
   // Search
   SEARCH_COURSE: "/webapi/SearchCourse",
+
+  // Priorty
+  GET_PRIORITY: "/webapi/SetPriority?role=",
 };
