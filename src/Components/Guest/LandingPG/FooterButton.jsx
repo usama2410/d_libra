@@ -26,6 +26,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const FooterButtons = (props) => {
+  const link = "https://api.libraa.ml";
+  const name = "D_Libra";
   const [footerbutton, setFooterButton] = React.useState(false);
   const handleFotterButton = () => {
     setFooterButton(true);
@@ -53,6 +55,25 @@ const FooterButtons = (props) => {
     // setOpenDrawer(true);
     console.log("whatsapp");
     const url = `https://api.whatsapp.com/send?text=${window.location.href}`;
+    window.open(url, "_blank");
+  };
+
+  const handleFacebook = () => {
+    console.log("facebook");
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${link}&quote=${name}&hashtag=Libra`;
+    window.open(url, "_blank");
+  };
+
+  const handleMail = () => {
+    console.log("mail");
+    // const url = `https://mail.google.com?subject=${link}&body=${link}`;
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=${name}&body=${link}`;
+    window.open(url, "_blank");
+  };
+
+  const handleTelegram = () => {
+    console.log("telegram web");
+    const url = `https://telegram.me/share/url?url=${link}&text=${link}`;
     window.open(url, "_blank");
   };
 
@@ -161,17 +182,20 @@ const FooterButtons = (props) => {
                           <img
                             src={Icon_facebook}
                             alt=""
-                            style={{ paddingLeft: "15px" }}
+                            style={{ paddingLeft: "15px", cursor: "pointer" }}
+                            onClick={handleFacebook}
                           />
                           <img
                             src={Icon_gmail}
                             alt=""
-                            style={{ paddingLeft: "15px" }}
+                            style={{ paddingLeft: "15px", cursor: "pointer" }}
+                            onClick={handleMail}
                           />
                           <img
                             src={Icon_telegram}
                             alt=""
-                            style={{ paddingLeft: "15px" }}
+                            style={{ paddingLeft: "15px", cursor: "pointer" }}
+                            onClick={handleTelegram}
                           />
                         </>
                       ) : (
@@ -203,7 +227,9 @@ const FooterButtons = (props) => {
                               position: "relative",
                               bottom: "-26px",
                               left: "8px",
+                              cursor: "pointer",
                             }}
+                            onClick={handleFacebook}
                           />
                           <img
                             src={Icon_gmail}
@@ -212,7 +238,9 @@ const FooterButtons = (props) => {
                               position: "relative",
                               bottom: "-40px",
                               left: "40px",
+                              cursor: "pointer",
                             }}
+                            onClick={handleMail}
                           />
                           <img
                             src={Icon_telegram}
@@ -221,7 +249,9 @@ const FooterButtons = (props) => {
                               position: "relative",
                               bottom: "-90px",
                               left: "52px",
+                              cursor: "pointer",
                             }}
+                            onClick={handleTelegram}
                           />
                         </>
                       )}

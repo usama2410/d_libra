@@ -16,6 +16,9 @@ import { Divider } from "@material-ui/core";
 
 import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.action";
 
+import { development } from "../../../endpoints";
+
+
 const labels = {
   0: "0",
   0.5: "0.5",
@@ -137,7 +140,7 @@ const LandingPageMain = () => {
     const viewRecentCourseStatus = async () => {
       if (viewRecentCourseState?.length === 0) {
         const response = await dispatch(viewCourseStatus(token, role));
-        // console.log("response", response);
+        console.log("response", response);
         setDataOne(response);
       } else {
         setDataOne(viewRecentCourseState);
@@ -165,7 +168,7 @@ const LandingPageMain = () => {
                     return (
                       <div className="intro-slides">
                         <img
-                          src={`https://api.libraa.ml/media/${e.images}`}
+                          src={`${development}/media/${e.images}`}
                           onClick={() => navigate("/coursepageguest")}
                           className="landingpage_images"
                           // style={{

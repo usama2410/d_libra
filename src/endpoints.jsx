@@ -1,5 +1,5 @@
-const production = "https://api.libraa.ml";
-const development = "https://api.libraa.ml";
+export const production = "https://api.libraa.ml";
+export const development = "https://api.libraa.ml"; // https://libra.pythonanywhere.com
 export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 
@@ -8,6 +8,7 @@ export const endpoints = {
   SIGNUP: "/webapi/signup",
   LOGIN: "/webapi/userlogin",
   CHANGE_PASSWORD: "/webapi/changepassword",
+  CHANGE_PASSWORD_FOR_EDITOR: "/webapi/UpdatePassword?role=",
   SEND_VERIFICATION_CODE: "/webapi/SendVerificationCode",
   FORGOT_PASSWORD: "/webapi/VerifyCode",
   RESET_PASSWORD: "/webapi/ChangePassword",

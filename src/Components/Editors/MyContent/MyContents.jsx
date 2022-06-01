@@ -16,6 +16,8 @@ import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.s
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
+import { development } from "../../../endpoints";
+
 const MyContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,13 +29,12 @@ const MyContents = () => {
   const handleBack = (e) => {
     e.preventDefault();
     navigate("/editormainpage");
-    console.log("vvv");
   };
 
   const dashboardState = useSelector((state) => state?.dashboardData?.data[0]);
   // console.log("dashboard", dashboardState[0]);
 
-  // console.log("data", data);
+  console.log("data", data);
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -205,7 +206,7 @@ const MyContents = () => {
                             onClick={() =>
                               handleDetailPageNavigate(item.id, e.id)
                             }
-                            src={`https://api.libraa.ml/media/${e.images}`}
+                            src={`${development}/media/${e.images}`}
                             className="landingpage_images"
                             alt=""
                           />

@@ -11,6 +11,9 @@ import {
 import Select from "react-select";
 import { ArrowBack } from "@mui/icons-material";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const AddNewCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ const AddNewCategory = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
 
-  console.log("message", message);
+  // console.log("message", message);
 
   const [parentCategory, setParentCategory] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
@@ -82,7 +85,7 @@ const AddNewCategory = () => {
 
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
-    console.log("selectedOption ID", selectedOption.id);
+    // console.log("selectedOption ID", selectedOption.id);
   };
 
   const customStyles = {
@@ -290,12 +293,12 @@ const AddNewCategory = () => {
         </div>
         <div className="update_button_newcategory">
           {isLoading ? (
-            <button
+            <Box
               className="update_button"
-              style={{ marginBottom: "40px", cursor: "pointer" }}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
-              loading...
-            </button>
+              <CircularProgress color="inherit" size={30} />
+            </Box>
           ) : (
             <button
               className="update_button   "

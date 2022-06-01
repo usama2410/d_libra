@@ -3,11 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 import "./DeleteContent.css";
-import WhatIsGit_ from "../../assests/SVG_Files/Slides/WhatIsGit_.svg";
-import {
-  deletePost,
-  getPostByID,
-} from "../../Redux/Actions/Editor/post.action";
+import { getPostByID } from "../../Redux/Actions/Editor/post.action";
+import { deletePost } from "../../Redux/Actions/Editor/content.action";
+import { development } from "../../endpoints";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const DeleteContent = () => {
   const navigate = useNavigate();
@@ -19,8 +20,9 @@ const DeleteContent = () => {
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [details, setDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log(params);
+  // console.log(params);
 
   const handleBack = () => {
     navigate(`/detailpage/${params.id}/${params.role}/${params.categoryid}`);
@@ -38,6 +40,7 @@ const DeleteContent = () => {
 
   // console.log(params)
   const handleDeleteContent = async () => {
+    // setIsLoading(true);
     const response = await dispatch(deletePost(params.id, token));
     // console.log(response);
     setMessage(response?.message);
@@ -46,7 +49,7 @@ const DeleteContent = () => {
       const timer = setTimeout(() => {
         navigate("/mycontents");
       }, 5000);
-
+      // setIsLoading(false);
       return () => clearTimeout(timer);
     }
   };
@@ -71,23 +74,32 @@ const DeleteContent = () => {
               className={
                 theme ? "delete_content_texttwo_sub" : "delete_content_texttwo"
               }
-            > 
+            >
               <span>What is Git?</span>
             </div>
             <img
               style={{ cursor: "pointer" }}
-              src={`https://api.libraa.ml/media/${details?.post?.images}`}
+              src={`${development}/media/${details?.post?.images}`}
               alt=""
               className="deletecontentimage"
             />
             <div className="updatecontainerbutton">
-              <button
-                onClick={handleDeleteContent}
-                className="delete_content_button"
-                style={{ color: "#FFFFFF", cursor: "pointer" }}
-              >
-                Yes, delete the content
-              </button>
+              {isLoading ? (
+                <Box
+                  className="delete_content_button"
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <CircularProgress color="inherit" size={30} />
+                </Box>
+              ) : (
+                <button
+                  onClick={handleDeleteContent}
+                  className="delete_content_button"
+                  style={{ color: "#FFFFFF", cursor: "pointer" }}
+                >
+                  Yes, delete the content
+                </button>
+              )}
             </div>
             <div>
               <h3 style={{ marginTop: "20px" }}>

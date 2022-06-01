@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { auth, theme, pin, searchSTate } from "../auth.reducer";
 import { viewRecentCourseStatus } from "../course.status.action";
 import { dashboardData } from "../dashboard.data.reducer";
+import { parentChildCategory } from "../editor/category";
 import { mainCategoryData } from "../main.category.reducer";
 import { searchResultData } from "../search.result.reducer";
 
@@ -19,6 +20,7 @@ const persistConfig = {
     "mainCategoryData",
     "searchResultData",
     "viewRecentCourseStatus",
+    "parentChildCategory",
   ],
 };
 
@@ -32,6 +34,7 @@ const rootReducer = combineReducers({
   mainCategoryData,
   searchResultData,
   viewRecentCourseStatus,
+  parentChildCategory,
 });
 
 export default persistReducer(persistConfig, rootReducer);

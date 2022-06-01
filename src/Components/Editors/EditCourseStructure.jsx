@@ -16,8 +16,7 @@ import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+
 import {
   getMainCategory,
   getParentChildCategories,
@@ -55,10 +54,15 @@ const EditCourseStructure = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const parentChildCategoryState = useSelector(
+    (state) => state?.parentChildCategory?.data
+  );
+
   const [result, setResult] = useState([]);
   const [parentChidCategory, setParentChidCategory] = useState([]);
 
-  console.log("parentChidCategory", parentChidCategory);
+  // console.log("parentChidCategory", parentChidCategory);
+  // console.log("parentChildCategoryState", parentChildCategoryState);
 
   const mainCategories = async () => {
     const response = await dispatch(getMainCategory(token));
@@ -66,8 +70,12 @@ const EditCourseStructure = () => {
   };
 
   const ParentChildCategories = async () => {
-    const response = await dispatch(getParentChildCategories(token));
-    setParentChidCategory(response);
+    if (parentChildCategoryState?.length === 0) {
+      const response = await dispatch(getParentChildCategories(token));
+      setParentChidCategory(response);
+    } else {
+      setParentChidCategory(parentChildCategoryState);
+    }
   };
 
   const handleBack = () => {
@@ -275,56 +283,37 @@ const EditCourseStructure = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {parentChidCategory?.length === 0 ? (
-                <div
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                    marginTop: "20px",
-                  }}
-                >
-                  Loading...
-                </div>
-              ) : (
-                <>
-                  {parentChidCategory?.map((item) => {
-                    return item.SubCategory?.map((subItem) => {
-                      return (
-                        <>
-                          <StyledTableRow>
-                            <StyledTableCell component="th" scope="row">
-                              <AddIcon className="tableBody_sub" />
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {item.CategoryName}
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {subItem.CategoryName}
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {subItem.unique_identifier}
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {subItem.image !== ""
-                                ? subItem.image
-                                : "No Image"}
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {subItem.created_at.split("T")[0]}
-                            </StyledTableCell>
-                            <StyledTableCell className="tableBody">
-                              {subItem.updated_at.split("T")[0]}
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        </>
-                      );
-                    });
-                  })}
-                </>
-              )}
+              {parentChidCategory?.map((item) => {
+                return item.SubCategory?.map((subItem) => {
+                  return (
+                    <>
+                      <StyledTableRow>
+                        <StyledTableCell component="th" scope="row">
+                          <AddIcon className="tableBody_sub" />
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {item.CategoryName}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.CategoryName}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.unique_identifier}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.image !== "" ? subItem.image : "No Image"}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.created_at.split("T")[0]}
+                        </StyledTableCell>
+                        <StyledTableCell className="tableBody">
+                          {subItem.updated_at.split("T")[0]}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    </>
+                  );
+                });
+              })}
             </TableBody>
           </Table>
         </TableContainer>

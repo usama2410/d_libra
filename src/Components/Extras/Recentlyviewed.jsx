@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RviewData from "./RviewData";
 import Slider from "react-slick";
@@ -9,16 +9,39 @@ import RVector from "../../assests/RVector.png";
 import { Typography } from "@material-ui/core";
 import Group89Blue from "../../assests/Group89Blue.png";
 import FooterButtons from "../User/FooterButtons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
+import { viewCourseStatus } from "../../Redux/Actions/Client Side/course.action";
+
+import { development } from "../../endpoints";
+
 
 const Recentlyviewed = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+  const viewRecentCourseState = useSelector(
+    (state) => state.viewRecentCourseStatus?.data
+  );
+
   const [data, setdata] = useState(RviewData);
   const handleBack = () => {
     navigate("/coursemainpage");
   };
+
+  console.log("data", data);
+  console.log("viewRecentCourseState", viewRecentCourseState);
+
+  useEffect(() => {
+    const recentViewedCourses = () => {
+      const response = dispatch(viewCourseStatus(token, role));
+    };
+    recentViewedCourses();
+  }, []);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,

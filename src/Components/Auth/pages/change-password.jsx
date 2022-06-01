@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
 import { changePassword } from "../../../Redux/Actions/auth.action";
+import { editorChangePassword } from "../../../Redux/Actions/Editor/auth.action";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const [oldPassword, setOldPassword] = useState();
   const [password, setPassword] = useState();
@@ -23,14 +25,29 @@ const ChangePassword = () => {
     navigate("/");
   };
 
+  const handleErrors = (response) => {
+    setMessage(response?.message);
+    setValidation(true);
+    if (response?.message === "Change Password Successfully") {
+      navigate("/login");
+    }
+  };
+
   const handleChangePassword = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await dispatch(
-      changePassword(oldPassword, password, token)
-    );
-    setMessage(response?.message);
-    setValidation(true);
+    if (role === "normaluser") {
+      const response = await dispatch(
+        changePassword(oldPassword, password, token)
+      );
+      handleErrors(response);
+    } else {
+      const response = await dispatch(
+        editorChangePassword(password, oldPassword, role, token)
+      );
+      handleErrors(response);
+    }
+
     const timer = setTimeout(() => {
       setValidation(false);
       setMessage("");

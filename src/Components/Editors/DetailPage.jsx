@@ -11,6 +11,7 @@ import Next_dark from "../../assests/SVG_Files/New folder/icons/Next_dark.svg";
 import Previous from "../../assests/SVG_Files/New folder/icons/Previous.svg";
 import Previous_dark from "../../assests/SVG_Files/New folder/icons/Previous_dark.svg";
 import { getPostByID } from "../../Redux/Actions/Editor/post.action";
+import { development } from "../../endpoints";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const DetailPage = () => {
   const params = useParams();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const [details, setDetails] = React.useState([]);
   const [startdata, setStartData] = React.useState(0);
@@ -36,11 +38,8 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      console.log("response", response);
-      const post = response?.all?.filter((item) => {
-        return item.id === params.id;
-      });
-      console.log("post", post);
+      // console.log("response", response);
+
       setDetails(response);
     };
     postById();
@@ -73,35 +72,36 @@ const DetailPage = () => {
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <div className="detailpagesubcontainertwo">
               <img
-                src={`https://api.libraa.ml/media/${details?.post?.images}`}
+                src={`${development}/media/${details?.post?.images}`}
                 alt=""
                 className="detail_page_image"
               />
             </div>
-
             <div className="buttons_container_detail_page_two">
-              <div className="deleteeditcontainer">
-                <button
-                  className="detail_delete_button"
-                  onClick={() =>
-                    navigate(
-                      `/deletecontent/${params.id}/${params.role}/${params.categoryid}`
-                    )
-                  }
-                >
-                  Delete
-                </button>
-                <button
-                  className="detail_edit_button"
-                  onClick={() =>
-                    navigate(
-                      `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`
-                    )
-                  }
-                >
-                  Edit
-                </button>
-              </div>
+              {role === "editor" && (
+                <div className="deleteeditcontainer">
+                  <button
+                    className="detail_delete_button"
+                    onClick={() =>
+                      navigate(
+                        `/deletecontent/${params.id}/${params.role}/${params.categoryid}`
+                      )
+                    }
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="detail_edit_button"
+                    onClick={() =>
+                      navigate(
+                        `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`
+                      )
+                    }
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
               <div className="tags_wrapper_one">
                 <span
                   className="detail_tag_text"

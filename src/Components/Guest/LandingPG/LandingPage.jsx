@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ContentData from "./LandingPagedata";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,12 +15,9 @@ import StarIcon from "@mui/icons-material/Star";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-import {
-  addToRecentViewCourses,
-  viewCourseStatus,
-} from "../../../Redux/Actions/Client Side/course.action";
-import { getMainCategory } from "../../../Redux/Actions/Editor/Category";
+import { addToRecentViewCourses } from "../../../Redux/Actions/Client Side/course.action";
 import { home } from "../../../Redux/Actions/Client Side/home.action";
+import { development } from "../../../endpoints";
 
 const labels = {
   0: "0",
@@ -41,8 +37,8 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setdata] = useState([]);
-  const [value, setValue] = React.useState("");
-  const [hover, setHover] = React.useState(-1);
+  // const [value, setValue] = React.useState("");
+  // const [hover, setHover] = React.useState(-1);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -52,7 +48,7 @@ const LandingPage = () => {
   );
 
   // console.log("mainCategoryState", mainCategoryState)
-  // console.log("data", data)
+  console.log("data", data);
 
   const settings = {
     dots: false,
@@ -135,13 +131,13 @@ const LandingPage = () => {
 
   useEffect(() => {
     const MainCategory = async () => {
-      if (mainCategoryState?.length === 0) {
-        const response = await dispatch(home(token));
-        // console.log("response", response);
-        setdata(response);
-      } else {
-        setdata(mainCategoryState);
-      }
+      // if (mainCategoryState?.length === 0) {
+      const response = await dispatch(home(token));
+      // console.log("response", response);
+      setdata(response);
+      // } else {
+      //   setdata(mainCategoryState);
+      // }
     };
     MainCategory();
   }, []);
@@ -149,7 +145,7 @@ const LandingPage = () => {
   const handleViewRecentCourses = async (id) => {
     console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    navigate("/coursepageguest");
+    // navigate("/coursepageguest");
   };
 
   return (
@@ -208,7 +204,7 @@ const LandingPage = () => {
                       return (
                         <div className="intro-slides">
                           <img
-                            src={`https://api.libraa.ml/media/${e.image}`}
+                            src={`${development}/media/${e.image}`}
                             // onClick={() => navigate("/coursepageguest")}
                             onClick={() => handleViewRecentCourses(e.id)}
                             className="landingpage_images"

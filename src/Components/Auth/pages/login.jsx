@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await dispatch(logIn(email, password));
-    console.log("response", response);
+    // console.log("response", response);
     setMessage(response?.message);
     if (!email || !password) {
       setErrorMessage(true);

@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { development } from "../../endpoints";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const Searchresult = () => {
 
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
+
+  console.log(data)
 
   useEffect(() => {
     const searchResult = async () => {
@@ -140,11 +143,11 @@ const Searchresult = () => {
                       </div>
                       <div>
                         <Slider className="intro-slick" {...settings}>
-                          {item.items.map((e) => {
+                          {item?.items?.map((e) => {
                             return (
                               <div className="intro-slides">
                                 <img
-                                  src={`https://api.libraa.ml/media/${e.images}`}
+                                  src={`${development}/media/${e.images}`}
                                   className="landingpage_images"
                                   style={{
                                     filter: `${
@@ -207,10 +210,10 @@ const Searchresult = () => {
       </div>
 
       <div className="second_tagpage_container">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <>
-              {item.items.map((content) => {
+              {item?.items?.map((content) => {
                 return (
                   <div
                     className="W-main-map"
