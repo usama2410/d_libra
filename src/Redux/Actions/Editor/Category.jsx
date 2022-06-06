@@ -3,13 +3,14 @@ import { URL, endpoints } from "../../../endpoints";
 import * as FormData from "form-data";
 
 export const addnewCategory =
-  (chapName, chapId, slug, token) => async (dispatch) => {
+  (chapName, chapId, slug, token, imageName) => async (dispatch) => {
+    console.log(chapName, chapId, slug, token, imageName)
     const formData = new FormData();
     formData.append("name", chapName);
     formData.append("parentCategoryid", chapId);
     formData.append("slug", slug);
 
-    formData.append("image", "/media/SuperAdmin/dummy.jpg");
+    formData.append("image", imageName);
     try {
       const response = await axios.post(
         URL + endpoints.ADD_CATEGORY,
@@ -20,7 +21,7 @@ export const addnewCategory =
           },
         }
       );
-      // console.log("response  profiledata", response.data);
+      console.log("response  profiledata", response.data);
       return response.data;
     } catch (error) {
       console.log(error);

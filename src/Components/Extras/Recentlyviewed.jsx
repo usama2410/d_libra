@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RviewData from "./RviewData";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import "../Guest/LandingPG/Lp.css";
 import RVector from "../../assests/RVector.png";
 import { Typography } from "@material-ui/core";
@@ -12,9 +9,9 @@ import FooterButtons from "../User/FooterButtons";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
 import { viewCourseStatus } from "../../Redux/Actions/Client Side/course.action";
-
 import { development } from "../../endpoints";
-
+import RecentlyviewdSlider from "./RecentlyViewdSlider";
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 
 const Recentlyviewed = () => {
   const navigate = useNavigate();
@@ -23,102 +20,79 @@ const Recentlyviewed = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-  const viewRecentCourseState = useSelector(
-    (state) => state.viewRecentCourseStatus?.data
-  );
 
-  const [data, setdata] = useState(RviewData);
+  const [todayHistory, setTodayHistory] = useState([]);
+  const [yesterdayHistory, setYesterdayHistory] = useState([]);
+  const [weekHistory, setWeekHistory] = useState([]);
+  const [monthHistory, setMonthHistory] = useState([]);
+
   const handleBack = () => {
     navigate("/coursemainpage");
   };
 
-  console.log("data", data);
-  console.log("viewRecentCourseState", viewRecentCourseState);
+  const todayIds = todayHistory?.map((o) => o.Courseid);
+
+  const filteredToday = todayHistory?.filter(
+    ({ Courseid }, index) => !todayIds.includes(Courseid, index + 1)
+  );
+  const yesterdayIds = yesterdayHistory?.map((o) => o.Courseid);
+
+  const filteredYesterday = yesterdayHistory?.filter(
+    ({ Courseid }, index) => !yesterdayIds.includes(Courseid, index + 1)
+  );
+
+  const weekIds = weekHistory?.map((o) => o.Courseid);
+
+  const filteredWeekly = weekHistory?.filter(
+    ({ Courseid }, index) => !weekIds.includes(Courseid, index + 1)
+  );
+
+  const monthIds = monthHistory?.map((o) => o.Courseid);
+  const filteredMonthly = monthHistory?.filter(
+    ({ Courseid }, index) => !monthIds.includes(Courseid, index + 1)
+  );
+
+  // console.log("filteredToday", filteredToday);
+  // console.log("filteredYesterday", filteredYesterday);
+
+  const timeSettings = (response) => {
+    // today.setHours(today.getHours() + 24);
+    // let newToday = today.toISOString().slice(0, 10);
+
+    let date = new Date();
+
+    response.forEach((item) => {
+      item.items.forEach((createdAt) => {
+        let createdDate = new Date(createdAt.created.slice(0, 10));
+        let difference = Math.abs(createdDate - date);
+        let differenceInDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        console.log("differenceInDays", differenceInDays);
+
+        if (differenceInDays === 1 && differenceInDays < 2) {
+          setTodayHistory((prevState) => [...prevState, createdAt]);
+          return "TODAY";
+        } else if (differenceInDays === 2 && differenceInDays < 3) {
+          setYesterdayHistory((prevState) => [...prevState, createdAt]);
+          return "YESTERDAY";
+        } else if (differenceInDays === 3 || differenceInDays < 8) {
+          setWeekHistory((prevState) => [...prevState, createdAt]);
+          return "WEEK";
+        } else if (differenceInDays === 8 || differenceInDays < 30) {
+          setMonthHistory((prevState) => [...prevState, createdAt]);
+          return "MONTH";
+        }
+      });
+    });
+  };
 
   useEffect(() => {
-    const recentViewedCourses = () => {
-      const response = dispatch(viewCourseStatus(token, role));
+    const recentViewedCourses = async () => {
+      const response = await dispatch(viewCourseStatus(token, role));
+      console.log("response", response);
+      timeSettings(response);
     };
     recentViewedCourses();
   }, []);
-
-  const settings = {
-    dots: false,
-    adaptiveHeight: true,
-    infinite: true,
-    speed: 500,
-    initialSlide: 0,
-    slidesToShow: 4,
-    autoplay: false,
-    slidesToScroll: 1,
-    centerMode: false,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1120,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 860,
-        settings: {
-          slidesToShow: 2.14,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 700,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          centerMode: false,
-        },
-      },
-      {
-        breakpoint: 510,
-        settings: {
-          slidesToShow: 1.15,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 430,
-        settings: {
-          slidesToShow: 1.19,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 380,
-        settings: {
-          slidesToShow: 1.21,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 361,
-        settings: {
-          slidesToShow: 1.24,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 338,
-        settings: {
-          slidesToShow: 1.3,
-          slidesToScroll: 1,
-          centerMode: true,
-        },
-      },
-    ],
-  };
 
   return (
     <>
@@ -164,69 +138,18 @@ const Recentlyviewed = () => {
           </div>
         </div>
       </div>
-      <div className="recentlyreviewd_slider_container">
-        {data.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.chapterName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          onClick={() => navigate("/Tagpage")}
-                          src={e.image}
-                          className="landingpage_images"
-                          style={{
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          }}
-                          alt=""
-                        />
-                        {e.image ? (
-                          <div className="underimagetextcontainer">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="underimagecontent"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursenametwo subcoursename"
-                              >
-                                {e.Tags}
-                              </Typography>
-                            </Typography>
-                            <div className="mycontenttagscontainer">
-                              <img
-                                src={e.TagsImageTwo}
-                                alt=""
-                                className="tagstwocontainer"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    );
-                  })}
-                </Slider>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {filteredToday.length > 0 && (
+        <RecentlyviewdSlider array={filteredToday} day={"Today"} />
+      )}
+      {filteredYesterday.length > 0 && (
+        <RecentlyviewdSlider array={filteredYesterday} day={"Yesterday"} />
+      )}
+      {filteredWeekly.length > 0 && (
+        <RecentlyviewdSlider array={filteredWeekly} day={"This Week"} />
+      )}
+      {filteredMonthly.length > 0 && (
+        <RecentlyviewdSlider array={filteredMonthly} day={"This Month"} />
+      )}
       <FooterButtons />
     </>
   );

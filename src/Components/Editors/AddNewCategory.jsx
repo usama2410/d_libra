@@ -37,7 +37,7 @@ const AddNewCategory = () => {
   const handleChange = (e) => {
     if (e.target.files.length) {
       setImage(URL.createObjectURL(e.target.files[0]));
-      setImageName(e.target.files[0].name);
+      setImageName(e.target.files[0]);
     }
   };
 
@@ -49,7 +49,7 @@ const AddNewCategory = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await dispatch(
-      addnewCategory(chapName, chapId, slug, token)
+      addnewCategory(chapName, chapId, slug, token, imageName)
     );
     setMessage(response.message);
 
@@ -86,6 +86,7 @@ const AddNewCategory = () => {
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
     // console.log("selectedOption ID", selectedOption.id);
+    setchapId(selectedOption?.id);
   };
 
   const customStyles = {

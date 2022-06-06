@@ -19,19 +19,19 @@ import { addToRecentViewCourses } from "../../../Redux/Actions/Client Side/cours
 import { home } from "../../../Redux/Actions/Client Side/home.action";
 import { development } from "../../../endpoints";
 
-const labels = {
-  0: "0",
-  0.5: "0.5",
-  1: "1+",
-  1.5: "1.5",
-  2: "2",
-  2.5: "2.5",
-  3: "3",
-  3.5: "3.5",
-  4: "4",
-  4.5: "4.5",
-  5: "5+",
-};
+// const labels = {
+//   0: "0",
+//   0.5: "0.5",
+//   1: "1+",
+//   1.5: "1.5",
+//   2: "2",
+//   2.5: "2.5",
+//   3: "3",
+//   3.5: "3.5",
+//   4: "4",
+//   4.5: "4.5",
+//   5: "5+",
+// };
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -43,12 +43,7 @@ const LandingPage = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const mainCategoryState = useSelector(
-    (state) => state?.mainCategoryData?.data
-  );
-
-  // console.log("mainCategoryState", mainCategoryState)
-  console.log("data", data);
+  // console.log("data", data);
 
   const settings = {
     dots: false,
@@ -195,7 +190,7 @@ const LandingPage = () => {
                       theme ? "chapternameclass" : "chapternameclasstwo"
                     }
                   >
-                    {item.chapterName}
+                    {item?.items?.length !== 0 && item?.chapterName}
                   </span>
                 </div>
                 <div>

@@ -8,15 +8,12 @@ export const getDashboardData = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("Get Dashboard Data Response", response);
-
+    // console.log("Get Dashboard Data Response", response);
     dispatch({
       type: "GET_DASHBOARD_DATA",
-      payload: {
-        data: [response.data.data],
-      },
+      payload: response?.data?.data,
     });
-    return response.data?.data;
+    return response?.data?.data;
   } catch (error) {
     console.log(error);
   }

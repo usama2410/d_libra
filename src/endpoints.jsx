@@ -1,5 +1,5 @@
 export const production = "https://api.libraa.ml";
-export const development = "https://api.libraa.ml"; // https://libra.pythonanywhere.com
+export const development = "https://libra.pythonanywhere.com"; // https://libra.pythonanywhere.com
 export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 

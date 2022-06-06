@@ -18,12 +18,15 @@ import {
   getPostByID,
   updatePost,
 } from "../../../Redux/Actions/Editor/post.action";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { development } from "../../../endpoints";
 
 const EditContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
+  // console.log(params);
 
   const [contentTitle, setContentTitle] = useState();
   const [imageName, setImageName] = useState("");
@@ -47,13 +50,11 @@ const EditContentMain = () => {
   const [childCategoryTwo, setChildCategoryTwo] = useState([]);
 
   const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    if (e.target.files.length) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      setImageName(e.target.files[0].name);
-    }
+    setImage(URL.createObjectURL(e.target.files[0]));
+    setImageName(e.target.files[0]);
   };
 
   // console.log("selectedOption", selectedOption);
@@ -190,26 +191,31 @@ const EditContentMain = () => {
   };
 
   const handleUpdatePost = async () => {
+    setIsLoading(true);
     const response = await dispatch(
       updatePost(
         contentTitle,
         categoryId,
         tags,
         htmlText,
+        imageName,
         contentId,
         metaDescription,
         OGP,
         token
       )
     );
-    // console.log("handleUpdatePost response", response);
-    setMessage(response.message);
-    setErrorMessage(true);
-
+    console.log("handleUpdatePost response", response);
+    setMessage(response?.message);
+    if (response?.message === "Update Post Successfully") {
+      navigate(
+        `/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`
+      );
+    }
     const timer = setTimeout(() => {
-      setErrorMessage(false);
+      setMessage("");
     }, 5000);
-
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -218,10 +224,12 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
+      console.log("response", response);
       setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);
       setOGP(response?.post?.OGP);
+      setImage(`${development}/media/${response?.post?.images}`);
     };
     postById();
   }, [contentTitle]);
@@ -245,9 +253,13 @@ const EditContentMain = () => {
       </div>
       <Grid container className="main_root_container_upload_content">
         <Grid item lg={4} md={4} sm={12} xs={12} style={{ marginTop: "-15px" }}>
-          {errorMessage === true && message === "Update Post Successfully" ? (
-            <div className={theme ? "successMessage" : "successMessageTwo"}>
-              <h4>Post Updated Successfully.</h4>
+          {message === "All Fields are Required" ? (
+            <div className="errorMessage">{message}</div>
+          ) : message === "title Already Exist" ? (
+            <div className="errorMessage">Content title already exist.</div>
+          ) : message === "Image format is incorrect" ? (
+            <div className="errorMessage">
+              {message}. Please upload in jpeg,png file foramte
             </div>
           ) : null}
           <div>
@@ -398,7 +410,7 @@ const EditContentMain = () => {
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <div className="main_slide_container">
                   <div style={{ paddingBottom: "10px" }}>
-                    <span>{imageName}</span>
+                    <span>{imageName?.name}</span>
                   </div>
                   <div>
                     <label htmlFor="contained-button-file">
@@ -407,7 +419,7 @@ const EditContentMain = () => {
                         id="contained-button-file"
                         type="file"
                         style={{ display: "none" }}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <Button
                         variant="contained"
@@ -457,9 +469,18 @@ const EditContentMain = () => {
           </div>
         </Grid>
         <div className="updatecontainerbutton">
-          <button className="update_button_new" onClick={handleUpdatePost}>
-            Update
-          </button>
+          {isLoading ? (
+            <Box
+              className="loginbuttontext"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="inherit" size={30} />
+            </Box>
+          ) : (
+            <button className="update_button_new" onClick={handleUpdatePost}>
+              Update
+            </button>
+          )}
         </div>
       </Grid>
     </>

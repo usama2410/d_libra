@@ -15,23 +15,28 @@ import {
   getParentChildCategories,
 } from "../../../Redux/Actions/Editor/Category";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const UploadContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [contentTitle, setContentTitle] = useState("nodejs table of content");
-  const [contentId, setContentId] = useState(16);
-  const [tags, setTags] = useState("niodejs,git,tech");
+  const [contentTitle, setContentTitle] = useState("");
+  const [contentId, setContentId] = useState("");
+  const [tags, setTags] = useState("");
   const [image, setImage] = useState("");
-  const [metaDescription, setMetaDiscription] = useState("meta_description");
-  const [OGP, setOGP] = useState("OGP");
-
+  const [metaDescription, setMetaDiscription] = useState("");
+  const [OGP, setOGP] = useState("");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState("");
 
-  console.log("image", image, imageName);
+  // console.log("image state", imageName);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = (editorState) => {
@@ -43,19 +48,20 @@ const UploadContentMain = () => {
   const [parentCategory, setParentCategory] = useState([]);
   const [childCategory, setChildCategory] = useState([]);
 
+  // console.log("parentCategory", parentCategory);
   // console.log("childCategory", childCategory);
 
   const handleChange = (e) => {
-    if (e.target.files.length) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      setImageName(e.target.files[0].name);
-    }
+    setImage(URL.createObjectURL(e.target.files[0]));
+    setImageName(e.target.files[0]);
   };
 
   const handleButton = async (e) => {
     e.preventDefault();
     // navigate("/editormainpage")
-    await dispatch(
+    setIsLoading(true);
+
+    const response = await dispatch(
       addPost(
         contentTitle,
         contentId,
@@ -67,6 +73,18 @@ const UploadContentMain = () => {
         token
       )
     );
+    console.log("response", response);
+    setMessage(response?.message);
+    if (response?.message === "Add Post Successfully") {
+      navigate("/mycontents");
+    }
+
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 5000);
+
+    setIsLoading(false);
+    return () => clearTimeout(timer);
   };
 
   const customStyles = {
@@ -181,6 +199,7 @@ const UploadContentMain = () => {
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
     // console.log("selectedOption ID", selectedOption.id);
+    setContentId(selectedOption?.id);
 
     const response = await dispatch(
       getChildCategories(selectedOption.id, token)
@@ -217,6 +236,19 @@ const UploadContentMain = () => {
             xs={12}
             style={{ marginTop: "-15px" }}
           >
+            {message === "Add Post Successfully" ? (
+              <div className={theme ? "successMessage" : "successMessageTwo"}>
+                <h4>Post added Successfully.</h4>
+              </div>
+            ) : message === "All Fields are Required" ? (
+              <div className="errorMessage">{message}</div>
+            ) : message === "title Already Exist" ? (
+              <div className="errorMessage">Content title already exist.</div>
+            ) : message === "Image format is incorrect" ? (
+              <div className="errorMessage">
+                {message}. Please upload in jpeg,png file foramte
+              </div>
+            ) : null}
             <div>
               <span
                 className="addcategory_text"
@@ -268,7 +300,7 @@ const UploadContentMain = () => {
                     ? "uploadcontentinputfieldtwo widthautoclass "
                     : "uploadcontentinputfield widthautoclass"
                 }
-                placeholder=""
+                placeholder="Content Title"
                 value={contentTitle}
                 onChange={(e) => setContentTitle(e.target.value)}
               />
@@ -286,9 +318,8 @@ const UploadContentMain = () => {
                     ? "uploadcontentinputfieldtwo widthautoclass"
                     : "uploadcontentinputfield widthautoclass"
                 }
-                placeholder=""
+                placeholder="Content ID"
                 value={contentId}
-                onChange={(e) => setContentId(e.target.value)}
               />
             </div>
             <div>
@@ -304,7 +335,7 @@ const UploadContentMain = () => {
                     ? "uploadcontentinputfieldtwo widthautoclass"
                     : "uploadcontentinputfield widthautoclass"
                 }
-                placeholder=""
+                placeholder="Tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
               />
@@ -324,7 +355,7 @@ const UploadContentMain = () => {
                 }
                 id="message"
                 rows="6"
-                placeholder=""
+                placeholder="Meta Descriptions"
                 value={metaDescription}
                 onChange={(e) => setMetaDiscription(e.target.value)}
               />
@@ -344,7 +375,7 @@ const UploadContentMain = () => {
                 }
                 id="message"
                 rows="6"
-                placeholder=""
+                placeholder="OGP(Open Graph Protocol)"
                 value={OGP}
                 onChange={(e) => setOGP(e.target.value)}
               />
@@ -363,9 +394,8 @@ const UploadContentMain = () => {
               <Grid container spacing={1}>
                 <Grid item lg={4} md={4} sm={12} xs={12}>
                   <div className="main_slide_container">
-                    <div style={{ paddingBottom: "10px" }}>
-                      <span>{imageName}</span>
-                    </div>
+                    <div style={{ paddingBottom: "10px" }}></div>
+                    <span>{imageName?.name}</span>
                     <div>
                       <label htmlFor="contained-button-file">
                         <input
@@ -373,7 +403,7 @@ const UploadContentMain = () => {
                           id="contained-button-file"
                           type="file"
                           style={{ display: "none" }}
-                          onChange={handleChange}
+                          onChange={(e) => handleChange(e)}
                         />
                         <Button
                           variant="contained"
@@ -425,9 +455,18 @@ const UploadContentMain = () => {
             </div>
           </Grid>
           <div className="updatecontainerbutton">
-            <button className="update_button_new" onClick={handleButton}>
-              Upload
-            </button>
+            {isLoading ? (
+              <Box
+                className="loginbuttontext"
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <CircularProgress color="inherit" size={30} />
+              </Box>
+            ) : (
+              <button className="update_button_new" onClick={handleButton}>
+                Upload
+              </button>
+            )}
           </div>
         </Grid>
       </div>

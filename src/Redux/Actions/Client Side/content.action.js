@@ -19,7 +19,7 @@ export const addRecenetViewContent =
         }
       );
 
-      // console.log("response", response);
+      console.log("response", response);
     } catch (error) {
       console.log(error);
     }

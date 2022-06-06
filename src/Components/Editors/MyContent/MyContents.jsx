@@ -22,7 +22,6 @@ const MyContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setdata] = useState([]);
-  const [responseArray, setresponseArray] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -31,10 +30,9 @@ const MyContents = () => {
     navigate("/editormainpage");
   };
 
-  const dashboardState = useSelector((state) => state?.dashboardData?.data[0]);
-  // console.log("dashboard", dashboardState[0]);
-
+  const dashboardState = useSelector((state) => state?.dashboardData?.data);
   console.log("data", data);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -115,13 +113,13 @@ const MyContents = () => {
 
   useEffect(() => {
     const dashboardData = async () => {
-      if (dashboardState?.length === 0) {
-        const response = await dispatch(getDashboardData(token));
-        // console.log("My content response", response);
-        setdata(response);
-      } else {
-        setdata(dashboardState);
-      }
+      // if (dashboardState?.length === 0) {
+      const response = await dispatch(getDashboardData(token));
+      // console.log("My content response", response);
+      setdata(response);
+      // } else {
+      //   setdata(dashboardState);
+      // }
     };
     dashboardData();
   }, []);
@@ -194,7 +192,7 @@ const MyContents = () => {
                       theme ? "chapternameclass" : "chapternameclasstwo"
                     }
                   >
-                    {item.CategoryName}
+                    {item?.lecture?.length !== 0 && item?.CategoryName}
                   </span>
                 </div>
                 <div>

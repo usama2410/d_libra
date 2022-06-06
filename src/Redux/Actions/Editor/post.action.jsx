@@ -14,15 +14,6 @@ export const addPost =
     token
   ) =>
   async (dispatch) => {
-    // console.log(
-    //   contentTitle,
-    //   contentId,
-    //   tags,
-    //   htmlText,
-    //   metaDescription,
-    //   OGP
-    //   //   token
-    // );
     const formData = new FormData();
     formData.append("title", contentTitle);
     formData.append("Categroyid", contentId);
@@ -37,7 +28,8 @@ export const addPost =
           Authorization: "Bearer " + token,
         },
       });
-      console.log("AddPost response", response);
+      // console.log("AddPost response", response);
+      return response?.data;
     } catch (error) {
       console.log(error);
     }
@@ -68,6 +60,7 @@ export const updatePost =
     categoryId,
     tags,
     htmlText,
+    image,
     contentId,
     metaDescription,
     OGP,
@@ -79,7 +72,7 @@ export const updatePost =
     formData.append("Categroyid", categoryId);
     formData.append("tags", tags);
     formData.append("content", htmlText);
-    formData.append("image", "/media/SuperAdmin/dummy.jpg");
+    formData.append("image", image);
     formData.append("Postid", contentId);
     formData.append("meta_description", metaDescription);
     formData.append("OGP", OGP);

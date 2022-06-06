@@ -17,7 +17,7 @@ import Icon_facebook from "../../../assests/SVG_Files/New folder/icons/Icon_face
 import Icon_gmail from "../../../assests/SVG_Files/New folder/icons/Icon_gmail.svg";
 import Icon_telegram from "../../../assests/SVG_Files/New folder/icons/Icon_telegram.svg";
 import Icon_whatsapp from "../../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg";
-
+import { useNavigate } from "react-router-dom";
 import ReactWhatsapp from "react-whatsapp";
 
 const drawerBleeding = 56;
@@ -26,6 +26,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const FooterButtons = (props) => {
+  const navigate = useNavigate();
+
   const link = "https://api.libraa.ml";
   const name = "D_Libra";
   const [footerbutton, setFooterButton] = React.useState(false);
@@ -77,11 +79,20 @@ const FooterButtons = (props) => {
     window.open(url, "_blank");
   };
 
+  const hanldeNavigateToHistory = () => {
+    navigate("/Recentlyviewed");
+  };
+
   return (
     <>
       <div>
         <div className="footer_buttons_container">
-          <img src={Popup_History_off} alt="" className="footerbuttonimages" />
+          <img
+            src={Popup_History_off}
+            alt=""
+            className="footerbuttonimages"
+            onClick={hanldeNavigateToHistory}
+          />
 
           <img
             src={Popup_My_library_off}
@@ -111,6 +122,7 @@ const FooterButtons = (props) => {
                 src={Popup_History_off}
                 alt=""
                 className="footerbuttonimages"
+                onClick={hanldeNavigateToHistory}
               />
 
               <img

@@ -7,6 +7,9 @@ import "../Stylesheet/stylesheet.css";
 import { changePassword } from "../../../Redux/Actions/auth.action";
 import { editorChangePassword } from "../../../Redux/Actions/Editor/auth.action";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 const ChangePassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -103,7 +106,12 @@ const ChangePassword = () => {
           />
         </div>
         {isLoading ? (
-          <Button className="update_button">loading...</Button>
+          <Box
+            className="update_button"
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            <CircularProgress color="inherit" size={30} />
+          </Box>
         ) : (
           <Button className="update_button" onClick={handleChangePassword}>
             Change Password

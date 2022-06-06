@@ -9,6 +9,7 @@ export const store = createStore(
   rootReducer,
   {},
   composeWithDevTools(applyMiddleware(thunk))
+  // applyMiddleware(thunk)
 );
 
 export const persistor = persistStore(store);

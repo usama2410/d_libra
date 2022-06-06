@@ -18,7 +18,6 @@ import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.acti
 
 import { development } from "../../../endpoints";
 
-
 const labels = {
   0: "0",
   0.5: "0.5",
@@ -52,7 +51,7 @@ const LandingPageMain = () => {
   );
 
   const viewRecentCourseState = useSelector(
-    (state) => state.viewRecentCourseStatus?.data
+    (state) => state?.viewRecentCourseStatus?.data
   );
   console.log("viewCourseStatus dataone", dataone);
   console.log("viewRecentCourseState", viewRecentCourseState.length);
@@ -138,13 +137,13 @@ const LandingPageMain = () => {
 
   useEffect(() => {
     const viewRecentCourseStatus = async () => {
-      if (viewRecentCourseState?.length === 0) {
-        const response = await dispatch(viewCourseStatus(token, role));
-        console.log("response", response);
-        setDataOne(response);
-      } else {
-        setDataOne(viewRecentCourseState);
-      }
+      // if (viewRecentCourseState?.length === 0) {
+      const response = await dispatch(viewCourseStatus(token, role));
+      console.log("response", response);
+      setDataOne(response);
+      // } else {
+      //   setDataOne(viewRecentCourseState);
+      // }
     };
     viewRecentCourseStatus();
   }, []);
@@ -159,12 +158,13 @@ const LandingPageMain = () => {
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
                 >
-                  {item.chapterName}
+                  {item?.items?.length !== 0 && item?.chapterName}
                 </span>
               </div>
               <div>
                 <Slider className="intro-slick" {...settings}>
                   {item?.items?.map((e) => {
+                    // console.log("e", `${development}/media/${e.images}`)
                     return (
                       <div className="intro-slides">
                         <img
@@ -174,7 +174,7 @@ const LandingPageMain = () => {
                           // style={{
                           //   filter: `${e.disable ? "brightness(15%)" : ""}`,
                           // }}
-                          alt=""
+                          alt="No Image"
                         />
                         {e.images ? (
                           <div className="landingpagemainunderimage">
@@ -224,15 +224,15 @@ const LandingPageMain = () => {
                             <Rating
                               sx={{ ml: 1 }}
                               name="hover-feedback"
-                              value={value}
+                              value={e?.totalratinng}
                               className="secondratingcomponent"
-                              precision={0.5}
-                              onChange={(event, newValue) => {
-                                setValue(newValue);
-                              }}
-                              onChangeActive={(event, newHover) => {
-                                setHover(newHover);
-                              }}
+                              // precision={0.5}
+                              // onChange={(event, newValue) => {
+                              //   setValue(newValue);
+                              // }}
+                              // onChangeActive={(event, newHover) => {
+                              //   setHover(newHover);
+                              // }}
                               emptyIcon={
                                 <StarIcon
                                   style={{ color: "#C4C4C4" }}
@@ -247,7 +247,7 @@ const LandingPageMain = () => {
                                 color: theme ? "#363636" : "#C8C8C8",
                               }}
                             >
-                              (110,000)
+                              ({e?.totalperson})
                             </div>
                           </Box>
                         </div>

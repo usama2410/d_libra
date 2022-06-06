@@ -8,7 +8,7 @@ export const dashboardData = (state = initialState, action) => {
     case "GET_DASHBOARD_DATA":
       return {
         ...state,
-        data: payload.data,
+        data: payload,
       };
     default:
       return state;

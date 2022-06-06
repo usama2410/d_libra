@@ -17,13 +17,15 @@ import Icon_facebook from "../../assests/SVG_Files/New folder/icons/Icon_faceboo
 import Icon_gmail from "../../assests/SVG_Files/New folder/icons/Icon_gmail.svg";
 import Icon_telegram from "../../assests/SVG_Files/New folder/icons/Icon_telegram.svg";
 import Icon_whatsapp from "../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg";
-
+import { useNavigate } from "react-router-dom";
 const drawerBleeding = 56;
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
 }));
 
 const FooterButtons = (props) => {
+  const navigate = useNavigate();
+
   const link = "https://api.libraa.ml";
   const name = "D_Libra";
   const [footerbutton, setFooterButton] = React.useState(false);
@@ -75,11 +77,15 @@ const FooterButtons = (props) => {
     window.open(url, "_blank");
   };
 
+  const hanldeNavigateToHistory = () =>{
+    navigate('Recentlyviewed')
+  }
+
   return (
     <>
       <div>
         <div className="footer_buttons_container">
-          <img src={History} alt="" className="footerbuttonimages" />
+          <img src={History} alt="" className="footerbuttonimages" onClick={hanldeNavigateToHistory}/>
           <img src={MyLibrary} alt="" className="footerbuttonimages" />
           <img src={Rating} alt="" className="footerbuttonimages" />
           <img
@@ -104,6 +110,7 @@ const FooterButtons = (props) => {
                 style={{ cursor: "pointer" }}
                 width="50px"
                 height="50px"
+                onClick={hanldeNavigateToHistory}
               />
               <img
                 src={MyLibrary}

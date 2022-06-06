@@ -41,6 +41,7 @@ import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.s
 import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
 import Searchresult from "./Extras/Searchresult";
 import { searchState } from "../../src/Redux/Actions/auth.action";
+import { development } from "../endpoints";
 
 const drawerWidth = () => {
   if (window.innerWidth <= 600) {
@@ -105,17 +106,17 @@ export default function Sidebar() {
   const [searchstate, setSearchState] = React.useState(false);
   const [searchstate2, setSearchState2] = React.useState(false);
   const [search, setSearch] = React.useState("");
-
+  const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-
-  // console.log("search", search);
+  const user = useSelector((state) => state?.auth);
+  // console.log("user", user);
 
   const handleSearchResult = (e) => {
     e.preventDefault();
     if (search) {
       navigate(`/searchresult?role=${role}&coursename=${search}`);
     } else {
-      console.log("null")
+      console.log("null");
     }
   };
 
@@ -124,15 +125,18 @@ export default function Sidebar() {
     // await dispatch(searchState(searchstate2))
   };
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     // console.log("searchstate2",searchstate2)
-    await dispatch(searchState(searchstate2));
+    const state = async () => {
+      await dispatch(searchState(searchstate2));
+    };
+    state();
   }, []);
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/logout")
-  }
+    navigate("/logout");
+  };
 
   const handleSearchState = async (e) => {
     e.preventDefault();
@@ -300,11 +304,16 @@ export default function Sidebar() {
             className="sidebarlistcontainer"
           >
             <ListItemIcon>
-              <img src={Member_Icon} alt="" className="profilesidebaricon" />
+              <img
+                src={user ? `${development}/${user?.profile}` : Member_Icon}
+                alt=""
+                className="profilesidebaricon"
+                style={{ borderRadius: "50%" }}
+              />
             </ListItemIcon>
             <Typography>
               <span className="listitem_text" style={{ marginLeft: "-17px" }}>
-                bloovee
+                {user?.username}
               </span>
             </Typography>
           </div>
@@ -377,36 +386,35 @@ export default function Sidebar() {
           </div>
         </ListItem>
 
-        <ListItem
-          style={{ cursor: "pointer" }}
-          onClick={handleLogout}
-        >
-          <div
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-            className="sidebarlistcontainer"
-          >
-            <ListItemIcon
+        {token && (
+          <ListItem style={{ cursor: "pointer" }} onClick={handleLogout}>
+            <div
               onClick={toggleDrawer(anchor, false)}
               onKeyDown={toggleDrawer(anchor, false)}
+              className="sidebarlistcontainer"
             >
-              <img
-                src={Sidebar_Logout}
-                alt=""
-                style={{ paddingLeft: "3px" }}
-                className="sidebarlogouticon"
-              />
-            </ListItemIcon>
-            <Typography
-              onClick={toggleDrawer(anchor, false)}
-              onKeyDown={toggleDrawer(anchor, false)}
-            >
-              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-                Logout
-              </span>
-            </Typography>
-          </div>
-        </ListItem>
+              <ListItemIcon
+                onClick={toggleDrawer(anchor, false)}
+                onKeyDown={toggleDrawer(anchor, false)}
+              >
+                <img
+                  src={Sidebar_Logout}
+                  alt=""
+                  style={{ paddingLeft: "3px" }}
+                  className="sidebarlogouticon"
+                />
+              </ListItemIcon>
+              <Typography
+                onClick={toggleDrawer(anchor, false)}
+                onKeyDown={toggleDrawer(anchor, false)}
+              >
+                <span className="listitem_text" style={{ marginLeft: "-24px" }}>
+                  Logout
+                </span>
+              </Typography>
+            </div>
+          </ListItem>
+        )}
 
         <ListItem
           style={{ cursor: "pointer" }}
@@ -857,9 +865,10 @@ export default function Sidebar() {
             ) : (
               <img
                 onClick={() => navigate("/usersettingviewpage")}
-                src={Member_Icon}
+                src={user ? `${development}/${user?.profile}` : Member_Icon}
                 alt=""
                 className={Conditional_Sidenavlogo()}
+                style={{ borderRadius: "50%" }}
               />
             )}
           </div>

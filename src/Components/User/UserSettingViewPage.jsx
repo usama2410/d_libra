@@ -15,6 +15,7 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import FooterButtons from "./FooterButtons";
 import Editor_icon_dark from "../../assests/SVG_Files/New/Editor_icon_dark.svg";
 import Editor_icon_light from "../../assests/SVG_Files/New/Editor_icon_light.svg";
+import { development } from "../../endpoints";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -28,19 +29,31 @@ const UserSettingViewPage = () => {
   const [lastName, setLastName] = useState("");
   const [validation, setValidation] = useState(false);
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState("");
+  const [imageName, setImageName] = useState("");
+  const [showImage, setShowImage] = useState(false);
+  const user = useSelector((state) => state?.auth);
+
+  // console.log("image", image, imageName);
 
   useEffect(() => {
     const userData = async () => {
       const response = await dispatch(profileData(token));
+      console.log("respinse", response);
       setUsername(response?.data?.username);
       setEmail(response?.data?.email);
+      // setImageName(response?.data?.profile);
+      setFirstName(response?.data?.fname);
+      setLastName(response?.data?.lname);
     };
     userData();
   }, []);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    const response = await dispatch(updateProfile(firstName, lastName, token));
+    const response = await dispatch(
+      updateProfile(firstName, lastName, imageName, token)
+    );
     setMessage(response?.message);
     setValidation(true);
     const timer = setTimeout(() => {
@@ -57,6 +70,14 @@ const UserSettingViewPage = () => {
 
   const handleBack = () => {
     navigate("/userdetailpage");
+  };
+
+  const handleChange = (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+    setImageName(e.target.files[0]);
+    if (imageName.name !== "") {
+      setShowImage(true);
+    }
   };
 
   return (
@@ -77,7 +98,18 @@ const UserSettingViewPage = () => {
               theme ? "user_root_container" : "user_root_container_two"
             }
           >
-            <img src={Member_Icon} alt="" className="usersettingmembericon" />
+            <img
+              src={
+                showImage
+                  ? image
+                  : user
+                  ? `${development}/${user?.profile}`
+                  : Member_Icon
+              }
+              alt=""
+              style={{ borderRadius: "50%" }}
+              className="usersettingmembericon"
+            />
             <div className="user_header_container">
               <div
                 className="vector_container vectorcontainermobile"
@@ -104,13 +136,26 @@ const UserSettingViewPage = () => {
                   Editor
                 </span>
               </div>
-              <Button
-                className={
-                  theme ? "user_update_button_sub" : "user_update_button"
-                }
-              >
-                Update Icon
-              </Button>
+              <div>
+                <label htmlFor="contained-button-file">
+                  <input
+                    accept="image/*"
+                    id="contained-button-file"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <Button
+                    component="span"
+                    className={
+                      theme ? "user_update_button_sub" : "user_update_button"
+                    }
+                    onChange={(e) => handleChange(e)}
+                  >
+                    Update Icon
+                  </Button>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -176,7 +221,7 @@ const UserSettingViewPage = () => {
             </span>
             <input
               className={theme ? "addcategory_input_sub" : "addcategory_input"}
-              placeholder=" First Name"
+              placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
@@ -190,7 +235,7 @@ const UserSettingViewPage = () => {
             </span>
             <input
               className={theme ? "addcategory_input_sub" : "addcategory_input"}
-              placeholder=" Last Name"
+              placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
@@ -304,7 +349,7 @@ const UserSettingViewPage = () => {
         >
           Update
         </Button>
-        <Button variant="contained" className="user_buttons">
+        <Button variant="contained" className="user_buttons" onClick={() => navigate('/logout')}>
           Log out
         </Button>
       </div>
