@@ -12,6 +12,7 @@ import Previous from "../../assests/SVG_Files/New folder/icons/Previous.svg";
 import Previous_dark from "../../assests/SVG_Files/New folder/icons/Previous_dark.svg";
 import { getPostByID } from "../../Redux/Actions/Editor/post.action";
 import { development } from "../../endpoints";
+import parse from "html-react-parser";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      // console.log("response", response);
+      console.log("response", response.post.tags);
 
       setDetails(response);
     };
@@ -127,11 +128,11 @@ const DetailPage = () => {
             <div className="detail_page_content">
               <div className="scrollable">
                 <span>
-                  {details?.post?.meta_description !== "" ? (
-                    details?.post?.meta_description
+                  {details?.post?.content !== "" ? (
+                    parse(`${details?.post?.content}`)
                   ) : (
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      No description
+                      No content
                     </div>
                   )}
                   {/* Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut

@@ -16,7 +16,7 @@ export const profileData = (token) => async (dispatch) => {
 };
 
 export const updateProfile =
-  (fname, lname, image, token) => async (dispatch) => {
+  (fname, lname, image, token, auth) => async (dispatch) => {
     const formData = new FormData();
     formData.append("fname", fname);
     formData.append("lname", lname);
@@ -32,10 +32,20 @@ export const updateProfile =
         }
       );
       // console.log(response);
-      // dispatch({
-      //   type: "LOGIN_SUCCESS",
-        
-      // });
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          userId: auth?.userId,
+          email: auth?.email,
+          username: auth?.username,
+          firstName: response?.data?.data?.fname,
+          lastName: response?.data?.data?.lname,
+          status: auth?.status,
+          profile: response?.data?.data?.profile,
+          token: auth?.token,
+          role: auth?.role,
+        },
+      });
       return response.data;
     } catch (error) {
       console.log(error);

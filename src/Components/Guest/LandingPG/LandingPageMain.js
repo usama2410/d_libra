@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
 import Typography from "@mui/material/Typography";
-import FooterButton from "./FooterButton";
 import { useSelector, useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
@@ -17,6 +16,7 @@ import { Divider } from "@material-ui/core";
 import { viewCourseStatus } from "../../../Redux/Actions/Client Side/course.action";
 
 import { development } from "../../../endpoints";
+import FooterButtons from "../../User/FooterButtons";
 
 const labels = {
   0: "0",
@@ -213,26 +213,12 @@ const LandingPageMain = () => {
                               alignItems: "center",
                             }}
                           >
-                            {" "}
-                            <div className="rating_text">
-                              {value !== null && (
-                                <Box sx={{ ml: 0 }}>
-                                  {labels[hover !== -1 ? hover : value]}
-                                </Box>
-                              )}
-                            </div>
                             <Rating
                               sx={{ ml: 1 }}
-                              name="hover-feedback"
+                              name="read-only"
+                              readOnly 
                               value={e?.totalratinng}
                               className="secondratingcomponent"
-                              // precision={0.5}
-                              // onChange={(event, newValue) => {
-                              //   setValue(newValue);
-                              // }}
-                              // onChangeActive={(event, newHover) => {
-                              //   setHover(newHover);
-                              // }}
                               emptyIcon={
                                 <StarIcon
                                   style={{ color: "#C4C4C4" }}
@@ -329,26 +315,12 @@ const LandingPageMain = () => {
                               alignItems: "center",
                             }}
                           >
-                            {" "}
-                            <div className="rating_text">
-                              {value !== null && (
-                                <Box sx={{ ml: 0 }}>
-                                  {labels[hover !== -1 ? hover : value]}
-                                </Box>
-                              )}
-                            </div>
                             <Rating
                               sx={{ ml: 1 }}
-                              name="hover-feedback"
+                              name="read-only"
+                              readOnly
                               value={value}
                               className="secondratingcomponent"
-                              precision={0.5}
-                              onChange={(event, newValue) => {
-                                setValue(newValue);
-                              }}
-                              onChangeActive={(event, newHover) => {
-                                setHover(newHover);
-                              }}
                               emptyIcon={
                                 <StarIcon
                                   style={{ color: "#C4C4C4" }}
@@ -377,7 +349,7 @@ const LandingPageMain = () => {
         })}
       </div>
 
-      <FooterButton />
+      <FooterButtons />
     </>
   );
 };

@@ -11,6 +11,7 @@ const Logout = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
+    navigate("/");
   };
 
   return (

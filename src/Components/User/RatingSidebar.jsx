@@ -16,6 +16,7 @@ import {
 import { ratingCourse } from "../../Redux/Actions/Client Side/Rating.action";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { home } from "../../Redux/Actions/Client Side/home.action";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
@@ -28,45 +29,62 @@ const RatingSidebar = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const [value, setValue] = React.useState(2);
+  const [ratingValue, setValue] = React.useState(0);
   const [comment, setComment] = useState("");
   const [parentCategory, setParentCategory] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [content_id, setContent_id] = useState("");
+  const [courseId, setCourseId] = useState("");
   const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isArray, setIsArray] = useState();
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getMainCategory(token));
+    const response = await dispatch(getParentChildCategories(token));
     // console.log("getParentChildCategories response", response)
-    setParentCategory(response[0]?.items);
+    setParentCategory(response);
+  };
+
+  const MainCategory = async () => {
+    const response = await dispatch(home());
+    let array = [];
+    response?.map((item) => {
+      return item?.data?.map((item2) => {
+        return item2?.items?.map((item3) => {
+          // console.log("item3", item3);
+          return array.push({
+            id: item3?.id,
+            label: item3?.CategoryName,
+            rating: item3?.totalratinng,
+          });
+        });
+      });
+    });
+
+    setIsArray(array);
   };
 
   useEffect(() => {
     handleParentChildeCategory();
+    MainCategory();
   }, []);
 
-  const parentOptions = parentCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.CategoryName };
-  });
-  const handleSelector = async (selectedOption) => {
+  const handleSelector = (selectedOption) => {
     setSelectedOption(selectedOption);
-    // console.log("selectedOption ID", selectedOption.id);
-    setContent_id(selectedOption.id);
+    console.log("selectedOption", selectedOption);
+    setCourseId(selectedOption?.id);
+    setValue(selectedOption?.rating);
   };
+
 
   const handleSubmit = async () => {
     setIsLoading(true);
     const response = await dispatch(
-      ratingCourse(role, content_id, value, comment, token)
+      ratingCourse(role, courseId, ratingValue, comment, token)
     );
-    setErrorMessage(true);
+    console.log(response);
     setMessage(response?.message);
-
     const timer = setTimeout(() => {
-      setErrorMessage(false);
+      setMessage("");
     }, 5000);
     setIsLoading(false);
     return () => clearTimeout(timer);
@@ -164,19 +182,19 @@ const RatingSidebar = () => {
         <span className="backbutton_text">Back</span>
       </button>
       <div className="ratingform_root_four_five">
-        {errorMessage === true && message === "Rating Content Sucessfully" ? (
+        {message === "Rating Course Sucessfully" ? (
           <div>
             <h4 className={theme ? "successMessage" : "successMessageTwo"}>
-              Content rated sucessfully
+              Course rated sucessfully
             </h4>
           </div>
-        ) : errorMessage === true && message === "Already rated" ? (
+        ) : message === "Already rated" ? (
           <div>
             <h4 className={theme ? "successMessage" : "successMessageTwo"}>
               Already rated
             </h4>
           </div>
-        ) : errorMessage === true && message === "All Fields are Required" ? (
+        ) : message === "All Fields are Required" ? (
           <div>
             <h4 className="errorMessage">{message}</h4>
           </div>
@@ -188,7 +206,7 @@ const RatingSidebar = () => {
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
           placeholder="Git & GitHub Introduction"
-          options={parentOptions}
+          options={isArray}
           onChange={handleSelector}
           value={selectedOption}
         />
@@ -200,7 +218,7 @@ const RatingSidebar = () => {
             emptyIcon={
               <StarIcon style={{ color: "#C4C4C4" }} fontSize="inherit" />
             }
-            value={value}
+            value={ratingValue}
             onChange={(event, newValue) => {
               setValue(newValue);
             }}

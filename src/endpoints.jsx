@@ -1,5 +1,5 @@
 export const production = "https://api.libraa.ml";
-export const development = "https://libra.pythonanywhere.com"; // https://libra.pythonanywhere.com
+export const development = "https://api.libraa.ml"; // https://libra.pythonanywhere.com
 export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 
@@ -12,6 +12,7 @@ export const endpoints = {
   SEND_VERIFICATION_CODE: "/webapi/SendVerificationCode",
   FORGOT_PASSWORD: "/webapi/VerifyCode",
   RESET_PASSWORD: "/webapi/ChangePassword",
+  LOGOUT: "/webapi/logout?role=",
 
   //Profile
   USER_PROFILE: "/webapi/userprofile",
@@ -19,6 +20,8 @@ export const endpoints = {
 
   //Dashboard Data
   DASHBOARD_DATA: "/webapi/GetDashboardData",
+  DASHBOARD_DATA_WITH_AUTHORIZATION:
+    "/webapi/GetDashboardDataWithAuthorization?id=",
 
   //Category
   PARENT_CATEGORY: "/GetParentCategories",
@@ -32,13 +35,13 @@ export const endpoints = {
   //Category
   ADD_CATEGORY: "/webapi/GetParentCategories",
   GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
-  GET_CHILD_CATEGORY: "/webapi//GetChildCategories?id=",
+  GET_CHILD_CATEGORY: "/webapi/GetChildCategories?id=",
 
   GET_PARENT_CHILD_CATEGORY: "/webapi/GetParentChildCategories",
   GET_TOPIC_CONTENT: "/webapi/GetTopicContent?role=",
 
   // Course Data - Screen 10
-  VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus?role",
+  VIEW_COURSE_STATUS: "/webapi/recentlyViewCourseStatus?role=",
   ADD_TO_RECENT_COURSES: "/webapi/recentlyViewCourseStatus",
 
   // Content Data
@@ -46,10 +49,12 @@ export const endpoints = {
   GET_RECENT_CONTENT: "/webapi/recentlyViewContentStatus?role",
 
   // Rating
-  RATING_COURSE: "/webapi/RatingContent",
+  RATING_COURSE: "/webapi/RatingCourse",
 
   // Search
-  SEARCH_COURSE: "/webapi/SearchCourse",
+  SEARCH_COURSE: "/webapi/GetParentCategories?search=",
+  SEARCH_CONTENT: "/webapi/SearchCourse",
+  SEARCH_USER_POST: "/webapi/GetTopicData?role=",
 
   // Priorty
   GET_PRIORITY: "/webapi/SetPriority?role=",

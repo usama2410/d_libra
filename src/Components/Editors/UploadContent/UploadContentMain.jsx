@@ -43,12 +43,12 @@ const UploadContentMain = () => {
     return setEditorState(editorState);
   };
   const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-  // console.log("hrmlText", htmlText)
+  console.log("hrmlText", htmlText)
 
   const [parentCategory, setParentCategory] = useState([]);
   const [childCategory, setChildCategory] = useState([]);
 
-  // console.log("parentCategory", parentCategory);
+  console.log("parentCategory", parentCategory);
   // console.log("childCategory", childCategory);
 
   const handleChange = (e) => {
@@ -205,7 +205,7 @@ const UploadContentMain = () => {
       getChildCategories(selectedOption.id, token)
     );
     setChildCategory(response);
-    // console.log("response", response);
+    console.log("response", response);
   };
 
   return (

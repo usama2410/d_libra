@@ -424,6 +424,17 @@
   color: #4f4f4f;
 }
 
+.listitem_text_enabled {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+}
+
 .sidenav_logo {
   width: 40px;
   height: 40px;

@@ -1,23 +1,52 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CourseGuestData from "./CourseGuestData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
 import Typography from "@mui/material/Typography";
-import FooterButton from "./FooterButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
 import { ArrowBack } from "@mui/icons-material";
+import { GetDashboardDataWithAuthorization } from "../../../Redux/Actions/Dashboard.Data.action";
+import { development } from "../../../endpoints";
+import FooterButtons from "../../User/FooterButtons";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const CoursePageGuest = () => {
   const navigate = useNavigate();
+  const params = useParams();
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
-  const [data, setdata] = useState(CourseGuestData);
+  const role = useSelector((state) => state.auth.role);
+  const token = useSelector((state) => state.auth.token);
+  const [data, setdata] = useState([]);
   const handleBack = () => {
     navigate("/");
   };
+
+  console.log("params", params);
+
+  useEffect(() => {
+    const authDashboardData = async () => {
+      const response = await dispatch(
+        GetDashboardDataWithAuthorization(params?.id, role, token)
+      );
+      console.log("Get Dashboard Data Response", response);
+      setdata(response);
+    };
+    authDashboardData();
+  }, [params]);
+
+  const handleDetailPageNavigate = async (categoryid, postId) => {
+    // console.log(categoryid, postId);
+    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`);
+
+    // await dispatch(addRecenetViewContent(categoryid, role, token));
+  };
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -117,56 +146,81 @@ const CoursePageGuest = () => {
           </span>
         </div>
       </div>
-      <div className="landingpage_slider_container coursemainpage_container">
-        {data.map((item) => {
-          return (
-            <div className="content_root_container">
-              <div>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.chapterName}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          onClick={() => navigate("/userdetailpage")}
-                          src={e.image}
-                          className="landingpage_images"
-                          style={{
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          }}
-                          alt=""
-                        />
-                        {e.image ? (
-                          <div className="coursepageguestsection">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="subcoursename"
-                              style={{ color: theme ? "#363636" : "#FFFFFF" }}
-                            >
-                              {e.Tags}
-                            </Typography>
-                            <div></div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
+      {data?.length > 0 ? (
+        <div className="landingpage_slider_container coursemainpage_container">
+          {data?.map((item) => {
+            return (
+              <div className="content_root_container">
+                <div>
+                  <span
+                    className={
+                      theme ? "chapternameclass" : "chapternameclasstwo"
+                    }
+                  >
+                    {item?.lecture?.length !== 0 ? (
+                      item?.CategoryName
+                    ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          textAlign: "center",
+                        }}
+                      >
+                        <h3 style={{ textAlign: "center" }}>No Data</h3>
                       </div>
-                    );
-                  })}
-                </Slider>
+                    )}
+                  </span>
+                </div>
+                <div>
+                  <Slider className="intro-slick" {...settings}>
+                    {item?.lecture?.map((e) => {
+                      return (
+                        <div className="intro-slides">
+                          <img
+                            onClick={() =>
+                              handleDetailPageNavigate(item?.id, e?.id)
+                            }
+                            src={`${development}/media/${e.images}`}
+                            className="landingpage_images"
+                            // style={{
+                            //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                            // }}
+                            alt=""
+                          />
+                          {e.images ? (
+                            <div className="coursepageguestsection">
+                              <Typography
+                                noWrap
+                                component="div"
+                                className="subcoursename"
+                                style={{ color: theme ? "#363636" : "#FFFFFF" }}
+                              >
+                                {e.title}
+                              </Typography>
+                              <div></div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      );
+                    })}
+                  </Slider>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <FooterButton />
+            );
+          })}
+        </div>
+      ) : (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+        >
+          <CircularProgress color="inherit" size={30} />
+        </Box>
+      )}
+
+      <FooterButtons />
     </>
   );
 };

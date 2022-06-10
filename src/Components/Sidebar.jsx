@@ -106,6 +106,7 @@ export default function Sidebar() {
   const [searchstate, setSearchState] = React.useState(false);
   const [searchstate2, setSearchState2] = React.useState(false);
   const [search, setSearch] = React.useState("");
+  const [searchKey, setSearchKey] = React.useState(true);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
@@ -114,9 +115,25 @@ export default function Sidebar() {
   const handleSearchResult = (e) => {
     e.preventDefault();
     if (search) {
-      navigate(`/searchresult?role=${role}&coursename=${search}`);
+      if (location.pathname === "/") {
+        navigate(`/?search=${search}`, {
+          state: {
+            searchKey,
+            search,
+          },
+        });
+      } else if (location.pathname === "/mycontents") {
+        navigate(`/mycontents?search=${search}`, {
+          state: {
+            searchKey,
+            search,
+          },
+        });
+      } else {
+        navigate(`/searchresult?role=${role}&coursename=${search}`);
+      }
     } else {
-      console.log("null");
+      console.log("Null");
     }
   };
 
@@ -135,7 +152,7 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/logout");
+    window.load((window.location.href = "/logout"));
   };
 
   const handleSearchState = async (e) => {
@@ -305,7 +322,11 @@ export default function Sidebar() {
           >
             <ListItemIcon>
               <img
-                src={user ? `${development}/${user?.profile}` : Member_Icon}
+                src={
+                  user?.profile !== null
+                    ? `${development}/${user?.profile}`
+                    : Member_Icon
+                }
                 alt=""
                 className="profilesidebaricon"
                 style={{ borderRadius: "50%" }}
@@ -343,7 +364,9 @@ export default function Sidebar() {
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <span
-                className="listitem_text_disabled"
+                className={
+                  user ? "listitem_text_disabled" : "listitem_text_enabled"
+                }
                 style={{ marginLeft: "-24px" }}
               >
                 Signup
@@ -377,7 +400,9 @@ export default function Sidebar() {
               onKeyDown={toggleDrawer(anchor, false)}
             >
               <span
-                className="listitem_text_disabled"
+                className={
+                  user ? "listitem_text_disabled" : "listitem_text_enabled"
+                }
                 style={{ marginLeft: "-24px" }}
               >
                 Login
@@ -785,16 +810,17 @@ export default function Sidebar() {
           "/uploadcontentmain" === location.pathname ||
           "/mycontents" === location.pathname ||
           "/editcontentmain" === location.pathname ||
-          "/deletecontent" === location.pathname ? (
-            <img
-              src={editor_icon}
-              className="editoriconsidebar"
-              onClick={() => navigate("/editormainpage")}
-              alt=""
-            />
-          ) : (
-            ""
-          )}
+          "/deletecontent" === location.pathname
+            ? user?.role === "editor" && (
+                <img
+                  src={editor_icon}
+                  className="editoriconsidebar"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate("/editormainpage")}
+                  alt=""
+                />
+              )
+            : ""}
 
           <div className="toolbar_rowreverse">
             <div>
@@ -865,7 +891,11 @@ export default function Sidebar() {
             ) : (
               <img
                 onClick={() => navigate("/usersettingviewpage")}
-                src={user ? `${development}/${user?.profile}` : Member_Icon}
+                src={
+                  user?.profile !== null
+                    ? `${development}/${user?.profile}`
+                    : Member_Icon
+                }
                 alt=""
                 className={Conditional_Sidenavlogo()}
                 style={{ borderRadius: "50%" }}

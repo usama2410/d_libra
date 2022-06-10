@@ -25,7 +25,7 @@ const ChangePassword = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/usersettingviewpage");
   };
 
   const handleErrors = (response) => {

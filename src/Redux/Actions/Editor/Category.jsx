@@ -4,7 +4,7 @@ import * as FormData from "form-data";
 
 export const addnewCategory =
   (chapName, chapId, slug, token, imageName) => async (dispatch) => {
-    console.log(chapName, chapId, slug, token, imageName)
+    console.log(chapName, chapId, slug, token, imageName);
     const formData = new FormData();
     formData.append("name", chapName);
     formData.append("parentCategoryid", chapId);
@@ -34,6 +34,7 @@ export const getMainCategory = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
+    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -75,13 +76,14 @@ export const getParentChildCategories = (token) => async (dispatch) => {
 };
 
 export const getChildCategories = (id, token) => async (dispatch) => {
+  console.log("id, ", id);
   try {
     const response = await axios.get(URL + endpoints.GET_CHILD_CATEGORY + id, {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    // console.log("GetChildCategories response", response);
+    console.log("GetChildCategories response", response);
     return response?.data?.data;
   } catch (error) {
     console.log(error);

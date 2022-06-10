@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
@@ -18,6 +18,9 @@ import Icon_gmail from "../../assests/SVG_Files/New folder/icons/Icon_gmail.svg"
 import Icon_telegram from "../../assests/SVG_Files/New folder/icons/Icon_telegram.svg";
 import Icon_whatsapp from "../../assests/SVG_Files/New folder/icons/Icon_whatsapp.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Popup_History_off from "../../assests/SVG_Files/New folder/icons/Popup_History_off.svg";
+import { viewCourseStatus } from "../../Redux/Actions/Client Side/course.action";
 const drawerBleeding = 56;
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
@@ -25,9 +28,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
 const FooterButtons = (props) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const link = "https://api.libraa.ml";
   const name = "D_Libra";
+
   const [footerbutton, setFooterButton] = React.useState(false);
   const handleFotterButton = () => {
     setFooterButton(true);
@@ -35,9 +39,11 @@ const FooterButtons = (props) => {
       setFooterButton(false);
     }
   };
-
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
   const [open, setOpen] = React.useState(false);
   const [mobileView, setMobileView] = React.useState(false);
+  const [history, setHistory] = React.useState([]);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -52,7 +58,6 @@ const FooterButtons = (props) => {
   }, []);
 
   const handleWhatsApp = () => {
-    // setOpenDrawer(true);
     console.log("whatsapp");
     const url = `https://api.whatsapp.com/send?text=${window.location.href}`;
     window.open(url, "_blank");
@@ -66,7 +71,6 @@ const FooterButtons = (props) => {
 
   const handleMail = () => {
     console.log("mail");
-    // const url = `https://mail.google.com?subject=${link}&body=${link}`;
     const url = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=${name}&body=${link}`;
     window.open(url, "_blank");
   };
@@ -77,17 +81,50 @@ const FooterButtons = (props) => {
     window.open(url, "_blank");
   };
 
-  const hanldeNavigateToHistory = () =>{
-    navigate('Recentlyviewed')
-  }
+  const hanldeNavigateToHistory = () => {
+    navigate("recentlyviewed");
+  };
+
+  const hanldeRatingNavigate = () => {
+    navigate("/ratingsidebar");
+  };
+
+  useEffect(() => {
+    const recentViewedCourses = async () => {
+      const response = await dispatch(viewCourseStatus(token, role));
+      // console.log("response", response);
+      setHistory(response);
+    };
+    recentViewedCourses();
+  }, []);
 
   return (
     <>
       <div>
         <div className="footer_buttons_container">
-          <img src={History} alt="" className="footerbuttonimages" onClick={hanldeNavigateToHistory}/>
+          {history?.length > 0 ? (
+            <img
+              src={History}
+              alt=""
+              className="footerbuttonimages"
+              onClick={hanldeNavigateToHistory}
+            />
+          ) : (
+            <img
+              src={Popup_History_off}
+              alt=""
+              className="footerbuttonimages"
+              onClick={hanldeNavigateToHistory}
+            />
+          )}
+
           <img src={MyLibrary} alt="" className="footerbuttonimages" />
-          <img src={Rating} alt="" className="footerbuttonimages" />
+          <img
+            src={Rating}
+            alt=""
+            className="footerbuttonimages"
+            onClick={hanldeRatingNavigate}
+          />
           <img
             src={Share}
             onClick={toggleDrawer(true)}

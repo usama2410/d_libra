@@ -8,6 +8,7 @@ import { parentChildCategory } from "../editor/category";
 import { mainCategoryData } from "../main.category.reducer";
 import { searchResultData } from "../search.result.reducer";
 
+// Redux persist configiration
 const persistConfig = {
   key: "root",
   storage,

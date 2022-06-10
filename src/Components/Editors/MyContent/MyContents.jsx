@@ -25,8 +25,7 @@ const MyContents = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-  const handleBack = (e) => {
-    e.preventDefault();
+  const handleBack = () => {
     navigate("/editormainpage");
   };
 
@@ -140,6 +139,7 @@ const MyContents = () => {
           theme ? "mainmycontentcontainer" : "mainmycontentcontainertwo"
         }
       >
+        <div>
         <div className="mycontentcontainerbackbutton">
           <button
             onClick={handleBack}
@@ -153,7 +153,6 @@ const MyContents = () => {
             <span className="backbutton_text">Back</span>
           </button>
         </div>
-        <div>
           <div className="mainContentContainertwotwo">
             <span
               className={theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { URL, endpoints } from "../../endpoints";
 import * as FormData from "form-data";
 
@@ -22,32 +23,35 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 };
 
-export const logIn = (email, password) => async (dispatch) => {
-  // console.log("email, password", email, password)
-  const bodyFormData = new FormData();
-  bodyFormData.append("email", email);
-  bodyFormData.append("password", password);
-  try {
-    const response = await axios.post(URL + endpoints.LOGIN, bodyFormData);
-    // console.log(response)
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: {
-        userId: response?.data?.data?.id,
-        email: response?.data?.data?.email,
-        username: response?.data?.data?.username,
-        status: response?.data?.status,
-        profile: response?.data?.data?.profile,
-        token: response?.data?.token,
-        role: response?.data?.data?.role,
-      },
-    });
-    return response?.data;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-};
+export const logIn =
+  (email, password, userSettingState) => async (dispatch) => {
+    // console.log("email, password", email, password)
+    const bodyFormData = new FormData();
+    bodyFormData.append("email", email);
+    bodyFormData.append("password", password);
+    try {
+      const response = await axios.post(URL + endpoints.LOGIN, bodyFormData);
+      // console.log(response)
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          userId: response?.data?.data?.id,
+          email: response?.data?.data?.email,
+          username: response?.data?.data?.username,
+          firstName: userSettingState?.firstName,
+          lastName: userSettingState?.lastName,
+          status: response?.data?.status,
+          profile: response?.data?.data?.profile,
+          token: response?.data?.token,
+          role: response?.data?.data?.role,
+        },
+      });
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
 
 export const changePassword =
   (oldpassword, password, token) => async (dispatch) => {
@@ -127,6 +131,21 @@ export const resetPassword = (email, passowrd, token) => async (dispatch) => {
     );
     // console.log("Forget Password Response", response);
     return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logout = (role, token) => async (dispatch) => {
+  console.log(role, token);
+  try {
+    const response = await axios.post(URL + endpoints.LOGOUT + role, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log("Logout response", response);
+    return response;
   } catch (error) {
     console.log(error);
   }

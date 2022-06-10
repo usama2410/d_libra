@@ -6,14 +6,14 @@ export const viewCourseStatus = (token, role) => async (dispatch) => {
   // console.log(URL + endpoints.VIEW_COURSE_STATUS + "=" + role);
   try {
     const response = await axios.get(
-      URL + endpoints.VIEW_COURSE_STATUS + "=" + role,
+      URL + endpoints.VIEW_COURSE_STATUS + role,
       {
         headers: {
           Authorization: "Bearer " + token,
         },
       }
     );
-    console.log("viewCourseStatus response", response);
+    // console.log("viewCourseStatus response", response);
     dispatch({
       type: "VIEW_RECENT_COURSE_STATUS_SUCCESS",
       payload: response?.data,
@@ -40,7 +40,7 @@ export const addToRecentViewCourses =
           },
         }
       );
-      console.log("addToRecentViewCourses response", response);
+      // console.log("addToRecentViewCourses response", response);
       return response?.data;
     } catch (error) {
       console.log(error);

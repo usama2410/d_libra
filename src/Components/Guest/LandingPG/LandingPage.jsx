@@ -8,7 +8,6 @@ import LandingPageImage1 from "../../../assests/SVG_Files/LandingPageImage1.svg"
 import darkmode_logo from "../../../assests/SVG_Files/New folder/darkmode_logo.svg";
 import lightmode_logo from "../../../assests/SVG_Files/New folder/lightmode_logo.svg";
 import Typography from "@mui/material/Typography";
-import FooterButton from "./FooterButton";
 import { useSelector, useDispatch } from "react-redux";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
@@ -18,6 +17,8 @@ import Box from "@mui/material/Box";
 import { addToRecentViewCourses } from "../../../Redux/Actions/Client Side/course.action";
 import { home } from "../../../Redux/Actions/Client Side/home.action";
 import { development } from "../../../endpoints";
+import Swal from "sweetalert2";
+import FooterButtons from "../../User/FooterButtons";
 
 // const labels = {
 //   0: "0",
@@ -43,7 +44,7 @@ const LandingPage = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  // console.log("data", data);
+  console.log("data", data[0]);
 
   const settings = {
     dots: false,
@@ -138,9 +139,11 @@ const LandingPage = () => {
   }, []);
 
   const handleViewRecentCourses = async (id) => {
-    console.log("view recent courses", id);
+    // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    // navigate("/coursepageguest");
+    !token
+      ? Swal.fire("Please Login to view course")
+      : navigate(`/coursepageguest/${id}`);
   };
 
   return (
@@ -165,23 +168,27 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="mainContentContainer">
-        {" "}
-        <div style={{ display: "flex" }}>
-          {" "}
-          <button
-            className="Signup_button Signup"
-            onClick={() => navigate("/register")}
-          >
-            Sign up
-          </button>
-          <button className="Signup_button" onClick={() => navigate("/login")}>
-            Log in
-          </button>
-        </div>
+        {!token && (
+          <div style={{ display: "flex" }}>
+            {" "}
+            <button
+              className="Signup_button Signup"
+              onClick={() => navigate("/register")}
+            >
+              Sign up
+            </button>
+            <button
+              className="Signup_button"
+              onClick={() => navigate("/login")}
+            >
+              Log in
+            </button>
+          </div>
+        )}
       </div>
       {data?.length > 0 ? (
         <div className="landingpage_slider_container">
-          {data?.map((item) => {
+          {data[0]?.data?.map((item) => {
             return (
               <div className="content_root_container">
                 <div>
@@ -190,98 +197,86 @@ const LandingPage = () => {
                       theme ? "chapternameclass" : "chapternameclasstwo"
                     }
                   >
-                    {item?.items?.length !== 0 && item?.chapterName}
+                    {item?.items?.length !== 0 && item?.chaptername}
                   </span>
                 </div>
                 <div>
                   <Slider className="intro-slick" {...settings}>
                     {item?.items?.map((e) => {
                       return (
-                        <div className="intro-slides">
-                          <img
-                            src={`${development}/media/${e.image}`}
-                            // onClick={() => navigate("/coursepageguest")}
-                            onClick={() => handleViewRecentCourses(e.id)}
-                            className="landingpage_images"
-                            // style={{
-                            //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                            // }}
-                            alt="No Image"
-                          />
-                          {e.image ? (
-                            <div className="landingpagesubsection">
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursename"
-                                style={{
-                                  color: theme ? "#363636" : "#FFFFFF",
-                                }}
-                              >
-                                {e.CategoryName}
-                              </Typography>
-                            </div>
-                          ) : (
-                            ""
-                          )}
+                        <div>
+                          <div className="intro-slides">
+                            <img
+                              src={`${development}/media/${e.image}`}
+                              // onClick={() => navigate("/coursepageguest")}
+                              onClick={() => handleViewRecentCourses(e.id)}
+                              className="landingpage_images"
+                              // style={{
+                              //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                              // }}
+                              alt="No Image"
+                            />
+                            {e.image ? (
+                              <div className="landingpagesubsection">
+                                <Typography
+                                  noWrap
+                                  component="div"
+                                  className="subcoursename"
+                                  style={{
+                                    color: theme ? "#363636" : "#FFFFFF",
+                                  }}
+                                >
+                                  {e.CategoryName}
+                                </Typography>
+                              </div>
+                            ) : (
+                              ""
+                            )}
 
-                          <div
-                            style={{
-                              padding: "10px 0px 0px 10px",
-                            }}
-                          >
-                            <span
-                              className="Author"
+                            <div
                               style={{
-                                color: theme ? "#363636" : "#C8C8C8",
+                                padding: "10px 0px 0px 10px",
                               }}
                             >
-                              Author:
-                            </span>
-                            <Box
-                              sx={{
-                                width: 200,
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              {" "}
-                              {/* <div className="rating_text">
-                              {value !== null && (
-                                <Box sx={{ ml: 0 }}>
-                                  {labels[hover !== -1 ? hover : value]}
-                                </Box>
-                              )}
-                            </div> */}
-                              <Rating
-                                sx={{ ml: 1 }}
-                                name="hover-feedback"
-                                value={e?.totalratinng}
-                                className="secondratingcomponent"
-                                // precision={0.5}
-                                // onChange={(event, newValue) => {
-                                //   setValue(newValue);
-                                // }}
-                                // onChangeActive={(event, newHover) => {
-                                //   setHover(newHover);
-                                // }}
-                                emptyIcon={
-                                  <StarIcon
-                                    style={{ color: "#C4C4C4" }}
-                                    fontSize="inherit"
-                                  />
-                                }
-                              />
-                              <div
-                                className="rating_text"
+                              <span
+                                className="Author"
                                 style={{
-                                  paddingLeft: "10px",
                                   color: theme ? "#363636" : "#C8C8C8",
                                 }}
                               >
-                                ({e?.totalperson})
-                              </div>
-                            </Box>
+                                Author:
+                              </span>
+                              <Box
+                                sx={{
+                                  width: 200,
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Rating
+                                  sx={{ ml: 1 }}
+                                  name="read-only"
+                                  readOnly
+                                  value={e?.totalratinng}
+                                  className="secondratingcomponent"
+                                  emptyIcon={
+                                    <StarIcon
+                                      style={{ color: "#C4C4C4" }}
+                                      fontSize="inherit"
+                                    />
+                                  }
+                                />
+                                <div
+                                  className="rating_text"
+                                  style={{
+                                    paddingLeft: "10px",
+                                    color: theme ? "#363636" : "#C8C8C8",
+                                  }}
+                                >
+                                  ({e?.totalperson})
+                                </div>
+                              </Box>
+                            </div>
                           </div>
                         </div>
                       );
@@ -300,7 +295,7 @@ const LandingPage = () => {
         </Box>
       )}
 
-      <FooterButton />
+      <FooterButtons />
     </>
   );
 };

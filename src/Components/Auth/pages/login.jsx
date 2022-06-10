@@ -18,6 +18,8 @@ const Login = () => {
   const theme = useSelector((state) => state.theme.state);
   const role = useSelector((state) => state.auth.role);
 
+  const userSettingState = useSelector((state) => state?.userSetting);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -34,8 +36,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const response = await dispatch(logIn(email, password));
-    // console.log("response", response);
+    const response = await dispatch(logIn(email, password, userSettingState));
+    console.log("response", response);
     setMessage(response?.message);
     if (!email || !password) {
       setErrorMessage(true);

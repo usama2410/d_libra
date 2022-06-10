@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Sidebar from "./Components/Sidebar";
 import EditorsMainPage from "../src/Components/Editors/EditorsMainPage";
 import EditCourseStructure from "./Components/Editors/EditCourseStructure";
@@ -216,14 +216,14 @@ function App() {
                         element={<CourseMainPage />}
                       />
                       <Route
-                        path="/coursepageguest"
+                        path="/coursepageguest/:id"
                         exact
                         element={<CoursePageGuest />}
                       />
                     </>
                   </>
                 ) : (
-                  <Navigate to={"/"} />
+                  <Route path='*' element={<Navigate to='/Home' />} />
                 )}
               </Routes>
             </div>

@@ -18,3 +18,22 @@ export const getDashboardData = (token) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const GetDashboardDataWithAuthorization =
+  (id, role, token) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        URL + endpoints.DASHBOARD_DATA_WITH_AUTHORIZATION + id + "&role=" + role,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log("Get authorized Dashboard Data Response", response);
+
+      return response?.data?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };

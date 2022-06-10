@@ -5,12 +5,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Lp.css";
 import Typography from "@mui/material/Typography";
-import FooterButton from "./FooterButton";
 import { useSelector, useDispatch } from "react-redux";
 import GitAndGitHub from "../../../assests/SVG_Files/GitAndGitHub.svg";
 import { ArrowBack } from "@mui/icons-material";
 
 import { getRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
+import FooterButtons from "../../User/FooterButtons";
 
 const CourseMainPage = () => {
   const dispatch = useDispatch();
@@ -190,7 +190,7 @@ const CourseMainPage = () => {
           );
         })}
       </div>
-      <FooterButton />
+      <FooterButtons />
     </>
   );
 };

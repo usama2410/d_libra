@@ -16,12 +16,17 @@ import FooterButtons from "./FooterButtons";
 import Editor_icon_dark from "../../assests/SVG_Files/New/Editor_icon_dark.svg";
 import Editor_icon_light from "../../assests/SVG_Files/New/Editor_icon_light.svg";
 import { development } from "../../endpoints";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { logout } from "../../Redux/Actions/auth.action";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const [username, setUsername] = useState();
   const [email, setEmail] = useState("");
@@ -32,9 +37,14 @@ const UserSettingViewPage = () => {
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const [showImage, setShowImage] = useState(false);
-  const user = useSelector((state) => state?.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // console.log("image", image, imageName);
+  const nameOfUser = useSelector((state) => state?.auth);
+  const user = useSelector((state) => state?.auth?.profile);
+  
+
+  // console.log("user", user);
+  // console.log("showImage", showImage);
 
   useEffect(() => {
     const userData = async () => {
@@ -51,15 +61,18 @@ const UserSettingViewPage = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const response = await dispatch(
-      updateProfile(firstName, lastName, imageName, token)
+      updateProfile(firstName, lastName, imageName, token, auth)
     );
+    console.log("response", response);
     setMessage(response?.message);
     setValidation(true);
     const timer = setTimeout(() => {
       setValidation(false);
       setMessage("");
     }, 5000);
+    setIsLoading(false);
     return () => clearTimeout(timer);
   };
 
@@ -69,7 +82,7 @@ const UserSettingViewPage = () => {
   };
 
   const handleBack = () => {
-    navigate("/userdetailpage");
+    navigate("/");
   };
 
   const handleChange = (e) => {
@@ -78,6 +91,14 @@ const UserSettingViewPage = () => {
     if (imageName.name !== "") {
       setShowImage(true);
     }
+  };
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.load((window.location.href = "/logout"));
+    // const response = await dispatch(logout(role, token));
+    // navigate("/logout")
   };
 
   return (
@@ -98,18 +119,21 @@ const UserSettingViewPage = () => {
               theme ? "user_root_container" : "user_root_container_two"
             }
           >
-            <img
-              src={
-                showImage
-                  ? image
-                  : user
-                  ? `${development}/${user?.profile}`
-                  : Member_Icon
-              }
-              alt=""
-              style={{ borderRadius: "50%" }}
-              className="usersettingmembericon"
-            />
+            {user !== null ? (
+              <img
+                src={showImage ? image : `${development}/${user}`}
+                alt="No Image"
+                style={{ borderRadius: "50%" }}
+                className="usersettingmembericon"
+              />
+            ) : (
+              <img
+                src={Member_Icon}
+                alt="No Image"
+                style={{ borderRadius: "50%" }}
+                className="usersettingmembericon"
+              />
+            )}
             <div className="user_header_container">
               <div
                 className="vector_container vectorcontainermobile"
@@ -133,7 +157,9 @@ const UserSettingViewPage = () => {
                     theme ? " editorimage_icon" : "  editorimage_icon_two"
                   }
                 >
-                  Editor
+                  {!firstName || !lastName
+                    ? "User"
+                    : `${firstName} ${lastName}`}
                 </span>
               </div>
               <div>
@@ -342,14 +368,28 @@ const UserSettingViewPage = () => {
         >
           Change Password
         </Button>
+        {isLoading ? (
+          <Box
+            className="user_buttons"
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            <CircularProgress color="inherit" size={30} />
+          </Box>
+        ) : (
+          <Button
+            variant="contained"
+            className="user_buttons"
+            onClick={handleUpdateProfile}
+          >
+            Update
+          </Button>
+        )}
+
         <Button
           variant="contained"
           className="user_buttons"
-          onClick={handleUpdateProfile}
+          onClick={handleLogout}
         >
-          Update
-        </Button>
-        <Button variant="contained" className="user_buttons" onClick={() => navigate('/logout')}>
           Log out
         </Button>
       </div>

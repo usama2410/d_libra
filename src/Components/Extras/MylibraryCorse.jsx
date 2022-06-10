@@ -18,7 +18,9 @@ const MylibraryCorse = () => {
   const navigate = useNavigate();
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/");
+  };
   const settings = {
     dots: false,
     adaptiveHeight: true,

@@ -26,11 +26,7 @@ const EditorsMainPage = () => {
     }
   };
 
-  const options = [
-    { value: "chocolate", label: "Git & GitHub Introduction" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));

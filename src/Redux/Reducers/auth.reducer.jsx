@@ -2,6 +2,8 @@ const initialState = {
   userId: null,
   email: null,
   username: null,
+  firstName: null,
+  lastName: null,
   status: false,
   profile: null,
   token: null,
@@ -33,24 +35,26 @@ export const auth = (state = initialState, action) => {
         userId: payload.userId,
         email: payload.email,
         username: payload.username,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
         status: true,
         profile: payload.profile,
         token: payload.token,
         role: payload.role,
       };
-
-    case "LOGIN_FAIL":
+    case "LOGOUT_SUCCESS":
       return {
         ...state,
         userId: null,
         email: null,
         username: null,
+        firstName: null,
+        lastName: null,
         status: false,
         profile: null,
         token: null,
         role: null,
       };
-
     default:
       return state;
   }

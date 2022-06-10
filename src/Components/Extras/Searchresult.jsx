@@ -21,7 +21,7 @@ const Searchresult = () => {
   const params = useParams();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
-
+  
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
 
