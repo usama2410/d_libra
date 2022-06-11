@@ -21,6 +21,7 @@ export const searchAction = (location, token) => async (dispatch) => {
 };
 
 export const searchCourse = (location) => async (dispatch) => {
+  console.log("searchCourse", location, `${URL}${endpoints.SEARCH_COURSE}${location}`);
   try {
     const response = await axios.get(
       `${URL}${endpoints.SEARCH_COURSE}${location}`

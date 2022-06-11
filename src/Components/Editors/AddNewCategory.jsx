@@ -13,6 +13,7 @@ import { ArrowBack } from "@mui/icons-material";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { home } from "../../Redux/Actions/Client Side/home.action";
 
 const AddNewCategory = () => {
   const navigate = useNavigate();
@@ -29,7 +30,10 @@ const AddNewCategory = () => {
   // console.log("message", message);
 
   const [parentCategory, setParentCategory] = useState([]);
+  const [categoryType, setCategoryType] = useState([]);
+
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedCategoryOption, setSelectedCategoryOption] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
@@ -49,9 +53,20 @@ const AddNewCategory = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await dispatch(
-      addnewCategory(chapName, chapId, slug, token, imageName)
+      addnewCategory(
+        chapName,
+        chapId,
+        slug,
+        token,
+        imageName,
+        selectedCategoryOption
+      )
     );
+    console.log(response);
     setMessage(response.message);
+    if (response.message === "Add Categroy Successfully") {
+      navigate("/");
+    }
 
     const timer = setTimeout(() => {
       setErrorMessage(false);
@@ -61,23 +76,31 @@ const AddNewCategory = () => {
     return () => clearTimeout(timer);
   };
 
-  // const options = [
-  //   { value: "chocolate", label: "Git & Git Hub Introduction" },
-  //   { value: "Saab", label: "Saab" },
-  //   { value: "Opel", label: "Opel" },
-  //   { value: "Audi", label: "Audi" },
-  // ];
-
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };
 
+  const authDashboradData = async () => {
+    const response = await dispatch(home());
+    const categoryLabel = response[0]?.data.map((babe) => {
+      return {
+        id: null,
+        label: (
+          babe.chaptername?.charAt(0).toLowerCase() +
+          babe.chaptername.substring(1)
+        ).replace(/ /g, ""),
+      };
+    });
+    setCategoryType(categoryLabel);
+  };
+
   useEffect(() => {
     handleParentChildeCategory();
+    authDashboradData();
   }, []);
-
+  console.log(categoryType);
   const parentOptions = parentCategory?.map((category) => {
     // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
@@ -85,9 +108,16 @@ const AddNewCategory = () => {
 
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
-    // console.log("selectedOption ID", selectedOption.id);
+    console.log("selectedOption ID", selectedOption);
     setchapId(selectedOption?.id);
   };
+
+  const handleCategorySelector = (selectedCategoryOption) => {
+    // console.log(selectedCategoryOption)
+    setSelectedCategoryOption(selectedCategoryOption);
+  };
+
+  console.log(selectedCategoryOption);
 
   const customStyles = {
     control: (base) => ({
@@ -194,11 +224,11 @@ const AddNewCategory = () => {
           {errorMessage === true ? (
             <div className="errorMessage">Feilds cannot be empty!</div>
           ) : message ? (
-            message === "Add Categroy Successfully" ? (
+            message === "Add Sub Categroy Successfully" ? (
               <div className={theme ? "successMessage" : "successMessageTwo"}>
                 Sub category added successfully
               </div>
-            ) : message === "All Fields are Required" ? (
+            ) : message === "All Filed are required" ? (
               <div className="errorMessage"> All Fields are Required </div>
             ) : null
           ) : null}
@@ -208,12 +238,14 @@ const AddNewCategory = () => {
           ) : message === "Slug Name Already Exist" ? (
             <div className="errorMessage">{message}</div>
           ) : null}
+
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
           >
             Category/Course/Chapter Name
           </span>
+
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="Cloud Computing"
@@ -232,12 +264,14 @@ const AddNewCategory = () => {
             value={selectedOption.id}
             // onChange={(e) => setchapId(e.target.value)}
           />
+
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
           >
             Select Parent Category/Course
           </span>
+
           <Select
             styles={theme ? customStyles : customStyless}
             className={
@@ -245,10 +279,30 @@ const AddNewCategory = () => {
                 ? "git_introduction_dropdown_sub"
                 : "git_introduction_dropdown"
             }
-            placeholder="Git & GitHub Introduction"
+            placeholder="Select Parent Category/Course"
             options={parentOptions}
             onChange={handleSelector}
             value={selectedOption}
+          />
+
+          <span
+            className="addcategory_text"
+            style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+          >
+            Select Category Type
+          </span>
+
+          <Select
+            styles={theme ? customStyles : customStyless}
+            className={
+              theme
+                ? "git_introduction_dropdown_sub"
+                : "git_introduction_dropdown"
+            }
+            placeholder="Select Category Type"
+            value={selectedCategoryOption}
+            options={categoryType}
+            onChange={handleCategorySelector}
           />
           <span
             className="addcategory_text"

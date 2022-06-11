@@ -56,23 +56,23 @@ const Recentlyviewed = () => {
   const timeSettings = (response) => {
     let date = new Date();
 
-    var REFERENCE = moment("2022/06/07"); 
-    var TODAY = REFERENCE.clone().startOf("day");
-    var YESTERDAY = REFERENCE.clone().subtract(1, "days").startOf("day");
-    var A_WEEK_OLD = REFERENCE.clone().subtract(7, "days").startOf("day");
+    // var REFERENCE = moment("2022/06/07");
+    // var TODAY = REFERENCE.clone().startOf("day");
+    // var YESTERDAY = REFERENCE.clone().subtract(1, "days").startOf("day");
+    // var A_WEEK_OLD = REFERENCE.clone().subtract(7, "days").startOf("day");
 
-    let isToday = (momentDate) => {
-      return momentDate.isSame(TODAY, "d");
-    };
-    let isYesterday = (momentDate) => {
-      return momentDate.isSame(YESTERDAY, "d");
-    };
-    let isWithinAWeek = (momentDate) => {
-      return momentDate.isAfter(A_WEEK_OLD);
-    };
-    let isMonth = (momentDate) => {
-      return !isWithinAWeek(momentDate);
-    };
+    // let isToday = (momentDate) => {
+    //   return momentDate.isSame(TODAY, "d");
+    // };
+    // let isYesterday = (momentDate) => {
+    //   return momentDate.isSame(YESTERDAY, "d");
+    // };
+    // let isWithinAWeek = (momentDate) => {
+    //   return momentDate.isAfter(A_WEEK_OLD);
+    // };
+    // let isMonth = (momentDate) => {
+    //   return !isWithinAWeek(momentDate);
+    // };
 
     // console.log(
     //   "is it today? ..................Should be true: " +
@@ -101,34 +101,36 @@ const Recentlyviewed = () => {
 
     response.forEach((item) => {
       item.items.forEach((createdAt) => {
-        // let createdDate = new Date(createdAt.created.slice(0, 10));
-        // let difference = Math.abs(createdDate - date);
-        // let differenceInDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
-        // console.log("differenceInDays", differenceInDays);
+        let localDate = localStorage.getItem("date");
+        console.log(localDate)
+        let createdDate = new Date(localDate);
+        let difference = Math.abs(date - createdDate);
+        let differenceInDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        console.log("differenceInDays", differenceInDays);
 
-        // if (differenceInDays === 1 && differenceInDays < 2) {
-        //   setTodayHistory((prevState) => [...prevState, createdAt]);
-        //   return "TODAY";
-        // } else if (differenceInDays === 2 && differenceInDays < 3) {
-        //   setYesterdayHistory((prevState) => [...prevState, createdAt]);
-        //   return "YESTERDAY";
-        // } else if (differenceInDays === 3 || differenceInDays < 8) {
-        //   setWeekHistory((prevState) => [...prevState, createdAt]);
-        //   return "WEEK";
-        // } else if (differenceInDays === 8 || differenceInDays < 30) {
-        //   setMonthHistory((prevState) => [...prevState, createdAt]);
-        //   return "MONTH";
-        // }
-
-        if (isToday(moment(date))) {
+        if (differenceInDays === 1 && differenceInDays < 2) {
           setTodayHistory((prevState) => [...prevState, createdAt]);
-        } else if (isYesterday(moment(date))) {
+          return "TODAY";
+        } else if (differenceInDays === 2 && differenceInDays < 3) {
           setYesterdayHistory((prevState) => [...prevState, createdAt]);
-        } else if (isWithinAWeek(moment(date))) {
+          return "YESTERDAY";
+        } else if (differenceInDays === 3 || differenceInDays < 8) {
           setWeekHistory((prevState) => [...prevState, createdAt]);
-        } else if (isMonth(moment(date))) {
+          return "WEEK";
+        } else if (differenceInDays === 8 || differenceInDays < 30) {
           setMonthHistory((prevState) => [...prevState, createdAt]);
+          return "MONTH";
         }
+
+        // if (isToday(moment(date))) {
+        //   setTodayHistory((prevState) => [...prevState, createdAt]);
+        // } else if (isYesterday(moment(date))) {
+        //   setYesterdayHistory((prevState) => [...prevState, createdAt]);
+        // } else if (isWithinAWeek(moment(date))) {
+        //   setWeekHistory((prevState) => [...prevState, createdAt]);
+        // } else if (isMonth(moment(date))) {
+        //   setMonthHistory((prevState) => [...prevState, createdAt]);
+        // }
       });
     });
   };

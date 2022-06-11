@@ -140,19 +140,19 @@ const MyContents = () => {
         }
       >
         <div>
-        <div className="mycontentcontainerbackbutton">
-          <button
-            onClick={handleBack}
-            className="back_button"
-            style={{
-              color: `${theme ? " #363636" : "  #C8C8C8"}`,
-              cursor: "pointer",
-            }}
-          >
-            <ArrowBack className="backbutton_icon" />{" "}
-            <span className="backbutton_text">Back</span>
-          </button>
-        </div>
+          <div className="mycontentcontainerbackbutton">
+            <button
+              onClick={handleBack}
+              className="back_button"
+              style={{
+                color: `${theme ? " #363636" : "  #C8C8C8"}`,
+                cursor: "pointer",
+              }}
+            >
+              <ArrowBack className="backbutton_icon" />{" "}
+              <span className="backbutton_text">Back</span>
+            </button>
+          </div>
           <div className="mainContentContainertwotwo">
             <span
               className={theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"}
@@ -184,64 +184,69 @@ const MyContents = () => {
         <div className="landingpage_slider_container">
           {data?.map((item) => {
             return (
-              <div className="content_root_container" key={item?.id}>
-                <div>
-                  <span
-                    className={
-                      theme ? "chapternameclass" : "chapternameclasstwo"
-                    }
-                  >
-                    {item?.lecture?.length !== 0 && item?.CategoryName}
-                  </span>
-                </div>
-                <div>
-                  <Slider className="intro-slick" {...settings}>
-                    {item?.lecture?.map((e) => {
-                      return (
-                        <div className="intro-slides" key={e?.id}>
-                          <img
-                            onClick={() =>
-                              handleDetailPageNavigate(item.id, e.id)
-                            }
-                            src={`${development}/media/${e.images}`}
-                            className="landingpage_images"
-                            alt=""
-                          />
-                          {e.images ? (
-                            <div className="underimagetextcontainer">
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="underimagecontent"
-                                style={{
-                                  color: theme ? "#363636" : "#FFFFFF",
-                                }}
-                              >
-                                <Typography
-                                  noWrap
-                                  component="div"
-                                  className="subcoursenametwo subcoursename"
-                                >
-                                  {e.title}
-                                </Typography>
-                              </Typography>
-                              <div className="mycontenttagscontainer">
-                                <img
-                                  src={Bookmark_blue}
-                                  alt=""
-                                  className="tagstwocontainer"
-                                />
-                              </div>
+              <>
+                {item?.lecture?.length > 0 && (
+                  <div className="content_root_container" key={item?.id}>
+                    <div>
+                      <span
+                        className={
+                          theme ? "chapternameclass" : "chapternameclasstwo"
+                        }
+                      >
+                        {item?.CategoryName}
+                      </span>
+                    </div>
+
+                    <div>
+                      <Slider className="intro-slick" {...settings}>
+                        {item?.lecture?.map((e) => {
+                          return (
+                            <div className="intro-slides" key={e?.id}>
+                              <img
+                                onClick={() =>
+                                  handleDetailPageNavigate(item.id, e.id)
+                                }
+                                src={`${development}/media/${e.images}`}
+                                className="landingpage_images"
+                                alt=""
+                              />
+                              {e.images ? (
+                                <div className="underimagetextcontainer">
+                                  <Typography
+                                    noWrap
+                                    component="div"
+                                    className="underimagecontent"
+                                    style={{
+                                      color: theme ? "#363636" : "#FFFFFF",
+                                    }}
+                                  >
+                                    <Typography
+                                      noWrap
+                                      component="div"
+                                      className="subcoursenametwo subcoursename"
+                                    >
+                                      {e.title}
+                                    </Typography>
+                                  </Typography>
+                                  <div className="mycontenttagscontainer">
+                                    <img
+                                      src={Bookmark_blue}
+                                      alt=""
+                                      className="tagstwocontainer"
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                ""
+                              )}
                             </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      );
-                    })}
-                  </Slider>
-                </div>
-              </div>
+                          );
+                        })}
+                      </Slider>
+                    </div>
+                  </div>
+                )}
+              </>
             );
           })}
         </div>

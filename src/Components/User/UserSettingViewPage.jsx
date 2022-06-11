@@ -19,6 +19,9 @@ import { development } from "../../endpoints";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { logout } from "../../Redux/Actions/auth.action";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { home } from "../../Redux/Actions/Client Side/home.action";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -38,18 +41,19 @@ const UserSettingViewPage = () => {
   const [imageName, setImageName] = useState("");
   const [showImage, setShowImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isArray, setIsArray] = useState();
+
+  const [selectedOption, setSelectedOption] = useState("");
 
   const nameOfUser = useSelector((state) => state?.auth);
   const user = useSelector((state) => state?.auth?.profile);
-  
 
   // console.log("user", user);
-  // console.log("showImage", showImage);
 
   useEffect(() => {
     const userData = async () => {
       const response = await dispatch(profileData(token));
-      console.log("respinse", response);
+      // console.log("respinse", response);
       setUsername(response?.data?.username);
       setEmail(response?.data?.email);
       // setImageName(response?.data?.profile);
@@ -65,7 +69,7 @@ const UserSettingViewPage = () => {
     const response = await dispatch(
       updateProfile(firstName, lastName, imageName, token, auth)
     );
-    console.log("response", response);
+    // console.log("response", response);
     setMessage(response?.message);
     setValidation(true);
     const timer = setTimeout(() => {
@@ -100,6 +104,48 @@ const UserSettingViewPage = () => {
     // const response = await dispatch(logout(role, token));
     // navigate("/logout")
   };
+
+  const MainCategory = async () => {
+    const response = await dispatch(home());
+    let array = [];
+    response?.map((item) => {
+      return item?.data?.map((item2) => {
+        return item2?.items?.map((item3) => {
+          // console.log("item3", item3);
+          return array.push({
+            id: item3?.id,
+            label: item3?.CategoryName,
+            rating: item3?.totalratinng,
+          });
+        });
+      });
+    });
+
+    setIsArray(array);
+  };
+
+  const handleGetOptionLabel = (option) => {
+    // console.log(option);
+    setSelectedOption(option);
+    return option?.label;
+  };
+
+  console.log("selectedOption", selectedOption);
+
+  const filteredOptions = isArray?.filter((item) => {
+    console.log("item", item);
+    if (item?.label !== selectedOption?.label) {
+      return item;
+    }
+  });
+  console.log("filteredOptions", filteredOptions);
+
+  useEffect(() => {
+    MainCategory();
+    setIsArray(filteredOptions);
+  }, []);
+
+  console.log("isArray", isArray);
 
   return (
     <div>
@@ -310,9 +356,27 @@ const UserSettingViewPage = () => {
                 className="tagimageusersettingpage"
               />
             </div>
-            <input
-              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="High Priority Review List"
+
+            {/* AUTOCOMPLETE */}
+            <Autocomplete
+              id="combo-box-demo"
+              options={isArray}
+              filterSelectedOptions={true}
+              getOptionLabel={handleGetOptionLabel}
+              renderInput={(params) => (
+                <div
+                  ref={params.InputProps.ref}
+                  className={
+                    theme ? "profile_sub_input" : "profile_sub_input_two"
+                  }
+                >
+                  <input
+                    {...params.inputProps}
+                    placeholder="High Priority Review List"
+                    autoFocus
+                  />
+                </div>
+              )}
             />
           </div>
           <div className="vector_container">
@@ -323,9 +387,25 @@ const UserSettingViewPage = () => {
                 className="tagimageusersettingpage"
               />
             </div>
-            <input
-              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="Review List"
+            <Autocomplete
+              id="combo-box-demo"
+              options={isArray}
+              filterSelectedOptions={true}
+              getOptionLabel={handleGetOptionLabel}
+              renderInput={(params) => (
+                <div
+                  ref={params.InputProps.ref}
+                  className={
+                    theme ? "profile_sub_input" : "profile_sub_input_two"
+                  }
+                >
+                  <input
+                    {...params.inputProps}
+                    placeholder="Review List"
+                    autoFocus
+                  />
+                </div>
+              )}
             />
           </div>
           <div className="vector_container">
@@ -337,9 +417,25 @@ const UserSettingViewPage = () => {
               />
             </div>
 
-            <input
-              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="For future need"
+            <Autocomplete
+              id="combo-box-demo"
+              options={isArray}
+              filterSelectedOptions={true}
+              getOptionLabel={handleGetOptionLabel}
+              renderInput={(params) => (
+                <div
+                  ref={params.InputProps.ref}
+                  className={
+                    theme ? "profile_sub_input" : "profile_sub_input_two"
+                  }
+                >
+                  <input
+                    {...params.inputProps}
+                    placeholder="For future read"
+                    autoFocus
+                  />
+                </div>
+              )}
             />
           </div>
           <div className="vector_container">

@@ -3,14 +3,15 @@ import { URL, endpoints } from "../../../endpoints";
 import * as FormData from "form-data";
 
 export const addnewCategory =
-  (chapName, chapId, slug, token, imageName) => async (dispatch) => {
-    console.log(chapName, chapId, slug, token, imageName);
+  (chapName, chapId, slug, token, imageName, selectedCategoryOption) =>
+  async (dispatch) => {
+    console.log(chapName, chapId, slug, selectedCategoryOption);
     const formData = new FormData();
     formData.append("name", chapName);
     formData.append("parentCategoryid", chapId);
     formData.append("slug", slug);
-
     formData.append("image", imageName);
+    formData.append("Type", selectedCategoryOption?.label);
     try {
       const response = await axios.post(
         URL + endpoints.ADD_CATEGORY,
