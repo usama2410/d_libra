@@ -110,7 +110,6 @@ export default function Sidebar() {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
-  // console.log("user", user);
 
   const handleSearchResult = (e) => {
     e.preventDefault();
@@ -365,7 +364,9 @@ export default function Sidebar() {
             >
               <span
                 className={
-                  user ? "listitem_text_disabled" : "listitem_text_enabled"
+                  user?.token !== null
+                    ? "listitem_text_disabled"
+                    : "listitem_text_enabled"
                 }
                 style={{ marginLeft: "-24px" }}
               >
@@ -401,7 +402,9 @@ export default function Sidebar() {
             >
               <span
                 className={
-                  user ? "listitem_text_disabled" : "listitem_text_enabled"
+                  user?.token !== null
+                    ? "listitem_text_disabled"
+                    : "listitem_text_enabled"
                 }
                 style={{ marginLeft: "-24px" }}
               >
@@ -947,6 +950,8 @@ export default function Sidebar() {
                     backgroundColor: `${themeState ? " #FFFFFF" : " #4F4F4F"}`,
                     color: `${themeState ? "black" : "white"}`,
                   }}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div
@@ -956,9 +961,19 @@ export default function Sidebar() {
                 }}
               >
                 {themeState ? (
-                  <img src={Search} alt="" className="sidebarsearchlogo" />
+                  <img
+                    src={Search}
+                    alt=""
+                    onClick={handleSearchResult}
+                    className="sidebarsearchlogo"
+                  />
                 ) : (
-                  <img src={Search_dark} alt="" className="sidebarsearchlogo" />
+                  <img
+                    src={Search_dark}
+                    alt=""
+                    onClick={handleSearchResult}
+                    className="sidebarsearchlogo"
+                  />
                 )}
               </div>
             </div>

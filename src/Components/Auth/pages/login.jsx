@@ -5,11 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import googleIcon from "../../../assests/google.png";
 import "../Stylesheet/stylesheet.css";
-import { logIn } from "../../../Redux/Actions/auth.action";
+import { logIn, logInWithGoogle } from "../../../Redux/Actions/auth.action";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import GoogleLogin from "react-google-login";
+import {
+  auth,
+  provider,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "../../../Firebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +32,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // console.log("email", email, password);
-  // console.log("role", role);
+  console.log("userSettingState", userSettingState);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -56,6 +62,47 @@ const Login = () => {
     setIsLoading(false);
     return () => clearTimeout(timer);
   };
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        user?.accessToken && navigate("/");
+        const id = user?.providerData[0]?.uid;
+        const email = user?.providerData[0]?.email;
+        const displayName = user?.providerData[0]?.displayName;
+        const emailVerified = user?.auth?.emailVerified;
+        const photoURL = user?.providerData[0]?.photoURL;
+        const accessToken = user?.accessToken;
+        user?.accessToken &&
+          dispatch(
+            logInWithGoogle(
+              id,
+              email,
+              displayName,
+              emailVerified,
+              photoURL,
+              accessToken
+            )
+          );
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
   return (
     <>
       <button
@@ -114,7 +161,11 @@ const Login = () => {
 
         <div className="loginwithgooglecontainer">
           <div>
-            <Button variant="text" className="signWithGoogle">
+            <Button
+              variant="text"
+              className="signWithGoogle"
+              onClick={handleGoogleLogin}
+            >
               <img src={googleIcon} className="googleIcon" alt="google" />
               Sign in with Google
             </Button>

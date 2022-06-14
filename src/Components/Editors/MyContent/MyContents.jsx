@@ -17,6 +17,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import { development } from "../../../endpoints";
+import { setBookMarkPriority } from "../../../Redux/Actions/Client Side/librar.y.action";
 
 const MyContents = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,16 @@ const MyContents = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
+
+  const [priority, setPriority] = useState("highpriority");
+  let [count, setCount] = useState(0);
+
   const handleBack = () => {
     navigate("/editormainpage");
   };
 
-  const dashboardState = useSelector((state) => state?.dashboardData?.data);
-  console.log("data", data);
+  // console.log("data", data);
+  // console.log("count", count);
 
   const settings = {
     dots: false,
@@ -112,25 +117,45 @@ const MyContents = () => {
 
   useEffect(() => {
     const dashboardData = async () => {
-      // if (dashboardState?.length === 0) {
       const response = await dispatch(getDashboardData(token));
-      // console.log("My content response", response);
       setdata(response);
-      // } else {
-      //   setdata(dashboardState);
-      // }
     };
     dashboardData();
   }, []);
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
-    // console.log(categoryid, postId);
     navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`);
 
     await dispatch(addRecenetViewContent(categoryid, role, token));
   };
 
-  //
+  const handleBookMark = async (content_id) => {
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    }
+    if (count === 1) {
+      setPriority("reviewlist");
+    }
+    if (count === 2) {
+      setCount(0);
+      setPriority("futureread");
+    }
+    const response = await dispatch(
+      setBookMarkPriority(role, content_id, priority, token)
+    );
+    console.log("response", response);
+  };
+
+  const handleBookMarkColor = () => {
+    if (count === 0) {
+      return "tagstwocontainerOne";
+    } else if (count === 1) {
+      return "tagstwocontainerTwo";
+    } else if (count === 2) {
+      return "tagstwocontainerThree";
+    }
+  };
 
   return (
     <>
@@ -232,7 +257,8 @@ const MyContents = () => {
                                     <img
                                       src={Bookmark_blue}
                                       alt=""
-                                      className="tagstwocontainer"
+                                      className={handleBookMarkColor()}
+                                      onClick={() => handleBookMark(e.id)}
                                     />
                                   </div>
                                 </div>

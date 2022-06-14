@@ -57,5 +57,6 @@ export const endpoints = {
   SEARCH_USER_POST: "/webapi/GetTopicData?role=",
 
   // Priorty
+  SET_PRIORITY: "/webapi/SetPriority",
   GET_PRIORITY: "/webapi/SetPriority?role=",
 };

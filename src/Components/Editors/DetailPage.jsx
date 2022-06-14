@@ -13,6 +13,8 @@ import Previous_dark from "../../assests/SVG_Files/New folder/icons/Previous_dar
 import { getPostByID } from "../../Redux/Actions/Editor/post.action";
 import { development } from "../../endpoints";
 import parse from "html-react-parser";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -26,9 +28,10 @@ const DetailPage = () => {
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
-  console.log(params.id);
+  let [selected, setSelected] = React.useState(0);
+  const [disable, setDisable] = React.useState(false);
 
-  // console.log(params);
+  console.log("selected", selected);
 
   const handleBack = () => {
     navigate("/mycontents");
@@ -39,7 +42,7 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      console.log("response", response.post.tags);
+      console.log("response", response);
 
       setDetails(response);
     };
@@ -47,8 +50,33 @@ const DetailPage = () => {
   }, [params]);
 
   const handleNextMark = () => {
+    let previousItem = details?.all?.filter((item, index) => {
+      return item.id !== Number(params.id?.split("=")[1]);
+    });
+
+    setSelected(selected + 1);
+    console.log(previousItem[selected]);
+    if (selected === previousItem.length - 1) {
+      setDisable(true);
+    }
     navigate(
-      `/detailpage/${params.id}/${params.role}/categoryid=${details.nextcategory}`
+      `/detailpage/id=${previousItem[selected]?.id}/${params.role}/${params.categoryid}`
+    );
+  };
+
+  const handlePreviousMark = () => {
+    let previousItem = details?.all?.filter((item, index) => {
+      return item.id !== Number(params.id?.split("=")[1]);
+    });
+
+    setSelected(selected - 1);
+    let previous = previousItem?.length - 1 - Math.abs(selected);
+    console.log(previousItem[previous]);
+    if (previous === 0) {
+      setDisable(true);
+    }
+    navigate(
+      `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
     );
   };
 
@@ -67,43 +95,83 @@ const DetailPage = () => {
         </div>
         <span className="header_text">{details?.post?.categories__name}</span>
       </div>
-
-      <div>
-        <Grid container>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <div className="detailpagesubcontainertwo">
-              <img
-                src={`${development}/media/${details?.post?.images}`}
-                alt=""
-                className="detail_page_image"
-              />
-            </div>
-            <div className="buttons_container_detail_page_two">
-              {role === "editor" && (
-                <div className="deleteeditcontainer">
-                  <button
-                    className="detail_delete_button"
-                    onClick={() =>
-                      navigate(
-                        `/deletecontent/${params.id}/${params.role}/${params.categoryid}`
-                      )
-                    }
+      {details?.status ? (
+        <div>
+          <Grid container>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              <div className="detailpagesubcontainertwo">
+                <img
+                  src={`${development}/media/${details?.post?.images}`}
+                  alt=""
+                  className="detail_page_image"
+                />
+              </div>
+              <div className="buttons_container_detail_page_two">
+                {role === "editor" && (
+                  <div className="deleteeditcontainer">
+                    <button
+                      className="detail_delete_button"
+                      onClick={() =>
+                        navigate(
+                          `/deletecontent/${params.id}/${params.role}/${params.categoryid}`
+                        )
+                      }
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="detail_edit_button"
+                      onClick={() =>
+                        navigate(
+                          `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+                <div className="tags_wrapper_one">
+                  <span
+                    className="detail_tag_text"
+                    style={{ color: theme ? " #363636" : " #C8C8C8" }}
                   >
-                    Delete
-                  </button>
-                  <button
-                    className="detail_edit_button"
-                    onClick={() =>
-                      navigate(
-                        `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`
-                      )
-                    }
-                  >
-                    Edit
-                  </button>
+                    {" "}
+                    Tag:{" "}
+                  </span>
+                  <button className="detail_tag_button">Git</button>
+                  <button className="detail_tag_button">GitHub</button>
+                  <button className="detail_tag_button">DevOps</button>
+                  <img
+                    src={Vectortag}
+                    alt=""
+                    className="detail_tag_text_two"
+                    style={{ paddingLeft: "24px" }}
+                  />
                 </div>
-              )}
-              <div className="tags_wrapper_one">
+              </div>
+            </Grid>
+
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              <div className="detail_page_content">
+                <div className="scrollable">
+                  <span>
+                    {details?.post?.content !== "" ? (
+                      parse(`${details?.post?.content}`)
+                    ) : (
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        No content
+                      </div>
+                    )}
+                  </span>
+                </div>
+                {/* <div className="noscrollable">
+                    
+                  </div> */}
+              </div>
+              <div className="tags_wrapper_two">
                 <span
                   className="detail_tag_text"
                   style={{ color: theme ? " #363636" : " #C8C8C8" }}
@@ -111,145 +179,33 @@ const DetailPage = () => {
                   {" "}
                   Tag:{" "}
                 </span>
-                <button className="detail_tag_button">Git</button>
-                <button className="detail_tag_button">GitHub</button>
-                <button className="detail_tag_button">DevOps</button>
-                <img
-                  src={Vectortag}
-                  alt=""
-                  className="detail_tag_text_two"
-                  style={{ paddingLeft: "24px" }}
-                />
-              </div>
-            </div>
-          </Grid>
 
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <div className="detail_page_content">
-              <div className="scrollable">
-                <span>
-                  {details?.post?.content !== "" ? (
-                    parse(`${details?.post?.content}`)
-                  ) : (
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                      No content
-                    </div>
-                  )}
-                  {/* Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br /> */}
-                </span>
+                <button className="detail_tag_button">
+                  {details?.post?.tags}
+                </button>
+                {/* <button className="detail_tag_button">GitHub</button>
+                  <button className="detail_tag_button">DevOps</button> */}
               </div>
-              <div className="noscrollable">
-                {/* <span>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                  odit aut fugit, sed quia consequuntur magni dolores eos qui
-                  ratione voluptatem sequi nesciunt Neque porro quisquam est,
-                  qui dolorem ipsum quia dolor sit amet <br />
-                  <br />
-                </span> */}
+              <div className="detailpagesub">
+                <button
+                  onClick={handleBack}
+                  className="back_button"
+                  style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+                >
+                  <ArrowBack className="backbutton_icon" />{" "}
+                  <span className="backbutton_text">Back</span>
+                </button>
               </div>
-            </div>
-            <div className="tags_wrapper_two">
-              <span
-                className="detail_tag_text"
-                style={{ color: theme ? " #363636" : " #C8C8C8" }}
-              >
-                {" "}
-                Tag:{" "}
-              </span>
-
-              <button className="detail_tag_button">
-                {details?.post?.tags}
-              </button>
-              {/* <button className="detail_tag_button">GitHub</button>
-              <button className="detail_tag_button">DevOps</button> */}
-            </div>
-            <div className="detailpagesub">
-              <button
-                onClick={handleBack}
-                className="back_button"
-                style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
-              >
-                <ArrowBack className="backbutton_icon" />{" "}
-                <span className="backbutton_text">Back</span>
-              </button>
-            </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      ) : (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
+        >
+          <CircularProgress color="inherit" size={30} />
+        </Box>
+      )}
 
       {theme ? (
         <div className="detailpagebuttoncontainer">
@@ -295,25 +251,20 @@ const DetailPage = () => {
         <div className="detailpagebuttoncontainedark">
           <div className="detailpagebuttoncontainerdarksub">
             <div className="footerbuttoncontainer">
-              <Button
-                style={{ marginLeft: "16px" }}
-                disabled={startdata === 0 ? true : false}
-              >
+              <Button style={{ marginLeft: "16px" }} disabled={disable}>
                 <img
                   src={Previous_dark}
                   alt=""
                   style={{ marginRight: "-15px" }}
                   className="userdetailfootericons userdetailfootericonsleft"
-                  onClick={() => {
-                    setStartData(startdata - 1);
-                    setEndData(enddata - 1);
-                  }}
+                  onClick={handlePreviousMark}
                 />
               </Button>
 
               <Button
                 style={{ marginLeft: "-16px" }}
                 // disabled={enddata >= userdata.length ? true : false}
+                disabled={disable}
               >
                 <img
                   src={Next_dark}

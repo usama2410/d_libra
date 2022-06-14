@@ -53,6 +53,30 @@ export const logIn =
     }
   };
 
+export const logInWithGoogle =
+  (uid, email, displayName, emailVerified, photoURL, accessToken) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          userId: uid,
+          email: email,
+          username: email.split("@")[0],
+          firstName: displayName,
+          lastName: displayName,
+          status: emailVerified,
+          profile: photoURL,
+          token: accessToken,
+          role: "normaluser",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
 export const changePassword =
   (oldpassword, password, token) => async (dispatch) => {
     // console.log("changePassword", oldpassword, password, token);

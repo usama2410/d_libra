@@ -31,7 +31,7 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await dispatch(signUp(username, email, password));
-    // console.log("response", response)
+    // console.log("response", response);
     setMessage(response.message);
     setData(response.data);
     if (email === "" && password === "") {
@@ -71,6 +71,10 @@ const Register = () => {
               </div>
             ) : message === "All Fields are Required" ? (
               <div className="errorMessage"> All Fields are Required </div>
+            ) : message === "Password must be 8 or less than 20 characters" ? (
+              <div className="errorMessage">{message}</div>
+            ) : message === "Email format is incorrect" ? (
+              <div className="errorMessage">{message}</div>
             ) : null
           ) : null}
 

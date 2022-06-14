@@ -145,7 +145,7 @@
   height: 100px;
 }
 
-.profile_sub_input input{
+.profile_sub_input {
   background: #ffffff !important;
   border: 1px solid rgba(230, 230, 230, 0.5) !important;
   box-sizing: border-box !important;
@@ -163,11 +163,11 @@
   color: #363636 !important;
 }
 
-.profile_sub_input input::placeholder {
+.profile_sub_input::placeholder {
   color: #363636 !important;
 }
 
-.profile_sub_input_two input{
+.profile_sub_input_two {
   background: #4f4f4f !important;
   border: 1px solid rgba(230, 230, 230, 0.5) !important;
   box-sizing: border-box !important;
@@ -185,7 +185,7 @@
   color: #ffffff !important;
 }
 
-.profile_sub_input_two input::placeholder {
+.profile_sub_input_two::placeholder {
   color: #ffffff !important;
 }
 
@@ -500,13 +500,13 @@
     margin-left: -235px;
   }
 
-  .profile_sub_input_two input {
+  .profile_sub_input_two  {
     width: 367px !important;
     margin-top: 0px !important;
     margin-right: -12px !important;
   }
 
-  .profile_sub_input input{
+  .profile_sub_input {
     width: 367px !important;
     margin-top: 0px !important;
     margin-right: -12px !important;
@@ -568,7 +568,7 @@
 }
 
 @media screen and (max-width: 468px) {
-  .profile_sub_input input{
+  .profile_sub_input{
     width: 267px !important;
     height: 40px !important;
     font-weight: 300 !important;
@@ -629,7 +629,7 @@
     letter-spacing: -0.015em !important;
   }
 
-  .profile_sub_input_two input {
+  .profile_sub_input_two  {
     width: 267px !important;
     margin-right: -15px !important;
     height: 30px !important;

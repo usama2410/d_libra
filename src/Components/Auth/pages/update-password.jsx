@@ -44,7 +44,11 @@ const UpdatePassword = ({ email }) => {
             padding: "20px",
           }}
         >
-          <h4>You are successfully verified. Please enter new password</h4>
+          <h1>Verified Successfully </h1>
+          <h4>
+            You are successfully verified. Please enter <br />
+            the new password
+          </h4>
         </div>
         <div className="editormainpage_container">
           {message === "All Fields are Required" ? (

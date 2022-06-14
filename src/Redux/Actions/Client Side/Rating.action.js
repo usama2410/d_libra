@@ -4,7 +4,7 @@ import * as FormData from "form-data";
 
 export const ratingCourse =
   (role, course_id, rating, comment, token) => async (dispatch) => {
-    // console.log(role, course_id, rating, comment, token);
+    console.log(role, course_id, rating, comment, token);
     const formData = new FormData();
     formData.append("role", role);
     formData.append("course_id", course_id);

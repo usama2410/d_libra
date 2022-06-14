@@ -27,14 +27,14 @@ const CoursePageGuest = () => {
     navigate("/");
   };
 
-  console.log("params", params);
+  // console.log("params", params);
 
   useEffect(() => {
     const authDashboardData = async () => {
       const response = await dispatch(
         GetDashboardDataWithAuthorization(params?.id, role, token)
       );
-      console.log("Get Dashboard Data Response", response);
+      // console.log("Get Dashboard Data Response", response);
       setdata(response);
     };
     authDashboardData();

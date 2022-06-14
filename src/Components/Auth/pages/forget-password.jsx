@@ -19,7 +19,7 @@ const ForgetPassword = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
-  const [code, setCode] = useState();
+  const [code, setCode] = useState(new Array(4).fill(""));
   const [message, setMessage] = useState("");
   const [validation, setValidation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,10 +36,23 @@ const ForgetPassword = () => {
     navigate("/");
   };
 
+  const handleCodeChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+    console.log(element.value);
+    setCode([...code?.map((d, i) => (i === index ? element.value : d))]);
+
+    // Focus on next input
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
+
+  let OTPCode = code.toString().replaceAll(",", "");
+
   const handleVerifyCode = async (e) => {
     e.preventDefault();
     setIsVerifying(true);
-    const response = await dispatch(forgetPassword(email, code, token));
+    const response = await dispatch(forgetPassword(email, OTPCode, token));
     setValidation(true);
     setMessage(response?.message);
     setStatus(response?.status);
@@ -51,8 +64,8 @@ const ForgetPassword = () => {
       const timer = setTimeout(() => {
         setMessage("");
         setChangePasswordForm(true);
-        setIsVerifying(false);
       }, 5000);
+      setIsVerifying(false);
       return () => clearTimeout(timer);
     }
 
@@ -174,7 +187,7 @@ const ForgetPassword = () => {
                 </div>
               ) : message === "Code verified successfully" ? (
                 <div className={theme ? "successMessage" : "successMessageTwo"}>
-                  Code verified successfully
+                  Code verified successfully. Wait you are redirecting...
                 </div>
               ) : null
             ) : null}
@@ -188,15 +201,26 @@ const ForgetPassword = () => {
                   placeholder="Email"
                   value={email}
                 />
-                <input
-                  className={
-                    theme ? "addcategory_input_sub" : "addcategory_input"
-                  }
-                  type="number"
-                  placeholder="Verification Code"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                />
+                <div style={{ display: "flex", gap: "13px" }}>
+                  {code?.map((item, index) => {
+                    return (
+                      <input
+                        className={
+                          theme
+                            ? "addcategory_input_sub_Otp"
+                            : "addcategory_input_Otp"
+                        }
+                        // type="number"
+                        // placeholder="Verification Code"
+                        value={item}
+                        key={index}
+                        maxLength={1}
+                        onChange={(e) => handleCodeChange(e.target, index)}
+                        onFocus={(e) => e.target.select()}
+                      />
+                    );
+                  })}
+                </div>
               </>
             ) : (
               <input

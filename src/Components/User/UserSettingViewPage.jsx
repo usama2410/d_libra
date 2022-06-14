@@ -41,22 +41,19 @@ const UserSettingViewPage = () => {
   const [imageName, setImageName] = useState("");
   const [showImage, setShowImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isArray, setIsArray] = useState();
+  const [addBookMark, setAddBookMark] = useState([]);
 
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const nameOfUser = useSelector((state) => state?.auth);
   const user = useSelector((state) => state?.auth?.profile);
 
-  // console.log("user", user);
+  const handleBack = () => {
+    navigate("/");
+  };
 
   useEffect(() => {
     const userData = async () => {
       const response = await dispatch(profileData(token));
-      // console.log("respinse", response);
       setUsername(response?.data?.username);
       setEmail(response?.data?.email);
-      // setImageName(response?.data?.profile);
       setFirstName(response?.data?.fname);
       setLastName(response?.data?.lname);
     };
@@ -85,10 +82,6 @@ const UserSettingViewPage = () => {
     navigate("/changepassword");
   };
 
-  const handleBack = () => {
-    navigate("/");
-  };
-
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
@@ -105,48 +98,9 @@ const UserSettingViewPage = () => {
     // navigate("/logout")
   };
 
-  const MainCategory = async () => {
-    const response = await dispatch(home());
-    let array = [];
-    response?.map((item) => {
-      return item?.data?.map((item2) => {
-        return item2?.items?.map((item3) => {
-          // console.log("item3", item3);
-          return array.push({
-            id: item3?.id,
-            label: item3?.CategoryName,
-            rating: item3?.totalratinng,
-          });
-        });
-      });
-    });
-
-    setIsArray(array);
+  const hanldeAddBookmark = () => {
+    setAddBookMark([...addBookMark, 1]);
   };
-
-  const handleGetOptionLabel = (option) => {
-    // console.log(option);
-    setSelectedOption(option);
-    return option?.label;
-  };
-
-  console.log("selectedOption", selectedOption);
-
-  const filteredOptions = isArray?.filter((item) => {
-    console.log("item", item);
-    if (item?.label !== selectedOption?.label) {
-      return item;
-    }
-  });
-  console.log("filteredOptions", filteredOptions);
-
-  useEffect(() => {
-    MainCategory();
-    setIsArray(filteredOptions);
-  }, []);
-
-  console.log("isArray", isArray);
-
   return (
     <div>
       <button
@@ -204,7 +158,7 @@ const UserSettingViewPage = () => {
                   }
                 >
                   {!firstName || !lastName
-                    ? "User"
+                    ? "Editor"
                     : `${firstName} ${lastName}`}
                 </span>
               </div>
@@ -358,25 +312,9 @@ const UserSettingViewPage = () => {
             </div>
 
             {/* AUTOCOMPLETE */}
-            <Autocomplete
-              id="combo-box-demo"
-              options={isArray}
-              filterSelectedOptions={true}
-              getOptionLabel={handleGetOptionLabel}
-              renderInput={(params) => (
-                <div
-                  ref={params.InputProps.ref}
-                  className={
-                    theme ? "profile_sub_input" : "profile_sub_input_two"
-                  }
-                >
-                  <input
-                    {...params.inputProps}
-                    placeholder="High Priority Review List"
-                    autoFocus
-                  />
-                </div>
-              )}
+            <input
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
+              placeholder="High Priority Review List"
             />
           </div>
           <div className="vector_container">
@@ -387,25 +325,10 @@ const UserSettingViewPage = () => {
                 className="tagimageusersettingpage"
               />
             </div>
-            <Autocomplete
-              id="combo-box-demo"
-              options={isArray}
-              filterSelectedOptions={true}
-              getOptionLabel={handleGetOptionLabel}
-              renderInput={(params) => (
-                <div
-                  ref={params.InputProps.ref}
-                  className={
-                    theme ? "profile_sub_input" : "profile_sub_input_two"
-                  }
-                >
-                  <input
-                    {...params.inputProps}
-                    placeholder="Review List"
-                    autoFocus
-                  />
-                </div>
-              )}
+
+            <input
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
+              placeholder="Review List"
             />
           </div>
           <div className="vector_container">
@@ -417,32 +340,40 @@ const UserSettingViewPage = () => {
               />
             </div>
 
-            <Autocomplete
-              id="combo-box-demo"
-              options={isArray}
-              filterSelectedOptions={true}
-              getOptionLabel={handleGetOptionLabel}
-              renderInput={(params) => (
-                <div
-                  ref={params.InputProps.ref}
+            <input
+              className={theme ? "profile_sub_input" : "profile_sub_input_two"}
+              placeholder="For future read"
+            />
+          </div>
+
+          {addBookMark?.map((item, index) => {
+            return (
+              <div className="vector_container" key={index}>
+                <div className="vector_image">
+                  <img
+                    src={Bookmark_red}
+                    alt=""
+                    className="tagimageusersettingpage"
+                  />
+                </div>
+
+                <input
                   className={
                     theme ? "profile_sub_input" : "profile_sub_input_two"
                   }
-                >
-                  <input
-                    {...params.inputProps}
-                    placeholder="For future read"
-                    autoFocus
-                  />
-                </div>
-              )}
-            />
-          </div>
+                  placeholder="For future read"
+                />
+              </div>
+            );
+          })}
+
           <div className="vector_container">
             <img
               src={theme ? Add_light : Add_dark}
               alt=""
               className="addiconcontainer"
+              style={{ cursor: "pointer" }}
+              onClick={hanldeAddBookmark}
             />
 
             <input

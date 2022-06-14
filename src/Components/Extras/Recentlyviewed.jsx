@@ -101,10 +101,10 @@ const Recentlyviewed = () => {
 
     response.forEach((item) => {
       item.items.forEach((createdAt) => {
-        let localDate = localStorage.getItem("date");
-        console.log(localDate)
-        let createdDate = new Date(localDate);
-        let difference = Math.abs(date - createdDate);
+        // let localDate = localStorage.getItem("date");
+        console.log(createdAt);
+        let createdDate = new Date(createdAt.created.slice(0, 10));
+        let difference = Math.abs(createdDate - date);
         let differenceInDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
         console.log("differenceInDays", differenceInDays);
 

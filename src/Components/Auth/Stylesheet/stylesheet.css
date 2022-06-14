@@ -200,7 +200,31 @@
   margin-bottom: 20px !important;
 }
 
+.addcategory_input_Otp {
+  background: #4f4f4f !important;
+  border-radius: 5px !important;
+  border: none !important;
+  width: 90px !important;
+  height: 70px !important;
+  border: 1px solid rgba(230, 230, 230, 0.5) !important;
+  margin-top: 5px !important;
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 21px !important;
+  line-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  letter-spacing: -0.015em !important;
+  color: #ffffff !important;
+  margin-bottom: 20px !important;
+  text-align: center !important;
+}
+
 .addcategory_input::placeholder {
+  color: white;
+}
+
+.addcategory_input_Otp::placeholder {
   color: white;
 }
 
@@ -227,7 +251,34 @@
   border-radius: 5px !important;
 }
 
+.addcategory_input_sub_Otp {
+  border: 1px solid rgba(230, 230, 230, 0.5) !important;
+  background: #ffffff !important;
+  border-radius: 5px !important;
+  border: none !important;
+  width: 90px !important;
+  height: 70px !important;
+  margin-top: 5px !important;
+  font-weight: 300 !important;
+  font-size: 21px !important;
+  line-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  letter-spacing: -0.015em !important;
+  margin-bottom: 20px !important;
+  color: #363636 !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(230, 230, 230, 0.5) !important;
+  box-sizing: border-box !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+}
+
 .addcategory_input_sub::placeholder {
+  color: #363636;
+}
+
+.addcategory_input_sub_Otp::placeholder {
   color: #363636;
 }
 
@@ -564,6 +615,17 @@
     letter-spacing: -0.015em !important;
   }
 
+  .addcategory_input_Otp {
+    width: 70px !important;
+    height: 70px !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    border: none !important;
+    text-align: center !important;
+    letter-spacing: -0.015em !important;
+  }
+
   .addcategory_input_sub {
     width: 300px !important;
     height: 40px !important;
@@ -572,6 +634,17 @@
     font-size: 14px !important;
     line-height: 16px !important;
     letter-spacing: -0.015em !important;
+  }
+
+  .addcategory_input_sub_Otp {
+    width: 70px !important;
+    height: 70px !important;
+    border: none !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    letter-spacing: -0.015em !important;
+    text-align: center !important;
   }
 
   .update_button {

@@ -62,7 +62,7 @@ const AddNewCategory = () => {
         selectedCategoryOption
       )
     );
-    console.log(response);
+    // console.log(response);
     setMessage(response.message);
     if (response.message === "Add Categroy Successfully") {
       navigate("/");
@@ -100,7 +100,7 @@ const AddNewCategory = () => {
     handleParentChildeCategory();
     authDashboradData();
   }, []);
-  console.log(categoryType);
+  // console.log(categoryType);
   const parentOptions = parentCategory?.map((category) => {
     // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
@@ -108,7 +108,7 @@ const AddNewCategory = () => {
 
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
-    console.log("selectedOption ID", selectedOption);
+    // console.log("selectedOption ID", selectedOption);
     setchapId(selectedOption?.id);
   };
 

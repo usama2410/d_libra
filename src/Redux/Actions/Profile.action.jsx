@@ -17,6 +17,7 @@ export const profileData = (token) => async (dispatch) => {
 
 export const updateProfile =
   (fname, lname, image, token, auth) => async (dispatch) => {
+    console.log(fname, lname, image, token, auth)
     const formData = new FormData();
     formData.append("fname", fname);
     formData.append("lname", lname);

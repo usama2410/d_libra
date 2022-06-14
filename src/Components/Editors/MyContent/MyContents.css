@@ -1,11 +1,35 @@
-.underimagecontent{
+.underimagecontent {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.mycontenttagscontainer{
+.mycontenttagscontainer {
   position: relative;
+}
+
+.tagstwocontainerOne {
+  /* filter: invert(8%) sepia(100%) saturate(6481%) hue-rotate(246deg) brightness(102%) contrast(143%); 
+  */
+
+  /* filter: invert(90%) sepia(93%) saturate(636%) hue-rotate(338deg)
+    brightness(112%) contrast(102%);  */
+
+  /* filter: brightness(0.5) sepia(1) hue-rotate(-70deg) saturate(5); */
+  /* filter: brightness(0.5) sepia(1) hue-rotate(140deg) saturate(6);
+  filter: brightness(0.2) sepia(1) hue-rotate(180deg) saturate(5); */
+
+  /* https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element*/
+}
+.tagstwocontainerTwo {
+  filter: brightness(0.5) sepia(1) hue-rotate(140deg) saturate(6);
+
+  /* https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element*/
+}
+.tagstwocontainerThree {
+  filter: invert(90%) sepia(93%) saturate(636%) hue-rotate(338deg)
+    brightness(112%) contrast(102%);
+  /* https://stackoverflow.com/questions/22252472/how-to-change-the-color-of-an-svg-element*/
 }
 .mycontentcontainer {
   display: flex;

@@ -47,8 +47,8 @@ const LandingPage = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  console.log("data", data);
-  console.log("state", state);
+  // console.log("data", data);
+  // console.log("state", state);
 
   const settings = {
     dots: false,
@@ -145,13 +145,11 @@ const LandingPage = () => {
   }, [state, params]);
 
   const handleViewRecentCourses = async (id) => {
-    let date = new Date();
-    localStorage.setItem("date", date);
     // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    !token
-      ? Swal.fire("Please Login to view course")
-      : navigate(`/coursepageguest/${id}`);
+    // !token
+    //   ? Swal.fire("Please Login to view course")
+    //   : navigate(`/coursepageguest/${id}`);
   };
 
   return (
