@@ -14,6 +14,9 @@ export const endpoints = {
   RESET_PASSWORD: "/webapi/ChangePassword",
   LOGOUT: "/webapi/logout?role=",
 
+  // Google Auth
+  GOOGLE_AUTH: "/webapi/signupwithgoogle",
+
   //Profile
   USER_PROFILE: "/webapi/userprofile",
   UPDATE_PROFILE: "/webapi/userprofile",

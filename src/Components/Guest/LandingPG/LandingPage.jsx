@@ -147,9 +147,9 @@ const LandingPage = () => {
   const handleViewRecentCourses = async (id) => {
     // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    // !token
-    //   ? Swal.fire("Please Login to view course")
-    //   : navigate(`/coursepageguest/${id}`);
+    !token
+      ? Swal.fire("Please Login to view course")
+      : navigate(`/coursepageguest/${id}`);
   };
 
   return (

@@ -12,6 +12,8 @@ import { Typography } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
 import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_yellow from "../../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_gray from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -27,7 +29,7 @@ const MyContents = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const [priority, setPriority] = useState("highpriority");
+  const [priority, setPriority] = useState(Bookmark_gray);
   let [count, setCount] = useState(0);
 
   const handleBack = () => {
@@ -148,13 +150,14 @@ const MyContents = () => {
   };
 
   const handleBookMarkColor = () => {
-    if (count === 0) {
-      return "tagstwocontainerOne";
-    } else if (count === 1) {
-      return "tagstwocontainerTwo";
-    } else if (count === 2) {
-      return "tagstwocontainerThree";
-    }
+      if (count === 0) {
+        return Bookmark_blue;
+      } else if (count === 1) {
+        return Bookmark_yellow;
+      } else if (count === 2) {
+        return Bookmark_gray;
+      }
+ 
   };
 
   return (
@@ -255,9 +258,8 @@ const MyContents = () => {
                                   </Typography>
                                   <div className="mycontenttagscontainer">
                                     <img
-                                      src={Bookmark_blue}
+                                      src={handleBookMarkColor()}
                                       alt=""
-                                      className={handleBookMarkColor()}
                                       onClick={() => handleBookMark(e.id)}
                                     />
                                   </div>

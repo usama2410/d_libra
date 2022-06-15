@@ -54,23 +54,32 @@ export const logIn =
   };
 
 export const logInWithGoogle =
-  (uid, email, displayName, emailVerified, photoURL, accessToken) =>
-  async (dispatch) => {
+  (email, user_id, displayName, userSettingState) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("ui", user_id);
+    formData.append("displayName", displayName);
     try {
+      const response = await axios.post(
+        `${URL}${endpoints.GOOGLE_AUTH}`,
+        formData
+      );
+      // console.log("logInWithGoogle response", response);
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: {
-          userId: uid,
-          email: email,
-          username: email.split("@")[0],
-          firstName: displayName,
-          lastName: displayName,
-          status: emailVerified,
-          profile: photoURL,
-          token: accessToken,
-          role: "normaluser",
+          userId: response?.data?.data?.id,
+          email: response?.data?.data?.email,
+          username: response?.data?.data?.username,
+          firstName: userSettingState?.firstName,
+          lastName: userSettingState?.lastName,
+          status: response?.data?.status,
+          profile: response?.data?.data?.profile,
+          token: response?.data?.token,
+          role: response?.data?.data?.role,
         },
       });
+      return response?.data;
     } catch (error) {
       console.log(error);
       return error;

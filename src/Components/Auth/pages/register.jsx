@@ -5,10 +5,17 @@ import { useNavigate } from "react-router-dom";
 import googleIcon from "../../../assests/google.png";
 import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
-import { signUp } from "../../../Redux/Actions/auth.action";
+import { logInWithGoogle, signUp } from "../../../Redux/Actions/auth.action";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+
+import {
+  auth,
+  provider,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "../../../Firebase";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -31,13 +38,11 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     const response = await dispatch(signUp(username, email, password));
-    // console.log("response", response);
+    console.log("response", response);
     setMessage(response.message);
     setData(response.data);
     if (email === "" && password === "") {
       setErrorMessage(true);
-    } else if (response.message === "Account Created Successfully") {
-      navigate("/");
     }
 
     const timer = setTimeout(() => {
@@ -47,6 +52,39 @@ const Register = () => {
     }, 5000);
     setIsLoading(false);
     return () => clearTimeout(timer);
+  };
+
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        // user?.accessToken && navigate("/");
+
+        const email = user?.email;
+        const displayName = user?.displayName;
+        const response = await dispatch(
+          logInWithGoogle(email, email.split("@")[0], displayName)
+        );
+        // console.log("response", response);
+        if (response?.data?.message === "login Successfully") {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
   };
 
   return (
@@ -67,7 +105,9 @@ const Register = () => {
           ) : message ? (
             message === "Account Created Successfully" ? (
               <div className={theme ? "successMessage" : "successMessageTwo"}>
-                {message}
+                Verification link has been sent to your email <br />{" "}
+                <h4 style={{ color: theme ? "blue" : "yellow" }}>{email}</h4>
+                Please verify your email to login.
               </div>
             ) : message === "All Fields are Required" ? (
               <div className="errorMessage"> All Fields are Required </div>
@@ -126,7 +166,11 @@ const Register = () => {
 
       <div className="loginwithgooglecontainer">
         <div>
-          <Button variant="text" className="signWithGoogle">
+          <Button
+            variant="text"
+            className="signWithGoogle"
+            onClick={handleGoogleLogin}
+          >
             <img src={googleIcon} className="googleIcon" alt="google" />
             Sign up with Google
           </Button>

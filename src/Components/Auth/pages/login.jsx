@@ -9,7 +9,6 @@ import { logIn, logInWithGoogle } from "../../../Redux/Actions/auth.action";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-import GoogleLogin from "react-google-login";
 import {
   auth,
   provider,
@@ -20,19 +19,16 @@ import {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [errorMessage, setErrorMessage] = useState(false);
   const theme = useSelector((state) => state.theme.state);
-  const role = useSelector((state) => state.auth.role);
-
   const userSettingState = useSelector((state) => state?.userSetting);
 
+  const [errorMessage, setErrorMessage] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // console.log("email", email, password);
-  console.log("userSettingState", userSettingState);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -65,31 +61,27 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
-        user?.accessToken && navigate("/");
-        const id = user?.providerData[0]?.uid;
-        const email = user?.providerData[0]?.email;
-        const displayName = user?.providerData[0]?.displayName;
-        const emailVerified = user?.auth?.emailVerified;
-        const photoURL = user?.providerData[0]?.photoURL;
-        const accessToken = user?.accessToken;
-        user?.accessToken &&
-          dispatch(
-            logInWithGoogle(
-              id,
-              email,
-              displayName,
-              emailVerified,
-              photoURL,
-              accessToken
-            )
-          );
+        // user?.accessToken && navigate("/");
+
+        const email = user?.email;
+        const displayName = user?.displayName;
+        const response = await dispatch(
+          logInWithGoogle(
+            email,
+            email.split("@")[0],
+            displayName,
+            userSettingState
+          )
+        );
+
+        if (response?.message === "login Successfully") {
+          navigate("/");
+        }
       })
       .catch((error) => {
         // Handle Errors here.
@@ -121,7 +113,14 @@ const Login = () => {
           ) : message ? (
             message === "Invalid Credential" ? (
               <div className="errorMessage">{message}</div>
-            ) : null
+            ) : (
+              message === "Your Account is not verify" && (
+                <div className="errorMessage">
+                  Verify your account. Verification link has been sent to
+                  <h4 style={{ color: theme ? "blue" : "yellow" }}>{email}</h4>
+                </div>
+              )
+            )
           ) : null}
 
           <input
@@ -169,29 +168,6 @@ const Login = () => {
               <img src={googleIcon} className="googleIcon" alt="google" />
               Sign in with Google
             </Button>
-            {/* <GoogleOAuthProvider
-              clientId="589338479437-kg18vpo3jkntfmefr8rl3cqug31c5rk9.apps.googleusercontent.com"
-              redirectUri="http://localhost:3000/"
-              scope="https://www.googleapis.com/auth/userinfo.email"
-              onSuccess={(response) => {
-                console.log("response", response);
-                navigate("/");
-              }}
-              onFailure={(error) => {
-                console.log("error", error);
-              }}
-            > */}
-            {/* <GoogleLogin
-              clientId="557890712742-u2b9oop79pjvdq9e5s1n9pqmuuugodhd.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              onSuccess={(response) => {
-                console.log("response", response);
-              }}
-              onFailure={(response) => {
-                console.log("response", response);
-              }}
-              cookiePolicy={"single_host_origin"}
-            /> */}
           </div>
         </div>
         <div style={{ Width: "62%" }}>
