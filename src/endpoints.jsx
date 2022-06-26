@@ -4,6 +4,10 @@ export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 
 export const endpoints = {
+
+  //Home
+  GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
+
   //Auth
   SIGNUP: "/webapi/signup",
   LOGIN: "/webapi/userlogin",
@@ -12,7 +16,7 @@ export const endpoints = {
   SEND_VERIFICATION_CODE: "/webapi/SendVerificationCode",
   FORGOT_PASSWORD: "/webapi/VerifyCode",
   RESET_PASSWORD: "/webapi/ChangePassword",
-  LOGOUT: "/webapi/logout?role=",
+  LOGOUT: "/webapi/logout",
 
   // Google Auth
   GOOGLE_AUTH: "/webapi/signupwithgoogle",
@@ -27,6 +31,12 @@ export const endpoints = {
     "/webapi/GetDashboardDataWithAuthorization?id=",
 
   //Category
+  ADD_PARENT_CATEGORY: "/webapi/parentCategories",
+  GET_PARENT_CATEGORY: "/webapi/parentCategories",
+  ADD_COURSE: "/webapi/GetParentCategories",
+  GET_ALL_COURSE: "/webapi/allcategories",
+  ADD_CHAPTER: "/webapi/GetParentCategories",
+  GET_ALL_CHAPTER: "/webapi/GetParentCategories",
   PARENT_CATEGORY: "/GetParentCategories",
 
   //Post
@@ -36,8 +46,7 @@ export const endpoints = {
   DELETE_POST_BY_ID: "/webapi/AddPost?",
 
   //Category
-  ADD_CATEGORY: "/webapi/GetParentCategories",
-  GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
+
   GET_CHILD_CATEGORY: "/webapi/GetChildCategories?id=",
 
   GET_PARENT_CHILD_CATEGORY: "/webapi/GetParentChildCategories",
@@ -62,4 +71,13 @@ export const endpoints = {
   // Priorty
   SET_PRIORITY: "/webapi/SetPriority",
   GET_PRIORITY: "/webapi/SetPriority?role=",
+
+  // Feedback
+  ADD_FEEDBACK: "/webapi/feedbackrecord",
+  GET_TOPICS_FROM_COURSE: "/webapi/feedbackrecord",
+
+  // BOOKMARK
+  ADD_BOOKMARK_LIBRARY: "/webapi/bookadd",
+  ADD_CONTENT_BOOKMARK: "/webapi/addcontent",
+  GET_BOOKMARK_COURSE: "/webapi/GetPriorityCourse"
 };

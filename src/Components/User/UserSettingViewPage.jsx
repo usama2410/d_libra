@@ -12,6 +12,8 @@ import Add_light from "../../assests/SVG_Files/New folder/Add_light.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import FooterButtons from "./FooterButtons";
 import Editor_icon_dark from "../../assests/SVG_Files/New/Editor_icon_dark.svg";
 import Editor_icon_light from "../../assests/SVG_Files/New/Editor_icon_light.svg";
@@ -22,6 +24,7 @@ import { logout } from "../../Redux/Actions/auth.action";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { home } from "../../Redux/Actions/Client Side/home.action";
+import { addBookmark } from "../../Redux/Actions/bookmark.action";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -42,6 +45,10 @@ const UserSettingViewPage = () => {
   const [showImage, setShowImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [addBookMark, setAddBookMark] = useState([]);
+  let [count, setCount] = useState(0);
+  let [countTwo, setCountTwo] = useState(0);
+  const [personal, setPersonal] = useState("Personal");
+  const [dayend, setDayend] = useState("Dayend");
 
   const user = useSelector((state) => state?.auth?.profile);
 
@@ -92,15 +99,53 @@ const UserSettingViewPage = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    localStorage.clear();
-    window.load((window.location.href = "/logout"));
-    // const response = await dispatch(logout(role, token));
+    // localStorage.clear();
+    // window.load((window.location.href = "/logout"));
+    const response = await dispatch(logout(role, token));
     // navigate("/logout")
   };
 
-  const hanldeAddBookmark = () => {
+  const hanldeAddBookmark = async () => {
     setAddBookMark([...addBookMark, 1]);
+
+    setCount(count + 1);
+    let priorityArray = [];
+
+    setCountTwo(count + 1);
+    if (count === 1) {
+      setCount(1);
+      priorityArray.push({
+        colorcode: "#34554",
+        bookmarkname: personal,
+      });
+    }
+    if (countTwo === 2) {
+      priorityArray.push({
+        colorcode: "#34554",
+        bookmarkname: dayend,
+      });
+    }
+
+    if (count === 0) {
+      priorityArray.push({
+        colorcode: "#34554",
+        bookmarkname: personal,
+      });
+    }
+    if (countTwo === 1) {
+      priorityArray.push({
+        colorcode: "#34555",
+        bookmarkname: dayend,
+      });
+    }
+    console.log("priorityArray", priorityArray);
+    await dispatch(addBookmark(priorityArray, role, token));
   };
+
+  // [{"colorcode":"#34554","bookmarkname":"personal"},
+  // {"colorcode":"#34dd54","bookmarkname":"Dayend"},{"colorcode":"#34554","bookmarkname":"personal"},
+  // {"colorcode":"#34554","bookmarkname":"personalcloud"}]
+
   return (
     <div>
       <button
@@ -346,12 +391,12 @@ const UserSettingViewPage = () => {
             />
           </div>
 
-          {addBookMark?.map((item, index) => {
+          {/* {addBookMark?.map((item, index) => {
             return (
               <div className="vector_container" key={index}>
                 <div className="vector_image">
                   <img
-                    src={Bookmark_red}
+                    src={handleBookMarkColor()}
                     alt=""
                     className="tagimageusersettingpage"
                   />
@@ -365,7 +410,47 @@ const UserSettingViewPage = () => {
                 />
               </div>
             );
-          })}
+          })} */}
+
+          {count === 1 && (
+            <div className="vector_container">
+              <div className="vector_image">
+                <img
+                  src={Bookmark_yellow}
+                  alt=""
+                  className="tagimageusersettingpage"
+                />
+              </div>
+
+              <input
+                className={
+                  theme ? "profile_sub_input" : "profile_sub_input_two"
+                }
+                placeholder="Personal"
+                value={personal}
+              />
+            </div>
+          )}
+
+          {countTwo === 2 && (
+            <div className="vector_container">
+              <div className="vector_image">
+                <img
+                  src={Bookmark_grey}
+                  alt=""
+                  className="tagimageusersettingpage"
+                />
+              </div>
+
+              <input
+                className={
+                  theme ? "profile_sub_input" : "profile_sub_input_two"
+                }
+                placeholder="Dayend"
+                value={dayend}
+              />
+            </div>
+          )}
 
           <div className="vector_container">
             <img

@@ -10,8 +10,8 @@ export const librarybookmark = (role, token) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    // console.log("librarybookmark response", response);
-    return response?.data;
+    console.log("librarybookmark response", response);
+    return response?.data.data;
   } catch (error) {
     console.log(error);
   }

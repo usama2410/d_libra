@@ -109,7 +109,7 @@ const Login = () => {
       <div className="loginmaincontainer">
         <div className="editomainpage_container">
           {errorMessage === true ? (
-            <div className="errorMessage">Feilds cannot be empty!</div>
+            <div className="errorMessage">Feilds cannot be empty</div>
           ) : message ? (
             message === "Invalid Credential" ? (
               <div className="errorMessage">{message}</div>

@@ -7,6 +7,7 @@ import "../Stylesheet/stylesheet.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { resetPassword } from "../../../Redux/Actions/auth.action";
+import { toast } from "react-toastify";
 
 const UpdatePassword = ({ email }) => {
   const navigate = useNavigate();

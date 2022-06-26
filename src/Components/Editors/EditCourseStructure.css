@@ -276,6 +276,11 @@
   padding: 2px 20px;
 }
 
+/* .git_introduction_dropdown {
+  width: 250px
+} */
+
+
 .detail_edit_button {
   background: #ffaa1d;
   border-radius: 15px;
@@ -312,13 +317,14 @@
 }
 
 .detail_tag_button {
+  margin-top: 5px;
   background: #119abd;
   border-radius: 15px;
   border: none;
   color: white;
   padding: 2px 20px;
   margin-left: 10px;
-  width: 80px;
+  width: 140px;
   height: 20px;
 }
 
@@ -399,6 +405,7 @@
   height: 30px;
   color: white;
   border: 1px solid rgba(70, 66, 77, 0.7) !important;
+  width: 300px
 }
 
 .editor_input_field:focus {

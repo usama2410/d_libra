@@ -142,13 +142,13 @@ const CoursePageGuest = () => {
             style={{ marginTop: "10px" }}
             className={theme ? "mycontentheadtwoo" : "mycontentheadthree"}
           >
-            Git & GitHub Introduction
+            {data?.dropdown?.parent?.CategoryName}
           </span>
         </div>
       </div>
-      {data?.length > 0 ? (
+      {data?.data?.length > 0 ? (
         <div className="landingpage_slider_container coursemainpage_container">
-          {data?.map((item) => {
+          {data?.data?.map((item) => {
             return (
               <div className="content_root_container">
                 <div>

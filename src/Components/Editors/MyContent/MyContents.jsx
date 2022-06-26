@@ -13,13 +13,20 @@ import { ArrowBack } from "@mui/icons-material";
 import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
 import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import Bookmark_yellow from "../../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
-import Bookmark_gray from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Bookmark_red from "../../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import { development } from "../../../endpoints";
-import { setBookMarkPriority } from "../../../Redux/Actions/Client Side/librar.y.action";
+import {
+  librarybookmark,
+  setBookMarkPriority,
+} from "../../../Redux/Actions/Client Side/librar.y.action";
+import { addContentBookmark } from "../../../Redux/Actions/bookmark.action";
+import Swal from "sweetalert2";
 
 const MyContents = () => {
   const dispatch = useDispatch();
@@ -29,15 +36,18 @@ const MyContents = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const [priority, setPriority] = useState(Bookmark_gray);
+  const [priority, setPriority] = useState("reviewlist");
+  const [bookmark, setBookmark] = useState();
   let [count, setCount] = useState(0);
+  const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
+  console.log("handleSetBookMark", handleSetBookMark);
   const handleBack = () => {
     navigate("/editormainpage");
   };
 
   // console.log("data", data);
-  // console.log("count", count);
+  console.log("bookmark", bookmark);
 
   const settings = {
     dots: false,
@@ -117,12 +127,24 @@ const MyContents = () => {
     ],
   };
 
+  const hanldeLibraryBook = async () => {
+    const response = await dispatch(librarybookmark(role, token));
+    console.log("librarybookmark response", response);
+    response.map((data) => {
+      data?.map((item) => {
+        setHandleSetBookMark(item.PriorityType);
+      });
+    });
+  };
+
   useEffect(() => {
     const dashboardData = async () => {
       const response = await dispatch(getDashboardData(token));
+      console.log("response", response);
       setdata(response);
     };
     dashboardData();
+    hanldeLibraryBook();
   }, []);
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
@@ -132,6 +154,7 @@ const MyContents = () => {
   };
 
   const handleBookMark = async (content_id) => {
+    console.log("content_id", content_id);
     setCount(count + 1);
     if (count === 0) {
       setPriority("highpriority");
@@ -143,21 +166,37 @@ const MyContents = () => {
       setCount(0);
       setPriority("futureread");
     }
-    const response = await dispatch(
+    const response2 = await dispatch(
       setBookMarkPriority(role, content_id, priority, token)
     );
+
+    console.log("response2", response2);
+
+    const response = await dispatch(
+      addContentBookmark(content_id, role, token)
+    );
     console.log("response", response);
+
+    // const response1 = await dispatch(librarybookmark(role, token));
+    // console.log("response1", response1);
+
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
   };
 
   const handleBookMarkColor = () => {
-      if (count === 0) {
-        return Bookmark_blue;
-      } else if (count === 1) {
-        return Bookmark_yellow;
-      } else if (count === 2) {
-        return Bookmark_gray;
-      }
- 
+    if (count === 0) {
+      return Bookmark_blue;
+    } else if (count === 1) {
+      return Bookmark_yellow;
+    } else if (count === 2) {
+      return Bookmark_red;
+    }
   };
 
   return (
@@ -258,9 +297,22 @@ const MyContents = () => {
                                   </Typography>
                                   <div className="mycontenttagscontainer">
                                     <img
-                                      src={handleBookMarkColor()}
+                                      src={
+                                        handleSetBookMark === "highpriority"
+                                          ? Bookmark_blue
+                                          : handleSetBookMark === "reviewlist"
+                                          ? Bookmark_green
+                                          : handleSetBookMark === "futureread"
+                                          ? Bookmark_red
+                                          : !token
+                                          ? Bookmark_grey
+                                          : handleSetBookMark === "Dayend"
+                                          ? Bookmark_yellow
+                                          : null
+                                      }
                                       alt=""
                                       onClick={() => handleBookMark(e.id)}
+                                      style={{ cursor: "pointer" }}
                                     />
                                   </div>
                                 </div>

@@ -82,7 +82,7 @@ const FooterButtons = (props) => {
   };
 
   const hanldeNavigateToHistory = () => {
-    navigate("recentlyviewed");
+    navigate("/recentlyviewed");
   };
 
   const hanldeRatingNavigate = () => {
@@ -118,7 +118,12 @@ const FooterButtons = (props) => {
             />
           )}
 
-          <img src={MyLibrary} alt="" className="footerbuttonimages" />
+          <img
+            src={MyLibrary}
+            alt=""
+            className="footerbuttonimages"
+            onClick={() => navigate("/mylibrarycourses")}
+          />
           <img
             src={Rating}
             alt=""
@@ -155,6 +160,7 @@ const FooterButtons = (props) => {
                 style={{ cursor: "pointer" }}
                 width="50px"
                 height="50px"
+                onClick={() => navigate("/mylibrarycourses")}
               />
               <img
                 src={Rating}

@@ -1,19 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "../Guest/LandingPG/Lp.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import { development } from "../../endpoints";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { Typography } from "@material-ui/core";
+import {
+  librarybookmark,
+  setBookMarkPriority,
+} from "../../Redux/Actions/Client Side/librar.y.action";
+
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 
 const RecentlyViewdSlider = (filterArray) => {
+  const dispatch = useDispatch();
+  const [priority, setPriority] = useState("reviewlist");
+  let [count, setCount] = useState(0);
+  const [singleContent, setSingleContent] = useState();
   const theme = useSelector((state) => state.theme.state);
+  const role = useSelector((state) => state.auth.role);
+  const token = useSelector((state) => state.auth.token);
 
-  // console.log("filterArray", filterArray);
+  const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
+
+  console.log("handleSetBookMark", handleSetBookMark);
+
+  const handleBookMark = async (content) => {
+    console.log("content_id", content);
+    setSingleContent(content);
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    }
+    if (count === 1) {
+      setPriority("reviewlist");
+    }
+    if (count === 2) {
+      setCount(0);
+      setPriority("futureread");
+    }
+    const response = await dispatch(
+      setBookMarkPriority(role, content?.Courseid, priority, token)
+    );
+    console.log("response", response);
+  };
+
+  const hanldeLibraryBook = async () => {
+    const response = await dispatch(librarybookmark(role, token));
+    console.log("librarybookmark response", response);
+    response.map((data) => {
+      data?.map((item) => {
+        setHandleSetBookMark(item.PriorityType);
+        
+        });
+      });
+  };
+
+  useEffect(() => {
+    hanldeLibraryBook();
+  }, []);
 
   const settings = {
     dots: false,
@@ -138,9 +191,22 @@ const RecentlyViewdSlider = (filterArray) => {
                           </Typography>
                           <div className="mycontenttagscontainer">
                             <img
-                              src={Bookmark_blue}
+                              src={
+                                handleSetBookMark === "highpriority"
+                                  ? Bookmark_blue
+                                  : handleSetBookMark === "reviewlist"
+                                  ? Bookmark_green
+                                  : handleSetBookMark === "futureread"
+                                  ? Bookmark_red
+                                  : handleSetBookMark === "Personal"
+                                  ? Bookmark_yellow
+                                  : handleSetBookMark === "Dayend"
+                                  ? Bookmark_grey
+                                  : null
+                              }
                               alt=""
                               className="tagstwocontainer"
+                              onClick={() => handleBookMark(e)}
                             />
                           </div>
                         </div>

@@ -93,11 +93,7 @@ const ForgetPassword = () => {
       }, 5000);
       return () => clearTimeout(timer);
     }
-    if (
-      !email.includes("@") ||
-      !email.includes(".") ||
-      !email.includes("com")
-    ) {
+    if (!email.includes("@") || !email.includes(".")) {
       setMessage("Email is not valid");
       setValidation(true);
       const timer = setTimeout(() => {

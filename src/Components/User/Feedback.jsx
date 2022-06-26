@@ -6,11 +6,14 @@ import FooterButtons from "./FooterButtons";
 import { useSelector, useDispatch } from "react-redux";
 import "./RatingForm.css";
 import Select from "react-select";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { getAllCourses } from "../../Redux/Actions/Editor/Category";
 import {
-  getMainCategory,
-  getTopicContent,
-} from "../../Redux/Actions/Editor/Category";
+  postFeedback,
+  topicsOfCourses,
+} from "../../Redux/Actions/feedback.action";
+import Swal from "sweetalert2";
 
 const Feedback = () => {
   const navigate = useNavigate();
@@ -18,49 +21,94 @@ const Feedback = () => {
   const theme = useSelector((state) => state.theme.state);
   const role = useSelector((state) => state.auth.role);
   const token = useSelector((state) => state.auth.token);
-  const [parentCategory, setParentCategory] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [childCategory, setChildCategory] = useState([]);
+  const [message, setMessage] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log("selectedOption", selectedOption);
+  // COURSE HOOKS
+  const [parentCourse, setParentCourse] = useState([]);
+  const [selectedCourseOption, setSelectedCourseOption] = useState("");
+  const [parentID, setParentID] = useState("");
+
+  // TOPIC HOOKS
+  const [topics, setTopics] = useState([]);
+  const [selectedTopicOption, setSelectedTopicOption] = useState("");
+  const [topicID, setTopicID] = useState("");
+
+  // console.log("selectedOption", selectedOption);
   const handleBack = () => {
     navigate("/ratingform");
   };
 
-  // const options = [
-  //   { value: "chocolate", label: "Git & Git Hub Introduction" },
-  //   { value: "Saab", label: "Saab" },
-  //   { value: "Opel", label: "Opel" },
-  //   { value: "Audi", label: "Audi" },
-  // ];
+  // GET ALL COURSES
+  const handleGetAllCourses = async () => {
+    const response = await dispatch(getAllCourses(token));
+    // console.log("response", response);
+    setParentCourse(response);
+  };
+
+  const courseOptions = parentCourse?.map((course) => {
+    // console.log("course", course);
+    return {
+      id: course?.id,
+      label: course?.category,
+      identifier: course?.unique_identifier,
+    };
+  });
+
+  const handleGetCourseSelector = (selectedChapterOption) => {
+    // console.log(selectedChapterOption);
+    setParentID(selectedChapterOption?.id);
+    setSelectedCourseOption(selectedChapterOption);
+  };
+
+  // GET ALL TOPICS
+  const handleGetAllTopics = async () => {
+    const response = await dispatch(topicsOfCourses(parentID, role, token));
+    console.log("response", response);
+    setTopics(response);
+  };
+
+  const topicOptions = topics?.map((topics) => {
+    // console.log("topics", topics);
+    return {
+      id: topics?.id,
+      label: topics?.title,
+    };
+  });
+
+  const handleGetTopicSelector = (selectedTopicOption) => {
+    // console.log(selectedChapterOption);
+    setTopicID(selectedTopicOption?.id);
+    setSelectedTopicOption(selectedTopicOption);
+  };
 
   useEffect(() => {
-    const mainCategory = async () => {
-      const response = await dispatch(getMainCategory());
-      // console.log("response", response);
-      setParentCategory(response?.data);
-    };
-    mainCategory();
-  }, []);
+    handleGetAllCourses();
+    handleGetAllTopics();
+  }, [parentID, topicID]);
 
-  const parentOptions = parentCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.CategoryName };
-  });
-
-  const childOptions = childCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.title };
-  });
-
-  const handleSelector = async (selectedOption) => {
-    setSelectedOption(selectedOption);
+  const handleSubmit = async () => {
+    setIsLoading(true);
 
     const response = await dispatch(
-      getTopicContent(role, selectedOption?.id, token)
+      postFeedback(topicID, feedback, role, token)
     );
-    console.log("response", response);
-    setChildCategory(response);
+    setMessage(response?.message);
+
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 5000);
+    setIsLoading(false);
+
+    !token && Swal.fire({
+      title: "Unauthenticated",
+      text: "Please login to give your feedback",
+      iconColor: "red",
+      icon: "error",
+    });
+
+    return () => clearTimeout(timer);
   };
 
   const customStyles = {
@@ -156,15 +204,22 @@ const Feedback = () => {
         <span className="backbutton_text">Back</span>
       </button>
       <div className="ratingform_root_two">
+        {message === "topicid,opinion is required" ? (
+          <div className="errorMessage">Feilds cannot be empty!</div>
+        ) : message === "Response recorded" ? (
+          <div className={theme ? "successMessage" : "successMessageTwo"}>
+            Feedback recorded successfully
+          </div>
+        ) : null}
         <Select
           styles={theme ? customStyles : customStyless}
           className={
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
           placeholder="Select a Course for Feedback"
-          options={parentOptions}
-          onChange={handleSelector}
-          value={selectedOption}
+          value={selectedCourseOption}
+          options={courseOptions}
+          onChange={handleGetCourseSelector}
         />
         <Select
           styles={theme ? customStyles : customStyless}
@@ -172,7 +227,9 @@ const Feedback = () => {
             theme ? "addcategory_input_sub_two" : "addcategory_input_two"
           }
           placeholder="Select a Topic for Feedback"
-          options={childOptions}
+          value={selectedTopicOption}
+          options={topicOptions}
+          onChange={handleGetTopicSelector}
         />
       </div>
       <div className="ratingform_root_three">
@@ -194,12 +251,27 @@ const Feedback = () => {
             rows="20"
             placeholder=""
             type="text"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
           />
         </div>
         <div className="submitfeedbackbutton">
-          <Button variant="contained" className="user_buttons">
-            Submit
-          </Button>
+          {isLoading ? (
+            <Box
+              className="user_buttons"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <CircularProgress color="inherit" size={20} />
+            </Box>
+          ) : (
+            <Button
+              variant="contained"
+              className="user_buttons"
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          )}
         </div>
       </div>
       <FooterButtons />

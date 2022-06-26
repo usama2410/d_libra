@@ -15,6 +15,12 @@ import { development } from "../../endpoints";
 import parse from "html-react-parser";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Swal from "sweetalert2";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -30,6 +36,8 @@ const DetailPage = () => {
 
   let [selected, setSelected] = React.useState(0);
   const [disable, setDisable] = React.useState(false);
+  const [disablePrevious, setDisablePrevious] = React.useState(false);
+  const [bookmark, setBookmark] = React.useState(Bookmark_blue);
 
   console.log("selected", selected);
 
@@ -49,35 +57,64 @@ const DetailPage = () => {
     postById();
   }, [params]);
 
+  const handleBookMark = () => {
+    console.log(details?.bookmark?.PriorityType);
+    if (details?.bookmark?.PriorityType === "personalcloud") {
+      return Bookmark_blue;
+    } else if (details?.bookmark?.PriorityType === undefined) {
+      return Bookmark_grey;
+    } else if (details?.bookmark?.PriorityType === "highpriority") {
+      return Bookmark_red;
+    } else if (details?.bookmark?.PriorityType === "reviewlist") {
+      return Bookmark_green;
+    } else if (details?.bookmark?.PriorityType === "forfutureread") {
+      return Bookmark_red;
+    } else if (details?.bookmark?.PriorityType === "personal") {
+      return Bookmark_yellow;
+    } else if (details?.bookmark?.PriorityType === "dayend") {
+      return Bookmark_grey;
+    }
+  };
+
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
 
-    setSelected(selected + 1);
-    console.log(previousItem[selected]);
-    if (selected === previousItem.length - 1) {
-      setDisable(true);
+    // console.log("Next", previousItem);
+    console.log("Next", selected);
+
+    selected < previousItem.length && setSelected(selected + 1);
+    // console.log(previousItem[selected]);
+    // console.log(previousItem[selected]);
+    // if (selected === previousItem.length - 1) {
+    //   setDisable(true);
+    // }
+    if (previousItem[selected] !== undefined) {
+      navigate(
+        `/detailpage/id=${previousItem[selected]?.id}/${params.role}/${params.categoryid}`
+      );
     }
-    navigate(
-      `/detailpage/id=${previousItem[selected]?.id}/${params.role}/${params.categoryid}`
-    );
   };
 
   const handlePreviousMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
+    // console.log("previousItem", previousItem);
 
-    setSelected(selected - 1);
-    let previous = previousItem?.length - 1 - Math.abs(selected);
-    console.log(previousItem[previous]);
-    if (previous === 0) {
-      setDisable(true);
+    selected > 0 && setSelected(selected - 1);
+    let previous = Math.abs(previousItem?.length - 1 - selected);
+    console.log("previous", previous);
+    // console.log(previousItem[previous]);
+    // if (previous === 0) {
+    //   setDisablePrevious(true);
+    // }
+    if (previousItem[previous] !== undefined) {
+      navigate(
+        `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
+      );
     }
-    navigate(
-      `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
-    );
   };
 
   return (
@@ -139,11 +176,13 @@ const DetailPage = () => {
                     {" "}
                     Tag:{" "}
                   </span>
-                  <button className="detail_tag_button">Git</button>
-                  <button className="detail_tag_button">GitHub</button>
-                  <button className="detail_tag_button">DevOps</button>
+                  <button className="detail_tag_button">
+                    {details?.post?.tags}
+                  </button>
+                  {/* <button className="detail_tag_button">GitHub</button>
+                  <button className="detail_tag_button">DevOps</button> */}
                   <img
-                    src={Vectortag}
+                    src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"
                     style={{ paddingLeft: "24px" }}
@@ -179,10 +218,27 @@ const DetailPage = () => {
                   {" "}
                   Tag:{" "}
                 </span>
+                {details?.post?.tags !== "" ? (
+                  <button className="detail_tag_button">
+                    {details?.post?.tags}
+                  </button>
+                ) : null}
 
-                <button className="detail_tag_button">
-                  {details?.post?.tags}
-                </button>
+                <img
+                  src={handleBookMark()}
+                  alt=""
+                  className="detail_tag_text_two"
+                  style={{ paddingLeft: "24px" }}
+                  onClick={() =>
+                    !token &&
+                    Swal.fire({
+                      title: "Unauthenticated",
+                      text: "Please login to bookmark",
+                      iconColor: "red",
+                      icon: "error",
+                    })
+                  }
+                />
                 {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
               </div>
@@ -251,7 +307,7 @@ const DetailPage = () => {
         <div className="detailpagebuttoncontainedark">
           <div className="detailpagebuttoncontainerdarksub">
             <div className="footerbuttoncontainer">
-              <Button style={{ marginLeft: "16px" }} disabled={disable}>
+              <Button style={{ marginLeft: "16px" }} disabled={disablePrevious}>
                 <img
                   src={Previous_dark}
                   alt=""

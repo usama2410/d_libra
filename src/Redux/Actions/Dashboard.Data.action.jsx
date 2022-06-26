@@ -32,7 +32,7 @@ export const GetDashboardDataWithAuthorization =
       );
       console.log("Get authorized Dashboard Data Response", response);
 
-      return response?.data?.data;
+      return response?.data;
     } catch (error) {
       console.log(error);
     }

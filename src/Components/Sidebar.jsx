@@ -121,13 +121,6 @@ export default function Sidebar() {
             search,
           },
         });
-      } else if (location.pathname === "/mycontents") {
-        navigate(`/mycontents?search=${search}`, {
-          state: {
-            searchKey,
-            search,
-          },
-        });
       } else {
         navigate(`/searchresult?role=${role}&coursename=${search}`);
       }
@@ -168,6 +161,7 @@ export default function Sidebar() {
   const handleChange = async (event) => {
     setThemeState(event.target.checked);
     dispatch(themeSwitch(!themeState));
+    navigate(`/`);
   };
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -340,7 +334,7 @@ export default function Sidebar() {
         </ListItem>
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/register")}
+          onClick={() => !token && navigate("/register")}
         >
           <div
             onClick={toggleDrawer(anchor, false)}
@@ -378,7 +372,7 @@ export default function Sidebar() {
 
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/login")}
+          onClick={() => !token && navigate("/login")}
         >
           <div
             onClick={toggleDrawer(anchor, false)}
@@ -476,7 +470,7 @@ export default function Sidebar() {
         </ListItem>
         <ListItem
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/MyLibraryCorse")}
+          onClick={() => navigate("/mylibrarycourses")}
         >
           <div
             onClick={toggleDrawer(anchor, false)}

@@ -33,6 +33,7 @@ const EditContentMain = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
+  const [unique, setUnique] = useState();
   const [contentId, setContentId] = useState(params?.id?.split("=")[1]);
   const [categoryId, setCategoryId] = useState(
     params?.categoryid?.split("=")[1]
@@ -164,8 +165,12 @@ const EditContentMain = () => {
   // console.log("parentCategory", parentOptions, selectedOption);
 
   const childOptions = childCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.CategoryName };
+    console.log("category.id", category);
+    return {
+      id: category.id,
+      label: category.course,
+      identifier: category?.unique_identifier,
+    };
   });
 
   const handleSelector = async (selectedOption) => {
@@ -182,6 +187,7 @@ const EditContentMain = () => {
   const handleSelectorChild = async (selectedOptionChild) => {
     setSelectedOptionChild(selectedOptionChild);
     // console.log("selectedOption ID", selectedOptionChild);
+    setUnique(selectedOptionChild?.identifier);
 
     const response = await dispatch(
       getChildCategories(selectedOption.id, token)
@@ -230,6 +236,7 @@ const EditContentMain = () => {
       setMetaDiscription(response?.post?.meta_description);
       setOGP(response?.post?.OGP);
       setImage(`${development}/media/${response?.post?.images}`);
+      setTags(response?.post?.tags);
     };
     postById();
   }, [contentTitle]);
@@ -335,7 +342,7 @@ const EditContentMain = () => {
                   : "uploadcontentinputfield widthautoclass"
               }
               placeholder=""
-              value={contentId}
+              value={unique}
             />
           </div>
           <div>

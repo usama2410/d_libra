@@ -17,6 +17,7 @@ import { ratingCourse } from "../../Redux/Actions/Client Side/Rating.action";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { home } from "../../Redux/Actions/Client Side/home.action";
+import Swal from "sweetalert2";
 
 const RatingSidebar = () => {
   const navigate = useNavigate();
@@ -87,6 +88,14 @@ const RatingSidebar = () => {
       setMessage("");
     }, 5000);
     setIsLoading(false);
+
+    !token && Swal.fire({
+      title: "Unauthenticated",
+      text: "Please login to rate",
+      iconColor: "red",
+      icon: "error",
+    });
+
     return () => clearTimeout(timer);
   };
 
@@ -188,7 +197,7 @@ const RatingSidebar = () => {
               Course rated sucessfully
             </h4>
           </div>
-        ) : message === "Already rated" ? (
+        ) : message === "already rated" ? (
           <div>
             <h4 className={theme ? "successMessage" : "successMessageTwo"}>
               Already rated

@@ -11,6 +11,7 @@ export const addPost =
     image,
     metaDescription,
     OGP,
+    uniqueIdentity,
     token
   ) =>
   async (dispatch) => {
@@ -22,6 +23,7 @@ export const addPost =
     formData.append("image", image);
     formData.append("meta_description", metaDescription);
     formData.append("OGP", OGP);
+    formData.append("uniqueidentifier", uniqueIdentity);
     try {
       const response = await axios.post(URL + endpoints.ADD_POST, formData, {
         headers: {

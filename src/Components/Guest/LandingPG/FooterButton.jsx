@@ -79,10 +79,6 @@ const FooterButtons = (props) => {
     window.open(url, "_blank");
   };
 
-  const hanldeNavigateToHistory = () => {
-    navigate("/Recentlyviewed");
-  };
-
   return (
     <>
       <div>
@@ -91,13 +87,14 @@ const FooterButtons = (props) => {
             src={Popup_History_off}
             alt=""
             className="footerbuttonimages"
-            onClick={hanldeNavigateToHistory}
+            onClick={() => navigate("/Recentlyviewed")}
           />
 
           <img
             src={Popup_My_library_off}
             alt=""
             className="footerbuttonimages"
+            onClick={() => navigate("/MyLibraryCorse")}
           />
 
           <img src={Popup_Rating_off} alt="" className="footerbuttonimages" />
@@ -122,13 +119,14 @@ const FooterButtons = (props) => {
                 src={Popup_History_off}
                 alt=""
                 className="footerbuttonimages"
-                onClick={hanldeNavigateToHistory}
+                onClick={() => navigate("/Recentlyviewed")}
               />
 
               <img
                 src={Popup_My_library_off}
                 alt=""
                 className="footerbuttonimages"
+                onClick={() => navigate("/MyLibraryCorse")}
               />
 
               <img

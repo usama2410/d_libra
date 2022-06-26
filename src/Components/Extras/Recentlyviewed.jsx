@@ -28,7 +28,7 @@ const Recentlyviewed = () => {
   const [monthHistory, setMonthHistory] = useState([]);
 
   const handleBack = () => {
-    navigate("/coursemainpage");
+    navigate("/");
   };
 
   const todayIds = todayHistory?.map((o) => o.Courseid);
@@ -102,11 +102,10 @@ const Recentlyviewed = () => {
     response.forEach((item) => {
       item.items.forEach((createdAt) => {
         // let localDate = localStorage.getItem("date");
-        console.log(createdAt);
         let createdDate = new Date(createdAt.created.slice(0, 10));
         let difference = Math.abs(createdDate - date);
         let differenceInDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
-        console.log("differenceInDays", differenceInDays);
+        // console.log("differenceInDays", differenceInDays);
 
         if (differenceInDays === 1 && differenceInDays < 2) {
           setTodayHistory((prevState) => [...prevState, createdAt]);

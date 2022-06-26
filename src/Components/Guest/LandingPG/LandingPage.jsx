@@ -137,6 +137,7 @@ const LandingPage = () => {
 
   const MainCategory = async () => {
     const response = await dispatch(home(token));
+    console.log("Home", response);
     setdata(response);
   };
 
@@ -147,9 +148,7 @@ const LandingPage = () => {
   const handleViewRecentCourses = async (id) => {
     // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    !token
-      ? Swal.fire("Please Login to view course")
-      : navigate(`/coursepageguest/${id}`);
+    navigate(`/coursepageguest/${id}`);
   };
 
   return (

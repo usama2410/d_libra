@@ -5,12 +5,14 @@ import "./AddNewCategory.css";
 import { useSelector, useDispatch } from "react-redux";
 import "../Sidebar.css";
 import {
-  addnewCategory,
-  getParentChildCategories,
+  addnewChapters,
+  addnewCourse,
+  addParentCategorie,
+  getAllCategories,
+  getAllCourses,
 } from "../../Redux/Actions/Editor/Category";
 import Select from "react-select";
 import { ArrowBack } from "@mui/icons-material";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { home } from "../../Redux/Actions/Client Side/home.action";
@@ -21,23 +23,46 @@ const AddNewCategory = () => {
   const theme = useSelector((state) => state.theme.state);
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
-  const [chapId, setchapId] = useState("");
-  const [chapName, setChapName] = useState("");
+  const [uniqueIdentity, setUniqueIdentity] = useState("");
+  const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-
-  // console.log("message", message);
-
-  const [parentCategory, setParentCategory] = useState([]);
-  const [categoryType, setCategoryType] = useState([]);
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedCategoryOption, setSelectedCategoryOption] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
   const token = useSelector((state) => state.auth.token);
 
+  // CATEGORIES HOOKS
+  const [parentCategory, setParentCategory] = useState([]);
+  const [selectedCategoryOption, setSelectedCategoryOption] = useState("");
+
+  // COURSE HOOKS
+  const [parentCourse, setParentCourse] = useState([]);
+  const [selectedCourseOption, setSelectedCourseOption] = useState("");
+  const [parentID, setParentID] = useState("");
+
+  // CHAPTER HOOKS
+  const [selectedChapterOption, setSelectedChapterOption] = useState("");
+
+  const [categoryType, setCategoryType] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleBack = () => {
+    navigate("/editcoursestructure");
+  };
+
+  console.log("message", message);
+  const hanldeSetUniqueIdentity = (target) => {
+    setUniqueIdentity(target.value);
+
+    // if (
+    //   selectedCategoryOption.label === "Course" &&
+    //   uniqueIdentity.length > 3
+    // ) {
+    //   setUniqueIdentity(target.value);
+    // } else {
+    //   console.log("hi");
+    // }
+  };
   const handleChange = (e) => {
     if (e.target.files.length) {
       setImage(URL.createObjectURL(e.target.files[0]));
@@ -45,41 +70,62 @@ const AddNewCategory = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate("/editcoursestructure");
-  };
+  const options = [
+    { value: "Category", label: "Category" },
+    { value: "Course", label: "Course" },
+    { value: "Chapter", label: "Chapter" },
+  ];
+
   const handleSubmit = async (e) => {
     // navigate("/editormainpage");
     e.preventDefault();
     setIsLoading(true);
+
+    // ADD CATEGORY CODE
     const response = await dispatch(
-      addnewCategory(
-        chapName,
-        chapId,
-        slug,
-        token,
-        imageName,
-        selectedCategoryOption
-      )
+      addParentCategorie(name, slug, imageName, uniqueIdentity, token)
     );
-    // console.log(response);
-    setMessage(response.message);
-    if (response.message === "Add Categroy Successfully") {
+    // console.log("response", response);
+    // ADD COURSE CODE
+    if (selectedCategoryOption?.label === "Course") {
+      const response = await dispatch(
+        addnewCourse(name, slug, imageName, uniqueIdentity, parentID, token)
+      );
+      setMessage(response?.message);
+    }
+    // ADD CHAPTER CODE
+    if (selectedCategoryOption?.label === "Chapter") {
+      const response = await dispatch(
+        addnewChapters(name, parentID, slug, imageName, uniqueIdentity, token)
+      );
+      setMessage(response?.message);
+    }
+
+    setIsLoading(false);
+
+    setMessage(response?.message);
+    // if (
+    //   response.message === "Add successfully" ||
+    //   "Add Course Successfully" ||
+    //   "Add Chapters Successfully"
+    // ) {
+    //   navigate("/");
+    // }
+    if (response?.message === "Add successfully") {
+      navigate("/");
+    } else if (response?.message === "Add Chapters Successfully") {
+      navigate("/");
+    } else if (response?.message === "Add Course Successfully") {
       navigate("/");
     }
 
     const timer = setTimeout(() => {
       setErrorMessage(false);
       setMessage("");
+      setIsLoading(false);
     }, 5000);
     setIsLoading(false);
     return () => clearTimeout(timer);
-  };
-
-  const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
-    // console.log("getParentChildCategories response", response)
-    setParentCategory(response);
   };
 
   const authDashboradData = async () => {
@@ -96,28 +142,62 @@ const AddNewCategory = () => {
     setCategoryType(categoryLabel);
   };
 
-  useEffect(() => {
-    handleParentChildeCategory();
-    authDashboradData();
-  }, []);
-  // console.log(categoryType);
-  const parentOptions = parentCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.CategoryName };
+  // GET ALL CATEGORIES
+  const handleGetAllCategories = async () => {
+    const response = await dispatch(getAllCategories(token));
+    console.log("response", response);
+    setParentCategory(response);
+  };
+
+  const categoryOptions = parentCategory?.map((category) => {
+    // console.log("category", category);
+    return {
+      id: category?.parentid,
+      label: category?.name,
+      identifier: category?.unique_identifier,
+    };
   });
 
-  const handleSelector = async (selectedOption) => {
-    setSelectedOption(selectedOption);
-    // console.log("selectedOption ID", selectedOption);
-    setchapId(selectedOption?.id);
+  const handleGetCategorySelector = (selectedCategoryOption) => {
+    // console.log(selectedCategoryOption);
+    setUniqueIdentity(selectedCategoryOption?.identifier);
+    setParentID(selectedCategoryOption?.id);
+    setSelectedCourseOption(selectedCategoryOption);
   };
+
+  // GET ALL COURSES
+  const handleGetAllCourses = async () => {
+    const response = await dispatch(getAllCourses(token));
+    console.log("response", response);
+    setParentCourse(response);
+  };
+
+  const courseOptions = parentCourse?.map((course) => {
+    // console.log("course", course);
+    return {
+      id: course?.id,
+      label: course?.category,
+      identifier: course?.unique_identifier,
+    };
+  });
+
+  const handleGetCourseSelector = (selectedChapterOption) => {
+    // console.log(selectedChapterOption);
+    setUniqueIdentity(selectedChapterOption?.identifier);
+    setParentID(selectedChapterOption?.id);
+    setSelectedChapterOption(selectedChapterOption);
+  };
+
+  useEffect(() => {
+    authDashboradData();
+    handleGetAllCategories();
+    handleGetAllCourses();
+  }, []);
 
   const handleCategorySelector = (selectedCategoryOption) => {
-    // console.log(selectedCategoryOption)
+    // console.log(selectedCategoryOption);
     setSelectedCategoryOption(selectedCategoryOption);
   };
-
-  console.log(selectedCategoryOption);
 
   const customStyles = {
     control: (base) => ({
@@ -207,6 +287,45 @@ const AddNewCategory = () => {
 
       <div className="addnewcategorycontainer">
         <div>
+          {errorMessage === true ? (
+            <div className="errorMessage">{message}</div>
+          ) : message ? (
+            message === "Add Sub Categroy Successfully" ? (
+              <div className={theme ? "successMessage" : "successMessageTwo"}>
+                Sub category added successfully
+              </div>
+            ) : message === "All Fields are Required" ? (
+              <div className="errorMessage">{message}</div>
+            ) : (
+              message ===
+                "['name', 'slug', 'image', 'uniqueidentity'] all keys are required" && (
+                <div className="errorMessage">All Fields are Required</div>
+              )
+            )
+          ) : message === "Add successfully" ? (
+            <div className={theme ? "successMessage" : "successMessageTwo"}>
+              Category added successfully
+            </div>
+          ) : message === "Please choose a unique id" ? (
+            <div className="errorMessage">{message}</div>
+          ) : null}
+
+          {message === "Category Name Already Exist" ? (
+            <div className="errorMessage">{message}</div>
+          ) : message === "Slug Name Already Exist" ? (
+            <div className="errorMessage">{message}</div>
+          ) : message === "Add Chapters Successfully" ? (
+            <div className={theme ? "successMessage" : "successMessageTwo"}>
+              Chapter added successfully
+            </div>
+          ) : message === "Add Course Successfully" ? (
+            <div className={theme ? "successMessage" : "successMessageTwo"}>
+              Course added successfully
+            </div>
+          ) : message === "Please choose a unique id" ? (
+            <div className="errorMessage">{message}</div>
+          ) : null}
+
           <Typography variant="h6" noWrap component="div">
             <span
               className={
@@ -221,89 +340,112 @@ const AddNewCategory = () => {
         </div>
 
         <div className="addcategorysubcontainer">
-          {errorMessage === true ? (
-            <div className="errorMessage">Feilds cannot be empty!</div>
-          ) : message ? (
-            message === "Add Sub Categroy Successfully" ? (
-              <div className={theme ? "successMessage" : "successMessageTwo"}>
-                Sub category added successfully
-              </div>
-            ) : message === "All Filed are required" ? (
-              <div className="errorMessage"> All Fields are Required </div>
-            ) : null
-          ) : null}
+          <div style={{ marginBottom: "30%", marginTop: "-40px" }}>
+            <span
+              className="addcategory_text"
+              style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+            >
+              Are you registering Category or Course or Chapter?
+            </span>
 
-          {message === "Category Name Already Exist" ? (
-            <div className="errorMessage">{message}</div>
-          ) : message === "Slug Name Already Exist" ? (
-            <div className="errorMessage">{message}</div>
-          ) : null}
+            <Select
+              styles={theme ? customStyles : customStyless}
+              className={
+                theme
+                  ? "git_introduction_dropdown_sub"
+                  : "git_introduction_dropdown"
+              }
+              placeholder="Category"
+              value={selectedCategoryOption}
+              options={options}
+              onChange={handleCategorySelector}
+            />
+          </div>
+
+          {selectedCategoryOption?.label === "Course" && (
+            <>
+              <span
+                className="addcategory_text"
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+              >
+                Select Parent Category
+              </span>
+
+              <Select
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub"
+                    : "git_introduction_dropdown"
+                }
+                placeholder="Category"
+                value={selectedCourseOption}
+                options={categoryOptions}
+                onChange={handleGetCategorySelector}
+              />
+            </>
+          )}
+
+          {selectedCategoryOption?.label === "Chapter" && (
+            <>
+              <span
+                className="addcategory_text"
+                style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+              >
+                Select Parent Course
+              </span>
+
+              <Select
+                styles={theme ? customStyles : customStyless}
+                className={
+                  theme
+                    ? "git_introduction_dropdown_sub"
+                    : "git_introduction_dropdown"
+                }
+                placeholder="Course"
+                value={selectedChapterOption}
+                options={courseOptions}
+                onChange={handleGetCourseSelector}
+              />
+            </>
+          )}
 
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
           >
-            Category/Course/Chapter Name
+            {selectedCategoryOption?.label === "Course"
+              ? "Course Name"
+              : selectedCategoryOption?.label === "Chapter"
+              ? "Chapter Name"
+              : "Category Name "}
           </span>
 
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="Cloud Computing"
-            value={chapName}
-            onChange={(e) => setChapName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
           >
-            Category/Course/Chapter ID
+            {selectedCategoryOption?.label === "Course"
+              ? "Course ID(4 + 2Digit)"
+              : selectedCategoryOption?.label === "Chapter"
+              ? "Course ID(4 + 2 + 2Digit)"
+              : "Category ID(4 Digit)"}
           </span>
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
-            placeholder="Parent Category Id"
-            value={selectedOption.id}
-            // onChange={(e) => setchapId(e.target.value)}
+            placeholder="Category ID"
+            value={uniqueIdentity}
+            // maxlength={7}
+            type="number"
+            onChange={(e) => hanldeSetUniqueIdentity(e.target)}
           />
 
-          <span
-            className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
-          >
-            Select Parent Category/Course
-          </span>
-
-          <Select
-            styles={theme ? customStyles : customStyless}
-            className={
-              theme
-                ? "git_introduction_dropdown_sub"
-                : "git_introduction_dropdown"
-            }
-            placeholder="Select Parent Category/Course"
-            options={parentOptions}
-            onChange={handleSelector}
-            value={selectedOption}
-          />
-
-          <span
-            className="addcategory_text"
-            style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
-          >
-            Select Category Type
-          </span>
-
-          <Select
-            styles={theme ? customStyles : customStyless}
-            className={
-              theme
-                ? "git_introduction_dropdown_sub"
-                : "git_introduction_dropdown"
-            }
-            placeholder="Select Category Type"
-            value={selectedCategoryOption}
-            options={categoryType}
-            onChange={handleCategorySelector}
-          />
           <span
             className="addcategory_text"
             style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
@@ -316,37 +458,42 @@ const AddNewCategory = () => {
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
           />
-          <div className="selectimagecontainer">
-            <label htmlFor="contained-button-file">
-              <input
-                accept="image/*"
-                id="contained-button-file"
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleChange}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                component="span"
-                style={{ height: "20px" }}
-                className="image_button"
-              >
-                Select an Image File
-              </Button>
-            </label>
-          </div>
-          <div className="newimage">
-            {image ? (
-              <div className="noimagefirstcontainer">
-                <img src={image} className="noimagesecondcontainer" alt="" />
-              </div>
-            ) : (
-              <span className="noimagetext">No Image</span>
-            )}
+          <div style={{ marginBottom: "92px" }}>
+            <div className="selectimagecontainer">
+              <label htmlFor="contained-button-file">
+                <input
+                  accept="image/*"
+                  id="contained-button-file"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={handleChange}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                  style={{ height: "20px" }}
+                  className="image_button"
+                >
+                  Select an Image File
+                </Button>
+              </label>
+            </div>
+            <div className="newimage">
+              {image ? (
+                <div className="noimagefirstcontainer">
+                  <img src={image} className="noimagesecondcontainer" alt="" />
+                </div>
+              ) : (
+                <span className="noimagetext">No Image</span>
+              )}
+            </div>
           </div>
         </div>
-        <div className="update_button_newcategory">
+        <div
+          className="update_button_newcategory"
+          style={{ marginTop: "150px", marginBottom: "92px" }}
+        >
           {isLoading ? (
             <Box
               className="update_button"

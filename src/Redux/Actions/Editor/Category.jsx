@@ -2,27 +2,22 @@ import axios from "axios";
 import { URL, endpoints } from "../../../endpoints";
 import * as FormData from "form-data";
 
-export const addnewCategory =
-  (chapName, chapId, slug, token, imageName, selectedCategoryOption) =>
+export const addnewCourse =
+  (name, slug, imageName, uniqueidentity, categoryid, token) =>
   async (dispatch) => {
-    console.log(chapName, chapId, slug, selectedCategoryOption);
     const formData = new FormData();
-    formData.append("name", chapName);
-    formData.append("parentCategoryid", chapId);
+    formData.append("name", name);
     formData.append("slug", slug);
     formData.append("image", imageName);
-    formData.append("Type", selectedCategoryOption?.label);
+    formData.append("uniqueidentity", uniqueidentity);
+    formData.append("categoryid", categoryid);
     try {
-      const response = await axios.post(
-        URL + endpoints.ADD_CATEGORY,
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      console.log("response  profiledata", response.data);
+      const response = await axios.post(URL + endpoints.ADD_COURSE, formData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      // console.log("response  profiledata", response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -35,7 +30,7 @@ export const getMainCategory = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -77,14 +72,13 @@ export const getParentChildCategories = (token) => async (dispatch) => {
 };
 
 export const getChildCategories = (id, token) => async (dispatch) => {
-  console.log("id, ", id);
   try {
     const response = await axios.get(URL + endpoints.GET_CHILD_CATEGORY + id, {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("GetChildCategories response", response);
+    // console.log("GetChildCategories response", response);
     return response?.data?.data;
   } catch (error) {
     console.log(error);
@@ -107,3 +101,82 @@ export const getTopicContent = (role, id, token) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addParentCategorie =
+  (name, slug, image, uniqueidentity, token) => async (dispatch) => {
+    // console.log(name, slug, image, uniqueidentity);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("slug", slug);
+    formData.append("image", image);
+    formData.append("uniqueidentity", uniqueidentity);
+    try {
+      const response = await axios.post(
+        `${URL}${endpoints.ADD_PARENT_CATEGORY}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // console.log("AddParentCategorie Response", response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const getAllCategories = (token) => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}${endpoints.GET_PARENT_CATEGORY}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log("GetAllCategories Response", response.data);
+    return response?.data?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllCourses = (token) => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}${endpoints.GET_ALL_COURSE}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log("GetAllCourses Response", response.data);
+    return response?.data?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addnewChapters =
+  (name, courseid, slug, imageName, uniqueidentity, token) =>
+  async (dispatch) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("courseid", courseid);
+    formData.append("slug", slug);
+    formData.append("image", imageName);
+    formData.append("uniqueidentity", uniqueidentity);
+    try {
+      const response = await axios.post(
+        `${URL}${endpoints.ADD_CHAPTER}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // console.log("AddnewChapters Response", response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };

@@ -41,6 +41,9 @@ import Recentlyviewed from "./Components/Extras/Recentlyviewed";
 import CourseMainPage from "./Components/Guest/LandingPG/CourseMainPage";
 import CoursePageGuest from "./Components/Guest/LandingPG/CoursePageGuest";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const theme = useSelector((state) => state.theme.state);
   const searchState = useSelector((state) => state.searchSTate.state);
@@ -193,15 +196,15 @@ function App() {
                         element={<LibraryBookmark />}
                       />
                       <Route path="/Accordian" exact element={<Accordian />} />
-                      <Route
-                        path="/MylibraryCorse"
+                      <Route 
+                        path="/mylibrarycourses"
                         exact
                         element={<MylibraryCorse />}
                       />
                       <Route path="/Tagpage" exact element={<Tagpage />} />
                       {/* <Route path="/Searchresult" exact element={<Searchresult />} /> */}
                       <Route
-                        path="/Recentlyviewed"
+                        path="/recentlyviewed"
                         exact
                         element={<Recentlyviewed />}
                       />
@@ -223,7 +226,7 @@ function App() {
                     </>
                   </>
                 ) : (
-                  <Route path='*' element={<Navigate to='/' />} />
+                  <Route path="*" element={<Navigate to="/" />} />
                 )}
               </Routes>
             </div>
@@ -232,6 +235,7 @@ function App() {
           <FooterCopyright backgroundHanld={backgroundHanlde()} />
         </Router>
       </div>
+      <ToastContainer />
     </>
   );
 }

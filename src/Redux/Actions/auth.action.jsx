@@ -170,13 +170,16 @@ export const resetPassword = (email, passowrd, token) => async (dispatch) => {
 };
 
 export const logout = (role, token) => async (dispatch) => {
-  console.log(role, token);
+  console.log(role, URL + endpoints.LOGOUT + role);
   try {
-    const response = await axios.post(URL + endpoints.LOGOUT + role, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const response = await axios.post(
+      `${URL}${endpoints.LOGOUT}?role=${role}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log("Logout response", response);
     return response;
   } catch (error) {

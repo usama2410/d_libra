@@ -23,6 +23,7 @@ const UploadContentMain = () => {
   const dispatch = useDispatch();
   const [contentTitle, setContentTitle] = useState("");
   const [contentId, setContentId] = useState("");
+  const [uniqueIdentity, setUniqueIdentity] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState("");
   const [metaDescription, setMetaDiscription] = useState("");
@@ -35,20 +36,21 @@ const UploadContentMain = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptionContent, setSelectedOptionContent] = useState("");
 
-  // console.log("image state", imageName);
+  // console.log("image state", message);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = (editorState) => {
     return setEditorState(editorState);
   };
   const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-  console.log("hrmlText", htmlText)
+  // console.log("hrmlText", htmlText);
 
   const [parentCategory, setParentCategory] = useState([]);
   const [childCategory, setChildCategory] = useState([]);
 
-  console.log("parentCategory", parentCategory);
+  // console.log("parentCategory", parentCategory);
   // console.log("childCategory", childCategory);
 
   const handleChange = (e) => {
@@ -64,12 +66,13 @@ const UploadContentMain = () => {
     const response = await dispatch(
       addPost(
         contentTitle,
-        contentId,
+        uniqueIdentity,
         tags,
         htmlText,
         imageName,
         metaDescription,
         OGP,
+        contentId,
         token
       )
     );
@@ -191,21 +194,32 @@ const UploadContentMain = () => {
   });
   // console.log("parentCategory", parentOptions, selectedOption);
 
-  const childOptions = childCategory?.map((category) => {
-    // console.log("category.id", category.id);
-    return { id: category.id, label: category.CategoryName };
-  });
-
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
-    // console.log("selectedOption ID", selectedOption.id);
-    setContentId(selectedOption?.id);
+    console.log("selectedOption ID", selectedOption);
+    // setContentId(selectedOption?.id);
 
     const response = await dispatch(
       getChildCategories(selectedOption.id, token)
     );
     setChildCategory(response);
-    console.log("response", response);
+    // console.log("response", response);
+  };
+
+  const childOptions = childCategory?.map((category) => {
+    // console.log("category.id", category.id);
+    return {
+      id: category?.id,
+      label: category?.course,
+      identifier: category?.unique_identifier,
+    };
+  });
+
+  const handleSelectorContent = (selectedOptionContent) => {
+    setSelectedOptionContent(selectedOptionContent);
+    console.log("selectedOption ID", selectedOptionContent);
+    setUniqueIdentity(selectedOptionContent?.id);
+    setContentId(selectedOptionContent?.identifier);
   };
 
   return (
@@ -248,6 +262,9 @@ const UploadContentMain = () => {
               <div className="errorMessage">
                 {message}. Please upload in jpeg,png file foramte
               </div>
+            ) : message ===
+              "['title', 'Categroyid', 'tags', 'image', 'content', 'meta_description', 'OGP', 'uniqueidentifier'] all keys are required" ? (
+              <div className="errorMessage">All Fields are Required</div>
             ) : null}
             <div>
               <span
@@ -285,6 +302,8 @@ const UploadContentMain = () => {
                 }
                 // placeholder="Git & GitHub Introduction"
                 options={childOptions}
+                onChange={handleSelectorContent}
+                value={selectedOptionContent}
               />
             </div>
             <div>

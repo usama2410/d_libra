@@ -8,7 +8,7 @@ export const home = (token) => async (dispatch) => {
         Authorization: "Bearer " + token,
       },
     });
-    // console.log("response home", response.data);
+    console.log("response home", response);
     dispatch({
       type: "GET_MAIN_CATEGORY_DATA",
       payload: {
@@ -17,6 +17,6 @@ export const home = (token) => async (dispatch) => {
     });
     return response?.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

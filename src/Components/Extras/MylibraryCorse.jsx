@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@material-ui/core";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
@@ -7,20 +7,40 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LibraryBookmarkContent from "./libcourse";
 import "../User/Library/Library.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
 import FooterButtons from "../User/FooterButtons";
 import Mylibrary_dark from "./../../assests/SVG_Files/Mylibrary_dark.svg";
 import MyLibrary_light from "./../../assests/SVG_Files/MyLibrary_light.svg";
+import { setBookMarkPriority } from "../../Redux/Actions/Client Side/librar.y.action";
+import { getBookmarkCourse } from "../../Redux/Actions/bookmark.action";
 
 const MylibraryCorse = () => {
-  const theme = useSelector((state) => state.theme.state);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+
   console.log(LibraryBookmarkContent);
   const [data, setdata] = useState(LibraryBookmarkContent);
   const handleBack = () => {
     navigate("/");
   };
+
+  const libraryByCourse = async () => {
+    const response = await dispatch(getBookmarkCourse(role, token));
+    console.log("response", response);
+  };
+  // const priority = () => {
+  //   const response = dispatch(setBookMarkPriority(token));
+  //   console.log(response);
+  // };
+
+  useEffect(() => {
+    // priority();
+    libraryByCourse();
+  }, []);
   const settings = {
     dots: false,
     adaptiveHeight: true,

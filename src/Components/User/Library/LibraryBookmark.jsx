@@ -14,25 +14,32 @@ import FooterButtons from "../FooterButtons";
 import { ArrowBack } from "@mui/icons-material";
 import { librarybookmark } from "../../../Redux/Actions/Client Side/librar.y.action";
 import Bookmark_blue from "../../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_red from "../../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_yellow from "../../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import { development } from "../../../endpoints";
 
 const LibraryBookmark = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  const role = useSelector((state) => state.auth.role);
-  const token = useSelector((state) => state.auth.token);
 
-  const theme = useSelector((state) => state.theme.state);
+  const role = useSelector((state) => state?.auth?.role);
+  const token = useSelector((state) => state?.auth?.token);
+
+  const theme = useSelector((state) => state?.theme?.state);
   const [data, setdata] = useState([]);
-  const handleBack = () => {}; 
+  const handleBack = () => {};
+
+  console.log(data);
 
   useEffect(() => {
     const library = async () => {
-      const response = await dispatch(librarybookmark(role, token))
-      setdata(response?.data)
-    }
+      const response = await dispatch(librarybookmark(role, token));
+      setdata(response);
+    };
     library();
-  }, [])
+  }, []);
 
   const settings = {
     dots: false,
@@ -163,7 +170,7 @@ const LibraryBookmark = () => {
       <div className="librarycoursecontainer">
         <Button
           className={theme ? "bycourse_button_sub" : "bycourse_button"}
-          onClick={() => navigate("/MyLibraryCorse")}
+          onClick={() => navigate("/mylibrarycourses")}
           style={{ color: "white" }}
           endIcon={<HiOutlineArrowNarrowRight />}
         >
@@ -172,68 +179,85 @@ const LibraryBookmark = () => {
       </div>
 
       <div className="landingpage_slider_container libraryrootcontainer">
-        {data?.map((item) => {
+        {data?.map((subItems) => {
           return (
-            <div className="content_root_container">
-              <div style={{ display: "flex", alignItems: " center" }}>
-                <span className="librarybookmarkicon">
-                  <img
-                    src={item.TagsImageOne}
-                    alt=""
-                    className="tagsiconcontainer"
-                  />
-                </span>
-                <span
-                  className={theme ? "chapternameclass" : "chapternameclasstwo"}
-                >
-                  {item.PriorityType}
-                </span>
-              </div>
-              <div>
-                <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          src={e.image}
-                          className="landingpage_images"
-                          alt=""
-                        />
-                        {e.image ? (
-                          <div className="underimagetextcontainer">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="underimagecontent"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursenametwo subcoursename"
-                              >
-                                {e.Tags}
-                              </Typography>
-                            </Typography>
-                            <div className="mycontenttagscontainer">
-                              <img
-                                src={Bookmark_blue}
-                                alt=""
-                                className="tagstwocontainer"
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
+            <>
+              {subItems?.map((item) => {
+                console.log(item);
+                return (
+                  <div className="content_root_container">
+                    {item?.items?.length !== 0 && (
+                      <div style={{ display: "flex", alignItems: " center" }}>
+                        <span
+                          className={
+                            theme ? "chapternameclass" : "chapternameclasstwo"
+                          }
+                        >
+                          {item?.PriorityType}
+                        </span>
                       </div>
-                    );
-                  })}
-                </Slider>
-              </div>
-            </div>
+                    )}
+
+                    <div>
+                      <Slider className="intro-slick" {...settings}>
+                        {item?.items.map((e) => {
+                          return (
+                            <div className="intro-slides">
+                              <img
+                                src={`${development}/media/${e?.Contentimage}`}
+                                className="landingpage_images"
+                                alt=""
+                              />
+                              {e?.Contentimage ? (
+                                <div className="underimagetextcontainer">
+                                  <Typography
+                                    noWrap
+                                    component="div"
+                                    className="underimagecontent"
+                                    style={{
+                                      color: theme ? "#363636" : "#FFFFFF",
+                                    }}
+                                  >
+                                    <Typography
+                                      noWrap
+                                      component="div"
+                                      className="subcoursenametwo subcoursename"
+                                    >
+                                      {e?.Contenttitle}
+                                    </Typography>
+                                  </Typography>
+                                  <div className="mycontenttagscontainer">
+                                    <img
+                                      src={
+                                        item?.PriorityType === "highpriority"
+                                          ? Bookmark_blue
+                                          : item?.PriorityType === "reviewlist"
+                                          ? Bookmark_green
+                                          : item?.PriorityType === "futureread"
+                                          ? Bookmark_red
+                                          : item?.PriorityType === "Personal"
+                                          ? Bookmark_yellow
+                                          : item?.PriorityType === "Dayend"
+                                          ? Bookmark_grey
+                                          : null
+                                      }
+                                      alt=""
+                                      className="tagstwocontainer"
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          );
+                        })}
+                      </Slider>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
           );
         })}
       </div>

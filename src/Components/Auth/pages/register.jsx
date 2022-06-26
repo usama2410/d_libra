@@ -6,7 +6,6 @@ import googleIcon from "../../../assests/google.png";
 import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
 import { logInWithGoogle, signUp } from "../../../Redux/Actions/auth.action";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
