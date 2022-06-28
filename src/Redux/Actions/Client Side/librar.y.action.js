@@ -3,14 +3,13 @@ import { URL, endpoints } from "../../../endpoints";
 import * as FormData from "form-data";
 
 export const librarybookmark = (role, token) => async (dispatch) => {
-  console.log(role, token);
   try {
     const response = await axios.get(`${URL}${endpoints.GET_PRIORITY}${role}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("librarybookmark response", response);
+    // console.log("librarybookmark response", response);
     return response?.data.data;
   } catch (error) {
     console.log(error);

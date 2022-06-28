@@ -21,11 +21,14 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Swal from "sweetalert2";
+import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
 
 const DetailPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+  const location = useLocation();
+
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -39,26 +42,11 @@ const DetailPage = () => {
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
 
-  console.log("selected", selected);
-
   const handleBack = () => {
     navigate("/mycontents");
   };
 
-  useEffect(() => {
-    const postById = async () => {
-      const response = await dispatch(
-        getPostByID(params.id, params.role, params.categoryid, token)
-      );
-      console.log("response", response);
-
-      setDetails(response);
-    };
-    postById();
-  }, [params]);
-
   const handleBookMark = () => {
-    console.log(details?.bookmark?.PriorityType);
     if (details?.bookmark?.PriorityType === "personalcloud") {
       return Bookmark_blue;
     } else if (details?.bookmark?.PriorityType === undefined) {
@@ -67,14 +55,27 @@ const DetailPage = () => {
       return Bookmark_red;
     } else if (details?.bookmark?.PriorityType === "reviewlist") {
       return Bookmark_green;
-    } else if (details?.bookmark?.PriorityType === "forfutureread") {
+    } else if (details?.bookmark?.PriorityType === "futureread") {
       return Bookmark_red;
-    } else if (details?.bookmark?.PriorityType === "personal") {
+    } else if (details?.bookmark?.PriorityType === "Personal") {
       return Bookmark_yellow;
-    } else if (details?.bookmark?.PriorityType === "dayend") {
+    } else if (details?.bookmark?.PriorityType === "Dayend") {
       return Bookmark_grey;
     }
   };
+
+  useEffect(() => {
+    const postById = async () => {
+      const response = await dispatch(
+        getPostByID(params.id, params.role, params.categoryid, token)
+      );
+      // console.log("response", response);
+
+      setDetails(response);
+    };
+    postById();
+    handleBookMark();
+  }, [params, details?.bookmark?.PriorityType, bookmark]);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
@@ -82,7 +83,6 @@ const DetailPage = () => {
     });
 
     // console.log("Next", previousItem);
-    console.log("Next", selected);
 
     selected < previousItem.length && setSelected(selected + 1);
     // console.log(previousItem[selected]);
@@ -105,7 +105,7 @@ const DetailPage = () => {
 
     selected > 0 && setSelected(selected - 1);
     let previous = Math.abs(previousItem?.length - 1 - selected);
-    console.log("previous", previous);
+    // console.log("previous", previous);
     // console.log(previousItem[previous]);
     // if (previous === 0) {
     //   setDisablePrevious(true);
@@ -115,6 +115,21 @@ const DetailPage = () => {
         `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
       );
     }
+  };
+
+  const hanldeBookMarkPriority = async () => {
+    const response = await dispatch(
+      addContentBookmark(params?.id?.split("=")[1], role, token)
+    );
+    // console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
   };
 
   return (
@@ -143,7 +158,13 @@ const DetailPage = () => {
                   className="detail_page_image"
                 />
               </div>
-              <div className="buttons_container_detail_page_two">
+              <div
+                className={
+                  role === "normaluser"
+                    ? "buttons_container_detail_page_two_two"
+                    : "buttons_container_detail_page_two"
+                }
+              >
                 {role === "editor" && (
                   <div className="deleteeditcontainer">
                     <button
@@ -185,7 +206,8 @@ const DetailPage = () => {
                     src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"
-                    style={{ paddingLeft: "24px" }}
+                    style={{ paddingLeft: "24px", cursor: "pointer" }}
+                    onClick={hanldeBookMarkPriority}
                   />
                 </div>
               </div>
@@ -228,16 +250,8 @@ const DetailPage = () => {
                   src={handleBookMark()}
                   alt=""
                   className="detail_tag_text_two"
-                  style={{ paddingLeft: "24px" }}
-                  onClick={() =>
-                    !token &&
-                    Swal.fire({
-                      title: "Unauthenticated",
-                      text: "Please login to bookmark",
-                      iconColor: "red",
-                      icon: "error",
-                    })
-                  }
+                  style={{ paddingLeft: "24px", cursor: "pointer" }}
+                  onClick={hanldeBookMarkPriority}
                 />
                 {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}

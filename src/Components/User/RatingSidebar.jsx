@@ -24,7 +24,7 @@ const RatingSidebar = () => {
   const dispatch = useDispatch();
 
   const handleBack = () => {
-    navigate("/usersettingviewpage");
+    navigate("/");
   };
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);

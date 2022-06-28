@@ -176,10 +176,7 @@ export default function Sidebar() {
   };
 
   const handleaccordiondrawer = () => {
-    if (
-      "/userdetailpage" === location.pathname ||
-      ("/detailpage" === location.pathname && themeState === true)
-    ) {
+    if (location.pathname.includes("detailpage") && themeState === true) {
       return (
         <button onClick={handleAccordionIcon} className="accordionbutton">
           {" "}
@@ -223,12 +220,11 @@ export default function Sidebar() {
         </button>
       );
     } else if (
-      "/userdetailpage" === location.pathname ||
-      ("/detailpage" === location.pathname && themeState === false)
+      location.pathname.includes("detailpage") &&
+      themeState === false
     ) {
       return (
         <button onClick={handleAccordionIcon} className="accordionbutton">
-          {" "}
           <div>
             {["right"].map((anchor) => (
               <React.Fragment key={anchor}>

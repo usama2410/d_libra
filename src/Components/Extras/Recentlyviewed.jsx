@@ -31,23 +31,25 @@ const Recentlyviewed = () => {
     navigate("/");
   };
 
+  //TODAY
   const todayIds = todayHistory?.map((o) => o.Courseid);
-
   const filteredToday = todayHistory?.filter(
     ({ Courseid }, index) => !todayIds.includes(Courseid, index + 1)
   );
-  const yesterdayIds = yesterdayHistory?.map((o) => o.Courseid);
 
+  // YESTERDAY
+  const yesterdayIds = yesterdayHistory?.map((o) => o.Courseid);
   const filteredYesterday = yesterdayHistory?.filter(
     ({ Courseid }, index) => !yesterdayIds.includes(Courseid, index + 1)
   );
 
+  // WEEK
   const weekIds = weekHistory?.map((o) => o.Courseid);
-
   const filteredWeekly = weekHistory?.filter(
     ({ Courseid }, index) => !weekIds.includes(Courseid, index + 1)
   );
 
+  // MONTH
   const monthIds = monthHistory?.map((o) => o.Courseid);
   const filteredMonthly = monthHistory?.filter(
     ({ Courseid }, index) => !monthIds.includes(Courseid, index + 1)

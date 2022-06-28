@@ -47,8 +47,8 @@ const UserSettingViewPage = () => {
   const [addBookMark, setAddBookMark] = useState([]);
   let [count, setCount] = useState(0);
   let [countTwo, setCountTwo] = useState(0);
-  const [personal, setPersonal] = useState("Personal");
-  const [dayend, setDayend] = useState("Dayend");
+  const [personal, setPersonal] = useState("");
+  const [dayend, setDayend] = useState("");
 
   const user = useSelector((state) => state?.auth?.profile);
 
@@ -106,40 +106,37 @@ const UserSettingViewPage = () => {
   };
 
   const hanldeAddBookmark = async () => {
-    setAddBookMark([...addBookMark, 1]);
-
     setCount(count + 1);
+    if (count === 1) {
+      setCount(1);
+    }
+    setCountTwo(count + 1);
+  };
+
+  const hanldeAddCustomPriority = async () => {
     let priorityArray = [];
 
-    setCountTwo(count + 1);
     if (count === 1) {
       setCount(1);
       priorityArray.push({
-        colorcode: "#34554",
+        colorcode: "#FFAA1D",
         bookmarkname: personal,
       });
     }
     if (countTwo === 2) {
+      priorityArray = [];
       priorityArray.push({
-        colorcode: "#34554",
+        colorcode: "#C8C8C8",
         bookmarkname: dayend,
       });
     }
 
-    if (count === 0) {
-      priorityArray.push({
-        colorcode: "#34554",
-        bookmarkname: personal,
-      });
-    }
-    if (countTwo === 1) {
-      priorityArray.push({
-        colorcode: "#34555",
-        bookmarkname: dayend,
-      });
-    }
     console.log("priorityArray", priorityArray);
-    await dispatch(addBookmark(priorityArray, role, token));
+    if (personal.length || dayend.length !== 0) {
+      await dispatch(addBookmark(priorityArray, role, token));
+    } else {
+      setMessage("Please enter bookmark name");
+    }
   };
 
   // [{"colorcode":"#34554","bookmarkname":"personal"},
@@ -391,12 +388,12 @@ const UserSettingViewPage = () => {
             />
           </div>
 
-          {/* {addBookMark?.map((item, index) => {
-            return (
-              <div className="vector_container" key={index}>
+          {count === 1 && (
+            <>
+              <div className="vector_container">
                 <div className="vector_image">
                   <img
-                    src={handleBookMarkColor()}
+                    src={Bookmark_yellow}
                     alt=""
                     className="tagimageusersettingpage"
                   />
@@ -406,50 +403,54 @@ const UserSettingViewPage = () => {
                   className={
                     theme ? "profile_sub_input" : "profile_sub_input_two"
                   }
-                  placeholder="For future read"
-                />
-              </div>
-            );
-          })} */}
-
-          {count === 1 && (
-            <div className="vector_container">
-              <div className="vector_image">
-                <img
-                  src={Bookmark_yellow}
-                  alt=""
-                  className="tagimageusersettingpage"
+                  placeholder="Add Your Custom Bookmark"
+                  value={personal}
+                  onChange={(e) => setPersonal(e.target.value)}
                 />
               </div>
 
-              <input
-                className={
-                  theme ? "profile_sub_input" : "profile_sub_input_two"
-                }
-                placeholder="Personal"
-                value={personal}
-              />
-            </div>
+              <Button
+                size="small"
+                style={{
+                  backgroundColor: "#FFAA1D",
+                  borderRadius: "50px",
+                  float: "right",
+                }}
+                onClick={hanldeAddCustomPriority}
+              >
+                Add
+              </Button>
+            </>
           )}
 
           {countTwo === 2 && (
-            <div className="vector_container">
-              <div className="vector_image">
-                <img
-                  src={Bookmark_grey}
-                  alt=""
-                  className="tagimageusersettingpage"
+            <>
+              <div className="vector_container">
+                <div className="vector_image">
+                  <img
+                    src={Bookmark_grey}
+                    alt=""
+                    className="tagimageusersettingpage"
+                  />
+                </div>
+
+                <input
+                  className={
+                    theme ? "profile_sub_input" : "profile_sub_input_two"
+                  }
+                  placeholder="Add Your Custom Bookmark"
+                  value={dayend}
+                  onChange={(e) => setDayend(e.target.value)}
                 />
               </div>
-
-              <input
-                className={
-                  theme ? "profile_sub_input" : "profile_sub_input_two"
-                }
-                placeholder="Dayend"
-                value={dayend}
-              />
-            </div>
+              <Button
+                size="small"
+                style={{ backgroundColor: "#C8C8C8", borderRadius: "50px" }}
+                onClick={hanldeAddCustomPriority}
+              >
+                Add
+              </Button>
+            </>
           )}
 
           <div className="vector_container">

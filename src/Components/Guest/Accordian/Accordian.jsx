@@ -6,12 +6,11 @@ import Typography from "@mui/material/Typography";
 import "./Accordian.css";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useNavigate } from "react-router-dom";
-import { getParentChildCategories } from "../../../Redux/Actions/Editor/Category";
 import { useSelector, useDispatch } from "react-redux";
+import { getParentChildCategories } from "../../../Redux/Actions/Editor/Category";
 
-const Accordion = styled(() => (
-  <MuiAccordion disableGutters elevation={0}  />
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   "&:not(:last-child)": {
@@ -28,7 +27,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const Accordian = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [expanded, setExpanded] = React.useState("panel1");
@@ -38,10 +36,9 @@ const Accordian = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
 
-  console.log("parentCategory", parentCategory);
+  // console.log("parentCategory", parentCategory);
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));
@@ -49,386 +46,41 @@ const Accordian = () => {
     setParentCategory(response);
   };
 
-  // const categoryOptions = parentCategory?.map((category) => {
-  //   // console.log("category", category);
-  //   return {
-  //     id: category?.parentid,
-  //     label: category?.name,
-  //     identifier: category?.unique_identifier,
-  //   };
-  // });
-
   React.useEffect(() => {
     handleParentChildeCategory();
   }, []);
-
   return (
     <>
       <div className="mainAccordionContainer">
-        <Accordion
-          expanded={expanded === "panel1"}
-          onChange={handleChange("panel1")}
-          className="main_accordian_container"
-        >
-          {parentCategory?.map((category) => {
-            return (
-              <>
-                <AccordionSummary
-                  className="accordianmain"
-                  expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className="accordiantext">
-                    {category?.CategoryName}
-                  </Typography>
-                </AccordionSummary>
-                {category?.SubCategory?.map((sub) => {
-                  return (
-                    <AccordionDetails className="sub_accordain_text">
-                      <Typography className="accordiantext">
-                        {sub?.CategoryName}
-                      </Typography>
-                    </AccordionDetails>
-                  );
-                })}
-              </>
-            );
-          })}
-          {/* <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Git & GitHub Introduction
-            </Typography>
-          </AccordionSummary> */}
-          {/* </Accordion>
-        <Accordion
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Git & GitHub Key Concepts
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Chapter 1.Git & GitHub Key Concepts
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">What is Git?</Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              What is Version Control?
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Collaborating On Git & GitHub
-              <br />
-              --Remote Repository
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Collaborating On Git & GitHub
-              <br />
-              --Branch
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              What You Can Do On GitHub Beyond Coding Collaboration
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 2. Git & GitHub Life Cycle
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel4"}
-          onChange={handleChange("panel4")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 3. Git & GitHub Initial Settings
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel5"}
-          onChange={handleChange("panel5")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 4. Launch Git Project
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel6"}
-          onChange={handleChange("panel6")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 5. Edit & Commit
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel7"}
-          onChange={handleChange("panel7")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 6. Work With Branches
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel8"}
-          onChange={handleChange("panel8")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 7. Remote Collaboration
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-
-        <Accordion
-          expanded={expanded === "panel9"}
-          onChange={handleChange("panel9")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 8. Supplemental Topics
-            </Typography>
-          </AccordionSummary>
-        </Accordion> */}
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Git & GitHub Key Concepts
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Chapter 1.Git & GitHub Key Concepts
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">What is Git?</Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              What is Version Control?
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Collaborating On Git & GitHub
-              <br />
-              --Remote Repository
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              Collaborating On Git & GitHub
-              <br />
-              --Branch
-            </Typography>
-          </AccordionDetails>
-          <AccordionDetails className="sub_accordain_text">
-            <Typography className="accordiantext">
-              What You Can Do On GitHub Beyond Coding Collaboration
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 2. Git & GitHub Life Cycle
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel4"}
-          onChange={handleChange("panel4")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 3. Git & GitHub Initial Settings
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel5"}
-          onChange={handleChange("panel5")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 4. Launch Git Project
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel6"}
-          onChange={handleChange("panel6")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 5. Edit & Commit
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel7"}
-          onChange={handleChange("panel7")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 6. Work With Branches
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel8"}
-          onChange={handleChange("panel8")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 7. Remote Collaboration
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
-
-        <Accordion
-          expanded={expanded === "panel9"}
-          onChange={handleChange("panel9")}
-          className="main_accordian_container"
-        >
-          <AccordionSummary
-            className="accordianmain"
-            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordiantext">
-              Chapter 8. Supplemental Topics
-            </Typography>
-          </AccordionSummary>
-        </Accordion>
+        {parentCategory?.map((category) => {
+          return (
+            <Accordion
+              expanded={expanded === category?.id}
+              onChange={handleChange(category?.id)}
+              className="main_accordian_container"
+            >
+              <AccordionSummary
+                className="accordianmain"
+                expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className="accordiantext">
+                  {category?.CategoryName}
+                </Typography>
+              </AccordionSummary>
+              {category?.SubCategory?.map((childCategory) => {
+                return (
+                  <AccordionDetails className="sub_accordain_text">
+                    <Typography className="accordiantext">
+                      {childCategory?.CategoryName}
+                    </Typography>
+                  </AccordionDetails>
+                );
+              })}
+            </Accordion>
+          );
+        })}
       </div>
     </>
   );

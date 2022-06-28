@@ -19,6 +19,8 @@ import Bookmark_yellow from "../../../assests/SVG_Files/New folder/Bookmark_yell
 import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import { development } from "../../../endpoints";
+import Swal from "sweetalert2";
+import { addContentBookmark } from "../../../Redux/Actions/bookmark.action";
 
 const LibraryBookmark = () => {
   const navigate = useNavigate();
@@ -29,9 +31,31 @@ const LibraryBookmark = () => {
 
   const theme = useSelector((state) => state?.theme?.state);
   const [data, setdata] = useState([]);
-  const handleBack = () => {};
+  const [bookmark, setBookmark] = React.useState();
+
+  const handleBack = () => {
+    navigate("/mylibrarycourses");
+  };
 
   console.log(data);
+
+  const hanldeBookMarkPriority = async (Contentid) => {
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
+
+  const hanldeDetails = (topic) => {
+    navigate(
+      `/detailpage/id=${topic?.Contentid}/role=${role}/categoryid=${topic?.Chapterid}`
+    );
+  };
 
   useEffect(() => {
     const library = async () => {
@@ -39,7 +63,7 @@ const LibraryBookmark = () => {
       setdata(response);
     };
     library();
-  }, []);
+  }, [bookmark]);
 
   const settings = {
     dots: false,
@@ -183,7 +207,6 @@ const LibraryBookmark = () => {
           return (
             <>
               {subItems?.map((item) => {
-                console.log(item);
                 return (
                   <div className="content_root_container">
                     {item?.items?.length !== 0 && (
@@ -207,6 +230,7 @@ const LibraryBookmark = () => {
                                 src={`${development}/media/${e?.Contentimage}`}
                                 className="landingpage_images"
                                 alt=""
+                                onClick={() => hanldeDetails(e)}
                               />
                               {e?.Contentimage ? (
                                 <div className="underimagetextcontainer">
@@ -243,6 +267,10 @@ const LibraryBookmark = () => {
                                       }
                                       alt=""
                                       className="tagstwocontainer"
+                                      onClick={() =>
+                                        hanldeBookMarkPriority(e?.Contentid)
+                                      }
+                                      style={{ cursor: "pointer" }}
                                     />
                                   </div>
                                 </div>

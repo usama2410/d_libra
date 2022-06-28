@@ -29,7 +29,7 @@ export const getBookmarkCourse = (role, token) => async (dispatch) => {
         },
       }
     );
-    console.log("Get Bookmark Course", response);
+    // console.log("Get Bookmark Course", response);
     return response?.data;
   } catch (error) {
     console.log(error);
@@ -50,7 +50,7 @@ export const addContentBookmark =
           },
         }
       );
-      console.log("Add Content Bookmark", response);
+      // console.log("Add Content Bookmark", response);
       return response?.data;
     } catch (error) {
       console.log(error);

@@ -43,7 +43,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const EditCourseStructure = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
-  const [parentChidCategory, setParentChidCategory] = useState([]);
 
   const handleBack = () => {
     navigate("/editormainpage");
@@ -205,10 +204,6 @@ const EditCourseStructure = () => {
           <span style={{ paddingLeft: "20px" }}>0 of 9 selected</span>
         </div>
         <Table />
-
-        <span style={{ padding: "0px 20px" }}>
-          {parentChidCategory?.length} categories
-        </span>
       </div>
     </div>
   );

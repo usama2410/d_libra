@@ -3,10 +3,6 @@ import { useSelector } from "react-redux";
 import { URL, endpoints } from "../../endpoints";
 import * as FormData from "form-data";
 
-// const headers = {
-//   Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6OSwidXNlcm5hbWUiOiJiYWJ1IiwiZW1haWwiOiJiYWJ1aWJyYXJAZ21haWwuY29tIiwiZXhwIjoxNjQ4NzI1MjE1LCJpYXQiOjE2NDg2Mzg4MTV9.hEpCYnHZrG8YhVJX27wQZXnZsVsauPTF0SbSdYwnK6E`,
-// };
-
 export const signUp = (username, email, password) => async (dispatch) => {
   // console.log(username, email, password)
   const bodyFormData = new FormData();
@@ -127,7 +123,7 @@ export const sendVerificationCode = (email, token) => async (dispatch) => {
 };
 
 export const forgetPassword = (email, Code, token) => async (dispatch) => {
-  console.log(email, Code);
+  // console.log(email, Code);
   const formData = new FormData();
   formData.append("Email", email);
   formData.append("Code", Code);

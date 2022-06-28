@@ -83,248 +83,284 @@ const CollapsibleTable = () => {
   }, []);
 
   return (
-    <TableContainer style={{ padding: "10px 20px" }}>
-      <Table sx={{ minWidth: 700 }} size="small" aria-label="customized table">
-        <TableHead>
-          <StyledTableCell
-            style={{
-              backgroundColor: "rgba(38, 36, 42, 0.7)",
-              borderBottom: "none !important",
-            }}
-          ></StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            TITLE
-          </StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            NAME
-          </StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            UNIQUE IDENTIFIER
-          </StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            IMAGE
-          </StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            CREATED DATE
-          </StyledTableCell>
-          <StyledTableCell
-            className="tablefirstheader"
-            sx={{ borderBottom: "none !important" }}
-          >
-            UPDATED DATE
-          </StyledTableCell>
-        </TableHead>
-        <TableBody>
-          {parentChidCategory?.map((row, index) => (
-            <>
-              <TableRow
-                className="zia"
-                style={{
-                  backgroundColor:
-                    index % 2 === 0
-                      ? " rgba(42, 36, 42, 0.9) !important"
-                      : "rgba(38, 36, 42, 0.7)",
-                  borderBottom: "none !important",
-                }}
-              >
-                <StyledTableCell sx={{ border: "none !important" }}>
-                  <IconButton size="small" onClick={() => setOpen(!open)}>
-                    {open ? (
-                      <KeyboardArrowUpIcon color="info" />
-                    ) : (
-                      <KeyboardArrowDownIcon color="info" />
-                    )}
-                  </IconButton>
-                  <IconButton size="small">
-                    <OpenWithIcon onClick={hanldeUpdateStatus} color="info" />
-                  </IconButton>
-                </StyledTableCell>
-
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{
+    <>
+      <TableContainer style={{ padding: "10px 20px" }}>
+        <Table
+          sx={{ minWidth: 700 }}
+          size="small"
+          aria-label="customized table"
+        >
+          <TableHead>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "100px" }}
+              // style={{
+              //   backgroundColor: "rgba(38, 36, 42, 0.7)",
+              //   borderBottom: "none !important",
+              // }}
+            ></StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "300px" }}
+            >
+              TITLE
+            </StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "300px" }}
+            >
+              NAME
+            </StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "300px" }}
+            >
+              UNIQUE IDENTIFIER
+            </StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "500px" }}
+            >
+              IMAGE
+            </StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "300px" }}
+            >
+              CREATED DATE
+            </StyledTableCell>
+            <StyledTableCell
+              className="tablefirstheader"
+              sx={{ borderBottom: "none !important", width: "300px" }}
+            >
+              UPDATED DATE
+            </StyledTableCell>
+          </TableHead>
+          <TableBody>
+            {parentChidCategory?.map((row, index) => (
+              <>
+                <TableRow
+                  className="zia"
+                  style={{
+                    backgroundColor:
+                      index % 2 === 0
+                        ? " rgba(42, 36, 42, 0.9) !important"
+                        : "rgba(38, 36, 42, 0.7)",
                     borderBottom: "none !important",
-                    color: "#009af9 !important",
                   }}
                 >
-                  {row.CategoryName}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{ borderBottom: "none !important" }}
-                >
-                  {row.CategoryName}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{ borderBottom: "none !important" }}
-                >
-                  {row.CategoryName}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{
-                    borderBottom: "none !important",
-                    color: "#009af9 !important",
-                  }}
-                >
-                  {row.image}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{ borderBottom: "none !important" }}
-                >
-                  {row.created_at?.split("T")[0]}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="tableBody"
-                  sx={{ borderBottom: "none !important" }}
-                >
-                  {row.updated_at?.split("T")[0]}
-                </StyledTableCell>
-              </TableRow>
+                  <StyledTableCell
+                    sx={{ border: "none !important", width: "100px" }}
+                  >
+                    <IconButton size="small" onClick={() => setOpen(!open)}>
+                      {open ? (
+                        <KeyboardArrowUpIcon color="info" />
+                      ) : (
+                        <KeyboardArrowDownIcon color="info" />
+                      )}
+                    </IconButton>
+                    <IconButton size="small">
+                      <OpenWithIcon onClick={hanldeUpdateStatus} color="info" />
+                    </IconButton>
+                  </StyledTableCell>
 
-              <TableRow>
-                <TableCell
-                  style={{ paddingBottom: 0, paddingTop: 0 }}
-                  colSpan={8}
-                  sx={{ borderBottom: "none !important" }}
-                >
-                  <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box margin={1}>
-                      <Table>
-                        <StyledTableRow>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            TITLE
-                          </StyledTableCell>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            NAME
-                          </StyledTableCell>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            UNIQUE IDENTIFIER
-                          </StyledTableCell>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            IMAGE
-                          </StyledTableCell>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            CREATE DATE
-                          </StyledTableCell>
-                          <StyledTableCell
-                            sx={{
-                              borderBottom: "none !important",
-                              color: "#ffffff !important",
-                            }}
-                          >
-                            UPDATE DATE
-                          </StyledTableCell>
-                        </StyledTableRow>
-                        <TableBody>
-                          {row?.SubCategory?.map((category) => (
-                            <StyledTableRow
-                              key={category.id}
-                              sx={{ borderBottom: "none !important" }}
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{
+                      borderBottom: "none !important",
+                      color: "#009af9 !important",
+                      width: "300px",
+                    }}
+                  >
+                    {row.CategoryName}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{ borderBottom: "none !important", width: "300px" }}
+                  >
+                    {row.CategoryName}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{ borderBottom: "none !important", width: "300px" }}
+                  >
+                    {row.unique_identifier}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{
+                      borderBottom: "none !important",
+                      color: "#009af9 !important",
+                      width: "500px",
+                    }}
+                  >
+                    {row.image}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{ borderBottom: "none !important", width: "300px" }}
+                  >
+                    {row.created_at?.split("T")[0]}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="tableBody"
+                    sx={{ borderBottom: "none !important", width: "300px" }}
+                  >
+                    {row.updated_at?.split("T")[0]}
+                  </StyledTableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    colSpan={8}
+                    sx={{
+                      borderBottom: "none !important",
+                      // paddingRight: "20px  !important",
+                      // paddingLeft: "150px !important",
+                    }}
+                  >
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                      <Box margin={1}>
+                        <Table>
+                          {/* <StyledTableRow>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
                             >
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#009af9 !important",
-                                }}
+                              TITLE
+                            </StyledTableCell>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
+                            >
+                              NAME
+                            </StyledTableCell>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
+                            >
+                              UNIQUE IDENTIFIER
+                            </StyledTableCell>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
+                            >
+                              IMAGE
+                            </StyledTableCell>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
+                            >
+                              CREATE DATE
+                            </StyledTableCell>
+                            <StyledTableCell
+                              sx={{
+                                borderBottom: "none !important",
+                                color: "#ffffff !important",
+                              }}
+                            >
+                              UPDATE DATE
+                            </StyledTableCell>
+                          </StyledTableRow> */}
+                          <TableBody>
+                            {row?.SubCategory?.map((category) => (
+                              <StyledTableRow
+                                key={category.id}
+                                sx={{ borderBottom: "none !important" }}
                               >
-                                {category.CategoryName}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#ffffff !important",
-                                }}
-                              >
-                                {category.CategoryName}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#ffffff !important",
-                                }}
-                              >
-                                {category.unique_identifier}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#009af9 !important",
-                                }}
-                              >
-                                {category.image}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#ffffff !important",
-                                }}
-                              >
-                                {category.created_at?.split("T")[0]}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#ffffff !important",
-                                }}
-                              >
-                                {category.updated_at?.split("T")[0]}
-                              </StyledTableCell>
-                            </StyledTableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </Box>
-                  </Collapse>
-                </TableCell>
-              </TableRow>
-            </>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                                <StyledTableCell
+                                  sx={{
+                                    border: "none !important",
+                                    width: "100px",
+                                  }}
+                                >
+                                 
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#009af9 !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {category.CategoryName}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#ffffff !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {category.CategoryName}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#ffffff !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {category.unique_identifier}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#009af9 !important",
+
+                                    width: "500px",
+                                  }}
+                                >
+                                  {category.image}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#ffffff !important",
+                                    width: "300px",
+                                    paddingLeft:"30px"
+                                  }}
+                                >
+                                  {category.created_at?.split("T")[0]}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#ffffff !important",
+                                    width: "300px",
+                                    paddingLeft:"30px"
+                                  }}
+                                >
+                                  {category.updated_at?.split("T")[0]}
+                                </StyledTableCell>
+                              </StyledTableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <span style={{ padding: "0px 20px" }}>
+        {parentChidCategory?.length} categories
+      </span>
+    </>
   );
 };
 export default CollapsibleTable;

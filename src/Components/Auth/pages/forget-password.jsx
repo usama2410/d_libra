@@ -38,7 +38,7 @@ const ForgetPassword = () => {
 
   const handleCodeChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    console.log(element.value);
+    // console.log(element.value);
     setCode([...code?.map((d, i) => (i === index ? element.value : d))]);
 
     // Focus on next input
@@ -46,6 +46,8 @@ const ForgetPassword = () => {
       element.nextSibling.focus();
     }
   };
+
+  // ['2', '4', '6', '8']
 
   let OTPCode = code.toString().replaceAll(",", "");
 
@@ -60,6 +62,7 @@ const ForgetPassword = () => {
 
     if (response?.status === true) {
       setMessage("Code verified successfully");
+      setIsVerifying(false);
 
       const timer = setTimeout(() => {
         setMessage("");
@@ -76,6 +79,7 @@ const ForgetPassword = () => {
         setShowCodeInput(false);
       }
     }, 5000);
+    setIsVerifying(false);
 
     return () => clearTimeout(timer);
   };

@@ -51,18 +51,18 @@ const AddNewCategory = () => {
   };
 
   console.log("message", message);
-  const hanldeSetUniqueIdentity = (target) => {
-    setUniqueIdentity(target.value);
+  // const hanldeSetUniqueIdentity = (target) => {
+  //   setUniqueIdentity(target.value);
 
-    // if (
-    //   selectedCategoryOption.label === "Course" &&
-    //   uniqueIdentity.length > 3
-    // ) {
-    //   setUniqueIdentity(target.value);
-    // } else {
-    //   console.log("hi");
-    // }
-  };
+  //   // if (
+  //   //   selectedCategoryOption.label === "Course" &&
+  //   //   uniqueIdentity.length > 3
+  //   // ) {
+  //   //   setUniqueIdentity(target.value);
+  //   // } else {
+  //   //   console.log("hi");
+  //   // }
+  // };
   const handleChange = (e) => {
     if (e.target.files.length) {
       setImage(URL.createObjectURL(e.target.files[0]));
@@ -83,9 +83,9 @@ const AddNewCategory = () => {
 
     // ADD CATEGORY CODE
     const response = await dispatch(
-      addParentCategorie(name, slug, imageName, uniqueIdentity, token)
+      addParentCategorie(name, slug, imageName, uniqueIdentity?.number, token)
     );
-    // console.log("response", response);
+    console.log("response", response);
     // ADD COURSE CODE
     if (selectedCategoryOption?.label === "Course") {
       const response = await dispatch(
@@ -440,10 +440,23 @@ const AddNewCategory = () => {
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="Category ID"
-            value={uniqueIdentity}
-            // maxlength={7}
-            type="number"
-            onChange={(e) => hanldeSetUniqueIdentity(e.target)}
+            value={uniqueIdentity.number}
+            // maxlength={
+            //   selectedCategoryOption?.label === "Category"
+            //     ? 4
+            //     : selectedCategoryOption?.label === "Course"
+            //     ? 6
+            //     : selectedCategoryOption?.label === "Chapter" && 8
+            // }
+            // type="number"
+            name="number"
+            onChange={(e) =>
+              setUniqueIdentity({
+                ...uniqueIdentity,
+                [e.target.name]: e.target.value.replace(/\D/g, ""),
+              })
+            }
+            // onChange={(e) => hanldeSetUniqueIdentity(e.target)}
           />
 
           <span
