@@ -29,7 +29,7 @@ export const getRecenetViewContent = (role, token) => async (dispatch) => {
   // console.log("token", URL + endpoints.GET_RECENT_CONTENT + role)
   try {
     const response = await axios.get(
-      URL + endpoints.GET_RECENT_CONTENT + "=" + role ,
+      URL + endpoints.GET_RECENT_CONTENT + "=" + role,
       {
         headers: {
           Authorization: "Bearer " + token,
