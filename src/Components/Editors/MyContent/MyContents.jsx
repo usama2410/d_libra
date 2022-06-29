@@ -4,10 +4,13 @@ import ContentData from "./ContentData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./MyContents.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getDashboardData } from "../../../Redux/Actions/Dashboard.Data.action";
+import {
+  getDashboardData,
+  GetDashboardDataWithAuthorization,
+} from "../../../Redux/Actions/Dashboard.Data.action";
 import { Typography } from "@material-ui/core";
 import { ArrowBack } from "@mui/icons-material";
 import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
@@ -31,6 +34,7 @@ import Swal from "sweetalert2";
 const MyContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [data, setdata] = useState([]);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -43,11 +47,11 @@ const MyContents = () => {
 
   console.log("handleSetBookMark", handleSetBookMark);
   const handleBack = () => {
-    navigate("/editormainpage");
+    navigate(state?.path);
   };
 
   // console.log("data", data);
-  console.log("bookmark", bookmark);
+  // console.log("state", state);
 
   const settings = {
     dots: false,
@@ -139,7 +143,9 @@ const MyContents = () => {
 
   useEffect(() => {
     const dashboardData = async () => {
-      const response = await dispatch(getDashboardData(token));
+      const response = await dispatch(
+        GetDashboardDataWithAuthorization(state?.topicId, role, token)
+      );
       console.log("response", response);
       setdata(response);
     };
@@ -224,7 +230,7 @@ const MyContents = () => {
             <span
               className={theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"}
             >
-              Git & GitHub Introduction
+              {data?.dropdown?.parent?.CategoryName}
             </span>
           </div>
 
@@ -247,9 +253,9 @@ const MyContents = () => {
         </div>
       </div>
 
-      {data?.length > 0 ? (
+      {data?.data?.length > 0 ? (
         <div className="landingpage_slider_container">
-          {data?.map((item) => {
+          {data?.data?.map((item) => {
             return (
               <>
                 {item?.lecture?.length > 0 && (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid } from "@material-ui/core";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -26,9 +26,10 @@ const EditContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  // console.log(params);
+  const location = useLocation();
+  console.log(location);
 
-  const [contentTitle, setContentTitle] = useState();
+  const [contentTitle, setContentTitle] = useState("");
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -42,7 +43,7 @@ const EditContentMain = () => {
   const [image, setImage] = useState("");
   const [metaDescription, setMetaDiscription] = useState("");
   const [OGP, setOGP] = useState();
-
+    console.log("contentTitle", contentTitle, tags)
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionChild, setSelectedOptionChild] = useState("");
 
@@ -239,7 +240,7 @@ const EditContentMain = () => {
       setTags(response?.post?.tags);
     };
     postById();
-  }, [contentTitle]);
+  }, []);
 
   return (
     <>

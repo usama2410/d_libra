@@ -27,8 +27,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const location = useLocation();
-
+  const {state} = useLocation();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -46,7 +45,7 @@ const DetailPage = () => {
   console.log("tags", details.post?.tags.split(","));
 
   const handleBack = () => {
-    navigate("/mycontents");
+    navigate(state?.path);
   };
 
   const handleBookMark = () => {
@@ -63,6 +62,8 @@ const DetailPage = () => {
     } else if (details?.bookmark?.PriorityType === "Personal") {
       return Bookmark_yellow;
     } else if (details?.bookmark?.PriorityType === "Dayend") {
+      return Bookmark_grey;
+    } else {
       return Bookmark_grey;
     }
   };
@@ -170,6 +171,7 @@ const DetailPage = () => {
               >
                 {role === "editor" && (
                   <div className="deleteeditcontainer">
+                    <div className="subcontainerdelete"> 
                     <button
                       className="detail_delete_button"
                       onClick={() =>
@@ -190,9 +192,20 @@ const DetailPage = () => {
                     >
                       Edit
                     </button>
+                    </div>
+                    <img
+                    src={handleBookMark()}
+                    alt=""
+                    className="detail_tag_text_two"
+                    style={{ paddingLeft: "24px", cursor: "pointer" }}
+                    onClick={hanldeBookMarkPriority}
+                  />
                   </div>
                 )}
-                <div className="tags_wrapper_one">
+            
+
+
+            <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
                       <span
@@ -210,14 +223,18 @@ const DetailPage = () => {
                   )}
                   {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
-                  <img
+                  {/* <img
                     src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"
                     style={{ paddingLeft: "24px", cursor: "pointer" }}
                     onClick={hanldeBookMarkPriority}
-                  />
+                  /> */}
                 </div>
+
+
+
+
               </div>
             </Grid>
 
@@ -256,14 +273,14 @@ const DetailPage = () => {
                 ) : (
                   null
                 )}
-
+{/* 
                 <img
                   src={handleBookMark()}
                   alt=""
                   className="detail_tag_text_two"
                   style={{ paddingLeft: "24px", cursor: "pointer" }}
                   onClick={hanldeBookMarkPriority}
-                />
+                /> */}
                 {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
               </div>

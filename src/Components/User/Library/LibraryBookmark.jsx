@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button, Typography } from "@material-ui/core";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import Slider from "react-slick";
@@ -25,6 +25,7 @@ import { addContentBookmark } from "../../../Redux/Actions/bookmark.action";
 const LibraryBookmark = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const role = useSelector((state) => state?.auth?.role);
   const token = useSelector((state) => state?.auth?.token);
@@ -53,7 +54,12 @@ const LibraryBookmark = () => {
 
   const hanldeDetails = (topic) => {
     navigate(
-      `/detailpage/id=${topic?.Contentid}/role=${role}/categoryid=${topic?.Chapterid}`
+      `/detailpage/id=${topic?.Contentid}/role=${role}/categoryid=${topic?.Chapterid}`,
+      {
+        state: {
+          path: location.pathname,
+        },
+      }
     );
   };
 
@@ -267,7 +273,7 @@ const LibraryBookmark = () => {
                                               ? Bookmark_yellow
                                               : item?.PriorityType === "Dayend"
                                               ? Bookmark_grey
-                                              : null
+                                              : Bookmark_grey
                                           }
                                           alt=""
                                           className="tagstwocontainer"
