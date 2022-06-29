@@ -79,5 +79,8 @@ export const endpoints = {
   // BOOKMARK
   ADD_BOOKMARK_LIBRARY: "/webapi/bookadd",
   ADD_CONTENT_BOOKMARK: "/webapi/addcontent",
-  GET_BOOKMARK_COURSE: "/webapi/GetPriorityCourse"
+  GET_BOOKMARK_COURSE: "/webapi/GetPriorityCourse",
+
+  // HISTORY 
+  GET_HISTORY_COURSE: "/webapi/recentlyViewContenthistory",
 };

@@ -13,6 +13,7 @@ import {
   librarybookmark,
   setBookMarkPriority,
 } from "../../Redux/Actions/Client Side/librar.y.action";
+import { useNavigate } from "react-router-dom";
 
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
@@ -20,8 +21,9 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 
-const RecentlyViewdSlider = (filterArray) => {
+const RecentlyViewdSlider = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [priority, setPriority] = useState("reviewlist");
   let [count, setCount] = useState(0);
   const [singleContent, setSingleContent] = useState();
@@ -31,10 +33,10 @@ const RecentlyViewdSlider = (filterArray) => {
 
   const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
-  console.log("handleSetBookMark", handleSetBookMark);
+  // console.log("handleSetBookMark", props);
 
   const handleBookMark = async (content) => {
-    console.log("content_id", content);
+    // console.log("content_id", content);
     setSingleContent(content);
     setCount(count + 1);
     if (count === 0) {
@@ -50,18 +52,17 @@ const RecentlyViewdSlider = (filterArray) => {
     const response = await dispatch(
       setBookMarkPriority(role, content?.Courseid, priority, token)
     );
-    console.log("response", response);
+    // console.log("response", response);
   };
 
   const hanldeLibraryBook = async () => {
     const response = await dispatch(librarybookmark(role, token));
-    console.log("librarybookmark response", response);
+    // console.log("librarybookmark response", response);
     response.map((data) => {
       data?.map((item) => {
         setHandleSetBookMark(item.PriorityType);
-        
-        });
       });
+    });
   };
 
   useEffect(() => {
@@ -146,90 +147,102 @@ const RecentlyViewdSlider = (filterArray) => {
     ],
   };
 
+  const handleDetails = (contentID, chapterID) => {
+    // console.log(chapterID, contentID);
+    navigate(
+      `/detailpage/id=${contentID}/role=${role}/categoryid=${chapterID}`
+    );
+  };
+
   return (
     <>
       <div className="recentlyreviewd_slider_container">
-        <div className="content_root_container">
-          <div>
-            <span
-              className={theme ? "chapternameclass" : "chapternameclasstwo"}
-            >
-              {filterArray?.day}
-            </span>
-          </div>
-          <div>
-            {filterArray?.array?.length > 0 ? (
-              <Slider className="intro-slick" {...settings}>
-                {filterArray?.array?.map((e) => {
-                  return (
-                    <div className="intro-slides">
-                      <img
-                        src={`${development}/media/${e.images}`}
-                        className="landingpage_images"
-                        // style={{
-                        //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                        // }}
-                        alt=""
-                      />
-                      {e.images ? (
-                        <div className="underimagetextcontainer">
-                          <Typography
-                            noWrap
-                            component="div"
-                            className="underimagecontent"
-                            style={{
-                              color: theme ? "#363636" : "#FFFFFF",
-                            }}
-                          >
+        {props?.history?.map((day) => (
+          <div className="content_root_container">
+            <div>
+              <span
+                className={theme ? "chapternameclass" : "chapternameclasstwo"}
+              >
+                {day?.chapterName}
+              </span>
+            </div>
+            <div>
+              {day?.items?.length > 0 ? (
+                <Slider className="intro-slick" {...settings}>
+                  {day?.items?.map((e) => {
+                    return (
+                      <div className="intro-slides">
+                        <img
+                          src={`${development}/media/${e.images}`}
+                          className="landingpage_images"
+                          // style={{
+                          //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                          // }}
+                          alt=""
+                          onClick={() =>
+                            handleDetails(e.Content_id, e.chapterid)
+                          }
+                        />
+                        {e?.images ? (
+                          <div className="underimagetextcontainer">
                             <Typography
                               noWrap
                               component="div"
-                              className="subcoursenametwo subcoursename"
+                              className="underimagecontent"
+                              style={{
+                                color: theme ? "#363636" : "#FFFFFF",
+                              }}
                             >
-                              {e.title}
+                              <Typography
+                                noWrap
+                                component="div"
+                                className="subcoursenametwo subcoursename"
+                              >
+                                {e?.title}
+                              </Typography>
                             </Typography>
-                          </Typography>
-                          <div className="mycontenttagscontainer">
-                            <img
-                              src={
-                                handleSetBookMark === "highpriority"
-                                  ? Bookmark_blue
-                                  : handleSetBookMark === "reviewlist"
-                                  ? Bookmark_green
-                                  : handleSetBookMark === "futureread"
-                                  ? Bookmark_red
-                                  : handleSetBookMark === "Personal"
-                                  ? Bookmark_yellow
-                                  : handleSetBookMark === "Dayend"
-                                  ? Bookmark_grey
-                                  : null
-                              }
-                              alt=""
-                              className="tagstwocontainer"
-                              onClick={() => handleBookMark(e)}
-                            />
+                            <div className="mycontenttagscontainer">
+                              <img
+                                src={
+                                  handleSetBookMark === "highpriority"
+                                    ? Bookmark_blue
+                                    : handleSetBookMark === "reviewlist"
+                                    ? Bookmark_green
+                                    : handleSetBookMark === "futureread"
+                                    ? Bookmark_red
+                                    : handleSetBookMark === "Personal"
+                                    ? Bookmark_yellow
+                                    : handleSetBookMark === "Dayend"
+                                    ? Bookmark_grey
+                                    : null
+                                }
+                                alt=""
+                                className="tagstwocontainer"
+                                onClick={() => handleBookMark(e)}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  );
-                })}
-              </Slider>
-            ) : (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "30px",
-                }}
-              >
-                <CircularProgress color="inherit" size={60} />
-              </Box>
-            )}
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    );
+                  })}
+                </Slider>
+              ) : (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "30px",
+                  }}
+                >
+                  <CircularProgress color="inherit" size={60} />
+                </Box>
+              )}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </>
   );

@@ -208,81 +208,87 @@ const LibraryBookmark = () => {
             <>
               {subItems?.map((item) => {
                 return (
-                  <div className="content_root_container">
+                  <>
                     {item?.items?.length !== 0 && (
-                      <div style={{ display: "flex", alignItems: " center" }}>
-                        <span
-                          className={
-                            theme ? "chapternameclass" : "chapternameclasstwo"
-                          }
-                        >
-                          {item?.PriorityType}
-                        </span>
+                      <div className="content_root_container">
+                        <div style={{ display: "flex", alignItems: " center" }}>
+                          <span
+                            className={
+                              theme ? "chapternameclass" : "chapternameclasstwo"
+                            }
+                          >
+                            {item?.PriorityType}
+                          </span>
+                        </div>
+
+                        <div>
+                          <Slider className="intro-slick" {...settings}>
+                            {item?.items.map((e) => {
+                              return (
+                                <div className="intro-slides">
+                                  <img
+                                    src={`${development}/media/${e?.Contentimage}`}
+                                    className="landingpage_images"
+                                    alt=""
+                                    onClick={() => hanldeDetails(e)}
+                                  />
+                                  {e?.Contentimage ? (
+                                    <div className="underimagetextcontainer">
+                                      <Typography
+                                        noWrap
+                                        component="div"
+                                        className="underimagecontent"
+                                        style={{
+                                          color: theme ? "#363636" : "#FFFFFF",
+                                        }}
+                                      >
+                                        <Typography
+                                          noWrap
+                                          component="div"
+                                          className="subcoursenametwo subcoursename"
+                                        >
+                                          {e?.Contenttitle}
+                                        </Typography>
+                                      </Typography>
+                                      <div className="mycontenttagscontainer">
+                                        <img
+                                          src={
+                                            item?.PriorityType ===
+                                            "highpriority"
+                                              ? Bookmark_blue
+                                              : item?.PriorityType ===
+                                                "reviewlist"
+                                              ? Bookmark_green
+                                              : item?.PriorityType ===
+                                                "futureread"
+                                              ? Bookmark_red
+                                              : item?.PriorityType ===
+                                                "Personal"
+                                              ? Bookmark_yellow
+                                              : item?.PriorityType === "Dayend"
+                                              ? Bookmark_grey
+                                              : null
+                                          }
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          onClick={() =>
+                                            hanldeBookMarkPriority(e?.Contentid)
+                                          }
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </Slider>
+                        </div>
                       </div>
                     )}
-
-                    <div>
-                      <Slider className="intro-slick" {...settings}>
-                        {item?.items.map((e) => {
-                          return (
-                            <div className="intro-slides">
-                              <img
-                                src={`${development}/media/${e?.Contentimage}`}
-                                className="landingpage_images"
-                                alt=""
-                                onClick={() => hanldeDetails(e)}
-                              />
-                              {e?.Contentimage ? (
-                                <div className="underimagetextcontainer">
-                                  <Typography
-                                    noWrap
-                                    component="div"
-                                    className="underimagecontent"
-                                    style={{
-                                      color: theme ? "#363636" : "#FFFFFF",
-                                    }}
-                                  >
-                                    <Typography
-                                      noWrap
-                                      component="div"
-                                      className="subcoursenametwo subcoursename"
-                                    >
-                                      {e?.Contenttitle}
-                                    </Typography>
-                                  </Typography>
-                                  <div className="mycontenttagscontainer">
-                                    <img
-                                      src={
-                                        item?.PriorityType === "highpriority"
-                                          ? Bookmark_blue
-                                          : item?.PriorityType === "reviewlist"
-                                          ? Bookmark_green
-                                          : item?.PriorityType === "futureread"
-                                          ? Bookmark_red
-                                          : item?.PriorityType === "Personal"
-                                          ? Bookmark_yellow
-                                          : item?.PriorityType === "Dayend"
-                                          ? Bookmark_grey
-                                          : null
-                                      }
-                                      alt=""
-                                      className="tagstwocontainer"
-                                      onClick={() =>
-                                        hanldeBookMarkPriority(e?.Contentid)
-                                      }
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                  </div>
-                                </div>
-                              ) : (
-                                ""
-                              )}
-                            </div>
-                          );
-                        })}
-                      </Slider>
-                    </div>
-                  </div>
+                  </>
                 );
               })}
             </>
