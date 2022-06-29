@@ -195,98 +195,102 @@ const LandingPage = () => {
         <div className="landingpage_slider_container">
           {data[0]?.data?.map((item) => {
             return (
-              <div className="content_root_container" key={item?.id}>
-                <div>
-                  <span
-                    className={
-                      theme ? "chapternameclass" : "chapternameclasstwo"
-                    }
-                  >
-                    {item?.items?.length !== 0 && item?.chaptername}
-                  </span>
-                </div>
-                <div>
-                  <Slider className="intro-slick" {...settings}>
-                    {item?.items?.map((e) => {
-                      return (
-                        <div className="intro-slides">
-                          <img
-                            src={`${development}/media/${e.image}`}
-                            // onClick={() => navigate("/coursepageguest")}
-                            onClick={() => handleViewRecentCourses(e.id)}
-                            className="landingpage_images"
-                            // style={{
-                            //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                            // }}
-                            alt="No Image"
-                          />
-                          {e.image ? (
-                            <div className="landingpagesubsection">
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursename"
-                                style={{
-                                  color: theme ? "#363636" : "#FFFFFF",
-                                }}
-                              >
-                                {e.CategoryName}
-                              </Typography>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-
-                          <div
-                            style={{
-                              padding: "10px 0px 0px 10px",
-                            }}
-                          >
-                            <span
-                              className="Author"
-                              style={{
-                                color: theme ? "#363636" : "#C8C8C8",
-                              }}
-                            >
-                              Author:
-                            </span>
-                            <Box
-                              sx={{
-                                width: 200,
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Rating
-                                sx={{ ml: 1 }}
-                                name="read-only"
-                                readOnly
-                                value={e?.totalratinng}
-                                className="secondratingcomponent"
-                                emptyIcon={
-                                  <StarIcon
-                                    style={{ color: "#C4C4C4" }}
-                                    fontSize="inherit"
-                                  />
-                                }
+              <>
+                {item?.items?.length !== 0 && (
+                  <div className="content_root_container" key={item?.id}>
+                    <div>
+                      <span
+                        className={
+                          theme ? "chapternameclass" : "chapternameclasstwo"
+                        }
+                      >
+                        {item?.chaptername}
+                      </span>
+                    </div>
+                    <div>
+                      <Slider className="intro-slick" {...settings}>
+                        {item?.items?.map((e) => {
+                          return (
+                            <div className="intro-slides">
+                              <img
+                                src={`${development}/media/${e.image}`}
+                                // onClick={() => navigate("/coursepageguest")}
+                                onClick={() => handleViewRecentCourses(e.id)}
+                                className="landingpage_images"
+                                // style={{
+                                //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                                // }}
+                                alt="No Image"
                               />
+                              {e.image ? (
+                                <div className="landingpagesubsection">
+                                  <Typography
+                                    noWrap
+                                    component="div"
+                                    className="subcoursename"
+                                    style={{
+                                      color: theme ? "#363636" : "#FFFFFF",
+                                    }}
+                                  >
+                                    {e.CategoryName}
+                                  </Typography>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+
                               <div
-                                className="rating_text"
                                 style={{
-                                  paddingLeft: "10px",
-                                  color: theme ? "#363636" : "#C8C8C8",
+                                  padding: "10px 0px 0px 10px",
                                 }}
                               >
-                                ({e?.totalperson})
+                                <span
+                                  className="Author"
+                                  style={{
+                                    color: theme ? "#363636" : "#C8C8C8",
+                                  }}
+                                >
+                                  Author:
+                                </span>
+                                <Box
+                                  sx={{
+                                    width: 200,
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <Rating
+                                    sx={{ ml: 1 }}
+                                    name="read-only"
+                                    readOnly
+                                    value={e?.totalratinng}
+                                    className="secondratingcomponent"
+                                    emptyIcon={
+                                      <StarIcon
+                                        style={{ color: "#C4C4C4" }}
+                                        fontSize="inherit"
+                                      />
+                                    }
+                                  />
+                                  <div
+                                    className="rating_text"
+                                    style={{
+                                      paddingLeft: "10px",
+                                      color: theme ? "#363636" : "#C8C8C8",
+                                    }}
+                                  >
+                                    ({e?.totalperson})
+                                  </div>
+                                </Box>
                               </div>
-                            </Box>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </Slider>
-                </div>
-              </div>
+                            </div>
+                          );
+                        })}
+                      </Slider>
+                    </div>
+                  </div>
+                )}
+              </>
             );
           })}
         </div>

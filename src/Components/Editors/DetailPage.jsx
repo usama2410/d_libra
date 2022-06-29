@@ -42,6 +42,9 @@ const DetailPage = () => {
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
 
+  console.log("details", details);
+  console.log("tags", details.post?.tags.split(","));
+
   const handleBack = () => {
     navigate("/mycontents");
   };
@@ -190,16 +193,21 @@ const DetailPage = () => {
                   </div>
                 )}
                 <div className="tags_wrapper_one">
-                  <span
-                    className="detail_tag_text"
-                    style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                  >
-                    {" "}
-                    Tag:{" "}
-                  </span>
-                  <button className="detail_tag_button">
-                    {details?.post?.tags}
-                  </button>
+                  {details?.post?.tags !== "" ? (
+                    <>
+                      <span
+                        className="detail_tag_text"
+                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                      >
+                        Tag:
+                      </span>
+                      {details?.post?.tags?.split(",")?.map((tag) => (
+                        <button className="detail_tag_button">{tag}</button>
+                      ))}
+                    </>
+                  ) : (
+                    null
+                  )}
                   {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
                   <img
@@ -233,18 +241,21 @@ const DetailPage = () => {
                   </div> */}
               </div>
               <div className="tags_wrapper_two">
-                <span
-                  className="detail_tag_text"
-                  style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                >
-                  {" "}
-                  Tag:{" "}
-                </span>
                 {details?.post?.tags !== "" ? (
-                  <button className="detail_tag_button">
-                    {details?.post?.tags}
-                  </button>
-                ) : null}
+                  <>
+                    <span
+                      className="detail_tag_text"
+                      style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                    >
+                      Tag:
+                    </span>
+                    {details?.post?.tags?.split(",")?.map((tag) => (
+                      <button className="detail_tag_button">{tag}</button>
+                    ))}
+                  </>
+                ) : (
+                  null
+                )}
 
                 <img
                   src={handleBookMark()}

@@ -408,18 +408,18 @@ const UserSettingViewPage = () => {
                   onChange={(e) => setPersonal(e.target.value)}
                 />
               </div>
-
-              <Button
-                size="small"
-                style={{
-                  backgroundColor: "#FFAA1D",
-                  borderRadius: "50px",
-                  float: "right",
-                }}
-                onClick={hanldeAddCustomPriority}
-              >
-                Add
-              </Button>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  size="small"
+                  style={{
+                    backgroundColor: "#FFAA1D",
+                    borderRadius: "50px",
+                  }}
+                  onClick={hanldeAddCustomPriority}
+                >
+                  Add
+                </Button>
+              </div>
             </>
           )}
 
@@ -443,13 +443,15 @@ const UserSettingViewPage = () => {
                   onChange={(e) => setDayend(e.target.value)}
                 />
               </div>
-              <Button
-                size="small"
-                style={{ backgroundColor: "#C8C8C8", borderRadius: "50px" }}
-                onClick={hanldeAddCustomPriority}
-              >
-                Add
-              </Button>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  size="small"
+                  style={{ backgroundColor: "#C8C8C8", borderRadius: "50px" }}
+                  onClick={hanldeAddCustomPriority}
+                >
+                  Add
+                </Button>
+              </div>
             </>
           )}
 
