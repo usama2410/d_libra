@@ -205,7 +205,9 @@ const DetailPage = () => {
                   </div>
                 )}
 
-                <div className="tags_wrapper_one">
+              </div>
+              
+              <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
                       <span
@@ -229,7 +231,6 @@ const DetailPage = () => {
                     onClick={hanldeBookMarkPriority}
                   /> */}
                 </div>
-              </div>
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
