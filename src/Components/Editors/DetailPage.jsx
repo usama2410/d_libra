@@ -21,7 +21,8 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Swal from "sweetalert2";
-import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
+import { addContentBookmark, showAllBoomark } from "../../Redux/Actions/bookmark.action";
+import FooterButtons from "../User/FooterButtons";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -40,8 +41,9 @@ const DetailPage = () => {
   const [disable, setDisable] = React.useState(false);
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
+  const [handleSetBook, setHandleSetBookMark] = React.useState();
 
-  // console.log("details", state);
+  console.log("details", handleSetBook);
   // console.log("tags", details?.bookmark?.PriorityType);
 
   const handleBack = () => {
@@ -59,26 +61,32 @@ const DetailPage = () => {
       return Bookmark_green;
     } else if (details?.bookmark?.PriorityType === "futureread") {
       return Bookmark_red;
-    } else if (details?.bookmark?.PriorityType === "Personal") {
+    } else if (handleSetBook[0].colorcode === "#FFAA1D") {
       return Bookmark_yellow;
-    } else if (details?.bookmark?.PriorityType === "Dayend") {
+    } else if (handleSetBook[0].colorcode  === "#C8C8C8") {
       return Bookmark_grey;
     } else {
       return Bookmark_grey;
     }
   };
 
-  useEffect(() => {
-    const postById = async () => {
-      const response = await dispatch(
-        getPostByID(params.id, params.role, params.categoryid, token)
-      );
-      // console.log("response", response);
+  const postById = async () => {
+    const response = await dispatch(
+      getPostByID(params.id, params.role, params.categoryid, token)
+    );
+    setDetails(response);
+  };
 
-      setDetails(response);
-    };
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    // console.log(response.slice(0, 2));
+    setHandleSetBookMark(response?.slice(0, 2));
+  };
+
+  useEffect(() => {
     postById();
     handleBookMark();
+    handleShowAllBookmark();
   }, [params, details?.bookmark?.PriorityType, bookmark]);
 
   const handleNextMark = () => {
@@ -139,17 +147,25 @@ const DetailPage = () => {
   return (
     <>
       <div className="detailpage_root_container ">
-        <div className="backbutton_disable">
-          <button
-            onClick={handleBack}
-            className="back_button"
-            style={{ color: "#FFFFFF " }}
-          >
-            <ArrowBack className="backbutton_icon" />{" "}
-            <span className="backbutton_text">Back</span>
-          </button>
-        </div>
-        <span className="header_text">{details?.post?.categories__name}</span>
+        {role === "editor" && (
+          <div className="backbutton_disable">
+            <button
+              onClick={handleBack}
+              className="back_button"
+              style={{ color: "#FFFFFF " }}
+            >
+              <ArrowBack className="backbutton_icon" />{" "}
+              <span className="backbutton_text">Back</span>
+            </button>
+          </div>
+        )}
+        <span
+          className={
+            role === "editor" ? "header_text" : "header_text_NormalUser"
+          }
+        >
+          {details?.post?.categories__name}
+        </span>
       </div>
       {details?.status ? (
         <div>
@@ -204,39 +220,38 @@ const DetailPage = () => {
                     />
                   </div>
                 )}
-
               </div>
-              
+
               <div className="tags_wrapper_one">
-                  {details?.post?.tags !== "" ? (
-                    <>
-                      <span
-                        className="detail_tag_text"
-                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                      >
-                        Tag:
-                      </span>
-                      {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button className="detail_tag_button">{tag}</button>
-                      ))}
-                    </>
-                  ) : null}
-                  {/* <button className="detail_tag_button">GitHub</button>
+                {details?.post?.tags !== "" ? (
+                  <>
+                    <span
+                      className="detail_tag_text"
+                      style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                    >
+                      Tag:
+                    </span>
+                    {details?.post?.tags?.split(",")?.map((tag) => (
+                      <button className="detail_tag_button">{tag}</button>
+                    ))}
+                  </>
+                ) : null}
+                {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
-                  {/* <img
+                {/* <img
                     src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"
                     style={{ paddingLeft: "24px", cursor: "pointer" }}
                     onClick={hanldeBookMarkPriority}
                   /> */}
-                </div>
+              </div>
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div className="detail_page_content">
                 <div className="scrollable">
-                  <span style={{lineHeight: "35px"}}>
+                  <span style={{ lineHeight: "35px" }}>
                     {details?.post?.content !== "" ? (
                       parse(`${details?.post?.content}`)
                     ) : (
@@ -376,6 +391,7 @@ const DetailPage = () => {
           </div>
         </div>
       )}
+      {role === "normaluser" && <FooterButtons />}
     </>
   );
 };

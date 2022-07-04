@@ -129,9 +129,12 @@ export default function Sidebar() {
     }
   };
 
-  const handleSearchBar = async () => {
-    // setSearchState2(!searchstate2);
-    // await dispatch(searchState(searchstate2))
+  const handleSearchBar = async (e) => {
+    setSearch(e.target.value);
+    // console.log(e.target.value);
+    if (e.target.value === "") {
+      navigate(`/`);
+    }
   };
 
   React.useEffect(() => {
@@ -800,14 +803,14 @@ export default function Sidebar() {
             </div>
           </div>
 
-          {"/detailpage" === location.pathname ||
+          {location.pathname?.includes("detailpage") ||
           "/editormainpage" === location.pathname ||
           "/editcoursestructure" === location.pathname ||
           "/addnewcategory" === location.pathname ||
           "/uploadcontentmain" === location.pathname ||
-          "/mycontents/:id" === location.pathname ||
-          "/editcontentmain" === location.pathname ||
-          "/deletecontent" === location.pathname
+          location.pathname?.includes("mycontents") ||
+          location.pathname?.includes("editcontentmain") ||
+          location.pathname?.includes("deletecontent")
             ? user?.role === "editor" && (
                 <img
                   src={editor_icon}
@@ -823,14 +826,14 @@ export default function Sidebar() {
             <div>
               <div className="mainsearchcontianer">
                 <input
-                  onClick={handleSearchBar}
+                  // onClick={handleSearchBar}
                   placeholder="Search"
                   className={`${
                     themeState ? "sidebar_inputfield_sub" : "sidebar_inputfield"
                   }`}
                   type="text"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => handleSearchBar(e)}
                 />
 
                 <div

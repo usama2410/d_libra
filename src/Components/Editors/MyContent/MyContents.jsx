@@ -28,7 +28,7 @@ import {
   librarybookmark,
   setBookMarkPriority,
 } from "../../../Redux/Actions/Client Side/librar.y.action";
-import { addContentBookmark } from "../../../Redux/Actions/bookmark.action";
+import { addContentBookmark, showAllBoomark } from "../../../Redux/Actions/bookmark.action";
 import Swal from "sweetalert2";
 
 const MyContents = () => {
@@ -47,9 +47,10 @@ const MyContents = () => {
   let [count, setCount] = useState(0);
   const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
-  // console.log("handleSetBookMark", params);
+  console.log("handleSetBookMark", state?.path);
   const handleBack = () => {
-    navigate(state?.path);
+    // navigate(state?.path);
+    navigate("/editormainpage");
   };
 
   const settings = {
@@ -130,26 +131,25 @@ const MyContents = () => {
     ],
   };
 
-  const hanldeLibraryBook = async () => {
-    const response = await dispatch(librarybookmark(role, token));
-    // console.log("librarybookmark response", response);
-    response.map((data) => {
-      data?.map((item) => {
-        setHandleSetBookMark(item.PriorityType);
-      });
-    });
+  console.log("handleSetBookMark", handleSetBookMark)
+
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    // console.log(response.slice(0, 2));
+    setHandleSetBookMark(response?.slice(0, 2));
+  };
+
+  const dashboardData = async () => {
+    const response = await dispatch(
+      GetDashboardDataWithAuthorization(params?.id, role, token)
+    );
+    // console.log("response", response);
+    setdata(response);
   };
 
   useEffect(() => {
-    const dashboardData = async () => {
-      const response = await dispatch(
-        GetDashboardDataWithAuthorization(params?.id, role, token)
-      );
-      // console.log("response", response);
-      setdata(response);
-    };
+    handleShowAllBookmark();
     dashboardData();
-    hanldeLibraryBook();
   }, [bookmark, params]);
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
@@ -159,7 +159,10 @@ const MyContents = () => {
       },
     });
 
-    await dispatch(addRecenetViewContent(categoryid, role, token));
+    const response = await dispatch(
+      addRecenetViewContent(categoryid, role, token)
+    );
+    console.log("History", response);
   };
 
   const hanldeBookMarkPriority = async (Contentid) => {
