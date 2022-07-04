@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 import "./DeleteContent.css";
@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 const DeleteContent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { state } = useLocation();
   const params = useParams();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -22,10 +23,12 @@ const DeleteContent = () => {
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // console.log(params);
+  // console.log(state);
 
   const handleBack = () => {
-    navigate(`/detailpage/${params.id}/${params.role}/${params.categoryid}`);
+    navigate(`/detailpage/${params.id}/${params.role}/${params.categoryid}`, {
+      state: { path: state?.path },
+    });
   };
 
   useEffect(() => {
@@ -42,12 +45,12 @@ const DeleteContent = () => {
   const handleDeleteContent = async () => {
     // setIsLoading(true);
     const response = await dispatch(deletePost(params.id, token));
-    // console.log(response);
+    console.log(response);
     setMessage(response?.message);
     setShowMessage(true);
     if (response?.message === "Delete successfully") {
       const timer = setTimeout(() => {
-        navigate("/mycontents");
+        navigate("/");
       }, 5000);
       // setIsLoading(false);
       return () => clearTimeout(timer);
@@ -111,7 +114,7 @@ const DeleteContent = () => {
                       justifyContent: "center",
                     }}
                   >
-                    {message}
+                    Deleted Successfully
                   </h3>
                 ) : null}
               </h3>

@@ -141,13 +141,16 @@ export const getAllCategories = (token) => async (dispatch) => {
   }
 };
 
-export const getAllCourses = (token) => async (dispatch) => {
+export const getAllCourses = (role, token) => async (dispatch) => {
   try {
-    const response = await axios.get(`${URL}${endpoints.GET_ALL_COURSE}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `${URL}${endpoints.GET_ALL_COURSE}?role=${role}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     // console.log("GetAllCourses Response", response.data);
     return response?.data?.data;
   } catch (error) {
@@ -158,6 +161,7 @@ export const getAllCourses = (token) => async (dispatch) => {
 export const addnewChapters =
   (name, courseid, slug, imageName, uniqueidentity, token) =>
   async (dispatch) => {
+    console.log(name, courseid, slug, imageName, uniqueidentity);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("courseid", courseid);

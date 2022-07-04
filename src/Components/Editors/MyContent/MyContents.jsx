@@ -4,7 +4,7 @@ import ContentData from "./ContentData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "./MyContents.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -34,6 +34,8 @@ import Swal from "sweetalert2";
 const MyContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
   const { state } = useLocation();
   const [data, setdata] = useState([]);
   const theme = useSelector((state) => state.theme.state);
@@ -45,13 +47,10 @@ const MyContents = () => {
   let [count, setCount] = useState(0);
   const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
-  console.log("handleSetBookMark", handleSetBookMark);
+  // console.log("handleSetBookMark", params);
   const handleBack = () => {
     navigate(state?.path);
   };
-
-  // console.log("data", data);
-  // console.log("state", state);
 
   const settings = {
     dots: false,
@@ -133,7 +132,7 @@ const MyContents = () => {
 
   const hanldeLibraryBook = async () => {
     const response = await dispatch(librarybookmark(role, token));
-    console.log("librarybookmark response", response);
+    // console.log("librarybookmark response", response);
     response.map((data) => {
       data?.map((item) => {
         setHandleSetBookMark(item.PriorityType);
@@ -144,48 +143,28 @@ const MyContents = () => {
   useEffect(() => {
     const dashboardData = async () => {
       const response = await dispatch(
-        GetDashboardDataWithAuthorization(state?.topicId, role, token)
+        GetDashboardDataWithAuthorization(params?.id, role, token)
       );
-      console.log("response", response);
+      // console.log("response", response);
       setdata(response);
     };
     dashboardData();
     hanldeLibraryBook();
-  }, []);
+  }, [bookmark, params]);
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
-    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`);
+    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`, {
+      state: {
+        path: location.pathname,
+      },
+    });
 
     await dispatch(addRecenetViewContent(categoryid, role, token));
   };
 
-  const handleBookMark = async (content_id) => {
-    console.log("content_id", content_id);
-    setCount(count + 1);
-    if (count === 0) {
-      setPriority("highpriority");
-    }
-    if (count === 1) {
-      setPriority("reviewlist");
-    }
-    if (count === 2) {
-      setCount(0);
-      setPriority("futureread");
-    }
-    const response2 = await dispatch(
-      setBookMarkPriority(role, content_id, priority, token)
-    );
-
-    console.log("response2", response2);
-
-    const response = await dispatch(
-      addContentBookmark(content_id, role, token)
-    );
-    console.log("response", response);
-
-    // const response1 = await dispatch(librarybookmark(role, token));
-    // console.log("response1", response1);
-
+  const hanldeBookMarkPriority = async (Contentid) => {
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    setBookmark(response);
     !token &&
       Swal.fire({
         title: "Unauthenticated",
@@ -193,16 +172,6 @@ const MyContents = () => {
         iconColor: "red",
         icon: "error",
       });
-  };
-
-  const handleBookMarkColor = () => {
-    if (count === 0) {
-      return Bookmark_blue;
-    } else if (count === 1) {
-      return Bookmark_yellow;
-    } else if (count === 2) {
-      return Bookmark_red;
-    }
   };
 
   return (
@@ -230,7 +199,8 @@ const MyContents = () => {
             <span
               className={theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"}
             >
-              {data?.dropdown?.parent?.CategoryName}
+              {data?.dropdown?.parent?.CategoryName?.charAt(0).toUpperCase() +
+                data?.dropdown?.parent?.CategoryName?.slice(1)}
             </span>
           </div>
 
@@ -266,7 +236,8 @@ const MyContents = () => {
                           theme ? "chapternameclass" : "chapternameclasstwo"
                         }
                       >
-                        {item?.CategoryName}
+                        {item?.CategoryName?.charAt(0).toUpperCase() +
+                          item?.CategoryName?.slice(1)}
                       </span>
                     </div>
 
@@ -301,26 +272,28 @@ const MyContents = () => {
                                       {e.title}
                                     </Typography>
                                   </Typography>
-                                  <div className="mycontenttagscontainer">
+                                  {/* <div className="mycontenttagscontainer">
                                     <img
                                       src={
-                                        handleSetBookMark === "highpriority"
+                                        e?.Prioritytype === "highpriority"
                                           ? Bookmark_blue
-                                          : handleSetBookMark === "reviewlist"
+                                          : e?.Prioritytype === "reviewlist"
                                           ? Bookmark_green
-                                          : handleSetBookMark === "futureread"
+                                          : e?.Prioritytype === "futureread"
                                           ? Bookmark_red
-                                          : !token
-                                          ? Bookmark_grey
-                                          : handleSetBookMark === "Dayend"
+                                          : e?.Prioritytype === "Personal"
                                           ? Bookmark_yellow
-                                          : null
+                                          : e?.Prioritytype === "Dayend"
+                                          ? Bookmark_grey
+                                          : Bookmark_grey
                                       }
                                       alt=""
-                                      onClick={() => handleBookMark(e.id)}
+                                      onClick={() =>
+                                        hanldeBookMarkPriority(e?.id)
+                                      }
                                       style={{ cursor: "pointer" }}
                                     />
-                                  </div>
+                                  </div> */}
                                 </div>
                               ) : (
                                 ""

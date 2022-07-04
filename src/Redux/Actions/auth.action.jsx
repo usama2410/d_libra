@@ -166,21 +166,85 @@ export const resetPassword = (email, passowrd, token) => async (dispatch) => {
 };
 
 export const logout = (role, token) => async (dispatch) => {
-  console.log(role, URL + endpoints.LOGOUT + role);
+  var config = {
+    method: "post",
+    url: "https://api.libraa.ml/webapi/logout?role=" + role,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   try {
-    const response = await axios.post(
-      `${URL}${endpoints.LOGOUT}?role=${role}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log("Logout response", response);
-    return response;
+    const response = await axios(config);
+    console.log("logout", response);
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+      payload: {
+        userId: "",
+        email: "",
+        username: "",
+        firstName: "",
+        lastName: "",
+        status: "",
+        profile: "",
+        token: "",
+        role: "",
+      },
+    });
+    return response.data;
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+      payload: {
+        userId: "",
+        email: "",
+        username: "",
+        firstName: "",
+        lastName: "",
+        status: "",
+        profile: "",
+        token: "",
+        role: "",
+      },
+    });
   }
+
+  // axios(config)
+  //   .then(function (response) {
+  //     console.log(JSON.stringify(response.data));
+  //     dispatch({
+  //       type: "LOGOUT_SUCCESS",
+  //       payload: {
+  //         userId: "",
+  //         email: "",
+  //         username: "",
+  //         firstName: "",
+  //         lastName: "",
+  //         status: "",
+  //         profile: "",
+  //         token: "",
+  //         role: "",
+  //       },
+  //     });
+  //     return response;
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // console.log(role, URL + endpoints.LOGOUT );
+  // try {
+  //   const response = await axios.post(
+  //     `${URL}${endpoints.LOGOUT}?role=${role}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
+  //   return response;
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 export const themeSwitch = (themestate) => async (dispatch) => {

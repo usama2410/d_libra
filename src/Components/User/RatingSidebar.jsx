@@ -10,6 +10,7 @@ import "./RatingForm.css";
 import StarIcon from "@mui/icons-material/Star";
 import Select from "react-select";
 import {
+  getAllCourses,
   getMainCategory,
   getParentChildCategories,
 } from "../../Redux/Actions/Editor/Category";
@@ -40,7 +41,7 @@ const RatingSidebar = () => {
   const [isArray, setIsArray] = useState();
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getAllCourses(role, token));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };
@@ -71,7 +72,7 @@ const RatingSidebar = () => {
 
   const handleSelector = (selectedOption) => {
     setSelectedOption(selectedOption);
-    console.log("selectedOption", selectedOption);
+    // console.log("selectedOption", selectedOption);
     setCourseId(selectedOption?.id);
     setValue(selectedOption?.rating);
   };
@@ -82,7 +83,7 @@ const RatingSidebar = () => {
     const response = await dispatch(
       ratingCourse(role, courseId, ratingValue, comment, token)
     );
-    console.log(response);
+    // console.log(response);
     setMessage(response?.message);
     const timer = setTimeout(() => {
       setMessage("");

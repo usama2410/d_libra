@@ -263,6 +263,7 @@ const Recentlyviewed = () => {
                                 alt=""
                                 className="tagstwocontainer"
                                 onClick={() => handleBookMark(e?.Content_id)}
+                                style={{ cursor: "pointer" }}
                               />
                             </div>
                           </div>
@@ -274,15 +275,9 @@ const Recentlyviewed = () => {
                   })}
                 </Slider>
               ) : (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "30px",
-                  }}
-                >
-                  <CircularProgress color="inherit" size={60} />
-                </Box>
+                <div style={{ display: "flex", justifyContent: "center"}}>
+                  <h4>No history for {day?.chapterName}</h4>
+                </div>
               )}
             </div>
           </div>

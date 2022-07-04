@@ -27,7 +27,7 @@ const EditContentMain = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const [contentTitle, setContentTitle] = useState("");
   const [imageName, setImageName] = useState("");
@@ -43,7 +43,7 @@ const EditContentMain = () => {
   const [image, setImage] = useState("");
   const [metaDescription, setMetaDiscription] = useState("");
   const [OGP, setOGP] = useState();
-    console.log("contentTitle", contentTitle, tags)
+  // console.log("contentTitle", contentTitle, tags)
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionChild, setSelectedOptionChild] = useState("");
 
@@ -63,7 +63,10 @@ const EditContentMain = () => {
   // console.log("selectedOptionChild", selectedOptionChild);
 
   const handleBack = () => {
-    navigate(`/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`);
+    navigate(
+      `/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`,
+      { state: { path: location?.state } }
+    );
   };
 
   const customStyles = {
@@ -166,7 +169,7 @@ const EditContentMain = () => {
   // console.log("parentCategory", parentOptions, selectedOption);
 
   const childOptions = childCategory?.map((category) => {
-    console.log("category.id", category);
+    // console.log("category.id", category);
     return {
       id: category.id,
       label: category.course,
@@ -212,7 +215,7 @@ const EditContentMain = () => {
         token
       )
     );
-    console.log("handleUpdatePost response", response);
+    // console.log("handleUpdatePost response", response);
     setMessage(response?.message);
     if (response?.message === "Update Post Successfully") {
       navigate(
@@ -231,7 +234,7 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      console.log("response", response);
+      // console.log("response", response);
       setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);

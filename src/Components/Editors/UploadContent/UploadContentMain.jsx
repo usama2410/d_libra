@@ -38,7 +38,7 @@ const UploadContentMain = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionContent, setSelectedOptionContent] = useState("");
 
-  // console.log("image state", message);
+  // console.log("image state", contentId);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const onEditorStateChange = (editorState) => {
@@ -66,20 +66,20 @@ const UploadContentMain = () => {
     const response = await dispatch(
       addPost(
         contentTitle,
-        uniqueIdentity,
+        contentId,
         tags,
         htmlText,
         imageName,
         metaDescription,
         OGP,
-        contentId,
+        uniqueIdentity,
         token
       )
     );
-    console.log("response", response);
+    // console.log("response", response);
     setMessage(response?.message);
     if (response?.message === "Add Post Successfully") {
-      navigate("/mycontents");
+      navigate("/editormainpage");
     }
 
     const timer = setTimeout(() => {
@@ -196,8 +196,8 @@ const UploadContentMain = () => {
 
   const handleSelector = async (selectedOption) => {
     setSelectedOption(selectedOption);
-    console.log("selectedOption ID", selectedOption);
-    // setContentId(selectedOption?.id);
+    // console.log("selectedOption ID", selectedOption);
+    setContentId(selectedOption?.id);
 
     const response = await dispatch(
       getChildCategories(selectedOption.id, token)
@@ -217,9 +217,8 @@ const UploadContentMain = () => {
 
   const handleSelectorContent = (selectedOptionContent) => {
     setSelectedOptionContent(selectedOptionContent);
-    console.log("selectedOption ID", selectedOptionContent);
-    setUniqueIdentity(selectedOptionContent?.id);
-    setContentId(selectedOptionContent?.identifier);
+    // console.log("selectedOption ID", selectedOptionContent);
+    setUniqueIdentity(selectedOptionContent?.identifier);
   };
 
   return (
@@ -338,7 +337,12 @@ const UploadContentMain = () => {
                     : "uploadcontentinputfield widthautoclass"
                 }
                 placeholder="Content ID"
-                value={contentId}
+                value={uniqueIdentity}
+                maxLength={12}
+                minLength={8}
+                onChange={(e) =>
+                  setUniqueIdentity(e.target.value.replace(/\D/g, ""))
+                }
               />
             </div>
             <div>

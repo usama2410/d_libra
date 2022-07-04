@@ -15,7 +15,9 @@ const EditorsMainPage = () => {
   // console.log(location);
   const token = useSelector((state) => state.auth.token);
 
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/");
+  };
   const theme = useSelector((state) => state.theme.state);
 
   const [parentCategory, setParentCategory] = useState([]);
@@ -158,7 +160,7 @@ const EditorsMainPage = () => {
                 className="upload_contents_button"
                 onClick={() =>
                   selectedOption?.id
-                    ? navigate("/mycontents", {
+                    ? navigate(`/mycontents/${selectedOption?.id}`, {
                         state: {
                           topicId: selectedOption.id,
                           path: location.pathname,

@@ -11,7 +11,7 @@ export const courseHistory = (token, role) => async (dispatch) => {
         },
       }
     );
-    console.log("courseHistory response", response);
+    // console.log("courseHistory response", response);
     return response.data;
   } catch (error) {
     console.log(error);

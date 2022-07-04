@@ -15,6 +15,18 @@ export const addPost =
     token
   ) =>
   async (dispatch) => {
+    console.log(
+      "addPost",
+      contentTitle,
+      contentId,
+      tags,
+      htmlText,
+      image,
+      metaDescription,
+      OGP,
+      uniqueIdentity,
+      token
+    );
     const formData = new FormData();
     formData.append("title", contentTitle);
     formData.append("Categroyid", contentId);

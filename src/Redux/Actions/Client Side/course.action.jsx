@@ -22,6 +22,20 @@ export const viewCourseStatus = (token, role) => async (dispatch) => {
     return response?.data;
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+      payload: {
+        userId: "",
+        email: "",
+        username: "",
+        firstName: "",
+        lastName: "",
+        status: "",
+        profile: "",
+        token: "",
+        role: "",
+      },
+    });
   }
 };
 export const addToRecentViewCourses =
@@ -40,7 +54,7 @@ export const addToRecentViewCourses =
           },
         }
       );
-      // console.log("addToRecentViewCourses response", response);
+      console.log("addToRecentViewCourses response", response);
       return response?.data;
     } catch (error) {
       console.log(error);

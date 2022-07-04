@@ -114,7 +114,6 @@ const FooterButtons = (props) => {
               src={Popup_History_off}
               alt=""
               className="footerbuttonimages"
-              onClick={hanldeNavigateToHistory}
             />
           )}
 

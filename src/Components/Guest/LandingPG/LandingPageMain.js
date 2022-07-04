@@ -216,7 +216,8 @@ const LandingPageMain = () => {
                             <Rating
                               sx={{ ml: 1 }}
                               name="read-only"
-                              readOnly 
+                              readOnly
+                              precision={0.5}
                               value={e?.totalratinng}
                               className="secondratingcomponent"
                               emptyIcon={
@@ -320,6 +321,7 @@ const LandingPageMain = () => {
                               name="read-only"
                               readOnly
                               value={value}
+                              precision={0.5}
                               className="secondratingcomponent"
                               emptyIcon={
                                 <StarIcon

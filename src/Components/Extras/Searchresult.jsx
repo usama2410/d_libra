@@ -10,20 +10,30 @@ import FooterButtons from "../User/FooterButtons";
 import { useSelector, useDispatch } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { searchAction } from "../../Redux/Actions/Client Side/search.action";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { development } from "../../endpoints";
+import Swal from "sweetalert2";
+import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
   
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
+  const [bookmark, setBookmark] = useState("");
 
   console.log(data)
 
@@ -41,7 +51,7 @@ const Searchresult = () => {
       }
     };
     searchResult();
-  }, [window.location.search, token, params]);
+  }, [window.location.search, token, params, bookmark]);
 
   const settings = {
     dots: false,
@@ -96,6 +106,32 @@ const Searchresult = () => {
       },
     ],
   };
+
+  const hanldeBookMarkPriority = async (Contentid) => {
+    console.log(Contentid);
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    console.log(response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
+
+  const hanldeDetails = (topic) => {
+    // navigate(
+    //   `/detailpage/id=${topic?.Contentid}/role=${role}/categoryid=${topic?.Chapterid}`,
+    //   {
+    //     state: {
+    //       path: location.pathname,
+    //     },
+    //   }
+    // );
+  };
+
   return (
     <>
       <div className={theme ? "" : "recentlyviewedmaincontainer"}>
@@ -155,6 +191,7 @@ const Searchresult = () => {
                                     }`,
                                   }}
                                   alt=""
+                                  onClick={() => hanldeDetails(e)}
                                 />
                                 {e.images ? (
                                   <div className="underimagetextcontainer">
@@ -174,13 +211,33 @@ const Searchresult = () => {
                                         {e.title}
                                       </Typography>
                                     </Typography>
-                                    <div className="mycontenttagscontainer">
-                                      <img
-                                        src={Bookmark_blue}
-                                        alt=""
-                                        className="tagstwocontainer"
-                                      />
-                                    </div>
+                                    {/* <div className="mycontenttagscontainer">
+                                    <img
+                                          src={
+                                            item?.PriorityType ===
+                                            "highpriority"
+                                              ? Bookmark_blue
+                                              : item?.PriorityType ===
+                                                "reviewlist"
+                                              ? Bookmark_green
+                                              : item?.PriorityType ===
+                                                "futureread"
+                                              ? Bookmark_red
+                                              : item?.PriorityType ===
+                                                "Personal"
+                                              ? Bookmark_yellow
+                                              : item?.PriorityType === "Dayend"
+                                              ? Bookmark_grey
+                                              : Bookmark_grey
+                                          }
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          onClick={() =>
+                                            hanldeBookMarkPriority(e?.id)
+                                          }
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                    </div> */}
                                   </div>
                                 ) : (
                                   ""

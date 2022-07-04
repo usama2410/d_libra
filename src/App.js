@@ -51,7 +51,7 @@ function App() {
 
   const backgroundHanlde = () => {
     if (
-      (window.location.href.split("/")[3] === "mycontents" &&
+      (window.location.href.split("/")[3] === "mycontents/:id" &&
         theme === false) ||
       (window.location.href.split("/")[3] === "uploadcontentmain" &&
         theme === false) ||
@@ -69,7 +69,7 @@ function App() {
       document.body.style.backgroundColor = "#111111";
       return "darkTheme";
     } else if (
-      (window.location.href.split("/")[3] === "mycontents" && theme === true) ||
+      (window.location.href.split("/")[3] === "mycontents/:id" && theme === true) ||
       (window.location.href.split("/")[3] === "uploadcontentmain" &&
         theme === true) ||
       (window.location.href.split("/")[3] === "editormainpage" &&
@@ -128,7 +128,7 @@ function App() {
                         element={<LandingPageMain />}
                       />
                       <Route
-                        path="/mycontents"
+                        path="/mycontents/:id"
                         exact
                         element={<MyContents />}
                       />

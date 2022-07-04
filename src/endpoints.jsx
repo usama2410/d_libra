@@ -4,7 +4,6 @@ export const URL =
   process.env.NODE_ENV === "development" ? development : production;
 
 export const endpoints = {
-
   //Home
   GET_MAIN_CATEGORY: "/webapi/GetParentCategories",
 
@@ -78,9 +77,10 @@ export const endpoints = {
 
   // BOOKMARK
   ADD_BOOKMARK_LIBRARY: "/webapi/bookadd",
+  GET_ALL_BOOKMARK: "/webapi/bookadd",
   ADD_CONTENT_BOOKMARK: "/webapi/addcontent",
   GET_BOOKMARK_COURSE: "/webapi/GetPriorityCourse",
 
-  // HISTORY 
+  // HISTORY
   GET_HISTORY_COURSE: "/webapi/recentlyViewContenthistory",
 };
