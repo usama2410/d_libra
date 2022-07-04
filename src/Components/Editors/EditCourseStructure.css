@@ -487,11 +487,11 @@
   display: block;
 }
 
-@media screen and (max-width: 1300px) {
+/* @media screen and (max-width: 1300px) {
   .scrollable {
-    height: 410px;
+    height: 700px;
   }
-}
+} */
 
 @media screen and (ma-width: 1054px) {
   .detail_tag_text_two {
