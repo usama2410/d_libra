@@ -235,7 +235,7 @@ const DetailPage = () => {
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div className="detail_page_content">
                 <div className="scrollable">
-                  <span>
+                  <span style={{lineHeight: "35px"}}>
                     {details?.post?.content !== "" ? (
                       parse(`${details?.post?.content}`)
                     ) : (
