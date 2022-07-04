@@ -24,7 +24,10 @@ import { logout } from "../../Redux/Actions/auth.action";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { home } from "../../Redux/Actions/Client Side/home.action";
-import { addBookmark } from "../../Redux/Actions/bookmark.action";
+import {
+  addBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
@@ -56,15 +59,23 @@ const UserSettingViewPage = () => {
     navigate("/");
   };
 
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    console.log(response.slice(0, 2));
+    setAddBookMark(response?.slice(0, 2));
+  };
+
+  const userData = async () => {
+    const response = await dispatch(profileData(token));
+    setUsername(response?.data?.username);
+    setEmail(response?.data?.email);
+    setFirstName(response?.data?.fname);
+    setLastName(response?.data?.lname);
+  };
+
   useEffect(() => {
-    const userData = async () => {
-      const response = await dispatch(profileData(token));
-      setUsername(response?.data?.username);
-      setEmail(response?.data?.email);
-      setFirstName(response?.data?.fname);
-      setLastName(response?.data?.lname);
-    };
     userData();
+    handleShowAllBookmark();
   }, []);
 
   const handleUpdateProfile = async (e) => {
@@ -97,11 +108,12 @@ const UserSettingViewPage = () => {
     }
   };
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
+  const handleLogout = async () => {
     // localStorage.clear();
     // window.load((window.location.href = "/logout"));
     const response = await dispatch(logout(role, token));
+    // console.log("response", response);
+    response?.message === "logout successfully" && navigate("/logout");
     // navigate("/logout")
   };
 
@@ -133,7 +145,8 @@ const UserSettingViewPage = () => {
 
     console.log("priorityArray", priorityArray);
     if (personal.length || dayend.length !== 0) {
-      await dispatch(addBookmark(priorityArray, role, token));
+      const response = await dispatch(addBookmark(priorityArray, role, token));
+      console.log("response", response);
     } else {
       setMessage("Please enter bookmark name");
     }
@@ -356,7 +369,7 @@ const UserSettingViewPage = () => {
             {/* AUTOCOMPLETE */}
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="High Priority Review List"
+              value="High Priority Review List"
             />
           </div>
           <div className="vector_container">
@@ -370,7 +383,7 @@ const UserSettingViewPage = () => {
 
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="Review List"
+              value="Review List"
             />
           </div>
           <div className="vector_container">
@@ -384,9 +397,29 @@ const UserSettingViewPage = () => {
 
             <input
               className={theme ? "profile_sub_input" : "profile_sub_input_two"}
-              placeholder="For future read"
+              value="For future read"
             />
           </div>
+
+          {addBookMark?.map((bookmark) => {
+            return (
+              <div className="vector_container">
+                <div className="vector_image">
+                  <img
+                    src={Bookmark_blue}
+                    alt=""
+                    className="tagimageusersettingpage"
+                  />
+                </div>
+                <input
+                  className={
+                    theme ? "profile_sub_input" : "profile_sub_input_two"
+                  }
+                  value={bookmark?.name}
+                />
+              </div>
+            );
+          })}
 
           {count === 1 && (
             <>

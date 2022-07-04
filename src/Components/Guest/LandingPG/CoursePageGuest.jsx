@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CourseGuestData from "./CourseGuestData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -18,6 +18,7 @@ import Box from "@mui/material/Box";
 const CoursePageGuest = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
   const role = useSelector((state) => state.auth.role);
@@ -42,7 +43,11 @@ const CoursePageGuest = () => {
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
     // console.log(categoryid, postId);
-    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`);
+    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`, {
+      state: {
+        path: location.pathname,
+      },
+    });
 
     // await dispatch(addRecenetViewContent(categoryid, role, token));
   };

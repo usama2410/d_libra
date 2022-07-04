@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import Rating from "../assests/Rating.png";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { themeSwitch } from "../Redux/Actions/auth.action";
+import { logout, themeSwitch } from "../Redux/Actions/auth.action";
 import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
 import { useLocation } from "react-router-dom";
 import UnionClose from "../assests/UnionClose.png";
@@ -142,9 +142,13 @@ export default function Sidebar() {
     state();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    window.load((window.location.href = "/logout"));
+  const handleLogout = async () => {
+    // localStorage.clear();
+    // window.load((window.location.href = "/logout"));
+    const response = await dispatch(logout(role, token));
+    // console.log("response", response);
+    response?.message === "logout successfully" && navigate("/logout");
+    !token && navigate("/login");
   };
 
   const handleSearchState = async (e) => {
@@ -161,7 +165,7 @@ export default function Sidebar() {
   const handleChange = async (event) => {
     setThemeState(event.target.checked);
     dispatch(themeSwitch(!themeState));
-    navigate(`/`);
+    // navigate(`/`);
   };
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -667,7 +671,7 @@ export default function Sidebar() {
       "/editcoursestructure" === location.pathname ||
       "/addnewcategory" === location.pathname ||
       "/uploadcontentmain" === location.pathname ||
-      "/mycontents" === location.pathname ||
+      "/mycontents/:id" === location.pathname ||
       "/detailpage" === location.pathname ||
       "/editcontentmain" === location.pathname ||
       "/deletecontent" === location.pathname
@@ -801,7 +805,7 @@ export default function Sidebar() {
           "/editcoursestructure" === location.pathname ||
           "/addnewcategory" === location.pathname ||
           "/uploadcontentmain" === location.pathname ||
-          "/mycontents" === location.pathname ||
+          "/mycontents/:id" === location.pathname ||
           "/editcontentmain" === location.pathname ||
           "/deletecontent" === location.pathname
             ? user?.role === "editor" && (

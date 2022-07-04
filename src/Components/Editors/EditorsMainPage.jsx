@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./EditorMainPage.css";
 import { Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
 import Select from "react-select";
 import { getParentChildCategories } from "../../Redux/Actions/Editor/Category";
+import Swal from "sweetalert2";
 
 const EditorsMainPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  // console.log(location);
   const token = useSelector((state) => state.auth.token);
 
-  const handleBack = () => {};
+  const handleBack = () => {
+    navigate("/");
+  };
   const theme = useSelector((state) => state.theme.state);
 
   const [parentCategory, setParentCategory] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleBackgroung = () => {
     if (
@@ -25,8 +31,6 @@ const EditorsMainPage = () => {
       return "#eeeeee";
     }
   };
-
-
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));
@@ -38,6 +42,13 @@ const EditorsMainPage = () => {
     // console.log("category.id", category.id);
     return { id: category.id, label: category.CategoryName };
   });
+
+  const handleSelector = async (selectedOption) => {
+    setSelectedOption(selectedOption);
+    // console.log("selectedOption ID", selectedOption.id);
+  };
+
+  console.log("selectedOption", selectedOption);
 
   useEffect(() => {
     handleParentChildeCategory();
@@ -139,13 +150,24 @@ const EditorsMainPage = () => {
                 }
                 placeholder="Git & GitHub Introduction"
                 options={parentOptions}
+                onChange={handleSelector}
+                value={selectedOption}
               />
             </div>
             <div className="editormainpagebuttoncontainertwo centercontainer">
               <Button
                 variant="outlined"
                 className="upload_contents_button"
-                onClick={() => navigate("/mycontents")}
+                onClick={() =>
+                  selectedOption?.id
+                    ? navigate(`/mycontents/${selectedOption?.id}`, {
+                        state: {
+                          topicId: selectedOption.id,
+                          path: location.pathname,
+                        },
+                      })
+                    : Swal.fire("Please select a course.")
+                }
               >
                 Edit Contents{" "}
               </Button>

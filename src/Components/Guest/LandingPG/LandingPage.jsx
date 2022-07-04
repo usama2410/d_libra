@@ -137,7 +137,7 @@ const LandingPage = () => {
 
   const MainCategory = async () => {
     const response = await dispatch(home(token));
-    console.log("Home", response);
+    // console.log("Home", response);
     setdata(response);
   };
 
@@ -204,7 +204,8 @@ const LandingPage = () => {
                           theme ? "chapternameclass" : "chapternameclasstwo"
                         }
                       >
-                        {item?.chaptername}
+                        {item?.chaptername.charAt(0).toUpperCase() +
+                          item?.chaptername.slice(1)}
                       </span>
                     </div>
                     <div>
@@ -232,7 +233,8 @@ const LandingPage = () => {
                                       color: theme ? "#363636" : "#FFFFFF",
                                     }}
                                   >
-                                    {e.CategoryName}
+                                    {e?.CategoryName.charAt(0).toUpperCase() +
+                                      e?.CategoryName.slice(1)}
                                   </Typography>
                                 </div>
                               ) : (
@@ -263,6 +265,7 @@ const LandingPage = () => {
                                     sx={{ ml: 1 }}
                                     name="read-only"
                                     readOnly
+                                    precision={0.5}
                                     value={e?.totalratinng}
                                     className="secondratingcomponent"
                                     emptyIcon={

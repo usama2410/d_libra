@@ -13,7 +13,25 @@ export const addBookmark = (rawData, role, token) => async (dispatch) => {
         },
       }
     );
-    console.log("Add Bookmark", response);
+    // console.log("Add Bookmark", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const showAllBoomark = (role, token) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${URL}${endpoints.GET_ALL_BOOKMARK}?role=${role}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // console.log("showAllBoomark", response);
+    return response?.data?.data;
   } catch (error) {
     console.log(error);
   }
@@ -30,7 +48,7 @@ export const getBookmarkCourse = (role, token) => async (dispatch) => {
       }
     );
     // console.log("Get Bookmark Course", response);
-    return response?.data;
+    return response?.data?.data;
   } catch (error) {
     console.log(error);
   }

@@ -42,7 +42,7 @@ const Feedback = () => {
 
   // GET ALL COURSES
   const handleGetAllCourses = async () => {
-    const response = await dispatch(getAllCourses(token));
+    const response = await dispatch(getAllCourses(role, token));
     // console.log("response", response);
     setParentCourse(response);
   };
@@ -65,7 +65,7 @@ const Feedback = () => {
   // GET ALL TOPICS
   const handleGetAllTopics = async () => {
     const response = await dispatch(topicsOfCourses(parentID, role, token));
-    console.log("response", response);
+    // console.log("response", response);
     setTopics(response);
   };
 
@@ -209,7 +209,9 @@ const Feedback = () => {
         ) : message === "Response recorded" ? (
           <div className={theme ? "successMessage" : "successMessageTwo"}>
             Feedback recorded successfully
-          </div>
+          </div>  
+        ) : message === "response already recorded" ? (
+          <div className="errorMessage">Response already recorded</div>
         ) : null}
         <Select
           styles={theme ? customStyles : customStyless}

@@ -64,9 +64,9 @@ const CollapsibleTable = () => {
     tempData.splice(e?.destination?.index, 0, source_data);
     setParentChidCategory(tempData);
 
-    console.log("[source_data]", [source_data]);
-    console.log("e?.source?.index", e?.source?.index);
-    console.log("e?.destination?.index", e?.destination);
+    // console.log("[source_data]", [source_data]);
+    // console.log("e?.source?.index", e?.source?.index);
+    // console.log("e?.destination?.index", e?.destination);
   };
 
   const hanldeUpdateStatus = () => {

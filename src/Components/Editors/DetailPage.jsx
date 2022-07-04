@@ -27,8 +27,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const location = useLocation();
-
+  const { state } = useLocation();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -42,11 +41,11 @@ const DetailPage = () => {
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
 
-  console.log("details", details);
-  console.log("tags", details.post?.tags.split(","));
+  // console.log("details", state);
+  // console.log("tags", details?.bookmark?.PriorityType);
 
   const handleBack = () => {
-    navigate("/mycontents");
+    navigate(state?.path);
   };
 
   const handleBookMark = () => {
@@ -63,6 +62,8 @@ const DetailPage = () => {
     } else if (details?.bookmark?.PriorityType === "Personal") {
       return Bookmark_yellow;
     } else if (details?.bookmark?.PriorityType === "Dayend") {
+      return Bookmark_grey;
+    } else {
       return Bookmark_grey;
     }
   };
@@ -170,28 +171,40 @@ const DetailPage = () => {
               >
                 {role === "editor" && (
                   <div className="deleteeditcontainer">
-                    <button
-                      className="detail_delete_button"
-                      onClick={() =>
-                        navigate(
-                          `/deletecontent/${params.id}/${params.role}/${params.categoryid}`
-                        )
-                      }
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="detail_edit_button"
-                      onClick={() =>
-                        navigate(
-                          `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`
-                        )
-                      }
-                    >
-                      Edit
-                    </button>
+                    <div className="subcontainerdelete">
+                      <button
+                        className="detail_delete_button"
+                        onClick={() =>
+                          navigate(
+                            `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
+                            { state: { path: state?.path } }
+                          )
+                        }
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="detail_edit_button"
+                        onClick={() =>
+                          navigate(
+                            `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
+                            { state: state?.path }
+                          )
+                        }
+                      >
+                        Edit
+                      </button>
+                    </div>
+                    <img
+                      src={handleBookMark()}
+                      alt=""
+                      className="detail_tag_text_two"
+                      style={{ paddingLeft: "24px", cursor: "pointer" }}
+                      onClick={hanldeBookMarkPriority}
+                    />
                   </div>
                 )}
+
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
@@ -205,18 +218,16 @@ const DetailPage = () => {
                         <button className="detail_tag_button">{tag}</button>
                       ))}
                     </>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
-                  <img
+                  {/* <img
                     src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"
                     style={{ paddingLeft: "24px", cursor: "pointer" }}
                     onClick={hanldeBookMarkPriority}
-                  />
+                  /> */}
                 </div>
               </div>
             </Grid>
@@ -253,17 +264,15 @@ const DetailPage = () => {
                       <button className="detail_tag_button">{tag}</button>
                     ))}
                   </>
-                ) : (
-                  null
-                )}
+                ) : null}
 
-                <img
+                {/* <img
                   src={handleBookMark()}
                   alt=""
                   className="detail_tag_text_two"
                   style={{ paddingLeft: "24px", cursor: "pointer" }}
                   onClick={hanldeBookMarkPriority}
-                />
+                /> */}
                 {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
               </div>

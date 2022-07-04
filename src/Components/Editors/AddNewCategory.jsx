@@ -15,12 +15,13 @@ import Select from "react-select";
 import { ArrowBack } from "@mui/icons-material";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { home } from "../../Redux/Actions/Client Side/home.action";
 
 const AddNewCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
   const [image, setImage] = useState("");
   const [imageName, setImageName] = useState("");
   const [uniqueIdentity, setUniqueIdentity] = useState("");
@@ -28,7 +29,6 @@ const AddNewCategory = () => {
   const [slug, setSlug] = useState("");
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-  const token = useSelector((state) => state.auth.token);
 
   // CATEGORIES HOOKS
   const [parentCategory, setParentCategory] = useState([]);
@@ -42,33 +42,20 @@ const AddNewCategory = () => {
   // CHAPTER HOOKS
   const [selectedChapterOption, setSelectedChapterOption] = useState("");
 
-  const [categoryType, setCategoryType] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = () => {
     navigate("/editcoursestructure");
   };
 
-  console.log("message", message);
-  // const hanldeSetUniqueIdentity = (target) => {
-  //   setUniqueIdentity(target.value);
-
-  //   // if (
-  //   //   selectedCategoryOption.label === "Course" &&
-  //   //   uniqueIdentity.length > 3
-  //   // ) {
-  //   //   setUniqueIdentity(target.value);
-  //   // } else {
-  //   //   console.log("hi");
-  //   // }
-  // };
   const handleChange = (e) => {
     if (e.target.files.length) {
       setImage(URL.createObjectURL(e.target.files[0]));
       setImageName(e.target.files[0]);
     }
   };
+
+  // console.log("message", message);
 
   const options = [
     { value: "Category", label: "Category" },
@@ -81,42 +68,30 @@ const AddNewCategory = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // ADD CATEGORY CODE
-    const response = await dispatch(
-      addParentCategorie(name, slug, imageName, uniqueIdentity?.number, token)
-    );
-    console.log("response", response);
     // ADD COURSE CODE
     if (selectedCategoryOption?.label === "Course") {
       const response = await dispatch(
         addnewCourse(name, slug, imageName, uniqueIdentity, parentID, token)
       );
+      response?.message?.includes("Successfully") && navigate("/");
       setMessage(response?.message);
     }
+
     // ADD CHAPTER CODE
-    if (selectedCategoryOption?.label === "Chapter") {
+    else if (selectedCategoryOption?.label === "Chapter") {
       const response = await dispatch(
         addnewChapters(name, parentID, slug, imageName, uniqueIdentity, token)
       );
+      response?.message?.includes("Successfully") && navigate("/");
       setMessage(response?.message);
     }
-
-    setIsLoading(false);
-
-    setMessage(response?.message);
-    // if (
-    //   response.message === "Add successfully" ||
-    //   "Add Course Successfully" ||
-    //   "Add Chapters Successfully"
-    // ) {
-    //   navigate("/");
-    // }
-    if (response?.message === "Add successfully") {
-      navigate("/");
-    } else if (response?.message === "Add Chapters Successfully") {
-      navigate("/");
-    } else if (response?.message === "Add Course Successfully") {
-      navigate("/");
+    // ADD CATEGORY CODE
+    else {
+      const response = await dispatch(
+        addParentCategorie(name, slug, imageName, uniqueIdentity, token)
+      );
+      response?.message?.includes("successfully") && navigate("/");
+      setMessage(response?.message);
     }
 
     const timer = setTimeout(() => {
@@ -128,24 +103,10 @@ const AddNewCategory = () => {
     return () => clearTimeout(timer);
   };
 
-  const authDashboradData = async () => {
-    const response = await dispatch(home());
-    const categoryLabel = response[0]?.data.map((babe) => {
-      return {
-        id: null,
-        label: (
-          babe.chaptername?.charAt(0).toLowerCase() +
-          babe.chaptername.substring(1)
-        ).replace(/ /g, ""),
-      };
-    });
-    setCategoryType(categoryLabel);
-  };
-
   // GET ALL CATEGORIES
   const handleGetAllCategories = async () => {
     const response = await dispatch(getAllCategories(token));
-    console.log("response", response);
+    // console.log("response", response);
     setParentCategory(response);
   };
 
@@ -167,8 +128,8 @@ const AddNewCategory = () => {
 
   // GET ALL COURSES
   const handleGetAllCourses = async () => {
-    const response = await dispatch(getAllCourses(token));
-    console.log("response", response);
+    const response = await dispatch(getAllCourses(role, token));
+    // console.log("response", response);
     setParentCourse(response);
   };
 
@@ -189,10 +150,10 @@ const AddNewCategory = () => {
   };
 
   useEffect(() => {
-    authDashboradData();
+    // authDashboradData();
     handleGetAllCategories();
     handleGetAllCourses();
-  }, []);
+  }, [selectedCategoryOption]);
 
   const handleCategorySelector = (selectedCategoryOption) => {
     // console.log(selectedCategoryOption);
@@ -440,21 +401,28 @@ const AddNewCategory = () => {
           <input
             className={theme ? "addcategory_inputt_sub" : "addcategory_inputt"}
             placeholder="Category ID"
-            value={uniqueIdentity.number}
-            // maxlength={
+            value={uniqueIdentity}
+            maxlength={
+              selectedCategoryOption?.label === "Category"
+                ? 4
+                : selectedCategoryOption?.label === "Course"
+                ? 6
+                : selectedCategoryOption?.label === "Chapter"
+                ? 8
+                : 4
+            }
+            // minlength={
             //   selectedCategoryOption?.label === "Category"
             //     ? 4
             //     : selectedCategoryOption?.label === "Course"
             //     ? 6
-            //     : selectedCategoryOption?.label === "Chapter" && 8
+            //     : selectedCategoryOption?.label === "Chapter"
+            //     ? 8
+            //     : 4
             // }
-            // type="number"
             name="number"
             onChange={(e) =>
-              setUniqueIdentity({
-                ...uniqueIdentity,
-                [e.target.name]: e.target.value.replace(/\D/g, ""),
-              })
+              setUniqueIdentity(e.target.value.replace(/\D/g, ""))
             }
             // onChange={(e) => hanldeSetUniqueIdentity(e.target)}
           />
