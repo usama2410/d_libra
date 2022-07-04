@@ -19,6 +19,7 @@ import { Box } from "@material-ui/core";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import "../EditCourseStructure.css";
+import { GoPrimitiveDot } from "react-icons/go";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,11 +33,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(38, 36, 42, 0.7)",
     color: "black",
   },
   "&:nth-of-type(even)": {
-    backgroundColor: "rgba(38, 36, 42, 0.7)",
+    backgroundColor: "transparent",
     border: "none",
     color: "black",
   },
@@ -152,16 +153,27 @@ const CollapsibleTable = () => {
                   <StyledTableCell
                     sx={{ border: "none !important", width: "100px" }}
                   >
-                    <IconButton size="small" onClick={() => setOpen(!open)}>
-                      {open ? (
-                        <KeyboardArrowUpIcon color="info" />
-                      ) : (
-                        <KeyboardArrowDownIcon color="info" />
-                      )}
-                    </IconButton>
-                    <IconButton size="small">
-                      <OpenWithIcon onClick={hanldeUpdateStatus} color="info" />
-                    </IconButton>
+                    <div className="table_icons">
+                      <IconButton size="small" onClick={() => setOpen(!open)}>
+                        {open ? (
+                          <GoPrimitiveDot
+                            color="white"
+                            className="open_icon_table"
+                          />
+                        ) : (
+                          <GoPrimitiveDot
+                            color="white"
+                            className="open_icon_table"
+                          />
+                        )}
+                      </IconButton>
+                      <IconButton size="small">
+                        <OpenWithIcon
+                          onClick={hanldeUpdateStatus}
+                          color="info"
+                        />
+                      </IconButton>
+                    </div>
                   </StyledTableCell>
 
                   <StyledTableCell
@@ -277,21 +289,45 @@ const CollapsibleTable = () => {
                             {row?.SubCategory?.map((category) => (
                               <StyledTableRow
                                 key={category.id}
-                                sx={{ borderBottom: "none !important" }}
+                                // sx={{ borderBottom: "none !important" }}
                               >
                                 <StyledTableCell
                                   sx={{
                                     border: "none !important",
-                                    width: "100px",
+                                    width: "150px",
                                   }}
                                 >
-                                 
+                                  <div className="table_icons">
+                                    <IconButton
+                                      size="small"
+                                      onClick={() => setOpen(!open)}
+                                    >
+                                      {open ? (
+                                        <GoPrimitiveDot
+                                          color="white"
+                                          className="open_icon_table"
+                                        />
+                                      ) : (
+                                        <GoPrimitiveDot
+                                          color="white"
+                                          className="open_icon_table"
+                                        />
+                                      )}
+                                    </IconButton>
+                                    <IconButton size="small">
+                                      <OpenWithIcon
+                                        onClick={hanldeUpdateStatus}
+                                        color="info"
+                                      />
+                                    </IconButton>
+                                  </div>
                                 </StyledTableCell>
                                 <StyledTableCell
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#009af9 !important",
-                                    width: "300px",
+                                    width: "180px",
+                                    // paddingLeft: "30px",
                                   }}
                                 >
                                   {category.CategoryName}
@@ -300,7 +336,7 @@ const CollapsibleTable = () => {
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#ffffff !important",
-                                    width: "300px",
+                                    width: "235px",
                                   }}
                                 >
                                   {category.CategoryName}
@@ -309,7 +345,7 @@ const CollapsibleTable = () => {
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#ffffff !important",
-                                    width: "300px",
+                                    width: "260px",
                                   }}
                                 >
                                   {category.unique_identifier}
@@ -318,8 +354,10 @@ const CollapsibleTable = () => {
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#009af9 !important",
-
-                                    width: "500px",
+                                    width: "430px",
+                                    textAlign: "left",
+                                    paddingLeft: "20px",
+                                    // border:" 1px solid white"
                                   }}
                                 >
                                   {category.image}
@@ -328,9 +366,11 @@ const CollapsibleTable = () => {
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#ffffff !important",
-                                    width: "300px",
-                                    paddingLeft:"30px"
+                                    width: "240px",
+
+                                    textAlign: "center",
                                   }}
+                                  className="date_text_container_one"
                                 >
                                   {category.created_at?.split("T")[0]}
                                 </StyledTableCell>
@@ -338,9 +378,10 @@ const CollapsibleTable = () => {
                                   sx={{
                                     borderBottom: "none !important",
                                     color: "#ffffff !important",
-                                    width: "300px",
-                                    paddingLeft:"30px"
+                                    width: "240px",
+                                    textAlign: "center",
                                   }}
+                                  className="date_text_container_two"
                                 >
                                   {category.updated_at?.split("T")[0]}
                                 </StyledTableCell>
