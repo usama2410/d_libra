@@ -117,6 +117,7 @@ const UserSettingViewPage = () => {
     const response = await dispatch(logout(role, token));
     // console.log("response", response);
     response?.message === "logout successfully" && navigate("/logout");
+    !token && navigate("/login");
     // navigate("/logout")
   };
 
@@ -502,8 +503,8 @@ const UserSettingViewPage = () => {
               </div>
             </>
           )}
-
-          {countTwo < 2 && (
+            {console.log("addBookMark?.length", addBookMark?.length)}
+          {addBookMark?.length < 2 && (
             <div className="vector_container">
               <img
                 src={theme ? Add_light : Add_dark}

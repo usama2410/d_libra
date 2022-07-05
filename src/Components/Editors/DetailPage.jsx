@@ -21,7 +21,10 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Swal from "sweetalert2";
-import { addContentBookmark, showAllBoomark } from "../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
 import FooterButtons from "../User/FooterButtons";
 
 const DetailPage = () => {
@@ -43,17 +46,18 @@ const DetailPage = () => {
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
   const [handleSetBook, setHandleSetBookMark] = React.useState();
 
-  console.log("details", handleSetBook);
-  // console.log("tags", details?.bookmark?.PriorityType);
+  console.log("handleSetBook", handleSetBook);
+  console.log("details", details);
+  console.log("tags", details?.bookmark);
 
   const handleBack = () => {
     navigate(state?.path);
   };
 
   const handleBookMark = () => {
-    if (details?.bookmark?.PriorityType === "personalcloud") {
-      return Bookmark_blue;
-    } else if (details?.bookmark?.PriorityType === undefined) {
+    if (details?.bookmark?.PriorityType === undefined) {
+      return Bookmark_grey;
+    } else if (details?.bookmark === "null") {
       return Bookmark_grey;
     } else if (details?.bookmark?.PriorityType === "highpriority") {
       return Bookmark_red;
@@ -63,7 +67,7 @@ const DetailPage = () => {
       return Bookmark_red;
     } else if (handleSetBook[0].colorcode === "#FFAA1D") {
       return Bookmark_yellow;
-    } else if (handleSetBook[0].colorcode  === "#C8C8C8") {
+    } else if (handleSetBook[1].colorcode === "#C8C8C8") {
       return Bookmark_grey;
     } else {
       return Bookmark_grey;
@@ -79,7 +83,7 @@ const DetailPage = () => {
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    // console.log(response.slice(0, 2));
+    console.log(response);
     setHandleSetBookMark(response?.slice(0, 2));
   };
 
@@ -133,7 +137,7 @@ const DetailPage = () => {
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
-    // console.log("response", response);
+    console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -185,8 +189,8 @@ const DetailPage = () => {
                     : "buttons_container_detail_page_two"
                 }
               >
-                {role === "editor" && (
-                  <div className="deleteeditcontainer">
+                <div className="deleteeditcontainer">
+                  {role === "editor" && (
                     <div className="subcontainerdelete">
                       <button
                         className="detail_delete_button"
@@ -211,15 +215,15 @@ const DetailPage = () => {
                         Edit
                       </button>
                     </div>
-                    <img
-                      src={handleBookMark()}
-                      alt=""
-                      className="detail_tag_text_two"
-                      style={{ paddingLeft: "24px", cursor: "pointer" }}
-                      onClick={hanldeBookMarkPriority}
-                    />
-                  </div>
-                )}
+                  )}
+                  <img
+                    src={handleBookMark()}
+                    alt=""
+                    className="detail_tag_text_two"
+                    style={{ paddingLeft: "24px", cursor: "pointer" }}
+                    onClick={hanldeBookMarkPriority}
+                  />
+                </div>
               </div>
 
               <div className="tags_wrapper_one">
@@ -238,7 +242,8 @@ const DetailPage = () => {
                 ) : null}
                 {/* <button className="detail_tag_button">GitHub</button>
                   <button className="detail_tag_button">DevOps</button> */}
-                {/* <img
+
+                {/* <img                      // THIS
                     src={handleBookMark()}
                     alt=""
                     className="detail_tag_text_two"

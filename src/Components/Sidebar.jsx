@@ -111,11 +111,13 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
+  console.log(search);
+
   const handleSearchResult = (e) => {
     e.preventDefault();
     if (search) {
       if (location.pathname === "/") {
-        navigate(`/?search=${search}`, {
+        navigate(`/?search=${search.replace(/\s+/g, "-")}`, {
           state: {
             searchKey,
             search,
@@ -128,7 +130,6 @@ export default function Sidebar() {
       console.log("Null");
     }
   };
-
   const handleSearchBar = async (e) => {
     setSearch(e.target.value);
     // console.log(e.target.value);
@@ -715,6 +716,11 @@ export default function Sidebar() {
     }
   };
 
+  const handleHomeNavigate = () => {
+    navigate("/");
+    setSearch("");
+  };
+
   return (
     <>
       <AppBar
@@ -783,7 +789,7 @@ export default function Sidebar() {
               }
             >
               <Button
-                onClick={() => navigate("/")}
+                onClick={handleHomeNavigate}
                 className={Conditional_Searchbar()}
               >
                 {themeState ? (

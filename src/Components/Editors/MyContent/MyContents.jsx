@@ -42,9 +42,10 @@ const MyContents = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const [priority, setPriority] = useState("reviewlist");
   const [bookmark, setBookmark] = useState();
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
+  const [priority, setPriority] = useState("highpriority");
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
   const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
   console.log("handleSetBookMark", state?.path);
@@ -135,7 +136,7 @@ const MyContents = () => {
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    // console.log(response.slice(0, 2));
+    console.log(response);
     setHandleSetBookMark(response?.slice(0, 2));
   };
 
@@ -150,7 +151,40 @@ const MyContents = () => {
   useEffect(() => {
     handleShowAllBookmark();
     dashboardData();
-  }, [bookmark, params]);
+  }, [bookmark, params, priority]);
+
+  const handleBookMark = async (Contentid) => {
+    console.log("contentid", Contentid);
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    } else if (count === 1) {
+      setPriority("reviewlist");
+    } else if (count === 2) {
+      setPriority("futureread");
+    } else if (count === 3) {
+      setPriority(showAllBookmark[0]?.name);
+    } else if (count === 4) {
+      setPriority(showAllBookmark[1]?.name);
+      setCount(0);
+    }
+
+    const result = await dispatch(
+      setBookMarkPriority(role, Contentid, priority, token)
+    );
+    console.log("result", result);
+
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
     navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`, {
@@ -275,7 +309,7 @@ const MyContents = () => {
                                       {e.title}
                                     </Typography>
                                   </Typography>
-                                  {/* <div className="mycontenttagscontainer">
+                                  <div className="mycontenttagscontainer">
                                     <img
                                       src={
                                         e?.Prioritytype === "highpriority"
@@ -284,19 +318,23 @@ const MyContents = () => {
                                           ? Bookmark_green
                                           : e?.Prioritytype === "futureread"
                                           ? Bookmark_red
-                                          : e?.Prioritytype === "Personal"
+                                          : e?.Prioritytype ===
+                                            showAllBookmark[0]?.name
                                           ? Bookmark_yellow
-                                          : e?.Prioritytype === "Dayend"
+                                          : e?.Prioritytype ===
+                                            showAllBookmark[1]?.name
+                                          ? Bookmark_grey
+                                          : e.Prioritytype === "null"
                                           ? Bookmark_grey
                                           : Bookmark_grey
                                       }
                                       alt=""
                                       onClick={() =>
-                                        hanldeBookMarkPriority(e?.id)
+                                        handleBookMark(e?.id)
                                       }
                                       style={{ cursor: "pointer" }}
                                     />
-                                  </div> */}
+                                  </div>
                                 </div>
                               ) : (
                                 ""

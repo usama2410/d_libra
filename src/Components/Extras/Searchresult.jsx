@@ -30,18 +30,16 @@ const Searchresult = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-  
+
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
 
-  console.log(data)
+  console.log(location);
 
   useEffect(() => {
     const searchResult = async () => {
-      const response = await dispatch(
-        searchAction(window.location.search, token)
-      );
+      const response = await dispatch(searchAction(location.search, token));
       if (response?.data[0]?.items?.length === 0) {
         setmessage("No Content Found");
         setdata([]);
@@ -152,7 +150,8 @@ const Searchresult = () => {
                   theme ? " recentlyviewedheading" : "recentlyviewedheadingtwo"
                 }
               >
-                Results for '{window.location.search?.split("=")[2]}'
+                Results for '
+                {location.search?.split("=")[2]?.replace(/[^a-zA-Z ]/g, " ")}'
               </span>
             </div>
           </div>

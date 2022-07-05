@@ -38,7 +38,7 @@ const Accordian = () => {
 
   const token = useSelector((state) => state.auth.token);
 
-  // console.log("parentCategory", parentCategory);
+  console.log("parentCategory", parentCategory);
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));
