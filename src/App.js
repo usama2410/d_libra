@@ -69,7 +69,8 @@ function App() {
       document.body.style.backgroundColor = "#111111";
       return "darkTheme";
     } else if (
-      (window.location.href.split("/")[3] === "mycontents/:id" && theme === true) ||
+      (window.location.href.split("/")[3] === "mycontents/:id" &&
+        theme === true) ||
       (window.location.href.split("/")[3] === "uploadcontentmain" &&
         theme === true) ||
       (window.location.href.split("/")[3] === "editormainpage" &&
@@ -196,12 +197,12 @@ function App() {
                         element={<LibraryBookmark />}
                       />
                       <Route path="/Accordian" exact element={<Accordian />} />
-                      <Route 
+                      <Route
                         path="/mylibrarycourses"
                         exact
                         element={<MylibraryCorse />}
                       />
-                      <Route path="/tagpage" exact element={<Tagpage />} />
+                      <Route path="/tagpage/:tag" exact element={<Tagpage />} />
                       {/* <Route path="/Searchresult" exact element={<Searchresult />} /> */}
                       <Route
                         path="/recentlyviewed"

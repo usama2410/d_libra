@@ -120,17 +120,14 @@ const DetailPage = () => {
     };
 
     postById();
-    handleBookMark();
     handleShowAllBookmark();
   }, [params, details?.bookmark?.PriorityType, bookmark]);
 
   useEffect(() => {
-      details?.post?.tags
-        ?.split(",")
-        .map((tags, i) =>
-          i <= 2 ? setTagsLength(true) : setTagsLength(false)
-        );
-  }, []);
+    details?.post?.tags
+      ?.split(",")
+      .map((tags, i) => (i <= 2 ? setTagsLength(true) : setTagsLength(false)));
+  }, [details]);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
@@ -169,6 +166,10 @@ const DetailPage = () => {
         iconColor: "red",
         icon: "error",
       });
+  };
+
+  const handleTag = (tag) => {
+    navigate(`/tagpage/${tag}`);
   };
 
   return (
@@ -255,7 +256,10 @@ const DetailPage = () => {
                                   Tag:
                                 </span>
                                 {details?.post?.tags?.split(",")?.map((tag) => (
-                                  <button className="detail_tag_button">
+                                  <button
+                                    className="detail_tag_button"
+                                    onClick={() => handleTag(tag)}
+                                  >
                                     {tag}
                                   </button>
                                 ))}
@@ -304,7 +308,12 @@ const DetailPage = () => {
                         Tag:
                       </span>
                       {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button className="detail_tag_button">{tag}</button>
+                        <button
+                          className="detail_tag_button"
+                          onClick={() => handleTag(tag)}
+                        >
+                          {tag}
+                        </button>
                       ))}
                     </div>
                     <img
@@ -344,7 +353,12 @@ const DetailPage = () => {
                         Tag:
                       </span>
                       {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button className="detail_tag_button">{tag}</button>
+                        <button
+                          className="detail_tag_button"
+                          onClick={() => handleTag(tag)}
+                        >
+                          {tag}
+                        </button>
                       ))}
                     </>
                   ) : null}
