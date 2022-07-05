@@ -239,6 +239,7 @@
   justify-content: center;
 }
 
+
 .footer_copyright_two {
   display: block;
   width: 100%;
@@ -260,6 +261,13 @@
   display: flex;
   bottom: 15px;
   left: 9px;
+  margin-left: 30px !important;
+}
+
+.footer_buttons_container_user{
+  position: fixed;
+  display: flex;
+  bottom: 50px;
   margin-left: 30px !important;
 }
 
@@ -398,6 +406,9 @@
 @media screen and (max-width: 640px) {
   .rating_form_sub_four {
     width: 600px;
+  }
+  .footer_copyright_normaluser{
+    display: none;
   }
 }
 
@@ -600,6 +611,10 @@
 
   .footer_buttons_container {
     display: none;
+  }
+
+  .footer_buttons_container_user{
+   display: none;
   }
 
   .bottomnavigator {

@@ -51,7 +51,7 @@ const DetailPage = () => {
     navigate(state?.path);
   };
 
-  console.log(details);
+  // console.log(details);
 
   // const handleBookMark = () => {
   //   if (details?.bookmark?.PriorityType === undefined) {
@@ -347,9 +347,7 @@ const DetailPage = () => {
                   </div>
                 </>
               )}
-              {
-              role === "editor" &&
-              !tagslength && (
+              {role === "editor" && !tagslength && (
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
@@ -370,8 +368,7 @@ const DetailPage = () => {
                     </>
                   ) : null}
                 </div>
-              )
-              }
+              )}
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -495,6 +492,7 @@ const DetailPage = () => {
                 />
               </Button>
             </div>
+            
             <span className="userdetailpagefootertexttwo">
               © D-Libra All Rights Reserved
             </span>
@@ -502,7 +500,7 @@ const DetailPage = () => {
         </div>
       )}
       {role === "normaluser" && <FooterButtons />}
-    </>
+   </>
   );
 };
 
