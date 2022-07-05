@@ -37,7 +37,7 @@ const DetailPage = () => {
   const role = useSelector((state) => state.auth.role);
 
   const [details, setDetails] = React.useState([]);
-  const [tagslength, setTagsLength] = React.useState([]);
+  const [tagslength, setTagsLength] = React.useState(true);
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
@@ -169,6 +169,7 @@ const DetailPage = () => {
   };
 
   const handleTag = (tag) => {
+    console.log(tag);
     navigate(`/tagpage/${tag}`);
   };
 
@@ -242,7 +243,7 @@ const DetailPage = () => {
                       </div>
 
                       <div style={{ display: "flex" }}>
-                        {/* {console.log("Ahsan length", tagslength)} */}
+                        {console.log("Ahsan length", tagslength)}
                         {tagslength && (
                           <div className="tags_wrapper_three">
                             {details?.post?.tags !== "" ? (
@@ -276,11 +277,13 @@ const DetailPage = () => {
                               ? Bookmark_green
                               : details?.bookmark?.PriorityType === "futureread"
                               ? Bookmark_red
-                              : details?.bookmark?.PriorityType ===
-                                showAllBookmark[0]?.name
+                              : token &&
+                                details?.bookmark?.PriorityType ===
+                                  showAllBookmark[0]?.name
                               ? Bookmark_yellow
-                              : details?.bookmark?.PriorityType ===
-                                showAllBookmark[1]?.name
+                              : token &&
+                                details?.bookmark?.PriorityType ===
+                                  showAllBookmark[1]?.name
                               ? Bookmark_grey
                               : details?.bookmark === "null"
                               ? Bookmark_grey
@@ -297,7 +300,7 @@ const DetailPage = () => {
                 </div>
               </div>
 
-              {role === "normaluser" && (
+              {(role === "normaluser" || role === null) && (
                 <>
                   <div className="normaluser_container">
                     <div style={{ display: "flex" }}>
@@ -324,11 +327,13 @@ const DetailPage = () => {
                           ? Bookmark_green
                           : details?.bookmark?.PriorityType === "futureread"
                           ? Bookmark_red
-                          : details?.bookmark?.PriorityType ===
-                            showAllBookmark[0]?.name
+                          : token &&
+                            details?.bookmark?.PriorityType ===
+                              showAllBookmark[0]?.name
                           ? Bookmark_yellow
-                          : details?.bookmark?.PriorityType ===
-                            showAllBookmark[1]?.name
+                          : token &&
+                            details?.bookmark?.PriorityType ===
+                              showAllBookmark[1]?.name
                           ? Bookmark_grey
                           : details?.bookmark === "null"
                           ? Bookmark_grey
