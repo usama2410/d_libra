@@ -37,7 +37,7 @@ const DetailPage = () => {
   const role = useSelector((state) => state.auth.role);
 
   const [details, setDetails] = React.useState([]);
-  const [tagslength, setTagsLength] = React.useState([]);
+  const [tagslength, setTagsLength] = React.useState(true);
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
@@ -130,7 +130,7 @@ const DetailPage = () => {
         .map((tags, i) =>
           i <= 2 ? setTagsLength(true) : setTagsLength(false)
         );
-  }, []);
+  }, [details]);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
@@ -241,7 +241,7 @@ const DetailPage = () => {
                       </div>
 
                       <div style={{ display: "flex" }}>
-                        {/* {console.log("Ahsan length", tagslength)} */}
+                        {console.log("Ahsan length", tagslength)}
                         {tagslength && (
                           <div className="tags_wrapper_three">
                             {details?.post?.tags !== "" ? (
