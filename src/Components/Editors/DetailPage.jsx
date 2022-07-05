@@ -169,8 +169,8 @@ const DetailPage = () => {
   };
 
   const handleTag = (tag) => {
-    console.log(tag);
-    navigate(`/tagpage/${tag}`);
+    console.log(tag.replace(/\s+/g, ""));
+    navigate(`/tagpage/${tag.replace(/\s+/g, "")}`);
   };
 
   return (
