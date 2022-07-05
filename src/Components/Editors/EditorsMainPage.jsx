@@ -169,12 +169,7 @@ const EditorsMainPage = () => {
                 className="upload_contents_button"
                 onClick={() =>
                   selectedOption?.id
-                    ? navigate(`/mycontents/${selectedOption?.id}`, {
-                        state: {
-                          topicId: selectedOption.id,
-                          path: location.pathname,
-                        },
-                      })
+                    ? navigate(`/mycontents/${selectedOption?.id}`)
                     : Swal.fire("Please select a course.")
                 }
               >

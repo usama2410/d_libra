@@ -111,11 +111,13 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
+  console.log(search);
+
   const handleSearchResult = (e) => {
     e.preventDefault();
     if (search) {
       if (location.pathname === "/") {
-        navigate(`/?search=${search}`, {
+        navigate(`/?search=${search.replace(/\s+/g, "-")}`, {
           state: {
             searchKey,
             search,
@@ -128,10 +130,12 @@ export default function Sidebar() {
       console.log("Null");
     }
   };
-
-  const handleSearchBar = async () => {
-    // setSearchState2(!searchstate2);
-    // await dispatch(searchState(searchstate2))
+  const handleSearchBar = async (e) => {
+    setSearch(e.target.value);
+    // console.log(e.target.value);
+    if (e.target.value === "") {
+      navigate(`/`);
+    }
   };
 
   React.useEffect(() => {
@@ -719,6 +723,11 @@ export default function Sidebar() {
     }
   };
 
+  const handleHomeNavigate = () => {
+    navigate("/");
+    setSearch("");
+  };
+
   return (
     <>
       <AppBar
@@ -787,7 +796,7 @@ export default function Sidebar() {
               }
             >
               <Button
-                onClick={() => navigate("/")}
+                onClick={handleHomeNavigate}
                 className={Conditional_Searchbar()}
               >
                 {themeState ? (
@@ -807,14 +816,14 @@ export default function Sidebar() {
             </div>
           </div>
 
-          {"/detailpage" === location.pathname ||
+          {location.pathname?.includes("detailpage") ||
           "/editormainpage" === location.pathname ||
           "/editcoursestructure" === location.pathname ||
           "/addnewcategory" === location.pathname ||
           "/uploadcontentmain" === location.pathname ||
-          "/mycontents/:id" === location.pathname ||
-          "/editcontentmain" === location.pathname ||
-          "/deletecontent" === location.pathname
+          location.pathname?.includes("mycontents") ||
+          location.pathname?.includes("editcontentmain") ||
+          location.pathname?.includes("deletecontent")
             ? user?.role === "editor" && (
                 <img
                   src={editor_icon}
@@ -830,14 +839,14 @@ export default function Sidebar() {
             <div>
               <div className="mainsearchcontianer">
                 <input
-                  onClick={handleSearchBar}
+                  // onClick={handleSearchBar}
                   placeholder="Search"
                   className={`${
                     themeState ? "sidebar_inputfield_sub" : "sidebar_inputfield"
                   }`}
                   type="text"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => handleSearchBar(e)}
                 />
 
                 <div

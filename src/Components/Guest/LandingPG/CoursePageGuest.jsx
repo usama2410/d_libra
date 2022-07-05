@@ -14,6 +14,7 @@ import { development } from "../../../endpoints";
 import FooterButtons from "../../User/FooterButtons";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { addRecenetViewContent } from "../../../Redux/Actions/Client Side/content.action";
 
 const CoursePageGuest = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const CoursePageGuest = () => {
       },
     });
 
-    // await dispatch(addRecenetViewContent(categoryid, role, token));
+    await dispatch(addRecenetViewContent(postId, role, token));
   };
 
   const settings = {

@@ -23,8 +23,12 @@ import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
-import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
 import Swal from "sweetalert2";
+import { setBookMarkPriority } from "../../Redux/Actions/Client Side/librar.y.action";
 
 const Recentlyviewed = () => {
   const dispatch = useDispatch();
@@ -35,19 +39,13 @@ const Recentlyviewed = () => {
   const role = useSelector((state) => state.auth.role);
   const [history, setHistory] = useState([]);
   const [bookmark, setBookmark] = useState();
+  const [count, setCount] = useState(0);
+  const [priority, setPriority] = useState("highpriority");
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
 
   const handleBack = () => {
     navigate("/");
   };
-
-  useEffect(() => {
-    const recentViewedCourses = async () => {
-      const response = await dispatch(courseHistory(token, role));
-      // console.log("response", response);
-      setHistory(response);
-    };
-    recentViewedCourses();
-  }, [bookmark]);
 
   const settings = {
     dots: false,
@@ -139,8 +137,34 @@ const Recentlyviewed = () => {
     );
   };
 
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
+  };
+
+  // console.log(count);
+
   const handleBookMark = async (Contentid) => {
-    // console.log("Contentid", Contentid)
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    } else if (count === 1) {
+      setPriority("reviewlist");
+    } else if (count === 2) {
+      setPriority("futureread");
+    } else if (count === 3) {
+      setPriority(showAllBookmark[0]?.name);
+    } else if (count === 4) {
+      setPriority(showAllBookmark[1]?.name);
+      setCount(0);
+    }
+
+    const result = await dispatch(
+      setBookMarkPriority(role, Contentid, priority, token)
+    );
+    console.log("result", result);
+
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     // console.log("response", response);
     setBookmark(response);
@@ -152,6 +176,16 @@ const Recentlyviewed = () => {
         icon: "error",
       });
   };
+
+  useEffect(() => {
+    const recentViewedCourses = async () => {
+      const response = await dispatch(courseHistory(token, role));
+      // console.log("response", response);
+      setHistory(response);
+    };
+    recentViewedCourses();
+    handleShowAllBookmark();
+  }, [bookmark]);
 
   return (
     <>
@@ -252,9 +286,11 @@ const Recentlyviewed = () => {
                                     ? Bookmark_green
                                     : e?.PriorityType === "futureread"
                                     ? Bookmark_red
-                                    : e?.PriorityType === "Personal"
+                                    : e?.PriorityType ===
+                                      showAllBookmark[0]?.name
                                     ? Bookmark_yellow
-                                    : e?.PriorityType === "Dayend"
+                                    : e?.PriorityType ===
+                                      showAllBookmark[1]?.name
                                     ? Bookmark_grey
                                     : e.PriorityType === "null"
                                     ? Bookmark_grey
@@ -275,7 +311,7 @@ const Recentlyviewed = () => {
                   })}
                 </Slider>
               ) : (
-                <div style={{ display: "flex", justifyContent: "center"}}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
                   <h4>No history for {day?.chapterName}</h4>
                 </div>
               )}

@@ -48,6 +48,7 @@ const RatingSidebar = () => {
 
   const MainCategory = async () => {
     const response = await dispatch(home());
+    // console.log("MainCategory response", response);
     let array = [];
     response?.map((item) => {
       return item?.data?.map((item2) => {

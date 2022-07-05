@@ -47,7 +47,7 @@ const LandingPage = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  console.log("data", data);
+  // console.log("data", data);
   // console.log("state", state);
 
   const settings = {
@@ -261,6 +261,9 @@ const LandingPage = () => {
                                     alignItems: "center",
                                   }}
                                 >
+                                  <span style={{ marginTop: "4px" }}>
+                                    {e?.totalratinng}
+                                  </span>
                                   <Rating
                                     sx={{ ml: 1 }}
                                     name="read-only"

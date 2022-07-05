@@ -4,6 +4,7 @@ import * as FormData from "form-data";
 
 export const addRecenetViewContent =
   (content_id, role, token) => async (dispatch) => {
+    console.log("Content ID", content_id);
     const formData = new FormData();
     formData.append("content_id", content_id);
     formData.append("role", role);
@@ -20,6 +21,7 @@ export const addRecenetViewContent =
       );
 
       console.log("response", response);
+      return response?.data
     } catch (error) {
       console.log(error);
     }

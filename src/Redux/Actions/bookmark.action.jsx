@@ -3,6 +3,7 @@ import { URL, endpoints } from "../../endpoints";
 import * as FormData from "form-data";
 
 export const addBookmark = (rawData, role, token) => async (dispatch) => {
+  console.log(rawData)
   try {
     const response = await axios.post(
       `${URL}${endpoints.ADD_BOOKMARK_LIBRARY}?role=${role}`,

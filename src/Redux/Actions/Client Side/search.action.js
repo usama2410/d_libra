@@ -2,6 +2,7 @@ import axios from "axios";
 import { URL, endpoints } from "../../../endpoints";
 
 export const searchAction = (location, token) => async (dispatch) => {
+  console.log(location)
   try {
     const response = await axios.get(
       `${URL}${endpoints.SEARCH_CONTENT}${location}`,

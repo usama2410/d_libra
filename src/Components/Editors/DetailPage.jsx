@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "./EditCourseStructure.css";
@@ -21,7 +21,11 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Swal from "sweetalert2";
-import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
+import FooterButtons from "../User/FooterButtons";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -41,28 +45,70 @@ const DetailPage = () => {
   const [disable, setDisable] = React.useState(false);
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
+  const [showAllBookmark, setShowAllBookmark] = useState(Bookmark_blue);
+
   const handleBack = () => {
     navigate(state?.path);
   };
 
-  const handleBookMark = () => {
-    if (details?.bookmark?.PriorityType === "personalcloud") {
-      return Bookmark_blue;
-    } else if (details?.bookmark?.PriorityType === undefined) {
-      return Bookmark_grey;
-    } else if (details?.bookmark?.PriorityType === "highpriority") {
-      return Bookmark_red;
-    } else if (details?.bookmark?.PriorityType === "reviewlist") {
-      return Bookmark_green;
-    } else if (details?.bookmark?.PriorityType === "futureread") {
-      return Bookmark_red;
-    } else if (details?.bookmark?.PriorityType === "Personal") {
-      return Bookmark_yellow;
-    } else if (details?.bookmark?.PriorityType === "Dayend") {
-      return Bookmark_grey;
-    } else {
-      return Bookmark_grey;
-    }
+  console.log(details);
+
+  // const handleBookMark = () => {
+  //   if (details?.bookmark?.PriorityType === undefined) {
+  //     return Bookmark_grey;
+  //   } else if (details?.bookmark === "null") {
+  //     return Bookmark_grey;
+  //   } else if (details?.bookmark?.PriorityType === "highpriority") {
+  //     return Bookmark_red;
+  //   } else if (details?.bookmark?.PriorityType === "reviewlist") {
+  //     return Bookmark_green;
+  //   } else if (details?.bookmark?.PriorityType === "futureread") {
+  //     return Bookmark_red;
+  //   } else if (handleSetBook[0].colorcode === "#FFAA1D") {
+  //     return Bookmark_yellow;
+  //   } else if (handleSetBook[1].colorcode === "#C8C8C8") {
+  //     return Bookmark_grey;
+  //   } else {
+  //     return Bookmark_grey;
+  //   }
+  // };
+
+  const handleBookMark = async () => {
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
+
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, params.id, priority, token)
+    // );
+    // console.log("result", result);
+
+    const response = await dispatch(addContentBookmark(params.id, role, token));
+    // console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
+
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    // console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
   };
 
   useEffect(() => {
@@ -75,13 +121,16 @@ const DetailPage = () => {
 
     postById();
     handleBookMark();
+    handleShowAllBookmark();
   }, [params, details?.bookmark?.PriorityType, bookmark]);
 
   useEffect(() => {
-    details?.post?.tags
-      ?.split(",")
-      .map((tags, i) => (i <= 2 ? setTagsLength(true) : setTagsLength(false)));
-  }, [details]);
+      details?.post?.tags
+        ?.split(",")
+        .map((tags, i) =>
+          i <= 2 ? setTagsLength(true) : setTagsLength(false)
+        );
+  }, []);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
@@ -125,17 +174,25 @@ const DetailPage = () => {
   return (
     <>
       <div className="detailpage_root_container ">
-        <div className="backbutton_disable">
-          <button
-            onClick={handleBack}
-            className="back_button"
-            style={{ color: "#FFFFFF " }}
-          >
-            <ArrowBack className="backbutton_icon" />{" "}
-            <span className="backbutton_text">Back</span>
-          </button>
-        </div>
-        <span className="header_text">{details?.post?.categories__name}</span>
+        {role === "editor" && (
+          <div className="backbutton_disable">
+            <button
+              onClick={handleBack}
+              className="back_button"
+              style={{ color: "#FFFFFF " }}
+            >
+              <ArrowBack className="backbutton_icon" />{" "}
+              <span className="backbutton_text">Back</span>
+            </button>
+          </div>
+        )}
+        <span
+          className={
+            role === "editor" ? "header_text" : "header_text_NormalUser"
+          }
+        >
+          {details?.post?.categories__name}
+        </span>
       </div>
       {details?.status ? (
         <div>
@@ -155,67 +212,85 @@ const DetailPage = () => {
                     : "buttons_container_detail_page_two"
                 }
               >
-                {role === "editor" && (
-                  <div className="deleteeditcontainer">
-                    <div className="subcontainerdelete">
-                      <button
-                        className="detail_delete_button"
-                        onClick={() =>
-                          navigate(
-                            `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
-                            { state: { path: state?.path } }
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="detail_edit_button"
-                        onClick={() =>
-                          navigate(
-                            `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
-                            { state: state?.path }
-                          )
-                        }
-                      >
-                        Edit
-                      </button>
-                    </div>
+                <div className="deleteeditcontainer">
+                  {role === "editor" && (
+                    <>
+                      <div className="subcontainerdelete">
+                        <button
+                          className="detail_delete_button"
+                          onClick={() =>
+                            navigate(
+                              `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
+                              { state: { path: state?.path } }
+                            )
+                          }
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="detail_edit_button"
+                          onClick={() =>
+                            navigate(
+                              `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
+                              { state: state?.path }
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
+                      </div>
 
-                    <div style={{ display: "flex" }}>
-                      {console.log("Ahsan length", tagslength)}
-                      {tagslength && (
-                        <div className="tags_wrapper_three">
-                          {details?.post?.tags !== "" ? (
-                            <>
-                              <span
-                                className="detail_tag_text"
-                                style={{
-                                  color: theme ? " #363636" : " #C8C8C8",
-                                }}
-                              >
-                                Tag:
-                              </span>
-                              {details?.post?.tags?.split(",")?.map((tag) => (
-                                <button className="detail_tag_button">
-                                  {tag}
-                                </button>
-                              ))}
-                            </>
-                          ) : null}
-                        </div>
-                      )}
+                      <div style={{ display: "flex" }}>
+                        {/* {console.log("Ahsan length", tagslength)} */}
+                        {tagslength && (
+                          <div className="tags_wrapper_three">
+                            {details?.post?.tags !== "" ? (
+                              <>
+                                <span
+                                  className="detail_tag_text"
+                                  style={{
+                                    color: theme ? " #363636" : " #C8C8C8",
+                                  }}
+                                >
+                                  Tag:
+                                </span>
+                                {details?.post?.tags?.split(",")?.map((tag) => (
+                                  <button className="detail_tag_button">
+                                    {tag}
+                                  </button>
+                                ))}
+                              </>
+                            ) : null}
+                          </div>
+                        )}
 
-                      <img
-                        src={handleBookMark()}
-                        alt=""
-                        className="detail_tag_text_two"
-                        style={{ paddingLeft: "24px", cursor: "pointer" }}
-                        onClick={hanldeBookMarkPriority}
-                      />
-                    </div>
-                  </div>
-                )}
+                        <img
+                          src={
+                            details?.bookmark?.PriorityType === "highpriority"
+                              ? Bookmark_blue
+                              : details?.bookmark?.PriorityType === "reviewlist"
+                              ? Bookmark_green
+                              : details?.bookmark?.PriorityType === "futureread"
+                              ? Bookmark_red
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[0]?.name
+                              ? Bookmark_yellow
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[1]?.name
+                              ? Bookmark_grey
+                              : details?.bookmark === "null"
+                              ? Bookmark_grey
+                              : Bookmark_grey
+                          }
+                          alt=""
+                          className="detail_tag_text_two"
+                          style={{ paddingLeft: "24px", cursor: "pointer" }}
+                          onClick={hanldeBookMarkPriority}
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
 
               {(role === "normaluser" || role === null) && (
@@ -233,7 +308,23 @@ const DetailPage = () => {
                       ))}
                     </div>
                     <img
-                      src={handleBookMark()}
+                      src={
+                        details?.bookmark?.PriorityType === "highpriority"
+                          ? Bookmark_blue
+                          : details?.bookmark?.PriorityType === "reviewlist"
+                          ? Bookmark_green
+                          : details?.bookmark?.PriorityType === "futureread"
+                          ? Bookmark_red
+                          : details?.bookmark?.PriorityType ===
+                            showAllBookmark[0]?.name
+                          ? Bookmark_yellow
+                          : details?.bookmark?.PriorityType ===
+                            showAllBookmark[1]?.name
+                          ? Bookmark_grey
+                          : details?.bookmark === "null"
+                          ? Bookmark_grey
+                          : Bookmark_grey
+                      }
                       alt=""
                       className="detail_tag_text_two"
                       style={{ paddingLeft: "24px", cursor: "pointer" }}
@@ -332,9 +423,7 @@ const DetailPage = () => {
                   }}
                 />
               </Button>
-              <Button
-                style={{ marginLeft: "-16px" }}
-              >
+              <Button style={{ marginLeft: "-16px" }}>
                 <img
                   src={Next}
                   alt=""
@@ -390,6 +479,7 @@ const DetailPage = () => {
           </div>
         </div>
       )}
+      {role === "normaluser" && <FooterButtons />}
     </>
   );
 };

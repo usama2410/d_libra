@@ -16,6 +16,7 @@ import { setBookMarkPriority } from "../../Redux/Actions/Client Side/librar.y.ac
 import {
   addContentBookmark,
   getBookmarkCourse,
+  showAllBoomark,
 } from "../../Redux/Actions/bookmark.action";
 import { development } from "../../endpoints";
 import Swal from "sweetalert2";
@@ -35,7 +36,12 @@ const MylibraryCorse = () => {
   const role = useSelector((state) => state.auth.role);
 
   const [data, setdata] = useState(LibraryBookmarkContent);
-  const [bookmark, setBookmark] = React.useState();
+  const [bookmark, setBookmark] = useState();
+  const [count, setCount] = useState(0);
+  const [priority, setPriority] = useState("highpriority");
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
+
+  console.log("data", data);
 
   const handleBack = () => {
     navigate("/");
@@ -50,14 +56,39 @@ const MylibraryCorse = () => {
   //   const response = dispatch(setBookMarkPriority(token));
   //   console.log(response);
   // };
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    // console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
+  };
 
   useEffect(() => {
     libraryByCourse();
+    handleShowAllBookmark();
   }, [bookmark]);
 
-  const hanldeBookMarkPriority = async (Contentid) => {
+  const handleBookMark = async (Contentid) => {
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    } else if (count === 1) {
+      setPriority("reviewlist");
+    } else if (count === 2) {
+      setPriority("futureread");
+    } else if (count === 3) {
+      setPriority(showAllBookmark[0]?.name);
+    } else if (count === 4) {
+      setPriority(showAllBookmark[1]?.name);
+      setCount(0);
+    }
+
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, Contentid, priority, token)
+    // );
+    // console.log("result", result);
+
     const response = await dispatch(addContentBookmark(Contentid, role, token));
-    console.log("response", response);
+    // console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -217,7 +248,7 @@ const MylibraryCorse = () => {
       </div>
       <div className="landingpage_slider_container libraryrootcontainer">
         {data?.map((item) => {
-          console.log("item", item);
+          // console.log("item", item);
           return (
             <>
               {item?.Chapter?.length !== 0 && (
@@ -276,17 +307,19 @@ const MylibraryCorse = () => {
                                         ? Bookmark_green
                                         : e?.Prioritytype === "futureread"
                                         ? Bookmark_red
-                                        : e?.Prioritytype === "Personal"
+                                        : e?.Prioritytype ===
+                                          showAllBookmark[0]?.name
                                         ? Bookmark_yellow
-                                        : e?.Prioritytype === "Dayend"
+                                        : e?.Prioritytype ===
+                                          showAllBookmark[1]?.name
+                                        ? Bookmark_grey
+                                        : e.Prioritytype === "null"
                                         ? Bookmark_grey
                                         : Bookmark_grey
                                     }
                                     alt=""
                                     className="tagstwocontainer"
-                                    onClick={() =>
-                                      hanldeBookMarkPriority(e?.contentid)
-                                    }
+                                    onClick={() => handleBookMark(e?.contentid)}
                                     style={{ cursor: "pointer" }}
                                   />
                                 </div>
