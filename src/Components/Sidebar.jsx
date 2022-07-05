@@ -208,10 +208,10 @@ export default function Sidebar() {
                 </Button>
                 <Drawer
                   sx={{
-                    width: drawerWidthTwo,
+                    width: "400px",
                     flexShrink: 0,
                     "& .MuiDrawer-paper": {
-                      width: drawerWidthTwo,
+                      // width: "500px",
                       boxSizing: "border-box",
                       border: "none",
                     },
@@ -253,10 +253,10 @@ export default function Sidebar() {
                 </Button>
                 <Drawer
                   sx={{
-                    width: drawerWidthTwo,
+                    width: "400px",
                     flexShrink: 0,
                     "& .MuiDrawer-paper": {
-                      width: drawerWidthTwo,
+                      // width: "500px",
                       boxSizing: "border-box",
                       border: "none",
                     },
@@ -276,7 +276,14 @@ export default function Sidebar() {
   };
 
   const listtwo = (anchor) => (
-    <Box style={{ background: "#212121", height: "100%", maxWidth: "100%" }}>
+    <Box
+      style={{
+        background: "#212121",
+        height: "100%",
+        maxWidth: "100%",
+        overflowX: "hidden",
+      }}
+    >
       <div
         style={{
           background: "#212121",
