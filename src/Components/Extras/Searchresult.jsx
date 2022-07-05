@@ -20,7 +20,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { development } from "../../endpoints";
 import Swal from "sweetalert2";
-import { addContentBookmark } from "../../Redux/Actions/bookmark.action";
+import { addContentBookmark, showAllBoomark } from "../../Redux/Actions/bookmark.action";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
@@ -34,22 +34,11 @@ const Searchresult = () => {
   const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
+  const [count, setCount] = useState(0);
+  // console.log(data);
 
-  console.log(location);
 
-  useEffect(() => {
-    const searchResult = async () => {
-      const response = await dispatch(searchAction(location.search, token));
-      if (response?.data[0]?.items?.length === 0) {
-        setmessage("No Content Found");
-        setdata([]);
-      } else {
-        setmessage("");
-        setdata(response?.data);
-      }
-    };
-    searchResult();
-  }, [window.location.search, token, params, bookmark]);
 
   const settings = {
     dots: false,
@@ -105,10 +94,31 @@ const Searchresult = () => {
     ],
   };
 
-  const hanldeBookMarkPriority = async (Contentid) => {
-    console.log(Contentid);
-    const response = await dispatch(addContentBookmark(Contentid, role, token));
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
     console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
+  };
+
+  // console.log(count);
+
+  const handleBookMark = async (Contentid) => {
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
+
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    // console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -120,15 +130,30 @@ const Searchresult = () => {
   };
 
   const hanldeDetails = (topic) => {
-    // navigate(
-    //   `/detailpage/id=${topic?.Contentid}/role=${role}/categoryid=${topic?.Chapterid}`,
-    //   {
-    //     state: {
-    //       path: location.pathname,
-    //     },
-    //   }
-    // );
+    navigate(
+      `/detailpage/id=${topic?.id}/role=${role}/categoryid=${topic?.chapterid}`,
+      {
+        state: {
+          path: location.pathname,
+        },
+      }
+    );
   };
+
+  useEffect(() => {
+    const searchResult = async () => {
+      const response = await dispatch(searchAction(location.search, token));
+      if (response?.data[0]?.items?.length === 0) {
+        setmessage("No Content Found");
+        setdata([]);
+      } else {
+        setmessage("");
+        setdata(response?.data);
+      }
+    };
+    searchResult();
+    handleShowAllBookmark();
+  }, [window.location.search, token, params, bookmark]);
 
   return (
     <>
@@ -210,33 +235,33 @@ const Searchresult = () => {
                                         {e.title}
                                       </Typography>
                                     </Typography>
-                                    {/* <div className="mycontenttagscontainer">
-                                    <img
-                                          src={
-                                            item?.PriorityType ===
-                                            "highpriority"
-                                              ? Bookmark_blue
-                                              : item?.PriorityType ===
-                                                "reviewlist"
-                                              ? Bookmark_green
-                                              : item?.PriorityType ===
-                                                "futureread"
-                                              ? Bookmark_red
-                                              : item?.PriorityType ===
-                                                "Personal"
-                                              ? Bookmark_yellow
-                                              : item?.PriorityType === "Dayend"
-                                              ? Bookmark_grey
-                                              : Bookmark_grey
-                                          }
-                                          alt=""
-                                          className="tagstwocontainer"
-                                          onClick={() =>
-                                            hanldeBookMarkPriority(e?.id)
-                                          }
-                                          style={{ cursor: "pointer" }}
-                                        />
-                                    </div> */}
+                                    <div className="mycontenttagscontainer">
+                                      <img
+                                        src={
+                                          e?.PriorityType === "highpriority"
+                                            ? Bookmark_blue
+                                            : e?.PriorityType === "reviewlist"
+                                            ? Bookmark_green
+                                            : e?.PriorityType === "futureread"
+                                            ? Bookmark_red
+                                            : e?.PriorityType ===
+                                              showAllBookmark[0]?.name
+                                            ? Bookmark_yellow
+                                            : e?.PriorityType ===
+                                              showAllBookmark[1]?.name
+                                            ? Bookmark_grey
+                                            : e.PriorityType === "null"
+                                            ? Bookmark_grey
+                                            : Bookmark_grey
+                                        }
+                                        alt=""
+                                        className="tagstwocontainer"
+                                        onClick={() =>
+                                          handleBookMark(e?.id)
+                                        }
+                                        style={{ cursor: "pointer" }}
+                                      />
+                                    </div>
                                   </div>
                                 ) : (
                                   ""

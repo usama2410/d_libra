@@ -28,7 +28,10 @@ import {
   librarybookmark,
   setBookMarkPriority,
 } from "../../../Redux/Actions/Client Side/librar.y.action";
-import { addContentBookmark, showAllBoomark } from "../../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../../Redux/Actions/bookmark.action";
 import Swal from "sweetalert2";
 
 const MyContents = () => {
@@ -46,9 +49,7 @@ const MyContents = () => {
   const [count, setCount] = useState(0);
   const [priority, setPriority] = useState("highpriority");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
-  const [handleSetBookMark, setHandleSetBookMark] = useState(Bookmark_blue);
 
-  console.log("handleSetBookMark", state?.path);
   const handleBack = () => {
     // navigate(state?.path);
     navigate("/editormainpage");
@@ -132,12 +133,10 @@ const MyContents = () => {
     ],
   };
 
-  console.log("handleSetBookMark", handleSetBookMark)
-
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
     console.log(response);
-    setHandleSetBookMark(response?.slice(0, 2));
+    setShowAllBookmark(response?.slice(0, 2));
   };
 
   const dashboardData = async () => {
@@ -329,9 +328,7 @@ const MyContents = () => {
                                           : Bookmark_grey
                                       }
                                       alt=""
-                                      onClick={() =>
-                                        handleBookMark(e?.id)
-                                      }
+                                      onClick={() => handleBookMark(e?.id)}
                                       style={{ cursor: "pointer" }}
                                     />
                                   </div>

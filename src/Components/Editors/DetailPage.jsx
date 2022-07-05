@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "./EditCourseStructure.css";
@@ -37,6 +37,7 @@ const DetailPage = () => {
   const role = useSelector((state) => state.auth.role);
 
   const [details, setDetails] = React.useState([]);
+  const [tagslength, setTagsLength] = React.useState([]);
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
@@ -44,68 +45,96 @@ const DetailPage = () => {
   const [disable, setDisable] = React.useState(false);
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
-  const [handleSetBook, setHandleSetBookMark] = React.useState();
-
-  console.log("handleSetBook", handleSetBook);
-  console.log("details", details);
-  console.log("tags", details?.bookmark);
+  const [showAllBookmark, setShowAllBookmark] = useState(Bookmark_blue);
 
   const handleBack = () => {
     navigate(state?.path);
   };
 
-  const handleBookMark = () => {
-    if (details?.bookmark?.PriorityType === undefined) {
-      return Bookmark_grey;
-    } else if (details?.bookmark === "null") {
-      return Bookmark_grey;
-    } else if (details?.bookmark?.PriorityType === "highpriority") {
-      return Bookmark_red;
-    } else if (details?.bookmark?.PriorityType === "reviewlist") {
-      return Bookmark_green;
-    } else if (details?.bookmark?.PriorityType === "futureread") {
-      return Bookmark_red;
-    } else if (handleSetBook[0].colorcode === "#FFAA1D") {
-      return Bookmark_yellow;
-    } else if (handleSetBook[1].colorcode === "#C8C8C8") {
-      return Bookmark_grey;
-    } else {
-      return Bookmark_grey;
-    }
-  };
+  // console.log(details);
 
-  const postById = async () => {
-    const response = await dispatch(
-      getPostByID(params.id, params.role, params.categoryid, token)
-    );
-    setDetails(response);
+  // const handleBookMark = () => {
+  //   if (details?.bookmark?.PriorityType === undefined) {
+  //     return Bookmark_grey;
+  //   } else if (details?.bookmark === "null") {
+  //     return Bookmark_grey;
+  //   } else if (details?.bookmark?.PriorityType === "highpriority") {
+  //     return Bookmark_red;
+  //   } else if (details?.bookmark?.PriorityType === "reviewlist") {
+  //     return Bookmark_green;
+  //   } else if (details?.bookmark?.PriorityType === "futureread") {
+  //     return Bookmark_red;
+  //   } else if (handleSetBook[0].colorcode === "#FFAA1D") {
+  //     return Bookmark_yellow;
+  //   } else if (handleSetBook[1].colorcode === "#C8C8C8") {
+  //     return Bookmark_grey;
+  //   } else {
+  //     return Bookmark_grey;
+  //   }
+  // };
+
+  const handleBookMark = async () => {
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
+
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, params.id, priority, token)
+    // );
+    // console.log("result", result);
+
+    const response = await dispatch(addContentBookmark(params.id, role, token));
+    // console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
   };
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    console.log(response);
-    setHandleSetBookMark(response?.slice(0, 2));
+    // console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
   };
 
   useEffect(() => {
+    const postById = async () => {
+      const response = await dispatch(
+        getPostByID(params.id, params.role, params.categoryid, token)
+      );
+      setDetails(response);
+    };
+
     postById();
     handleBookMark();
     handleShowAllBookmark();
   }, [params, details?.bookmark?.PriorityType, bookmark]);
 
+  useEffect(() => {
+    details?.post?.tags
+      ?.split(",")
+      .map((tags, i) => (i <= 2 ? setTagsLength(true) : setTagsLength(false)));
+  }, [details]);
+
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
-
-    // console.log("Next", previousItem);
-
     selected < previousItem.length && setSelected(selected + 1);
-    // console.log(previousItem[selected]);
-    // console.log(previousItem[selected]);
-    // if (selected === previousItem.length - 1) {
-    //   setDisable(true);
-    // }
     if (previousItem[selected] !== undefined) {
       navigate(
         `/detailpage/id=${previousItem[selected]?.id}/${params.role}/${params.categoryid}`
@@ -117,15 +146,8 @@ const DetailPage = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
-    // console.log("previousItem", previousItem);
-
     selected > 0 && setSelected(selected - 1);
     let previous = Math.abs(previousItem?.length - 1 - selected);
-    // console.log("previous", previous);
-    // console.log(previousItem[previous]);
-    // if (previous === 0) {
-    //   setDisablePrevious(true);
-    // }
     if (previousItem[previous] !== undefined) {
       navigate(
         `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
@@ -137,7 +159,6 @@ const DetailPage = () => {
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
-    console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -191,66 +212,142 @@ const DetailPage = () => {
               >
                 <div className="deleteeditcontainer">
                   {role === "editor" && (
-                    <div className="subcontainerdelete">
-                      <button
-                        className="detail_delete_button"
-                        onClick={() =>
-                          navigate(
-                            `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
-                            { state: { path: state?.path } }
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="detail_edit_button"
-                        onClick={() =>
-                          navigate(
-                            `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
-                            { state: state?.path }
-                          )
-                        }
-                      >
-                        Edit
-                      </button>
-                    </div>
+                    <>
+                      <div className="subcontainerdelete">
+                        <button
+                          className="detail_delete_button"
+                          onClick={() =>
+                            navigate(
+                              `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
+                              { state: { path: state?.path } }
+                            )
+                          }
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="detail_edit_button"
+                          onClick={() =>
+                            navigate(
+                              `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
+                              { state: state?.path }
+                            )
+                          }
+                        >
+                          Edit
+                        </button>
+                      </div>
+
+                      <div style={{ display: "flex" }}>
+                        {/* {console.log("Ahsan length", tagslength)} */}
+                        {tagslength && (
+                          <div className="tags_wrapper_three">
+                            {details?.post?.tags !== "" ? (
+                              <>
+                                <span
+                                  className="detail_tag_text"
+                                  style={{
+                                    color: theme ? " #363636" : " #C8C8C8",
+                                  }}
+                                >
+                                  Tag:
+                                </span>
+                                {details?.post?.tags?.split(",")?.map((tag) => (
+                                  <button className="detail_tag_button">
+                                    {tag}
+                                  </button>
+                                ))}
+                              </>
+                            ) : null}
+                          </div>
+                        )}
+
+                        <img
+                          src={
+                            details?.bookmark?.PriorityType === "highpriority"
+                              ? Bookmark_blue
+                              : details?.bookmark?.PriorityType === "reviewlist"
+                              ? Bookmark_green
+                              : details?.bookmark?.PriorityType === "futureread"
+                              ? Bookmark_red
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[0]?.name
+                              ? Bookmark_yellow
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[1]?.name
+                              ? Bookmark_grey
+                              : details?.bookmark.PriorityType === "null"
+                              ? Bookmark_grey
+                              : Bookmark_grey
+                          }
+                          alt=""
+                          className="detail_tag_text_two"
+                          style={{ paddingLeft: "24px", cursor: "pointer" }}
+                          onClick={hanldeBookMarkPriority}
+                        />
+                      </div>
+                    </>
                   )}
-                  <img
-                    src={handleBookMark()}
-                    alt=""
-                    className="detail_tag_text_two"
-                    style={{ paddingLeft: "24px", cursor: "pointer" }}
-                    onClick={hanldeBookMarkPriority}
-                  />
                 </div>
               </div>
 
-              <div className="tags_wrapper_one">
-                {details?.post?.tags !== "" ? (
-                  <>
-                    <span
-                      className="detail_tag_text"
-                      style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                    >
-                      Tag:
-                    </span>
-                    {details?.post?.tags?.split(",")?.map((tag) => (
-                      <button className="detail_tag_button">{tag}</button>
-                    ))}
-                  </>
-                ) : null}
-                {/* <button className="detail_tag_button">GitHub</button>
-                  <button className="detail_tag_button">DevOps</button> */}
-
-                {/* <img                      // THIS
-                    src={handleBookMark()}
-                    alt=""
-                    className="detail_tag_text_two"
-                    style={{ paddingLeft: "24px", cursor: "pointer" }}
-                    onClick={hanldeBookMarkPriority}
-                  /> */}
-              </div>
+              {role === "normaluser" && (
+                <>
+                  <div className="normaluser_container">
+                    <div style={{ display: "flex" }}>
+                      <span
+                        className="detail_tag_text"
+                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                      >
+                        Tag:
+                      </span>
+                      {details?.post?.tags?.split(",")?.map((tag) => (
+                        <button className="detail_tag_button">{tag}</button>
+                      ))}
+                    </div>
+                    <img
+                      src={
+                        details?.bookmark?.PriorityType === "highpriority"
+                          ? Bookmark_blue
+                          : details?.bookmark?.PriorityType === "reviewlist"
+                          ? Bookmark_green
+                          : details?.bookmark?.PriorityType === "futureread"
+                          ? Bookmark_red
+                          : details?.bookmark?.PriorityType ===
+                            showAllBookmark[0]?.name
+                          ? Bookmark_yellow
+                          : details?.bookmark?.PriorityType ===
+                            showAllBookmark[1]?.name
+                          ? Bookmark_grey
+                          : details?.bookmark.PriorityType === "null"
+                          ? Bookmark_grey
+                          : Bookmark_grey
+                      }
+                      alt=""
+                      className="detail_tag_text_two"
+                      style={{ paddingLeft: "24px", cursor: "pointer" }}
+                      onClick={hanldeBookMarkPriority}
+                    />
+                  </div>
+                </>
+              )}
+              {!tagslength && (
+                <div className="tags_wrapper_one">
+                  {details?.post?.tags !== "" ? (
+                    <>
+                      <span
+                        className="detail_tag_text"
+                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                      >
+                        Tag:
+                      </span>
+                      {details?.post?.tags?.split(",")?.map((tag) => (
+                        <button className="detail_tag_button">{tag}</button>
+                      ))}
+                    </>
+                  ) : null}
+                </div>
+              )}
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -268,9 +365,6 @@ const DetailPage = () => {
                     )}
                   </span>
                 </div>
-                {/* <div className="noscrollable">
-                    
-                  </div> */}
               </div>
               <div className="tags_wrapper_two">
                 {details?.post?.tags !== "" ? (
@@ -286,16 +380,6 @@ const DetailPage = () => {
                     ))}
                   </>
                 ) : null}
-
-                {/* <img
-                  src={handleBookMark()}
-                  alt=""
-                  className="detail_tag_text_two"
-                  style={{ paddingLeft: "24px", cursor: "pointer" }}
-                  onClick={hanldeBookMarkPriority}
-                /> */}
-                {/* <button className="detail_tag_button">GitHub</button>
-                  <button className="detail_tag_button">DevOps</button> */}
               </div>
               <div className="detailpagesub">
                 <button
@@ -337,10 +421,7 @@ const DetailPage = () => {
                   }}
                 />
               </Button>
-              <Button
-                style={{ marginLeft: "-16px" }}
-                // disabled={enddata >= userdata.length ? true : false}
-              >
+              <Button style={{ marginLeft: "-16px" }}>
                 <img
                   src={Next}
                   alt=""

@@ -91,7 +91,7 @@ const UploadContentMain = () => {
   };
 
   const customStyles = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       background: " #FFFFFF",
       borderRadius: "5px",
@@ -104,20 +104,20 @@ const UploadContentMain = () => {
       ...base,
       color: "#111111",
     }),
-    menu: (base) => ({
+    menu: (base, state) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: " #363636",
     }),
-    menuList: (base) => ({
+    menuList: (base, state) => ({
       ...base,
       padding: 0,
       background: "white",
       color: " #363636",
     }),
-    singleValue: (base) => ({
+    singleValue: (base, state) => ({
       ...base,
       color: " #363636",
     }),
@@ -142,20 +142,20 @@ const UploadContentMain = () => {
       color: "#FFFFFF",
       opacity: 1,
     }),
-    menu: (base) => ({
+    menu: (base, state) => ({
       ...base,
       borderRadius: 0,
       marginTop: 0,
       backgroundColor: "yellow",
       color: "black",
     }),
-    menuList: (base) => ({
+    menuList: (base, state) => ({
       ...base,
       padding: 0,
       background: "white",
       color: "black",
     }),
-    singleValue: (base) => ({
+    singleValue: (base, state) => ({
       ...base,
       color: "#FFFFFF",
     }),

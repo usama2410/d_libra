@@ -115,7 +115,7 @@
   line-height: 21px !important;
   letter-spacing: -0.015em !important;
   color: #ffffff !important;
-  width: 300px !important;
+  /* width: 300px !important; */
 }
 
 .git_introduction_dropdown_sub {
