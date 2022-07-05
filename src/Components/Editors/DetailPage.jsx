@@ -33,6 +33,7 @@ const DetailPage = () => {
   const role = useSelector((state) => state.auth.role);
 
   const [details, setDetails] = React.useState([]);
+  const [tagslength, setTagsLength] = React.useState([]);
   const [startdata, setStartData] = React.useState(0);
   const [enddata, setEndData] = React.useState(1);
 
@@ -40,10 +41,6 @@ const DetailPage = () => {
   const [disable, setDisable] = React.useState(false);
   const [disablePrevious, setDisablePrevious] = React.useState(false);
   const [bookmark, setBookmark] = React.useState(Bookmark_blue);
-
-  // console.log("details", state);
-  // console.log("tags", details?.bookmark?.PriorityType);
-
   const handleBack = () => {
     navigate(state?.path);
   };
@@ -73,27 +70,24 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      // console.log("response", response);
-
       setDetails(response);
     };
+
     postById();
     handleBookMark();
   }, [params, details?.bookmark?.PriorityType, bookmark]);
+
+  useEffect(() => {
+    details?.post?.tags
+      ?.split(",")
+      .map((tags, i) => (i <= 2 ? setTagsLength(true) : setTagsLength(false)));
+  }, [details]);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
-
-    // console.log("Next", previousItem);
-
     selected < previousItem.length && setSelected(selected + 1);
-    // console.log(previousItem[selected]);
-    // console.log(previousItem[selected]);
-    // if (selected === previousItem.length - 1) {
-    //   setDisable(true);
-    // }
     if (previousItem[selected] !== undefined) {
       navigate(
         `/detailpage/id=${previousItem[selected]?.id}/${params.role}/${params.categoryid}`
@@ -105,15 +99,8 @@ const DetailPage = () => {
     let previousItem = details?.all?.filter((item, index) => {
       return item.id !== Number(params.id?.split("=")[1]);
     });
-    // console.log("previousItem", previousItem);
-
     selected > 0 && setSelected(selected - 1);
     let previous = Math.abs(previousItem?.length - 1 - selected);
-    // console.log("previous", previous);
-    // console.log(previousItem[previous]);
-    // if (previous === 0) {
-    //   setDisablePrevious(true);
-    // }
     if (previousItem[previous] !== undefined) {
       navigate(
         `/detailpage/id=${previousItem[previous]?.id}/${params.role}/${params.categoryid}`
@@ -125,7 +112,6 @@ const DetailPage = () => {
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
-    // console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -195,6 +181,57 @@ const DetailPage = () => {
                         Edit
                       </button>
                     </div>
+
+                    <div style={{ display: "flex" }}>
+                      {console.log("Ahsan length", tagslength)}
+                      {tagslength && (
+                        <div className="tags_wrapper_three">
+                          {details?.post?.tags !== "" ? (
+                            <>
+                              <span
+                                className="detail_tag_text"
+                                style={{
+                                  color: theme ? " #363636" : " #C8C8C8",
+                                }}
+                              >
+                                Tag:
+                              </span>
+                              {details?.post?.tags?.split(",")?.map((tag) => (
+                                <button className="detail_tag_button">
+                                  {tag}
+                                </button>
+                              ))}
+                            </>
+                          ) : null}
+                        </div>
+                      )}
+
+                      <img
+                        src={handleBookMark()}
+                        alt=""
+                        className="detail_tag_text_two"
+                        style={{ paddingLeft: "24px", cursor: "pointer" }}
+                        onClick={hanldeBookMarkPriority}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {role === "normaluser" && (
+                <>
+                  <div className="normaluser_container">
+                    <div style={{ display: "flex" }}>
+                      <span
+                        className="detail_tag_text"
+                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                      >
+                        Tag:
+                      </span>
+                      {details?.post?.tags?.split(",")?.map((tag) => (
+                        <button className="detail_tag_button">{tag}</button>
+                      ))}
+                    </div>
                     <img
                       src={handleBookMark()}
                       alt=""
@@ -203,11 +240,10 @@ const DetailPage = () => {
                       onClick={hanldeBookMarkPriority}
                     />
                   </div>
-                )}
-
-              </div>
-              
-              <div className="tags_wrapper_one">
+                </>
+              )}
+              {!tagslength && (
+                <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
                       <span
@@ -221,22 +257,14 @@ const DetailPage = () => {
                       ))}
                     </>
                   ) : null}
-                  {/* <button className="detail_tag_button">GitHub</button>
-                  <button className="detail_tag_button">DevOps</button> */}
-                  {/* <img
-                    src={handleBookMark()}
-                    alt=""
-                    className="detail_tag_text_two"
-                    style={{ paddingLeft: "24px", cursor: "pointer" }}
-                    onClick={hanldeBookMarkPriority}
-                  /> */}
                 </div>
+              )}
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div className="detail_page_content">
                 <div className="scrollable">
-                  <span style={{lineHeight: "35px"}}>
+                  <span style={{ lineHeight: "35px" }}>
                     {details?.post?.content !== "" ? (
                       parse(`${details?.post?.content}`)
                     ) : (
@@ -248,9 +276,6 @@ const DetailPage = () => {
                     )}
                   </span>
                 </div>
-                {/* <div className="noscrollable">
-                    
-                  </div> */}
               </div>
               <div className="tags_wrapper_two">
                 {details?.post?.tags !== "" ? (
@@ -266,16 +291,6 @@ const DetailPage = () => {
                     ))}
                   </>
                 ) : null}
-
-                {/* <img
-                  src={handleBookMark()}
-                  alt=""
-                  className="detail_tag_text_two"
-                  style={{ paddingLeft: "24px", cursor: "pointer" }}
-                  onClick={hanldeBookMarkPriority}
-                /> */}
-                {/* <button className="detail_tag_button">GitHub</button>
-                  <button className="detail_tag_button">DevOps</button> */}
               </div>
               <div className="detailpagesub">
                 <button
@@ -319,7 +334,6 @@ const DetailPage = () => {
               </Button>
               <Button
                 style={{ marginLeft: "-16px" }}
-                // disabled={enddata >= userdata.length ? true : false}
               >
                 <img
                   src={Next}
