@@ -91,6 +91,15 @@ const UploadContentMain = () => {
   };
 
   const customStyles = {
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      // const color = chroma(data.color);
+      console.log({ data, isDisabled, isFocused, isSelected });
+      return {
+        ...styles,
+        backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
+        color: " #363636",
+      };
+    },
     control: (base) => ({
       ...base,
       background: " #FFFFFF",
@@ -128,6 +137,15 @@ const UploadContentMain = () => {
   };
 
   const customStyless = {
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      // const color = chroma(data.color);
+      console.log({ data, isDisabled, isFocused, isSelected });
+      return {
+        ...styles,
+        backgroundColor: isFocused ? "#4F4F4F" : "#4F4F4F",
+        color: "white",
+      };
+    },
     control: (base) => ({
       ...base,
       background: " #4F4F4F",
