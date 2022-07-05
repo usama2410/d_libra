@@ -347,7 +347,9 @@ const DetailPage = () => {
                   </div>
                 </>
               )}
-              {!tagslength && (
+              {
+              role === "editor" &&
+              !tagslength && (
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
@@ -368,7 +370,8 @@ const DetailPage = () => {
                     </>
                   ) : null}
                 </div>
-              )}
+              )
+              }
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
