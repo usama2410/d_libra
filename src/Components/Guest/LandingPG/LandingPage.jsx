@@ -261,6 +261,9 @@ const LandingPage = () => {
                                     alignItems: "center",
                                   }}
                                 >
+                                  <span style={{ marginTop: "4px" }}>
+                                    {e?.totalratinng}
+                                  </span>
                                   <Rating
                                     sx={{ ml: 1 }}
                                     name="read-only"

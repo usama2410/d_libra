@@ -154,24 +154,24 @@ const MyContents = () => {
 
   const handleBookMark = async (Contentid) => {
     console.log("contentid", Contentid);
-    setCount(count + 1);
-    if (count === 0) {
-      setPriority("highpriority");
-    } else if (count === 1) {
-      setPriority("reviewlist");
-    } else if (count === 2) {
-      setPriority("futureread");
-    } else if (count === 3) {
-      setPriority(showAllBookmark[0]?.name);
-    } else if (count === 4) {
-      setPriority(showAllBookmark[1]?.name);
-      setCount(0);
-    }
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
 
-    const result = await dispatch(
-      setBookMarkPriority(role, Contentid, priority, token)
-    );
-    console.log("result", result);
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, Contentid, priority, token)
+    // );
+    // console.log("result", result);
 
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     console.log("response", response);
@@ -308,22 +308,22 @@ const MyContents = () => {
                                       {e.title}
                                     </Typography>
                                   </Typography>
-                                  <div className="mycontenttagscontainer">
+                                  {/* <div className="mycontenttagscontainer">
                                     <img
                                       src={
-                                        e?.Prioritytype === "highpriority"
+                                        e?.PriorityType === "highpriority"
                                           ? Bookmark_blue
-                                          : e?.Prioritytype === "reviewlist"
+                                          : e?.PriorityType === "reviewlist"
                                           ? Bookmark_green
-                                          : e?.Prioritytype === "futureread"
+                                          : e?.PriorityType === "futureread"
                                           ? Bookmark_red
-                                          : e?.Prioritytype ===
+                                          : e?.PriorityType ===
                                             showAllBookmark[0]?.name
                                           ? Bookmark_yellow
-                                          : e?.Prioritytype ===
+                                          : e?.PriorityType ===
                                             showAllBookmark[1]?.name
                                           ? Bookmark_grey
-                                          : e.Prioritytype === "null"
+                                          : e.PriorityType === "null"
                                           ? Bookmark_grey
                                           : Bookmark_grey
                                       }
@@ -331,7 +331,7 @@ const MyContents = () => {
                                       onClick={() => handleBookMark(e?.id)}
                                       style={{ cursor: "pointer" }}
                                     />
-                                  </div>
+                                  </div> */}
                                 </div>
                               ) : (
                                 ""

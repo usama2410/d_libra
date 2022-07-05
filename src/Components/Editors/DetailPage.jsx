@@ -51,7 +51,7 @@ const DetailPage = () => {
     navigate(state?.path);
   };
 
-  // console.log(details);
+  console.log(details);
 
   // const handleBookMark = () => {
   //   if (details?.bookmark?.PriorityType === undefined) {
@@ -125,10 +125,12 @@ const DetailPage = () => {
   }, [params, details?.bookmark?.PriorityType, bookmark]);
 
   useEffect(() => {
-    details?.post?.tags
-      ?.split(",")
-      .map((tags, i) => (i <= 2 ? setTagsLength(true) : setTagsLength(false)));
-  }, [details]);
+      details?.post?.tags
+        ?.split(",")
+        .map((tags, i) =>
+          i <= 2 ? setTagsLength(true) : setTagsLength(false)
+        );
+  }, []);
 
   const handleNextMark = () => {
     let previousItem = details?.all?.filter((item, index) => {
@@ -276,7 +278,7 @@ const DetailPage = () => {
                               : details?.bookmark?.PriorityType ===
                                 showAllBookmark[1]?.name
                               ? Bookmark_grey
-                              : details?.bookmark.PriorityType === "null"
+                              : details?.bookmark === "null"
                               ? Bookmark_grey
                               : Bookmark_grey
                           }
@@ -319,7 +321,7 @@ const DetailPage = () => {
                           : details?.bookmark?.PriorityType ===
                             showAllBookmark[1]?.name
                           ? Bookmark_grey
-                          : details?.bookmark.PriorityType === "null"
+                          : details?.bookmark === "null"
                           ? Bookmark_grey
                           : Bookmark_grey
                       }

@@ -248,7 +248,7 @@ const MylibraryCorse = () => {
       </div>
       <div className="landingpage_slider_container libraryrootcontainer">
         {data?.map((item) => {
-          console.log("item", item);
+          // console.log("item", item);
           return (
             <>
               {item?.Chapter?.length !== 0 && (

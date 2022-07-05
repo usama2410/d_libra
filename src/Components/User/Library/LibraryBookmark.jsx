@@ -20,7 +20,7 @@ import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.s
 import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import { development } from "../../../endpoints";
 import Swal from "sweetalert2";
-import { addContentBookmark } from "../../../Redux/Actions/bookmark.action";
+import { addContentBookmark, showAllBoomark } from "../../../Redux/Actions/bookmark.action";
 
 const LibraryBookmark = () => {
   const navigate = useNavigate();
@@ -33,23 +33,11 @@ const LibraryBookmark = () => {
   const theme = useSelector((state) => state?.theme?.state);
   const [data, setdata] = useState([]);
   const [bookmark, setBookmark] = React.useState();
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
+
 
   const handleBack = () => {
     navigate("/mylibrarycourses");
-  };
-
-  console.log(data);
-
-  const hanldeBookMarkPriority = async (Contentid) => {
-    const response = await dispatch(addContentBookmark(Contentid, role, token));
-    setBookmark(response);
-    !token &&
-      Swal.fire({
-        title: "Unauthenticated",
-        text: "Please login to bookmark",
-        iconColor: "red",
-        icon: "error",
-      });
   };
 
   const hanldeDetails = (topic) => {
@@ -63,12 +51,34 @@ const LibraryBookmark = () => {
     );
   };
 
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    // console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
+  };
+
+  const handleBookMark = async (Contentid) => {
+
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    // console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
+
+
   useEffect(() => {
     const library = async () => {
       const response = await dispatch(librarybookmark(role, token));
       setdata(response);
     };
     library();
+    handleShowAllBookmark();
   }, [bookmark]);
 
   const settings = {
@@ -258,27 +268,27 @@ const LibraryBookmark = () => {
                                       </Typography>
                                       <div className="mycontenttagscontainer">
                                         <img
-                                          src={
-                                            item?.PriorityType ===
-                                            "highpriority"
-                                              ? Bookmark_blue
-                                              : item?.PriorityType ===
-                                                "reviewlist"
-                                              ? Bookmark_green
-                                              : item?.PriorityType ===
-                                                "futureread"
-                                              ? Bookmark_red
-                                              : item?.PriorityType ===
-                                                "Personal"
-                                              ? Bookmark_yellow
-                                              : item?.PriorityType === "Dayend"
-                                              ? Bookmark_grey
-                                              : Bookmark_grey
-                                          }
+                                             src={
+                                              item?.PriorityType === "highpriority"
+                                                ? Bookmark_blue
+                                                : item?.PriorityType === "reviewlist"
+                                                ? Bookmark_green
+                                                : item?.PriorityType === "futureread"
+                                                ? Bookmark_red
+                                                : item?.PriorityType ===
+                                                  showAllBookmark[0]?.name
+                                                ? Bookmark_yellow
+                                                : item?.PriorityType ===
+                                                  showAllBookmark[1]?.name
+                                                ? Bookmark_grey
+                                                : item.PriorityType === "null"
+                                                ? Bookmark_grey
+                                                : Bookmark_grey
+                                            }
                                           alt=""
                                           className="tagstwocontainer"
                                           onClick={() =>
-                                            hanldeBookMarkPriority(e?.Contentid)
+                                            handleBookMark(e?.Contentid)
                                           }
                                           style={{ cursor: "pointer" }}
                                         />
