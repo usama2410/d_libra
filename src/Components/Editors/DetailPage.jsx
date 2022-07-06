@@ -32,6 +32,7 @@ const DetailPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { state } = useLocation();
+  const location = useLocation();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
@@ -48,10 +49,17 @@ const DetailPage = () => {
   const [showAllBookmark, setShowAllBookmark] = useState(Bookmark_blue);
 
   const handleBack = () => {
-    navigate(state?.path);
+    navigate(state?.path, {
+      path: location.pathname,
+      search: state?.search,
+      state: state?.path?.includes("tagpage")
+        ? { search: state?.search, path: location.pathname }
+        : state?.path,
+    });
   };
 
-  console.log(details);
+  console.log(state);
+  console.log(location);
 
   // const handleBookMark = () => {
   //   if (details?.bookmark?.PriorityType === undefined) {
@@ -169,8 +177,14 @@ const DetailPage = () => {
   };
 
   const handleTag = (tag) => {
-    console.log(tag.replace(/\s+/g, ""));
-    navigate(`/tagpage/${tag.replace(/\s+/g, "")}`);
+    console.log(tag.trim());
+    navigate(`/tagpage/${tag.replace(/\s+/g, "-")}`, {
+      state: {
+        search: tag.trim(),
+        path: `${location.pathname}${location.search}`,
+        previous: state,
+      },
+    });
   };
 
   return (
@@ -347,9 +361,7 @@ const DetailPage = () => {
                   </div>
                 </>
               )}
-              {
-              role === "editor" &&
-              !tagslength && (
+              {role === "editor" && !tagslength && (
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
@@ -370,8 +382,7 @@ const DetailPage = () => {
                     </>
                   ) : null}
                 </div>
-              )
-              }
+              )}
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -400,7 +411,12 @@ const DetailPage = () => {
                       Tag:
                     </span>
                     {details?.post?.tags?.split(",")?.map((tag) => (
-                      <button className="detail_tag_button">{tag}</button>
+                      <button
+                        className="detail_tag_button"
+                        onClick={() => handleTag(tag)}
+                      >
+                        {tag}
+                      </button>
                     ))}
                   </>
                 ) : null}

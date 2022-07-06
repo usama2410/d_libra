@@ -7,7 +7,8 @@ import "../Stylesheet/stylesheet.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { resetPassword } from "../../../Redux/Actions/auth.action";
-import { toast } from "react-toastify";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 const UpdatePassword = ({ email }) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const UpdatePassword = ({ email }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -33,6 +35,10 @@ const UpdatePassword = ({ email }) => {
     }, 5000);
     setIsLoading(false);
     return () => clearTimeout(timer);
+  };
+
+  const hanldeShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -65,13 +71,26 @@ const UpdatePassword = ({ email }) => {
             placeholder="Email"
             value={email}
           />
-          <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
-            type="password"
-            placeholder="New Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div style={{ display: "flex", position: "relative" }}>
+            <input
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              type={showPassword ? "text" : "password"}
+              placeholder="New Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {showPassword ? (
+              <VisibilityOutlinedIcon
+                style={{ position: "absolute", right: "10px", top: "13px", cursor: "pointer" }}
+                onClick={hanldeShowPassword}
+              />
+            ) : (
+              <VisibilityOffOutlinedIcon
+                style={{ position: "absolute", right: "10px", top: "13px", cursor: "pointer" }}
+                onClick={hanldeShowPassword}
+              />
+            )}
+          </div>
         </div>
 
         {isLoading ? (

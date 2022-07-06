@@ -8,6 +8,8 @@ import "../Stylesheet/stylesheet.css";
 import { logIn, logInWithGoogle } from "../../../Redux/Actions/auth.action";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 import {
   auth,
@@ -27,6 +29,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // console.log("email", email, password);
 
@@ -95,6 +98,10 @@ const Login = () => {
       });
   };
 
+  const hanldeShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <button
@@ -131,13 +138,36 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div style={{ display: "flex", position: "relative" }}>
+            <input
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {showPassword ? (
+              <VisibilityOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowPassword}
+              />
+            ) : (
+              <VisibilityOffOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowPassword}
+              />
+            )}
+          </div>
         </div>
         <div className="logininbuttoncontainer">
           {isLoading ? (

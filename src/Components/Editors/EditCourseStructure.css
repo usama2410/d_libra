@@ -392,6 +392,7 @@
   /* overflow-wrap: break-word; */
   /* overflow: visible; */
   height: 20px;
+  cursor: pointer;
 }
 
 .detail_page_content {

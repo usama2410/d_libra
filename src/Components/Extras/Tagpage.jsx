@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,16 +9,94 @@ import Tag_light from "../../assests/SVG_Files/Tag_light.svg";
 import TgpageData from "./TgpageData";
 import { ArrowBack } from "@mui/icons-material";
 import FooterButtons from "../User/FooterButtons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Typography } from "@material-ui/core";
+import { searchAction } from "../../Redux/Actions/Client Side/search.action";
+import { development } from "../../endpoints";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
+import Swal from "sweetalert2";
+import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
+import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
+import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
+import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 
 const Tagpage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { state } = useLocation();
+  const { path } = useLocation();
+  const location = useLocation();
+  const params = useParams();
+  const role = useSelector((state) => state.auth.role);
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
   const [data, setdata] = useState(TgpageData);
+  const [message, setmessage] = useState("");
+  const [bookmark, setBookmark] = useState("");
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
+
   const handleBack = () => {
-    navigate("/userdetailpage");
+    navigate(state?.path, {
+      state: state?.previous,
+    });
   };
+
+  console.log("location", location);
+  console.log("state", state);
+  console.log("path", path);
+
+  const hanldeDetails = (topic) => {
+    navigate(
+      `/detailpage/id=${topic?.id}/role=${role}/categoryid=${topic?.chapterid}`,
+      {
+        state: {
+          path: location.pathname,
+          // path: state?.path,
+          search: state?.search,
+        },
+      }
+    );
+  };
+
+  const handleBookMark = async (Contentid) => {
+    const response = await dispatch(addContentBookmark(Contentid, role, token));
+    // console.log("response", response);
+    setBookmark(response);
+    !token &&
+      Swal.fire({
+        title: "Unauthenticated",
+        text: "Please login to bookmark",
+        iconColor: "red",
+        icon: "error",
+      });
+  };
+
+  const handleShowAllBookmark = async () => {
+    const response = await dispatch(showAllBoomark(role, token));
+    console.log(response);
+    setShowAllBookmark(response?.slice(0, 2));
+  };
+
+  useEffect(() => {
+    const searchResult = async () => {
+      const response = await dispatch(searchAction(role, state?.search, token));
+      console.log("response", response);
+      if (response?.data[0]?.items?.length === 0) {
+        setmessage("No Content Found");
+        setdata([]);
+      } else {
+        setmessage("");
+        setdata(response?.data);
+      }
+    };
+    searchResult();
+    handleShowAllBookmark();
+  }, [params, bookmark, state]);
+
   const settings = {
     dots: false,
     adaptiveHeight: true,
@@ -120,38 +198,38 @@ const Tagpage = () => {
                   theme ? " recentlyviewedheading" : "recentlyviewedheadingtwo"
                 }
               >
-                Tag 'Git'
+                Tag '{state?.search}'
               </span>
             </div>
           </div>
         </div>
       </div>
       <div className="searchresult_slider_container">
-        {data.map((item) => {
+        {data?.map((item) => {
           return (
             <div className="content_root_container">
-              <div>
+              {/* <div>
                 <span
                   className={theme ? "chapternameclass" : "chapternameclasstwo"}
                 >
                   {item.chapterName}
                 </span>
-              </div>
+              </div> */}
               <div>
                 <Slider className="intro-slick" {...settings}>
-                  {item.items.map((e) => {
+                  {item?.items?.map((e) => {
                     return (
                       <div className="intro-slides">
                         <img
-                          onClick={() => navigate("/userdetailpage")}
-                          src={e.image}
+                          onClick={() => hanldeDetails(e)}
+                          src={`${development}/media/${e.images}`}
                           className="landingpage_images"
-                          style={{
-                            filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          }}
+                          // style={{
+                          //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                          // }}
                           alt=""
                         />
-                        {e.image ? (
+                        {e?.images ? (
                           <div className="underimagetextcontainer">
                             <Typography
                               noWrap
@@ -166,14 +244,32 @@ const Tagpage = () => {
                                 component="div"
                                 className="subcoursenametwo subcoursename"
                               >
-                                {e.Tags}
+                                {e.title}
                               </Typography>
                             </Typography>
                             <div className="mycontenttagscontainer">
                               <img
-                                src={e.TagsImageTwo}
+                                src={
+                                  e?.PriorityType === "highpriority"
+                                    ? Bookmark_blue
+                                    : e?.PriorityType === "reviewlist"
+                                    ? Bookmark_green
+                                    : e?.PriorityType === "futureread"
+                                    ? Bookmark_red
+                                    : e?.PriorityType ===
+                                      showAllBookmark[0]?.name
+                                    ? Bookmark_yellow
+                                    : e?.PriorityType ===
+                                      showAllBookmark[1]?.name
+                                    ? Bookmark_grey
+                                    : e.PriorityType === "null"
+                                    ? Bookmark_grey
+                                    : Bookmark_grey
+                                }
                                 alt=""
                                 className="tagstwocontainer"
+                                onClick={() => handleBookMark(e?.id)}
+                                style={{ cursor: "pointer" }}
                               />
                             </div>
                           </div>

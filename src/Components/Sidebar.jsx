@@ -124,7 +124,17 @@ export default function Sidebar() {
           },
         });
       } else {
-        navigate(`/searchresult?role=${role}&coursename=${search}`);
+        navigate(
+          `/searchresult?role=${role}&coursename=${search.replace(
+            /\s+/g,
+            "-"
+          )}`,
+          {
+            state: {
+              search,
+            },
+          }
+        );
       }
     } else {
       console.log("Null");

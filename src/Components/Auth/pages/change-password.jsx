@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "../Stylesheet/stylesheet.css";
 import { changePassword } from "../../../Redux/Actions/auth.action";
 import { editorChangePassword } from "../../../Redux/Actions/Editor/auth.action";
-
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -22,6 +23,8 @@ const ChangePassword = () => {
   const [message, setMessage] = useState("");
   const [validation, setValidation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showOldPassword, setShowOldPassword] = useState(false);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -59,6 +62,14 @@ const ChangePassword = () => {
     return () => clearTimeout(timer);
   };
 
+  const hanldeShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const hanldeShowOldPassword = () => {
+    setShowOldPassword(!showOldPassword);
+  };
+
   return (
     <>
       <button
@@ -89,21 +100,67 @@ const ChangePassword = () => {
               <div className="errorMessage">Feilds cannot be empty!</div>
             )
           ) : null}
-          <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
-            type="password"
-            placeholder="Old Password"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
+          <div style={{ display: "flex", position: "relative" }}>
+            <input
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              type={showPassword ? "text" : "password"}
+              placeholder="Old Password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+            {showPassword ? (
+              <VisibilityOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowPassword}
+              />
+            ) : (
+              <VisibilityOffOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowPassword}
+              />
+            )}
+          </div>
 
-          <input
-            className={theme ? "addcategory_input_sub" : "addcategory_input"}
-            type="password"
-            placeholder="New Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div style={{ display: "flex", position: "relative" }}>
+            <input
+              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              type={showOldPassword ? "text" : "password"}
+              placeholder="New Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {showOldPassword ? (
+              <VisibilityOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowOldPassword}
+              />
+            ) : (
+              <VisibilityOffOutlinedIcon
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "13px",
+                  cursor: "pointer",
+                }}
+                onClick={hanldeShowOldPassword}
+              />
+            )}
+          </div>
         </div>
         {isLoading ? (
           <Box

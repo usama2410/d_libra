@@ -1,11 +1,11 @@
 import axios from "axios";
 import { URL, endpoints } from "../../../endpoints";
 
-export const searchAction = (location, token) => async (dispatch) => {
-  console.log(location)
+export const searchAction = (role, coursename, token) => async (dispatch) => {
+  console.log("coursename", coursename)
   try {
     const response = await axios.get(
-      `${URL}${endpoints.SEARCH_CONTENT}${location}`,
+      `${URL}${endpoints.SEARCH_CONTENT}?role=${role}&coursename=${coursename}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     // console.log("searchAction", response.data);
@@ -22,7 +22,11 @@ export const searchAction = (location, token) => async (dispatch) => {
 };
 
 export const searchCourse = (location) => async (dispatch) => {
-  console.log("searchCourse", location, `${URL}${endpoints.SEARCH_COURSE}${location}`);
+  console.log(
+    "searchCourse",
+    location,
+    `${URL}${endpoints.SEARCH_COURSE}${location}`
+  );
   try {
     const response = await axios.get(
       `${URL}${endpoints.SEARCH_COURSE}${location}`

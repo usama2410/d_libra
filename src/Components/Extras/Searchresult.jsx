@@ -20,7 +20,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { development } from "../../endpoints";
 import Swal from "sweetalert2";
-import { addContentBookmark, showAllBoomark } from "../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../Redux/Actions/bookmark.action";
 
 const Searchresult = () => {
   const dispatch = useDispatch();
@@ -35,10 +38,9 @@ const Searchresult = () => {
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
-  const [count, setCount] = useState(0);
-  // console.log(data);
-
-
+  console.log(location);
+  console.log(location.state.search);
+  console.log(location.search?.split("=")[2].replace("-", " "));
 
   const settings = {
     dots: false,
@@ -103,20 +105,6 @@ const Searchresult = () => {
   // console.log(count);
 
   const handleBookMark = async (Contentid) => {
-    // setCount(count + 1);
-    // if (count === 0) {
-    //   setPriority("highpriority");
-    // } else if (count === 1) {
-    //   setPriority("reviewlist");
-    // } else if (count === 2) {
-    //   setPriority("futureread");
-    // } else if (count === 3) {
-    //   setPriority(showAllBookmark[0]?.name);
-    // } else if (count === 4) {
-    //   setPriority(showAllBookmark[1]?.name);
-    //   setCount(0);
-    // }
-
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     // console.log("response", response);
     setBookmark(response);
@@ -134,7 +122,8 @@ const Searchresult = () => {
       `/detailpage/id=${topic?.id}/role=${role}/categoryid=${topic?.chapterid}`,
       {
         state: {
-          path: location.pathname,
+          path: `${location.pathname}${location.search}`,
+          state: location.state.search,
         },
       }
     );
@@ -142,7 +131,15 @@ const Searchresult = () => {
 
   useEffect(() => {
     const searchResult = async () => {
-      const response = await dispatch(searchAction(location.search, token));
+      const response = await dispatch(
+        searchAction(
+          role,
+          location.state.search
+            ? location.search?.split("=")[2].replace("-", " ")
+            : location.state.search,
+          token
+        )
+      );
       if (response?.data[0]?.items?.length === 0) {
         setmessage("No Content Found");
         setdata([]);
@@ -152,7 +149,6 @@ const Searchresult = () => {
       }
     };
     searchResult();
-    handleShowAllBookmark();
   }, [window.location.search, token, params, bookmark]);
 
   return (
@@ -256,9 +252,7 @@ const Searchresult = () => {
                                         }
                                         alt=""
                                         className="tagstwocontainer"
-                                        onClick={() =>
-                                          handleBookMark(e?.id)
-                                        }
+                                        onClick={() => handleBookMark(e?.id)}
                                         style={{ cursor: "pointer" }}
                                       />
                                     </div>
