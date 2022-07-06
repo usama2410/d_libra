@@ -1,3 +1,20 @@
+.rdw-dropdownoption-default {
+  color: black !important;
+}
+
+.rdw-dropdown-selectedtext {
+  color: black !important;
+}
+.rdw-link-modal-label {
+  color: black !important;
+}
+.rdw-embedded-modal-header-option {
+  color: black !important;
+}
+.rdw-image-modal-header-option {
+  color: black !important;
+}
+
 .updatecontainerbutton {
   width: 100%;
   display: flex;
