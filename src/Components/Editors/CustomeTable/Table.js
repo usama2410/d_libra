@@ -196,7 +196,7 @@ const CollapsibleTable = () => {
                     className="tableBody"
                     sx={{ borderBottom: "none !important", width: "300px" }}
                   >
-                    {row.unique_identifier}
+                    {row.unique_identifier?.replace(/(\d{4})(\d{2})/, "$1-$2")}
                   </StyledTableCell>
                   <StyledTableCell
                     className="tableBody"
