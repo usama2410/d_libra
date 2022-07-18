@@ -142,7 +142,9 @@ const ForgetPassword = () => {
         <UpdatePassword email={email} />
       ) : (
         <div className="editormainpage_root_contianer">
-          <div className="editormainpage_container">
+          <div className="editormainpage_container" style={{display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'}}>
             <div
               style={{
                 textAlign: "center",
