@@ -556,10 +556,10 @@
   }
 } */
 
-@media screen and (ma-width: 1054px) {
+@media screen and (max-width: 1054px) {
   .detail_tag_text_two {
-    display: none;
-    border: 1px solid red !important;
+    display: block;
+    /* border: 1px solid red !important; */
   }
 }
 

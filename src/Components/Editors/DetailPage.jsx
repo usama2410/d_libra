@@ -328,7 +328,7 @@ const DetailPage = () => {
                             src={Bookmark_grey}
                             alt=""
                             className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            style={{ paddingLeft: "24px", cursor: "pointer"}}
                             onClick={hanldeBookMarkPriority}
                           />
                         )}
@@ -411,8 +411,9 @@ const DetailPage = () => {
                           {tag}
                         </button>
                       ))}
+                    
                     </>
-                  ) : null}
+                  ) :  null}
                 </div>
               )}
             </Grid>
@@ -436,6 +437,8 @@ const DetailPage = () => {
               <div className="tags_wrapper_two">
                 {details?.post?.tags !== "" ? (
                   <>
+                  <div style={{display: 'flex'}}>
+
                     <span
                       className="detail_tag_text"
                       style={{ color: theme ? " #363636" : " #C8C8C8" }}
@@ -450,6 +453,17 @@ const DetailPage = () => {
                         {tag}
                       </button>
                     ))}
+                  </div>
+                  {
+                    role !== "editor" && 
+                    <img
+                        src={Bookmark_grey}
+                        alt=""
+                        className="detail_tag_text_two"
+                        style={{ paddingLeft: "24px", cursor: "pointer", marginRight: "5px"}}
+                        onClick={hanldeBookMarkPriority}
+                      />
+                  }
                   </>
                 ) : null}
               </div>
