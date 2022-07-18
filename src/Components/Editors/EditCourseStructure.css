@@ -579,6 +579,7 @@
     margin-top: -46px;
     padding: 0px 8px;
     width: 100%;
+    overflow-y: scroll;
   }
   .scrollable {
     display: none;
