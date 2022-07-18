@@ -194,11 +194,11 @@ export default function Sidebar() {
     setState({ ...state, [anchor]: open });
   };
 
-  console.log("themeState", themeState)
-  console.log("pathname", location.pathname.includes("detailpage"))
+  console.log("themeState", themeState);
+  console.log("pathname", location.pathname.includes("detailpage"));
 
   const handleaccordiondrawer = () => {
-    if (location.pathname.includes("detailpage") && themeState === true) {
+    if (location.pathname.includes("detailpage")) {
       return (
         <button onClick={handleAccordionIcon} className="accordionbutton">
           {" "}
@@ -241,10 +241,7 @@ export default function Sidebar() {
           </div>
         </button>
       );
-    } else if (
-      location.pathname.includes("detailpage") &&
-      themeState === false
-    ) {
+    } else if (location.pathname.includes("detailpage")) {
       return (
         <button onClick={handleAccordionIcon} className="accordionbutton">
           <div>
@@ -932,7 +929,10 @@ export default function Sidebar() {
                     style={{ borderRadius: "50%" }}
                   />
                 ) : (
-                  <AccountCircleOutlinedIcon fontSize="large" className={Conditional_Sidenavlogo()} />
+                  <AccountCircleOutlinedIcon
+                    fontSize="large"
+                    className={Conditional_Sidenavlogo()}
+                  />
                 )}
               </>
             )}

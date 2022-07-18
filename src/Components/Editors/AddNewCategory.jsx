@@ -44,7 +44,7 @@ const AddNewCategory = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  let uniqueIdentifierWithOutHyphens = uniqueIdentity.replace(/-/g, "");
+  let uniqueIdentifierWithOutHyphens = uniqueIdentity?.replace(/-/g, "");
 
   const handleBack = () => {
     navigate("/editcoursestructure");
@@ -64,7 +64,7 @@ const AddNewCategory = () => {
   ];
 
   const hanldeSetUniqueIdentity = (target) => {
-    let hyphenValue = target.value.replace(/\D/g, "");
+    let hyphenValue = target.value?.replace(/\D/g, "");
     if (selectedCategoryOption.label === "Course") {
       setUniqueIdentity(hyphenValue?.replace(/(\d{4})(\d{2})/, "$1-$2"));
     } else if (selectedCategoryOption.label === "Chapter") {
@@ -156,7 +156,7 @@ const AddNewCategory = () => {
     // console.log(selectedCategoryOption);
     let hypenIdentifierCategory = (selectedCategoryOption?.identifier)
       .toString()
-      .replace(/(\d{4})(\d{2})/, "$1-$2");
+      ?.replace(/(\d{4})(\d{2})/, "$1-$2");
     // console.log("hypenIdentifier", hypenIdentifier);
     setUniqueIdentity(hypenIdentifierCategory);
     setParentID(selectedCategoryOption?.id);
@@ -183,7 +183,7 @@ const AddNewCategory = () => {
     // console.log(selectedChapterOption);
     let hypenIdentifierCourse = (selectedChapterOption?.identifier)
       .toString()
-      .replace(/(\d{4})(\d{2})/, "$1-$2");
+      ?.replace(/(\d{4})(\d{2})/, "$1-$2");
     setUniqueIdentity(hypenIdentifierCourse);
     setParentID(selectedChapterOption?.id);
     setSelectedChapterOption(selectedChapterOption);

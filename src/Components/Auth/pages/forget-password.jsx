@@ -49,7 +49,7 @@ const ForgetPassword = () => {
 
   // ['2', '4', '6', '8']
 
-  let OTPCode = code.toString().replaceAll(",", "");
+  let OTPCode = code?.toString()?.replaceAll(",", "");
 
   const handleVerifyCode = async (e) => {
     e.preventDefault();

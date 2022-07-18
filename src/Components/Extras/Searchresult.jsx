@@ -40,7 +40,7 @@ const Searchresult = () => {
   const [showAllBookmark, setShowAllBookmark] = useState([]);
   console.log(location);
   console.log(location.state.search);
-  console.log(location.search?.split("=")[2].replace("-", " "));
+  // console.log(location.search?.split("=")[2].replace("-", " "));
 
   const settings = {
     dots: false,
@@ -135,7 +135,7 @@ const Searchresult = () => {
         searchAction(
           role,
           location.state.search
-            ? location.search?.split("=")[2].replace("-", " ")
+            ? location.search?.split("=")[2]?.replace("-", " ")
             : location.state.search,
           token
         )
@@ -204,6 +204,7 @@ const Searchresult = () => {
                               <div className="intro-slides">
                                 <img
                                   src={`${development}/media/${e.images}`}
+                                  onClick={() => hanldeDetails(e)}
                                   className="landingpage_images"
                                   style={{
                                     filter: `${
@@ -211,7 +212,6 @@ const Searchresult = () => {
                                     }`,
                                   }}
                                   alt=""
-                                  onClick={() => hanldeDetails(e)}
                                 />
                                 {e.images ? (
                                   <div className="underimagetextcontainer">
@@ -288,7 +288,7 @@ const Searchresult = () => {
         {data?.map((item) => {
           return (
             <>
-              {item?.items?.map((content) => {
+              {item?.items?.map((e) => {
                 return (
                   <div
                     className="W-main-map"
@@ -302,11 +302,12 @@ const Searchresult = () => {
                         className="left_p"
                         style={{ color: theme ? " #363636" : "  #ffffff" }}
                       >
-                        {content.Tags}
+                        {e.title}
                       </p>
                     </div>
                     <div className="right">
-                      <img className="right_image" src={content.image} alt="" />
+                      <img className="right_image" src={`${development}/media/${e.images}`}
+                                  onClick={() => hanldeDetails(e)} alt="" />
                     </div>
                   </div>
                 );

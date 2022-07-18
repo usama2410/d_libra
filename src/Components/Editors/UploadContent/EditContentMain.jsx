@@ -24,7 +24,6 @@ import { development } from "../../../endpoints";
 // import { CKEditor } from "ckeditor4-react";
 import CKEditor from "ckeditor4-react-advanced";
 
-
 const EditContentMain = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -218,7 +217,7 @@ const EditContentMain = () => {
     // console.log("selectedOption ID", selectedOptionChild);
     let hypenIdentifierChild = (selectedOptionChild?.identifier)
       .toString()
-      .replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+      ?.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
     setUnique(hypenIdentifierChild);
 
     const response = await dispatch(

@@ -292,7 +292,7 @@ const Tagpage = () => {
         {data.map((item) => {
           return (
             <>
-              {item.items.map((content) => {
+              {item.items.map((e) => {
                 return (
                   <div
                     onClick={() => navigate("/userdetailpage")}
@@ -307,11 +307,16 @@ const Tagpage = () => {
                         className="left_p"
                         style={{ color: theme ? " #363636" : "  #ffffff" }}
                       >
-                        {content.Tags}
+                        {e.title}
                       </p>
                     </div>
                     <div className="right">
-                      <img className="right_image" src={content.image} alt="" />
+                      <img
+                        className="right_image"
+                        onClick={() => hanldeDetails(e)}
+                        src={`${development}/media/${e.images}`}
+                        alt=""
+                      />
                     </div>
                   </div>
                 );

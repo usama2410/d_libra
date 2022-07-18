@@ -56,7 +56,7 @@ const UploadContentMain = () => {
   const [parentCategory, setParentCategory] = useState([]);
   const [childCategory, setChildCategory] = useState([]);
 
-  let uniqueIdentifierWithOutHyphens = uniqueIdentity.replace(/-/g, "");
+  let uniqueIdentifierWithOutHyphens = uniqueIdentity?.replace(/-/g, "");
 
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
@@ -64,7 +64,7 @@ const UploadContentMain = () => {
   };
 
   const hanldeSetUniqueIdentity = (target) => {
-    let hyphenValue = target.value.replace(/\D/g, "");
+    let hyphenValue = target.value?.replace(/\D/g, "");
 
     setUniqueIdentity(
       hyphenValue?.replace(/(\d{4})(\d{2})(\d{2})(\d{4})/, "$1-$2-$3-$4")
@@ -250,8 +250,7 @@ const UploadContentMain = () => {
     setSelectedOptionContent(selectedOptionContent);
     // console.log("selectedOption ID", selectedOptionContent);
     let hypenIdentifierContent = (selectedOptionContent?.identifier)
-      .toString()
-      .replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+      .toString()?.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
     setUniqueIdentity(hypenIdentifierContent);
   };
 
