@@ -467,6 +467,19 @@ const DetailPage = () => {
                   </>
                 ) : null}
               </div>
+              <div className="noscrollable">
+                  <span style={{ lineHeight: "35px" }}>
+                    {details?.post?.content !== "" ? (
+                      parse(`${details?.post?.content}`)
+                    ) : (
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        No content
+                      </div>
+                    )}
+                  </span>
+                </div>
               <div className="detailpagesub">
                 <button
                   onClick={handleBack}
