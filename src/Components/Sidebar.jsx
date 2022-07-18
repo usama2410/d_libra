@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import Rating from "../assests/Rating.png";
 import "./Sidebar.css";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, themeSwitch } from "../Redux/Actions/auth.action";
 import Member_Icon from "../assests/SVG_Files/Member_Icon.svg";
@@ -192,6 +193,9 @@ export default function Sidebar() {
     }
     setState({ ...state, [anchor]: open });
   };
+
+  console.log("themeState", themeState)
+  console.log("pathname", location.pathname.includes("detailpage"))
 
   const handleaccordiondrawer = () => {
     if (location.pathname.includes("detailpage") && themeState === true) {
@@ -914,17 +918,23 @@ export default function Sidebar() {
             "/coursepageguest" === location.pathname ? (
               ""
             ) : (
-              <img
-                onClick={() => navigate("/usersettingviewpage")}
-                src={
-                  user?.profile !== null
-                    ? `${development}/${user?.profile}`
-                    : Member_Icon
-                }
-                alt=""
-                className={Conditional_Sidenavlogo()}
-                style={{ borderRadius: "50%" }}
-              />
+              <>
+                {token ? (
+                  <img
+                    onClick={() => navigate("/usersettingviewpage")}
+                    src={
+                      user?.profile !== null
+                        ? `${development}/${user?.profile}`
+                        : Member_Icon
+                    }
+                    alt=""
+                    className={Conditional_Sidenavlogo()}
+                    style={{ borderRadius: "50%" }}
+                  />
+                ) : (
+                  <AccountCircleOutlinedIcon fontSize="large" className={Conditional_Sidenavlogo()} />
+                )}
+              </>
             )}
           </div>
           {handleaccordiondrawer()}
