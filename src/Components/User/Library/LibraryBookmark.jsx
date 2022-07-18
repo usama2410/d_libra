@@ -20,7 +20,10 @@ import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.s
 import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import { development } from "../../../endpoints";
 import Swal from "sweetalert2";
-import { addContentBookmark, showAllBoomark } from "../../../Redux/Actions/bookmark.action";
+import {
+  addContentBookmark,
+  showAllBoomark,
+} from "../../../Redux/Actions/bookmark.action";
 
 const LibraryBookmark = () => {
   const navigate = useNavigate();
@@ -34,7 +37,6 @@ const LibraryBookmark = () => {
   const [data, setdata] = useState([]);
   const [bookmark, setBookmark] = React.useState();
   const [showAllBookmark, setShowAllBookmark] = useState([]);
-
 
   const handleBack = () => {
     navigate("/mylibrarycourses");
@@ -58,7 +60,6 @@ const LibraryBookmark = () => {
   };
 
   const handleBookMark = async (Contentid) => {
-
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     // console.log("response", response);
     setBookmark(response);
@@ -70,7 +71,6 @@ const LibraryBookmark = () => {
         icon: "error",
       });
   };
-
 
   useEffect(() => {
     const library = async () => {
@@ -268,23 +268,28 @@ const LibraryBookmark = () => {
                                       </Typography>
                                       <div className="mycontenttagscontainer">
                                         <img
-                                             src={
-                                              item?.PriorityType === "highpriority"
-                                                ? Bookmark_blue
-                                                : item?.PriorityType === "reviewlist"
-                                                ? Bookmark_green
-                                                : item?.PriorityType === "futureread"
-                                                ? Bookmark_red
-                                                : item?.PriorityType ===
+                                          src={
+                                            item?.PriorityType ===
+                                            "highpriority"
+                                              ? Bookmark_blue
+                                              : item?.PriorityType ===
+                                                "reviewlist"
+                                              ? Bookmark_green
+                                              : item?.PriorityType ===
+                                                "futureread"
+                                              ? Bookmark_red
+                                              : token &&
+                                                item?.PriorityType ===
                                                   showAllBookmark[0]?.name
-                                                ? Bookmark_yellow
-                                                : item?.PriorityType ===
+                                              ? Bookmark_yellow
+                                              : token &&
+                                                item?.PriorityType ===
                                                   showAllBookmark[1]?.name
-                                                ? Bookmark_grey
-                                                : item.PriorityType === "null"
-                                                ? Bookmark_grey
-                                                : Bookmark_grey
-                                            }
+                                              ? Bookmark_grey
+                                              : item.bookmark === "null"
+                                              ? Bookmark_grey
+                                              : Bookmark_grey
+                                          }
                                           alt=""
                                           className="tagstwocontainer"
                                           onClick={() =>

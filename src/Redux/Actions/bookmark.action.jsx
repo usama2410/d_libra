@@ -3,7 +3,7 @@ import { URL, endpoints } from "../../endpoints";
 import * as FormData from "form-data";
 
 export const addBookmark = (rawData, role, token) => async (dispatch) => {
-  console.log(rawData)
+  console.log(rawData);
   try {
     const response = await axios.post(
       `${URL}${endpoints.ADD_BOOKMARK_LIBRARY}?role=${role}`,
@@ -75,3 +75,20 @@ export const addContentBookmark =
       console.log(error);
     }
   };
+
+export const deleteBookmark = (role, bookmarkID, token) => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      `${URL}${endpoints.DELETE_BOOKMARK}?role=${role}&bookmarkid=${bookmarkID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("deleteBookmark Bookmark", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

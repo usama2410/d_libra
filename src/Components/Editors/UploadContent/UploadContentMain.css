@@ -1,3 +1,20 @@
+.rdw-dropdownoption-default {
+  color: black !important;
+}
+
+.rdw-dropdown-selectedtext {
+  color: black !important;
+}
+.rdw-link-modal-label {
+  color: black !important;
+}
+.rdw-embedded-modal-header-option {
+  color: black !important;
+}
+.rdw-image-modal-header-option {
+  color: black !important;
+}
+
 .updatecontainerbutton {
   width: 100%;
   display: flex;
@@ -6,11 +23,11 @@
 }
 
 .noimagecontainer {
-  width: 100px;
-  height: 200px;
-  margin-left: -10px;
-  object-fit: contain;
-  padding-top: 10px;
+  width: 300px;
+  height: auto;
+  /* margin-left: -30px; */
+  object-fit: cover;
+  padding-top: 20px;
 }
 
 .widthautoclass {
@@ -195,6 +212,7 @@ textarea.addcategory_input_sub {
 .image_none {
   width: 100px;
   height: 222px;
+  margin-top: 15px;
 }
 
 @media screen and (max-width: 1051px) {
@@ -205,7 +223,7 @@ textarea.addcategory_input_sub {
 
 @media screen and (max-width: 960px) {
   .editormaincontainer {
-    margin-top: 0px;
+    margin-top: 50px;
   }
 
   .reactdraftcontainer {

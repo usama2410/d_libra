@@ -104,7 +104,7 @@ const RatingSidebar = () => {
   const customStyles = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
@@ -273,7 +273,7 @@ const RatingSidebar = () => {
             style={{ color: `${theme ? "black" : "white"}` }}
             id="message"
             rows="14"
-            placeholder=""
+            placeholder="Write your comments here"
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}

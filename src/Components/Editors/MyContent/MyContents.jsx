@@ -323,7 +323,7 @@ const MyContents = () => {
                                           : e?.PriorityType ===
                                             showAllBookmark[1]?.name
                                           ? Bookmark_grey
-                                          : e.PriorityType === "null"
+                                          : e.bookmark === "null"
                                           ? Bookmark_grey
                                           : Bookmark_grey
                                       }

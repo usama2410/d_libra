@@ -31,7 +31,7 @@
 }
 
 .usersetting_inputfield_dark::placeholder {
-  color: #ffffff !important;
+  color: grey !important;
 }
 .usersetting_inputfield_light {
   background: #ffffff !important;
@@ -52,7 +52,7 @@
 }
 
 .usersetting_inputfield_light::placeholder {
-  color: #363636 !important;
+  color: grey !important;
 }
 
 .addiconcontainer {
@@ -164,7 +164,7 @@
 }
 
 .profile_sub_input::placeholder {
-  color: #363636 !important;
+  color: grey !important;
 }
 
 .profile_sub_input_two {
@@ -186,7 +186,7 @@
 }
 
 .profile_sub_input_two::placeholder {
-  color: #ffffff !important;
+  color: grey !important;
 }
 
 .user_header_container {

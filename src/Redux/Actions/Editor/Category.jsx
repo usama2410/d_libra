@@ -104,7 +104,7 @@ export const getTopicContent = (role, id, token) => async (dispatch) => {
 
 export const addParentCategorie =
   (name, slug, image, uniqueidentity, token) => async (dispatch) => {
-    console.log(name, slug, image, uniqueidentity);
+    // console.log(name, slug, image, uniqueidentity);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("slug", slug);
@@ -161,7 +161,7 @@ export const getAllCourses = (role, token) => async (dispatch) => {
 export const addnewChapters =
   (name, courseid, slug, imageName, uniqueidentity, token) =>
   async (dispatch) => {
-    console.log(name, courseid, slug, imageName, uniqueidentity);
+    // console.log(name, courseid, slug, imageName, uniqueidentity);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("courseid", courseid);

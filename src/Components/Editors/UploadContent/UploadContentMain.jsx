@@ -17,6 +17,10 @@ import {
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+// import { CKEditor } from "ckeditor4-react";
+// import CKEditor  from "react-ckeditor-component";
+import CKEditor from "ckeditor4-react-advanced";
+
 
 const UploadContentMain = () => {
   const navigate = useNavigate();
@@ -38,24 +42,33 @@ const UploadContentMain = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionContent, setSelectedOptionContent] = useState("");
 
-  // console.log("image state", contentId);
+  const [CKEditorState, setCKEditorState] = useState("");
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const onEditorStateChange = (editorState) => {
-    return setEditorState(editorState);
-  };
-  const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  console.log("image state", CKEditorState);
+
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  // const onEditorStateChange = (editorState) => {
+  //   return setEditorState(editorState);
+  // };
+  // const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
   // console.log("hrmlText", htmlText);
 
   const [parentCategory, setParentCategory] = useState([]);
   const [childCategory, setChildCategory] = useState([]);
 
-  // console.log("parentCategory", parentCategory);
-  // console.log("childCategory", childCategory);
+  let uniqueIdentifierWithOutHyphens = uniqueIdentity.replace(/-/g, "");
 
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
+  };
+
+  const hanldeSetUniqueIdentity = (target) => {
+    let hyphenValue = target.value.replace(/\D/g, "");
+
+    setUniqueIdentity(
+      hyphenValue?.replace(/(\d{4})(\d{2})(\d{2})(\d{4})/, "$1-$2-$3-$4")
+    );
   };
 
   const handleButton = async (e) => {
@@ -68,11 +81,11 @@ const UploadContentMain = () => {
         contentTitle,
         contentId,
         tags,
-        htmlText,
+        CKEditorState,
         imageName,
         metaDescription,
         OGP,
-        uniqueIdentity,
+        uniqueIdentifierWithOutHyphens,
         token
       )
     );
@@ -93,7 +106,7 @@ const UploadContentMain = () => {
   const customStyles = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
@@ -139,7 +152,7 @@ const UploadContentMain = () => {
   const customStyless = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? "#4F4F4F" : "#4F4F4F",
@@ -236,8 +249,151 @@ const UploadContentMain = () => {
   const handleSelectorContent = (selectedOptionContent) => {
     setSelectedOptionContent(selectedOptionContent);
     // console.log("selectedOption ID", selectedOptionContent);
-    setUniqueIdentity(selectedOptionContent?.identifier);
+    let hypenIdentifierContent = (selectedOptionContent?.identifier)
+      .toString()
+      .replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+    setUniqueIdentity(hypenIdentifierContent);
   };
+
+  const handleEditorChange = (evt) => {
+    setCKEditorState(evt.editor.getData());
+  };
+
+  // const editorConfig = {
+  //   toolbar: [
+  //     {
+  //       name: "document",
+  //       items: ["Source", "-", "NewPage", "Preview", "-", "Templates"],
+  //     },
+  //     {
+  //       name: "clipboard",
+  //       items: [
+  //         "Cut",
+  //         "Copy",
+  //         "Paste",
+  //         "PasteText",
+  //         "PasteFromWord",
+  //         "-",
+  //         "Undo",
+  //         "Redo",
+  //       ],
+  //     },
+
+  //     {
+  //       name: "basicstyles",
+  //       items: [
+  //         "Bold",
+  //         "Italic",
+  //         "Underline",
+  //         "Strike",
+  //         "-",
+  //         "Subscript",
+  //         "Superscript",
+  //         "RemoveFormat",
+  //       ],
+  //     },
+
+  //     {
+  //       name: "paragraph",
+  //       items: [
+  //         "AlignLeft",
+  //         "JustifyLeft",
+  //         "JustifyCenter",
+  //         "JustifyRight",
+  //         "JustifyBlock",
+  //       ],
+  //     },
+  //     {
+  //       name: "lists",
+  //       items: [
+  //         "NumberedList",
+  //         "BulletedList",
+  //         "-",
+  //         "Outdent",
+  //         "Indent",
+  //         "Blockquote",
+  //       ],
+  //     },
+  //     {
+  //       name: "insert",
+  //       items: ["Image", "Link", "Unlink", "Table", "HorizontalRule", "doctools"],
+  //     },
+      
+
+  //     {
+  //       name: "clipboard",
+  //       items: [
+  //         "Undo",
+  //         "Redo",
+  //         "Cut",
+  //         "Copy",
+  //         "Paste",
+  //         "PasteText",
+  //         "Radio",
+  //         "TextArea",
+  //       ],
+  //     },
+  //     {
+  //       name: "items",
+  //       items: [
+  //         "Save",
+  //         "Print",
+  //         "document",
+  //         "tools",
+  //         "PasteFromWord",
+  //         "SelectAll",
+  //         "Scayt",
+  //         "Form",
+  //         "Checkbox",
+  //         "Textarea",
+  //         "Select",
+  //         "Button",
+  //         "ImageButton",
+  //         "HiddenField",
+  //         "Language",
+
+  //         "Smiley",
+  //         "SpecialChar",
+  //         "PageBreak",
+  //         "Iframe",
+  //         "Anchor",
+  //         "ShowBlocks",
+  //         "CopyFormatting",
+  //       ],
+  //     },
+  //     "/",
+  //     {
+  //       name: "styles",
+  //       items: [
+  //         "Styles",
+  //         "Format",
+  //         "-",
+  //         "Font",
+  //         "-",
+  //         "FontSize",
+  //         "Flash",
+  //         "fontfamily",
+  //       ],
+  //     },
+  //     {
+  //       name: "hello",
+  //       items: ["CreateDiv", "Find", "Replace", "CreatePlaceholder"],
+  //     },
+  //     {
+  //       name: "colorStyles",
+  //       items: ["TextColor", "BGColor", "Maximize", "BidiLtr", "BidiRtl"],
+  //     },
+  //     '/',
+  //     { name: 'base', items: [ 'basicstyles', 'cleanup' ] },
+  //   ],
+  //   skin: "moono",
+  //   extraPlugins: "justify, colorbutton, font",
+  //   removeButtons: "",
+  //   shouldNotGroupWhenFull: true,
+  // };
+
+  // CKEditor.editorbgcolor = 'grey';
+  // CKEditor.config.removeButtons  = 'help'; 
 
   return (
     <>
@@ -358,9 +514,7 @@ const UploadContentMain = () => {
                 value={uniqueIdentity}
                 maxLength={12}
                 minLength={8}
-                onChange={(e) =>
-                  setUniqueIdentity(e.target.value.replace(/\D/g, ""))
-                }
+                onChange={(e) => hanldeSetUniqueIdentity(e.target)}
               />
             </div>
             <div>
@@ -437,7 +591,7 @@ const UploadContentMain = () => {
                   <div className="main_slide_container">
                     <div style={{ paddingBottom: "10px" }}></div>
                     <span>{imageName?.name}</span>
-                    <div>
+                    <div style={{ marginTop: "10px" }}>
                       <label htmlFor="contained-button-file">
                         <input
                           accept="image/*"
@@ -482,14 +636,21 @@ const UploadContentMain = () => {
                   style={{
                     backgroundColor: `${theme ? "white" : "#4f4f4f"}`,
                   }}
-                  className="editorstatecontainer"
+                  // className="editorstatecontainer"
                 >
-                  <Editor
+                  {/* <Editor
                     editorState={editorState}
                     wrapperClassName="demo-wrapper"
                     editorClassName="demo-editor"
                     onEditorStateChange={onEditorStateChange}
                     placeholder="Write description here"
+                  /> */}
+                  <CKEditor
+                    // data="Type here..."
+                    // config={editorConfig}
+                    onChange={(evt) => handleEditorChange(evt)}
+                    placeholder="Write description here"
+                    
                   />
                 </div>
               </div>

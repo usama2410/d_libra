@@ -80,6 +80,7 @@ export const endpoints = {
   GET_ALL_BOOKMARK: "/webapi/bookadd",
   ADD_CONTENT_BOOKMARK: "/webapi/addcontent",
   GET_BOOKMARK_COURSE: "/webapi/GetPriorityCourse",
+  DELETE_BOOKMARK: "/webapi/bookadd",
 
   // HISTORY
   GET_HISTORY_COURSE: "/webapi/recentlyViewContenthistory",

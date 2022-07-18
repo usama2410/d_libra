@@ -35,10 +35,10 @@ const MylibraryCorse = () => {
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
 
-  const [data, setdata] = useState(LibraryBookmarkContent);
+  const [data, setdata] = useState([]);
   const [bookmark, setBookmark] = useState();
   const [count, setCount] = useState(0);
-  const [priority, setPriority] = useState("highpriority");
+  const [priority, setPriority] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
   console.log("data", data);
@@ -313,7 +313,7 @@ const MylibraryCorse = () => {
                                         : e?.Prioritytype ===
                                           showAllBookmark[1]?.name
                                         ? Bookmark_grey
-                                        : e.Prioritytype === "null"
+                                        : e.bookmark === "null"
                                         ? Bookmark_grey
                                         : Bookmark_grey
                                     }

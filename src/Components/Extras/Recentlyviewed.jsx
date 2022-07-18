@@ -40,7 +40,7 @@ const Recentlyviewed = () => {
   const [history, setHistory] = useState([]);
   const [bookmark, setBookmark] = useState();
   const [count, setCount] = useState(0);
-  const [priority, setPriority] = useState("highpriority");
+  const [priority, setPriority] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
   const handleBack = () => {
@@ -286,13 +286,15 @@ const Recentlyviewed = () => {
                                     ? Bookmark_green
                                     : e?.PriorityType === "futureread"
                                     ? Bookmark_red
-                                    : e?.PriorityType ===
-                                      showAllBookmark[0]?.name
+                                    : token &&
+                                      e?.PriorityType ===
+                                        showAllBookmark[0]?.name
                                     ? Bookmark_yellow
-                                    : e?.PriorityType ===
-                                      showAllBookmark[1]?.name
+                                    : token &&
+                                      e?.PriorityType ===
+                                        showAllBookmark[1]?.name
                                     ? Bookmark_grey
-                                    : e.PriorityType === "null"
+                                    : e.bookmark === "null"
                                     ? Bookmark_grey
                                     : Bookmark_grey
                                 }

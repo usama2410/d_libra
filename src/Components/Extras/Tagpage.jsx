@@ -34,14 +34,16 @@ const Tagpage = () => {
   const role = useSelector((state) => state.auth.role);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
-  const [data, setdata] = useState(TgpageData);
+  const [data, setdata] = useState([]);
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
+  console.log("showAllBookmark", showAllBookmark);
+
   const handleBack = () => {
     navigate(state?.path, {
-      state: state?.previous,
+      state: { path: state?.previous, search: state?.search },
     });
   };
 
@@ -55,7 +57,7 @@ const Tagpage = () => {
       {
         state: {
           path: location.pathname,
-          // path: state?.path,
+          previous: state?.previous,
           search: state?.search,
         },
       }

@@ -334,18 +334,20 @@ export default function Sidebar() {
             onKeyDown={toggleDrawer(anchor, false)}
             className="sidebarlistcontainer"
           >
-            <ListItemIcon>
-              <img
-                src={
-                  user?.profile !== null
-                    ? `${development}/${user?.profile}`
-                    : Member_Icon
-                }
-                alt=""
-                className="profilesidebaricon"
-                style={{ borderRadius: "50%" }}
-              />
-            </ListItemIcon>
+            {token && (
+              <ListItemIcon>
+                <img
+                  src={
+                    user?.profile !== null
+                      ? `${development}/${user?.profile}`
+                      : Member_Icon
+                  }
+                  alt=""
+                  className="profilesidebaricon"
+                  style={{ borderRadius: "50%" }}
+                />
+              </ListItemIcon>
+            )}
             <Typography>
               <span className="listitem_text" style={{ marginLeft: "-17px" }}>
                 {user?.username}

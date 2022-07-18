@@ -101,7 +101,7 @@ const FooterButtons = (props) => {
   return (
     <>
       <div>
-        <div className="footer_buttons_container">
+        <div className={role === "normaluser" ? "footer_buttons_container_user": "footer_buttons_container"}>
           {history?.length > 0 ? (
             <img
               src={History}

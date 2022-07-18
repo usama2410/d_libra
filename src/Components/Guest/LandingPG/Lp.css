@@ -229,6 +229,7 @@
 .coursemainimage {
   width: 300px !important;
   height: 150px !important;
+  /* border-radius: 50% !important; */
 }
 .mycontentheadtwoo {
   font-style: normal !important;

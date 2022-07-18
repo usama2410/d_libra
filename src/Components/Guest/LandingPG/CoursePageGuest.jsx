@@ -20,6 +20,7 @@ const CoursePageGuest = () => {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
+  const { state } = useLocation();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
   const role = useSelector((state) => state.auth.role);
@@ -29,7 +30,7 @@ const CoursePageGuest = () => {
     navigate("/");
   };
 
-  // console.log("params", params);
+  // console.log("params", state);
 
   useEffect(() => {
     const authDashboardData = async () => {
@@ -130,7 +131,7 @@ const CoursePageGuest = () => {
       },
     ],
   };
-
+  console.log(data?.dropdown?.parent?.CategoryName);
   return (
     <>
       <button
@@ -143,12 +144,19 @@ const CoursePageGuest = () => {
       </button>
       <div className="mainContentContainer">
         <div className="mainContentContainer" style={{ marginTop: "20px" }}>
-          <img src={GitAndGitHub} alt="" className="coursemainimage" />
+          <img
+            src={`${development}/media/${state}`}
+            alt=""
+            className="coursemainimage"
+          />
           <span
             style={{ marginTop: "10px" }}
             className={theme ? "mycontentheadtwoo" : "mycontentheadthree"}
           >
-            {data?.dropdown?.parent?.CategoryName}
+            {data?.dropdown?.parent?.CategoryName !== undefined
+              ? data?.dropdown?.parent?.CategoryName?.charAt(0).toUpperCase() +
+                data?.dropdown?.parent?.CategoryName?.slice(1)
+              : null}
           </span>
         </div>
       </div>
@@ -164,7 +172,8 @@ const CoursePageGuest = () => {
                     }
                   >
                     {item?.lecture?.length !== 0 ? (
-                      item?.CategoryName
+                      item?.CategoryName?.charAt(0).toUpperCase() +
+                      item?.CategoryName?.slice(1)
                     ) : (
                       <div
                         style={{
@@ -202,7 +211,8 @@ const CoursePageGuest = () => {
                                 className="subcoursename"
                                 style={{ color: theme ? "#363636" : "#FFFFFF" }}
                               >
-                                {e.title}
+                                {e?.title?.charAt(0).toUpperCase() +
+                                  e?.title?.slice(1)}
                               </Typography>
                               <div></div>
                             </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Grid } from "@material-ui/core";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,6 +21,9 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { development } from "../../../endpoints";
+// import { CKEditor } from "ckeditor4-react";
+import CKEditor from "ckeditor4-react-advanced";
+
 
 const EditContentMain = () => {
   const navigate = useNavigate();
@@ -54,13 +57,15 @@ const EditContentMain = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const [CKEditorState, setCKEditorState] = useState("");
+
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
   };
 
   // console.log("selectedOption", selectedOption);
-  // console.log("selectedOptionChild", selectedOptionChild);
+  console.log("selectedOptionChild", CKEditorState);
 
   const handleBack = () => {
     navigate(
@@ -70,6 +75,16 @@ const EditContentMain = () => {
   };
 
   const customStyles = {
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      // const color = chroma(data.color);
+      // console.log({ data, isDisabled, isFocused, isSelected });
+
+      return {
+        ...styles,
+        backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
+        color: " #363636",
+      };
+    },
     control: (base, state) => ({
       ...base,
       background: " #FFFFFF",
@@ -107,6 +122,15 @@ const EditContentMain = () => {
   };
 
   const customStyless = {
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      // const color = chroma(data.color);
+      // console.log({ data, isDisabled, isFocused, isSelected });
+      return {
+        ...styles,
+        backgroundColor: isFocused ? "#4F4F4F" : "#4F4F4F",
+        color: "white",
+      };
+    },
     control: (base, state) => ({
       ...base,
       background: " #4F4F4F",
@@ -146,11 +170,12 @@ const EditContentMain = () => {
 
   // useEffect(() => {}, [editorState]);
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const onEditorStateChange = (editorState) => {
-    return setEditorState(editorState);
-  };
-  const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  // const onEditorStateChange = (editorState) => {
+  //   return setEditorState(editorState);
+  // };
+  // const htmlText = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  // console.log("htmlText", htmlText)
 
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getParentChildCategories(token));
@@ -191,7 +216,10 @@ const EditContentMain = () => {
   const handleSelectorChild = async (selectedOptionChild) => {
     setSelectedOptionChild(selectedOptionChild);
     // console.log("selectedOption ID", selectedOptionChild);
-    setUnique(selectedOptionChild?.identifier);
+    let hypenIdentifierChild = (selectedOptionChild?.identifier)
+      .toString()
+      .replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+    setUnique(hypenIdentifierChild);
 
     const response = await dispatch(
       getChildCategories(selectedOption.id, token)
@@ -207,7 +235,7 @@ const EditContentMain = () => {
         contentTitle,
         categoryId,
         tags,
-        htmlText,
+        CKEditorState,
         imageName,
         contentId,
         metaDescription,
@@ -234,16 +262,129 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      // console.log("response", response);
+      console.log("response", response);
       setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);
       setOGP(response?.post?.OGP);
       setImage(`${development}/media/${response?.post?.images}`);
       setTags(response?.post?.tags);
+      setCKEditorState(response?.post?.content);
     };
     postById();
   }, []);
+
+  const editorConfig = {
+    toolbar: [
+      {
+        name: "source",
+        items: ["Source"],
+      },
+
+      {
+        name: "basicstyles",
+        items: [
+          "Bold",
+          "Italic",
+          "Underline",
+          "Strike",
+          "-",
+          "Subscript",
+          "Superscript",
+        ],
+      },
+      {
+        name: "colorStyles",
+        items: ["TextColor", "BGColor", "Maximize"],
+      },
+      {
+        name: "paragraph",
+        items: [
+          "AlignLeft",
+          "JustifyLeft",
+          "JustifyCenter",
+          "JustifyRight",
+          "JustifyBlock",
+        ],
+      },
+      {
+        name: "lists",
+        items: [
+          "NumberedList",
+          "BulletedList",
+          "-",
+          "Outdent",
+          "Indent",
+          "Blockquote",
+        ],
+      },
+      {
+        name: "insert",
+        items: ["Image", "Link", "Unlink", "Table", "HorizontalRule"],
+      },
+      "/",
+
+      {
+        name: "clipboard",
+        items: [
+          "Undo",
+          "Redo",
+          "Cut",
+          "Copy",
+          "Paste",
+          "PasteText",
+          "Radio",
+          "TextArea",
+        ],
+      },
+      {
+        name: "document",
+        items: [
+          "Save",
+          "NewPage",
+          "Preview",
+          "Print",
+          "Templates",
+          "tools",
+          "PasteFromWord",
+          "Find",
+          "SelectAll",
+          "Scayt",
+          "Replace",
+          "Form",
+          "Checkbox",
+          "Textarea",
+          "Select",
+          "Button",
+          "ImageButton",
+          "HiddenField",
+          "CreateDiv",
+          "BidiLtr",
+          "BidiRtl",
+          "Language",
+          "Flash",
+          "Smiley",
+          "SpecialChar",
+          "PageBreak",
+          "Iframe",
+          "Anchor",
+          "ShowBlocks",
+          "CopyFormatting",
+        ],
+      },
+      {
+        name: "styles",
+        items: ["Styles", "Format", "-", "Font", "-", "FontSize"],
+      },
+    ],
+    skin: "moono",
+    extraPlugins: "justify, colorbutton, font",
+    removeButtons: "",
+  };
+
+  const handleEditorChange = (evt) => {
+    setCKEditorState(evt.editor.getData());
+  };
 
   return (
     <>
@@ -327,7 +468,7 @@ const EditContentMain = () => {
                   ? "uploadcontentinputfieldtwo widthautoclass"
                   : "uploadcontentinputfield widthautoclass"
               }
-              placeholder=""
+              placeholder="Content Title"
               value={contentTitle}
               onChange={(e) => setContentTitle(e.target.value)}
             />
@@ -345,7 +486,7 @@ const EditContentMain = () => {
                   ? "uploadcontentinputfieldtwo widthautoclass"
                   : "uploadcontentinputfield widthautoclass"
               }
-              placeholder=""
+              placeholder="Content ID"
               value={unique}
             />
           </div>
@@ -362,7 +503,7 @@ const EditContentMain = () => {
                   ? "uploadcontentinputfieldtwo widthautoclass"
                   : "uploadcontentinputfield widthautoclass"
               }
-              placeholder=""
+              placeholder="Tags(Max 5 Tags)"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
             />
@@ -382,7 +523,7 @@ const EditContentMain = () => {
               }
               id="message"
               rows="6"
-              placeholder=""
+              placeholder="Meta Descriptions"
               value={metaDescription}
               onChange={(e) => setMetaDiscription(e.target.value)}
             />
@@ -402,7 +543,7 @@ const EditContentMain = () => {
               }
               id="message"
               rows="6"
-              placeholder=""
+              placeholder="OGP(Open Graph Protocol)"
               value={OGP}
               onChange={(e) => setOGP(e.target.value)}
             />
@@ -466,14 +607,20 @@ const EditContentMain = () => {
                 style={{
                   backgroundColor: `${theme ? "white" : "#4f4f4f"}`,
                 }}
-                className="editorstatecontainer"
+                // className="editorstatecontainer"
               >
-                <Editor
+                {/* <Editor
                   editorState={editorState}
                   wrapperClassName="demo-wrapper"
                   editorClassName="demo-editor"
                   onEditorStateChange={onEditorStateChange}
                   placeholder="Write description here"
+                /> */}
+
+                <CKEditor
+                  data={CKEditorState}
+                  // config={editorConfig}
+                  onChange={(evt) => handleEditorChange(evt)}
                 />
               </div>
             </div>

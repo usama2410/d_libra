@@ -145,10 +145,10 @@ const LandingPage = () => {
     state?.searchKey ? searchOnCourse() : MainCategory();
   }, [state, params]);
 
-  const handleViewRecentCourses = async (id) => {
+  const handleViewRecentCourses = async (id, image) => {
     // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    navigate(`/coursepageguest/${id}`);
+    navigate(`/coursepageguest/${id}`, {state: image});
   };
 
   return (
@@ -216,7 +216,7 @@ const LandingPage = () => {
                               <img
                                 src={`${development}/media/${e.image}`}
                                 // onClick={() => navigate("/coursepageguest")}
-                                onClick={() => handleViewRecentCourses(e.id)}
+                                onClick={() => handleViewRecentCourses(e.id, e.image)}
                                 className="landingpage_images"
                                 // style={{
                                 //   filter: `${e.disable ? "brightness(15%)" : ""}`,
@@ -252,7 +252,7 @@ const LandingPage = () => {
                                     color: theme ? "#363636" : "#C8C8C8",
                                   }}
                                 >
-                                  Author:
+                                  Author: {e?.author}
                                 </span>
                                 <Box
                                   sx={{

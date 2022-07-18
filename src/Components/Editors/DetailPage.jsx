@@ -45,16 +45,24 @@ const DetailPage = () => {
   let [selected, setSelected] = React.useState(0);
   const [disable, setDisable] = React.useState(false);
   const [disablePrevious, setDisablePrevious] = React.useState(false);
-  const [bookmark, setBookmark] = React.useState(Bookmark_blue);
-  const [showAllBookmark, setShowAllBookmark] = useState(Bookmark_blue);
+  const [bookmark, setBookmark] = React.useState();
+  const [showAllBookmark, setShowAllBookmark] = useState([]);
+
+  console.log("showAllBookmark", showAllBookmark);
 
   const handleBack = () => {
     navigate(state?.path, {
       path: location.pathname,
       search: state?.search,
       state: state?.path?.includes("tagpage")
-        ? { search: state?.search, path: location.pathname }
+        ? {
+            search: state?.search,
+            path: location.pathname,
+            previous: state?.previous,
+          }
         : state?.path,
+      previous: state?.previous,
+      search: state?.search,
     });
   };
 
@@ -101,16 +109,20 @@ const DetailPage = () => {
     // );
     // console.log("result", result);
 
-    const response = await dispatch(addContentBookmark(params.id, role, token));
-    // console.log("response", response);
-    setBookmark(response);
-    !token &&
+    if (token) {
+      const response = await dispatch(
+        addContentBookmark(params.id, role, token)
+      );
+      console.log("response", response);
+      setBookmark(response);
+    } else {
       Swal.fire({
         title: "Unauthenticated",
         text: "Please login to bookmark",
         iconColor: "red",
         icon: "error",
       });
+    }
   };
 
   const handleShowAllBookmark = async () => {
@@ -177,12 +189,12 @@ const DetailPage = () => {
   };
 
   const handleTag = (tag) => {
-    console.log(tag.trim());
+    // console.log(tag.trim());
     navigate(`/tagpage/${tag.replace(/\s+/g, "-")}`, {
       state: {
         search: tag.trim(),
         path: `${location.pathname}${location.search}`,
-        previous: state,
+        previous: state?.path,
       },
     });
   };
@@ -257,7 +269,7 @@ const DetailPage = () => {
                       </div>
 
                       <div style={{ display: "flex" }}>
-                        {console.log("Ahsan length", tagslength)}
+                        {/* {console.log("Ahsan length", tagslength)} */}
                         {tagslength && (
                           <div className="tags_wrapper_three">
                             {details?.post?.tags !== "" ? (
@@ -283,31 +295,43 @@ const DetailPage = () => {
                           </div>
                         )}
 
-                        <img
-                          src={
-                            details?.bookmark?.PriorityType === "highpriority"
-                              ? Bookmark_blue
-                              : details?.bookmark?.PriorityType === "reviewlist"
-                              ? Bookmark_green
-                              : details?.bookmark?.PriorityType === "futureread"
-                              ? Bookmark_red
-                              : token &&
-                                details?.bookmark?.PriorityType ===
-                                  showAllBookmark[0]?.name
-                              ? Bookmark_yellow
-                              : token &&
-                                details?.bookmark?.PriorityType ===
-                                  showAllBookmark[1]?.name
-                              ? Bookmark_grey
-                              : details?.bookmark === "null"
-                              ? Bookmark_grey
-                              : Bookmark_grey
-                          }
-                          alt=""
-                          className="detail_tag_text_two"
-                          style={{ paddingLeft: "24px", cursor: "pointer" }}
-                          onClick={hanldeBookMarkPriority}
-                        />
+                        {token ? (
+                          <img
+                            src={
+                              details?.bookmark?.PriorityType === "highpriority"
+                                ? Bookmark_blue
+                                : details?.bookmark?.PriorityType ===
+                                  "reviewlist"
+                                ? Bookmark_green
+                                : details?.bookmark?.PriorityType ===
+                                  "futureread"
+                                ? Bookmark_red
+                                : token &&
+                                  details?.bookmark?.PriorityType ===
+                                    showAllBookmark[0]?.name
+                                ? Bookmark_yellow
+                                : token &&
+                                  details?.bookmark?.PriorityType ===
+                                    showAllBookmark[1]?.name
+                                ? Bookmark_grey
+                                : details?.bookmark === "null"
+                                ? Bookmark_grey
+                                : Bookmark_grey
+                            }
+                            alt=""
+                            className="detail_tag_text_two"
+                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            onClick={hanldeBookMarkPriority}
+                          />
+                        ) : (
+                          <img
+                            src={Bookmark_grey}
+                            alt=""
+                            className="detail_tag_text_two"
+                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            onClick={hanldeBookMarkPriority}
+                          />
+                        )}
                       </div>
                     </>
                   )}
@@ -333,31 +357,39 @@ const DetailPage = () => {
                         </button>
                       ))}
                     </div>
-                    <img
-                      src={
-                        details?.bookmark?.PriorityType === "highpriority"
-                          ? Bookmark_blue
-                          : details?.bookmark?.PriorityType === "reviewlist"
-                          ? Bookmark_green
-                          : details?.bookmark?.PriorityType === "futureread"
-                          ? Bookmark_red
-                          : token &&
-                            details?.bookmark?.PriorityType ===
+                    {token ? (
+                      <img
+                        src={
+                          details?.bookmark?.PriorityType === "highpriority"
+                            ? Bookmark_blue
+                            : details?.bookmark?.PriorityType === "reviewlist"
+                            ? Bookmark_green
+                            : details?.bookmark?.PriorityType === "futureread"
+                            ? Bookmark_red
+                            : details?.bookmark?.PriorityType ===
                               showAllBookmark[0]?.name
-                          ? Bookmark_yellow
-                          : token &&
-                            details?.bookmark?.PriorityType ===
+                            ? Bookmark_yellow
+                            : details?.bookmark?.PriorityType ===
                               showAllBookmark[1]?.name
-                          ? Bookmark_grey
-                          : details?.bookmark === "null"
-                          ? Bookmark_grey
-                          : Bookmark_grey
-                      }
-                      alt=""
-                      className="detail_tag_text_two"
-                      style={{ paddingLeft: "24px", cursor: "pointer" }}
-                      onClick={hanldeBookMarkPriority}
-                    />
+                            ? Bookmark_grey
+                            : details?.bookmark === "null"
+                            ? Bookmark_grey
+                            : Bookmark_grey
+                        }
+                        alt=""
+                        className="detail_tag_text_two"
+                        style={{ paddingLeft: "24px", cursor: "pointer" }}
+                        onClick={hanldeBookMarkPriority}
+                      />
+                    ) : (
+                      <img
+                        src={Bookmark_grey}
+                        alt=""
+                        className="detail_tag_text_two"
+                        style={{ paddingLeft: "24px", cursor: "pointer" }}
+                        onClick={hanldeBookMarkPriority}
+                      />
+                    )}
                   </div>
                 </>
               )}
@@ -511,6 +543,7 @@ const DetailPage = () => {
                 />
               </Button>
             </div>
+
             <span className="userdetailpagefootertexttwo">
               © D-Libra All Rights Reserved
             </span>

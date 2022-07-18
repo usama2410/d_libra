@@ -44,6 +44,8 @@ const AddNewCategory = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  let uniqueIdentifierWithOutHyphens = uniqueIdentity.replace(/-/g, "");
+
   const handleBack = () => {
     navigate("/editcoursestructure");
   };
@@ -55,13 +57,24 @@ const AddNewCategory = () => {
     }
   };
 
-  // console.log("message", message);
-
   const options = [
     { value: "Category", label: "Category" },
     { value: "Course", label: "Course" },
     { value: "Chapter", label: "Chapter" },
   ];
+
+  const hanldeSetUniqueIdentity = (target) => {
+    let hyphenValue = target.value.replace(/\D/g, "");
+    if (selectedCategoryOption.label === "Course") {
+      setUniqueIdentity(hyphenValue?.replace(/(\d{4})(\d{2})/, "$1-$2"));
+    } else if (selectedCategoryOption.label === "Chapter") {
+      setUniqueIdentity(
+        hyphenValue?.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+      );
+    } else {
+      setUniqueIdentity(hyphenValue);
+    }
+  };
 
   const handleSubmit = async (e) => {
     // navigate("/editormainpage");
@@ -71,7 +84,14 @@ const AddNewCategory = () => {
     // ADD COURSE CODE
     if (selectedCategoryOption?.label === "Course") {
       const response = await dispatch(
-        addnewCourse(name, slug, imageName, uniqueIdentity, parentID, token)
+        addnewCourse(
+          name,
+          slug,
+          imageName,
+          uniqueIdentifierWithOutHyphens,
+          parentID,
+          token
+        )
       );
       response?.message?.includes("Successfully") && navigate("/");
       setMessage(response?.message);
@@ -80,7 +100,14 @@ const AddNewCategory = () => {
     // ADD CHAPTER CODE
     else if (selectedCategoryOption?.label === "Chapter") {
       const response = await dispatch(
-        addnewChapters(name, parentID, slug, imageName, uniqueIdentity, token)
+        addnewChapters(
+          name,
+          parentID,
+          slug,
+          imageName,
+          uniqueIdentifierWithOutHyphens,
+          token
+        )
       );
       response?.message?.includes("Successfully") && navigate("/");
       setMessage(response?.message);
@@ -88,7 +115,13 @@ const AddNewCategory = () => {
     // ADD CATEGORY CODE
     else {
       const response = await dispatch(
-        addParentCategorie(name, slug, imageName, uniqueIdentity, token)
+        addParentCategorie(
+          name,
+          slug,
+          imageName,
+          uniqueIdentifierWithOutHyphens,
+          token
+        )
       );
       response?.message?.includes("successfully") && navigate("/");
       setMessage(response?.message);
@@ -121,7 +154,11 @@ const AddNewCategory = () => {
 
   const handleGetCategorySelector = (selectedCategoryOption) => {
     // console.log(selectedCategoryOption);
-    setUniqueIdentity(selectedCategoryOption?.identifier);
+    let hypenIdentifierCategory = (selectedCategoryOption?.identifier)
+      .toString()
+      .replace(/(\d{4})(\d{2})/, "$1-$2");
+    // console.log("hypenIdentifier", hypenIdentifier);
+    setUniqueIdentity(hypenIdentifierCategory);
     setParentID(selectedCategoryOption?.id);
     setSelectedCourseOption(selectedCategoryOption);
   };
@@ -144,7 +181,10 @@ const AddNewCategory = () => {
 
   const handleGetCourseSelector = (selectedChapterOption) => {
     // console.log(selectedChapterOption);
-    setUniqueIdentity(selectedChapterOption?.identifier);
+    let hypenIdentifierCourse = (selectedChapterOption?.identifier)
+      .toString()
+      .replace(/(\d{4})(\d{2})/, "$1-$2");
+    setUniqueIdentity(hypenIdentifierCourse);
     setParentID(selectedChapterOption?.id);
     setSelectedChapterOption(selectedChapterOption);
   };
@@ -163,7 +203,8 @@ const AddNewCategory = () => {
   const customStyles = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
+
       return {
         ...styles,
         backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
@@ -209,7 +250,7 @@ const AddNewCategory = () => {
   const customStyless = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? "#4F4F4F" : "#4F4F4F",
@@ -439,10 +480,10 @@ const AddNewCategory = () => {
             //     : 4
             // }
             name="number"
-            onChange={(e) =>
-              setUniqueIdentity(e.target.value.replace(/\D/g, ""))
-            }
-            // onChange={(e) => hanldeSetUniqueIdentity(e.target)}
+            // onChange={(e) =>
+            //   setUniqueIdentity(e.target.value.replace(/\D/g, ""))
+            // }
+            onChange={(e) => hanldeSetUniqueIdentity(e.target)}
           />
 
           <span

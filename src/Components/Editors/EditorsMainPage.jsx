@@ -48,7 +48,7 @@ const EditorsMainPage = () => {
     // console.log("selectedOption ID", selectedOption.id);
   };
 
-  console.log("selectedOption", selectedOption);
+  // console.log("selectedOption", selectedOption);
 
   useEffect(() => {
     handleParentChildeCategory();
@@ -57,7 +57,7 @@ const EditorsMainPage = () => {
   const customStyless = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",

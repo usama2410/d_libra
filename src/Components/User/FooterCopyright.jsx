@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 const FooterCopyright = (props) => {
   const location = useLocation();
+  const role = useSelector((state) => state.auth.role);
   const theme = useSelector((state) => state.theme.state);
   const handleFooter = () => {
     if (
@@ -28,7 +29,7 @@ const FooterCopyright = (props) => {
         display: handleFooter(),
       }}
     >
-      <span style={{ fontSize: "12px" }}>
+      <span style={{ fontSize: "12px" }}  className={role === "normaluser" && "footer_copyright_normaluser"}>
         &copy; D-Libra All Rights Reserved
       </span>
     </div>

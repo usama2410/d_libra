@@ -37,7 +37,7 @@ const Feedback = () => {
 
   // console.log("selectedOption", selectedOption);
   const handleBack = () => {
-    navigate("/ratingform");
+    navigate("/");
   };
 
   // GET ALL COURSES
@@ -114,7 +114,7 @@ const Feedback = () => {
   const customStyles = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       // const color = chroma(data.color);
-      console.log({ data, isDisabled, isFocused, isSelected });
+      // console.log({ data, isDisabled, isFocused, isSelected });
       return {
         ...styles,
         backgroundColor: isFocused ? " #FFFFFF" : " #FFFFFF",
@@ -269,7 +269,7 @@ const Feedback = () => {
             }
             id="message"
             rows="20"
-            placeholder=""
+            placeholder="Write your feedback here"
             type="text"
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}

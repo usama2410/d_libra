@@ -100,7 +100,7 @@
 }
 
 .addcategory_inputt::placeholder {
-  color: white;
+  color: grey;
 }
 
 .addcategory_inputt_sub {
@@ -127,7 +127,7 @@
 }
 
 .addcategory_inputt_sub::placeholder {
-  color: #363636;
+  color: grey;
 }
 
 .addcategory_dropdown {

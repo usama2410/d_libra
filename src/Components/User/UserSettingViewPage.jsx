@@ -23,9 +23,13 @@ import Box from "@mui/material/Box";
 import { logout } from "../../Redux/Actions/auth.action";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { home } from "../../Redux/Actions/Client Side/home.action";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import {
   addBookmark,
+  deleteBookmark,
   showAllBoomark,
 } from "../../Redux/Actions/bookmark.action";
 
@@ -53,6 +57,7 @@ const UserSettingViewPage = () => {
   let [countTwo, setCountTwo] = useState(1);
   const [personal, setPersonal] = useState("");
   const [dayend, setDayend] = useState("");
+  const [deleteTheBookmark, setDeleteTheBookmark] = useState("");
 
   const user = useSelector((state) => state?.auth?.profile);
 
@@ -79,7 +84,7 @@ const UserSettingViewPage = () => {
   useEffect(() => {
     userData();
     handleShowAllBookmark();
-  }, []);
+  }, [deleteTheBookmark]);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -162,6 +167,12 @@ const UserSettingViewPage = () => {
     } else {
       setMessage("Please enter bookmark name");
     }
+  };
+
+  const handleDeleteBookmark = async (id) => {
+    const response = await dispatch(deleteBookmark(role, id, token));
+    console.log("response", response);
+    setDeleteTheBookmark(response);
   };
 
   return (
@@ -410,6 +421,7 @@ const UserSettingViewPage = () => {
           </div>
 
           {addBookMark?.map((bookmark) => {
+            console.log(bookmark);
             return (
               <div className="vector_container">
                 <div className="vector_image">
@@ -429,6 +441,16 @@ const UserSettingViewPage = () => {
                   }
                   value={bookmark?.name}
                 />
+                <Tooltip title="Delete bookmark" placement="right">
+                  <IconButton>
+                    <DeleteOutlinedIcon
+                      fontSize="large"
+                      color="error"
+                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      onClick={() => handleDeleteBookmark(bookmark?.id)}
+                    />
+                  </IconButton>
+                </Tooltip>
               </div>
             );
           })}
@@ -503,7 +525,6 @@ const UserSettingViewPage = () => {
               </div>
             </>
           )}
-            {console.log("addBookMark?.length", addBookMark?.length)}
           {addBookMark?.length < 2 && (
             <div className="vector_container">
               <img
@@ -553,13 +574,15 @@ const UserSettingViewPage = () => {
           </Button>
         )}
 
-        <Button
-          variant="contained"
-          className="user_buttons"
-          onClick={handleLogout}
-        >
-          Log out
-        </Button>
+        {token && (
+          <Button
+            variant="contained"
+            className="user_buttons"
+            onClick={handleLogout}
+          >
+            Log out
+          </Button>
+        )}
       </div>
       <FooterButtons />
     </div>
