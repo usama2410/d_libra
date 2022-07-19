@@ -39,8 +39,8 @@ const Searchresult = () => {
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
-  console.log(location);
-  console.log("state", state);
+  // console.log(location);
+  // console.log("state", state);
   // console.log(location.state.search);
   // console.log(location.search?.split("=")[2].replace("-", " "));
 
@@ -100,7 +100,7 @@ const Searchresult = () => {
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    console.log(response);
+    // console.log(response);
     setShowAllBookmark(response?.slice(0, 2));
   };
 

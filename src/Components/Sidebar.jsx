@@ -113,9 +113,10 @@ export default function Sidebar() {
   const user = useSelector((state) => state?.auth);
 
   console.log("search", search);
+  console.log("searchstate", searchstate);
+
 
   const handleSearchResult = (e) => {
-    e.preventDefault();
     if (search) {
       if (location.pathname === "/") {
         navigate(`/?search=${search.replace(/\s+/g, "-")}`, {
@@ -147,10 +148,10 @@ export default function Sidebar() {
     if (e.target.value === "") {
       navigate(`/`);
     }
-  }; 
+  };
 
   React.useEffect(() => {
-    console.log("searchstate2",searchstate2)
+    console.log("searchstate2", searchstate2);
     const state = async () => {
       await dispatch(searchState(searchstate2));
     };
@@ -167,8 +168,9 @@ export default function Sidebar() {
   };
 
   const handleSearchState = async (e) => {
+    // console.log("searchstate");
     e.preventDefault();
-    await dispatch(searchState(searchstate2));
+    // await dispatch(searchState(searchstate2));
     setSearchState2(!searchstate2);
     setSearchState(true);
   };
@@ -194,8 +196,8 @@ export default function Sidebar() {
     setState({ ...state, [anchor]: open });
   };
 
-  console.log("themeState", themeState);
-  console.log("pathname", location.pathname.includes("detailpage"));
+  // console.log("themeState", themeState);
+  // console.log("pathname", location.pathname.includes("detailpage"));
 
   const handleaccordiondrawer = () => {
     if (location.pathname.includes("detailpage")) {
@@ -988,7 +990,7 @@ export default function Sidebar() {
                 />
               </div>
               <div
-                className="right" 
+                className="right"
                 style={{
                   backgroundColor: `${themeState ? " #FFFFFF" : "#4F4F4F"}`,
                 }}
