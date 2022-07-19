@@ -452,6 +452,26 @@
   margin-right: 20px;
   top: 0px;
 }
+
+.sidenav_logothree {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  right: -10px;
+  top: 00px;
+  font-size: 2.4rem !important;
+}
+.sidenav_logofour {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  right: -6px;
+  margin-right: 10px;
+  top: 0px;
+  font-size: 2.4rem !important;
+}
 .container {
   position: absolute;
   top: 0;
@@ -703,10 +723,26 @@
   }
 
   .sidenav_logotwo {
-    margin-right: 40px;
+    margin-right: 14px;
     width: 25px;
-    right: -12px;
     height: 25px;
+  }
+
+  .sidenav_logothree {
+    margin-right: 14px;
+    width: 25px;
+    height: 25px;
+    font-size: 1.6rem !important;
+  }
+  .sidenav_logofour {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    right: -6px;
+    margin-right: 10px;
+    top: 0px;
+    font-size: 1.6rem !important;
   }
 
   .listitem_text {
