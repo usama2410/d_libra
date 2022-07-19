@@ -48,7 +48,9 @@ const DetailPage = () => {
   const [bookmark, setBookmark] = React.useState();
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
-  console.log("showAllBookmark", showAllBookmark);
+  console.log("showAllBookmark", details);
+  console.log("showAllBookmark", details?.bookmark);
+  console.log("showAllBookmark", details?.bookmark === null);
 
   const handleBack = () => {
     navigate(state?.path, {
@@ -66,8 +68,8 @@ const DetailPage = () => {
     });
   };
 
-  console.log(state);
-  console.log(location);
+  // console.log(state);
+  // console.log(location);
 
   // const handleBookMark = () => {
   //   if (details?.bookmark?.PriorityType === undefined) {
@@ -113,7 +115,7 @@ const DetailPage = () => {
       const response = await dispatch(
         addContentBookmark(params.id, role, token)
       );
-      console.log("response", response);
+      // console.log("response", response);
       setBookmark(response);
     } else {
       Swal.fire({
@@ -298,7 +300,10 @@ const DetailPage = () => {
                         {token ? (
                           <img
                             src={
-                              details?.bookmark?.PriorityType === "highpriority"
+                              details?.bookmark === null
+                                ? Bookmark_grey
+                                : details?.bookmark?.PriorityType ===
+                                  "highpriority"
                                 ? Bookmark_blue
                                 : details?.bookmark?.PriorityType ===
                                   "reviewlist"
@@ -306,13 +311,11 @@ const DetailPage = () => {
                                 : details?.bookmark?.PriorityType ===
                                   "futureread"
                                 ? Bookmark_red
-                                : token &&
-                                  details?.bookmark?.PriorityType ===
-                                    showAllBookmark[0]?.name
+                                : details?.bookmark?.PriorityType ===
+                                  showAllBookmark[0]?.name
                                 ? Bookmark_yellow
-                                : token &&
-                                  details?.bookmark?.PriorityType ===
-                                    showAllBookmark[1]?.name
+                                : details?.bookmark?.PriorityType ===
+                                  showAllBookmark[1]?.name
                                 ? Bookmark_grey
                                 : details?.bookmark === "null"
                                 ? Bookmark_grey
@@ -328,7 +331,7 @@ const DetailPage = () => {
                             src={Bookmark_grey}
                             alt=""
                             className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer"}}
+                            style={{ paddingLeft: "24px", cursor: "pointer" }}
                             onClick={hanldeBookMarkPriority}
                           />
                         )}
@@ -357,10 +360,13 @@ const DetailPage = () => {
                         </button>
                       ))}
                     </div>
+
                     {token ? (
                       <img
                         src={
-                          details?.bookmark?.PriorityType === "highpriority"
+                          details?.bookmark === null
+                            ? Bookmark_grey
+                            : details?.bookmark?.PriorityType === "highpriority"
                             ? Bookmark_blue
                             : details?.bookmark?.PriorityType === "reviewlist"
                             ? Bookmark_green
@@ -411,9 +417,8 @@ const DetailPage = () => {
                           {tag}
                         </button>
                       ))}
-                    
                     </>
-                  ) :  null}
+                  ) : null}
                 </div>
               )}
             </Grid>
@@ -437,49 +442,49 @@ const DetailPage = () => {
               <div className="tags_wrapper_two">
                 {details?.post?.tags !== "" ? (
                   <>
-                  <div style={{display: 'flex'}}>
-
-                    <span
-                      className="detail_tag_text"
-                      style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                    >
-                      Tag:
-                    </span>
-                    {details?.post?.tags?.split(",")?.map((tag) => (
-                      <button
-                        className="detail_tag_button"
-                        onClick={() => handleTag(tag)}
+                    <div style={{ display: "flex" }}>
+                      <span
+                        className="detail_tag_text"
+                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
                       >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                  {
-                    role !== "editor" && 
-                    <img
+                        Tag:
+                      </span>
+                      {details?.post?.tags?.split(",")?.map((tag) => (
+                        <button
+                          className="detail_tag_button"
+                          onClick={() => handleTag(tag)}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                    {role !== "editor" && (
+                      <img
                         src={Bookmark_grey}
                         alt=""
                         className="detail_tag_text_two"
-                        style={{ paddingLeft: "24px", cursor: "pointer", marginRight: "5px"}}
+                        style={{
+                          paddingLeft: "24px",
+                          cursor: "pointer",
+                          marginRight: "5px",
+                        }}
                         onClick={hanldeBookMarkPriority}
                       />
-                  }
+                    )}
                   </>
                 ) : null}
               </div>
               <div className="noscrollable">
-                  <span style={{ lineHeight: "35px" }}>
-                    {details?.post?.content !== "" ? (
-                      parse(`${details?.post?.content}`)
-                    ) : (
-                      <div
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        No content
-                      </div>
-                    )}
-                  </span>
-                </div>
+                <span style={{ lineHeight: "35px" }}>
+                  {details?.post?.content !== "" ? (
+                    parse(`${details?.post?.content}`)
+                  ) : (
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      No content
+                    </div>
+                  )}
+                </span>
+              </div>
               <div className="detailpagesub">
                 <button
                   onClick={handleBack}

@@ -50,6 +50,8 @@ const MyContents = () => {
   const [priority, setPriority] = useState("highpriority");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
+  console.log(data);
+
   const handleBack = () => {
     // navigate(state?.path);
     navigate("/editormainpage");
@@ -154,24 +156,24 @@ const MyContents = () => {
 
   const handleBookMark = async (Contentid) => {
     console.log("contentid", Contentid);
-    // setCount(count + 1);
-    // if (count === 0) {
-    //   setPriority("highpriority");
-    // } else if (count === 1) {
-    //   setPriority("reviewlist");
-    // } else if (count === 2) {
-    //   setPriority("futureread");
-    // } else if (count === 3) {
-    //   setPriority(showAllBookmark[0]?.name);
-    // } else if (count === 4) {
-    //   setPriority(showAllBookmark[1]?.name);
-    //   setCount(0);
-    // }
+    setCount(count + 1);
+    if (count === 0) {
+      setPriority("highpriority");
+    } else if (count === 1) {
+      setPriority("reviewlist");
+    } else if (count === 2) {
+      setPriority("futureread");
+    } else if (count === 3) {
+      setPriority(showAllBookmark[0]?.name);
+    } else if (count === 4) {
+      setPriority(showAllBookmark[1]?.name);
+      setCount(0);
+    }
 
-    // const result = await dispatch(
-    //   setBookMarkPriority(role, Contentid, priority, token)
-    // );
-    // console.log("result", result);
+    const result = await dispatch(
+      setBookMarkPriority(role, Contentid, priority, token)
+    );
+    console.log("result", result);
 
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     console.log("response", response);
@@ -235,8 +237,12 @@ const MyContents = () => {
             <span
               className={theme ? "mycontentheadthreeee" : "mycontentheadtwoooo"}
             >
-              {data?.dropdown?.parent?.CategoryName?.charAt(0).toUpperCase() +
-                data?.dropdown?.parent?.CategoryName?.slice(1)}
+              {data?.dropdown?.parent?.CategoryName !== undefined
+                ? data?.dropdown?.parent?.CategoryName?.charAt(
+                    0
+                  ).toUpperCase() +
+                  data?.dropdown?.parent?.CategoryName?.slice(1)
+                : null}
             </span>
           </div>
 
@@ -311,7 +317,9 @@ const MyContents = () => {
                                   {/* <div className="mycontenttagscontainer">
                                     <img
                                       src={
-                                        e?.PriorityType === "highpriority"
+                                        e.PriorityType === null
+                                          ? Bookmark_grey
+                                          : e?.PriorityType === "highpriority"
                                           ? Bookmark_blue
                                           : e?.PriorityType === "reviewlist"
                                           ? Bookmark_green
@@ -323,7 +331,7 @@ const MyContents = () => {
                                           : e?.PriorityType ===
                                             showAllBookmark[1]?.name
                                           ? Bookmark_grey
-                                          : e.bookmark === "null"
+                                          : e.PriorityType === "null"
                                           ? Bookmark_grey
                                           : Bookmark_grey
                                       }
