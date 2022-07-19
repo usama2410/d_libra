@@ -144,11 +144,7 @@ const CoursePageGuest = () => {
       </button>
       <div className="mainContentContainer">
         <div className="mainContentContainer" style={{ marginTop: "20px" }}>
-          <img
-            src={`${development}/media/${state}`}
-            alt=""
-            className="coursemainimage"
-          />
+          <img src={GitAndGitHub} alt="" className="coursemainimage" />
           <span
             style={{ marginTop: "10px" }}
             className={theme ? "mycontentheadtwoo" : "mycontentheadthree"}
