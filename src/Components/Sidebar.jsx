@@ -147,7 +147,7 @@ export default function Sidebar() {
     if (e.target.value === "") {
       navigate(`/`);
     }
-  };
+  }; 
 
   React.useEffect(() => {
     console.log("searchstate2",searchstate2)

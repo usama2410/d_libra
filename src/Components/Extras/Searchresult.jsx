@@ -29,6 +29,7 @@ const Searchresult = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
+  const {state} = useLocation();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -39,6 +40,7 @@ const Searchresult = () => {
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
   console.log(location);
+  console.log("state", state);
   // console.log(location.state.search);
   // console.log(location.search?.split("=")[2].replace("-", " "));
 
