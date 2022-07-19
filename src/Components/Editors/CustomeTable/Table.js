@@ -51,6 +51,8 @@ const CollapsibleTable = () => {
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+
   const [selectedID, setSelectedID] = useState(null);
   const [parentChidCategory, setParentChidCategory] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -75,7 +77,7 @@ const CollapsibleTable = () => {
   };
 
   const ParentChildCategories = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getParentChildCategories(token, role));
     setParentChidCategory(response);
   };
 
@@ -196,7 +198,9 @@ const CollapsibleTable = () => {
                     className="tableBody"
                     sx={{ borderBottom: "none !important", width: "300px" }}
                   >
-                    {row.unique_identifier?.replace(/(\d{4})(\d{2})/, "$1-$2")}
+                    {row.unique_identifier
+                      .toString()
+                      ?.replace(/(\d{4})(\d{2})/, "$1-$2")}
                   </StyledTableCell>
                   <StyledTableCell
                     className="tableBody"
@@ -348,7 +352,12 @@ const CollapsibleTable = () => {
                                     width: "260px",
                                   }}
                                 >
-                                  {category.unique_identifier}
+                                  {category.unique_identifier
+                                    .toString()
+                                    ?.replace(
+                                      /(\d{4})(\d{2})(\d{2})/,
+                                      "$1-$2-$3"
+                                    )}
                                 </StyledTableCell>
                                 <StyledTableCell
                                   sx={{

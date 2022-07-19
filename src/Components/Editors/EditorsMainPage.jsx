@@ -14,6 +14,7 @@ const EditorsMainPage = () => {
   const location = useLocation();
   // console.log(location);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
 
   const handleBack = () => {
     navigate("/");
@@ -33,7 +34,7 @@ const EditorsMainPage = () => {
   };
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getParentChildCategories(token, role));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };

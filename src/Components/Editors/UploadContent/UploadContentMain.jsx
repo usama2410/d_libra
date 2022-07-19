@@ -38,6 +38,7 @@ const UploadContentMain = () => {
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const [isLoading, setIsLoading] = useState(false);
+  const role = useSelector((state) => state.auth.role);
 
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedOptionContent, setSelectedOptionContent] = useState("");
@@ -210,7 +211,7 @@ const UploadContentMain = () => {
   };
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getParentChildCategories(token, role));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };

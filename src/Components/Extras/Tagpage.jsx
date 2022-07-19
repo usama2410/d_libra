@@ -295,7 +295,6 @@ const Tagpage = () => {
               {item.items.map((e) => {
                 return (
                   <div
-                    onClick={() => navigate("/userdetailpage")}
                     className="W-main-map"
                     style={{
                       marginTop: "2px",

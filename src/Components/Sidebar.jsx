@@ -112,7 +112,7 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
-  console.log(search);
+  console.log("search", search);
 
   const handleSearchResult = (e) => {
     e.preventDefault();
@@ -150,7 +150,7 @@ export default function Sidebar() {
   };
 
   React.useEffect(() => {
-    // console.log("searchstate2",searchstate2)
+    console.log("searchstate2",searchstate2)
     const state = async () => {
       await dispatch(searchState(searchstate2));
     };
@@ -930,7 +930,7 @@ export default function Sidebar() {
                   />
                 ) : (
                   <AccountCircleOutlinedIcon
-                    fontSize="large"
+                    fontSize="medium"
                     className={Conditional_Sidenavlogo()}
                   />
                 )}
@@ -983,11 +983,12 @@ export default function Sidebar() {
                     color: `${themeState ? "black" : "white"}`,
                   }}
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => handleSearchBar(e)}
+                  // onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div
-                className="right"
+                className="right" 
                 style={{
                   backgroundColor: `${themeState ? " #FFFFFF" : "#4F4F4F"}`,
                 }}

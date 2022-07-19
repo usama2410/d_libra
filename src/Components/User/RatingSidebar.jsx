@@ -23,13 +23,10 @@ import Swal from "sweetalert2";
 const RatingSidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const role = useSelector((state) => state.auth.role);
 
-  const handleBack = () => {
-    navigate("/");
-  };
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
-  const role = useSelector((state) => state.auth.role);
 
   const [ratingValue, setValue] = React.useState(0);
   const [comment, setComment] = useState("");
@@ -40,9 +37,13 @@ const RatingSidebar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isArray, setIsArray] = useState();
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   const handleParentChildeCategory = async () => {
     const response = await dispatch(getAllCourses(role, token));
-    // console.log("getParentChildCategories response", response)
+    // console.log(" response", response)
     setParentCategory(response);
   };
 

@@ -28,6 +28,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Accordian = () => {
   const dispatch = useDispatch();
+  const role = useSelector((state) => state.auth.role);
 
   const [expanded, setExpanded] = React.useState("panel1");
   const [parentCategory, setParentCategory] = React.useState([]);
@@ -41,7 +42,7 @@ const Accordian = () => {
   console.log("parentCategory", parentCategory);
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getParentChildCategories(token, role));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };

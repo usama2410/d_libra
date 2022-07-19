@@ -39,7 +39,7 @@ const Searchresult = () => {
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
   console.log(location);
-  console.log(location.state.search);
+  // console.log(location.state.search);
   // console.log(location.search?.split("=")[2].replace("-", " "));
 
   const settings = {
@@ -306,8 +306,12 @@ const Searchresult = () => {
                       </p>
                     </div>
                     <div className="right">
-                      <img className="right_image" src={`${development}/media/${e.images}`}
-                                  onClick={() => hanldeDetails(e)} alt="" />
+                      <img
+                        className="right_image"
+                        src={`${development}/media/${e.images}`}
+                        onClick={() => hanldeDetails(e)}
+                        alt=""
+                      />
                     </div>
                   </div>
                 );

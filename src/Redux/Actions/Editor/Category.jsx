@@ -49,11 +49,11 @@ export const getSubCategory = (token) => async (dispatch) => {
   }
 };
 
-export const getParentChildCategories = (token) => async (dispatch) => {
+export const getParentChildCategories = (token, role) => async (dispatch) => {
   // console.log("token", token);
   try {
     const response = await axios.get(
-      URL + endpoints.GET_PARENT_CHILD_CATEGORY,
+      URL + endpoints.GET_PARENT_CHILD_CATEGORY + "?role=" + role,
       {
         headers: {
           Authorization: "Bearer " + token,

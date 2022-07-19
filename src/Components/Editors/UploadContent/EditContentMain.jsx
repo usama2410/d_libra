@@ -35,6 +35,8 @@ const EditContentMain = () => {
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.role);
+
 
   const [unique, setUnique] = useState();
   const [contentId, setContentId] = useState(params?.id?.split("=")[1]);
@@ -177,7 +179,7 @@ const EditContentMain = () => {
   // console.log("htmlText", htmlText)
 
   const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token));
+    const response = await dispatch(getParentChildCategories(token, role));
     // console.log("getParentChildCategories response", response)
     setParentCategory(response);
   };
