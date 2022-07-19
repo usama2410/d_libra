@@ -738,6 +738,17 @@ export default function Sidebar() {
     }
   };
 
+  const Conditional_Sidenavlogotwo = () => {
+    if (
+      "/detailpage" === location.pathname ||
+      "/userdetailpage" === location.pathname
+    ) {
+      return "sidenav_logothree";
+    } else {
+      return "sidenav_logofour";
+    }
+  }
+
   const handleHomeNavigate = () => {
     navigate("/");
     setSearch("");
@@ -932,8 +943,7 @@ export default function Sidebar() {
                   />
                 ) : (
                   <AccountCircleOutlinedIcon
-                    fontSize="medium"
-                    className={Conditional_Sidenavlogo()}
+                    className={Conditional_Sidenavlogotwo()}
                   />
                 )}
               </>
