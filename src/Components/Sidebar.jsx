@@ -112,8 +112,8 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
-  console.log("search", search);
-  console.log("searchstate", searchstate);
+  // console.log("search", search);
+  // console.log("searchstate", searchstate);
 
 
   const handleSearchResult = (e) => {
@@ -151,7 +151,7 @@ export default function Sidebar() {
   };
 
   React.useEffect(() => {
-    console.log("searchstate2", searchstate2);
+    // console.log("searchstate2", searchstate2);
     const state = async () => {
       await dispatch(searchState(searchstate2));
     };

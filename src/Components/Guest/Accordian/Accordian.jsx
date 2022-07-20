@@ -7,7 +7,8 @@ import "./Accordian.css";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector, useDispatch } from "react-redux";
-import { getParentChildCategories } from "../../../Redux/Actions/Editor/Category";
+import { useLocation } from "react-router-dom";
+import { getPostByID } from "../../../Redux/Actions/Editor/post.action";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -29,6 +30,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const Accordian = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.auth.role);
+  const location = useLocation();
+  const token = useSelector((state) => state.auth.token);
 
   const [expanded, setExpanded] = React.useState("panel1");
   const [parentCategory, setParentCategory] = React.useState([]);
@@ -37,51 +40,53 @@ const Accordian = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const token = useSelector((state) => state.auth.token);
+  let id = location?.pathname?.split("/")[2];
+  let categoryid = location?.pathname?.split("/")[4];
 
-  console.log("parentCategory", parentCategory);
-
-  const handleParentChildeCategory = async () => {
-    const response = await dispatch(getParentChildCategories(token, role));
-    // console.log("getParentChildCategories response", response)
+  const postById = async () => {
+    const response = await dispatch(
+      getPostByID(
+        id,
+        role === null ? "role=normaluser" : `role=${role}`,
+        categoryid,
+        token
+      )
+    );
+    // console.log(response);
     setParentCategory(response);
   };
 
   React.useEffect(() => {
-    handleParentChildeCategory();
+    postById();
   }, []);
   return (
     <>
       <div className="mainAccordionContainer">
-        {parentCategory?.map((category) => {
-          return (
-            <Accordion
-              expanded={expanded === category?.id}
-              onChange={handleChange(category?.id)}
-              className="main_accordian_container"
-            >
-              <AccordionSummary
-                className="accordianmain"
-                expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
+        <Accordion
+          expanded={expanded === "category?.id"}
+          onChange={handleChange("category?.id")}
+          className="main_accordian_container"
+        >
+          <AccordionSummary
+            className="accordianmain"
+            expandIcon={<ExpandMoreIcon className="accordionarrowicon" />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className="accordiantext">
+              {parentCategory?.post?.categories__name}
+            </Typography>
+          </AccordionSummary>
+          {parentCategory?.all?.map((childCategory) => {
+            return (
+              <AccordionDetails className="sub_accordain_text">
                 <Typography className="accordiantext">
-                  {category?.CategoryName}
+                  {childCategory?.title}
                 </Typography>
-              </AccordionSummary>
-              {category?.SubCategory?.map((childCategory) => {
-                return (
-                  <AccordionDetails className="sub_accordain_text">
-                    <Typography className="accordiantext">
-                      {childCategory?.CategoryName}
-                    </Typography>
-                  </AccordionDetails>
-                );
-              })}
-            </Accordion>
-          );
-        })}
+              </AccordionDetails>
+            );
+          })}
+        </Accordion>
       </div>
     </>
   );

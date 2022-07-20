@@ -342,7 +342,7 @@ const DetailPage = () => {
                 </div>
               </div>
 
-              {role === "normaluser" || role === null ? (
+              {role === "normaluser" ? (
                 <>
                   <div className="normaluser_container">
                     <div style={{ display: "flex" }}>
@@ -400,7 +400,7 @@ const DetailPage = () => {
                   </div>
                 </>
               ) : null}
-              {role === "editor" && !tagslength && (
+              {role === "editor" && !tagslength ? (
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (
                     <>
@@ -421,7 +421,7 @@ const DetailPage = () => {
                     </>
                   ) : null}
                 </div>
-              )}
+              ) : null}
             </Grid>
 
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -460,17 +460,57 @@ const DetailPage = () => {
                       ))}
                     </div>
                     {role !== "editor" && (
-                      <img
-                        src={Bookmark_grey}
-                        alt=""
-                        className="detail_tag_text_two"
-                        style={{
-                          paddingLeft: "24px",
-                          cursor: "pointer",
-                          marginRight: "5px",
-                        }}
-                        onClick={hanldeBookMarkPriority}
-                      />
+                      <>
+                        {token ? (
+                          <img
+                            src={
+                              details?.bookmark === null
+                                ? Bookmark_grey
+                                : details?.bookmark?.PriorityType ===
+                                  "highpriority"
+                                ? Bookmark_blue
+                                : details?.bookmark?.PriorityType ===
+                                  "reviewlist"
+                                ? Bookmark_green
+                                : details?.bookmark?.PriorityType ===
+                                  "futureread"
+                                ? Bookmark_red
+                                : details?.bookmark?.PriorityType ===
+                                  showAllBookmark[0]?.name
+                                ? Bookmark_yellow
+                                : details?.bookmark?.PriorityType ===
+                                  showAllBookmark[1]?.name
+                                ? Bookmark_grey
+                                : details?.bookmark === "null"
+                                ? Bookmark_grey
+                                : Bookmark_grey
+                            }
+                            alt=""
+                            className="detail_tag_text_two"
+                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            onClick={hanldeBookMarkPriority}
+                          />
+                        ) : (
+                          <img
+                            src={Bookmark_grey}
+                            alt=""
+                            className="detail_tag_text_two"
+                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            onClick={hanldeBookMarkPriority}
+                          />
+                        )}
+                      </>
+                      // <img
+                      //   src={Bookmark_grey}
+                      //   alt=""
+                      //   className="detail_tag_text_two"
+                      //   style={{
+                      //     paddingLeft: "24px",
+                      //     cursor: "pointer",
+                      //     marginRight: "5px",
+                      //   }}
+                      //   onClick={hanldeBookMarkPriority}
+                      // />
                     )}
                   </>
                 ) : null}

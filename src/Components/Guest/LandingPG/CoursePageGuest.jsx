@@ -45,11 +45,11 @@ const CoursePageGuest = () => {
 
   const handleDetailPageNavigate = async (categoryid, postId) => {
     // console.log(categoryid, postId);
-    // navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`, {
-    //   state: {
-    //     path: location.pathname,
-    //   },
-    // });
+    navigate(`/detailpage/id=${postId}/role=${role}/categoryid=${categoryid}`, {
+      state: {
+        path: location.pathname,
+      },
+    });
 
     await dispatch(addRecenetViewContent(postId, role, token));
   };
