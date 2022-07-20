@@ -342,7 +342,7 @@ const DetailPage = () => {
                 </div>
               </div>
 
-              {role === "normaluser" ? (
+              {role === "normaluser" || role === null ? (
                 <>
                   <div className="normaluser_container">
                     <div style={{ display: "flex" }}>
