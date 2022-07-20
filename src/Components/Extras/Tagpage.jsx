@@ -250,29 +250,39 @@ const Tagpage = () => {
                               </Typography>
                             </Typography>
                             <div className="mycontenttagscontainer">
-                              <img
-                                src={
-                                  e?.PriorityType === "highpriority"
-                                    ? Bookmark_blue
-                                    : e?.PriorityType === "reviewlist"
-                                    ? Bookmark_green
-                                    : e?.PriorityType === "futureread"
-                                    ? Bookmark_red
-                                    : e?.PriorityType ===
-                                      showAllBookmark[0]?.name
-                                    ? Bookmark_yellow
-                                    : e?.PriorityType ===
-                                      showAllBookmark[1]?.name
-                                    ? Bookmark_grey
-                                    : e.PriorityType === "null"
-                                    ? Bookmark_grey
-                                    : Bookmark_grey
-                                }
-                                alt=""
-                                className="tagstwocontainer"
-                                onClick={() => handleBookMark(e?.id)}
-                                style={{ cursor: "pointer" }}
-                              />
+                              {token ? (
+                                <img
+                                  src={
+                                    e?.PriorityType === "highpriority"
+                                      ? Bookmark_blue
+                                      : e?.PriorityType === "reviewlist"
+                                      ? Bookmark_green
+                                      : e?.PriorityType === "futureread"
+                                      ? Bookmark_red
+                                      : e?.PriorityType ===
+                                        showAllBookmark[0]?.name
+                                      ? Bookmark_yellow
+                                      : e?.PriorityType ===
+                                        showAllBookmark[1]?.name
+                                      ? Bookmark_grey
+                                      : e.PriorityType === "null"
+                                      ? Bookmark_grey
+                                      : Bookmark_grey
+                                  }
+                                  alt=""
+                                  className="tagstwocontainer"
+                                  onClick={() => handleBookMark(e?.id)}
+                                  style={{ cursor: "pointer" }}
+                                />
+                              ) : (
+                                <img
+                                  src={Bookmark_grey}
+                                  alt=""
+                                  className="tagstwocontainer"
+                                  onClick={() => handleBookMark(e?.id)}
+                                  style={{ cursor: "pointer" }}
+                                />
+                              )}
                             </div>
                           </div>
                         ) : (

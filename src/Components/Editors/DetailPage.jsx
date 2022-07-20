@@ -48,9 +48,7 @@ const DetailPage = () => {
   const [bookmark, setBookmark] = React.useState();
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
-  console.log("showAllBookmark", details);
-  console.log("showAllBookmark", details?.bookmark);
-  console.log("showAllBookmark", details?.bookmark === null);
+  // console.log("state", state);
 
   const handleBack = () => {
     navigate(state?.path, {
@@ -138,6 +136,7 @@ const DetailPage = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
+      console.log(response);
       setDetails(response);
     };
 
@@ -177,9 +176,11 @@ const DetailPage = () => {
   };
 
   const hanldeBookMarkPriority = async () => {
+    // console.log("clicked");
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
+    // console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -341,7 +342,7 @@ const DetailPage = () => {
                 </div>
               </div>
 
-              {(role === "normaluser" || role === null) && (
+              {role === "normaluser" || role === null ? (
                 <>
                   <div className="normaluser_container">
                     <div style={{ display: "flex" }}>
@@ -398,7 +399,7 @@ const DetailPage = () => {
                     )}
                   </div>
                 </>
-              )}
+              ) : null}
               {role === "editor" && !tagslength && (
                 <div className="tags_wrapper_one">
                   {details?.post?.tags !== "" ? (

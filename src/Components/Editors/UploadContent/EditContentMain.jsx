@@ -29,14 +29,14 @@ const EditContentMain = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
-  // console.log(location);
+  const { state } = useLocation();
+  console.log(state);
 
   const [contentTitle, setContentTitle] = useState("");
   const [imageName, setImageName] = useState("");
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
-
 
   const [unique, setUnique] = useState();
   const [contentId, setContentId] = useState(params?.id?.split("=")[1]);
@@ -66,7 +66,7 @@ const EditContentMain = () => {
   };
 
   // console.log("selectedOption", selectedOption);
-  console.log("selectedOptionChild", CKEditorState);
+  // console.log("selectedOptionChild", CKEditorState);
 
   const handleBack = () => {
     navigate(
@@ -248,7 +248,10 @@ const EditContentMain = () => {
     setMessage(response?.message);
     if (response?.message === "Update Post Successfully") {
       navigate(
-        `/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`
+        `/detailpage/${params?.id}/${params?.role}/${params?.categoryid}`,
+        {
+          state: { path: state },
+        }
       );
     }
     const timer = setTimeout(() => {
@@ -263,7 +266,7 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      console.log("response", response);
+      // console.log("response", response);
       setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);

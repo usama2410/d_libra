@@ -286,7 +286,7 @@ const LibraryBookmark = () => {
                                                 item?.PriorityType ===
                                                   showAllBookmark[1]?.name
                                               ? Bookmark_grey
-                                              : item.bookmark === "null"
+                                              : item.bookmark === null
                                               ? Bookmark_grey
                                               : Bookmark_grey
                                           }

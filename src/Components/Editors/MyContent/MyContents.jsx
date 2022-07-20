@@ -270,7 +270,7 @@ const MyContents = () => {
           {data?.data?.map((item) => {
             return (
               <>
-                {item?.lecture?.length > 0 && (
+                {item?.lecture?.length > 0 ? (
                   <div className="content_root_container" key={item?.id}>
                     <div>
                       <span
@@ -350,6 +350,8 @@ const MyContents = () => {
                       </Slider>
                     </div>
                   </div>
+                ) : (
+                  <h1 style={{ textAlign: "center" }}>No Content Found</h1>
                 )}
               </>
             );
