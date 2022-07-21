@@ -40,6 +40,7 @@ import Hamburger_Menu_light from "../assests/SVG_Files/New folder/Hamburger_Menu
 import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_dark.svg";
 import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.svg";
 import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
+import user_svg from "../assests/SVG_Files/New folder/user.svg";
 import Searchresult from "./Extras/Searchresult";
 import { searchState } from "../../src/Redux/Actions/auth.action";
 import { development } from "../endpoints";
@@ -112,7 +113,7 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
-  // console.log("search", search);
+  console.log("user", user);
   // console.log("searchstate", searchstate);
 
 
@@ -343,7 +344,7 @@ export default function Sidebar() {
                   src={
                     user?.profile !== null
                       ? `${development}/${user?.profile}`
-                      : Member_Icon
+                      : user_svg
                   }
                   alt=""
                   className="profilesidebaricon"
@@ -935,7 +936,7 @@ export default function Sidebar() {
                     src={
                       user?.profile !== null
                         ? `${development}/${user?.profile}`
-                        : Member_Icon
+                        : user_svg
                     }
                     alt=""
                     className={Conditional_Sidenavlogo()}

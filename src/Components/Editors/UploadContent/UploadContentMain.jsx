@@ -207,7 +207,7 @@ const UploadContentMain = () => {
   };
 
   const handleBack = () => {
-    navigate("/addnewcategory");
+    navigate("/editormainpage");
   };
 
   const handleParentChildeCategory = async () => {
