@@ -312,7 +312,7 @@ const UserSettingViewPage = () => {
               />
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column" }} className="first_name_container">
             <span
               className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}
@@ -320,13 +320,17 @@ const UserSettingViewPage = () => {
               First Name
             </span>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+                className={
+                  theme
+                    ? "usersetting_inputfield_light"
+                    : "usersetting_inputfield_dark"
+                }
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column", paddingBottom: "20px" }}>
             <span
               className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}
@@ -334,7 +338,11 @@ const UserSettingViewPage = () => {
               Last Name
             </span>
             <input
-              className={theme ? "addcategory_input_sub" : "addcategory_input"}
+              className={
+                  theme
+                    ? "usersetting_inputfield_light"
+                    : "usersetting_inputfield_dark"
+                }
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -421,9 +429,8 @@ const UserSettingViewPage = () => {
           </div>
 
           {addBookMark?.map((bookmark) => {
-            console.log(bookmark);
             return (
-              <div className="vector_container">
+              <div className="vector_container_deletefield">
                 <div className="vector_image">
                   <img
                     src={
