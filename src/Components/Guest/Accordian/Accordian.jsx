@@ -8,8 +8,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getPostByID } from "../../../Redux/Actions/Editor/post.action";
-
+import { getPostByIDAccordian } from "../../../Redux/Actions/Editor/post.action";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -42,17 +43,21 @@ const Accordian = () => {
 
   let id = location?.pathname?.split("/")[2];
   let categoryid = location?.pathname?.split("/")[4];
+  let courseid = categoryid?.split("=")[1];
+
+  console.log(id, categoryid, courseid);
 
   const postById = async () => {
     const response = await dispatch(
-      getPostByID(
+      getPostByIDAccordian(
         id,
         role === null ? "role=normaluser" : `role=${role}`,
         categoryid,
+        courseid,
         token
       )
     );
-    // console.log(response);
+    console.log(response);
     setParentCategory(response);
   };
 
@@ -74,14 +79,24 @@ const Accordian = () => {
             id="panel1a-header"
           >
             <Typography className="accordiantext">
-              {parentCategory?.post?.categories__name}
+              {parentCategory?.post?.categories__name !== undefined ? (
+                parentCategory?.post?.categories__name
+                  ?.charAt(0)
+                  .toUpperCase() +
+                parentCategory?.post?.categories__name?.slice(1)
+              ) : (
+                <Box sx={{ display: "flex" }}>
+                  <CircularProgress color="inherit" size={20} />
+                </Box>
+              )}
             </Typography>
           </AccordionSummary>
-          {parentCategory?.all?.map((childCategory) => {
+          {parentCategory?.chapters?.map((childCategory) => {
             return (
               <AccordionDetails className="sub_accordain_text">
                 <Typography className="accordiantext">
-                  {childCategory?.title}
+                  {childCategory?.CategoryName?.charAt(0).toUpperCase() +
+                    childCategory?.CategoryName?.slice(1)}
                 </Typography>
               </AccordionDetails>
             );

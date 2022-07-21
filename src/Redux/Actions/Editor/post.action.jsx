@@ -68,6 +68,35 @@ export const getPostByID =
     }
   };
 
+export const getPostByIDAccordian =
+  (id, role, categoryid, courseid, token) => async (dispatch) => {
+    // console.log("get post by id", id, role, categoryid, courseid);
+
+    try {
+      const response = await axios.get(
+        URL +
+          endpoints.GET_POST_BY_ID +
+          id +
+          "&" +
+          role +
+          "&" +
+          categoryid +
+          "&" +
+          "courseid=" +
+          courseid,
+        {
+          headers: {
+            Authorization: "Bearar " + token,
+          },
+        }
+      );
+      console.log(" getPostByID response", response);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 export const updatePost =
   (
     contentTitle,

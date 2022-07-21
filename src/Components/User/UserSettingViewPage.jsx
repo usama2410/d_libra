@@ -27,6 +27,10 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { home } from "../../Redux/Actions/Client Side/home.action";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import user_svg from "../../assests/SVG_Files/New folder/user.svg";
+// import logoutUser from "../../assests/SVG_Files/New folder/logout.svg";
+
 import {
   addBookmark,
   deleteBookmark,
@@ -60,6 +64,7 @@ const UserSettingViewPage = () => {
   const [deleteTheBookmark, setDeleteTheBookmark] = useState("");
 
   const user = useSelector((state) => state?.auth?.profile);
+  const userProfile = useSelector((state) => state?.auth);
 
   // console.log("count", count, "countTwo", countTwo);
 
@@ -201,8 +206,13 @@ const UserSettingViewPage = () => {
                 className="usersettingmembericon"
               />
             ) : (
+              // <AccountCircleOutlinedIcon
+              //   style={{ borderRadius: "50%" }}
+              //   className="usersettingmembericon"
+              // />
+
               <img
-                src={Member_Icon}
+                src={user_svg}
                 alt="No Image"
                 style={{ borderRadius: "50%" }}
                 className="usersettingmembericon"

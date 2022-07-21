@@ -41,6 +41,8 @@ import Hamburger_Menu_dark from "../assests/SVG_Files/New folder/Hamburger_Menu_
 import Arrow_Left_light from "../assests/SVG_Files/New folder/Arrow_Left_light.svg";
 import Arrow_Left_dark from "../assests/SVG_Files/New folder/Arrow_Left_dark.svg";
 import user_svg from "../assests/SVG_Files/New folder/user.svg";
+// import lunIcon from "../assests/SVG_Files/New folder/user_white.svg";
+// import white_user_icon from '../assests/SVG_Files/user_ji.svg'
 import Searchresult from "./Extras/Searchresult";
 import { searchState } from "../../src/Redux/Actions/auth.action";
 import { development } from "../endpoints";
@@ -115,7 +117,6 @@ export default function Sidebar() {
 
   console.log("user", user);
   // console.log("searchstate", searchstate);
-
 
   const handleSearchResult = (e) => {
     if (search) {
@@ -340,16 +341,34 @@ export default function Sidebar() {
           >
             {token && (
               <ListItemIcon>
-                <img
-                  src={
-                    user?.profile !== null
-                      ? `${development}/${user?.profile}`
-                      : user_svg
-                  }
-                  alt=""
-                  className="profilesidebaricon"
-                  style={{ borderRadius: "50%" }}
-                />
+                <>
+                  {user?.profile?.includes("dummy") && themeState ? (
+                    <AccountCircleOutlinedIcon
+                      className="sidebarsignupicon"
+                      style={{ borderRadius: "50%", color: "white" }}
+                      onClick={() => navigate("/usersettingviewpage")}
+                    />
+                  ) : user?.profile?.includes("dummy") &&
+                    themeState === false ? (
+                    <AccountCircleOutlinedIcon
+                      className="sidebarsignupicon"
+                      style={{ borderRadius: "50%", color: "white" }}
+                      onClick={() => navigate("/usersettingviewpage")}
+                    />
+                  ) : (
+                    <img
+                      onClick={() => navigate("/usersettingviewpage")}
+                      src={
+                        user?.profile !== null
+                          ? `${development}/${user?.profile}`
+                          : user_svg
+                      }
+                      alt=""
+                      className="profilesidebaricon"
+                      style={{ borderRadius: "50%" }}
+                    />
+                  )}
+                </>
               </ListItemIcon>
             )}
             <Typography>
@@ -748,7 +767,7 @@ export default function Sidebar() {
     } else {
       return "sidenav_logofour";
     }
-  }
+  };
 
   const handleHomeNavigate = () => {
     navigate("/");
@@ -931,16 +950,39 @@ export default function Sidebar() {
             ) : (
               <>
                 {token ? (
-                  <img
-                    onClick={() => navigate("/usersettingviewpage")}
-                    src={
-                      user?.profile !== null
-                        ? `${development}/${user?.profile}`
-                        : user_svg
-                    }
-                    alt=""
-                    className={Conditional_Sidenavlogo()}
-                    style={{ borderRadius: "50%" }}
+                  <>
+                    {user?.profile?.includes("dummy") && themeState ? (
+                      <AccountCircleOutlinedIcon
+                        color="primary"
+                        className={Conditional_Sidenavlogotwo()}
+                        style={{ borderRadius: "50%" }}
+                        onClick={() => navigate("/usersettingviewpage")}
+                      />
+                    ) : user?.profile?.includes("dummy") &&
+                      themeState === false ? (
+                      <AccountCircleOutlinedIcon
+                        className={Conditional_Sidenavlogotwo()}
+                        style={{ borderRadius: "50%" }}
+                        onClick={() => navigate("/usersettingviewpage")}
+                      />
+                    ) : (
+                      <img
+                        onClick={() => navigate("/usersettingviewpage")}
+                        src={
+                          user?.profile !== null
+                            ? `${development}/${user?.profile}`
+                            : user_svg
+                        }
+                        alt=""
+                        className={Conditional_Sidenavlogo()}
+                        style={{ borderRadius: "50%" }}
+                      />
+                    )}
+                  </>
+                ) : themeState ? (
+                  <AccountCircleOutlinedIcon
+                    color="primary"
+                    className={Conditional_Sidenavlogotwo()}
                   />
                 ) : (
                   <AccountCircleOutlinedIcon

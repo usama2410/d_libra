@@ -29,7 +29,7 @@ const Searchresult = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
@@ -39,7 +39,7 @@ const Searchresult = () => {
   const [message, setmessage] = useState("");
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
-  // console.log(location);
+  console.log(data);
   // console.log("state", state);
   // console.log(location.state.search);
   // console.log(location.search?.split("=")[2].replace("-", " "));
@@ -234,29 +234,46 @@ const Searchresult = () => {
                                       </Typography>
                                     </Typography>
                                     <div className="mycontenttagscontainer">
-                                      <img
-                                        src={
-                                          e?.PriorityType === "highpriority"
-                                            ? Bookmark_blue
-                                            : e?.PriorityType === "reviewlist"
-                                            ? Bookmark_green
-                                            : e?.PriorityType === "futureread"
-                                            ? Bookmark_red
-                                            : e?.PriorityType ===
-                                              showAllBookmark[0]?.name
-                                            ? Bookmark_yellow
-                                            : e?.PriorityType ===
-                                              showAllBookmark[1]?.name
-                                            ? Bookmark_grey
-                                            : e.PriorityType === "null"
-                                            ? Bookmark_grey
-                                            : Bookmark_grey
-                                        }
-                                        alt=""
-                                        className="tagstwocontainer"
-                                        onClick={() => handleBookMark(e?.id)}
-                                        style={{ cursor: "pointer" }}
-                                      />
+                                      {token ? (
+                                        <img
+                                          src={
+                                            e.PriorityType === null
+                                              ? Bookmark_grey
+                                              : e?.PriorityType ===
+                                                "highpriority"
+                                              ? Bookmark_blue
+                                              : e?.PriorityType === "reviewlist"
+                                              ? Bookmark_green
+                                              : e?.PriorityType === "futureread"
+                                              ? Bookmark_red
+                                              : e?.PriorityType ===
+                                                showAllBookmark[0]?.name
+                                              ? Bookmark_yellow
+                                              : e?.PriorityType ===
+                                                showAllBookmark[1]?.name
+                                              ? Bookmark_grey
+                                              : e.PriorityType === "null"
+                                              ? Bookmark_grey
+                                              : Bookmark_grey
+                                          }
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          onClick={() => handleBookMark(e?.id)}
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={Bookmark_grey}
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          style={{
+                                            cursor: "pointer"
+                                          }}
+                                          onClick={() =>
+                                            handleBookMark(e?.Contentid)
+                                          }
+                                        />
+                                      )}
                                     </div>
                                   </div>
                                 ) : (

@@ -299,29 +299,47 @@ const MylibraryCorse = () => {
                                   </Typography>
                                 </Typography>
                                 <div className="mycontenttagscontainer">
-                                  <img
-                                    src={
-                                      e?.Prioritytype === "highpriority"
-                                        ? Bookmark_blue
-                                        : e?.Prioritytype === "reviewlist"
-                                        ? Bookmark_green
-                                        : e?.Prioritytype === "futureread"
-                                        ? Bookmark_red
-                                        : e?.Prioritytype ===
-                                          showAllBookmark[0]?.name
-                                        ? Bookmark_yellow
-                                        : e?.Prioritytype ===
-                                          showAllBookmark[1]?.name
-                                        ? Bookmark_grey
-                                        : e.bookmark === "null"
-                                        ? Bookmark_grey
-                                        : Bookmark_grey
-                                    }
-                                    alt=""
-                                    className="tagstwocontainer"
-                                    onClick={() => handleBookMark(e?.contentid)}
-                                    style={{ cursor: "pointer" }}
-                                  />
+                                  {token ? (
+                                    <img
+                                      src={
+                                        e.bookmark === null
+                                          ? Bookmark_grey
+                                          : e?.Prioritytype === "highpriority"
+                                          ? Bookmark_blue
+                                          : e?.Prioritytype === "reviewlist"
+                                          ? Bookmark_green
+                                          : e?.Prioritytype === "futureread"
+                                          ? Bookmark_red
+                                          : e?.Prioritytype ===
+                                            showAllBookmark[0]?.name
+                                          ? Bookmark_yellow
+                                          : e?.Prioritytype ===
+                                            showAllBookmark[1]?.name
+                                          ? Bookmark_grey
+                                          : e.bookmark === "null"
+                                          ? Bookmark_grey
+                                          : Bookmark_grey
+                                      }
+                                      alt=""
+                                      className="tagstwocontainer"
+                                      onClick={() =>
+                                        handleBookMark(e?.contentid)
+                                      }
+                                      style={{ cursor: "pointer" }}
+                                    />
+                                  ) : (
+                                    <img
+                                      src={Bookmark_grey}
+                                      alt=""
+                                      className="tagstwocontainer"
+                                      style={{
+                                        cursor: "pointer",
+                                      }}
+                                      onClick={() =>
+                                        handleBookMark(e?.contentid)
+                                      }
+                                    />
+                                  )}
                                 </div>
                               </div>
                             ) : (
