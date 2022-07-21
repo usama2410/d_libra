@@ -1,3 +1,7 @@
+.first_name_container{
+  margin-top: -8px;
+}
+
 .emailaddresscontainer {
   display: flex;
   flex-direction: column;
@@ -227,6 +231,19 @@
   letter-spacing: -0.015em;
 }
 
+.vector_container_deletefield {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center !important;
+  text-align: center;
+  letter-spacing: -0.015em;
+}
+
 .vector_containertwo {
   margin-top: -10px;
 }
@@ -386,7 +403,10 @@
   margin-top: 60px;
 }
 
-@media screen and (max-width: 929px) {
+@media screen and (max-width: 944px) {
+  .vector_container_deletefield {
+    margin-left: 44px;
+}
   .user_bookmark_container {
     width: 100%;
     display: flex;
@@ -478,6 +498,17 @@
     letter-spacing: -0.015em;
   }
 
+  .vector_container_deletefield > span {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 9px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+  }
+
   .user_buttons {
     width: 200px !important;
     height: 29.26px !important;
@@ -500,7 +531,7 @@
     margin-left: -235px;
   }
 
-  .profile_sub_input_two  {
+  .profile_sub_input_two {
     width: 367px !important;
     margin-top: 0px !important;
     margin-right: -12px !important;
@@ -568,7 +599,10 @@
 }
 
 @media screen and (max-width: 468px) {
-  .profile_sub_input{
+  .first_name_container{
+    margin-top: -28px;
+  }
+  .profile_sub_input {
     width: 267px !important;
     height: 40px !important;
     font-weight: 300 !important;
@@ -629,7 +663,7 @@
     letter-spacing: -0.015em !important;
   }
 
-  .profile_sub_input_two  {
+  .profile_sub_input_two {
     width: 267px !important;
     margin-right: -15px !important;
     height: 30px !important;
