@@ -20,6 +20,7 @@ import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
 import Swal from "sweetalert2";
 import {
   addContentBookmark,
@@ -64,65 +65,6 @@ const DetailPage = () => {
       previous: state?.previous,
       search: state?.search,
     });
-  };
-
-  // console.log(state);
-  // console.log(location);
-
-  // const handleBookMark = () => {
-  //   if (details?.bookmark?.PriorityType === undefined) {
-  //     return Bookmark_grey;
-  //   } else if (details?.bookmark === "null") {
-  //     return Bookmark_grey;
-  //   } else if (details?.bookmark?.PriorityType === "highpriority") {
-  //     return Bookmark_red;
-  //   } else if (details?.bookmark?.PriorityType === "reviewlist") {
-  //     return Bookmark_green;
-  //   } else if (details?.bookmark?.PriorityType === "futureread") {
-  //     return Bookmark_red;
-  //   } else if (handleSetBook[0].colorcode === "#FFAA1D") {
-  //     return Bookmark_yellow;
-  //   } else if (handleSetBook[1].colorcode === "#C8C8C8") {
-  //     return Bookmark_grey;
-  //   } else {
-  //     return Bookmark_grey;
-  //   }
-  // };
-
-  const handleBookMark = async () => {
-    // setCount(count + 1);
-    // if (count === 0) {
-    //   setPriority("highpriority");
-    // } else if (count === 1) {
-    //   setPriority("reviewlist");
-    // } else if (count === 2) {
-    //   setPriority("futureread");
-    // } else if (count === 3) {
-    //   setPriority(showAllBookmark[0]?.name);
-    // } else if (count === 4) {
-    //   setPriority(showAllBookmark[1]?.name);
-    //   setCount(0);
-    // }
-
-    // const result = await dispatch(
-    //   setBookMarkPriority(role, params.id, priority, token)
-    // );
-    // console.log("result", result);
-
-    if (token) {
-      const response = await dispatch(
-        addContentBookmark(params.id, role, token)
-      );
-      // console.log("response", response);
-      setBookmark(response);
-    } else {
-      Swal.fire({
-        title: "Unauthenticated",
-        text: "Please login to bookmark",
-        iconColor: "red",
-        icon: "error",
-      });
-    }
   };
 
   const handleShowAllBookmark = async () => {
@@ -180,7 +122,7 @@ const DetailPage = () => {
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
-    // console.log("response", response);
+    console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -222,7 +164,9 @@ const DetailPage = () => {
             role === "editor" ? "header_text" : "header_text_NormalUser"
           }
         >
-          {details?.post?.categories__name}
+          {details?.post?.title !== undefined &&
+            details?.post?.title?.charAt(0)?.toUpperCase() +
+              details?.post?.title?.slice(1)}
         </span>
       </div>
       {details?.status ? (
@@ -298,7 +242,7 @@ const DetailPage = () => {
                           </div>
                         )}
 
-                        {token ? (
+                        {token ? ( // Bookmark For Editor
                           <img
                             src={
                               details?.bookmark === null
@@ -317,14 +261,19 @@ const DetailPage = () => {
                                 ? Bookmark_yellow
                                 : details?.bookmark?.PriorityType ===
                                   showAllBookmark[1]?.name
-                                ? Bookmark_grey
+                                ? Green_Bookmark
                                 : details?.bookmark === "null"
                                 ? Bookmark_grey
                                 : Bookmark_grey
                             }
                             alt=""
                             className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            style={{
+                              paddingLeft: "24px",
+                              cursor: "pointer",
+                              height: "30px",
+                              width: "58px",
+                            }}
                             onClick={hanldeBookMarkPriority}
                           />
                         ) : (
@@ -362,7 +311,7 @@ const DetailPage = () => {
                       ))}
                     </div>
 
-                    {token ? (
+                    {token ? ( // Normal User Bookmark For PC
                       <img
                         src={
                           details?.bookmark === null
@@ -378,14 +327,19 @@ const DetailPage = () => {
                             ? Bookmark_yellow
                             : details?.bookmark?.PriorityType ===
                               showAllBookmark[1]?.name
-                            ? Bookmark_grey
+                            ? Green_Bookmark
                             : details?.bookmark === "null"
                             ? Bookmark_grey
                             : Bookmark_grey
                         }
                         alt=""
                         className="detail_tag_text_two"
-                        style={{ paddingLeft: "24px", cursor: "pointer" }}
+                        style={{
+                          paddingLeft: "24px",
+                          cursor: "pointer",
+                          height: "30px",
+                          width: "58px",
+                        }}
                         onClick={hanldeBookMarkPriority}
                       />
                     ) : (
@@ -459,7 +413,7 @@ const DetailPage = () => {
                         </button>
                       ))}
                     </div>
-                    {role !== "editor" && (
+                    {role !== "editor" && ( // Bookmark For Normaluser for mobile view
                       <>
                         {token ? (
                           <img
@@ -480,14 +434,19 @@ const DetailPage = () => {
                                 ? Bookmark_yellow
                                 : details?.bookmark?.PriorityType ===
                                   showAllBookmark[1]?.name
-                                ? Bookmark_grey
+                                ? Green_Bookmark
                                 : details?.bookmark === "null"
                                 ? Bookmark_grey
                                 : Bookmark_grey
                             }
                             alt=""
                             className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer" }}
+                            style={{
+                              paddingLeft: "24px",
+                              cursor: "pointer",
+                              height: "30px",
+                              width: "58px",
+                            }}
                             onClick={hanldeBookMarkPriority}
                           />
                         ) : (

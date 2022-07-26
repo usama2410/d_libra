@@ -37,6 +37,7 @@ export const endpoints = {
   ADD_CHAPTER: "/webapi/GetParentCategories",
   GET_ALL_CHAPTER: "/webapi/GetParentCategories",
   PARENT_CATEGORY: "/GetParentCategories",
+  IMPORT_COURSES_OR_CHAPTERS: "/webapi/exportcategory_or_course",
 
   //Post
   ADD_POST: "/webapi/AddPost",

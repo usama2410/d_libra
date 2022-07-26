@@ -159,6 +159,7 @@
   justify-content: center;
   align-items: center;
   width: 20%;
+  cursor: pointer;
 }
 .right_search {
   height: 42px;
@@ -653,6 +654,7 @@
   .searchiconsize {
     width: 22px;
     height: 22px;
+    cursor: pointer;
   }
   .subheadingsidebar {
     font-style: normal;

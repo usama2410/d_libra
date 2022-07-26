@@ -20,7 +20,7 @@ import Box from "@mui/material/Box";
 // import { CKEditor } from "ckeditor4-react";
 // import CKEditor  from "react-ckeditor-component";
 import CKEditor from "ckeditor4-react-advanced";
-
+import { FileUploader } from "react-drag-drop-files";
 
 const UploadContentMain = () => {
   const navigate = useNavigate();
@@ -45,7 +45,10 @@ const UploadContentMain = () => {
 
   const [CKEditorState, setCKEditorState] = useState("");
 
-  console.log("image state", CKEditorState);
+  const fileTypes = ["JPEG", "PNG", "SVG"];
+
+  // console.log("image image", image);
+  // console.log("image imageName", imageName);
 
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
   // const onEditorStateChange = (editorState) => {
@@ -62,6 +65,12 @@ const UploadContentMain = () => {
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
+  };
+
+  const handleChangeDragDrop = (file) => {
+    console.log("file", file);
+    setImage(URL.createObjectURL(file));
+    setImageName(file);
   };
 
   const hanldeSetUniqueIdentity = (target) => {
@@ -251,7 +260,8 @@ const UploadContentMain = () => {
     setSelectedOptionContent(selectedOptionContent);
     // console.log("selectedOption ID", selectedOptionContent);
     let hypenIdentifierContent = (selectedOptionContent?.identifier)
-      .toString()?.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+      .toString()
+      ?.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
     setUniqueIdentity(hypenIdentifierContent);
   };
 
@@ -318,7 +328,6 @@ const UploadContentMain = () => {
   //       name: "insert",
   //       items: ["Image", "Link", "Unlink", "Table", "HorizontalRule", "doctools"],
   //     },
-      
 
   //     {
   //       name: "clipboard",
@@ -393,7 +402,7 @@ const UploadContentMain = () => {
   // };
 
   // CKEditor.editorbgcolor = 'grey';
-  // CKEditor.config.removeButtons  = 'help'; 
+  // CKEditor.config.removeButtons  = 'help';
 
   return (
     <>
@@ -611,6 +620,27 @@ const UploadContentMain = () => {
                       </label>
                     </div>
                   </div>
+                  <div style={{ marginTop: "20px" }}>
+                    <FileUploader
+                      multiple={false}
+                      label="Drop a file right here"
+                      // hoverTitle="Drop here"
+                      handleChange={handleChangeDragDrop}
+                      name="file"
+                      types={fileTypes}
+                     
+                      children={
+
+                      <div>
+                        <div className="drop_file_container">
+                          <div className="drop_file_container_text">
+                            Drop a file here
+                          </div>
+                        </div>
+                      </div>
+                      }
+                    />
+                  </div>
                 </Grid>
 
                 <Grid item lg={8} md={8} sm={0} xs={0}>
@@ -650,7 +680,6 @@ const UploadContentMain = () => {
                     // config={editorConfig}
                     onChange={(evt) => handleEditorChange(evt)}
                     placeholder="Write description here"
-                    
                   />
                 </div>
               </div>

@@ -115,7 +115,7 @@ export default function Sidebar() {
   const role = useSelector((state) => state.auth.role);
   const user = useSelector((state) => state?.auth);
 
-  console.log("user", user);
+  // console.log("user", user);
   // console.log("searchstate", searchstate);
 
   const handleSearchResult = (e) => {
@@ -622,43 +622,50 @@ export default function Sidebar() {
           </div>
         </ListItem>
       </List>
-      <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
-        {" "}
-        Editor Menu{" "}
-      </span>
-      <Divider className="divider_class" />
-      <List style={{ paddingLeft: "20px" }}>
-        <ListItem
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate("/editormainpage")}
-        >
-          <div
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-            className="sidebarlistcontainer"
-          >
-            <ListItemIcon
-              onClick={toggleDrawer(anchor, false)}
-              onKeyDown={toggleDrawer(anchor, false)}
+      {role === "editor" && (
+        <>
+        <Divider className="divider_class" />
+          <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
+            {" "}
+            Editor Menu{" "}
+          </span>
+          <List style={{ paddingLeft: "20px" }}>
+            <ListItem
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/editormainpage")}
             >
-              <img
-                className="sidebareditoricon"
-                src={Sidebar_EditorPage}
-                alt=""
-                style={{ paddingLeft: "3px" }}
-              />
-            </ListItemIcon>
-            <Typography
-              onClick={toggleDrawer(anchor, false)}
-              onKeyDown={toggleDrawer(anchor, false)}
-            >
-              <span className="listitem_text" style={{ marginLeft: "-24px" }}>
-                Editor's Page
-              </span>
-            </Typography>
-          </div>
-        </ListItem>
-      </List>
+              <div
+                onClick={toggleDrawer(anchor, false)}
+                onKeyDown={toggleDrawer(anchor, false)}
+                className="sidebarlistcontainer"
+              >
+                <ListItemIcon
+                  onClick={toggleDrawer(anchor, false)}
+                  onKeyDown={toggleDrawer(anchor, false)}
+                >
+                  <img
+                    className="sidebareditoricon"
+                    src={Sidebar_EditorPage}
+                    alt=""
+                    style={{ paddingLeft: "3px" }}
+                  />
+                </ListItemIcon>
+                <Typography
+                  onClick={toggleDrawer(anchor, false)}
+                  onKeyDown={toggleDrawer(anchor, false)}
+                >
+                  <span
+                    className="listitem_text"
+                    style={{ marginLeft: "-24px" }}
+                  >
+                    Editor's Page
+                  </span>
+                </Typography>
+              </div>
+            </ListItem>
+          </List>
+        </>
+      )}
       <span className="subheadingsidebar" style={{ marginTop: "20px" }}>
         Others{" "}
       </span>

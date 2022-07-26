@@ -109,6 +109,7 @@ const AddNewCategory = () => {
           token
         )
       );
+      console.log(response)
       response?.message?.includes("Successfully") && navigate("/");
       setMessage(response?.message);
     }

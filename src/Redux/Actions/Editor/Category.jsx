@@ -161,7 +161,7 @@ export const getAllCourses = (role, token) => async (dispatch) => {
 export const addnewChapters =
   (name, courseid, slug, imageName, uniqueidentity, token) =>
   async (dispatch) => {
-    // console.log(name, courseid, slug, imageName, uniqueidentity);
+    console.log(name, courseid, slug, imageName, uniqueidentity);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("courseid", courseid);
@@ -184,3 +184,24 @@ export const addnewChapters =
       console.log(error);
     }
   };
+
+export const importCoursesOrChapters = (file, token) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await axios.post(
+      `${URL}${endpoints.IMPORT_COURSES_OR_CHAPTERS}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("importCoursesOrChapters Response", response);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -23,6 +23,7 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
 
 const Tagpage = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Tagpage = () => {
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
-  console.log("showAllBookmark", showAllBookmark);
+  // console.log("showAllBookmark", showAllBookmark);
 
   const handleBack = () => {
     navigate(state?.path, {
@@ -47,9 +48,9 @@ const Tagpage = () => {
     });
   };
 
-  console.log("location", location);
-  console.log("state", state);
-  console.log("path", path);
+  // console.log("location", location);
+  // console.log("state", state);
+  // console.log("path", path);
 
   const hanldeDetails = (topic) => {
     navigate(
@@ -66,7 +67,7 @@ const Tagpage = () => {
 
   const handleBookMark = async (Contentid) => {
     const response = await dispatch(addContentBookmark(Contentid, role, token));
-    // console.log("response", response);
+    console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -264,7 +265,7 @@ const Tagpage = () => {
                                       ? Bookmark_yellow
                                       : e?.PriorityType ===
                                         showAllBookmark[1]?.name
-                                      ? Bookmark_grey
+                                      ? Green_Bookmark
                                       : e.PriorityType === "null"
                                       ? Bookmark_grey
                                       : Bookmark_grey

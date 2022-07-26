@@ -22,6 +22,33 @@
   justify-content: center;
 }
 
+.drop_file_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:white 1px dashed ;
+  background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+  cursor: pointer;
+}
+
+.drop_file_container_text {
+  padding: 30px;
+}
+
+.cXBrtO {
+  display: none !important;
+}
+
+.fVfcRr > span {
+  color: white !important;
+}
+
+.successMessage {
+  color: white !important;
+  font-size: 12px !important;
+}
+
 .noimagecontainer {
   width: 300px;
   height: auto;

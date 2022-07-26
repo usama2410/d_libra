@@ -58,25 +58,25 @@ const FooterButtons = (props) => {
   }, []);
 
   const handleWhatsApp = () => {
-    console.log("whatsapp");
+    // console.log("whatsapp");
     const url = `https://api.whatsapp.com/send?text=${window.location.href}`;
     window.open(url, "_blank");
   };
 
   const handleFacebook = () => {
-    console.log("facebook");
+    // console.log("facebook");
     const url = `https://www.facebook.com/sharer/sharer.php?u=${link}&quote=${name}&hashtag=Libra`;
     window.open(url, "_blank");
   };
 
   const handleMail = () => {
-    console.log("mail");
+    // console.log("mail");
     const url = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=${name}&body=${link}`;
     window.open(url, "_blank");
   };
 
   const handleTelegram = () => {
-    console.log("telegram web");
+    // console.log("telegram web");
     const url = `https://telegram.me/share/url?url=${link}&text=${link}`;
     window.open(url, "_blank");
   };
@@ -101,7 +101,13 @@ const FooterButtons = (props) => {
   return (
     <>
       <div>
-        <div className={role === "normaluser" ? "footer_buttons_container_user": "footer_buttons_container"}>
+        <div
+          className={
+            role === "normaluser"
+              ? "footer_buttons_container_user"
+              : "footer_buttons_container"
+          }
+        >
           {history?.length > 0 ? (
             <img
               src={History}
@@ -145,14 +151,24 @@ const FooterButtons = (props) => {
                 marginLeft: "30px",
               }}
             >
-              <img
-                src={History}
-                alt=""
-                style={{ cursor: "pointer" }}
-                width="50px"
-                height="50px"
-                onClick={hanldeNavigateToHistory}
-              />
+              {history?.length > 0 ? (
+                <img
+                  src={History}
+                  alt=""
+                  style={{ cursor: "pointer" }}
+                  width="50px"
+                  height="50px"
+                  onClick={hanldeNavigateToHistory}
+                />
+              ) : (
+                <img
+                  src={Popup_History_off}
+                  alt=""
+                  style={{ cursor: "pointer" }}
+                  width="50px"
+                  height="50px"
+                />
+              )}
               <img
                 src={MyLibrary}
                 alt=""

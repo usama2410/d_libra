@@ -131,7 +131,7 @@ const CoursePageGuest = () => {
       },
     ],
   };
-  console.log(data?.dropdown?.parent?.CategoryName);
+  // console.log(data?.dropdown?.parent?.CategoryName);
   return (
     <>
       <button
@@ -167,10 +167,9 @@ const CoursePageGuest = () => {
                       theme ? "chapternameclass" : "chapternameclasstwo"
                     }
                   >
-                    {item?.lecture?.length !== 0 ? (
-                      item?.CategoryName?.charAt(0).toUpperCase() +
-                      item?.CategoryName?.slice(1)
-                    ) : (
+                    {item?.CategoryName?.charAt(0).toUpperCase() +
+                      item?.CategoryName?.slice(1)}
+                    {/* ) : (
                       <div
                         style={{
                           display: "flex",
@@ -180,46 +179,54 @@ const CoursePageGuest = () => {
                       >
                         <h3 style={{ textAlign: "center" }}>No Data</h3>
                       </div>
-                    )}
+                    )} */}
                   </span>
                 </div>
-                <div>
-                  <Slider className="intro-slick" {...settings}>
-                    {item?.lecture?.map((e) => {
-                      return (
-                        <div className="intro-slides">
-                          <img
-                            onClick={() =>
-                              handleDetailPageNavigate(item?.id, e?.id)
-                            }
-                            src={`${development}/media/${e.images}`}
-                            className="landingpage_images"
-                            // style={{
-                            //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                            // }}
-                            alt=""
-                          />
-                          {e.images ? (
-                            <div className="coursepageguestsection">
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursename"
-                                style={{ color: theme ? "#363636" : "#FFFFFF" }}
-                              >
-                                {e?.title?.charAt(0).toUpperCase() +
-                                  e?.title?.slice(1)}
-                              </Typography>
-                              <div></div>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      );
-                    })}
-                  </Slider>
-                </div>
+                {item?.lecture?.length !== 0 ? (
+                  <div>
+                    <Slider className="intro-slick" {...settings}>
+                      {item?.lecture?.map((e) => {
+                        return (
+                          <div className="intro-slides">
+                            <img
+                              onClick={() =>
+                                handleDetailPageNavigate(item?.id, e?.id)
+                              }
+                              src={`${development}/media/${e.images}`}
+                              className="landingpage_images"
+                              // style={{
+                              //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                              // }}
+                              alt=""
+                            />
+                            {e.images ? (
+                              <div className="coursepageguestsection">
+                                <Typography
+                                  noWrap
+                                  component="div"
+                                  className="subcoursename"
+                                  style={{
+                                    color: theme ? "#363636" : "#FFFFFF",
+                                  }}
+                                >
+                                  {e?.title?.charAt(0).toUpperCase() +
+                                    e?.title?.slice(1)}
+                                </Typography>
+                                <div></div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        );
+                      })}
+                    </Slider>
+                  </div>
+                ) : (
+                  <h4 style={{ textAlign: "center", marginTop: "10px" }}>
+                    No content found
+                  </h4>
+                )}
               </div>
             );
           })}

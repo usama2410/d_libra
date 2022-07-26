@@ -13,7 +13,8 @@ import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.sv
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
-import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
+
 import FooterButtons from "./FooterButtons";
 import Editor_icon_dark from "../../assests/SVG_Files/New/Editor_icon_dark.svg";
 import Editor_icon_light from "../../assests/SVG_Files/New/Editor_icon_light.svg";
@@ -223,18 +224,20 @@ const UserSettingViewPage = () => {
                 className="vector_container vectorcontainermobile"
                 style={{ color: `${theme ? "#009AF9" : "#C8C8C8"}` }}
               >
-                {theme ? (
+                {theme && role === "editor" ? (
                   <img
                     src={Editor_icon_light}
                     alt=""
                     className="editoricon_image"
                   />
                 ) : (
-                  <img
-                    src={Editor_icon_dark}
-                    alt=""
-                    className="editoricon_image_two"
-                  />
+                  role === "editor" && (
+                    <img
+                      src={Editor_icon_dark}
+                      alt=""
+                      className="editoricon_image_two"
+                    />
+                  )
                 )}
                 <span
                   className={
@@ -242,7 +245,7 @@ const UserSettingViewPage = () => {
                   }
                 >
                   {!firstName || !lastName
-                    ? "Editor"
+                    ? "User"
                     : `${firstName} ${lastName}`}
                 </span>
               </div>
@@ -322,7 +325,10 @@ const UserSettingViewPage = () => {
               />
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }} className="first_name_container">
+          <div
+            style={{ display: "flex", flexDirection: "column" }}
+            className="first_name_container"
+          >
             <span
               className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}
@@ -330,17 +336,23 @@ const UserSettingViewPage = () => {
               First Name
             </span>
             <input
-                className={
-                  theme
-                    ? "usersetting_inputfield_light"
-                    : "usersetting_inputfield_dark"
-                }
+              className={
+                theme
+                  ? "usersetting_inputfield_light"
+                  : "usersetting_inputfield_dark"
+              }
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "column", paddingBottom: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              paddingBottom: "20px",
+            }}
+          >
             <span
               className="addcategory_text"
               style={{ color: `${theme ? "#363636" : "white"}` }}
@@ -349,10 +361,10 @@ const UserSettingViewPage = () => {
             </span>
             <input
               className={
-                  theme
-                    ? "usersetting_inputfield_light"
-                    : "usersetting_inputfield_dark"
-                }
+                theme
+                  ? "usersetting_inputfield_light"
+                  : "usersetting_inputfield_dark"
+              }
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -446,7 +458,7 @@ const UserSettingViewPage = () => {
                     src={
                       bookmark.colorcode === "#FFAA1D"
                         ? Bookmark_yellow
-                        : bookmark.colorcode === "#C8C8C8" && Bookmark_grey
+                        : bookmark.colorcode === "#C8C8C8" && Green_Bookmark
                     }
                     alt=""
                     className="tagimageusersettingpage"
@@ -516,7 +528,7 @@ const UserSettingViewPage = () => {
               <div className="vector_container">
                 <div className="vector_image">
                   <img
-                    src={Bookmark_grey}
+                    src={Green_Bookmark}
                     alt=""
                     className="tagimageusersettingpage"
                   />

@@ -148,7 +148,7 @@ const LandingPage = () => {
   const handleViewRecentCourses = async (id, image) => {
     // console.log("view recent courses", id);
     await dispatch(addToRecentViewCourses(id, role, token));
-    navigate(`/coursepageguest/${id}`, {state: image});
+    navigate(`/coursepageguest/${id}`, { state: image });
   };
 
   return (
@@ -216,7 +216,9 @@ const LandingPage = () => {
                               <img
                                 src={`${development}/media/${e.image}`}
                                 // onClick={() => navigate("/coursepageguest")}
-                                onClick={() => handleViewRecentCourses(e.id, e.image)}
+                                onClick={() =>
+                                  handleViewRecentCourses(e.id, e.image)
+                                }
                                 className="landingpage_images"
                                 // style={{
                                 //   filter: `${e.disable ? "brightness(15%)" : ""}`,

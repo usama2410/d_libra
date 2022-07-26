@@ -23,6 +23,8 @@ import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
+
 import {
   addContentBookmark,
   showAllBoomark,
@@ -286,14 +288,14 @@ const Recentlyviewed = () => {
                                     ? Bookmark_green
                                     : e?.PriorityType === "futureread"
                                     ? Bookmark_red
-                                    : token &&
+                                    : 
                                       e?.PriorityType ===
                                         showAllBookmark[0]?.name
                                     ? Bookmark_yellow
-                                    : token &&
+                                    : 
                                       e?.PriorityType ===
                                         showAllBookmark[1]?.name
-                                    ? Bookmark_grey
+                                    ? Green_Bookmark
                                     : e.bookmark === "null"
                                     ? Bookmark_grey
                                     : Bookmark_grey

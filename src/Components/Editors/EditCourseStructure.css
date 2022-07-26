@@ -1,23 +1,22 @@
-
-.table_icons{
+.table_icons {
   /* border: 1px solid white !important  ; */
   display: flex;
   align-items: center;
 }
-.open_icon_table{
+.open_icon_table {
   /* color: white; */
   font-size: 14px;
 }
 
-.date_text_container_one{
+.date_text_container_one {
   padding-right: 14px !important;
   /* border: 1px solid white; */
 }
 
-.date_text_container_two{
+.date_text_container_two {
   padding-left: 40px !important;
 }
-.MuiCollapse-wrapperInner{
+.MuiCollapse-wrapperInner {
   margin-left: -24px !important;
 }
 .tablefirstheader {
@@ -115,7 +114,7 @@
   padding-right: 16px;
 }
 
-.normaluser_container{
+.normaluser_container {
   display: flex;
   width: 100%;
   padding: 0px 16px;
@@ -430,7 +429,7 @@
   margin-left: 18px;
 }
 
-.tags_wrapper_three{
+.tags_wrapper_three {
   display: flex;
 }
 
@@ -486,7 +485,6 @@
   color: white;
   border: 1px solid rgba(70, 66, 77, 0.7) !important;
   width: 300px;
-  
 }
 
 .editor_input_field:focus {
@@ -546,6 +544,11 @@
   margin-left: 10px !important;
 }
 
+.detdet {
+  filter: invert(21%) sepia(100%) saturate(3618%) hue-rotate(102deg)
+    brightness(96%) contrast(108%);
+}
+
 .detail_tag_text_two {
   display: block;
 }
@@ -564,7 +567,7 @@
 }
 
 @media screen and (max-width: 958px) {
-  .normaluser_container{
+  .normaluser_container {
     display: none;
   }
   .detailpagesubcontainer {
@@ -603,7 +606,7 @@
   .tags_wrapper_one {
     display: none;
   }
-  .tags_wrapper_three{
+  .tags_wrapper_three {
     display: none;
   }
   .button_container {
@@ -733,7 +736,6 @@
     padding-bottom: 7px;
     margin-left: 70px;
   }
-
 }
 
 @media screen and (max-width: 750px) {
@@ -749,7 +751,7 @@
     padding-bottom: 7px;
     margin-left: 65px;
   }
-  .detail_page_image{
+  .detail_page_image {
     width: 80% !important;
   }
 }
@@ -1089,20 +1091,12 @@
   }
 }
 
-
-
 @media screen and (max-width: 1150px) {
-  .date_text_container_one{
+  .date_text_container_one {
     padding-right: 0px !important;
   }
-  
-  .date_text_container_two{
+
+  .date_text_container_two {
     padding-left: 0px !important;
   }
 }
-
-
-
-
-
-

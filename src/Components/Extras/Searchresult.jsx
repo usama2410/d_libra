@@ -16,6 +16,8 @@ import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { development } from "../../endpoints";
@@ -40,7 +42,8 @@ const Searchresult = () => {
   const [bookmark, setBookmark] = useState("");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
   console.log(data);
-  // console.log("state", state);
+  // console.log("state", showAllBookmark);
+  // console.log("state", showAllBookmark[1]?.name);
   // console.log(location.state.search);
   // console.log(location.search?.split("=")[2].replace("-", " "));
 
@@ -151,6 +154,7 @@ const Searchresult = () => {
       }
     };
     searchResult();
+    handleShowAllBookmark();
   }, [window.location.search, token, params, bookmark]);
 
   return (
@@ -251,7 +255,7 @@ const Searchresult = () => {
                                               ? Bookmark_yellow
                                               : e?.PriorityType ===
                                                 showAllBookmark[1]?.name
-                                              ? Bookmark_grey
+                                              ? Green_Bookmark
                                               : e.PriorityType === "null"
                                               ? Bookmark_grey
                                               : Bookmark_grey

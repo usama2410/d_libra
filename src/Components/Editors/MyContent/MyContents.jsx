@@ -19,6 +19,7 @@ import Bookmark_yellow from "../../../assests/SVG_Files/New folder/Bookmark_yell
 import Bookmark_red from "../../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_green from "../../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Bookmark_grey from "../../../assests/SVG_Files/New folder/Bookmark_gray.svg";
+import Green_Bookmark from "../../../assests/SVG_Files/New folder/Green_Bookmark.svg";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -50,7 +51,7 @@ const MyContents = () => {
   const [priority, setPriority] = useState("highpriority");
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
-  console.log(data);
+  // console.log(data);
 
   const handleBack = () => {
     // navigate(state?.path);
@@ -137,7 +138,7 @@ const MyContents = () => {
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    console.log(response);
+    // console.log(response);
     setShowAllBookmark(response?.slice(0, 2));
   };
 
@@ -155,28 +156,28 @@ const MyContents = () => {
   }, [bookmark, params, priority]);
 
   const handleBookMark = async (Contentid) => {
-    console.log("contentid", Contentid);
-    setCount(count + 1);
-    if (count === 0) {
-      setPriority("highpriority");
-    } else if (count === 1) {
-      setPriority("reviewlist");
-    } else if (count === 2) {
-      setPriority("futureread");
-    } else if (count === 3) {
-      setPriority(showAllBookmark[0]?.name);
-    } else if (count === 4) {
-      setPriority(showAllBookmark[1]?.name);
-      setCount(0);
-    }
+    // console.log("contentid", Contentid);
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
 
-    const result = await dispatch(
-      setBookMarkPriority(role, Contentid, priority, token)
-    );
-    console.log("result", result);
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, Contentid, priority, token)
+    // );
+    // console.log("result", result);
 
     const response = await dispatch(addContentBookmark(Contentid, role, token));
-    console.log("response", response);
+    // console.log("response", response);
     setBookmark(response);
     !token &&
       Swal.fire({
@@ -197,19 +198,7 @@ const MyContents = () => {
     const response = await dispatch(
       addRecenetViewContent(categoryid, role, token)
     );
-    console.log("History", response);
-  };
-
-  const hanldeBookMarkPriority = async (Contentid) => {
-    const response = await dispatch(addContentBookmark(Contentid, role, token));
-    setBookmark(response);
-    !token &&
-      Swal.fire({
-        title: "Unauthenticated",
-        text: "Please login to bookmark",
-        iconColor: "red",
-        icon: "error",
-      });
+    // console.log("History", response);
   };
 
   return (
@@ -270,19 +259,18 @@ const MyContents = () => {
           {data?.data?.map((item) => {
             return (
               <>
-                {item?.lecture?.length > 0 ? (
-                  <div className="content_root_container" key={item?.id}>
-                    <div>
-                      <span
-                        className={
-                          theme ? "chapternameclass" : "chapternameclasstwo"
-                        }
-                      >
-                        {item?.CategoryName?.charAt(0).toUpperCase() +
-                          item?.CategoryName?.slice(1)}
-                      </span>
-                    </div>
-
+                <div className="content_root_container" key={item?.id}>
+                  <div>
+                    <span
+                      className={
+                        theme ? "chapternameclass" : "chapternameclasstwo"
+                      }
+                    >
+                      {item?.CategoryName?.charAt(0).toUpperCase() +
+                        item?.CategoryName?.slice(1)}
+                    </span>
+                  </div>
+                  {item?.lecture?.length > 0 ? (
                     <div>
                       <Slider className="intro-slick" {...settings}>
                         {item?.lecture?.map((e) => {
@@ -311,35 +299,49 @@ const MyContents = () => {
                                       component="div"
                                       className="subcoursenametwo subcoursename"
                                     >
-                                      {e.title}
+                                      {e.title?.charAt(0).toUpperCase() +
+                                        e.title?.slice(1)}
                                     </Typography>
                                   </Typography>
-                                  {/* <div className="mycontenttagscontainer">
-                                    <img
-                                      src={
-                                        e.PriorityType === null
-                                          ? Bookmark_grey
-                                          : e?.PriorityType === "highpriority"
-                                          ? Bookmark_blue
-                                          : e?.PriorityType === "reviewlist"
-                                          ? Bookmark_green
-                                          : e?.PriorityType === "futureread"
-                                          ? Bookmark_red
-                                          : e?.PriorityType ===
-                                            showAllBookmark[0]?.name
-                                          ? Bookmark_yellow
-                                          : e?.PriorityType ===
-                                            showAllBookmark[1]?.name
-                                          ? Bookmark_grey
-                                          : e.PriorityType === "null"
-                                          ? Bookmark_grey
-                                          : Bookmark_grey
-                                      }
-                                      alt=""
-                                      onClick={() => handleBookMark(e?.id)}
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                  </div> */}
+                                  <div className="mycontenttagscontainer">
+                                    {token ? (
+                                      <img
+                                        src={
+                                          e.PriorityType === null
+                                            ? Bookmark_grey
+                                            : e?.PriorityType === "highpriority"
+                                            ? Bookmark_blue
+                                            : e?.PriorityType === "reviewlist"
+                                            ? Bookmark_green
+                                            : e?.PriorityType === "futureread"
+                                            ? Bookmark_red
+                                            : e?.PriorityType ===
+                                              showAllBookmark[0]?.name
+                                            ? Bookmark_yellow
+                                            : e?.PriorityType ===
+                                              showAllBookmark[1]?.name
+                                            ? Green_Bookmark
+                                            : e.PriorityType === "null"
+                                            ? Bookmark_grey
+                                            : Bookmark_grey
+                                        }
+                                        alt=""
+                                        onClick={() => handleBookMark(e?.id)}
+                                        style={{
+                                          cursor: "pointer",
+                                          width: "20px",
+                                          height: "20.4px",
+                                        }}
+                                      />
+                                    ) : (
+                                      <img
+                                        src={Bookmark_grey}
+                                        alt=""
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() => handleBookMark(e?.id)}
+                                      />
+                                    )}
+                                  </div>
                                 </div>
                               ) : (
                                 ""
@@ -349,10 +351,12 @@ const MyContents = () => {
                         })}
                       </Slider>
                     </div>
-                  </div>
-                ) : (
-                  <h1 style={{ textAlign: "center" }}>No Content Found</h1>
-                )}
+                  ) : (
+                    <h3 style={{ textAlign: "center", marginTop: "10px" }}>
+                      No content found
+                    </h3>
+                  )}
+                </div>
               </>
             );
           })}

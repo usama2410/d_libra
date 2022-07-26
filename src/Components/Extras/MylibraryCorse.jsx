@@ -20,12 +20,15 @@ import {
 } from "../../Redux/Actions/bookmark.action";
 import { development } from "../../endpoints";
 import Swal from "sweetalert2";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import Bookmark_blue from "../../assests/SVG_Files/New folder/Bookmark_blue.svg";
 import Bookmark_red from "../../assests/SVG_Files/New folder/Bookmark_red.svg";
 import Bookmark_yellow from "../../assests/SVG_Files/New folder/Bookmark_yellow.svg";
 import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg";
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
+import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
 
 const MylibraryCorse = () => {
   const navigate = useNavigate();
@@ -247,114 +250,129 @@ const MylibraryCorse = () => {
         </Button>
       </div>
       <div className="landingpage_slider_container libraryrootcontainer">
-        {data?.map((item) => {
-          // console.log("item", item);
-          return (
-            <>
-              {item?.Chapter?.length !== 0 && (
-                <div className="content_root_container">
-                  <div>
-                    <span
-                      className={
-                        theme ? "chapternameclass" : "chapternameclasstwo"
-                      }
-                    >
-                      {item.Coursename === null
-                        ? "No Course Name"
-                        : item.Coursename}
-                    </span>
-                  </div>
-                  <div>
-                    <Slider className="intro-slick" {...settings}>
-                      {item?.Chapter?.map((e) => {
-                        return (
-                          <div className="intro-slides">
-                            <img
-                              src={`${development}/media/${e.contentimage}`}
-                              className="landingpage_images"
-                              style={{
-                                filter: `${
-                                  e.disabled ? "brightness(15%)" : ""
-                                }`,
-                              }}
-                              alt=""
-                              onClick={() => hanldeDetails(e)}
-                            />
-                            {e.contentimage ? (
-                              <div className="underimagetextcontainer">
-                                <Typography
-                                  noWrap
-                                  component="div"
-                                  className="underimagecontent"
+        {data?.length > 0 ? (
+          <>
+            {data?.map((item) => {
+              // console.log("item", item);
+              return (
+                <>
+                  {item?.Chapter?.length !== 0 && (
+                    <div className="content_root_container">
+                      <div>
+                        <span
+                          className={
+                            theme ? "chapternameclass" : "chapternameclasstwo"
+                          }
+                        >
+                          {item.Coursename === null
+                            ? "No Course Name"
+                            : item.Coursename}
+                        </span>
+                      </div>
+                      <div>
+                        <Slider className="intro-slick" {...settings}>
+                          {item?.Chapter?.map((e) => {
+                            return (
+                              <div className="intro-slides">
+                                <img
+                                  src={`${development}/media/${e.contentimage}`}
+                                  className="landingpage_images"
                                   style={{
-                                    color: theme ? "#363636" : "#FFFFFF",
+                                    filter: `${
+                                      e.disabled ? "brightness(15%)" : ""
+                                    }`,
                                   }}
-                                >
-                                  <Typography
-                                    noWrap
-                                    component="div"
-                                    className="subcoursenametwo subcoursename"
-                                  >
-                                    {e.contentname}
-                                  </Typography>
-                                </Typography>
-                                <div className="mycontenttagscontainer">
-                                  {token ? (
-                                    <img
-                                      src={
-                                        e.bookmark === null
-                                          ? Bookmark_grey
-                                          : e?.Prioritytype === "highpriority"
-                                          ? Bookmark_blue
-                                          : e?.Prioritytype === "reviewlist"
-                                          ? Bookmark_green
-                                          : e?.Prioritytype === "futureread"
-                                          ? Bookmark_red
-                                          : e?.Prioritytype ===
-                                            showAllBookmark[0]?.name
-                                          ? Bookmark_yellow
-                                          : e?.Prioritytype ===
-                                            showAllBookmark[1]?.name
-                                          ? Bookmark_grey
-                                          : e.bookmark === "null"
-                                          ? Bookmark_grey
-                                          : Bookmark_grey
-                                      }
-                                      alt=""
-                                      className="tagstwocontainer"
-                                      onClick={() =>
-                                        handleBookMark(e?.contentid)
-                                      }
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                  ) : (
-                                    <img
-                                      src={Bookmark_grey}
-                                      alt=""
-                                      className="tagstwocontainer"
+                                  alt=""
+                                  onClick={() => hanldeDetails(e)}
+                                />
+                                {e.contentimage ? (
+                                  <div className="underimagetextcontainer">
+                                    <Typography
+                                      noWrap
+                                      component="div"
+                                      className="underimagecontent"
                                       style={{
-                                        cursor: "pointer",
+                                        color: theme ? "#363636" : "#FFFFFF",
                                       }}
-                                      onClick={() =>
-                                        handleBookMark(e?.contentid)
-                                      }
-                                    />
-                                  )}
-                                </div>
+                                    >
+                                      <Typography
+                                        noWrap
+                                        component="div"
+                                        className="subcoursenametwo subcoursename"
+                                      >
+                                        {e.contentname}
+                                      </Typography>
+                                    </Typography>
+                                    <div className="mycontenttagscontainer">
+                                      {token ? (
+                                        <img
+                                          src={
+                                            e.bookmark === null
+                                              ? Bookmark_grey
+                                              : e?.Prioritytype ===
+                                                "highpriority"
+                                              ? Bookmark_blue
+                                              : e?.Prioritytype === "reviewlist"
+                                              ? Bookmark_green
+                                              : e?.Prioritytype === "futureread"
+                                              ? Bookmark_red
+                                              : e?.Prioritytype ===
+                                                showAllBookmark[0]?.name
+                                              ? Bookmark_yellow
+                                              : e?.Prioritytype ===
+                                                showAllBookmark[1]?.name
+                                              ? Green_Bookmark
+                                              : e.bookmark === "null"
+                                              ? Bookmark_grey
+                                              : Bookmark_grey
+                                          }
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          onClick={() =>
+                                            handleBookMark(e?.contentid)
+                                          }
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={Bookmark_grey}
+                                          alt=""
+                                          className="tagstwocontainer"
+                                          style={{
+                                            cursor: "pointer",
+                                          }}
+                                          onClick={() =>
+                                            handleBookMark(e?.contentid)
+                                          }
+                                        />
+                                      )}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
                               </div>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                </div>
-              )}
-            </>
-          );
-        })}
+                            );
+                          })}
+                        </Slider>
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })}
+          </>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "50px",
+            }}
+          >
+            <CircularProgress color="inherit" size={60} />
+          </Box>
+        )}
       </div>
       <FooterButtons />
     </>

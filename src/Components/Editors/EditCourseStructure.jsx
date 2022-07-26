@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ArrowBack } from "@mui/icons-material";
 import Table from "./CustomeTable/Table";
 import Select from "react-select";
+import { importCoursesOrChapters } from "../../Redux/Actions/Editor/Category";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,10 +43,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const EditCourseStructure = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
+  const token = useSelector((state) => state.auth.token);
+
+  // const [fileName, setFileName] = useState("");
+
+  // console.log(fileName);
 
   const handleBack = () => {
     navigate("/editormainpage");
+  };
+
+  const handleChange = (e) => {
+    // setFileName(e.target.files[0]);
+
+    dispatch(importCoursesOrChapters(e.target.files[0], token ));
   };
 
   const customStyles = {
@@ -141,6 +154,7 @@ const EditCourseStructure = () => {
                 >
                   Collapse Three
                 </Button>
+
                 <Button
                   variant="contained"
                   className="editcoursestructure_button"
@@ -169,13 +183,26 @@ const EditCourseStructure = () => {
             >
               Export
             </Button>
-            <Button
-              variant="contained"
-              className="editcoursestructure_button_two"
-              startIcon={<HiArrowSmRight />}
-            >
-              Import
-            </Button>
+
+            <label htmlFor="contained-button-file">
+              <input
+                accept="image/*"
+                id="contained-button-file"
+                type="file"
+                style={{ display: "none" }}
+                onChange={(e) => handleChange(e)}
+              />
+
+              <Button
+                variant="contained"
+                component="span"
+                // className="image_button selectanimagebutton"
+                className="editcoursestructure_button_two"
+                startIcon={<HiArrowSmRight />}
+              >
+                Import
+              </Button>
+            </label>
           </div>
           <div className="search_main_container">
             <img src={Vector} alt="" className="editcourseimagesection" />
