@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "./EditCourseStructure.css";
-import Vectortag from "../../assests/VectorTag.png";
 import { ArrowBack } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
-import UserDetailPageData from "../User/DetailPageUser/UserDetailPageData";
 import Next from "../../assests/SVG_Files/New folder/icons/Next.svg";
 import Next_dark from "../../assests/SVG_Files/New folder/icons/Next_dark.svg";
 import Previous from "../../assests/SVG_Files/New folder/icons/Previous.svg";
@@ -22,11 +20,15 @@ import Bookmark_grey from "../../assests/SVG_Files/New folder/Bookmark_gray.svg"
 import Bookmark_green from "../../assests/SVG_Files/New folder/Bookmark_green.svg";
 import Green_Bookmark from "../../assests/SVG_Files/New folder/Green_Bookmark.svg";
 import Swal from "sweetalert2";
+import Pin_off from "../../assests/SVG_Files/New folder/icons/Pin_off.svg";
+import Pin_on from "../../assests/SVG_Files/New folder/icons/Pin_on.svg";
 import {
   addContentBookmark,
   showAllBoomark,
 } from "../../Redux/Actions/bookmark.action";
 import FooterButtons from "../User/FooterButtons";
+
+import { pinState } from "../../Redux/Actions/auth.action";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -49,7 +51,17 @@ const DetailPage = () => {
   const [bookmark, setBookmark] = React.useState();
   const [showAllBookmark, setShowAllBookmark] = useState([]);
 
-  // console.log("state", state);
+  const [pinstate, setPinState] = useState(false);
+  const [transform, setTransform] = React.useState(false);
+  const handlePinState = async () => {
+    setPinState(!pinstate);
+    setTransform(!transform);
+    await dispatch(pinState(!pinstate));
+  };
+
+  React.useEffect(async () => {
+    await dispatch(pinState(pinstate));
+  }, []);
 
   const handleBack = () => {
     navigate(state?.path, {
@@ -69,7 +81,6 @@ const DetailPage = () => {
 
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
-    // console.log(response);
     setShowAllBookmark(response?.slice(0, 2));
   };
 
@@ -118,7 +129,6 @@ const DetailPage = () => {
   };
 
   const hanldeBookMarkPriority = async () => {
-    // console.log("clicked");
     const response = await dispatch(
       addContentBookmark(params?.id?.split("=")[1], role, token)
     );
@@ -134,7 +144,6 @@ const DetailPage = () => {
   };
 
   const handleTag = (tag) => {
-    // console.log(tag.trim());
     navigate(`/tagpage/${tag.replace(/\s+/g, "-")}`, {
       state: {
         search: tag.trim(),
@@ -146,443 +155,559 @@ const DetailPage = () => {
 
   return (
     <>
-      <div className="detailpage_root_container ">
-        {role === "editor" && (
-          <div className="backbutton_disable">
-            <button
-              onClick={handleBack}
-              className="back_button"
-              style={{ color: "#FFFFFF " }}
-            >
-              <ArrowBack className="backbutton_icon" />{" "}
-              <span className="backbutton_text">Back</span>
-            </button>
-          </div>
-        )}
-        <span
-          className={
-            role === "editor" ? "header_text" : "header_text_NormalUser"
-          }
-        >
-          {details?.post?.title !== undefined &&
-            details?.post?.title?.charAt(0)?.toUpperCase() +
-              details?.post?.title?.slice(1)}
-        </span>
-      </div>
-      {details?.status ? (
-        <div>
-          <Grid container>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <div className="detailpagesubcontainertwo">
-                <img
-                  src={`${development}/media/${details?.post?.images}`}
-                  alt=""
-                  className="detail_page_image"
-                />
-              </div>
-              <div
-                className={
-                  role === "normaluser"
-                    ? "buttons_container_detail_page_two_two"
-                    : "buttons_container_detail_page_two"
-                }
+      <div
+        style={{ position: pinstate ? "fixed" : "", top: pinstate ? "0" : "" }}
+      >
+        <div className="detailpage_root_container ">
+          {role === "editor" && (
+            <div className="backbutton_disable">
+              <button
+                onClick={handleBack}
+                className="back_button"
+                style={{ color: "#FFFFFF " }}
               >
-                <div className="deleteeditcontainer">
-                  {role === "editor" && (
-                    <>
-                      <div className="subcontainerdelete">
-                        <button
-                          className="detail_delete_button"
-                          onClick={() =>
-                            navigate(
-                              `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
-                              { state: { path: state?.path } }
-                            )
-                          }
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className="detail_edit_button"
-                          onClick={() =>
-                            navigate(
-                              `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
-                              { state: state?.path }
-                            )
-                          }
-                        >
-                          Edit
-                        </button>
-                      </div>
-
-                      <div style={{ display: "flex" }}>
-                        {/* {console.log("Ahsan length", tagslength)} */}
-                        {tagslength && (
-                          <div className="tags_wrapper_three">
-                            {details?.post?.tags !== "" ? (
-                              <>
-                                <span
-                                  className="detail_tag_text"
-                                  style={{
-                                    color: theme ? " #363636" : " #C8C8C8",
-                                  }}
-                                >
-                                  Tag:
-                                </span>
-                                {details?.post?.tags?.split(",")?.map((tag) => (
-                                  <button
-                                    className="detail_tag_button"
-                                    onClick={() => handleTag(tag)}
-                                  >
-                                    {tag}
-                                  </button>
-                                ))}
-                              </>
-                            ) : null}
-                          </div>
-                        )}
-
-                        {token ? ( // Bookmark For Editor
-                          <img
-                            src={
-                              details?.bookmark === null
-                                ? Bookmark_grey
-                                : details?.bookmark?.PriorityType ===
-                                  "highpriority"
-                                ? Bookmark_blue
-                                : details?.bookmark?.PriorityType ===
-                                  "reviewlist"
-                                ? Bookmark_green
-                                : details?.bookmark?.PriorityType ===
-                                  "futureread"
-                                ? Bookmark_red
-                                : details?.bookmark?.PriorityType ===
-                                  showAllBookmark[0]?.name
-                                ? Bookmark_yellow
-                                : details?.bookmark?.PriorityType ===
-                                  showAllBookmark[1]?.name
-                                ? Green_Bookmark
-                                : details?.bookmark === "null"
-                                ? Bookmark_grey
-                                : Bookmark_grey
-                            }
-                            alt=""
-                            className="detail_tag_text_two"
-                            style={{
-                              paddingLeft: "24px",
-                              cursor: "pointer",
-                              height: "30px",
-                              width: "58px",
-                            }}
-                            onClick={hanldeBookMarkPriority}
-                          />
-                        ) : (
-                          <img
-                            src={Bookmark_grey}
-                            alt=""
-                            className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer" }}
-                            onClick={hanldeBookMarkPriority}
-                          />
-                        )}
-                      </div>
-                    </>
-                  )}
+                <ArrowBack className="backbutton_icon" />{" "}
+                <span className="backbutton_text">Back</span>
+              </button>
+            </div>
+          )}
+          <span
+            className={
+              role === "editor" ? "header_text" : "header_text_NormalUser"
+            }
+          >
+            {details?.post?.title !== undefined &&
+              details?.post?.title?.charAt(0)?.toUpperCase() +
+                details?.post?.title?.slice(1)}
+          </span>
+        </div>
+        {details?.status ? (
+          <div>
+            <Grid container>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <div
+                  className="detailpagesubcontainertwo"
+                  style={{
+                    transition: "transform .2s",
+                    transform: transform && "scale(97%)",
+                    padding: `${pinstate ? "0px 0px" : "5px 5px"}`,
+                  }}
+                >
+                  <img
+                    src={`${development}/media/${details?.post?.images}`}
+                    alt=""
+                    className={
+                      pinstate ? "detail_page_image_two" : "detail_page_image"
+                    }
+                  />
                 </div>
-              </div>
 
-              {role === "normaluser" || role === null ? (
-                <>
-                  <div className="normaluser_container">
-                    <div style={{ display: "flex" }}>
-                      <span
-                        className="detail_tag_text"
-                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                      >
-                        Tag:
-                      </span>
-                      {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button
-                          className="detail_tag_button"
-                          onClick={() => handleTag(tag)}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
+                <div
+                  className={
+                    role === "normaluser"
+                      ? "buttons_container_detail_page_two_two"
+                      : "buttons_container_detail_page_two"
+                  }
+                >
+                  <div className="deleteeditcontainer">
+                    {role === "editor" && (
+                      <>
+                        <div className="subcontainerdelete">
+                          <button
+                            className="detail_delete_button"
+                            onClick={() =>
+                              navigate(
+                                `/deletecontent/${params.id}/${params.role}/${params.categoryid}`,
+                                { state: { path: state?.path } }
+                              )
+                            }
+                          >
+                            Delete
+                          </button>
+                          <button
+                            className="detail_edit_button"
+                            onClick={() =>
+                              navigate(
+                                `/editcontentmain/${params.id}/${params.role}/${params.categoryid}`,
+                                { state: state?.path }
+                              )
+                            }
+                          >
+                            Edit
+                          </button>
+                        </div>
 
-                    {token ? ( // Normal User Bookmark For PC
-                      <img
-                        src={
-                          details?.bookmark === null
-                            ? Bookmark_grey
-                            : details?.bookmark?.PriorityType === "highpriority"
-                            ? Bookmark_blue
-                            : details?.bookmark?.PriorityType === "reviewlist"
-                            ? Bookmark_green
-                            : details?.bookmark?.PriorityType === "futureread"
-                            ? Bookmark_red
-                            : details?.bookmark?.PriorityType ===
-                              showAllBookmark[0]?.name
-                            ? Bookmark_yellow
-                            : details?.bookmark?.PriorityType ===
-                              showAllBookmark[1]?.name
-                            ? Green_Bookmark
-                            : details?.bookmark === "null"
-                            ? Bookmark_grey
-                            : Bookmark_grey
-                        }
-                        alt=""
-                        className="detail_tag_text_two"
-                        style={{
-                          paddingLeft: "24px",
-                          cursor: "pointer",
-                          height: "30px",
-                          width: "58px",
-                        }}
-                        onClick={hanldeBookMarkPriority}
-                      />
-                    ) : (
-                      <img
-                        src={Bookmark_grey}
-                        alt=""
-                        className="detail_tag_text_two"
-                        style={{ paddingLeft: "24px", cursor: "pointer" }}
-                        onClick={hanldeBookMarkPriority}
-                      />
+                        <div style={{ display: "flex" }}>
+                          {tagslength && (
+                            <div className="tags_wrapper_three">
+                              {details?.post?.tags !== "" ? (
+                                <>
+                                  <span
+                                    className="detail_tag_text"
+                                    style={{
+                                      color: theme ? " #363636" : " #C8C8C8",
+                                    }}
+                                  >
+                                    Tag:
+                                  </span>
+                                  {details?.post?.tags
+                                    ?.split(",")
+                                    ?.map((tag) => (
+                                      <button
+                                        className="detail_tag_button"
+                                        onClick={() => handleTag(tag)}
+                                      >
+                                        {tag}
+                                      </button>
+                                    ))}
+                                </>
+                              ) : null}
+                            </div>
+                          )}
+
+                          {token ? ( // Bookmark For Editor
+                            <img
+                              src={
+                                details?.bookmark === null
+                                  ? Bookmark_grey
+                                  : details?.bookmark?.PriorityType ===
+                                    "highpriority"
+                                  ? Bookmark_blue
+                                  : details?.bookmark?.PriorityType ===
+                                    "reviewlist"
+                                  ? Bookmark_green
+                                  : details?.bookmark?.PriorityType ===
+                                    "futureread"
+                                  ? Bookmark_red
+                                  : details?.bookmark?.PriorityType ===
+                                    showAllBookmark[0]?.name
+                                  ? Bookmark_yellow
+                                  : details?.bookmark?.PriorityType ===
+                                    showAllBookmark[1]?.name
+                                  ? Green_Bookmark
+                                  : details?.bookmark === "null"
+                                  ? Bookmark_grey
+                                  : Bookmark_grey
+                              }
+                              alt=""
+                              className="detail_tag_text_two"
+                              style={{
+                                paddingLeft: "42px",
+                                cursor: "pointer",
+                                height: "30px",
+                                width: "58px",
+                              }}
+                              onClick={hanldeBookMarkPriority}
+                            />
+                          ) : (
+                            <img
+                              src={Bookmark_grey}
+                              alt=""
+                              className="detail_tag_text_two"
+                              style={{ paddingLeft: "24px", cursor: "pointer" }}
+                              onClick={hanldeBookMarkPriority}
+                            />
+                          )}
+                        </div>
+                      </>
                     )}
                   </div>
-                </>
-              ) : null}
-              {role === "editor" && !tagslength ? (
-                <div className="tags_wrapper_one">
+                </div>
+
+                {role === "normaluser" || role === null ? (
+                  <>
+                    <div className="normaluser_container">
+                      <div style={{ display: "flex" }}>
+                        <span
+                          className="detail_tag_text"
+                          style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                        >
+                          Tag:
+                        </span>
+                        {details?.post?.tags?.split(",")?.map((tag) => (
+                          <button
+                            className="detail_tag_button"
+                            onClick={() => handleTag(tag)}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/*  Normal User Bookmark For PC */}
+                      {token ? (
+                        <img
+                          src={
+                            details?.bookmark === null
+                              ? Bookmark_grey
+                              : details?.bookmark?.PriorityType ===
+                                "highpriority"
+                              ? Bookmark_blue
+                              : details?.bookmark?.PriorityType === "reviewlist"
+                              ? Bookmark_green
+                              : details?.bookmark?.PriorityType === "futureread"
+                              ? Bookmark_red
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[0]?.name
+                              ? Bookmark_yellow
+                              : details?.bookmark?.PriorityType ===
+                                showAllBookmark[1]?.name
+                              ? Green_Bookmark
+                              : details?.bookmark === "null"
+                              ? Bookmark_grey
+                              : Bookmark_grey
+                          }
+                          alt=""
+                          className="detail_tag_text_two"
+                          style={{
+                            paddingLeft: "24px",
+                            cursor: "pointer",
+                            height: "30px",
+                            width: "58px",
+                          }}
+                          onClick={hanldeBookMarkPriority}
+                        />
+                      ) : (
+                        <img
+                          src={Bookmark_grey}
+                          alt=""
+                          className="detail_tag_text_two"
+                          style={{ paddingLeft: "24px", cursor: "pointer" }}
+                          onClick={hanldeBookMarkPriority}
+                        />
+                      )}
+                    </div>
+                  </>
+                ) : null}
+                {role === "editor" && !tagslength ? (
+                  <div className="tags_wrapper_one">
+                    {details?.post?.tags !== "" ? (
+                      <>
+                        <span
+                          className="detail_tag_text"
+                          style={{ color: theme ? " #363636" : " #C8C8C8" }}
+                        >
+                          Tag:
+                        </span>
+                        {details?.post?.tags?.split(",")?.map((tag) => (
+                          <button
+                            className="detail_tag_button"
+                            onClick={() => handleTag(tag)}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </>
+                    ) : null}
+                  </div>
+                ) : null}
+              </Grid>
+
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <div
+                  className="detail_page_content"
+                  style={{ display: role === "normaluser" ? "none" : "block" }}
+                >
+                  <div className="scrollable">
+                    <span style={{ lineHeight: "35px" }}>
+                      {details?.post?.content !== "" ? (
+                        parse(`${details?.post?.content}`)
+                      ) : (
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          No content
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bookmark For Normaluser Mobile View */}
+
+                {role !== "editor" && (
+                  <>
+                    <div style={{ position: "relative" }}>
+                      <div
+                        className={
+                          pinstate ? "pincontainertwo" : "pincontainer"
+                        }
+                      >
+                        <button
+                          style={{
+                            marginRight: `${pinstate ? "" : "15px"}`,
+                            background: "none",
+                            border: "none",
+                          }}
+                        >
+                          {token ? (
+                            <img
+                              src={
+                                details?.bookmark === null
+                                  ? Bookmark_grey
+                                  : details?.bookmark?.PriorityType ===
+                                    "highpriority"
+                                  ? Bookmark_blue
+                                  : details?.bookmark?.PriorityType ===
+                                    "reviewlist"
+                                  ? Bookmark_green
+                                  : details?.bookmark?.PriorityType ===
+                                    "futureread"
+                                  ? Bookmark_red
+                                  : details?.bookmark?.PriorityType ===
+                                    showAllBookmark[0]?.name
+                                  ? Bookmark_yellow
+                                  : details?.bookmark?.PriorityType ===
+                                    showAllBookmark[1]?.name
+                                  ? Green_Bookmark
+                                  : details?.bookmark === "null"
+                                  ? Bookmark_grey
+                                  : Bookmark_grey
+                              }
+                              alt=""
+                              className="userdetailpinimage"
+                              style={{
+                                paddingLeft: "24px",
+                                cursor: "pointer",
+                                height: "30px",
+                                width: "58px",
+                              }}
+                              onClick={hanldeBookMarkPriority}
+                            />
+                          ) : (
+                            <img
+                              src={Bookmark_grey}
+                              alt=""
+                              className="userdetailpinimage"
+                              style={{ paddingLeft: "24px", cursor: "pointer" }}
+                              onClick={hanldeBookMarkPriority}
+                            />
+                          )}
+                        </button>
+                        <button
+                          style={{ background: "none", border: "none" }}
+                          onClick={handlePinState}
+                        >
+                          <img
+                            className="userdetailpinimage"
+                            style={{
+                              marginRight: `${
+                                pinstate
+                                  ? role === "normaluser"
+                                    ? "-40px"
+                                    : "0px"
+                                  : "0px"
+                              }`,
+                              marginTop: `${
+                                pinstate
+                                  ? role === "normaluser"
+                                    ? "0px"
+                                    : "-40px"
+                                  : "0px"
+                              }`,
+                            }}
+                            src={pinstate ? Pin_on : Pin_off}
+                            alt=""
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Mobile View Excluding Bookmarks And Pin Icon For Both Normal User and Null User*/}
+
+                {role === "normaluser" || role === null ? (
+                  <div
+                    className={
+                      role === "normaluser"
+                        ? "detail_page_content"
+                        : "detail_page_content_fornull"
+                    }
+                    style={{
+                      height: `${pinstate ? "50vh" : "100%"}`,
+                      paddingLeft: "24px",
+                      overflow: `${pinstate ? "scroll" : "visible"}`,
+                    }}
+                  >
+                    <span style={{ lineHeight: "35px" }}>
+                      {details?.post?.content !== "" ? (
+                        parse(`${details?.post?.content}`)
+                      ) : (
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          No content
+                        </div>
+                      )}
+
+                      <div className="tags_for_user_null">
+                        {details?.post?.tags !== "" ? (
+                          <>
+                            <div style={{ display: "flex" }}>
+                              <span
+                                className="detail_tag_text"
+                                style={{
+                                  color: theme ? " #363636" : " #C8C8C8",
+                                }}
+                              >
+                                Tag:
+                              </span>
+                              {details?.post?.tags?.split(",")?.map((tag) => (
+                                <button
+                                  className="detail_tag_button"
+                                  onClick={() => handleTag(tag)}
+                                >
+                                  {tag}
+                                </button>
+                              ))}
+                            </div>
+                          </>
+                        ) : null}
+                      </div>
+                    </span>
+                  </div>
+                ) : (
+                  <div className="noscrollable">
+                    <span style={{ lineHeight: "35px" }}>
+                      {details?.post?.content !== "" ? (
+                        parse(`${details?.post?.content}`)
+                      ) : (
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          No content
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                )}
+
+                {/* Tags For Editor Role */}
+
+                <div className="tags_wrapper_two">
                   {details?.post?.tags !== "" ? (
                     <>
-                      <span
-                        className="detail_tag_text"
-                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                      >
-                        Tag:
-                      </span>
-                      {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button
-                          className="detail_tag_button"
-                          onClick={() => handleTag(tag)}
+                      <div style={{ display: "flex" }}>
+                        <span
+                          className="detail_tag_text"
+                          style={{ color: theme ? " #363636" : " #C8C8C8" }}
                         >
-                          {tag}
-                        </button>
-                      ))}
+                          Tag:
+                        </span>
+                        {details?.post?.tags?.split(",")?.map((tag) => (
+                          <button
+                            className="detail_tag_button"
+                            onClick={() => handleTag(tag)}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
                     </>
                   ) : null}
                 </div>
-              ) : null}
-            </Grid>
 
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <div className="detail_page_content">
-                <div className="scrollable">
-                  <span style={{ lineHeight: "35px" }}>
-                    {details?.post?.content !== "" ? (
-                      parse(`${details?.post?.content}`)
-                    ) : (
-                      <div
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        No content
-                      </div>
-                    )}
-                  </span>
+                {/* Footer Back Button  */}
+
+                <div className="detailpagesub">
+                  <button
+                    onClick={handleBack}
+                    className="back_button"
+                    style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
+                  >
+                    <ArrowBack className="backbutton_icon" />{" "}
+                    <span className="backbutton_text">Back</span>
+                  </button>
                 </div>
-              </div>
-              <div className="tags_wrapper_two">
-                {details?.post?.tags !== "" ? (
-                  <>
-                    <div style={{ display: "flex" }}>
-                      <span
-                        className="detail_tag_text"
-                        style={{ color: theme ? " #363636" : " #C8C8C8" }}
-                      >
-                        Tag:
-                      </span>
-                      {details?.post?.tags?.split(",")?.map((tag) => (
-                        <button
-                          className="detail_tag_button"
-                          onClick={() => handleTag(tag)}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-                    {role !== "editor" && ( // Bookmark For Normaluser for mobile view
-                      <>
-                        {token ? (
-                          <img
-                            src={
-                              details?.bookmark === null
-                                ? Bookmark_grey
-                                : details?.bookmark?.PriorityType ===
-                                  "highpriority"
-                                ? Bookmark_blue
-                                : details?.bookmark?.PriorityType ===
-                                  "reviewlist"
-                                ? Bookmark_green
-                                : details?.bookmark?.PriorityType ===
-                                  "futureread"
-                                ? Bookmark_red
-                                : details?.bookmark?.PriorityType ===
-                                  showAllBookmark[0]?.name
-                                ? Bookmark_yellow
-                                : details?.bookmark?.PriorityType ===
-                                  showAllBookmark[1]?.name
-                                ? Green_Bookmark
-                                : details?.bookmark === "null"
-                                ? Bookmark_grey
-                                : Bookmark_grey
-                            }
-                            alt=""
-                            className="detail_tag_text_two"
-                            style={{
-                              paddingLeft: "24px",
-                              cursor: "pointer",
-                              height: "30px",
-                              width: "58px",
-                            }}
-                            onClick={hanldeBookMarkPriority}
-                          />
-                        ) : (
-                          <img
-                            src={Bookmark_grey}
-                            alt=""
-                            className="detail_tag_text_two"
-                            style={{ paddingLeft: "24px", cursor: "pointer" }}
-                            onClick={hanldeBookMarkPriority}
-                          />
-                        )}
-                      </>
-                      // <img
-                      //   src={Bookmark_grey}
-                      //   alt=""
-                      //   className="detail_tag_text_two"
-                      //   style={{
-                      //     paddingLeft: "24px",
-                      //     cursor: "pointer",
-                      //     marginRight: "5px",
-                      //   }}
-                      //   onClick={hanldeBookMarkPriority}
-                      // />
-                    )}
-                  </>
-                ) : null}
-              </div>
-              <div className="noscrollable">
-                <span style={{ lineHeight: "35px" }}>
-                  {details?.post?.content !== "" ? (
-                    parse(`${details?.post?.content}`)
-                  ) : (
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                      No content
-                    </div>
-                  )}
-                </span>
-              </div>
-              <div className="detailpagesub">
-                <button
-                  onClick={handleBack}
-                  className="back_button"
-                  style={{ color: `${theme ? " #363636" : " #FFFFFF"}` }}
-                >
-                  <ArrowBack className="backbutton_icon" />{" "}
-                  <span className="backbutton_text">Back</span>
-                </button>
-              </div>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
-      ) : (
-        <Box
-          sx={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
-        >
-          <CircularProgress color="inherit" size={30} />
-        </Box>
-      )}
-
-      {theme ? (
-        <div className="detailpagebuttoncontainer">
-          <div className="detailpagebuttoncontainertwo">
-            <div className="footerbuttoncontainer">
-              <Button
-                style={{ marginLeft: "16px" }}
-                disabled={startdata === 0 ? true : false}
-              >
-                <img
-                  src={Previous}
-                  alt=""
-                  style={{ marginRight: "-15px" }}
-                  className="userdetailfootericons userdetailfootericonsleft"
-                  onClick={() => {
-                    setStartData(startdata - 1);
-                    setEndData(enddata - 1);
-                  }}
-                />
-              </Button>
-              <Button style={{ marginLeft: "-16px" }}>
-                <img
-                  src={Next}
-                  alt=""
-                  style={{ marginleft: "15px" }}
-                  className="userdetailfootericons userdetailfootericonsright"
-                  onClick={() => {
-                    setStartData(startdata + 1);
-                    setEndData(enddata + 1);
-                  }}
-                />
-              </Button>
-            </div>
-            <span className="userdetailpagefootertexttwo">
-              © D-Libra All Rights Reserved
-            </span>
           </div>
-        </div>
-      ) : (
-        <div className="detailpagebuttoncontainedark">
-          <div className="detailpagebuttoncontainerdarksub">
-            <div className="footerbuttoncontainer">
-              <Button style={{ marginLeft: "16px" }} disabled={disablePrevious}>
-                <img
-                  src={Previous_dark}
-                  alt=""
-                  style={{ marginRight: "-15px" }}
-                  className="userdetailfootericons userdetailfootericonsleft"
-                  onClick={handlePreviousMark}
-                />
-              </Button>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "30px",
+            }}
+          >
+            <CircularProgress color="inherit" size={30} />
+          </Box>
+        )}
 
-              <Button
-                style={{ marginLeft: "-16px" }}
-                // disabled={enddata >= userdata.length ? true : false}
-                disabled={disable}
-              >
-                <img
-                  src={Next_dark}
-                  alt=""
-                  style={{ marginleft: "15px" }}
-                  className="userdetailfootericons userdetailfootericonsright"
-                  // onClick={() => {
-                  //   setStartData(startdata + 1);
-                  //   setEndData(enddata + 1);
-                  // }}
-                  onClick={handleNextMark}
-                />
-              </Button>
+        {theme ? (
+          <div className="detailpagebuttoncontainer">
+            <div className="detailpagebuttoncontainertwo">
+              <div className="footerbuttoncontainer">
+                <Button
+                  style={{ marginLeft: "16px" }}
+                  disabled={startdata === 0 ? true : false}
+                >
+                  <img
+                    src={Previous}
+                    alt=""
+                    style={{ marginRight: "-15px" }}
+                    className="userdetailfootericons userdetailfootericonsleft"
+                    onClick={() => {
+                      setStartData(startdata - 1);
+                      setEndData(enddata - 1);
+                    }}
+                  />
+                </Button>
+                <Button style={{ marginLeft: "-16px" }}>
+                  <img
+                    src={Next}
+                    alt=""
+                    style={{ marginleft: "15px" }}
+                    className="userdetailfootericons userdetailfootericonsright"
+                    onClick={() => {
+                      setStartData(startdata + 1);
+                      setEndData(enddata + 1);
+                    }}
+                  />
+                </Button>
+              </div>
+              <span className="userdetailpagefootertexttwo">
+                © D-Libra All Rights Reserved
+              </span>
             </div>
-
-            <span className="userdetailpagefootertexttwo">
-              © D-Libra All Rights Reserved
-            </span>
           </div>
-        </div>
-      )}
-      {role === "normaluser" && <FooterButtons />}
+        ) : (
+          <div className="detailpagebuttoncontainedark">
+            <div className="detailpagebuttoncontainerdarksub">
+              <div className="footerbuttoncontainer">
+                <Button
+                  style={{ marginLeft: "16px" }}
+                  disabled={disablePrevious}
+                >
+                  <img
+                    src={Previous_dark}
+                    alt=""
+                    style={{ marginRight: "-15px" }}
+                    className="userdetailfootericons userdetailfootericonsleft"
+                    onClick={handlePreviousMark}
+                  />
+                </Button>
+
+                <Button style={{ marginLeft: "-16px" }} disabled={disable}>
+                  <img
+                    src={Next_dark}
+                    alt=""
+                    style={{ marginleft: "15px" }}
+                    className="userdetailfootericons userdetailfootericonsright"
+                    onClick={handleNextMark}
+                  />
+                </Button>
+              </div>
+
+              <span className="userdetailpagefootertexttwo">
+                © D-Libra All Rights Reserved
+              </span>
+            </div>
+          </div>
+        )}
+        {role === "normaluser" && <FooterButtons />}
+      </div>
     </>
   );
 };
