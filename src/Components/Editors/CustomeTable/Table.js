@@ -97,10 +97,6 @@ const CollapsibleTable = () => {
             <StyledTableCell
               className="tablefirstheader"
               sx={{ borderBottom: "none !important", width: "100px" }}
-              // style={{
-              //   backgroundColor: "rgba(38, 36, 42, 0.7)",
-              //   borderBottom: "none !important",
-              // }}
             ></StyledTableCell>
             <StyledTableCell
               className="tablefirstheader"
@@ -164,23 +160,35 @@ const CollapsibleTable = () => {
                         }}
                       >
                         <Draggable
+                          
                           key={row.CategoryName}
                           draggableId={row.CategoryName}
                           index={index}
                         >
                           {(provider) => (
-                            <div
+                            <>
+                           
+                             <TableCell
+                      style={{ paddingBottom: 0, paddingTop: 0 }}
+                      colSpan={8}
+                      sx={{
+                        borderBottom: "none !important",
+                       
+                      }}
+                      // className="table_wrapper"
                               {...provider.draggableProps}
                               ref={provider.innerRef}
-                            >
+                    >
                               <StyledTableCell
+                                           
                                 {...provider.dragHandleProps}
                                 sx={{
                                   border: "none !important",
                                   width: "100px",
                                 }}
                               >
-                                <div className="table_icons">
+                                <div className="table_icons"
+                               >
                                   <IconButton
                                     size="small"
                                     onClick={() => setOpen(!open)}
@@ -205,8 +213,8 @@ const CollapsibleTable = () => {
                                   </IconButton>
                                 </div>
                               </StyledTableCell>
-
                               <StyledTableCell
+                                  
                                 className="tableBody"
                                 sx={{
                                   borderBottom: "none !important",
@@ -264,7 +272,9 @@ const CollapsibleTable = () => {
                               >
                                 {row.updated_at?.split("T")[0]}
                               </StyledTableCell>
-                            </div>
+                              </TableCell>
+                        
+                            </>
                           )}
                         </Draggable>
                         {provider.placeholder}
