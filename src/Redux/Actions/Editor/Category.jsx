@@ -199,7 +199,7 @@ export const importCoursesOrChapters = (file, token) => async (dispatch) => {
         },
       }
     );
-    console.log("importCoursesOrChapters Response", response);
+    // console.log("importCoursesOrChapters Response", response?.data);
     return response?.data;
   } catch (error) {
     console.log(error);

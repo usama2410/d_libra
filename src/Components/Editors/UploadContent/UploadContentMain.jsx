@@ -14,13 +14,14 @@ import {
   getChildCategories,
   getParentChildCategories,
 } from "../../../Redux/Actions/Editor/Category";
-
+import CancelIcon from "@mui/icons-material/Cancel";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 // import { CKEditor } from "ckeditor4-react";
 // import CKEditor  from "react-ckeditor-component";
 import CKEditor from "ckeditor4-react-advanced";
 import { FileUploader } from "react-drag-drop-files";
+import Tooltip from "@mui/material/Tooltip";
 
 const UploadContentMain = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const UploadContentMain = () => {
   const [uniqueIdentity, setUniqueIdentity] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState("");
+  const [clearImage, setClearImage] = useState(false);
   const [metaDescription, setMetaDiscription] = useState("");
   const [OGP, setOGP] = useState("");
   const [message, setMessage] = useState("");
@@ -45,7 +47,7 @@ const UploadContentMain = () => {
 
   const [CKEditorState, setCKEditorState] = useState("");
 
-  const fileTypes = ["JPEG", "PNG", "SVG"];
+  const fileTypes = ["JPEG", "PNG", "SVG", "GIF", "JPG"];
 
   // console.log("image image", image);
   // console.log("image imageName", imageName);
@@ -65,12 +67,24 @@ const UploadContentMain = () => {
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
+    if (e.target.files[0]) {
+      setClearImage(true);
+    }
   };
 
   const handleChangeDragDrop = (file) => {
     console.log("file", file);
     setImage(URL.createObjectURL(file));
     setImageName(file);
+    if (file) {
+      setClearImage(true);
+    }
+  };
+
+  const handleClearImage = () => {
+    setImage("");
+    setImageName("");
+    setClearImage(false);
   };
 
   const hanldeSetUniqueIdentity = (target) => {
@@ -623,21 +637,25 @@ const UploadContentMain = () => {
                   <div style={{ marginTop: "20px" }}>
                     <FileUploader
                       multiple={false}
-                      label="Drop a file right here"
-                      // hoverTitle="Drop here"
+                      // label="Drop a file right here"
+                      hoverTitle=""
                       handleChange={handleChangeDragDrop}
                       name="file"
                       types={fileTypes}
-                     
                       children={
-
-                      <div>
-                        <div className="drop_file_container">
-                          <div className="drop_file_container_text">
-                            Drop a file here
+                        <div>
+                          <div
+                            className={
+                              theme
+                                ? "drop_file_container_white"
+                                : "drop_file_container"
+                            }
+                          >
+                            <div className="drop_file_container_text">
+                              Drop a file here
+                            </div>
                           </div>
                         </div>
-                      </div>
                       }
                     />
                   </div>
@@ -645,12 +663,29 @@ const UploadContentMain = () => {
 
                 <Grid item lg={8} md={8} sm={0} xs={0}>
                   <div className="image_none">
-                    <div>
-                      <span
-                        style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
-                      >
-                        Preview
-                      </span>
+                    <div style={{ display: "flex", gap: "13.8rem" }}>
+                      <div>
+                        <span
+                          style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+                        >
+                          Preview
+                        </span>
+                      </div>
+
+                      {clearImage && (
+                        <Tooltip title="Clear Image" placement="top">
+                          <div>
+                            <span
+                              style={{
+                                color: `${theme ? "#363636" : "#FFFFFF"}`,
+                                cursor: "pointer",
+                              }}
+                            >
+                              <CancelIcon onClick={handleClearImage} />
+                            </span>
+                          </div>
+                        </Tooltip>
+                      )}
                     </div>
                     {image ? (
                       <img src={image} className="noimagecontainer" alt="" />

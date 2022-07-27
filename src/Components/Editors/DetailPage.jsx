@@ -466,12 +466,21 @@ const DetailPage = () => {
                               }
                               alt=""
                               className="userdetailpinimage"
-                              style={{
-                                paddingLeft: "24px",
-                                cursor: "pointer",
-                                height: "30px",
-                                width: "58px",
-                              }}
+                              style={
+                                pinstate
+                                  ? {
+                                      paddingLeft: "40px",
+                                      cursor: "pointer",
+                                      height: "30px",
+                                      width: "58px",
+                                    }
+                                  : {
+                                      paddingLeft: "24px",
+                                      cursor: "pointer",
+                                      height: "30px",
+                                      width: "40px",
+                                    }
+                              }
                               onClick={hanldeBookMarkPriority}
                             />
                           ) : (

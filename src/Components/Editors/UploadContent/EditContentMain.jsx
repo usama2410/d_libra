@@ -13,6 +13,7 @@ import {
   getChildCategories,
   getParentChildCategories,
 } from "../../../Redux/Actions/Editor/Category";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 import {
   getPostByID,
@@ -23,6 +24,8 @@ import Box from "@mui/material/Box";
 import { development } from "../../../endpoints";
 // import { CKEditor } from "ckeditor4-react";
 import CKEditor from "ckeditor4-react-advanced";
+import { FileUploader } from "react-drag-drop-files";
+import Tooltip from "@mui/material/Tooltip";
 
 const EditContentMain = () => {
   const navigate = useNavigate();
@@ -45,6 +48,7 @@ const EditContentMain = () => {
   );
   const [tags, setTags] = useState();
   const [image, setImage] = useState("");
+  const [clearImage, setClearImage] = useState(false);
   const [metaDescription, setMetaDiscription] = useState("");
   const [OGP, setOGP] = useState();
   // console.log("contentTitle", contentTitle, tags)
@@ -60,9 +64,29 @@ const EditContentMain = () => {
 
   const [CKEditorState, setCKEditorState] = useState("");
 
+  const fileTypes = ["JPEG", "PNG", "SVG", "GIF", "JPG"];
+
   const handleChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setImageName(e.target.files[0]);
+    if (e.target.files[0]) {
+      setClearImage(true);
+    }
+  };
+
+  const handleChangeDragDrop = (file) => {
+    console.log("file", file);
+    setImage(URL.createObjectURL(file));
+    setImageName(file);
+    if (file) {
+      setClearImage(true);
+    }
+  };
+
+  const handleClearImage = () => {
+    setImage("");
+    setImageName("");
+    setClearImage(false);
   };
 
   // console.log("selectedOption", selectedOption);
@@ -266,7 +290,7 @@ const EditContentMain = () => {
       const response = await dispatch(
         getPostByID(params.id, params.role, params.categoryid, token)
       );
-      // console.log("response", response);
+      console.log("response", response);
       setTags(response?.post?.tags);
       setContentTitle(response?.post?.title);
       setMetaDiscription(response?.post?.meta_description);
@@ -274,117 +298,121 @@ const EditContentMain = () => {
       setImage(`${development}/media/${response?.post?.images}`);
       setTags(response?.post?.tags);
       setCKEditorState(response?.post?.content);
+
+      if (response?.post?.images) {
+        setClearImage(true);
+      }
     };
     postById();
   }, []);
 
-  const editorConfig = {
-    toolbar: [
-      {
-        name: "source",
-        items: ["Source"],
-      },
+  // const editorConfig = {
+  //   toolbar: [
+  //     {
+  //       name: "source",
+  //       items: ["Source"],
+  //     },
 
-      {
-        name: "basicstyles",
-        items: [
-          "Bold",
-          "Italic",
-          "Underline",
-          "Strike",
-          "-",
-          "Subscript",
-          "Superscript",
-        ],
-      },
-      {
-        name: "colorStyles",
-        items: ["TextColor", "BGColor", "Maximize"],
-      },
-      {
-        name: "paragraph",
-        items: [
-          "AlignLeft",
-          "JustifyLeft",
-          "JustifyCenter",
-          "JustifyRight",
-          "JustifyBlock",
-        ],
-      },
-      {
-        name: "lists",
-        items: [
-          "NumberedList",
-          "BulletedList",
-          "-",
-          "Outdent",
-          "Indent",
-          "Blockquote",
-        ],
-      },
-      {
-        name: "insert",
-        items: ["Image", "Link", "Unlink", "Table", "HorizontalRule"],
-      },
-      "/",
+  //     {
+  //       name: "basicstyles",
+  //       items: [
+  //         "Bold",
+  //         "Italic",
+  //         "Underline",
+  //         "Strike",
+  //         "-",
+  //         "Subscript",
+  //         "Superscript",
+  //       ],
+  //     },
+  //     {
+  //       name: "colorStyles",
+  //       items: ["TextColor", "BGColor", "Maximize"],
+  //     },
+  //     {
+  //       name: "paragraph",
+  //       items: [
+  //         "AlignLeft",
+  //         "JustifyLeft",
+  //         "JustifyCenter",
+  //         "JustifyRight",
+  //         "JustifyBlock",
+  //       ],
+  //     },
+  //     {
+  //       name: "lists",
+  //       items: [
+  //         "NumberedList",
+  //         "BulletedList",
+  //         "-",
+  //         "Outdent",
+  //         "Indent",
+  //         "Blockquote",
+  //       ],
+  //     },
+  //     {
+  //       name: "insert",
+  //       items: ["Image", "Link", "Unlink", "Table", "HorizontalRule"],
+  //     },
+  //     "/",
 
-      {
-        name: "clipboard",
-        items: [
-          "Undo",
-          "Redo",
-          "Cut",
-          "Copy",
-          "Paste",
-          "PasteText",
-          "Radio",
-          "TextArea",
-        ],
-      },
-      {
-        name: "document",
-        items: [
-          "Save",
-          "NewPage",
-          "Preview",
-          "Print",
-          "Templates",
-          "tools",
-          "PasteFromWord",
-          "Find",
-          "SelectAll",
-          "Scayt",
-          "Replace",
-          "Form",
-          "Checkbox",
-          "Textarea",
-          "Select",
-          "Button",
-          "ImageButton",
-          "HiddenField",
-          "CreateDiv",
-          "BidiLtr",
-          "BidiRtl",
-          "Language",
-          "Flash",
-          "Smiley",
-          "SpecialChar",
-          "PageBreak",
-          "Iframe",
-          "Anchor",
-          "ShowBlocks",
-          "CopyFormatting",
-        ],
-      },
-      {
-        name: "styles",
-        items: ["Styles", "Format", "-", "Font", "-", "FontSize"],
-      },
-    ],
-    skin: "moono",
-    extraPlugins: "justify, colorbutton, font",
-    removeButtons: "",
-  };
+  //     {
+  //       name: "clipboard",
+  //       items: [
+  //         "Undo",
+  //         "Redo",
+  //         "Cut",
+  //         "Copy",
+  //         "Paste",
+  //         "PasteText",
+  //         "Radio",
+  //         "TextArea",
+  //       ],
+  //     },
+  //     {
+  //       name: "document",
+  //       items: [
+  //         "Save",
+  //         "NewPage",
+  //         "Preview",
+  //         "Print",
+  //         "Templates",
+  //         "tools",
+  //         "PasteFromWord",
+  //         "Find",
+  //         "SelectAll",
+  //         "Scayt",
+  //         "Replace",
+  //         "Form",
+  //         "Checkbox",
+  //         "Textarea",
+  //         "Select",
+  //         "Button",
+  //         "ImageButton",
+  //         "HiddenField",
+  //         "CreateDiv",
+  //         "BidiLtr",
+  //         "BidiRtl",
+  //         "Language",
+  //         "Flash",
+  //         "Smiley",
+  //         "SpecialChar",
+  //         "PageBreak",
+  //         "Iframe",
+  //         "Anchor",
+  //         "ShowBlocks",
+  //         "CopyFormatting",
+  //       ],
+  //     },
+  //     {
+  //       name: "styles",
+  //       items: ["Styles", "Format", "-", "Font", "-", "FontSize"],
+  //     },
+  //   ],
+  //   skin: "moono",
+  //   extraPlugins: "justify, colorbutton, font",
+  //   removeButtons: "",
+  // };
 
   const handleEditorChange = (evt) => {
     setCKEditorState(evt.editor.getData());
@@ -415,7 +443,7 @@ const EditContentMain = () => {
             <div className="errorMessage">Content title already exist.</div>
           ) : message === "Image format is incorrect" ? (
             <div className="errorMessage">
-              {message}. Please upload in jpeg,png file foramte
+              {message}. Please upload in jpeg,png or svg file foramte
             </div>
           ) : null}
           <div>
@@ -588,14 +616,58 @@ const EditContentMain = () => {
                     </label>
                   </div>
                 </div>
+                <div style={{ marginTop: "20px" }}>
+                  <FileUploader
+                    multiple={false}
+                    // label="Drop a file right here"
+                    hoverTitle=""
+                    handleChange={handleChangeDragDrop}
+                    name="file"
+                    types={fileTypes}
+                    children={
+                      <div>
+                        <div
+                          className={
+                            theme
+                              ? "drop_file_container_white"
+                              : "drop_file_container"
+                          }
+                        >
+                          <div className="drop_file_container_text">
+                            Drop a file here
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  />
+                </div>
               </Grid>
 
               <Grid item lg={8} md={8} sm={0} xs={0}>
                 <div className="image_none">
-                  <div>
-                    <span style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}>
-                      Preview
-                    </span>
+                  <div style={{ display: "flex", gap: "13.8rem" }}>
+                    <div>
+                      <span
+                        style={{ color: `${theme ? "#363636" : "#FFFFFF"}` }}
+                      >
+                        Preview
+                      </span>
+                    </div>
+
+                    {clearImage && (
+                      <Tooltip title="Clear Image" placement="top">
+                        <div>
+                          <span
+                            style={{
+                              color: `${theme ? "#363636" : "#FFFFFF"}`,
+                              cursor: "pointer",
+                            }}
+                          >
+                            <CancelIcon onClick={handleClearImage} />
+                          </span>
+                        </div>
+                      </Tooltip>
+                    )}
                   </div>
                   {image ? (
                     <img src={image} className="noimagecontainer" alt="" />

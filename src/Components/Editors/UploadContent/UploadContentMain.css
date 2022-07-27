@@ -27,13 +27,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border:white 1px dashed ;
+  border: white 1px dashed;
+  border-radius: 10px;
+  background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
+  cursor: pointer;
+}
+
+.drop_file_container_white {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: black 1px dashed;
+  border-radius: 10px;
   background: linear-gradient(87.62deg, #004cb6 -44.71%, #009af9 100%);
   cursor: pointer;
 }
 
 .drop_file_container_text {
-  padding: 30px;
+  padding: 10px;
+  color: white !important;
 }
 
 .cXBrtO {

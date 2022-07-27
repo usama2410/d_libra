@@ -15,6 +15,7 @@ import { ArrowBack } from "@mui/icons-material";
 import Table from "./CustomeTable/Table";
 import Select from "react-select";
 import { importCoursesOrChapters } from "../../Redux/Actions/Editor/Category";
+import { toast } from "react-toastify";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,6 +47,7 @@ const EditCourseStructure = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
+  const [message, setMessage] = useState("");
 
   // const [fileName, setFileName] = useState("");
 
@@ -55,10 +57,14 @@ const EditCourseStructure = () => {
     navigate("/editormainpage");
   };
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     // setFileName(e.target.files[0]);
 
-    dispatch(importCoursesOrChapters(e.target.files[0], token ));
+    const response = await dispatch(
+      importCoursesOrChapters(e.target.files[0], token)
+    );
+    console.log(response);
+    setMessage(response.message);
   };
 
   const customStyles = {
@@ -101,8 +107,25 @@ const EditCourseStructure = () => {
     }),
   };
 
+  // console.log(message?.includes("already exists"));
+
   return (
     <div style={{ height: "100%" }}>
+      {message === "Data Upload Successfully"
+        ? toast.success(message, {
+            toastId: "success1",
+            position: "top-center",
+          })
+        : message?.includes("already exists")
+        ? toast.info(message, {
+            toastId: "error1",
+            position: "top-center",
+          })
+        : message?.includes("xlsx files") &&
+          toast.error(message, {
+            toastId: "error2",
+            position: "top-center",
+          })}
       <button
         onClick={handleBack}
         className="back_button"
