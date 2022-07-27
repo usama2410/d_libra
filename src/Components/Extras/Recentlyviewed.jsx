@@ -148,24 +148,24 @@ const Recentlyviewed = () => {
   // console.log(count);
 
   const handleBookMark = async (Contentid) => {
-    setCount(count + 1);
-    if (count === 0) {
-      setPriority("highpriority");
-    } else if (count === 1) {
-      setPriority("reviewlist");
-    } else if (count === 2) {
-      setPriority("futureread");
-    } else if (count === 3) {
-      setPriority(showAllBookmark[0]?.name);
-    } else if (count === 4) {
-      setPriority(showAllBookmark[1]?.name);
-      setCount(0);
-    }
+    // setCount(count + 1);
+    // if (count === 0) {
+    //   setPriority("highpriority");
+    // } else if (count === 1) {
+    //   setPriority("reviewlist");
+    // } else if (count === 2) {
+    //   setPriority("futureread");
+    // } else if (count === 3) {
+    //   setPriority(showAllBookmark[0]?.name);
+    // } else if (count === 4) {
+    //   setPriority(showAllBookmark[1]?.name);
+    //   setCount(0);
+    // }
 
-    const result = await dispatch(
-      setBookMarkPriority(role, Contentid, priority, token)
-    );
-    console.log("result", result);
+    // const result = await dispatch(
+    //   setBookMarkPriority(role, Contentid, priority, token)
+    // );
+    // console.log("result", result);
 
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     // console.log("response", response);
@@ -235,93 +235,109 @@ const Recentlyviewed = () => {
       </div>
 
       <div className="recentlyreviewd_slider_container">
-        {history?.map((day) => (
-          <div className="content_root_container">
-            <div>
-              <span
-                className={theme ? "chapternameclass" : "chapternameclasstwo"}
-              >
-                {day?.chapterName}
-              </span>
-            </div>
-            <div>
-              {day?.items?.length > 0 ? (
-                <Slider className="intro-slick" {...settings}>
-                  {day?.items?.map((e) => {
-                    return (
-                      <div className="intro-slides">
-                        <img
-                          src={`${development}/media/${e.images}`}
-                          className="landingpage_images"
-                          // style={{
-                          //   filter: `${e.disable ? "brightness(15%)" : ""}`,
-                          // }}
-                          alt=""
-                          onClick={() =>
-                            handleDetails(e.Content_id, e.chapterid)
-                          }
-                        />
-                        {e?.images ? (
-                          <div className="underimagetextcontainer">
-                            <Typography
-                              noWrap
-                              component="div"
-                              className="underimagecontent"
-                              style={{
-                                color: theme ? "#363636" : "#FFFFFF",
-                              }}
-                            >
-                              <Typography
-                                noWrap
-                                component="div"
-                                className="subcoursenametwo subcoursename"
-                              >
-                                {e?.title}
-                              </Typography>
-                            </Typography>
-                            <div className="mycontenttagscontainer">
-                              <img
-                                src={
-                                  e?.PriorityType === "highpriority"
-                                    ? Bookmark_blue
-                                    : e?.PriorityType === "reviewlist"
-                                    ? Bookmark_green
-                                    : e?.PriorityType === "futureread"
-                                    ? Bookmark_red
-                                    : 
-                                      e?.PriorityType ===
-                                        showAllBookmark[0]?.name
-                                    ? Bookmark_yellow
-                                    : 
-                                      e?.PriorityType ===
-                                        showAllBookmark[1]?.name
-                                    ? Green_Bookmark
-                                    : e.bookmark === "null"
-                                    ? Bookmark_grey
-                                    : Bookmark_grey
-                                }
-                                alt=""
-                                className="tagstwocontainer"
-                                onClick={() => handleBookMark(e?.Content_id)}
-                                style={{ cursor: "pointer" }}
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    );
-                  })}
-                </Slider>
-              ) : (
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <h4>No history for {day?.chapterName}</h4>
+        {history.length > 0 ? (
+          <>
+            {history?.map((day) => (
+              <div className="content_root_container">
+                <div>
+                  <span
+                    className={
+                      theme ? "chapternameclass" : "chapternameclasstwo"
+                    }
+                  >
+                    {day?.chapterName}
+                  </span>
                 </div>
-              )}
-            </div>
-          </div>
-        ))}
+                <div>
+                  {day?.items?.length > 0 ? (
+                    <Slider className="intro-slick" {...settings}>
+                      {day?.items?.map((e) => {
+                        return (
+                          <div className="intro-slides">
+                            <img
+                              src={`${development}/media/${e.images}`}
+                              className="landingpage_images"
+                              // style={{
+                              //   filter: `${e.disable ? "brightness(15%)" : ""}`,
+                              // }}
+                              alt=""
+                              onClick={() =>
+                                handleDetails(e.Content_id, e.chapterid)
+                              }
+                            />
+                            {e?.images ? (
+                              <div className="underimagetextcontainer">
+                                <Typography
+                                  noWrap
+                                  component="div"
+                                  className="underimagecontent"
+                                  style={{
+                                    color: theme ? "#363636" : "#FFFFFF",
+                                  }}
+                                >
+                                  <Typography
+                                    noWrap
+                                    component="div"
+                                    className="subcoursenametwo subcoursename"
+                                  >
+                                    {e?.title}
+                                  </Typography>
+                                </Typography>
+                                <div className="mycontenttagscontainer">
+                                  <img
+                                    src={
+                                      e?.PriorityType === "highpriority"
+                                        ? Bookmark_blue
+                                        : e?.PriorityType === "reviewlist"
+                                        ? Bookmark_green
+                                        : e?.PriorityType === "futureread"
+                                        ? Bookmark_red
+                                        : e?.PriorityType ===
+                                          showAllBookmark[0]?.name
+                                        ? Bookmark_yellow
+                                        : e?.PriorityType ===
+                                          showAllBookmark[1]?.name
+                                        ? Green_Bookmark
+                                        : e.bookmark === "null"
+                                        ? Bookmark_grey
+                                        : Bookmark_grey
+                                    }
+                                    alt=""
+                                    className="tagstwocontainer"
+                                    onClick={() =>
+                                      handleBookMark(e?.Content_id)
+                                    }
+                                    style={{ cursor: "pointer" }}
+                                  />
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        );
+                      })}
+                    </Slider>
+                  ) : (
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <h4>No history for {day?.chapterName}</h4>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "50px",
+            }}
+          >
+            <CircularProgress color="inherit" size={60} />
+          </Box>
+        )}
       </div>
 
       <FooterButtons />

@@ -71,25 +71,6 @@ const MylibraryCorse = () => {
   }, [bookmark]);
 
   const handleBookMark = async (Contentid) => {
-    setCount(count + 1);
-    if (count === 0) {
-      setPriority("highpriority");
-    } else if (count === 1) {
-      setPriority("reviewlist");
-    } else if (count === 2) {
-      setPriority("futureread");
-    } else if (count === 3) {
-      setPriority(showAllBookmark[0]?.name);
-    } else if (count === 4) {
-      setPriority(showAllBookmark[1]?.name);
-      setCount(0);
-    }
-
-    // const result = await dispatch(
-    //   setBookMarkPriority(role, Contentid, priority, token)
-    // );
-    // console.log("result", result);
-
     const response = await dispatch(addContentBookmark(Contentid, role, token));
     // console.log("response", response);
     setBookmark(response);
