@@ -62,16 +62,16 @@ const CollapsibleTable = () => {
   // console.log("parentChidCategory", parentChidCategory);
 
   const handleDragEnd = (e) => {
-    // if (!e.destination) return;
+    if (!e.destination) return;
     let tempData = Array.from(parentChidCategory);
     let [source_data] = tempData.splice(e?.source?.index, 1);
     tempData.splice(e?.destination?.index, 0, source_data);
     setParentChidCategory(tempData);
 
-    // console.log("[source_data]", [source_data]);
-    // console.log("e?.source?.index", e?.source?.index);
-    // console.log("e?.destination?.index", e?.destination);
-  }; 
+    console.log("[source_data]", [source_data]);
+    console.log("e?.source?.index", e?.source?.index);
+    console.log("e?.destination?.index", e?.destination);
+  };
 
   const hanldeUpdateStatus = () => {
     setOrder(!order);
@@ -140,7 +140,7 @@ const CollapsibleTable = () => {
             <DragDropContext onDragEnd={handleDragEnd}>
               {parentChidCategory?.map((row, index) => (
                 <>
-                  <Droppable droppableId={index}>
+                  <Droppable droppableId={row.CategoryName}>
                     {(provider) => (
                       <TableRow
                         hover
@@ -316,158 +316,144 @@ const CollapsibleTable = () => {
                       <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                           <Table>
-                            {/* <StyledTableRow>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              TITLE
-                            </StyledTableCell>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              NAME
-                            </StyledTableCell>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              UNIQUE IDENTIFIER
-                            </StyledTableCell>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              IMAGE
-                            </StyledTableCell>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              CREATE DATE
-                            </StyledTableCell>
-                            <StyledTableCell
-                              sx={{
-                                borderBottom: "none !important",
-                                color: "#ffffff !important",
-                              }}
-                            >
-                              UPDATE DATE
-                            </StyledTableCell>
-                          </StyledTableRow> */}
                             <TableBody>
-                              {row?.SubCategory?.map((category) => (
-                                <StyledTableRow key={category.id}>
-                                  <StyledTableCell
-                                    sx={{
-                                      border: "none !important",
-                                      width: "150px",
-                                      paddingLeft: "30px",
-                                    }}
-                                  >
-                                    <div className="table_icons">
-                                      <IconButton
-                                        size="small"
-                                        onClick={() => setOpen(!open)}
+                              {row?.SubCategory?.map((category, i) => (
+                                <Droppable droppableId={category.CategoryName}>
+                                  {(provide) => (
+                                    <StyledTableRow
+                                      hover
+                                      key={category.id}
+                                      onClick={() => {
+                                        setSelectedID(category.id);
+                                      }}
+                                      selected={selectedID === category.id}
+                                      ref={provide.innerRef}
+                                      {...provide.droppableProps}
+                                    >
+                                      <Draggable
+                                        key={category.CategoryName}
+                                        draggableId={category.CategoryName}
+                                        index={i}
                                       >
-                                        {open ? (
-                                          <GoPrimitiveDot
-                                            color="white"
-                                            className="open_icon_table"
-                                          />
-                                        ) : (
-                                          <GoPrimitiveDot
-                                            color="white"
-                                            className="open_icon_table"
-                                          />
-                                        )}
-                                      </IconButton>
-                                      <IconButton size="small">
-                                        <OpenWithIcon
-                                          onClick={hanldeUpdateStatus}
-                                          color="info"
-                                        />
-                                      </IconButton>
-                                    </div>
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#009af9 !important",
-                                      width: "180px",
-                                    }}
-                                  >
-                                    {category.CategoryName}
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#ffffff !important",
-                                      width: "235px",
-                                    }}
-                                  >
-                                    {category.CategoryName}
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#ffffff !important",
-                                      width: "260px",
-                                    }}
-                                  >
-                                    {category.unique_identifier
-                                      .toString()
-                                      ?.replace(
-                                        /(\d{4})(\d{2})(\d{2})/,
-                                        "$1-$2-$3"
-                                      )}
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#009af9 !important",
-                                      width: "380px",
-                                      textAlign: "left",
-                                      paddingLeft: "40px",
-                                    }}
-                                  >
-                                    {category.image}
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#ffffff !important",
-                                      width: "220px",
+                                        {(provide) => (
+                                          <StyledTableRow
+                                            {...provide.draggableProps}
+                                            ref={provide.innerRef}
+                                          >
+                                            <StyledTableCell
+                                              {...provide.dragHandleProps}
+                                              sx={{
+                                                border: "none !important",
+                                                width: "150px",
+                                                paddingLeft: "30px",
+                                              }}
+                                            >
+                                              <div className="table_icons">
+                                                {/* <IconButton
+                                                  size="small"
+                                                  onClick={() => setOpen(!open)}
+                                                >
+                                                  {open ? (
+                                                    <GoPrimitiveDot
+                                                      color="white"
+                                                      className="open_icon_table"
+                                                    />
+                                                  ) : (
+                                                    <GoPrimitiveDot
+                                                      color="white"
+                                                      className="open_icon_table"
+                                                    />
+                                                  )}
+                                                </IconButton> */}
+                                                <IconButton size="small">
+                                                  <OpenWithIcon
+                                                    onClick={hanldeUpdateStatus}
+                                                    color="info"
+                                                  />
+                                                </IconButton>
+                                              </div>
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#009af9 !important",
+                                                width: "180px",
+                                              }}
+                                            >
+                                              {category.CategoryName}
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#ffffff !important",
+                                                width: "235px",
+                                              }}
+                                            >
+                                              {category.CategoryName}
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#ffffff !important",
+                                                width: "260px",
+                                              }}
+                                            >
+                                              {category.unique_identifier
+                                                .toString()
+                                                ?.replace(
+                                                  /(\d{4})(\d{2})(\d{2})/,
+                                                  "$1-$2-$3"
+                                                )}
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#009af9 !important",
+                                                width: "380px",
+                                                textAlign: "left",
+                                                paddingLeft: "40px",
+                                              }}
+                                            >
+                                              {category.image}
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#ffffff !important",
+                                                width: "220px",
 
-                                      textAlign: "left",
-                                    }}
-                                    className="date_text_container_one"
-                                  >
-                                    {category.created_at?.split("T")[0]}
-                                  </StyledTableCell>
-                                  <StyledTableCell
-                                    sx={{
-                                      borderBottom: "none !important",
-                                      color: "#ffffff !important",
-                                      width: "240px",
-                                      textAlign: "left",
-                                    }}
-                                    className="date_text_container_two"
-                                  >
-                                    {category.updated_at?.split("T")[0]}
-                                  </StyledTableCell>
-                                </StyledTableRow>
+                                                textAlign: "left",
+                                              }}
+                                              className="date_text_container_one"
+                                            >
+                                              {
+                                                category.created_at?.split(
+                                                  "T"
+                                                )[0]
+                                              }
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                              sx={{
+                                                borderBottom: "none !important",
+                                                color: "#ffffff !important",
+                                                width: "240px",
+                                                textAlign: "left",
+                                              }}
+                                              className="date_text_container_two"
+                                            >
+                                              {
+                                                category.updated_at?.split(
+                                                  "T"
+                                                )[0]
+                                              }
+                                            </StyledTableCell>
+                                          </StyledTableRow>
+                                        )}
+                                      </Draggable>
+                                      {provide.placeholder}
+                                    </StyledTableRow>
+                                  )}
+                                </Droppable>
                               ))}
                             </TableBody>
                           </Table>
