@@ -57,6 +57,8 @@ const LibraryBookmark = () => {
     );
   };
 
+  console.log("data", data);
+
   const handleShowAllBookmark = async () => {
     const response = await dispatch(showAllBoomark(role, token));
     // console.log(response);

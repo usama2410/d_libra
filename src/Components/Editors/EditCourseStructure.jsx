@@ -113,17 +113,17 @@ const EditCourseStructure = () => {
     <div style={{ height: "100%" }}>
       {message === "Data Upload Successfully"
         ? toast.success(message, {
-            toastId: "success1",
+            toastId: "",
             position: "top-center",
           })
         : message?.includes("already exists")
         ? toast.info(message, {
-            toastId: "error1",
+            toastId: "",
             position: "top-center",
           })
         : message?.includes("xlsx files") &&
           toast.error(message, {
-            toastId: "error2",
+            toastId: "",
             position: "top-center",
           })}
       <button

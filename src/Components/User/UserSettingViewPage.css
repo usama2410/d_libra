@@ -249,7 +249,7 @@
 }
 
 .successMessage {
-  color: green;
+  color: green !important;
   padding: 10px;
   width: 100%;
   border: 2px solid green;

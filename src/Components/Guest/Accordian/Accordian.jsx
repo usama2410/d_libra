@@ -45,7 +45,7 @@ const Accordian = () => {
   let categoryid = location?.pathname?.split("/")[4];
   let courseid = categoryid?.split("=")[1];
 
-  console.log(id, categoryid, courseid);
+  console.log(parentCategory?.chapters);
 
   const postById = async () => {
     const response = await dispatch(

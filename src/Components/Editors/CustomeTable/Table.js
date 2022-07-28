@@ -136,10 +136,10 @@ const CollapsibleTable = () => {
             </StyledTableCell>
           </TableHead>
           <TableBody>
-            {parentChidCategory?.map((row, index) => (
-              <>
-                <DragDropContext onDragEnd={handleDragEnd}>
-                  <Droppable droppableId="droppable-1">
+            <DragDropContext onDragEnd={handleDragEnd}>
+              {parentChidCategory?.map((row, index) => (
+                <>
+                  <Droppable droppableId={index}>
                     {(provider) => (
                       <TableRow
                         hover
@@ -160,120 +160,113 @@ const CollapsibleTable = () => {
                         }}
                       >
                         <Draggable
-                          
                           key={row.CategoryName}
                           draggableId={row.CategoryName}
                           index={index}
                         >
                           {(provider) => (
                             <>
-                           
-                             <TableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={8}
-                      sx={{
-                        borderBottom: "none !important",
-                       
-                      }}
-                      // className="table_wrapper"
-                              {...provider.draggableProps}
-                              ref={provider.innerRef}
-                    >
-                              <StyledTableCell
-                                           
-                                {...provider.dragHandleProps}
+                              <TableCell
+                                style={{ paddingBottom: 0, paddingTop: 0 }}
+                                colSpan={8}
                                 sx={{
-                                  border: "none !important",
-                                  width: "100px",
+                                  borderBottom: "none !important",
                                 }}
+                                // className="table_wrapper"
+                                {...provider.draggableProps}
+                                ref={provider.innerRef}
                               >
-                                <div className="table_icons"
-                               >
-                                  <IconButton
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                                  >
-                                    {open ? (
-                                      <GoPrimitiveDot
-                                        color="white"
-                                        className="open_icon_table"
+                                <StyledTableCell
+                                  {...provider.dragHandleProps}
+                                  sx={{
+                                    border: "none !important",
+                                    width: "100px",
+                                  }}
+                                >
+                                  <div className="table_icons">
+                                    <IconButton
+                                      size="small"
+                                      onClick={() => setOpen(!open)}
+                                    >
+                                      {open ? (
+                                        <GoPrimitiveDot
+                                          color="white"
+                                          className="open_icon_table"
+                                        />
+                                      ) : (
+                                        <GoPrimitiveDot
+                                          color="white"
+                                          className="open_icon_table"
+                                        />
+                                      )}
+                                    </IconButton>
+                                    <IconButton size="small">
+                                      <OpenWithIcon
+                                        onClick={hanldeUpdateStatus}
+                                        color="info"
                                       />
-                                    ) : (
-                                      <GoPrimitiveDot
-                                        color="white"
-                                        className="open_icon_table"
-                                      />
-                                    )}
-                                  </IconButton>
-                                  <IconButton size="small">
-                                    <OpenWithIcon
-                                      onClick={hanldeUpdateStatus}
-                                      color="info"
-                                    />
-                                  </IconButton>
-                                </div>
-                              </StyledTableCell>
-                              <StyledTableCell
-                                  
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#009af9 !important",
-                                  width: "300px",
-                                }}
-                              >
-                                {row.CategoryName}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  width: "300px",
-                                }}
-                              >
-                                {row.CategoryName}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  width: "300px",
-                                }}
-                              >
-                                {row.unique_identifier
-                                  .toString()
-                                  ?.replace(/(\d{4})(\d{2})/, "$1-$2")}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  color: "#009af9 !important",
-                                  width: "500px",
-                                }}
-                              >
-                                {row.image}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  width: "300px",
-                                }}
-                              >
-                                {row.created_at?.split("T")[0]}
-                              </StyledTableCell>
-                              <StyledTableCell
-                                className="tableBody"
-                                sx={{
-                                  borderBottom: "none !important",
-                                  width: "300px",
-                                }}
-                              >
-                                {row.updated_at?.split("T")[0]}
-                              </StyledTableCell>
+                                    </IconButton>
+                                  </div>
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#009af9 !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {row.CategoryName}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {row.CategoryName}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {row.unique_identifier
+                                    .toString()
+                                    ?.replace(/(\d{4})(\d{2})/, "$1-$2")}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    color: "#009af9 !important",
+                                    width: "500px",
+                                  }}
+                                >
+                                  {row.image}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {row.created_at?.split("T")[0]}
+                                </StyledTableCell>
+                                <StyledTableCell
+                                  className="tableBody"
+                                  sx={{
+                                    borderBottom: "none !important",
+                                    width: "300px",
+                                  }}
+                                >
+                                  {row.updated_at?.split("T")[0]}
+                                </StyledTableCell>
                               </TableCell>
-                        
                             </>
                           )}
                         </Draggable>
@@ -458,9 +451,9 @@ const CollapsibleTable = () => {
                       </Collapse>
                     </TableCell>
                   </TableRow>
-                </DragDropContext>
-              </>
-            ))}
+                </>
+              ))}
+            </DragDropContext>
           </TableBody>
         </Table>
       </TableContainer>

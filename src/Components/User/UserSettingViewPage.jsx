@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Member_Icon from "../../assests/SVG_Files/Member_Icon.svg";
 import { ArrowBack } from "@mui/icons-material";
 import { useSelector } from "react-redux";
@@ -30,6 +30,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import user_svg from "../../assests/SVG_Files/New folder/user.svg";
+import user_svg_white from "../../assests/SVG_Files/New folder/user_svg_white.svg";
 // import logoutUser from "../../assests/SVG_Files/New folder/logout.svg";
 
 import {
@@ -37,14 +38,17 @@ import {
   deleteBookmark,
   showAllBoomark,
 } from "../../Redux/Actions/bookmark.action";
+import { toast } from "react-toastify";
 
 const UserSettingViewPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const auth = useSelector((state) => state.auth);
   const theme = useSelector((state) => state.theme.state);
   const token = useSelector((state) => state.auth.token);
   const role = useSelector((state) => state.auth.role);
+  const currentUser = useSelector((state) => state.auth);
 
   const [username, setUsername] = useState();
   const [email, setEmail] = useState("");
@@ -66,8 +70,6 @@ const UserSettingViewPage = () => {
 
   const user = useSelector((state) => state?.auth?.profile);
   const userProfile = useSelector((state) => state?.auth);
-
-  // console.log("count", count, "countTwo", countTwo);
 
   const handleBack = () => {
     navigate("/");
@@ -170,6 +172,10 @@ const UserSettingViewPage = () => {
     if (personal.length || dayend.length !== 0) {
       const response = await dispatch(addBookmark(priorityArray, role, token));
       // console.log("response", response);
+      setMessage(response?.message);
+      if (response?.message === "Add successfully") {
+        window.location.reload();
+      }
     } else {
       setMessage("Please enter bookmark name");
     }
@@ -177,12 +183,29 @@ const UserSettingViewPage = () => {
 
   const handleDeleteBookmark = async (id) => {
     const response = await dispatch(deleteBookmark(role, id, token));
-    console.log("response", response);
+    // console.log("response", response);
+    setMessage(response?.message);
     setDeleteTheBookmark(response);
   };
 
   return (
     <div>
+      {message === "All bookmarks already exist"
+        ? toast.info("Bookmark already exists", {
+            position: "top-center",
+            toastId: "",
+          })
+        : message === "Add successfully"
+        ? toast.success("Bookmark added successfully", {
+            position: "top-center",
+            toastId: "",
+          })
+        : message === "Delete successfully"
+        ? toast.success("Bookmark deleted successfully", {
+            position: "top-center",
+            toastId: "",
+          })
+        : null}
       <button
         onClick={handleBack}
         className="back_button"
@@ -201,7 +224,15 @@ const UserSettingViewPage = () => {
           >
             {user !== null ? (
               <img
-                src={showImage ? image : `${development}/${user}`}
+                src={
+                  showImage
+                    ? image
+                    : userProfile?.profile?.includes("dummy") && theme
+                    ? user_svg
+                    : userProfile?.profile?.includes("dummy") && theme === false
+                    ? user_svg_white
+                    : `${development}/${user}`
+                }
                 alt="No Image"
                 style={{ borderRadius: "50%" }}
                 className="usersettingmembericon"
@@ -244,9 +275,19 @@ const UserSettingViewPage = () => {
                     theme ? " editorimage_icon" : "  editorimage_icon_two"
                   }
                 >
-                  {!firstName || !lastName
-                    ? "User"
-                    : `${firstName} ${lastName}`}
+                  {role === "editor"
+                    ? currentUser?.username?.charAt(0)?.toUpperCase() +
+                      currentUser?.username?.slice(1)
+                    : role === "normaluser"
+                    ? `${firstName} ${lastName}`?.charAt(0)?.toUpperCase() +
+                      `${firstName} ${lastName}`?.slice(1)
+                    : "User"}
+
+                  {/* {!firstName || !lastName
+                    ? "user"
+                    : role === "editor"
+                    ? "Editor"
+                    : `${firstName} ${lastName}`} */}
                 </span>
               </div>
               <div>
